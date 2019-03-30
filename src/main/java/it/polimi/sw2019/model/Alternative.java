@@ -1,5 +1,7 @@
 package it.polimi.sw2019.model;
 
+import it.polimi.sw2019.model.weapon_power.Power;
+
 public class Alternative extends Weapon{
 
     private Power alternativePower;

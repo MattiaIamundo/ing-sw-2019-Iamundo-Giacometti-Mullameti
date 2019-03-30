@@ -2,12 +2,12 @@ package it.polimi.sw2019.model;
 
 public class PlayerPlance {
 
-    private String damageTrack[12];
+    private String[] damageTrack = new String[12];
     private boolean isFirstAdrenaline;
     private boolean isSecondAdrenaline;
     private boolean isKilled;
     private boolean isOverkilled;
-    private Player markedBy[3];
+    private Player[] markedBy = new Player[3];
 
     public boolean getFirstAdrenaline(){
 

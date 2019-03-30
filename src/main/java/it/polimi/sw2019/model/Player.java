@@ -5,12 +5,12 @@ public class Player {
 
     private String nickname;
     private Integer score;
-    private Integer ammo[3];
-    private Weapon weapon[3];
+    private Integer[] ammo = new Integer[3];
+    private Weapon[] weapon = new Weapon[3];
     private Space position;
-    private Player marked[3];
+    private Player[] marked = new Player[3];
     public PlayerPlance plance;
-    private PowerUp powerup[3];
+    private PowerUp[] powerup = new PowerUp[3];
 
     public String getNickname(){
 
@@ -31,10 +31,10 @@ public class Player {
 
     }
 
-    public Weapon[3] listWeapon() {
+    public Weapon[] listWeapon() {
 
     }
-    public PowerUp[3] listPowerUp() {
+    public PowerUp[] listPowerUp() {
 
     }
 }
