@@ -9,12 +9,12 @@ public class Additive extends  Weapon{
     private String descriptionAdditivePower;
 
     public String getExtraCost(){
-
+        return additiveCost;
     }
     public void attackAdditive (){
 
     }
     public String getDescriptionAdditivePower(){
-
+        return descriptionAdditivePower;
     }
 }

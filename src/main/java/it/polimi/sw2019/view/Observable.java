@@ -14,7 +14,4 @@ public class Observable {
 
     }
 
-    protected void notify(){
-
-    }
 }

@@ -11,12 +11,12 @@ public abstract class Weapon extends WeaponView implements Cloneable {
     private String descriptionPower;
 
     public String[] getCost(){
-
+        return rechargeCost;
     }
     public void attack(){
 
     }
     public String getDescriptionPower(){
-
+        return descriptionPower;
     }
 }

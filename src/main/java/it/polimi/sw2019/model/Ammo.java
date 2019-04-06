@@ -11,9 +11,9 @@ public abstract class Ammo extends AmmoView implements Cloneable {
 
     }
     public String getColorFirst(){
-
+        return colorFirst;
     }
     public String getColorSecond(){
-
+        return colorSecond;
     }
 }

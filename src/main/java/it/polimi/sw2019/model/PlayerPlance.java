@@ -13,16 +13,16 @@ public class PlayerPlance {
     private ArrayList<Player> markedBy = new ArrayList<>();
 
     public boolean getFirstAdrenaline(){
-
+        return isFirstAdrenaline;
     }
     public boolean getSecondAdrenaline(){
-
+        return isSecondAdrenaline;
     }
     public boolean getKilled(){
-
+        return isKilled;
     }
     public boolean getOverkilled(){
-
+        return isOverkilled;
     }
     public void giveDamage(Player shooter, Integer quantity){
 

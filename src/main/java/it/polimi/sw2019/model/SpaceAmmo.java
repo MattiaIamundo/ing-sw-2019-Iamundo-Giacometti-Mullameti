@@ -5,6 +5,6 @@ public class SpaceAmmo extends Space {
     private Ammo ammo;
 
     public Ammo takeAmmo(){
-
+        return ammo;
     }
 }

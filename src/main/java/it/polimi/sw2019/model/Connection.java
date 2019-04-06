@@ -6,14 +6,14 @@ public class Connection {
     private boolean isWall;
 
     public Space getSpaceFirst(){
-
+        return spaceFirst;
     }
 
     public Space getSpaceSecond(){
-
+        return spaceSecond;
     }
 
     public boolean isWall(){
-
+        return isWall;
     }
 }

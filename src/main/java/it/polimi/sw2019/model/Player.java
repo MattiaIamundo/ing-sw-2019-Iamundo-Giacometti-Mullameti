@@ -17,26 +17,26 @@ public class Player extends PlayerView implements Cloneable {
     private PowerUp[] powerup = new PowerUp[3];
 
     public String getNickname(){
-
+        return nickname;
     }
     public Integer getScore() {
-
+        return score;
     }
 
     public Space getPosition() {
-
+        return position;
     }
     public boolean isVisible() {   //return true if this Player is visible from the caller Player
-
+        return true;
     }
     public PlayerPlance getPlance() {
-
+        return plance;
     }
 
     public Weapon[] listWeapon() {
-
+        return weapon;
     }
     public PowerUp[] listPowerUp() {
-
+        return powerup;
     }
 }

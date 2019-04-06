@@ -9,12 +9,12 @@ public class Alternative extends Weapon{
     public String descriptionAlternativePower;
 
     public String getExtraCost(){
-
+        return extraCost;
     }
     public void attackAlternative(){
 
     }
     public String getDescriptionAlternativePower(){
-
+        return descriptionAlternativePower;
     }
 }

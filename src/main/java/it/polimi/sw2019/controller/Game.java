@@ -4,6 +4,8 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.view.Observer;
 
+import java.util.Timer;
+
 
 public class Game implements Observer {
 
@@ -14,6 +16,7 @@ public class Game implements Observer {
     private String gamemode;
     private State state;
     private Player firstPlayer;
+    private String[] mapconfig = new String[3];
 
     public void newPlayer(String nickname){
 
@@ -27,20 +30,20 @@ public class Game implements Observer {
 
     }
 
-    public String[3] listGameboard(){
-
+    public String[] listGameboard(){
+        return mapconfig;
     }
 
     public String listGamemode(){
-
+        return gamemode;
     }
 
     public Player getFirstPlayer(){
-
+        return firstPlayer;
     }
 
-    public String getState(){
-
+    public State getState(){
+        return state;
     }
 
     private void loadMap(Integer maptype){

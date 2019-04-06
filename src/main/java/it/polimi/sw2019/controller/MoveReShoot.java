@@ -17,6 +17,6 @@ public class MoveReShoot implements Action{
     }
 
     private boolean isBeforeFirstPlayer(){
-
+        return true;
     }
 }

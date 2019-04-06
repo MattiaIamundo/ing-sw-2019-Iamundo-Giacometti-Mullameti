@@ -11,6 +11,6 @@ public class MoveFrenzy implements Action {
     }
 
     private boolean isBeforeFirstPlayer(){
-
+        return true;
     }
 }

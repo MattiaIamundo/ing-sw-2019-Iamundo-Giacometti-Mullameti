@@ -9,10 +9,10 @@ public class PowerUp extends PowerUpView implements Cloneable {
     private EffectBehaviour effect;
 
     public String getColor(){
-
+        return color;
     }
     public String getName(){
-
+        return name;
     }
     public void useEffect(Player target){
 

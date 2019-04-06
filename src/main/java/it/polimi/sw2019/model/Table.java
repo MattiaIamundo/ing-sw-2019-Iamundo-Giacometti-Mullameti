@@ -11,18 +11,18 @@ public class Table extends TableView implements Cloneable {
     private Ammo[] ammoDeck = new Ammo[36];
 
     public Skull[] getKillshotTrack(){
-
+        return killshotTrack;
     }
 
-    public PowerUp getPowerUp(){
-
+    public PowerUp[] getPowerUp(){
+        return powerupDeck;
     }
 
-    public Weapon getWeapon(){
-
+    public Weapon[] getWeapon(){
+        return weaponDeck;
     }
 
-    public Ammo getAmmo(){
-
+    public Ammo[] getAmmo(){
+        return ammoDeck;
     }
 }

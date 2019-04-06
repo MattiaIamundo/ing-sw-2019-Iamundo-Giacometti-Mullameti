@@ -12,10 +12,10 @@ public class DoubleAdditive {
     private String descriptionSecondAdditivePower;
 
     public String getFirstExtraCost(){
-
+        return firstExtraCost;
     }
     public String getSecondExtraCost(){
-
+        return secondExtraCost;
     }
     public void attackFirstAdditive(){
 
@@ -24,9 +24,9 @@ public class DoubleAdditive {
 
     }
     public String getDescriptionFirstAdditivePower(){
-
+        return descriptionFirstAdditivePower;
     }
     public String getDescriptionSecondAdditivePower(){
-
+        return descriptionSecondAdditivePower;
     }
 }

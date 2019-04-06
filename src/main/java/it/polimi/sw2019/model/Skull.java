@@ -7,7 +7,7 @@ public class Skull {
     private Player killer;
 
     public Player getKiller(){
-
+        return killer;
     }
     public void setIsPresent(){
 
