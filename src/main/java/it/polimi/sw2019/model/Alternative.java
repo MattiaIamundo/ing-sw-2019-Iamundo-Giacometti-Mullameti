@@ -11,7 +11,7 @@ public class Alternative extends Weapon{
     public String getExtraCost(){
 
     }
-    public void attackAlternative(Player target){
+    public void attackAlternative(){
 
     }
     public String getDescriptionAlternativePower(){

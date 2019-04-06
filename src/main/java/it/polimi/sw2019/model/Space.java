@@ -2,25 +2,25 @@ package it.polimi.sw2019.model;
 
 public abstract class Space {
 
-    private Space nord;
-    private Space est;
-    private Space sud;
-    private Space ovest;
+    private Connection nord;
+    private Connection est;
+    private Connection sud;
+    private Connection ovest;
     private String room;
 
-    public Space getNord() {
+    public Connection getNord() {
         return nord;
     }
 
-    public Space getEst() {
+    public Connection getEst() {
         return est;
     }
 
-    public Space getOvest() {
+    public Connection getOvest() {
         return ovest;
     }
 
-    public Space getSud() {
+    public Connection getSud() {
         return sud;
     }
 

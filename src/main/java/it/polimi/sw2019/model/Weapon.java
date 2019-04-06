@@ -12,7 +12,7 @@ public abstract class Weapon {
     public String[] getCost(){
 
     }
-    public void attack(Player target){
+    public void attack(){
 
     }
     public String getDescriptionPower(){

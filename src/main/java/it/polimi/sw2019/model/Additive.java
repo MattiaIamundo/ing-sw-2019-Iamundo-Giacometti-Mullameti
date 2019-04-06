@@ -11,7 +11,7 @@ public class Additive extends  Weapon{
     public String getExtraCost(){
 
     }
-    public void attackAdditive (Player target){
+    public void attackAdditive (){
 
     }
     public String getDescriptionAdditivePower(){

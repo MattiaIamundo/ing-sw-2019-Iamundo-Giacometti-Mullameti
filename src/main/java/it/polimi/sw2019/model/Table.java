@@ -11,4 +11,16 @@ public class Table {
     public Skull[] getKillshotTrack(){
 
     }
+
+    public PowerUp getPowerUp(){
+
+    }
+
+    public Weapon getWeapon(){
+
+    }
+
+    public Ammo getAmmo(){
+
+    }
 }

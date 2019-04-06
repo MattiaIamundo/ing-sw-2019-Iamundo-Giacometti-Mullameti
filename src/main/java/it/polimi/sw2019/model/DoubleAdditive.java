@@ -17,10 +17,10 @@ public class DoubleAdditive {
     public String getSecondExtraCost(){
 
     }
-    public void attackFirstAdditive(Player target){
+    public void attackFirstAdditive(){
 
     }
-    public void attackSecondAdditive(Player target){
+    public void attackSecondAdditive(){
 
     }
     public String getDescriptionFirstAdditivePower(){

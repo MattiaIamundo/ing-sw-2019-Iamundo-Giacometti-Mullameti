@@ -6,7 +6,7 @@ public class Skull {
     public boolean isOverkilled;
     private Player killer;
 
-    public boolean getKiller(){
+    public Player getKiller(){
 
     }
     public void setIsPresent(){

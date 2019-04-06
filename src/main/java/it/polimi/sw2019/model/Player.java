@@ -1,14 +1,16 @@
 package it.polimi.sw2019.model;
 
 
+import java.util.ArrayList;
+
 public class Player {
 
     private String nickname;
     private Integer score;
-    private Integer[] ammo = new Integer[3];
+    private Integer[] ammo = new Integer[3]; //first red, second blue, third yellow
     private Weapon[] weapon = new Weapon[3];
     private Space position;
-    private Player[] marked = new Player[3];
+    private ArrayList<Player> marked = new ArrayList<>();
     public PlayerPlance plance;
     private PowerUp[] powerup = new PowerUp[3];
 
@@ -18,13 +20,11 @@ public class Player {
     public Integer getScore() {
 
     }
-    public void takeAmmo() {
 
-    }
     public Space getPosition() {
 
     }
-    public boolean isVisible() {
+    public boolean isVisible() {   //return true if this Player is visible from the caller Player
 
     }
     public PlayerPlance getPlance() {

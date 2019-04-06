@@ -7,7 +7,7 @@ public class SpaceGeneration extends Space {
     public Weapon takeWeapon(Integer weaponNum){
 
     }
-    public Weapon listWeapon(){
+    public Weapon[] listWeapon(){
 
     }
 }
