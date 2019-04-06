@@ -1,6 +1,8 @@
 package it.polimi.sw2019.model;
 
-public class PowerUp {
+import it.polimi.sw2019.view.PowerUpView;
+
+public class PowerUp extends PowerUpView implements Cloneable {
 
     private String color;
     private String name;

@@ -1,6 +1,8 @@
 package it.polimi.sw2019.model;
 
-public abstract class Ammo {
+import it.polimi.sw2019.view.AmmoView;
+
+public abstract class Ammo extends AmmoView implements Cloneable {
 
     private String colorFirst;
     private String colorSecond;

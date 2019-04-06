@@ -1,9 +1,11 @@
 package it.polimi.sw2019.model;
 
 
+import it.polimi.sw2019.view.PlayerView;
+
 import java.util.ArrayList;
 
-public class Player {
+public class Player extends PlayerView implements Cloneable {
 
     private String nickname;
     private Integer score;

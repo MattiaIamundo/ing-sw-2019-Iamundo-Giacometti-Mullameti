@@ -1,6 +1,8 @@
 package it.polimi.sw2019.model;
 
-public class Table {
+import it.polimi.sw2019.view.TableView;
+
+public class Table extends TableView implements Cloneable {
 
     private Skull[] killshotTrack = new Skull[8];
     private Space[][] map = new Space[3][4];
