@@ -11,7 +11,7 @@ public class Flamethrower implements Power{
     private Space targetarea2;
 
     @Override
-    public void usePower(){
+    public void usePower(Player attacker){
 
     }
 }

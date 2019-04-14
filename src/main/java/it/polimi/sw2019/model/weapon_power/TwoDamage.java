@@ -7,7 +7,7 @@ public class TwoDamage implements Power{
     Player target;
 
     @Override
-    public void usePower(){
+    public void usePower(Player attacker){
 
     }
 }

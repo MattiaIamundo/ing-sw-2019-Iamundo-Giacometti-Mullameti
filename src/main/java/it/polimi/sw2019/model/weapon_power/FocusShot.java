@@ -7,7 +7,7 @@ public class FocusShot implements Power{
     Player target; //choose one of the target of the basic effect
 
     @Override
-    public void usePower(){
+    public void usePower(Player attacker){
 
     }
 }

@@ -1,5 +1,6 @@
 package it.polimi.sw2019.model.weapon_power;
 
+import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 
 public class ExtraGrenade implements Power{
@@ -7,7 +8,7 @@ public class ExtraGrenade implements Power{
     private Space targetarea;
 
     @Override
-    public void usePower(){
+    public void usePower(Player attacker){
 
     }
 }

@@ -8,7 +8,7 @@ public class TwoTargetDamage implements Power{
     Player target2; //save the second target [optional]
 
     @Override
-    public void usePower(){
+    public void usePower(Player attacker){
 
     }
 }

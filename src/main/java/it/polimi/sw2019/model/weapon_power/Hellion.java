@@ -9,7 +9,7 @@ public class Hellion implements Power{
     private Space targetarea;
 
     @Override
-    public void usePower(){
+    public void usePower(Player attacker){
 
     }
 }

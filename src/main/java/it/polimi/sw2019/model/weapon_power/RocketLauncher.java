@@ -11,7 +11,7 @@ public class RocketLauncher implements Power{
     private Space moveto;
 
     @Override
-    public void usePower(){
+    public void usePower(Player attacker){
 
     }
 }
