@@ -8,7 +8,7 @@ public class BlackHole implements Power{
     private Player target2;
 
     @Override
-    public void usePower(){
+    public void usePower(Player attacker){
 
     }
 }

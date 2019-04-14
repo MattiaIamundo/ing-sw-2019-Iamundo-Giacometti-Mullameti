@@ -9,7 +9,7 @@ public class ScannerMode implements Power{
     private Player target3;
 
     @Override
-    public void usePower(){
+    public void usePower(Player attacker){
 
     }
 }
