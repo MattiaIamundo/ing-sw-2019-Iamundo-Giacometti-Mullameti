@@ -9,6 +9,7 @@ public class Table extends TableView implements Cloneable {
     private Weapon[] weaponDeck = new Weapon[21];
     private PowerUp[] powerupDeck = new PowerUp[24];
     private Ammo[] ammoDeck = new Ammo[36];
+    private static Player[] players = new Player[5];
 
     public Skull[] getKillshotTrack(){
         return killshotTrack;
@@ -24,5 +25,9 @@ public class Table extends TableView implements Cloneable {
 
     public Ammo[] getAmmo(){
         return ammoDeck;
+    }
+
+    public static Player getPlayers(int i){
+        return players[i];
     }
 }

@@ -11,14 +11,18 @@ public class Player extends PlayerView implements Cloneable {
 
     private String nickname; //player's nickname
     private Integer score; //player's score
-    private Integer[] ammo = new Integer[3]; //first red, second blue, third yellow
-    //list of weapons the player ownes , every player can own at top 3 weapons
+    //first red, second blue, third yellow
+    private Integer[] ammo = new Integer[3];
+    //list of weapons the player owns , every player can own at top 3 weapons
+    //if null there isn't a weapon in that position
     private Weapon[] weapon = new Weapon[3];
+
     private Space position; //the position the player's in
     private ArrayList<Player> marked = new ArrayList<>();
     private PlayerPlance plance;
     //list of powerup cards  the player ownes , every player can own at top 3 weapons
     private PowerUp[] powerup = new PowerUp[3];
+
     /**Constructor of the class
      * @param nickname
      * @param score
@@ -52,7 +56,7 @@ public class Player extends PlayerView implements Cloneable {
     /**
      * @return true if this Player is visible from the caller Player
      */
-    public boolean isVisible() {
+    public boolean isVisible(Player callerPlayer) {
         return true;
     }
     /**
@@ -70,5 +74,12 @@ public class Player extends PlayerView implements Cloneable {
      */
     public PowerUp[] listPowerUp() {
         return powerup;
+    }
+
+    /**
+     * @return the player's ammo
+     */
+    public Integer[] getAmmo() {
+        return ammo;
     }
 }

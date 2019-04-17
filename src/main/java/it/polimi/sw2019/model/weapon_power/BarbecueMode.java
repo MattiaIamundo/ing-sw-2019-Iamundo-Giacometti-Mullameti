@@ -11,10 +11,16 @@ import java.util.Scanner;
  * @author Mattia Iamundo
  */
 public class BarbecueMode implements Power{
+
     private Space targetarea1;
     private Space targetarea2;
     private Player attacker;
     private Scanner scanner = new Scanner(System.in);
+
+    @Override
+    public void usePower(Player attacker, Player enemy) {
+
+    }
 
     @Override
     public void usePower(Player attacker){
