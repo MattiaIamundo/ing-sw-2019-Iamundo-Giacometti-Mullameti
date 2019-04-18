@@ -11,13 +11,6 @@ public interface Power {
     /**
      *
      * @param attacker the player who throws the attack
-     * @param enemy the opponent who will be damaged
-     */
-    void usePower (Player attacker, Player enemy);
-
-    /**
-     *
-     * @param attacker the player who throws the attack
      */
     void usePower (Player attacker);
 

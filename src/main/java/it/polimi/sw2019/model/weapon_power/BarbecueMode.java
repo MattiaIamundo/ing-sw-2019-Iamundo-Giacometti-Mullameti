@@ -17,10 +17,6 @@ public class BarbecueMode implements Power{
     private Player attacker;
     private Scanner scanner = new Scanner(System.in);
 
-    @Override
-    public void usePower(Player attacker, Player enemy) {
-
-    }
 
     @Override
     public void usePower(Player attacker){
