@@ -1,9 +1,7 @@
 package it.polimi.sw2019.model;
 
-import it.polimi.sw2019.exception.InvalidPlayerException;
 import it.polimi.sw2019.model.weapon_power.Power;
 
-import java.util.Scanner;
 
 /**Class Alternative: describes the alternative effect of the weapon that is used instead of the basic one
  * @author Merita Mullameti
@@ -16,7 +14,6 @@ public class Alternative extends Weapon{
     private String extraCost;
     //a description of the effect the weapon can do in alternative to the basic effect
     private String descriptionAlternativePower;
-    private Scanner scanner = new Scanner(System.in);
 
     /**Constructor of the class
      * @param alternativePower the second power which can be used instead of the main one
@@ -38,50 +35,15 @@ public class Alternative extends Weapon{
         return extraCost;
     }
 
-    public void attackAlternative(){
-        System.out.println("This is the list of the players: ");
-        for (int i = 0; i < 5; i++){
-            //printing the "list"
-            if ( Table.getPlayers(i) != null) {
-                System.out.println(Table.getPlayers(i).getNickname() + "\n");
-            }
-        }
-        System.out.println("Insert a player to damage: ");
-
-        try{
-            findPlayerAlternative(scanner.nextLine());
-        }
-        catch (InvalidPlayerException e){
-            System.out.println(e.getMessage() + "is an invalid target...\n");
-            attackAlternative();
-        }
-    }
-
     /**
      *
-     * @param player the target's name
-     * @throws InvalidPlayerException thrown if insert an invalid player
+     * @param attacker the player who declared the attack
      */
-    public void findPlayerAlternative(String player) throws InvalidPlayerException{
-        boolean out = false;
-        int i = 0;
-        // finding if the name is present in the list of players
-        for ( i = 0; i < 5 || out ; i++){
+    public void attackAlternative(Player attacker){
 
-            if (Table.getPlayers(i).getNickname() == player){
-                //control: can i see him?
-                if (Table.getPlayers(i).isVisible(Turn.getPlayer()) == true) {
-
-                    //first parameter is the player is the attacker
-                    //second parameter is the player who will be damaged
-                    alternativePower.usePower(Turn.getPlayer(), Table.getPlayers(i));
-                    out = true;
-                }
-            }
-        }
-        //if usePower was not activated throw the exception
-        if ( i == 5 && out == false ) throw new InvalidPlayerException(player);
+        alternativePower.usePower(attacker);
     }
+
     /**
      * @return a description of the effect the weapon can do in alternative to the basic effect
      */

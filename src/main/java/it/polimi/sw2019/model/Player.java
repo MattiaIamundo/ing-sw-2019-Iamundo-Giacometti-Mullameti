@@ -20,20 +20,20 @@ public class Player extends PlayerView implements Cloneable {
     private Space position; //the position the player's in
     private ArrayList<Player> marked = new ArrayList<>();
     private PlayerPlance plance;
-    //list of powerup cards  the player ownes , every player can own at top 3 weapons
+    //list of power up cards  the player owns , every player can own at top 3 weapons
     private PowerUp[] powerup = new PowerUp[3];
 
     /**Constructor of the class
-     * @param nickname
-     * @param score
-     * @param position
-     * @param plance
+     * @param nickname the player's nickname
+     * @param score the player's score in this game
+     * @param position the player's position in the map
+     * @param plance hte player's plance
      */
     public Player(String nickname , Integer score , Space position, PlayerPlance plance){
-        this.nickname=nickname;
-        this.score=score;
-        this.position=position;
-        this.plance=plance;
+        this.nickname = nickname;
+        this.score = score;
+        this.position = position;
+        this.plance = plance;
     }
     /**
      * @return the player's nickname
@@ -54,6 +54,7 @@ public class Player extends PlayerView implements Cloneable {
         return position;
     }
     /**
+     * the callerPlayer is not this player
      * @return true if this Player is visible from the caller Player
      */
     public boolean isVisible(Player callerPlayer) {
@@ -85,7 +86,7 @@ public class Player extends PlayerView implements Cloneable {
 
     /**
      * change the actual position of the player
-     * @param position identifies the new position of he Player
+     * @param position identifies the new position of the player
      */
     public void setPosition(Space position) {
         this.position = position;

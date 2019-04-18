@@ -1,8 +1,6 @@
 package it.polimi.sw2019.model;
 
-import it.polimi.sw2019.exception.InvalidPlayerException;
 import it.polimi.sw2019.model.weapon_power.Power;
-import java.util.Scanner;
 
 /**
  * this class represents the weapon cards which have two power to be used
@@ -16,7 +14,6 @@ public class DoubleAdditive extends Weapon{
     private String secondExtraCost;
     private String descriptionFirstAdditivePower;
     private String descriptionSecondAdditivePower;
-    private Scanner scanner = new Scanner(System.in);
 
     /**
      * this is the constructor
@@ -56,65 +53,19 @@ public class DoubleAdditive extends Weapon{
     }
 
     /**
-     * printing the players list
-     * scannering the player's name to damage
-     * loop if it isn't present in the list of players
-     * or the attacker cannot see him
+     *
+     * @param attacker the player who calls the attack
      */
-    public void attackFirstAdditive(){
+    public void attackFirstAdditive(Player attacker){
 
-        System.out.println("This is the list of the players: ");
-        for (int i = 0; i < 5; i++){
-            //printing the "list"
-            if ( Table.getPlayers(i) != null) {
-                System.out.println(Table.getPlayers(i).getNickname() + "\n");
-            }
-        }
-        System.out.println("Insert a player to damage: ");
-
-        try{
-            findPlayerFirstAdditive(scanner.nextLine());
-        }
-        catch (InvalidPlayerException e){
-            System.out.println(e.getMessage() + "is an invalid target...\n");
-            attackFirstAdditive();
-        }
+        firstAdditivePower.usePower(attacker);
     }
 
     /**
      *
      * @param attacker the player who calls the attack
      */
-    public void attackSecondAdditive(){
-
-        System.out.println("This is the list of the players: ");
-        for (int i = 0; i < 5; i++){
-            //printing the "list"
-            if ( Table.getPlayers(i) != null) {
-                System.out.println(Table.getPlayers(i).getNickname() + "\n");
-            }
-        }
-        System.out.println("Insert a player to damage: ");
-
-        try{
-            findPlayerSecondAdditive(scanner.nextLine());
-        }
-        catch (InvalidPlayerException e){
-            System.out.println(e.getMessage() + "is an invalid target...\n");
-            attackSecondAdditive();
-        }
-    }
-
-    /**
-     *
-     * @param player the input, it is probably the target's name
-     * @throws InvalidPlayerException when the target is incorrect
-     */
-    public void findPlayerSecondAdditive (String player) throws InvalidPlayerException {
-        boolean out = false;
-        int i = 0;
-        // finding if the name is present in the list of players
-        for ( i = 0; i < 5 || out ; i++){
+    public void attackSecondAdditive(Player attacker){
 
         secondAdditivePower.usePower(attacker);
     }
