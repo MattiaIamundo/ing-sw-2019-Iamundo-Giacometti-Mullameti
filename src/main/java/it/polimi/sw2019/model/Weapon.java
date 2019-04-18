@@ -33,6 +33,10 @@ public abstract class Weapon extends WeaponView implements Cloneable {
         this.descriptionPower = descriptionPower;
     }
 
+    public String getName(){
+        return name;
+    }
+
     /**
      *
      * @return weapon's recharge cost
@@ -50,9 +54,9 @@ public abstract class Weapon extends WeaponView implements Cloneable {
         boolean out = false;
         int i = 0;
         // finding if the name is present in the list of players
-        for ( i = 0; i < 5 || out ; i++){
-
-        power.usePower(attacker);
+        for ( i = 0; i < 5 || out ; i++) {
+            power.usePower(attacker);
+        }
     }
 
     /**
@@ -69,5 +73,9 @@ public abstract class Weapon extends WeaponView implements Cloneable {
      */
     public boolean getIsLoad(){
         return isLoad;
+    }
+
+    public Power getPower() {
+        return power;
     }
 }
