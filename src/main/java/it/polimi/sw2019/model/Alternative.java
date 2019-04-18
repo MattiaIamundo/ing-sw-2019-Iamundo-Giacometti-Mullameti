@@ -1,6 +1,6 @@
 package it.polimi.sw2019.model;
 
-import it.polimi.sw2019.Exception.InvalidPlayerException;
+import it.polimi.sw2019.exception.InvalidPlayerException;
 import it.polimi.sw2019.model.weapon_power.Power;
 
 import java.util.Scanner;
@@ -79,7 +79,7 @@ public class Alternative extends Weapon{
                 }
             }
         }
-        //if usePower was not activated throw the Exception
+        //if usePower was not activated throw the exception
         if ( i == 5 && out == false ) throw new InvalidPlayerException(player);
     }
     /**

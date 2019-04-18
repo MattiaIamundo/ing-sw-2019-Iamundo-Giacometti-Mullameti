@@ -12,4 +12,5 @@ public class Vortex implements Power{
     public void usePower(Player attacker){
 
     }
+
 }

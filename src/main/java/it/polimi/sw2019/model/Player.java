@@ -82,4 +82,12 @@ public class Player extends PlayerView implements Cloneable {
     public Integer[] getAmmo() {
         return ammo;
     }
+
+    /**
+     * change the actual position of the player
+     * @param position identifies the new position of he Player
+     */
+    public void setPosition(Space position) {
+        this.position = position;
+    }
 }

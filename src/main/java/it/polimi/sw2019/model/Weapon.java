@@ -1,6 +1,6 @@
 package it.polimi.sw2019.model;
 
-import it.polimi.sw2019.Exception.InvalidPlayerException;
+import it.polimi.sw2019.exception.InvalidPlayerException;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.WeaponView;
 
@@ -39,6 +39,13 @@ public abstract class Weapon extends WeaponView implements Cloneable {
      */
     public String[] getCost(){
         return rechargeCost;
+    }
+
+    /**
+     * @return the name of the weapon
+     */
+    public String getName(){
+        return name;
     }
 
     public void attack(){
@@ -83,7 +90,7 @@ public abstract class Weapon extends WeaponView implements Cloneable {
                 }
             }
         }
-        //if usePower was not activated throw the Exception
+        //if usePower was not activated throw the exception
         if ( i == 5 && out == false ) throw new InvalidPlayerException(player);
     }
 
@@ -101,5 +108,13 @@ public abstract class Weapon extends WeaponView implements Cloneable {
      */
     public boolean getIsLoad(){
         return isLoad;
+    }
+
+    /**
+     * thi method is needed for the optional power that is correlated with his basic power
+     * @return the power of the weapon
+     */
+    public Power getPower(){
+        return power;
     }
 }
