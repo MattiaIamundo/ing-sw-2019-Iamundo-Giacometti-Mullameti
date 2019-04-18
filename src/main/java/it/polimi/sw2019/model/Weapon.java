@@ -42,33 +42,6 @@ public abstract class Weapon extends WeaponView implements Cloneable {
     }
 
     /**
-     * @return the name of the weapon
-     */
-    public String getName(){
-        return name;
-    }
-
-    public void attack(){
-
-        System.out.println("This is the list of the players: ");
-        for (int i = 0; i < 5; i++){
-            //printing the "list"
-            if ( Table.getPlayers(i) != null) {
-                System.out.println(Table.getPlayers(i).getNickname() + "\n");
-            }
-        }
-        System.out.println("Insert a player to damage: ");
-
-        try{
-            findPlayer(scanner.nextLine());
-        }
-        catch (InvalidPlayerException e){
-            System.out.println(e.getMessage() + "is an invalid target...\n");
-            attack();
-        }
-    }
-
-    /**
      *
      * @param player the target
      * @throws InvalidPlayerException if the target is incorrect
@@ -79,19 +52,7 @@ public abstract class Weapon extends WeaponView implements Cloneable {
         // finding if the name is present in the list of players
         for ( i = 0; i < 5 || out ; i++){
 
-            if (Table.getPlayers(i).getNickname() == player){
-                //control: can i see him?
-                if (Table.getPlayers(i).isVisible(Turn.getPlayer()) == true) {
-
-                    //first parameter is the player is the attacker
-                    //second parameter is the player who will be damaged
-                    power.usePower(Turn.getPlayer(), Table.getPlayers(i));
-                    out = true;
-                }
-            }
-        }
-        //if usePower was not activated throw the exception
-        if ( i == 5 && out == false ) throw new InvalidPlayerException(player);
+        power.usePower(attacker);
     }
 
     /**
@@ -108,13 +69,5 @@ public abstract class Weapon extends WeaponView implements Cloneable {
      */
     public boolean getIsLoad(){
         return isLoad;
-    }
-
-    /**
-     * thi method is needed for the optional power that is correlated with his basic power
-     * @return the power of the weapon
-     */
-    public Power getPower(){
-        return power;
     }
 }

@@ -3,7 +3,6 @@ package it.polimi.sw2019.model.weapon_power;
 import it.polimi.sw2019.exception.InvalidDirectionException;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
-import it.polimi.sw2019.model.Table;
 
 import java.util.Scanner;
 
@@ -15,36 +14,32 @@ public class BarbecueMode implements Power{
 
     private Space targetarea1;
     private Space targetarea2;
+    private Player attacker;
     private Scanner scanner = new Scanner(System.in);
+
 
     /**
      * @param attacker the player who throws the attack
      */
     @Override
     public void usePower(Player attacker){
+        this.attacker = attacker;
         System.out.println("Choose firing direction:");
         try {
-            findDirection(scanner.nextLine(), attacker);
+            findDirection(scanner.nextLine());
         }
         catch (InvalidDirectionException e){
             System.out.println(e.getMessage()+"is an invalid direction, insert a valid direction\n");
             usePower(attacker);
         }
-        for (int i=0; i <= 5; i++){
-            if (Table.getPlayers(i).getPosition() == targetarea1){
-                Table.getPlayers(i).getPlance().giveDamage(attacker, 2);
-            }else if (Table.getPlayers(i).getPosition() == targetarea2){
-                Table.getPlayers(i).getPlance().giveDamage(attacker, 1);
-            }
-        }
+
     }
 
     /**
      * The method find the two Space identified by the direction given by the Attacker
      * @param dir identifies the direction of the attack (e.g. north, south, east, west)
-     * @param attacker identifies the Player that use the power
      */
-    private void findDirection(String dir, Player attacker) throws InvalidDirectionException {
+    private void findDirection(String dir) throws InvalidDirectionException {
         switch (dir) {
             case "north":
                 if (attacker.getPosition().getNord().isWall()) {

@@ -1,9 +1,10 @@
-package it.polimi.sw2019.model;
+package it.polimi.sw2019.controller;
 
-import it.polimi.sw2019.controller.Action;
+import it.polimi.sw2019.model.Player;
+import it.polimi.sw2019.model.Weapon;
 
 /**
- * this class implements the turn of the game
+ * this class stands for the game's turn
  * @author Luca Giacometti
  */
 public class Turn {
@@ -34,6 +35,7 @@ public class Turn {
     }
 
     public void useAction(){
+
 
     }
 

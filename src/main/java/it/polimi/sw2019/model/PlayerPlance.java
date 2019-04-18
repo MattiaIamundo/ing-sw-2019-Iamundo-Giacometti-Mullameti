@@ -59,14 +59,20 @@ public class PlayerPlance {
      * the controller has to control if the vector is full
      */
     public void giveDamage(Player shooter, Integer quantity){
+
         int i = 0;
         while(quantity > 0 && i < 12) {
+
             if (damageTrack[i] != null) {
                 i++;
             } else {
                 this.damageTrack[i] = shooter.getNickname();
                 quantity--;
             }
+        }
+        if (damageTrack[11] != null && quantity > 0) {
+
+            System.out.println("The player is already overkilled, you can't damage him again...\n");
         }
     }
     /**

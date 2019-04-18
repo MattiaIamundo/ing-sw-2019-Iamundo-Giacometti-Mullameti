@@ -83,35 +83,7 @@ public class DoubleAdditive extends Weapon{
 
     /**
      *
-     * @param player the input, it is probably the target's name
-     * @throws InvalidPlayerException when the target is incorrect
-     */
-    public void findPlayerFirstAdditive (String player) throws InvalidPlayerException {
-        boolean out = false;
-        int i = 0;
-        // finding if the name is present in the list of players
-        for ( i = 0; i < 5 || out ; i++){
-
-            if (Table.getPlayers(i).getNickname() == player){
-                //control: can i see him?
-                if (Table.getPlayers(i).isVisible(Turn.getPlayer()) == true) {
-
-                    //first parameter is the player is the attacker
-                    //second parameter is the player who will be damaged
-                    firstAdditivePower.usePower(Turn.getPlayer(), Table.getPlayers(i));
-                    out = true;
-                }
-            }
-        }
-        //if usePower was not activated throw the exception
-        if ( i == 5 && out == false ) throw new InvalidPlayerException(player);
-    }
-
-    /**
-     * printing the players list
-     * scannering the player's name to damage
-     * loop if it isn't present in the list of players
-     * or the attacker cannot see him
+     * @param attacker the player who calls the attack
      */
     public void attackSecondAdditive(){
 
@@ -144,19 +116,7 @@ public class DoubleAdditive extends Weapon{
         // finding if the name is present in the list of players
         for ( i = 0; i < 5 || out ; i++){
 
-            if (Table.getPlayers(i).getNickname() == player){
-                //control: can i see him?
-                if (Table.getPlayers(i).isVisible(Turn.getPlayer()) == true) {
-
-                    //first parameter is the player is the attacker
-                    //second parameter is the player who will be damaged
-                    secondAdditivePower.usePower(Turn.getPlayer(), Table.getPlayers(i));
-                    out = true;
-                }
-            }
-        }
-        //if usePower was not activated throw the exception
-        if ( i == 5 && out == false ) throw new InvalidPlayerException(player);
+        secondAdditivePower.usePower(attacker);
     }
 
     /**
