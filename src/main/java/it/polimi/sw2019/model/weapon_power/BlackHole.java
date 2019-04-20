@@ -1,7 +1,7 @@
 package it.polimi.sw2019.model.weapon_power;
 
 import it.polimi.sw2019.exception.ErrorCode;
-import it.polimi.sw2019.exception.IllegalPlayerexception;
+import it.polimi.sw2019.exception.IllegalPlayerException;
 import it.polimi.sw2019.exception.InvalidPlayerException;
 import it.polimi.sw2019.exception.UnreachablePlayerException;
 import it.polimi.sw2019.model.Player;
@@ -33,7 +33,7 @@ public class BlackHole implements Power{
                 System.out.println(e.getMessage()+"isn't a Player\n");
             }catch (UnreachablePlayerException e){
                 System.out.println(e.getMessage()+"isn't in a reachable position\n");
-            }catch (IllegalPlayerexception e){
+            }catch (IllegalPlayerException e){
                 if (e.getCode() == ErrorCode.ATTACKERSELECTED){
                     System.out.println("you can't select yourself as a valid target\n");
                 }else if (e.getCode() == ErrorCode.NOTSELECTABLE){
@@ -64,9 +64,9 @@ public class BlackHole implements Power{
      * @param attacker identify the attacker
      * @throws InvalidPlayerException identify a non existing Player
      * @throws UnreachablePlayerException identify a Player that isn't in the range of the power
-     * @throws IllegalPlayerexception identify a non valid target (e.g. the attacker or a Player already classified as a target)
+     * @throws IllegalPlayerException identify a non valid target (e.g. the attacker or a Player already classified as a target)
      */
-    private void acquireFirst(Player attacker) throws InvalidPlayerException, UnreachablePlayerException, IllegalPlayerexception{
+    private void acquireFirst(Player attacker) throws InvalidPlayerException, UnreachablePlayerException, IllegalPlayerException {
         String name;
         int i = 0;
         System.out.println("Indicates the name of the first target, it must be at most 1 square away from the Vortex:\n");
@@ -77,9 +77,9 @@ public class BlackHole implements Power{
         if (i == 5){
             throw new InvalidPlayerException(name);
         }else if (basicpower.target.getNickname().equals(name)){
-            throw new IllegalPlayerexception(name, ErrorCode.NOTSELECTABLE);
+            throw new IllegalPlayerException(name, ErrorCode.NOTSELECTABLE);
         }else if (attacker.getNickname().equals(name)){
-            throw new IllegalPlayerexception(name, ErrorCode.ATTACKERSELECTED);
+            throw new IllegalPlayerException(name, ErrorCode.ATTACKERSELECTED);
         }
         if (isValidPosition(i)){
             target1 = Table.getPlayers(i);
@@ -93,9 +93,9 @@ public class BlackHole implements Power{
      * @param attacker identify the attacker
      * @throws InvalidPlayerException identify a non existing Player
      * @throws UnreachablePlayerException identify a Player that isn't in the range of the power
-     * @throws IllegalPlayerexception identify a non valid target (e.g. the attacker or a Player already classified as a target)
+     * @throws IllegalPlayerException identify a non valid target (e.g. the attacker or a Player already classified as a target)
      */
-    private void acquireSecond(Player attacker) throws InvalidPlayerException, UnreachablePlayerException, IllegalPlayerexception{
+    private void acquireSecond(Player attacker) throws InvalidPlayerException, UnreachablePlayerException, IllegalPlayerException {
         String name;
         int i = 0;
         System.out.println("Indicates the name of the second target, it must be at most 1 square away from the Vortex\n");
@@ -109,11 +109,11 @@ public class BlackHole implements Power{
         if (i == 5){
             throw new InvalidPlayerException(name);
         }else if (basicpower.target.getNickname().equals(name)){
-            throw new IllegalPlayerexception(name, ErrorCode.NOTSELECTABLE);
+            throw new IllegalPlayerException(name, ErrorCode.NOTSELECTABLE);
         } else if (target1.getNickname().equals(name)) {
-            throw new IllegalPlayerexception(name, ErrorCode.NOTSELECTABLE);
+            throw new IllegalPlayerException(name, ErrorCode.NOTSELECTABLE);
         } else if (attacker.getNickname().equals(name)) {
-            throw new IllegalPlayerexception(name, ErrorCode.ATTACKERSELECTED);
+            throw new IllegalPlayerException(name, ErrorCode.ATTACKERSELECTED);
         }
         if (isValidPosition(i)){
             target2 = Table.getPlayers(i);
