@@ -3,6 +3,7 @@ package it.polimi.sw2019.model;
 import java.util.ArrayList;
 /**
  * this class stands for the player's plance
+ * @author Luca Giacometti
  */
 public class PlayerPlance {
 
@@ -19,7 +20,6 @@ public class PlayerPlance {
     private ArrayList<Player> markedBy = new ArrayList<>(12);
 
     /**
-     * @author Luca Giacometti
      * this is the constructor
      */
     public PlayerPlance (){
@@ -27,6 +27,14 @@ public class PlayerPlance {
         this.isKilled = false;
         this.isSecondAdrenaline = false;
         this.isOverkilled = false;
+    }
+
+    /**
+     * @return a vector where is set how many times the player was killed
+     */
+    public boolean[] getKilled () {
+
+        return killed;
     }
     /**
      * @return true if the player got the first adrenaline
@@ -43,7 +51,7 @@ public class PlayerPlance {
     /**
      * @return true if the player is dead
      */
-    public boolean getKilled(){
+    public boolean getIsKilled(){
         return isKilled;
     }
     /**
@@ -53,10 +61,8 @@ public class PlayerPlance {
         return isOverkilled;
     }
     /**
-     * @author Luca Giacometti
      * @param shooter it is the opponent who provoked the damage
      * @param quantity it is the amount of damage
-     * the controller has to control if the vector is full
      */
     public void giveDamage(Player shooter, Integer quantity){
 
@@ -65,7 +71,8 @@ public class PlayerPlance {
 
             if (damageTrack[i] != null) {
                 i++;
-            } else {
+            }
+            else {
                 this.damageTrack[i] = shooter.getNickname();
                 quantity--;
             }
@@ -76,16 +83,18 @@ public class PlayerPlance {
         }
     }
     /**
-     * @author Luca Giacometti
      * @param shooter it is the opponent who marked the player
-     * the controller has to control if the arraylist is full
      */
     public void setMark(Player shooter) {
         if ( markedBy.isEmpty() ) {
             markedBy.add( 0,shooter);
         }
-        else {
+        else if ((markedBy.get(11)) == null) {
+            //the arrayList is not full
             markedBy.add( markedBy.lastIndexOf(null), shooter);
+        }
+        else {
+            System.out.println("The target player's mark List is already full\n");
         }
     }
 }

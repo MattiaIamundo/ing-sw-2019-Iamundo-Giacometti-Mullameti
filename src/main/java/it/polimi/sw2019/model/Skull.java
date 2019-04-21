@@ -1,6 +1,8 @@
 package it.polimi.sw2019.model;
+
 /**
  * this class symbolizes the skulls which are present on the table
+ * @author Luca Giacometti
  */
 public class Skull {
 
@@ -10,7 +12,6 @@ public class Skull {
     private Player killer;
 
     /**
-     * @author Luca Giacometti
      * this is the constructor
      * the skull is presents in the table,
      * so there are not a killer and an overkilled mark
@@ -33,6 +34,7 @@ public class Skull {
     public void setIsPresent(){
         this.isPresent = false;
     }
+
     /**
      * it sets the double mark
      */
@@ -40,10 +42,9 @@ public class Skull {
         this.isOverkilled = true;
     }
     /**
-     * it sets who was the killer
-     * @param killer
+     * @param killer the player which killed another player
      */
-    public void setKiller(Player killer){
+    public void setKiller(Player killer) {
         this.killer = killer;
     }
 }
