@@ -45,6 +45,13 @@ public class Alternative extends Weapon{
     }
 
     /**
+     * @return the weapon's alternative power
+     */
+    public Power getAlternativePower (){
+
+        return alternativePower;
+    }
+    /**
      * @return a description of the effect the weapon can do in alternative to the basic effect
      */
     public String getDescriptionAlternativePower(){

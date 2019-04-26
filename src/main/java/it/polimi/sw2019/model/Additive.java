@@ -31,15 +31,24 @@ public class Additive extends Weapon{
     /**
      * @return the extra cost needed to activate this part of the weapon
      */
-    public String getExtraCost(){
+    public String getAdditiveCost(){
         return additiveCost;
     }
 
+    /**
+     * @param attacker the player who wants to attack
+     */
     public void attackAdditive (Player attacker){
 
         additivePower.usePower(attacker);
     }
 
+    /**
+     * @return the weapon's additive power
+     */
+    public Power getAdditivePower() {
+        return additivePower;
+    }
     /**
      * @return a description of the effect the weapon can do in addition to the basic effect
      */

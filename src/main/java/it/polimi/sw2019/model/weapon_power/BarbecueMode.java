@@ -55,47 +55,47 @@ public class BarbecueMode implements Power{
     private void findDirection(String dir) throws InvalidDirectionException, IllegalDirectionException {
         switch (dir) {
             case "north":
-                if (attacker.getPosition().getNord().isWall()) {
+                if (attacker.getPosition().getNorth().isWall()) {
                     throw new IllegalDirectionException(dir);
                 }
-                targetarea1 = attacker.getPosition().getNord().getSpaceSecond();
-                if (targetarea1.getNord().isWall()) {
+                targetarea1 = attacker.getPosition().getNorth().getSpaceSecond();
+                if (targetarea1.getNorth().isWall()) {
                     targetarea2 = null;
                 } else {
-                    targetarea2 = targetarea1.getNord().getSpaceSecond();
+                    targetarea2 = targetarea1.getNorth().getSpaceSecond();
                 }
                 break;
             case "east":
-                if (attacker.getPosition().getEst().isWall()) {
+                if (attacker.getPosition().getEast().isWall()) {
                     throw new IllegalDirectionException(dir);
                 }
-                targetarea1 = attacker.getPosition().getEst().getSpaceSecond();
-                if (targetarea1.getEst().isWall()) {
+                targetarea1 = attacker.getPosition().getEast().getSpaceSecond();
+                if (targetarea1.getEast().isWall()) {
                     targetarea2 = null;
                 } else {
-                    targetarea2 = targetarea1.getEst().getSpaceSecond();
+                    targetarea2 = targetarea1.getEast().getSpaceSecond();
                 }
                 break;
             case "south":
-                if (attacker.getPosition().getSud().isWall()) {
+                if (attacker.getPosition().getSouth().isWall()) {
                     throw new IllegalDirectionException(dir);
                 }
-                targetarea1 = attacker.getPosition().getSud().getSpaceSecond();
-                if (targetarea1.getSud().isWall()) {
+                targetarea1 = attacker.getPosition().getSouth().getSpaceSecond();
+                if (targetarea1.getSouth().isWall()) {
                     targetarea2 = null;
                 } else {
-                    targetarea2 = targetarea1.getSud().getSpaceSecond();
+                    targetarea2 = targetarea1.getSouth().getSpaceSecond();
                 }
                 break;
             case "west":
-                if (attacker.getPosition().getOvest().isWall()) {
+                if (attacker.getPosition().getWest().isWall()) {
                     throw new IllegalDirectionException(dir);
                 }
-                targetarea1 = attacker.getPosition().getOvest().getSpaceSecond();
-                if (targetarea1.getOvest().isWall()) {
+                targetarea1 = attacker.getPosition().getWest().getSpaceSecond();
+                if (targetarea1.getWest().isWall()) {
                     targetarea2 = null;
                 } else {
-                    targetarea2 = targetarea1.getOvest().getSpaceSecond();
+                    targetarea2 = targetarea1.getWest().getSpaceSecond();
                 }
                 break;
             default:

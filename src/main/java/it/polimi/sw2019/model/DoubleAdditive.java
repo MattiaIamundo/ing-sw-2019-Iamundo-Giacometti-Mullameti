@@ -83,4 +83,18 @@ public class DoubleAdditive extends Weapon{
     public String getDescriptionSecondAdditivePower(){
         return descriptionSecondAdditivePower;
     }
+
+    /**
+     * @return the weapon's first additive power
+     */
+    public Power getFirstAdditivePower() {
+        return firstAdditivePower;
+    }
+
+    /**
+     * @return the weapon's second additive power
+     */
+    public Power getSecondAdditivePower() {
+        return secondAdditivePower;
+    }
 }

@@ -130,21 +130,21 @@ public class BlackHole implements Power{
     private boolean isValidPosition(int target){
         if (Table.getPlayers(target).getPosition() == basicpower.vortex){
             return true;
-        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getNord().getSpaceSecond()){
+        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getNorth().getSpaceSecond()){
             return true;
-        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getNord().getSpaceSecond().getOvest().getSpaceSecond()){
+        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getNorth().getSpaceSecond().getWest().getSpaceSecond()){
             return true;
-        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getOvest().getSpaceSecond()){
+        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getWest().getSpaceSecond()){
             return true;
-        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getOvest().getSpaceSecond().getSud().getSpaceSecond()){
+        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getWest().getSpaceSecond().getSouth().getSpaceSecond()){
             return true;
-        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getSud().getSpaceSecond()){
+        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getSouth().getSpaceSecond()){
             return true;
-        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getSud().getSpaceSecond().getEst().getSpaceSecond()){
+        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getSouth().getSpaceSecond().getEast().getSpaceSecond()){
             return true;
-        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getEst().getSpaceSecond()){
+        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getEast().getSpaceSecond()){
             return true;
-        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getEst().getSpaceSecond().getNord().getSpaceSecond()){
+        }else if (Table.getPlayers(target).getPosition() == basicpower.vortex.getEast().getSpaceSecond().getNorth().getSpaceSecond()){
             return true;
         }else {
             return false;

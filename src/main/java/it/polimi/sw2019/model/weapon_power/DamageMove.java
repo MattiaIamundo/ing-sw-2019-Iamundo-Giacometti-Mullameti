@@ -102,31 +102,31 @@ public class DamageMove implements Power{
         dir = scanner.nextLine();
         switch (dir){
             case "north":
-                if (target.getPosition().getNord().isWall()){
+                if (target.getPosition().getNorth().isWall()){
                     throw new IllegalDirectionException(dir);
                 }else {
-                    moveto = target.getPosition().getNord().getSpaceSecond();
+                    moveto = target.getPosition().getNorth().getSpaceSecond();
                     break;
                 }
             case "west":
-                if (target.getPosition().getOvest().isWall()){
+                if (target.getPosition().getWest().isWall()){
                     throw new IllegalDirectionException(dir);
                 }else {
-                    moveto = target.getPosition().getOvest().getSpaceSecond();
+                    moveto = target.getPosition().getWest().getSpaceSecond();
                     break;
                 }
             case "south":
-                if (target.getPosition().getSud().isWall()){
+                if (target.getPosition().getSouth().isWall()){
                     throw new IllegalDirectionException(dir);
                 }else {
-                    moveto = target.getPosition().getSud().getSpaceSecond();
+                    moveto = target.getPosition().getSouth().getSpaceSecond();
                     break;
                 }
             case "east":
-                if (target.getPosition().getEst().isWall()){
+                if (target.getPosition().getEast().isWall()){
                     throw new IllegalDirectionException(dir);
                 }else {
-                    moveto = target.getPosition().getEst().getSpaceSecond();
+                    moveto = target.getPosition().getEast().getSpaceSecond();
                     break;
                 }
             default:

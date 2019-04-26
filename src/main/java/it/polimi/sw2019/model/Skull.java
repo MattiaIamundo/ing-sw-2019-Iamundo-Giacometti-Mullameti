@@ -6,8 +6,8 @@ package it.polimi.sw2019.model;
  */
 public class Skull {
 
-    public boolean isPresent;
-    public boolean isOverkilled;
+    private boolean isPresent;
+    private boolean isOverkilled;
     //the player who killed an opponent
     private Player killer;
 
@@ -35,6 +35,19 @@ public class Skull {
         this.isPresent = false;
     }
 
+    /**
+     * @return the skull's attribute isPresent
+     */
+    public boolean getIsPresent (){
+        return this.isPresent;
+    }
+
+    /**
+     * @return the skull's attribute isOverkilled
+     */
+    public boolean getIsOverkilled (){
+        return this.isOverkilled;
+    }
     /**
      * it sets the double mark
      */
