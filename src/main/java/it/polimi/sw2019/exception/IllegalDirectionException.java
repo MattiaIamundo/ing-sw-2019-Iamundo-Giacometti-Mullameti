@@ -8,4 +8,9 @@ public class IllegalDirectionException extends Exception{
     public IllegalDirectionException(String s){
         super(s);
     }
+
+    public IllegalDirectionException(){
+        super();
+    }
+
 }
