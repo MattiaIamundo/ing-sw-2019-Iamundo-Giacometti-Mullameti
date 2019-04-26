@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Map {
     //list is set to 4 because the map is a 4 x-coordinate x 3 y-coordinate
-    private ArrayList <ArrayList <Space>> list = new ArrayList <> (4);
+    private static ArrayList <ArrayList <Space>> list = new ArrayList <> (4);
     // this: ArrayList<Space> innerList0 = new ArrayList<Space>(3);
     //is the constructor's parameters form
     /**
@@ -29,7 +29,7 @@ public class Map {
      * @param y it is the y-coordinate of the map
      * @return the space having x and y coordinates
      */
-    public Space getSpace(Integer x , Integer y) {
+    public static Space getSpace(Integer x , Integer y) {
         return (list.get(x)).get(y);
     }
 }
