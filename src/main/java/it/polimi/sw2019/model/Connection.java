@@ -10,9 +10,9 @@ public class Connection {
     //boolean variable to decide if there is a wall or not , if there is possibile to move from spaceFirst to spaceSecond
     private boolean isWall;
     /**Constructor of the class
-     * @param spaceFirst
-     * @param spaceSecond
-     * @param isWall
+     * @param spaceFirst the space the player's in
+     * @param spaceSecond the space the player wants to move to
+     * @param isWall true if there is a wall and false if there isn't
      */
 
     public Connection(Space spaceFirst , Space spaceSecond , boolean isWall){

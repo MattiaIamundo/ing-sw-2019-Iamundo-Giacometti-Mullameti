@@ -58,8 +58,32 @@ public class Player extends PlayerView implements Cloneable {
      * @return true if this Player is visible from the caller Player
      */
     public boolean isVisible(Player callerPlayer) {
-        return true;
+        //the players are in the same room
+        if (this.getPosition().getRoom() == callerPlayer.getPosition().getRoom()) {
+            return true;
+        } else {
+            //the players are in different rooms
+            if (!(callerPlayer.getPosition().getNorth().isWall())) {
+                if (callerPlayer.getPosition().getNorth().getSpaceSecond().getRoom() == this.getPosition().getRoom()) {
+                    return true;
+                }
+            } else if (!(callerPlayer.getPosition().getSouth().isWall())) {
+                if (callerPlayer.getPosition().getSouth().getSpaceSecond().getRoom() == this.getPosition().getRoom()) {
+                    return true;
+                }
+            } else if (!(callerPlayer.getPosition().getEast().isWall())) {
+                if (callerPlayer.getPosition().getEast().getSpaceSecond().getRoom() == this.getPosition().getRoom()) {
+                    return true;
+                }
+            } else if (!(callerPlayer.getPosition().getWest().isWall())) {
+                if (callerPlayer.getPosition().getWest().getSpaceSecond().getRoom() == this.getPosition().getRoom()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
+
     /**
      * @return the player's plance
      */
