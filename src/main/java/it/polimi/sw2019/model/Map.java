@@ -3,6 +3,7 @@ package it.polimi.sw2019.model;
 import java.util.ArrayList;
 /**
  * this class is stand of the game's maps
+ * @author Luca Giacometti
  */
 public class Map {
     //list is set to 4 because the map is a 4 x-coordinate x 3 y-coordinate
@@ -11,7 +12,6 @@ public class Map {
     //is the constructor's parameters form
     /**
      * this is the constructor
-     * @author Luca Giacometti
      * @param innerList0 the list of spaces who have x-coordinate equals 0
      * @param innerList1 the list of spaces who have x-coordinate equals 1
      * @param innerList2 the list of spaces who have x-coordinate equals 2
@@ -25,7 +25,6 @@ public class Map {
         this.list.add(3,innerList3);
     }
     /**
-     * @author Luca Giacometti
      * @param x it is the x-coordinate of the map
      * @param y it is the y-coordinate of the map
      * @return the space having x and y coordinates

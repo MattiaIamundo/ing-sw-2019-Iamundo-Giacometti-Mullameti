@@ -55,7 +55,7 @@ public class Player extends PlayerView implements Cloneable {
     }
     /**
      * the callerPlayer is not this player
-     * @return true if this Player is visible from the caller Player
+     * @return true if this.player is visible from the caller Player
      */
     public boolean isVisible(Player callerPlayer) {
         //the players are in the same room

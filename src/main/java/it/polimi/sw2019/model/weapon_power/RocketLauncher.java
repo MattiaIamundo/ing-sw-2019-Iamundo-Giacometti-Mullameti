@@ -7,8 +7,9 @@ import javax.swing.*;
 
 public class RocketLauncher implements Power{
     //basic effect for RocketLauncher
-    private Player target;
-    private Space moveto;
+    Space origin;
+    Player target;
+    Space moveto;
 
     @Override
     public void usePower(Player attacker){
