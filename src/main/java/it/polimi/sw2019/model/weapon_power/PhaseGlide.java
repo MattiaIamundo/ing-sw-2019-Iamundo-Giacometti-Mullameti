@@ -30,16 +30,16 @@ public class PhaseGlide implements Power{
             if (Arrays.asList(validdirection).contains(dir)){
                 switch (dir){
                     case "north":
-                        attacker.setPosition(attacker.getPosition().getNord().getSpaceSecond());
+                        attacker.setPosition(attacker.getPosition().getNorth().getSpaceSecond());
                         break;
                     case "west":
-                        attacker.setPosition(attacker.getPosition().getOvest().getSpaceSecond());
+                        attacker.setPosition(attacker.getPosition().getWest().getSpaceSecond());
                         break;
                     case "south":
-                        attacker.setPosition(attacker.getPosition().getSud().getSpaceSecond());
+                        attacker.setPosition(attacker.getPosition().getSouth().getSpaceSecond());
                         break;
                     case "east":
-                        attacker.setPosition(attacker.getPosition().getEst().getSpaceSecond());
+                        attacker.setPosition(attacker.getPosition().getEast().getSpaceSecond());
                         break;
                     default:
                         break;
@@ -59,16 +59,16 @@ public class PhaseGlide implements Power{
     private String[] validDirection(Space position){
         ArrayList<String> direction = new ArrayList<>();
 
-        if (!position.getNord().isWall()){
+        if (!position.getNorth().isWall()){
             direction.add("north");
         }
-        if (!position.getOvest().isWall()){
+        if (!position.getWest().isWall()){
             direction.add("west");
         }
-        if (!position.getSud().isWall()){
+        if (!position.getSouth().isWall()){
             direction.add("south");
         }
-        if (!position.getEst().isWall()){
+        if (!position.getEast().isWall()){
             direction.add("east");
         }
 

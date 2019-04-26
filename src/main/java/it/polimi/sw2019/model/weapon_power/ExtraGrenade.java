@@ -42,14 +42,14 @@ public class ExtraGrenade implements Power{
     private void initialize(Player attacker){
         int i = 0;
         thisroom = attacker.getPosition().getRoom();
-        if (!attacker.getPosition().getNord().getSpaceSecond().getRoom().equals(thisroom)){
-            otherroom = attacker.getPosition().getNord().getSpaceSecond().getRoom();
-        }else if (!attacker.getPosition().getOvest().getSpaceSecond().getRoom().equals(thisroom)){
-            otherroom = attacker.getPosition().getOvest().getSpaceSecond().getRoom();
-        }else if (!attacker.getPosition().getSud().getSpaceSecond().getRoom().equals(thisroom)){
-            otherroom = attacker.getPosition().getSud().getSpaceSecond().getRoom();
-        }else if (!attacker.getPosition().getEst().getSpaceSecond().getRoom().equals(thisroom)){
-            otherroom = attacker.getPosition().getEst().getSpaceSecond().getRoom();
+        if (!attacker.getPosition().getNorth().getSpaceSecond().getRoom().equals(thisroom)){
+            otherroom = attacker.getPosition().getNorth().getSpaceSecond().getRoom();
+        }else if (!attacker.getPosition().getWest().getSpaceSecond().getRoom().equals(thisroom)){
+            otherroom = attacker.getPosition().getWest().getSpaceSecond().getRoom();
+        }else if (!attacker.getPosition().getSouth().getSpaceSecond().getRoom().equals(thisroom)){
+            otherroom = attacker.getPosition().getSouth().getSpaceSecond().getRoom();
+        }else if (!attacker.getPosition().getEast().getSpaceSecond().getRoom().equals(thisroom)){
+            otherroom = attacker.getPosition().getEast().getSpaceSecond().getRoom();
         }else {
             otherroom = null;
         }
@@ -88,16 +88,16 @@ public class ExtraGrenade implements Power{
      */
     private String[] valideDirection(Space position){
         ArrayList<String> availabledirection = new ArrayList<>();
-        if (!(position.getNord().isWall()) && (position.getNord().getSpaceSecond().getRoom().equals(thisroom) || position.getNord().getSpaceSecond().getRoom().equals(otherroom))){
+        if (!(position.getNorth().isWall()) && (position.getNorth().getSpaceSecond().getRoom().equals(thisroom) || position.getNorth().getSpaceSecond().getRoom().equals(otherroom))){
             availabledirection.add("north");
         }
-        if (!(position.getOvest().isWall()) && (position.getOvest().getSpaceSecond().getRoom().equals(thisroom) || position.getOvest().getSpaceSecond().getRoom().equals(otherroom))){
+        if (!(position.getWest().isWall()) && (position.getWest().getSpaceSecond().getRoom().equals(thisroom) || position.getWest().getSpaceSecond().getRoom().equals(otherroom))){
             availabledirection.add("west");
         }
-        if (!(position.getSud().isWall()) && (position.getSud().getSpaceSecond().getRoom().equals(thisroom) || position.getSud().getSpaceSecond().getRoom().equals(otherroom))){
+        if (!(position.getSouth().isWall()) && (position.getSouth().getSpaceSecond().getRoom().equals(thisroom) || position.getSouth().getSpaceSecond().getRoom().equals(otherroom))){
             availabledirection.add("south");
         }
-        if (!(position.getEst().isWall()) && (position.getEst().getSpaceSecond().getRoom().equals(thisroom) || position.getEst().getSpaceSecond().getRoom().equals(otherroom))){
+        if (!(position.getEast().isWall()) && (position.getEast().getSpaceSecond().getRoom().equals(thisroom) || position.getEast().getSpaceSecond().getRoom().equals(otherroom))){
             availabledirection.add("east");
         }
         return availabledirection.toArray(new String[0]);
@@ -114,16 +114,16 @@ public class ExtraGrenade implements Power{
         if (result){
             switch (inserted){
                 case "north":
-                    targetarea = targetarea.getNord().getSpaceSecond();
+                    targetarea = targetarea.getNorth().getSpaceSecond();
                     break;
                 case "west":
-                    targetarea = targetarea.getOvest().getSpaceSecond();
+                    targetarea = targetarea.getWest().getSpaceSecond();
                     break;
                 case "south":
-                    targetarea = targetarea.getSud().getSpaceSecond();
+                    targetarea = targetarea.getSouth().getSpaceSecond();
                     break;
                 case "east":
-                    targetarea = targetarea.getEst().getSpaceSecond();
+                    targetarea = targetarea.getEast().getSpaceSecond();
                     break;
                 default:
                     break;

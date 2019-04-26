@@ -16,6 +16,8 @@ public class Table extends TableView implements Cloneable {
     private Ammo[] ammoDeck = new Ammo[36];
     //there can be 3 , 4 or 5 players
     private static Player[] players = new Player[5];
+    //this variable indicates the player who is currently playing
+    private static Player currentPlayer;
 
     /**
      * Constructor of the class
@@ -59,5 +61,17 @@ public class Table extends TableView implements Cloneable {
      */
     public static Player getPlayers(int i){
         return players[i];
+    }
+    /**
+     * @return the current player
+     */
+    public static Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+    /**
+     * @return the current player
+     */
+    public static Player setCurrentPlayer(){
+        return currentPlayer;
     }
 }

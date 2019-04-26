@@ -169,27 +169,27 @@ public class PiercingMode implements Power{
         }
         switch (dir){
             case "north":
-                while (position.getNord().getSpaceSecond() != null){
+                while (position.getNorth().getSpaceSecond() != null){
                     firingline.add(position);
-                    position = position.getNord().getSpaceSecond();
+                    position = position.getNorth().getSpaceSecond();
                 }
                 break;
             case "west":
-                while (position.getOvest().getSpaceSecond() != null){
+                while (position.getWest().getSpaceSecond() != null){
                     firingline.add(position);
-                    position = position.getOvest().getSpaceSecond();
+                    position = position.getWest().getSpaceSecond();
                 }
                 break;
             case "south":
-                while (position.getSud().getSpaceSecond() != null){
+                while (position.getSouth().getSpaceSecond() != null){
                     firingline.add(position);
-                    position = position.getSud().getSpaceSecond();
+                    position = position.getSouth().getSpaceSecond();
                 }
                 break;
             case "east":
-                while (position.getEst().getSpaceSecond() != null){
+                while (position.getEast().getSpaceSecond() != null){
                     firingline.add(position);
-                    position = position.getEst().getSpaceSecond();
+                    position = position.getEast().getSpaceSecond();
                 }
                 break;
             default:
@@ -209,16 +209,16 @@ public class PiercingMode implements Power{
     private String[] checkDirection(Space position){
         ArrayList<String> direction = new ArrayList<>();
 
-        if (position.getNord().getSpaceSecond() != null){
+        if (position.getNorth().getSpaceSecond() != null){
             direction.add("north");
         }
-        if (position.getOvest().getSpaceSecond() != null){
+        if (position.getWest().getSpaceSecond() != null){
             direction.add("west");
         }
-        if (position.getSud().getSpaceSecond() != null){
+        if (position.getSouth().getSpaceSecond() != null){
             direction.add("south");
         }
-        if (position.getEst().getSpaceSecond() != null){
+        if (position.getEast().getSpaceSecond() != null){
             direction.add("east");
         }
         return direction.toArray(new String[0]);

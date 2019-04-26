@@ -69,13 +69,13 @@ public class LongBarrelMode implements Power{
      * @return true if the target is valid, false otherwise
      */
     private boolean isInValidPosition(Player attacker, Player target){
-        if (attacker.getPosition().getNord().getSpaceSecond() == target.getPosition()){
+        if (attacker.getPosition().getNorth().getSpaceSecond() == target.getPosition()){
             return true;
-        }else if (attacker.getPosition().getOvest().getSpaceSecond() == target.getPosition()){
+        }else if (attacker.getPosition().getWest().getSpaceSecond() == target.getPosition()){
             return true;
-        }else if (attacker.getPosition().getSud().getSpaceSecond() == target.getPosition()){
+        }else if (attacker.getPosition().getSouth().getSpaceSecond() == target.getPosition()){
             return true;
-        }else if (attacker.getPosition().getEst().getSpaceSecond() == target.getPosition()){
+        }else if (attacker.getPosition().getEast().getSpaceSecond() == target.getPosition()){
             return true;
         }else {
             return false;

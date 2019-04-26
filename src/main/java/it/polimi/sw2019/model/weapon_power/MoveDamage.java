@@ -95,16 +95,16 @@ public class MoveDamage implements Power{
             if (Arrays.asList(possibledir).contains(dir)){
                 switch (dir){
                     case "north":
-                        actualposition = actualposition.getNord().getSpaceSecond();
+                        actualposition = actualposition.getNorth().getSpaceSecond();
                         break;
                     case "west":
-                        actualposition = actualposition.getOvest().getSpaceSecond();
+                        actualposition = actualposition.getWest().getSpaceSecond();
                         break;
                     case "south":
-                        actualposition = actualposition.getSud().getSpaceSecond();
+                        actualposition = actualposition.getSouth().getSpaceSecond();
                         break;
                     case "east":
-                        actualposition = actualposition.getEst().getSpaceSecond();
+                        actualposition = actualposition.getEast().getSpaceSecond();
                         break;
                     default:
                         break;
@@ -126,16 +126,16 @@ public class MoveDamage implements Power{
      */
     private String[] validMove(Space position){
         ArrayList<String> direction = new ArrayList<>();
-        if (!position.getNord().isWall()){
+        if (!position.getNorth().isWall()){
             direction.add("north");
         }
-        if (!position.getOvest().isWall()){
+        if (!position.getWest().isWall()){
             direction.add("west");
         }
-        if (!position.getSud().isWall()){
+        if (!position.getSouth().isWall()){
             direction.add("south");
         }
-        if (!position.getEst().isWall()){
+        if (!position.getEast().isWall()){
             direction.add("east");
         }
         return direction.toArray(new String[0]);

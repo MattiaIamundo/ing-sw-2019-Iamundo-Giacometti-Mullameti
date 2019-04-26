@@ -48,31 +48,31 @@ public class CozyFireMode implements Power{
         direction = scanner.nextLine();
         switch (direction){
             case "north":
-                if (attacker.getPosition().getNord().isWall()){
+                if (attacker.getPosition().getNorth().isWall()){
                     throw new IllegalDirectionException(direction);
                 }else {
-                    targetarea = attacker.getPosition().getNord().getSpaceSecond();
+                    targetarea = attacker.getPosition().getNorth().getSpaceSecond();
                     break;
                 }
             case "west":
-                if (attacker.getPosition().getOvest().isWall()){
+                if (attacker.getPosition().getWest().isWall()){
                     throw new IllegalDirectionException(direction);
                 }else {
-                    targetarea = attacker.getPosition().getOvest().getSpaceSecond();
+                    targetarea = attacker.getPosition().getWest().getSpaceSecond();
                     break;
                 }
             case "south":
-                if (attacker.getPosition().getSud().isWall()){
+                if (attacker.getPosition().getSouth().isWall()){
                     throw new IllegalDirectionException(direction);
                 }else {
-                    targetarea = attacker.getPosition().getSud().getSpaceSecond();
+                    targetarea = attacker.getPosition().getSouth().getSpaceSecond();
                     break;
                 }
             case "east":
-                if (attacker.getPosition().getEst().isWall()){
+                if (attacker.getPosition().getEast().isWall()){
                     throw new IllegalDirectionException(direction);
                 }else {
-                    targetarea = attacker.getPosition().getEst().getSpaceSecond();
+                    targetarea = attacker.getPosition().getEast().getSpaceSecond();
                     break;
                 }
             default:

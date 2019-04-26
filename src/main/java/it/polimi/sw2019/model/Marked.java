@@ -11,5 +11,10 @@ public class Marked implements EffectBehaviour {
     @Override
     public void useEffect(Player target) {
 
+        Player currentPlayer; //variable to memorise the player who´s currently playing
+        currentPlayer=Table.getCurrentPlayer();
+
+        target.getPlance().setMark(currentPlayer);
+
     }
 }
