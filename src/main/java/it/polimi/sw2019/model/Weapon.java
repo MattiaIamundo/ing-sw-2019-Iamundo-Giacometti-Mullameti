@@ -73,6 +73,12 @@ public abstract class Weapon extends WeaponView implements Cloneable {
     }
 
     /**
+     * @param set this variable is true if the weapon is load and false if it is discharged
+     */
+    public void setIsLoad(boolean set) {
+        this.isLoad = set;
+    }
+    /**
      *
      * @return the weapon's power
      */

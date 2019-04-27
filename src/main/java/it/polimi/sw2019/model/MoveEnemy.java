@@ -87,7 +87,7 @@ public class MoveEnemy implements EffectBehaviour {
                 if(target.getPosition().getSouth().isWall()){
                     throw new IllegalDirectionException(direction);
                 }else{
-                    System.out.println("Do you want"+target.getNickname()+"to move north again ? \n Yes or No ? ");
+                    System.out.println("Do you want"+target.getNickname()+"to move south again ? \n Yes or No ? ");
                     nrSpaces=scanner.nextLine();
 
                     if(nrSpaces == "yes"||nrSpaces=="Yes"){
@@ -115,7 +115,7 @@ public class MoveEnemy implements EffectBehaviour {
                 if(target.getPosition().getWest().isWall()){
                     throw new IllegalDirectionException(direction);
                 }else{
-                    System.out.println("Do you want"+target.getNickname()+"to move north again ? \n Yes or No ? ");
+                    System.out.println("Do you want"+target.getNickname()+"to move west again ? \n Yes or No ? ");
                     nrSpaces=scanner.nextLine();
 
                     if(nrSpaces == "yes"||nrSpaces=="Yes"){
@@ -143,7 +143,7 @@ public class MoveEnemy implements EffectBehaviour {
                 if(target.getPosition().getEast().isWall()){
                     throw new IllegalDirectionException(direction);
                 }else{
-                    System.out.println("Do you want"+target.getNickname()+"to move north again ? \n Yes or No ? ");
+                    System.out.println("Do you want"+target.getNickname()+"to move east again ? \n Yes or No ? ");
                     nrSpaces=scanner.nextLine();
 
                     if(nrSpaces == "yes"||nrSpaces=="Yes"){

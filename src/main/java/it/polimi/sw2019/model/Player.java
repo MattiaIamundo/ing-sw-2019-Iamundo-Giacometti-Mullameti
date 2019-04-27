@@ -3,6 +3,7 @@ package it.polimi.sw2019.model;
 import it.polimi.sw2019.view.PlayerView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**Class Player : describes player's characteristics
  * @author Merita Mullameti
@@ -18,6 +19,7 @@ public class Player extends PlayerView implements Cloneable {
     private Weapon[] weapon = new Weapon[3];
 
     private Space position; //the position the player's in
+    //the opponents who the player has marked
     private ArrayList<Player> marked = new ArrayList<>();
     private PlayerPlance plance;
     //list of power up cards  the player owns , every player can own at top 3 weapons
@@ -27,7 +29,7 @@ public class Player extends PlayerView implements Cloneable {
      * @param nickname the player's nickname
      * @param score the player's score in this game
      * @param position the player's position in the map
-     * @param plance hte player's plance
+     * @param plance the player's plance
      */
     public Player(String nickname , Integer score , Space position, PlayerPlance plance){
         this.nickname = nickname;
@@ -46,6 +48,14 @@ public class Player extends PlayerView implements Cloneable {
      */
     public Integer getScore() {
         return score;
+    }
+
+    /**
+     * this method adds some points or a point to the player's score
+     * @param points the points which the player has to gain
+     */
+    public void addPoints(int points) {
+        this.score = this.score + points;
     }
     /**
      * @return the player's position
@@ -85,13 +95,69 @@ public class Player extends PlayerView implements Cloneable {
     }
 
     /**
+     * this method set the marks which the player gave to the others players
+     * @param markedPlayer the player who is marked
+     * @param numberOfMarks the number of mark given
+     */
+    public void addMarked(Player markedPlayer, int numberOfMarks) {
+        //the arrayList is empty and the number of marks is ok
+        if( marked.isEmpty() && numberOfMarks < 12 ){
+
+            for (int i = 0; i < numberOfMarks; i++){
+
+                marked.add(markedPlayer);
+            }
+        }
+        //the arrayList is not empty but the number of marks is not big enough
+        else if ( !marked.isEmpty() && (marked.size() + numberOfMarks) < 12 ){
+
+            for ( int i = marked.size() + 1; i < marked.size() + numberOfMarks; i++) {
+
+                marked.add(markedPlayer);
+            }
+        }
+        //the arrayList is not empty but the number of marks is big enough to create a problem
+        else if ( !marked.isEmpty() && (marked.size() + numberOfMarks) > 12 ){
+
+            for (int i = marked.size() + 1; i < 12 ; i++){
+
+                marked.add(markedPlayer);
+            }
+        }
+    }
+
+    /**
+     * this method remove the marks which are transformed in damages
+     * @param markedPlayer the player who is damaged and has got also some of attacker's marks
+     */
+    public void removeMarked (Player markedPlayer){
+
+        Iterator <Player> iterator = marked.iterator();
+        //there is almost one marked
+        if ( !marked.isEmpty() ){
+
+            while (iterator.hasNext()){
+
+                Player p = iterator.next();
+                //if the arrayList marked contains the markedPlayer, it is to be removed
+                if (p == markedPlayer){
+
+                    iterator.remove();
+                }
+            }
+        }
+        else{
+            System.out.println("The player didn't marked any players!\n ");
+        }
+    }
+    /**
      * @return the player's plance
      */
     public PlayerPlance getPlance() {
         return plance;
     }
     /**
-     * @return a pointer to the list of weapons the player ownes
+     * @return a pointer to the list of weapons the player owns
      */
     public Weapon[] listWeapon() { return weapon; }
     /**

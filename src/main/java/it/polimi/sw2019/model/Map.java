@@ -1,5 +1,7 @@
 package it.polimi.sw2019.model;
 
+import it.polimi.sw2019.exception.InvalidSpaceException;
+
 import java.util.ArrayList;
 /**
  * this class is stand of the game's maps
@@ -29,7 +31,17 @@ public class Map {
      * @param y it is the y-coordinate of the map
      * @return the space having x and y coordinates
      */
-    public static Space getSpace(Integer x , Integer y) {
-        return (list.get(x)).get(y);
+    public static Space getSpace(int x , int y) throws InvalidSpaceException {
+
+        if ( x > 3 && y <= 2 )
+            throw new InvalidSpaceException("xout");
+        else if ( x <= 3 && y > 2 )
+            throw new InvalidSpaceException("yout");
+        else if (x > 3 && y > 2 )
+            throw new InvalidSpaceException("xyout");
+        else if (x < 0 || y < 0)
+            throw new InvalidSpaceException("neg");
+        else
+            return (list.get(x)).get(y);
     }
 }
