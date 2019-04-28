@@ -17,6 +17,9 @@ public abstract class Ammo extends AmmoView implements Cloneable {
         this.colorSecond=colorSecond;
     }
 
+    protected void showAmmo() {
+
+    }
     /**
      * @return the color of the first ammo
      */

@@ -32,6 +32,13 @@ public abstract class Weapon extends WeaponView implements Cloneable {
     }
 
     /**
+     * this method has to show to the view the weapon
+     */
+    protected void showWeapon() {
+
+    }
+
+    /**
      *
      * @return the ammo's name
      */

@@ -11,16 +11,16 @@ import java.util.Iterator;
 public class Player extends PlayerView implements Cloneable {
 
     private String nickname; //player's nickname
-    private Integer score; //player's score
+    private int score; //player's score
     //first red, second blue, third yellow
-    private Integer[] ammo = new Integer[3];
+    private Ammo[] ammo = new Ammo[3];
     //list of weapons the player owns , every player can own at top 3 weapons
     //if null there isn't a weapon in that position
     private Weapon[] weapon = new Weapon[3];
 
     private Space position; //the position the player's in
     //the opponents who the player has marked
-    private ArrayList<Player> marked = new ArrayList<>();
+    private ArrayList<Player> marked;
     private PlayerPlance plance;
     //list of power up cards  the player owns , every player can own at top 3 weapons
     private PowerUp[] powerup = new PowerUp[3];
@@ -31,12 +31,17 @@ public class Player extends PlayerView implements Cloneable {
      * @param position the player's position in the map
      * @param plance the player's plance
      */
-    public Player(String nickname , Integer score , Space position, PlayerPlance plance){
+    public Player(String nickname , int score , Space position, PlayerPlance plance){
         this.nickname = nickname;
         this.score = score;
         this.position = position;
         this.plance = plance;
     }
+
+    protected void showPlayer() {
+
+    }
+
     /**
      * @return the player's nickname
      */
@@ -46,7 +51,7 @@ public class Player extends PlayerView implements Cloneable {
     /**
      * @return the player's score
      */
-    public Integer getScore() {
+    public int getScore() {
         return score;
     }
 
@@ -170,7 +175,7 @@ public class Player extends PlayerView implements Cloneable {
     /**
      * @return the player's ammo
      */
-    public Integer[] getAmmo() {
+    public Ammo[] listAmmo() {
         return ammo;
     }
 

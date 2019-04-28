@@ -22,6 +22,14 @@ public class PowerUp extends PowerUpView implements Cloneable {
         this.name = name;
         this.effect = effect;
     }
+
+    /**
+     * this method has to show to the view the power up
+     */
+    protected void showPowerUp() {
+
+    }
+
     /**
      * @return the power up's color
      */

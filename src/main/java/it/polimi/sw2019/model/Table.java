@@ -33,6 +33,15 @@ public class Table extends TableView implements Cloneable {
     }
 
     /**
+     * this method has to show to the view the table
+     */
+    protected void showTable (){
+
+    }
+
+
+
+    /**
      * @return the Track of skulls
      */
     public Skull[] getKillshotTrack(){

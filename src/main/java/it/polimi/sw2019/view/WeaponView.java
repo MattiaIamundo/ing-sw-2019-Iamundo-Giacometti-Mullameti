@@ -1,13 +1,17 @@
 package it.polimi.sw2019.view;
 
+import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.model.Weapon;
 
-public class WeaponView extends Observable implements Observer{
+public abstract class WeaponView extends Observable <Game> implements Observer <Weapon> {
 
-    private Weapon weapon;
+    //private Weapon weapon;
 
-    protected void getWeaponName(){}
-    protected void getWeaponDescription(){}
-    protected void getWeaponEffect(){}
-    protected void getEffectCost(){}
+    protected abstract void showWeapon();
+    /**
+     * this method show the update that one player did
+     */
+    public void update(Weapon message) {
+        showWeapon();
+    }
 }

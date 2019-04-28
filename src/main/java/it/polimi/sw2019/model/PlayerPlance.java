@@ -19,7 +19,7 @@ public class PlayerPlance {
     //so the controller will be able to calculate the points
     private boolean[] killed = new boolean[6];
     //the initial capacity is set to 12 since every player could be marked at top 12 times
-    private ArrayList<Player> markedBy = new ArrayList<> ();
+    private ArrayList<Player> markedBy;
 
     /**
      * this is the constructor
