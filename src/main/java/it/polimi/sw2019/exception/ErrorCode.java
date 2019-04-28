@@ -6,5 +6,6 @@ package it.polimi.sw2019.exception;
  */
 public enum ErrorCode {
     ATTACKERSELECTED,
-    NOTSELECTABLE
+    NOTSELECTABLE,
+    SAMESQUARE
 }

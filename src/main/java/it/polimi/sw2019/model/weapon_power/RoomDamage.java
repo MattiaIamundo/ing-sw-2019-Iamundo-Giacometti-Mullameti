@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 /**
  * This class implement the basic effect of Furnace
+ * @author Mattia Iamundo
  */
 public class RoomDamage implements Power{
 
