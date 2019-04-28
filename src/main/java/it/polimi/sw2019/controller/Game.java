@@ -7,7 +7,7 @@ import it.polimi.sw2019.view.Observer;
 import java.util.Timer;
 
 
-public class Game implements Observer {
+public class Game implements Observer<Table> {
 
     private Player[] players = new Player[5];
     private Turn turnOf;
@@ -18,6 +18,9 @@ public class Game implements Observer {
     private Player firstPlayer;
     private String[] mapconfig = new String[3];
 
+    public void update (Table message) {
+
+    }
     public void newPlayer(String nickname){
 
     }
