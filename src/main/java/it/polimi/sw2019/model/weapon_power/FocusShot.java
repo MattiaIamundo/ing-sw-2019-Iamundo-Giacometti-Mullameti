@@ -7,20 +7,25 @@ import java.util.Scanner;
 
 /**
  * This class implements the first optional effect of Machine Gun
+ * @author Mattia Iamundo
  */
 public class FocusShot implements Power{
-    Player target; //choose one of the target of the basic effect
-    TwoTargetDamage basiceffect;
+    Player target = null; //choose one of the target of the basic effect
+    private TwoTargetDamage basiceffect;
 
     @Override
     public void usePower(Player attacker){
         initialize(attacker);
-        while (true){
-            try {
-                acquireTarget();
-                break;
-            }catch (InvalidPlayerException e){
-                System.out.println(e.getMessage()+" isn't one of the two possible target\n");
+        if (basiceffect.target2 == null){
+            target = basiceffect.target1;
+        }else {
+            while (true) {
+                try {
+                    acquireTarget();
+                    break;
+                } catch (InvalidPlayerException e) {
+                    System.out.println(e.getMessage() + " isn't one of the two possible target\n");
+                }
             }
         }
         target.getPlance().giveDamage(attacker, 1);
