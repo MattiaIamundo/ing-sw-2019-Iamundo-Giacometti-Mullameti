@@ -15,6 +15,9 @@ public class MoveEnemy implements EffectBehaviour {
     private Space moveto; //variable dedicated to the space the player wants his enemy to be
     private Scanner scanner = new Scanner(System.in);
 
+    /**
+     * @param target the player  who is going to be attacked using this power up card
+     */
     @Override
     public void useEffect (Player target){
 
@@ -43,8 +46,13 @@ public class MoveEnemy implements EffectBehaviour {
 
     }
 
-
-
+    /**
+     * @param target the player  who is going to be attacked using this power up card
+     * @param direction the direction the target needs to be moved
+     * @throws InvalidInputException exception due to not correct input
+     * @throws InvalidDirectionException exception due to wrong spelling of the direction
+     * @throws IllegalDirectionException exception due to the presence of wall in the required direction
+     */
 
     private void findDirection (Player target , String direction) throws InvalidInputException,InvalidDirectionException, IllegalDirectionException {
 

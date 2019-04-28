@@ -7,6 +7,9 @@ package it.polimi.sw2019.model;
  */
 public class ExtraDamage implements EffectBehaviour {
 
+    /**
+     * @param target the player  who is going to be attacked using this power up card
+     */
     @Override
     public void useEffect(Player target) {
 

@@ -26,10 +26,13 @@ public class Map {
         this.list.add(2,innerList2);
         this.list.add(3,innerList3);
     }
+
     /**
+     *
      * @param x it is the x-coordinate of the map
      * @param y it is the y-coordinate of the map
      * @return the space having x and y coordinates
+     * @throws InvalidSpaceException exception due to coordinates being out of the considered area
      */
     public static Space getSpace(int x , int y) throws InvalidSpaceException {
 

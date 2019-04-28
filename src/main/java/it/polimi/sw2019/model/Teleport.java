@@ -9,6 +9,10 @@ import java.util.Scanner;
 public class Teleport implements EffectBehaviour {
     private Space moveto = null;  //variable dedicated to the space the player wants to go
 
+    /**
+     * @param target the player  who is going to be attacked using this power up card
+     */
+
     @Override
     public  void useEffect(Player target) {
 

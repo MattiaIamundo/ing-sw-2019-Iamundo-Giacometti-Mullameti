@@ -61,17 +61,17 @@ public class RoomDamage implements Power{
     private String[] identifyRoom(Player attacker){
         ArrayList<String> rooms = new ArrayList<>();
         String attackerroom = attacker.getPosition().getRoom();
-        if (!attacker.getPosition().getNord().getSpaceSecond().getRoom().equals(attackerroom)){
-            rooms.add(attacker.getPosition().getNord().getSpaceSecond().getRoom());
+        if (!attacker.getPosition().getNorth().getSpaceSecond().getRoom().equals(attackerroom)){
+            rooms.add(attacker.getPosition().getNorth().getSpaceSecond().getRoom());
         }
-        if (!attacker.getPosition().getOvest().getSpaceSecond().getRoom().equals(attackerroom)){
-            rooms.add(attacker.getPosition().getOvest().getSpaceSecond().getRoom());
+        if (!attacker.getPosition().getWest().getSpaceSecond().getRoom().equals(attackerroom)){
+            rooms.add(attacker.getPosition().getWest().getSpaceSecond().getRoom());
         }
-        if (!attacker.getPosition().getSud().getSpaceSecond().getRoom().equals(attackerroom)){
-            rooms.add(attacker.getPosition().getSud().getSpaceSecond().getRoom());
+        if (!attacker.getPosition().getSouth().getSpaceSecond().getRoom().equals(attackerroom)){
+            rooms.add(attacker.getPosition().getSouth().getSpaceSecond().getRoom());
         }
-        if (!attacker.getPosition().getEst().getSpaceSecond().getRoom().equals(attackerroom)){
-            rooms.add(attacker.getPosition().getEst().getSpaceSecond().getRoom());
+        if (!attacker.getPosition().getEast().getSpaceSecond().getRoom().equals(attackerroom)){
+            rooms.add(attacker.getPosition().getEast().getSpaceSecond().getRoom());
         }
         return rooms.toArray(new String[0]);
     }
