@@ -126,4 +126,20 @@ public class PlayerPlance {
             System.out.println("The player is not marked by anybody!\n ");
         }
     }
+
+    /**
+     * this method return the damage track
+     * @return plance's damage track
+     */
+    public String[] getDamageTrack() {
+        return damageTrack;
+    }
+
+    /**
+     * this method set how many times the player was killed
+     * @param i how many times the player was killed
+     */
+    public void setKilled(int i) {
+        killed[i] = true;
+    }
 }

@@ -19,11 +19,26 @@ public class TestPlayerPlanceClass {
 
     }
 
+    //set killed to be test
+
     @Test
     public void testGetKilled(){
 
         PlayerPlance board = new PlayerPlance();
+        board.setKilled(0);
+        board.setKilled(1);
+        board.setKilled(2);
+        board.setKilled(3);
+        board.setKilled(4);
+        board.setKilled(5);
+        boolean[] killed = board.getKilled();
 
+        Assert.assertTrue( killed[0]  );
+        Assert.assertTrue( killed[1]  );
+        Assert.assertTrue( killed[2]  );
+        Assert.assertTrue( killed[3]  );
+        Assert.assertTrue( killed[4]  );
+        Assert.assertTrue( killed[5]  );
 
     }
     @Test
@@ -54,5 +69,42 @@ public class TestPlayerPlanceClass {
         Assert.assertFalse(board.getOverkilled());
     }
 
-   //to be continued...
+    //it has to have an exception
+    @Test
+    public void testGiveDamage() {
+
+        PlayerPlance board = new PlayerPlance();
+        AmmoTriple ammo = new AmmoTriple("red", "blu", "green");
+        SpaceAmmo position = new SpaceAmmo (null, null, null, null, "red", ammo);
+        Player shooter = new Player("name", 0, position, board);
+        Player player = new Player("player", 0, position, null);
+        String[] trackDamage = new String[12];
+        trackDamage[0] = "name";
+        trackDamage[1] = "name";
+        trackDamage[2] = "name";
+        trackDamage[3] = "name";
+
+        board.giveDamage( shooter, 4);
+        Assert.assertArrayEquals( board.getDamageTrack(), trackDamage );
+
+        trackDamage[4] = "player";
+        trackDamage[5] = "player";
+        trackDamage[6] = "player";
+
+        board.giveDamage( player,3);
+        Assert.assertArrayEquals( board.getDamageTrack(), trackDamage );
+
+        trackDamage[7] = "name";
+        trackDamage[8] = "name";
+        trackDamage[9] = "name";
+        trackDamage[10] = "name";
+        trackDamage[11] = "name";
+
+        board.giveDamage( shooter, 5);
+        Assert.assertArrayEquals( board.getDamageTrack(), trackDamage );
+        //we have to implement the exception
+        //to go out the bounds
+    }
+
+    //to be continued
 }
