@@ -13,7 +13,7 @@ public class Player extends PlayerView implements Cloneable {
     private String nickname; //player's nickname
     private int score; //player's score
     //first red, second blue, third yellow
-    private Ammo[] ammo = new Ammo[3];
+    private static int[] ammo = new int[3];
     //list of weapons the player owns , every player can own at top 3 weapons
     //if null there isn't a weapon in that position
     private Weapon[] weapon = new Weapon[3];
@@ -23,7 +23,7 @@ public class Player extends PlayerView implements Cloneable {
     private ArrayList<Player> marked;
     private PlayerPlance plance;
     //list of power up cards  the player owns , every player can own at top 3 weapons
-    private PowerUp[] powerup = new PowerUp[3];
+    private static PowerUp[] powerup = new PowerUp[3];
 
     /**Constructor of the class
      * @param nickname the player's nickname
@@ -175,7 +175,7 @@ public class Player extends PlayerView implements Cloneable {
     /**
      * @return the player's ammo
      */
-    public Ammo[] listAmmo() {
+    public int[] listAmmo() {
         return ammo;
     }
 
@@ -186,4 +186,118 @@ public class Player extends PlayerView implements Cloneable {
     public void setPosition(Space position) {
         this.position = position;
     }
+
+
+    public static void addAmmo(Ammo ammocard){
+            //add the first ammo in the ammo array
+            if (ammocard.getColorFirst() == "red") {
+
+                if(ammo[0]>=3){
+
+                }else{
+                    ammo[0]++;
+                }
+
+
+
+            } else if (ammocard.getColorFirst() == "blue") {
+
+                if(ammo[1]>=3){
+
+                }else{
+                    ammo[1]++;
+                }
+
+            } else if (ammocard.getColorFirst() == "yellow") {
+
+                if(ammo[2]>=3){
+
+                }else{
+                    ammo[2]++;
+                }
+
+            }
+
+            //add the second ammo in the ammo array
+
+            if(ammocard.getColorFirst()=="red"){
+
+                if(ammo[0]>=3){
+
+                }else{
+                    ammo[0]++;
+                }
+
+            }else if(ammocard.getColorFirst()=="blue"){
+
+                if(ammo[1]>=3){
+
+                }else{
+                    ammo[1]++;
+                }
+
+            }else if (ammocard.getColorFirst()=="yellow"){
+
+                if(ammo[2]>=3){
+
+                }else{
+                    ammo[2]++;
+                }
+
+            }
+
+
+        if (ammocard instanceof AmmoTriple) {
+
+
+                //add the third ammo in the ammo array
+
+                if(((AmmoTriple) ammocard).getColorThird()=="red"){
+
+                    if(ammo[0]>=3){
+
+                    }else{
+                        ammo[0]++;
+                    }
+
+                }else if(((AmmoTriple) ammocard).getColorThird()=="blue"){
+
+                    if(ammo[1]>=3){
+
+                    }else{
+                        ammo[1]++;
+                    }
+
+                }else if((((AmmoTriple) ammocard).getColorThird()=="yellow")){
+
+                    if(ammo[2]>=3){
+
+                    }else{
+                        ammo[2]++;
+                    }
+
+                }
+
+
+        }
+        else if (ammocard instanceof AmmoDoublePowerUp) {
+
+            if (powerup[2]!=null) {
+                System.out.println("You already have three powerup cards !!");
+                System.out.println("Don't pick up a new power up card");
+            }else{
+                for (int i = 0; i < 3; i++) {
+                    if (powerup[i] == null) {
+
+                        powerup[i] = ((AmmoDoublePowerUp) ammocard).getPowerUp();
+                        break;
+                    }
+                }
+            }
+
+        }
+    }
+
 }
+
+

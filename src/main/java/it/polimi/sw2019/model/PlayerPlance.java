@@ -12,7 +12,7 @@ public class PlayerPlance {
     //the vector is set to 12 space due to every player can be hit at top 12 times
     private String[] damageTrack = new String[12];
     private boolean isFirstAdrenaline;
-    private boolean isSecondAdrenaline;
+    private static boolean isSecondAdrenaline;
     private boolean isKilled;
     private boolean isOverkilled;
     //this vector shows how many times the player is dead
@@ -47,7 +47,7 @@ public class PlayerPlance {
     /**
      * @return true if the player got the second adrenaline
      */
-    public boolean getSecondAdrenaline(){
+    public static boolean getSecondAdrenaline(){
         return isSecondAdrenaline;
     }
     /**
