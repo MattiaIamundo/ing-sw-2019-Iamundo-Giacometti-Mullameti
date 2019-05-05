@@ -20,4 +20,5 @@ public class AmmoTriple extends Ammo{
     public String getColorThird() {
         return colorThird;
     }
+
 }

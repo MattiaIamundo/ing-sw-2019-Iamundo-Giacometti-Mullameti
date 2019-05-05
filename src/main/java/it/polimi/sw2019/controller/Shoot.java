@@ -6,7 +6,7 @@ public class Shoot implements Action {
 
     private Weapon weapon;
 
-    public void useAction(){
+    public static void useAction(){
 
     }
 }

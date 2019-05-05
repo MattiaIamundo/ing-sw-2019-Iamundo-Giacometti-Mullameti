@@ -5,7 +5,7 @@ package it.polimi.sw2019.model;
  */
 public class SpaceAmmo extends Space {
 
-    private Ammo ammo;
+    private static Ammo ammo;
 
     /**
      * this is the constructor
@@ -23,7 +23,8 @@ public class SpaceAmmo extends Space {
     /**
      * @return tha ammo card
      */
-    public Ammo takeAmmo(){
+    public static Ammo takeAmmo(){
+
         return ammo;
     }
 
