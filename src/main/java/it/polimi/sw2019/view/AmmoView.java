@@ -1,11 +1,10 @@
 package it.polimi.sw2019.view;
 
-import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.model.Ammo;
 
-public abstract class AmmoView extends Observable <Game> implements Observer <Ammo>{
+public abstract class AmmoView extends ObservableByGame implements Observer <Ammo>{
 
-    //private Ammo ammo;
+    private Ammo ammo;
 
     protected abstract void showAmmo();
 

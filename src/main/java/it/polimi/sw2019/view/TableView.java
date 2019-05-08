@@ -1,13 +1,11 @@
 package it.polimi.sw2019.view;
 
-import it.polimi.sw2019.controller.Game;
-import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 
 /**
  * @author Luca Giacometti
  */
-public abstract class TableView extends Observable <Game> implements Observer <Table> {
+public abstract class TableView extends ObservableByGame implements Observer <Table> {
 
     //private Table table;
 
