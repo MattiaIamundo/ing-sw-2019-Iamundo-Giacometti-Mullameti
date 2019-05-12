@@ -298,6 +298,13 @@ public class Player extends PlayerView implements Cloneable {
         }
     }
 
+    public static String getColor(){
+
+        //Esempio
+        String color="Yellow";
+        return color;
+    }
+
 }
 
 
