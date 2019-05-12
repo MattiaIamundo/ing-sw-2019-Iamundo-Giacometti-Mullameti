@@ -10,7 +10,8 @@ import java.util.ArrayList;
 
 public class OneMOveAway extends TargetAcquisition{
 
-    public static Player acquireTarget(Player attacker){
+    public static void acquireTarget(Player attacker){
+        //it is Player, only for now it is void
         int i = 0;
         ArrayList<String> valid = new ArrayList<>();
         ArrayList<String> notselectable = new ArrayList<>();
@@ -33,12 +34,12 @@ public class OneMOveAway extends TargetAcquisition{
             if (validposition.contains(Table.getPlayers(i).getPosition())){
                 valid.add(Table.getPlayers(i).getNickname());
             }else {
-                notreachable.add(Table.getPlayers(i).getNickname())
+                notreachable.add(Table.getPlayers(i).getNickname());
             }
             i++;
         }
         notselectable.add(attacker.getNickname());
         Weaponeffect view;
-        view.notify(new TargetAcquisitionEv(attacker, valid, notselectable, notreachable, "Select a player that is exactly 1 move away from you"));
+//        view.notify(new TargetAcquisitionEv(attacker, valid, notselectable, notreachable, "Select a player that is exactly 1 move away from you"));
     }
 }

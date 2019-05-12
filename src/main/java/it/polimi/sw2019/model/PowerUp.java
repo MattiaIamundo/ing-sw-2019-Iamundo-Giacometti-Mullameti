@@ -1,11 +1,14 @@
 package it.polimi.sw2019.model;
 
 import it.polimi.sw2019.view.PowerUpView;
+
+import java.io.Serializable;
+
 /**
  * this class represents the power up cards
  * @author Luca Giacometti
  */
-public class PowerUp extends PowerUpView implements Cloneable {
+public class PowerUp extends PowerUpView implements Cloneable, Serializable {
 
     private String color;
     private String name;

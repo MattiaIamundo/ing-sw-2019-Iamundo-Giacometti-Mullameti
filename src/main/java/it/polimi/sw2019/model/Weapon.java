@@ -3,12 +3,14 @@ package it.polimi.sw2019.model;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.WeaponView;
 
+import java.io.Serializable;
+
 
 /**
  * this class stands for the game's weapons
  * @author Luca Giacometti
  */
-public abstract class Weapon extends WeaponView implements Cloneable {
+public abstract class Weapon extends WeaponView implements Cloneable, Serializable {
 
     private String name;
     private String[] rechargeCost = new String[3];

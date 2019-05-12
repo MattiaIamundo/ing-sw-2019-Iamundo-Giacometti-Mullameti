@@ -1,10 +1,12 @@
 package it.polimi.sw2019.model;
 
+import java.io.Serializable;
+
 /**
  * this class symbolizes the skulls which are present on the table
  * @author Luca Giacometti
  */
-public class Skull {
+public class Skull implements Serializable {
 
     private boolean isPresent;
     private boolean isOverkilled;

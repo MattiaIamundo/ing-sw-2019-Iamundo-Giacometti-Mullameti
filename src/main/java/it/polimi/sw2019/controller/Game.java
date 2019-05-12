@@ -7,12 +7,15 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.view.Observer;
 
+import static it.polimi.sw2019.view.AmmoView.showAmmo;
+
+import java.util.ArrayList;
 import java.util.Timer;
 
 
 public class Game implements Observer <ObservableByGame> {
-
-    private Player[] players = new Player[5];
+    //the max number of players is 5
+    private ArrayList<Player> players = new ArrayList<>(5);
     private Turn turnOf;
     private Table gameboard ;
     private Timer timer;
@@ -24,10 +27,19 @@ public class Game implements Observer <ObservableByGame> {
 
     public void update (ObservableByGame message) {
 
-        if ( message instanceof Ammo) {
-            //to be continued
+        if ( message instanceof Ammo ) {
+
+            //i have to pass the object to the remoteView
+
         }
     }
+
+    public void showTheAmmo (Ammo ammo) {
+
+        showAmmo(ammo);
+    }
+
+
     public void newPlayer(String nickname){
 
     }
@@ -56,7 +68,7 @@ public class Game implements Observer <ObservableByGame> {
         return state;
     }
 
-    private void loadMap(Integer maptype){
+    private void loadMap(int maptype){
 
     }
 

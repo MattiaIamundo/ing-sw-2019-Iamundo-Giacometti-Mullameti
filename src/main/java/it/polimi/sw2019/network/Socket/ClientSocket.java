@@ -24,7 +24,7 @@ public class ClientSocket extends JFrame implements Runnable, Serializable {
     private Scanner scanner;
     //output for the server
     private PrintWriter output;
-    //the player's number
+    //the player's number ( 1 to 5 )
     private int playerNumber;
     //host name for the server
     private String serverHost;
@@ -126,6 +126,16 @@ public class ClientSocket extends JFrame implements Runnable, Serializable {
             System.out.println("You are the third player\n");
             //set the player's position
             playerNumber = 3;
+        }
+        else if ( message.equals("You are the " + 4 + " player!") ) {
+            System.out.println("You are the fourth player\n");
+            //set the player's position
+            playerNumber = 4;
+        }
+        else if ( message.equals("You are the " + 5 + " player!") ) {
+            System.out.println("You are the fifth player\n");
+            //set the player's position
+            playerNumber = 5;
         }
         else {
             System.out.println( message + "\n");

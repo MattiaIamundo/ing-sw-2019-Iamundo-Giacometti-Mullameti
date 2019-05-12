@@ -1,10 +1,13 @@
 package it.polimi.sw2019.model;
 
 import it.polimi.sw2019.view.AmmoView;
+
+import java.io.Serializable;
+
 /**Class Ammo:dedicated to the ammo cards
  * @author Merita Mullameti
  */
-public abstract class Ammo extends AmmoView implements Cloneable {
+public abstract class Ammo extends AmmoView implements Cloneable, Serializable {
 
     private String colorFirst;
     private String colorSecond;
@@ -17,9 +20,7 @@ public abstract class Ammo extends AmmoView implements Cloneable {
         this.colorSecond=colorSecond;
     }
 
-    protected void showAmmo() {
 
-    }
     /**
      * @return the color of the first ammo
      */

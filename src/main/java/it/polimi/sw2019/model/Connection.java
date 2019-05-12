@@ -1,8 +1,11 @@
 package it.polimi.sw2019.model;
+
+import java.io.Serializable;
+
 /**Class Connection : describes the connection between to spaces , the possibility to move from one to the other
  * @author Merita Mullameti
  */
-public class Connection {
+public class Connection implements Serializable {
     //the space the player's in
     private Space spaceFirst;
     //the space the player wants to move to

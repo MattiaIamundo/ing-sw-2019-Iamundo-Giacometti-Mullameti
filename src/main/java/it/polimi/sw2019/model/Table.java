@@ -2,11 +2,13 @@ package it.polimi.sw2019.model;
 
 import it.polimi.sw2019.view.TableView;
 
+import java.io.Serializable;
+
 /**Class Table
  * @author Merita Mullameti
  */
 
-public class Table extends TableView implements Cloneable {
+public class Table extends TableView implements Cloneable, Serializable {
 
     private Skull[] killshotTrack = new Skull[8];
     //the map of the battlefield ;there can be 3 different ones , based on the number of the players
@@ -35,7 +37,7 @@ public class Table extends TableView implements Cloneable {
     /**
      * this method has to show to the view the table
      */
-    protected void showTable (){
+    protected void showTable (Table message){
 
     }
 

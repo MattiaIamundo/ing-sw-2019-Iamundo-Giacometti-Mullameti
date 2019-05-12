@@ -8,7 +8,8 @@ import it.polimi.sw2019.view.Observable;
 import java.util.ArrayList;
 
 public abstract class TargetAcquisition extends Observable<TargetAcquisitionEv> {
-    public static Player acquireTarget(Player attacker){
+    public static void acquireTarget(Player attacker){
+        //it is Player, only for now it is void
         int i = 0;
         ArrayList<String> valid = new ArrayList<>();
         ArrayList<String> notselectable = new ArrayList<>();
@@ -24,6 +25,6 @@ public abstract class TargetAcquisition extends Observable<TargetAcquisitionEv> 
         }
         notselectable.add(attacker.getNickname());
         TargetAcquisition view;
-        view.notify(new TargetAcquisitionEv(attacker, valid, notselectable, notreachable, "Select a player that you can see"));
+//        view.notify(new TargetAcquisitionEv(attacker, valid, notselectable, notreachable, "Select a player that you can see"));
     }
 }

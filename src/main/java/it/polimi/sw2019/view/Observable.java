@@ -1,5 +1,7 @@
 package it.polimi.sw2019.view;
 
+import it.polimi.sw2019.model.Ammo;
+
 import java.util.ArrayList;
 
 /**
@@ -39,11 +41,12 @@ public class Observable <T> {
      * this methods make an update to the message
      * @param message the variable to be update
      */
-    protected void notify( T message) {
+    protected void notify(T message) {
         //stopping the variable players
         synchronized (observers) {
 
             for(Observer<T> observer : observers){
+                //Observer or observer normal??
                 observer.update(message);
             }
         }

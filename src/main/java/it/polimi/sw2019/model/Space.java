@@ -1,9 +1,12 @@
 package it.polimi.sw2019.model;
+
+import java.io.Serializable;
+
 /**
  * this class indicates the table's squares
  * @author Luca Giacometti
  */
-public abstract class Space {
+public abstract class Space implements Serializable {
 
     private Connection north;
     private Connection east;

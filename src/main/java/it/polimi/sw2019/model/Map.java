@@ -2,12 +2,13 @@ package it.polimi.sw2019.model;
 
 import it.polimi.sw2019.exception.InvalidSpaceException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * this class is stand of the game's maps
  * @author Luca Giacometti
  */
-public class Map {
+public class Map implements Serializable {
     //list is set to 4 because the map is a 4 x-coordinate x 3 y-coordinate
     private static ArrayList <ArrayList <Space>> list = new ArrayList <> (4);
     // this: ArrayList<Space> innerList0 = new ArrayList<Space>(3);
@@ -28,7 +29,7 @@ public class Map {
     }
 
     /**
-     *
+     * this method return the single space selected by player
      * @param x it is the x-coordinate of the map
      * @param y it is the y-coordinate of the map
      * @return the space having x and y coordinates
