@@ -299,6 +299,13 @@ public class Player extends PlayerView implements Cloneable, Serializable {
         }
     }
 
+    public static String getColor(){
+
+        //Esempio
+        String color="Yellow";
+        return color;
+    }
+
 }
 
 
