@@ -4,7 +4,7 @@ import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
 
-public class TargetAcquisitionEv {
+public class TargetAcquisitionEv implements WeaponEvent{
     private Player attacker;
     private ArrayList<String> valid;
     private ArrayList<String> notselectable;

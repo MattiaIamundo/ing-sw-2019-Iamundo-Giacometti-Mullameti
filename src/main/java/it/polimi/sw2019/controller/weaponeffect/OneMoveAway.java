@@ -4,14 +4,20 @@ import it.polimi.sw2019.model.Events.TargetAcquisitionEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.model.weapon_power.SingleTarget;
 import it.polimi.sw2019.view.Weaponeffect;
 
 import java.util.ArrayList;
 
-public class OneMOveAway extends TargetAcquisition{
+public class OneMoveAway extends TargetAcquisition{
+    private SingleTarget model;
 
-    public static void acquireTarget(Player attacker){
-        //it is Player, only for now it is void
+    public OneMoveAway(SingleTarget model, SingleTarget model1) {
+        super(model);
+        this.model = model1;
+    }
+
+    public void acquireTarget(Player attacker){
         int i = 0;
         ArrayList<String> valid = new ArrayList<>();
         ArrayList<String> notselectable = new ArrayList<>();
@@ -39,7 +45,7 @@ public class OneMOveAway extends TargetAcquisition{
             i++;
         }
         notselectable.add(attacker.getNickname());
-        Weaponeffect view;
-//        view.notify(new TargetAcquisitionEv(attacker, valid, notselectable, notreachable, "Select a player that is exactly 1 move away from you"));
+        model.chooseTarget(valid, notselectable, notreachable, attacker);
     }
+
 }
