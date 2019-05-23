@@ -2,11 +2,11 @@ package it.polimi.sw2019.view;
 
 import it.polimi.sw2019.model.PowerUp;
 
-public abstract class PowerUpView extends ObservableByGame implements Observer <PowerUp>{
+public class PowerUpView extends ObservableByGame implements Observer <PowerUp>{
 
     private PowerUp powerup;
 
-    protected abstract void showPowerUp();
+    protected void showPowerUp() {}
 
     /**
      * this method show the update that one player did

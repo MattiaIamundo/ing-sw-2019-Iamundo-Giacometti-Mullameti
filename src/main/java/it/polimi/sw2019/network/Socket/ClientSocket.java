@@ -1,5 +1,8 @@
 package it.polimi.sw2019.network.Socket;
 
+import it.polimi.sw2019.model.Player;
+import it.polimi.sw2019.view.*;
+
 import javax.swing.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,6 +12,8 @@ import java.net.Socket;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientSocket extends JFrame implements Runnable, Serializable {
 
@@ -24,21 +29,31 @@ public class ClientSocket extends JFrame implements Runnable, Serializable {
     private Scanner scanner;
     //output for the server
     private PrintWriter output;
-    //the player's number ( 1 to 5 )
-    private int playerNumber;
+    //this is the player
+    private Player player = new Player(null, 0, null, null);
     //host name for the server
     private String serverHost;
     //it contains the what the client is writing
     //it is set to null to avoid the exception
     private String string = "null";
+    //the logger for debugging
+    private static final Logger logger = Logger.getLogger( ClientSocket.class.getName() );
 
-//----------- THIS IS THE FIRST CLIENT VERSION, MADE ONLY TO TEST THE CONNECTION BETWEEN SERVER AND CLIENT ---------
+    //
+    //view not the NH...
+    //
+
+    //the NH
+    private ContSelect contSelect;
+    private ModViewEvent modViewEvent;
+    private ViewContEvent viewContEvent;
+
 
     /**
      * this is the constructor
      * @param host the server name
      */
-    public ClientSocket(String host){
+    private ClientSocket(String host){
         //set the server name
         serverHost = host;
         //commands for set the GUI
@@ -50,7 +65,7 @@ public class ClientSocket extends JFrame implements Runnable, Serializable {
      * in this method are set the connection with the server,
      * get the streams and run the thread's client
      */
-    public void startClient(){
+    private void startClient(){
 
         try{
             //set the connection
@@ -60,10 +75,13 @@ public class ClientSocket extends JFrame implements Runnable, Serializable {
             output = new PrintWriter( connection.getOutputStream() );
             //get the player stream
             scanner = new Scanner( System.in );
+            //set the socket to the NH
+            contSelect = new ContSelect( connection );
+            modViewEvent = new ModViewEvent( connection );
+            viewContEvent = new ViewContEvent( connection );
 
         }catch(IOException e){
-
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.toString(), e);
         }
         //it creates and starts the thread for this client
         ExecutorService worker = Executors.newFixedThreadPool( 1 );
@@ -71,7 +89,6 @@ public class ClientSocket extends JFrame implements Runnable, Serializable {
         worker.execute( this );
 
     }//END of START CLIENT
-
 
     /**
      * it is control the thread which are updating a GUI component
@@ -97,7 +114,6 @@ public class ClientSocket extends JFrame implements Runnable, Serializable {
 
     }//END of RUN
 
-
     /**
      * in this method there is the process which analyses the message received
      * @param message the server's message
@@ -115,27 +131,33 @@ public class ClientSocket extends JFrame implements Runnable, Serializable {
         else if ( message.equals("You are the " + 1 + " player!") ) {
             System.out.println("You are the first player\n");
             //set the player's position
-            playerNumber = 1;
+            player.setPlayerNumber(1);
         }
         else if ( message.equals("You are the " + 2 + " player!") ) {
             System.out.println("You are the second player\n");
             //set the player's position
-            playerNumber = 2;
+            player.setPlayerNumber(2);
         }
         else if ( message.equals("You are the " + 3 + " player!") ) {
             System.out.println("You are the third player\n");
             //set the player's position
-            playerNumber = 3;
+            player.setPlayerNumber(3);
         }
         else if ( message.equals("You are the " + 4 + " player!") ) {
             System.out.println("You are the fourth player\n");
             //set the player's position
-            playerNumber = 4;
+            player.setPlayerNumber(4);
         }
         else if ( message.equals("You are the " + 5 + " player!") ) {
             System.out.println("You are the fifth player\n");
             //set the player's position
-            playerNumber = 5;
+            player.setPlayerNumber(5);
+        }
+        else if( message.equals("nickname") ) {
+            contSelect.addPlayer();
+        }
+        else if( message.equals("timer") ) {
+            contSelect.setTimer();
         }
         else {
             System.out.println( message + "\n");
@@ -143,12 +165,11 @@ public class ClientSocket extends JFrame implements Runnable, Serializable {
 
     }//END of PROCESS MESSAGE
 
-
     /**
      * this method close the connection with the server
      * and the input, output stream
      */
-    public void closeConnection () {
+    private void closeConnection () {
 
         input.close();
         output.close();
@@ -156,7 +177,7 @@ public class ClientSocket extends JFrame implements Runnable, Serializable {
             connection.close();
         }catch (IOException e) {
 
-            e.printStackTrace();
+            logger.log( Level.SEVERE, e.toString(), e);
             System.exit(1);
         }
         System.out.println("The connection with the server is closed!\n");

@@ -14,21 +14,22 @@ import java.util.Scanner;
  */
 public class Turn {
 
-    private static Player player;
-    private Integer usedAction;
+    private static Player player = null;
+    private int usedAction;
     private Action action;
 
     /**
      * this is the constructor
-     * @param player who is playing
      * @param usedAction how many actions he used during this turn
      * @param action the action on air
      */
-    public Turn (Player player, Integer usedAction, Action action){
+    public Turn ( int usedAction, Action action){
 
-        this.player = player;
         this.action = action;
         this.usedAction = usedAction;
+    }
+    public static void setPlayer(Player player1) {
+        player = player1;
     }
 
     /**

@@ -4,7 +4,7 @@ package it.polimi.sw2019;
  * Hello world!
  *
  */
-public class App 
+public class Adrenaline_launcher
 {
     public static void main( String[] args )
     {

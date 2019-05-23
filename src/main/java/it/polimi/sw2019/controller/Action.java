@@ -4,7 +4,5 @@ import it.polimi.sw2019.model.Player;
 
 public interface Action {
 
-    static void useAction(Player player){
-
-    }
+     void useAction(Player player);
 }

@@ -60,4 +60,6 @@ public class AmmoView extends ObservableByGame implements Observer <Ammo>{
         System.out.println( "There is an update!\n");
         showAmmo( message );
     }
+
+
 }

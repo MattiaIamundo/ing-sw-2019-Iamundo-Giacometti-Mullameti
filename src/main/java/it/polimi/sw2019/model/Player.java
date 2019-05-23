@@ -18,13 +18,15 @@ public class Player extends PlayerView implements Cloneable, Serializable {
     //list of weapons the player owns , every player can own at top 3 weapons
     //if null there isn't a weapon in that position
     private Weapon[] weapon = new Weapon[3];
-
-    private Space position; //the position the player's in
+    //the position the player's in
+    private Space position;
     //the opponents who the player has marked
-    private ArrayList<Player> marked;
+    private ArrayList<Player> marked = new ArrayList<> (12);
     private PlayerPlance plance;
     //list of power up cards  the player owns , every player can own at top 3 weapons
     private static PowerUp[] powerup = new PowerUp[3];
+    //
+    private int playerNumber;
 
     /**Constructor of the class
      * @param nickname the player's nickname
@@ -49,6 +51,7 @@ public class Player extends PlayerView implements Cloneable, Serializable {
     public String getNickname(){
         return nickname;
     }
+
     /**
      * @return the player's score
      */
@@ -63,12 +66,14 @@ public class Player extends PlayerView implements Cloneable, Serializable {
     public void addPoints(int points) {
         this.score = this.score + points;
     }
+
     /**
      * @return the player's position
      */
     public Space getPosition() {
         return position;
     }
+
     /**
      * the callerPlayer is not this player
      * @return true if this.player is visible from the caller Player
@@ -156,16 +161,19 @@ public class Player extends PlayerView implements Cloneable, Serializable {
             System.out.println("The player didn't marked any players!\n ");
         }
     }
+
     /**
      * @return the player's plance
      */
     public PlayerPlance getPlance() {
         return plance;
     }
+
     /**
      * @return a pointer to the list of weapons the player owns
      */
     public Weapon[] listWeapon() { return weapon; }
+
     /**
      * @return a pointer to the list of powerup the player ownes
      */
@@ -188,6 +196,13 @@ public class Player extends PlayerView implements Cloneable, Serializable {
         this.position = position;
     }
 
+    public void setPlayerNumber (int number) {
+        this.playerNumber = number;
+    }
+
+    public int getPlayerNumber () {
+        return this.playerNumber;
+    }
 
     public static void addAmmo(Ammo ammocard){
             //add the first ammo in the ammo array

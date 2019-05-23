@@ -3,7 +3,15 @@ package it.polimi.sw2019.view;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 
+import java.net.Socket;
+
 public class TableRemoteView extends TableView{
+
+    Socket socket;
+
+    public TableRemoteView (Socket socket) {
+        this.socket = socket;
+    }
 
     private class MessageReceiver implements Observer <String> {
         /**

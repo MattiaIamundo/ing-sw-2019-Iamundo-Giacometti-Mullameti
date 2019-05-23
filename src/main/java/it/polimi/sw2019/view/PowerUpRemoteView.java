@@ -1,6 +1,14 @@
 package it.polimi.sw2019.view;
 
+import java.net.Socket;
+
 public class PowerUpRemoteView extends PowerUpView {
+
+    Socket socket;
+
+    public PowerUpRemoteView (Socket socket) {
+        this.socket = socket;
+    }
 
     private class MessageReceiver implements Observer <String> {
         /**
