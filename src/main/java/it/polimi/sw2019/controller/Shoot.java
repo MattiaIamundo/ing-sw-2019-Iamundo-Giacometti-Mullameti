@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Shoot implements Action, Observer<WeaponSelectEv> {
 
-    public void useAction(Player attacker){
+    public static void useAction(Player attacker){
         ArrayList<String> weapons = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             if (attacker.listWeapon()[i] != null && attacker.listWeapon()[i].getIsLoad()){

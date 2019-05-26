@@ -75,7 +75,7 @@ public class TurnNormal extends Turn {
             }
             case "shoot":{
 
-                Shoot.useAction();
+                Shoot.useAction(player);
 
             }
 

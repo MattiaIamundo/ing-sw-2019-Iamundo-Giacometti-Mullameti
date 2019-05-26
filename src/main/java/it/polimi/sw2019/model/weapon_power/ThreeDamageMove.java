@@ -15,16 +15,11 @@ import java.util.Map;
  * @author Mattia Iamundo
  */
 public class ThreeDamageMove extends SingleTarget implements WithMove{
-    private Player attacker = null;
     private Player target = null;
 
     @Override
     public void usePower(Player attacker){
-        this.attacker = attacker;
-        SameSquare controller1 = new SameSquare(this);
-        MovePlayer controller2 = new MovePlayer(this);
-        controller1.acquireTarget(attacker);
-        controller2.acquirePosition(attacker, target.getPosition());
+        target.getPlance().giveDamage(attacker, 3);
     }
 
     @Override
@@ -35,7 +30,6 @@ public class ThreeDamageMove extends SingleTarget implements WithMove{
     @Override
     public void setTarget(Player target) {
         this.target = target;
-        target.getPlance().giveDamage(attacker, 3);
     }
 
     public void changePosition(Player attacker, Map<String, Space> positions){

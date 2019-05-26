@@ -13,7 +13,6 @@ import java.util.Scanner;
  * @author Luca Giacometti
  */
 public abstract class Turn {
-
     private static Player player;
     private Integer usedAction;
     private Action action;

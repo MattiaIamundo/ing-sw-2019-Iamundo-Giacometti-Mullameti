@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class Whisper extends TargetAcquisition{
     ArrayList<Space> invalidpos = new ArrayList<>();
 
-    public Whisper(SingleTarget model) {
-        super(model);
+    public Whisper(SingleTarget model, Player attacker) {
+        super(model, attacker);
     }
 
     public void acquireTarget(Player attacker){
