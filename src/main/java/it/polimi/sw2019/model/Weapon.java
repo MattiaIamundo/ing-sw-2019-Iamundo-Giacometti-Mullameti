@@ -1,16 +1,20 @@
 package it.polimi.sw2019.model;
 
+import it.polimi.sw2019.model.Events.PowerChooseEv;
+import it.polimi.sw2019.model.Events.WeaponSelectEv;
 import it.polimi.sw2019.model.weapon_power.Power;
+import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.WeaponView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 /**
  * this class stands for the game's weapons
  * @author Luca Giacometti
  */
-public abstract class Weapon extends WeaponView implements Cloneable, Serializable {
+public abstract class Weapon extends Observable<PowerChooseEv> implements Cloneable, Serializable {
 
     private String name;
     private String[] rechargeCost = new String[3];
@@ -93,5 +97,9 @@ public abstract class Weapon extends WeaponView implements Cloneable, Serializab
      */
     public Power getPower() {
         return power;
+    }
+
+    public void choosePower(ArrayList<String> powers){
+        notify(new PowerChooseEv(powers));
     }
 }

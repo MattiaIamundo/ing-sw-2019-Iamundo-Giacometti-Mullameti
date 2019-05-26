@@ -9,11 +9,10 @@ import java.util.ArrayList;
 
 public class SameSquare extends TargetAcquisition{
 
-    public SameSquare(SingleTarget model) {
-        super(model);
+    public SameSquare(SingleTarget model, Player attacker) {
+        super(model, attacker);
     }
 
-    @Override
     public void acquireTarget(Player attacker) {
         int i = 0;
         ArrayList<String> valid = new ArrayList<>();

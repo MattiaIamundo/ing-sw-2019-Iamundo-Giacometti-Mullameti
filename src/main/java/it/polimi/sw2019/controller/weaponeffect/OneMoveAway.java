@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class OneMoveAway extends TargetAcquisition{
     private SingleTarget model;
 
-    public OneMoveAway(SingleTarget model, SingleTarget model1) {
-        super(model);
+    public OneMoveAway(SingleTarget model, Player attacker, SingleTarget model1) {
+        super(model, attacker);
         this.model = model1;
     }
 
