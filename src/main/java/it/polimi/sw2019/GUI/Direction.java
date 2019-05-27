@@ -55,10 +55,12 @@ public class Direction {
         gruppo.add(east);
         north.setSelected(true);
 
+
         directionContainer.add(north);
         directionContainer.add(west);
         directionContainer.add(south);
         directionContainer.add(east);
+
 
         JButton move = new JButton("MoveAgain");
         JButton done = new JButton("Done");

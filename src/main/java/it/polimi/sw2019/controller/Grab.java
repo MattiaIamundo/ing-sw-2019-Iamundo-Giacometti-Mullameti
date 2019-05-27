@@ -10,7 +10,7 @@ public class Grab implements Action {
     /**
      * @param player the player  who is going to be attacked using this power up card
      */
-    public static  void useAction(Player player) {
+    public static void useAction(Player player) {
 
         if(player.getPosition() instanceof SpaceAmmo){
             Ammo ammoCard = SpaceAmmo.takeAmmo();

@@ -1,6 +1,6 @@
 package it.polimi.sw2019.controller;
-
-public class UsePowerUp implements Action{
+//modified for sonarreport
+public abstract class UsePowerUp implements Action{
 
     public void useAction(){
 

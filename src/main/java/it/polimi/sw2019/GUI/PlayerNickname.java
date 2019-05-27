@@ -16,6 +16,10 @@ public class PlayerNickname {
 
     public static void main(String[] args)
     {
+       
+        //String nickname =JOptionPane.showInputDialog("Enter your Nickname : ");
+        
+
 
         frame = new JFrame("New Player");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -11,7 +11,7 @@ public class MoveTakeFrenzy implements Action{
     private static Ammo ammo;
     private Space moveto;
 
-    public static  void useAction(Player player) {
+    public void useAction(Player player) {
         Scanner scanner = new Scanner(System.in);
         int nrSpaces;
         String direction;

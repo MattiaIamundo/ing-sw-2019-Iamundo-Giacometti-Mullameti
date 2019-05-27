@@ -1,5 +1,6 @@
 package it.polimi.sw2019.model.weapon_power;
 
+import it.polimi.sw2019.controller.weaponeffect.MovePlayer;
 import it.polimi.sw2019.controller.weaponeffect.SameSquare;
 import it.polimi.sw2019.model.Events.PositionSelctEv;
 import it.polimi.sw2019.model.Events.TargetAcquisitionEv;
@@ -14,14 +15,11 @@ import java.util.Map;
  * @author Mattia Iamundo
  */
 public class ThreeDamageMove extends SingleTarget implements WithMove{
-    private Player attacker = null;
     private Player target = null;
 
     @Override
     public void usePower(Player attacker){
-        this.attacker = attacker;
-        SameSquare controller1 = new SameSquare(this);
-        controller1.acquireTarget(attacker);
+        target.getPlance().giveDamage(attacker, 3);
     }
 
     @Override
@@ -32,7 +30,6 @@ public class ThreeDamageMove extends SingleTarget implements WithMove{
     @Override
     public void setTarget(Player target) {
         this.target = target;
-        target.getPlance().giveDamage(attacker, 3);
     }
 
     public void changePosition(Player attacker, Map<String, Space> positions){
