@@ -8,7 +8,7 @@ public class TestAmmoDoublePowerUpClass {
     @Test
     public void testAmmoDoublePowerUp(){
 
-        AmmoDoublePowerUp ammoCard= new AmmoDoublePowerUp("blue" ,"yellow" ,null);
+        AmmoDoublePowerUp ammoCard= new AmmoDoublePowerUp("blue" ,"yellow" ,null,"name");
         Assert.assertNull(ammoCard.getPowerUp());
 
     }
@@ -16,7 +16,7 @@ public class TestAmmoDoublePowerUpClass {
     @Test
     public void testGetPowerUp(){
 
-        AmmoDoublePowerUp ammoCard= new AmmoDoublePowerUp("blue" ,"yellow" ,null);
+        AmmoDoublePowerUp ammoCard= new AmmoDoublePowerUp("blue" ,"yellow" ,null,"name");
         Assert.assertNull(ammoCard.getPowerUp());
     }
 }

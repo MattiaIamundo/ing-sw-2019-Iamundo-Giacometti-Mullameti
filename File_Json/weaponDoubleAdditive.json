@@ -1,0 +1,18 @@
+[
+  {
+    "name" : "",
+    "rechargeCost" : ["", "", ""],
+    "isLoad" : "",
+    "power" : "",
+    "descriptionPower" : "",
+    "firstAdditivePower" : "",
+    "firstExtraCost" : "",
+    "secondAdditivePower" : "",
+    "secondExtraCost" : "",
+    "descriptionFirstAdditivePower" : "",
+    "descriptionSecondAdditivePower" : ""
+  },
+  {
+
+  }
+]
