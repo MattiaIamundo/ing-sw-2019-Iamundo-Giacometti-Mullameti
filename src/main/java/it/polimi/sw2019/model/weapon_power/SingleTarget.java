@@ -7,9 +7,12 @@ import it.polimi.sw2019.view.Observable;
 import java.util.ArrayList;
 
 public abstract class SingleTarget extends Observable<WeaponEvent> implements Power{
+    protected Player target;
 
     public abstract void chooseTarget(ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable, Player attacker);
 
-    public abstract void setTarget(Player target);
+    public void setTarget(Player target){
+        this.target = target;
+    }
 
 }

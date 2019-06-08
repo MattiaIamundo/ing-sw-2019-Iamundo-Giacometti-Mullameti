@@ -5,14 +5,11 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.weapon_power.MoveDamage;
-import it.polimi.sw2019.model.weapon_power.SingleTarget;
 import it.polimi.sw2019.view.Observer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-public class TractorBeam implements Observer<TracBeamSetEv> {
+public class TractorBeam implements Observer<TracBeamSetEv>, EffectController{
    private Map<Player, Map<String, Space>> movingmap = new HashMap<>();
    private ArrayList<String> validroom = new ArrayList<>();
    private MoveDamage model;
@@ -22,9 +19,31 @@ public class TractorBeam implements Observer<TracBeamSetEv> {
         this.model = model;
     }
 
-    public void acquireTarget(Player attacker) {
-        this.attacker = attacker;
+    @Override
+    public void useEffect(String effectname, Player attacker) {
+        if (model.toString().equals(effectname)){
+            this.attacker = attacker;
+            acquireTarget();
+        }
+    }
+
+    public void acquireTarget() {
         ArrayList<String> notselectable = new ArrayList<>();
+        initializeRooms();
+        for (int i = 0; i < 5; i++) {
+            if (Table.getPlayers(i)!=null && Table.getPlayers(i)!=attacker){
+                checkTarget(Table.getPlayers(i));
+            }
+        }
+        notselectable.add(attacker.getNickname());
+        HashMap<String, ArrayList<String>> valid = new HashMap<>();
+        for (Map.Entry<Player, Map<String, Space>> a : movingmap.entrySet()){
+            valid.put(a.getKey().getNickname(), new ArrayList<>(a.getValue().keySet()));
+        }
+        model.chooseTarget(valid, notselectable);
+    }
+
+    private void initializeRooms(){
         validroom.add(attacker.getPosition().getRoom());
         if (!attacker.getPosition().getNorth().isWall() && !validroom.contains(attacker.getPosition().getNorth().getSpaceSecond().getRoom())){
             validroom.add(attacker.getPosition().getNorth().getSpaceSecond().getRoom());
@@ -38,17 +57,6 @@ public class TractorBeam implements Observer<TracBeamSetEv> {
         if (!attacker.getPosition().getEast().isWall() && !validroom.contains(attacker.getPosition().getEast().getSpaceSecond().getRoom())){
             validroom.add(attacker.getPosition().getEast().getSpaceSecond().getRoom());
         }
-        for (int i = 0; i < 5; i++) {
-            if (Table.getPlayers(i)!=null && Table.getPlayers(i)!=attacker){
-                checkTarget(Table.getPlayers(i));
-            }
-        }
-        notselectable.add(attacker.getNickname());
-        HashMap<String, ArrayList<String>> valid = new HashMap<>();
-        for (Player a:movingmap.keySet()){
-            valid.put(a.getNickname(), new ArrayList<String>(movingmap.get(a).keySet()));
-        }
-        model.chooseTarget(valid, notselectable);
     }
 
     private void checkTarget(Player target){
@@ -56,6 +64,16 @@ public class TractorBeam implements Observer<TracBeamSetEv> {
         if (validroom.contains(target.getPosition().getRoom())){
             positions.put("zero", target.getPosition());
         }
+        checkNorth(positions, target);
+        checkWest(positions, target);
+        checkSouth(positions, target);
+        checkEast(positions, target);
+        if (!positions.isEmpty()){
+            movingmap.put(target, positions);
+        }
+    }
+
+    private void checkNorth(HashMap<String, Space> positions, Player target){
         if ((!target.getPosition().getNorth().isWall()) && (validroom.contains(target.getPosition().getNorth().getSpaceSecond().getRoom()))){
             positions.put("north", target.getPosition().getNorth().getSpaceSecond());
             if ((!target.getPosition().getNorth().getSpaceSecond().getNorth().isWall()) && (validroom.contains(target.getPosition().getNorth().getSpaceSecond().getNorth().getSpaceSecond().getRoom()))){
@@ -68,44 +86,56 @@ public class TractorBeam implements Observer<TracBeamSetEv> {
                 positions.put("north-east", target.getPosition().getNorth().getSpaceSecond().getEast().getSpaceSecond());
             }
         }
+    }
+
+    private void checkWest(HashMap<String, Space> positions, Player target){
         if ((!target.getPosition().getWest().isWall()) && (validroom.contains(target.getPosition().getWest().getSpaceSecond().getRoom()))){
             positions.put("west", target.getPosition().getWest().getSpaceSecond());
             if ((!target.getPosition().getWest().getSpaceSecond().getWest().isWall()) && (validroom.contains(target.getPosition().getWest().getSpaceSecond().getWest().getSpaceSecond().getRoom()))){
                 positions.put("west-west", target.getPosition().getWest().getSpaceSecond().getWest().getSpaceSecond());
             }
-            if ((!target.getPosition().getWest().getSpaceSecond().getNorth().isWall()) && (validroom.contains(target.getPosition().getWest().getSpaceSecond().getNorth().getSpaceSecond().getRoom()))){
+            if ((!target.getPosition().getWest().getSpaceSecond().getNorth().isWall()) && (validroom.contains(target.getPosition().getWest().getSpaceSecond().getNorth().getSpaceSecond().getRoom()))
+                    && (!positions.containsValue(target.getPosition().getWest().getSpaceSecond().getNorth().getSpaceSecond()))){
                 positions.put("west-north", target.getPosition().getWest().getSpaceSecond().getNorth().getSpaceSecond());
             }
-            if ((!target.getPosition().getWest().getSpaceSecond().getSouth().isWall()) && (validroom.contains(target.getPosition().getWest().getSpaceSecond().getSouth().getSpaceSecond().getRoom()))){
+            if ((!target.getPosition().getWest().getSpaceSecond().getSouth().isWall()) && (validroom.contains(target.getPosition().getWest().getSpaceSecond().getSouth().getSpaceSecond().getRoom()))
+                    && (!positions.containsValue(target.getPosition().getWest().getSpaceSecond().getSouth().getSpaceSecond()))){
                 positions.put("west-south", target.getPosition().getWest().getSpaceSecond().getSouth().getSpaceSecond());
             }
         }
+    }
+
+    private void checkSouth(HashMap<String, Space> positions, Player target){
         if ((!target.getPosition().getSouth().isWall()) && (validroom.contains(target.getPosition().getSouth().getSpaceSecond().getRoom()))){
             positions.put("south", target.getPosition().getSouth().getSpaceSecond());
             if ((!target.getPosition().getSouth().getSpaceSecond().getSouth().isWall()) && (validroom.contains(target.getPosition().getSouth().getSpaceSecond().getSouth().getSpaceSecond().getRoom()))){
                 positions.put("south-south", target.getPosition().getSouth().getSpaceSecond().getSouth().getSpaceSecond());
             }
-            if ((!target.getPosition().getSouth().getSpaceSecond().getWest().isWall()) && (validroom.contains(target.getPosition().getSouth().getSpaceSecond().getWest().getSpaceSecond().getRoom()))){
+            if ((!target.getPosition().getSouth().getSpaceSecond().getWest().isWall()) && (validroom.contains(target.getPosition().getSouth().getSpaceSecond().getWest().getSpaceSecond().getRoom()))
+                    && (!positions.containsValue(target.getPosition().getSouth().getSpaceSecond().getWest().getSpaceSecond()))){
                 positions.put("south-west", target.getPosition().getSouth().getSpaceSecond().getWest().getSpaceSecond());
             }
-            if ((!target.getPosition().getSouth().getSpaceSecond().getEast().isWall()) && (validroom.contains(target.getPosition().getSouth().getSpaceSecond().getEast().getSpaceSecond().getRoom()))){
+            if ((!target.getPosition().getSouth().getSpaceSecond().getEast().isWall()) && (validroom.contains(target.getPosition().getSouth().getSpaceSecond().getEast().getSpaceSecond().getRoom()))
+                    && (!positions.containsValue(target.getPosition().getSouth().getSpaceSecond().getEast().getSpaceSecond()))){
                 positions.put("south-east", target.getPosition().getSouth().getSpaceSecond().getEast().getSpaceSecond());
             }
         }
+    }
+
+    private void checkEast(HashMap<String, Space> positions, Player target){
         if ((!target.getPosition().getEast().isWall()) && (validroom.contains(target.getPosition().getEast().getSpaceSecond().getRoom()))){
             positions.put("east", target.getPosition().getEast().getSpaceSecond());
             if ((!target.getPosition().getEast().getSpaceSecond().getEast().isWall()) && (validroom.contains(target.getPosition().getEast().getSpaceSecond().getEast().getSpaceSecond().getRoom()))){
                 positions.put("east-east", target.getPosition().getEast().getSpaceSecond().getEast().getSpaceSecond());
             }
-            if ((!target.getPosition().getEast().getSpaceSecond().getNorth().isWall()) && (validroom.contains(target.getPosition().getEast().getSpaceSecond().getNorth().getSpaceSecond().getRoom()))){
+            if ((!target.getPosition().getEast().getSpaceSecond().getNorth().isWall()) && (validroom.contains(target.getPosition().getEast().getSpaceSecond().getNorth().getSpaceSecond().getRoom()))
+                    && (!positions.containsValue(target.getPosition().getEast().getSpaceSecond().getNorth().getSpaceSecond()))){
                 positions.put("east-north", target.getPosition().getEast().getSpaceSecond().getNorth().getSpaceSecond());
             }
-            if ((!target.getPosition().getEast().getSpaceSecond().getSouth().isWall()) && (validroom.contains(target.getPosition().getEast().getSpaceSecond().getSouth().getSpaceSecond().getRoom()))){
+            if ((!target.getPosition().getEast().getSpaceSecond().getSouth().isWall()) && (validroom.contains(target.getPosition().getEast().getSpaceSecond().getSouth().getSpaceSecond().getRoom()))
+                    && (!positions.containsValue(target.getPosition().getEast().getSpaceSecond().getSouth().getSpaceSecond()))){
                 positions.put("east-south", target.getPosition().getEast().getSpaceSecond().getSouth().getSpaceSecond());
             }
-        }
-        if (!positions.isEmpty()){
-            movingmap.put(target, positions);
         }
     }
 

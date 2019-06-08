@@ -1,20 +1,18 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.model.Events.TargetSetEv;
-import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.weapon_power.SingleTarget;
-import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 
-public class PunishModeCont extends TargetAcquisition{
+public class PunishModeCont extends TargetIsVisible {
 
-    public PunishModeCont(SingleTarget model, Player attacker) {
-        super(model, attacker);
+    public PunishModeCont(SingleTarget model) {
+        super(model);
     }
 
+    @Override
     public void acquireTarget(){
         ArrayList<Space> position;
         ArrayList<String> valid = new ArrayList<>();
@@ -38,54 +36,78 @@ public class PunishModeCont extends TargetAcquisition{
     private ArrayList<Space> loadPositions(){
         ArrayList<Space> tarpos = new ArrayList<>();
         tarpos.add(attacker.getPosition());
+        tarpos.addAll(acquireNorth());
+        tarpos.addAll(acquireWest());
+        tarpos.addAll(acquireSouth());
+        tarpos.addAll(acquireEast());
+        return tarpos;
+    }
+
+    private ArrayList<Space> acquireNorth(){
+        ArrayList<Space> northposition = new ArrayList<>();
         if (!attacker.getPosition().getNorth().isWall()){
-            tarpos.add(attacker.getPosition().getNorth().getSpaceSecond());
+            northposition.add(attacker.getPosition().getNorth().getSpaceSecond());
             if (!attacker.getPosition().getNorth().getSpaceSecond().getNorth().isWall()){
-                tarpos.add(attacker.getPosition().getNorth().getSpaceSecond().getNorth().getSpaceSecond());
+                northposition.add(attacker.getPosition().getNorth().getSpaceSecond().getNorth().getSpaceSecond());
             }
             if (!attacker.getPosition().getNorth().getSpaceSecond().getWest().isWall()){
-                tarpos.add(attacker.getPosition().getNorth().getSpaceSecond().getWest().getSpaceSecond());
+                northposition.add(attacker.getPosition().getNorth().getSpaceSecond().getWest().getSpaceSecond());
             }
             if (!attacker.getPosition().getNorth().getSpaceSecond().getEast().isWall()){
-                tarpos.add(attacker.getPosition().getNorth().getSpaceSecond().getEast().getSpaceSecond());
+                northposition.add(attacker.getPosition().getNorth().getSpaceSecond().getEast().getSpaceSecond());
             }
         }
+        return northposition;
+    }
+
+    private ArrayList<Space> acquireWest(){
+        ArrayList<Space> westposition = new ArrayList<>();
         if (!attacker.getPosition().getWest().isWall()){
-            tarpos.add(attacker.getPosition().getWest().getSpaceSecond());
+            westposition.add(attacker.getPosition().getWest().getSpaceSecond());
             if (!attacker.getPosition().getWest().getSpaceSecond().getWest().isWall()){
-                tarpos.add(attacker.getPosition().getWest().getSpaceSecond().getWest().getSpaceSecond());
+                westposition.add(attacker.getPosition().getWest().getSpaceSecond().getWest().getSpaceSecond());
             }
-            if ((!attacker.getPosition().getWest().getSpaceSecond().getNorth().isWall()) && (!tarpos.contains(attacker.getPosition().getWest().getSpaceSecond().getNorth().getSpaceSecond()))){
-                tarpos.add(attacker.getPosition().getWest().getSpaceSecond().getNorth().getSpaceSecond());
+            if ((!attacker.getPosition().getWest().getSpaceSecond().getNorth().isWall()) && (!westposition.contains(attacker.getPosition().getWest().getSpaceSecond().getNorth().getSpaceSecond()))){
+                westposition.add(attacker.getPosition().getWest().getSpaceSecond().getNorth().getSpaceSecond());
             }
             if (!attacker.getPosition().getWest().getSpaceSecond().getSouth().isWall()){
-                tarpos.add(attacker.getPosition().getWest().getSpaceSecond().getSouth().getSpaceSecond());
+                westposition.add(attacker.getPosition().getWest().getSpaceSecond().getSouth().getSpaceSecond());
             }
         }
+        return westposition;
+    }
+
+    private ArrayList<Space> acquireSouth(){
+        ArrayList<Space> southposition = new ArrayList<>();
         if (!attacker.getPosition().getSouth().isWall()){
-            tarpos.add(attacker.getPosition().getSouth().getSpaceSecond());
+            southposition.add(attacker.getPosition().getSouth().getSpaceSecond());
             if (!attacker.getPosition().getSouth().getSpaceSecond().getSouth().isWall()){
-                tarpos.add(attacker.getPosition().getSouth().getSpaceSecond().getSouth().getSpaceSecond());
+                southposition.add(attacker.getPosition().getSouth().getSpaceSecond().getSouth().getSpaceSecond());
             }
-            if ((!attacker.getPosition().getSouth().getSpaceSecond().getWest().isWall()) && (!tarpos.contains(attacker.getPosition().getSouth().getSpaceSecond().getWest().getSpaceSecond()))){
-                tarpos.add(attacker.getPosition().getSouth().getSpaceSecond().getWest().getSpaceSecond());
+            if ((!attacker.getPosition().getSouth().getSpaceSecond().getWest().isWall()) && (!southposition.contains(attacker.getPosition().getSouth().getSpaceSecond().getWest().getSpaceSecond()))){
+                southposition.add(attacker.getPosition().getSouth().getSpaceSecond().getWest().getSpaceSecond());
             }
             if (!attacker.getPosition().getSouth().getSpaceSecond().getEast().isWall()){
-                tarpos.add(attacker.getPosition().getSouth().getSpaceSecond().getEast().getSpaceSecond());
+                southposition.add(attacker.getPosition().getSouth().getSpaceSecond().getEast().getSpaceSecond());
             }
         }
+        return southposition;
+    }
+
+    private ArrayList<Space> acquireEast(){
+        ArrayList<Space> eastposition = new ArrayList<>();
         if (!attacker.getPosition().getEast().isWall()){
-            tarpos.add(attacker.getPosition().getEast().getSpaceSecond());
+            eastposition.add(attacker.getPosition().getEast().getSpaceSecond());
             if (!attacker.getPosition().getEast().getSpaceSecond().getEast().isWall()){
-                tarpos.add(attacker.getPosition().getEast().getSpaceSecond().getEast().getSpaceSecond());
+                eastposition.add(attacker.getPosition().getEast().getSpaceSecond().getEast().getSpaceSecond());
             }
-            if ((!attacker.getPosition().getEast().getSpaceSecond().getSouth().isWall()) && (!tarpos.contains(attacker.getPosition().getEast().getSpaceSecond().getSouth().getSpaceSecond()))){
-                tarpos.add(attacker.getPosition().getEast().getSpaceSecond().getSouth().getSpaceSecond());
+            if ((!attacker.getPosition().getEast().getSpaceSecond().getSouth().isWall()) && (!eastposition.contains(attacker.getPosition().getEast().getSpaceSecond().getSouth().getSpaceSecond()))){
+                eastposition.add(attacker.getPosition().getEast().getSpaceSecond().getSouth().getSpaceSecond());
             }
-            if((!attacker.getPosition().getEast().getSpaceSecond().getNorth().isWall()) && (!tarpos.contains(attacker.getPosition().getEast().getSpaceSecond().getNorth().getSpaceSecond()))){
-                tarpos.add(attacker.getPosition().getEast().getSpaceSecond().getNorth().getSpaceSecond());
+            if((!attacker.getPosition().getEast().getSpaceSecond().getNorth().isWall()) && (!eastposition.contains(attacker.getPosition().getEast().getSpaceSecond().getNorth().getSpaceSecond()))){
+                eastposition.add(attacker.getPosition().getEast().getSpaceSecond().getNorth().getSpaceSecond());
             }
         }
-        return tarpos;
+        return eastposition;
     }
 }

@@ -12,7 +12,7 @@ public class Table extends TableView implements Cloneable, Serializable {
 
     private Skull[] killshotTrack = new Skull[8];
     //the map of the battlefield ;there can be 3 different ones , based on the number of the players
-    private Map map;
+    private static Map map;
     private Weapon[] weaponDeck = new Weapon[21];
     private PowerUp[] powerupDeck = new PowerUp[24];
     private Ammo[] ammoDeck = new Ammo[36];
@@ -84,5 +84,9 @@ public class Table extends TableView implements Cloneable, Serializable {
      */
     public static Player setCurrentPlayer(){
         return currentPlayer;
+    }
+
+    public static Map getMap() {
+        return map;
     }
 }

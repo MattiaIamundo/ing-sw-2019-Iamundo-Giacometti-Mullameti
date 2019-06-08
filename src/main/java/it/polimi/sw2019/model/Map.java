@@ -1,5 +1,6 @@
 package it.polimi.sw2019.model;
 
+import it.polimi.sw2019.exception.InvalidDirectionException;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  */
 public class Map implements Serializable {
     //list is set to 4 because the map is a 4 x-coordinate x 3 y-coordinate
-    private static ArrayList <ArrayList <Space>> list = new ArrayList <> (4);
+    private  ArrayList <ArrayList <Space>> list = new ArrayList <> (4);
     // this: ArrayList<Space> innerList0 = new ArrayList<Space>(3);
     //is the constructor's parameters form
     /**
@@ -35,7 +36,7 @@ public class Map implements Serializable {
      * @return the space having x and y coordinates
      * @throws InvalidSpaceException exception due to coordinates being out of the considered area
      */
-    public static Space getSpace(int x , int y) throws InvalidSpaceException {
+    public Space getSpace(int x , int y) throws InvalidSpaceException {
 
         if ( x > 3 && y <= 2 )
             throw new InvalidSpaceException("xout");
@@ -47,5 +48,28 @@ public class Map implements Serializable {
             throw new InvalidSpaceException("neg");
         else
             return (list.get(x)).get(y);
+    }
+
+    public Integer[] getCoordinates(Space position) throws InvalidSpaceException {
+        Integer x = 0;
+        Integer y = 0;
+        Integer[] coordinates = {x, y};
+
+        for (x = 0; x < list.size(); x++) {
+            for (y = 0; y < list.get(x).size(); y++) {
+                if (position == getSpace(x, y)) {
+                    return coordinates;
+                }
+            }
+        }
+        throw new InvalidSpaceException("space not exist");
+    }
+
+    public int getMaxX(){
+        return list.size();
+    }
+
+    public int getMaxY(){
+        return list.get(0).size();
     }
 }

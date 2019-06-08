@@ -1,24 +1,19 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.model.Events.TargetAcquisitionEv;
-import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.weapon_power.SingleTarget;
-import it.polimi.sw2019.view.Weaponeffect;
 
 import java.util.ArrayList;
 
-public class OneMoveAway extends TargetAcquisition{
-    private SingleTarget model;
+public class OneMoveAway extends TargetIsVisible {
 
-    public OneMoveAway(SingleTarget model, Player attacker, SingleTarget model1) {
-        super(model, attacker);
-        this.model = model1;
+    public OneMoveAway(SingleTarget model) {
+        super(model);
     }
 
-    public void acquireTarget(Player attacker){
-        int i = 0;
+    @Override
+    public void acquireTarget(){
         ArrayList<String> valid = new ArrayList<>();
         ArrayList<String> notselectable = new ArrayList<>();
         ArrayList<String> notreachable = new ArrayList<>();
@@ -36,13 +31,14 @@ public class OneMoveAway extends TargetAcquisition{
         if (!attacker.getPosition().getEast().isWall()){
             validposition.add(attacker.getPosition().getEast().getSpaceSecond());
         }
-        while ((i < 5) && (Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker)){
-            if (validposition.contains(Table.getPlayers(i).getPosition())){
-                valid.add(Table.getPlayers(i).getNickname());
-            }else {
-                notreachable.add(Table.getPlayers(i).getNickname());
+        for (int i = 0; i < 5; i++) {
+            if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker)){
+                if (validposition.contains(Table.getPlayers(i).getPosition())){
+                    valid.add(Table.getPlayers(i).getNickname());
+                }else {
+                    notreachable.add(Table.getPlayers(i).getNickname());
+                }
             }
-            i++;
         }
         notselectable.add(attacker.getNickname());
         model.chooseTarget(valid, notselectable, notreachable, attacker);

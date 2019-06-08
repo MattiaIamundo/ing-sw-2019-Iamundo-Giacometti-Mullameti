@@ -1,24 +1,24 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.weapon_power.SingleTarget;
 
 import java.util.ArrayList;
 
-public class Whisper extends TargetAcquisition{
-    ArrayList<Space> invalidpos = new ArrayList<>();
+public class Whisper extends SingleTargetCont {
 
-    public Whisper(SingleTarget model, Player attacker) {
-        super(model, attacker);
+    public Whisper(SingleTarget model) {
+        super(model);
     }
 
-    public void acquireTarget(Player attacker){
+    @Override
+    public void acquireTarget(){
+        ArrayList<Space> invalidpos = new ArrayList<>();
         ArrayList<String> valid = new ArrayList<>();
         ArrayList<String> notselectable = new ArrayList<>();
         ArrayList<String> notreachable = new ArrayList<>();
-        initializePos(attacker.getPosition());
+        initializePos(attacker.getPosition(), invalidpos);
         for (int i = 0; i < 5; i++) {
             if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker)){
                 if (invalidpos.contains(Table.getPlayers(i).getPosition())){
@@ -32,7 +32,7 @@ public class Whisper extends TargetAcquisition{
         model.chooseTarget(valid, notselectable, notreachable, attacker);
     }
 
-    private void initializePos(Space attpos){
+    private void initializePos(Space attpos, ArrayList<Space> invalidpos){
         invalidpos.add(attpos);
         if (!attpos.getNorth().isWall()){
             invalidpos.add(attpos.getNorth().getSpaceSecond());

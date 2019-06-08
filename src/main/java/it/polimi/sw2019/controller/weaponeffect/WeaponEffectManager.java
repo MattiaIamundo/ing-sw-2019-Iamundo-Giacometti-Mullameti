@@ -10,18 +10,13 @@ import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 
-public class WeaponEffectMenager implements Observer<PowerSelectEv> {
+public class WeaponEffectManager implements Observer<PowerSelectEv> {
     private Player attacker;
     private Weapon weapon;
     private Power power;
     private String basicpower = "basic";
 
-    public WeaponEffectMenager(Player attacker, Weapon weapon) {
-        this.attacker = attacker;
-        this.weapon = weapon;
-    }
-
-    public void acquirePower(){
+    public void acquirePower(Weapon weapon, Player attacker){
         ArrayList<String> powers = new ArrayList<>();
         if (weapon instanceof Alternative){
             powers.add(basicpower);
@@ -33,7 +28,7 @@ public class WeaponEffectMenager implements Observer<PowerSelectEv> {
             weapon.choosePower(powers);
         }else {
             power = weapon.getPower();
-            this.menagePower();
+
         }
     }
 
@@ -41,15 +36,13 @@ public class WeaponEffectMenager implements Observer<PowerSelectEv> {
     public void update(PowerSelectEv message) {
         if (message.getPower().equals(basicpower)){
             power = weapon.getPower();
+            //Iterate on the list of effectcontroller and for each call method .useEffect()
         }else if (weapon instanceof Alternative){
             power = ((Alternative) weapon).getAlternativePower();
+            //Iterate on the list of effectcontroller and for each call method .useEffect()
         }else {
             power = ((DoubleAdditive) weapon).getFirstAdditivePower();
+            //Iterate on the list of effectcontroller and for each call method .useEffect()
         }
-        menagePower();
-    }
-
-    private void menagePower(){
-
     }
 }
