@@ -1,6 +1,6 @@
 package it.polimi.sw2019.model.weapon_power;
 
-import it.polimi.sw2019.model.Events.TargetAcquisitionEv;
+import it.polimi.sw2019.model.events.TargetAcquisitionEv;
 import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;

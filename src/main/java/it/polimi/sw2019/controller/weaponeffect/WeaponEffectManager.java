@@ -2,7 +2,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.Alternative;
 import it.polimi.sw2019.model.DoubleAdditive;
-import it.polimi.sw2019.model.Events.PowerSelectEv;
+import it.polimi.sw2019.model.events.PowerSelectEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.Power;

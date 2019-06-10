@@ -1,16 +1,12 @@
 package it.polimi.sw2019.model.weapon_power;
 
-import it.polimi.sw2019.exception.*;
-import it.polimi.sw2019.model.Events.RocketLaunchChooseEv;
+import it.polimi.sw2019.model.events.RocketLaunchChooseEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
-import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 
 /**
  * This class implements the basic effect of Rocket Launcher
@@ -23,7 +19,7 @@ public class RocketLauncher extends Observable<RocketLaunchChooseEv> implements 
 
     @Override
     public void usePower(Player attacker){
-
+        target.getPlance().giveDamage(attacker, 2);
     }
 
     public void setTarget(Player target, Space newposition) {
@@ -32,7 +28,7 @@ public class RocketLauncher extends Observable<RocketLaunchChooseEv> implements 
         this.target.setPosition(newposition);
     }
 
-    public void chooseTarget(HashMap<String, ArrayList<String>> targets){
-        notify(new RocketLaunchChooseEv(targets));
+    public void chooseTarget(HashMap<String, ArrayList<String>> targets, Player attacker){
+        notify(new RocketLaunchChooseEv(targets, attacker));
     }
 }

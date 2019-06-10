@@ -1,6 +1,6 @@
 package it.polimi.sw2019.model.weapon_power;
 
-import it.polimi.sw2019.model.Events.VortexChooseEv;
+import it.polimi.sw2019.model.events.VortexChooseEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.view.Observable;
@@ -27,8 +27,8 @@ public class Vortex extends Observable<VortexChooseEv> implements Power{
         this.target = target;
     }
 
-    public void chooseVortexAndTarget(HashMap<String, ArrayList<String>> valid){
-        notify(new VortexChooseEv(valid));
+    public void chooseVortexAndTarget(HashMap<String, ArrayList<String>> valid, Player attacker){
+        notify(new VortexChooseEv(valid, attacker));
     }
 
     public Space getVortex() {

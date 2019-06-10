@@ -1,7 +1,7 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.exception.InvalidSpaceException;
-import it.polimi.sw2019.model.Events.VortexSetEv;
+import it.polimi.sw2019.model.events.VortexSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
@@ -10,6 +10,8 @@ import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class VortexCont implements Observer<VortexSetEv> {
     Vortex model;
@@ -22,6 +24,7 @@ public class VortexCont implements Observer<VortexSetEv> {
     }
 
     public void acquireTarget(){
+        Logger logger = Logger.getLogger("controller.WeaponEffct.Vortex.acquireTarget");
         ArrayList<String> validrooms = validRooms(attacker.getPosition());
         for (int x = 0; x < Table.getMap().getMaxX(); x++) {
             for (int y = 0; y < Table.getMap().getMaxY(); y++) {
@@ -30,10 +33,11 @@ public class VortexCont implements Observer<VortexSetEv> {
                         valid.put(x+"-"+y, validPlayer(Table.getMap().getSpace(x,y)));
                     }
                 }catch (InvalidSpaceException e){
-                    //TODO manage exception
+                    logger.log(Level.SEVERE, "Left the boundaries of the map");
                 }
             }
         }
+        model.chooseVortexAndTarget(valid, attacker);
     }
 
     private ArrayList<String> validRooms(Space attpos){
@@ -82,6 +86,7 @@ public class VortexCont implements Observer<VortexSetEv> {
 
     @Override
     public void update(VortexSetEv message) {
+        Logger logger = Logger.getLogger("controller.WeaponEffct.Vortex.update");
         Space vorpos;
         Player target;
         for (int i = 0; i < 5; i++) {
@@ -95,7 +100,7 @@ public class VortexCont implements Observer<VortexSetEv> {
             vorpos = Table.getMap().getSpace(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
             model.setVortex(vorpos);
         }catch (InvalidSpaceException e){
-            //TODO manage exception
+            logger.log(Level.SEVERE, "Left the boundaries of the map");
         }
     }
 }

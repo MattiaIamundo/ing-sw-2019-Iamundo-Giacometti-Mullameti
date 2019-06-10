@@ -1,7 +1,6 @@
 package it.polimi.sw2019.controller;
 
-import it.polimi.sw2019.controller.weaponeffect.WeaponEffectManager;
-import it.polimi.sw2019.model.Events.WeaponSelectEv;
+import it.polimi.sw2019.model.events.WeaponSelectEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.Weapon;

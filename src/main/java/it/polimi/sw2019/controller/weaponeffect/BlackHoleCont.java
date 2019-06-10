@@ -1,6 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.model.Events.BlackHoleSetEv;
+import it.polimi.sw2019.model.events.BlackHoleSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
@@ -39,7 +39,7 @@ public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController
                 }
             }
         }
-        model.chooseTargets(targets, invalid.getNickname());
+        model.chooseTargets(targets, invalid.getNickname(), attacker);
         model.setVortex(vortex);
     }
 

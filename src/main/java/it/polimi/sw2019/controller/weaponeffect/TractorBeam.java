@@ -1,6 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.model.Events.TracBeamSetEv;
+import it.polimi.sw2019.model.events.TracBeamSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
@@ -40,7 +40,7 @@ public class TractorBeam implements Observer<TracBeamSetEv>, EffectController{
         for (Map.Entry<Player, Map<String, Space>> a : movingmap.entrySet()){
             valid.put(a.getKey().getNickname(), new ArrayList<>(a.getValue().keySet()));
         }
-        model.chooseTarget(valid, notselectable);
+        model.chooseTarget(valid, notselectable, attacker);
     }
 
     private void initializeRooms(){

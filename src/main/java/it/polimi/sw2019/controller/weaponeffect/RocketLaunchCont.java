@@ -1,6 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.model.Events.RocketLaunchSetEv;
+import it.polimi.sw2019.model.events.RocketLaunchSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
@@ -33,7 +33,7 @@ public class RocketLaunchCont implements Observer<RocketLaunchSetEv>, EffectCont
         for (HashMap.Entry<String, HashMap<String, Space>> a : targets.entrySet()){
             valid.put(a.getKey(), new ArrayList<>(a.getValue().keySet()));
         }
-        model.chooseTarget(valid);
+        model.chooseTarget(valid, attacker);
     }
 
     private HashMap<String, Space> acquireMovements(Space tarpos){

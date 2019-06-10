@@ -9,6 +9,7 @@ import it.polimi.sw2019.model.Player;
 public class ChargedShot implements Power{
     private TwoDamage basiceffect;
     private int i = 0;
+
     @Override
     public void usePower(Player attacker){
         while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("PlasmaGun"))){

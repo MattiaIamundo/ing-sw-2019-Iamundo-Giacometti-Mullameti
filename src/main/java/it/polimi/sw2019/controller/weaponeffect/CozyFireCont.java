@@ -1,6 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.model.Events.CozyFireSetEv;
+import it.polimi.sw2019.model.events.CozyFireSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.weapon_power.CozyFireMode;
@@ -39,7 +39,7 @@ public class CozyFireCont implements Observer<CozyFireSetEv>, EffectController {
         if (!attacker.getPosition().getEast().isWall()){
             valid.put("east", attacker.getPosition().getEast().getSpaceSecond());
         }
-        model.chooseTargetArea(new ArrayList<>(valid.keySet()));
+        model.chooseTargetArea(new ArrayList<>(valid.keySet()), attacker);
     }
 
     @Override

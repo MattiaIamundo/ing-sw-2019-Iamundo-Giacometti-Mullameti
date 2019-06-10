@@ -1,15 +1,12 @@
 package it.polimi.sw2019.model.weapon_power;
 
-import it.polimi.sw2019.exception.IllegalDirectionException;
-import it.polimi.sw2019.exception.InvalidDirectionException;
-import it.polimi.sw2019.model.Events.CozyFireChooseEv;
+import it.polimi.sw2019.model.events.CozyFireChooseEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * This class implements the alternative power of the Furnace
@@ -28,8 +25,8 @@ public class CozyFireMode extends Observable<CozyFireChooseEv> implements Power{
         }
     }
 
-    public void chooseTargetArea(ArrayList<String> positions){
-        notify(new CozyFireChooseEv(positions));
+    public void chooseTargetArea(ArrayList<String> positions, Player attacker){
+        notify(new CozyFireChooseEv(positions, attacker));
     }
 
     public void setTargetarea(Space targetarea) {

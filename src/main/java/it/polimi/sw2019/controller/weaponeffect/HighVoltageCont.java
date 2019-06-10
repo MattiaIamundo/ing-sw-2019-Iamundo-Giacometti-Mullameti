@@ -1,7 +1,7 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.DoubleAdditive;
-import it.polimi.sw2019.model.Events.HighVoltageSetEv;
+import it.polimi.sw2019.model.events.HighVoltageSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.weapon_power.ChainReaction;

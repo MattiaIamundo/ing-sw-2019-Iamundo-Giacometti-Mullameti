@@ -1,6 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.model.Events.PulvModeSetEv;
+import it.polimi.sw2019.model.events.PulvModeSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
@@ -35,7 +35,7 @@ public class PulverizeModeCont implements Observer<PulvModeSetEv>, EffectControl
             }
         }
         initializePositions();
-        model.chooseTarget(targets, new ArrayList<>(positions.keySet()));
+        model.chooseTarget(targets, new ArrayList<>(positions.keySet()), attacker);
     }
 
     private void initializePositions(){

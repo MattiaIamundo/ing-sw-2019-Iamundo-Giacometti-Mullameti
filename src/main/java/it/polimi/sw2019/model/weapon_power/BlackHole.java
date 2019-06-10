@@ -1,17 +1,11 @@
 package it.polimi.sw2019.model.weapon_power;
 
-import it.polimi.sw2019.exception.ErrorCode;
-import it.polimi.sw2019.exception.IllegalPlayerException;
-import it.polimi.sw2019.exception.InvalidPlayerException;
-import it.polimi.sw2019.exception.UnreachablePlayerException;
-import it.polimi.sw2019.model.Events.BlackHoleChooseEv;
+import it.polimi.sw2019.model.events.BlackHoleChooseEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
-import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * This class implements the optional effect for the Vortex Cannon
@@ -33,8 +27,8 @@ public class BlackHole extends Observable<BlackHoleChooseEv> implements Power{
         }
     }
 
-    public void chooseTargets(ArrayList<String> targets, String notselectable){
-        notify(new BlackHoleChooseEv(targets, notselectable));
+    public void chooseTargets(ArrayList<String> targets, String notselectable, Player attacker){
+        notify(new BlackHoleChooseEv(targets, notselectable, attacker));
     }
 
     public void setTarget1(Player target1) {

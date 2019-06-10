@@ -1,22 +1,17 @@
 package it.polimi.sw2019.model.weapon_power;
 
-import it.polimi.sw2019.exception.*;
-import it.polimi.sw2019.model.Events.RailGunChooseEv;
+import it.polimi.sw2019.model.events.RailGunChooseEv;
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.model.Space;
-import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Scanner;
 
 /**
  * This class implements the basic effect of Railgun
  * @author Mattia Iamundo
  */
-public class RailGun extends Observable<RailGunChooseEv> implements Power{
+public class RailGun extends Observable<RailGunChooseEv> implements Power, ThroughWalls{
     private Player target = null;
 
     @Override
@@ -25,8 +20,8 @@ public class RailGun extends Observable<RailGunChooseEv> implements Power{
         target = null;
     }
 
-    public void chooseTarget(HashMap<String, ArrayList<String>> valid){
-        notify(new RailGunChooseEv(valid));
+    public void chooseTarget(HashMap<String, ArrayList<String>> valid, Player attacker){
+        notify(new RailGunChooseEv(valid, attacker));
     }
 
     public void setTarget(Player target){

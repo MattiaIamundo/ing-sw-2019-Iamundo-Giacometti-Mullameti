@@ -19,7 +19,7 @@ public class FragmentingWarhead implements Power{
         }
         basiceffect = (RocketLauncher) attacker.listWeapon()[i].getPower();
         for (int j = 0; j < 5; j++) {
-            if ((basiceffect.origin == Table.getPlayers(i).getPosition()) && (attacker != Table.getPlayers(i))){
+            if ((Table.getPlayers(i).getPosition() == basiceffect.origin) && (Table.getPlayers(i) != attacker)){
                 Table.getPlayers(i).getPlance().giveDamage(attacker, 1);
             }
         }

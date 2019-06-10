@@ -1,9 +1,7 @@
 package it.polimi.sw2019.model.weapon_power;
 
-import it.polimi.sw2019.controller.weaponeffect.MovePlayer;
-import it.polimi.sw2019.controller.weaponeffect.SameSquare;
-import it.polimi.sw2019.model.Events.PositionSelctEv;
-import it.polimi.sw2019.model.Events.TargetAcquisitionEv;
+import it.polimi.sw2019.model.events.PositionChooseEv;
+import it.polimi.sw2019.model.events.TargetAcquisitionEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 
@@ -33,7 +31,7 @@ public class ThreeDamageMove extends SingleTarget implements WithMove{
     }
 
     public void changePosition(Player attacker, Map<String, Space> positions){
-        notify(new PositionSelctEv(attacker, positions, "Select one of the possible square to move the target in, or just press enter leave it there"));
+        notify(new PositionChooseEv(attacker, positions, "Select one of the possible square to move the target in, or just press enter leave it there"));
     }
 
     @Override

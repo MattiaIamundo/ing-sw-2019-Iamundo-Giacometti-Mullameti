@@ -1,6 +1,6 @@
 package it.polimi.sw2019.model.weapon_power;
 
-import it.polimi.sw2019.model.Events.PulvModeChooseEv;
+import it.polimi.sw2019.model.events.PulvModeChooseEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.view.Observable;
@@ -21,8 +21,8 @@ public class PulverizeMode extends Observable<PulvModeChooseEv> implements Power
         target.setPosition(moveto);
     }
 
-    public void chooseTarget(ArrayList<String> targets, ArrayList<String> positions){
-        notify(new PulvModeChooseEv(targets, positions));
+    public void chooseTarget(ArrayList<String> targets, ArrayList<String> positions, Player attacker){
+        notify(new PulvModeChooseEv(targets, positions, attacker));
     }
 
     public void setTarget(Player target) {
