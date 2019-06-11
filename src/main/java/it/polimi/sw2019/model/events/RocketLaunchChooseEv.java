@@ -1,17 +1,26 @@
 package it.polimi.sw2019.model.events;
 
+import it.polimi.sw2019.model.Player;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RocketLaunchChooseEv {
-    private Map<String, ArrayList<String>> targets = new HashMap<>();
+public class RocketLaunchChooseEv implements WeaponEvent{
 
-    public RocketLaunchChooseEv(Map<String, ArrayList<String>> targets) {
+    private Player attacker;
+    private Map<String, ArrayList<String>> targets;
+
+    public RocketLaunchChooseEv(Map<String, ArrayList<String>> targets, Player attacker) {
         this.targets = targets;
+        this.attacker = attacker;
     }
 
     public Map<String, ArrayList<String>> getTargets() {
         return targets;
+    }
+
+    public String getAttacker(){
+        return attacker.getNickname();
     }
 }

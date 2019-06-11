@@ -19,8 +19,8 @@ public class TargetAcquisitionEv implements WeaponEvent{
         this.message = message;
     }
 
-    public Player getAttacker() {
-        return attacker;
+    public String getAttacker() {
+        return attacker.getNickname();
     }
 
     public ArrayList<String> getValid() {

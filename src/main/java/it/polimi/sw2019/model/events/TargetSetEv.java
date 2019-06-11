@@ -1,6 +1,6 @@
 package it.polimi.sw2019.model.events;
 
-public class TargetSetEv implements WeaponEvent{
+public class TargetSetEv {
     protected String target;
 
     public TargetSetEv(String target) {
