@@ -6,7 +6,7 @@ import it.polimi.sw2019.model.weapon_power.SingleTarget;
 
 import java.util.ArrayList;
 
-public class OneMoveAway extends TargetIsVisible {
+public class OneMoveAway extends SingleTargetCont {
 
     public OneMoveAway(SingleTarget model) {
         super(model);
@@ -17,6 +17,22 @@ public class OneMoveAway extends TargetIsVisible {
         ArrayList<String> valid = new ArrayList<>();
         ArrayList<String> notselectable = new ArrayList<>();
         ArrayList<String> notreachable = new ArrayList<>();
+        ArrayList<Space> validposition = loadSquares();
+
+        for (int i = 0; i < 5; i++) {
+            if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker)){
+                if (validposition.contains(Table.getPlayers(i).getPosition())){
+                    valid.add(Table.getPlayers(i).getNickname());
+                }else {
+                    notreachable.add(Table.getPlayers(i).getNickname());
+                }
+            }
+        }
+        notselectable.add(attacker.getNickname());
+        model.chooseTarget(valid, notselectable, notreachable, attacker);
+    }
+
+    private ArrayList<Space> loadSquares(){
         ArrayList<Space> validposition = new ArrayList<>();
 
         if (!attacker.getPosition().getNorth().isWall()){
@@ -31,17 +47,6 @@ public class OneMoveAway extends TargetIsVisible {
         if (!attacker.getPosition().getEast().isWall()){
             validposition.add(attacker.getPosition().getEast().getSpaceSecond());
         }
-        for (int i = 0; i < 5; i++) {
-            if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker)){
-                if (validposition.contains(Table.getPlayers(i).getPosition())){
-                    valid.add(Table.getPlayers(i).getNickname());
-                }else {
-                    notreachable.add(Table.getPlayers(i).getNickname());
-                }
-            }
-        }
-        notselectable.add(attacker.getNickname());
-        model.chooseTarget(valid, notselectable, notreachable, attacker);
+        return validposition;
     }
-
 }

@@ -2,13 +2,15 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
-import it.polimi.sw2019.model.weapon_power.SingleTarget;
+import it.polimi.sw2019.model.events.PunisherModeSetEv;
+import it.polimi.sw2019.model.weapon_power.PunisherMode;
+import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 
-public class PunishModeCont extends TargetIsVisible {
+public class PunishModeCont extends SingleTargetCont implements Observer<PunisherModeSetEv> {
 
-    public PunishModeCont(SingleTarget model) {
+    public PunishModeCont(PunisherMode model) {
         super(model);
     }
 
@@ -109,5 +111,11 @@ public class PunishModeCont extends TargetIsVisible {
             }
         }
         return eastposition;
+    }
+
+    @Override
+    public void update(PunisherModeSetEv message) {
+        super.update(message);
+        model.usePower(attacker);
     }
 }

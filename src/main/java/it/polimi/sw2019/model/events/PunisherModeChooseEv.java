@@ -4,19 +4,22 @@ import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
 
-public class TargetAcquisitionEv {
-    protected Player attacker;
-    protected ArrayList<String> valid;
-    protected ArrayList<String> notselectable;
-    protected ArrayList<String> notreachable;
-    protected String message;
+public class PunisherModeChooseEv implements WeaponEvent{
 
-    public TargetAcquisitionEv(Player attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable, String message) {
+    private Player attacker;
+    private ArrayList<String> valid;
+    private ArrayList<String> notselectable;
+    private ArrayList<String> notreachable;
+
+    public PunisherModeChooseEv(Player attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable) {
         this.attacker = attacker;
         this.valid = valid;
         this.notselectable = notselectable;
         this.notreachable = notreachable;
-        this.message = message;
+    }
+
+    public String getAttacker() {
+        return attacker.getNickname();
     }
 
     public ArrayList<String> getValid() {

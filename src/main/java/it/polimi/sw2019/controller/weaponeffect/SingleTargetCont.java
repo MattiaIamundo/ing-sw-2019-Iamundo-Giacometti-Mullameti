@@ -4,11 +4,14 @@ import it.polimi.sw2019.model.events.TargetSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.weapon_power.SingleTarget;
-import it.polimi.sw2019.view.Observer;
 
-public abstract class SingleTargetCont implements Observer<TargetSetEv>, EffectController {
-    protected SingleTarget model;
+import java.util.ArrayList;
+
+public abstract class SingleTargetCont implements EffectController {
+    private SingleTarget model;
     protected Player attacker;
+    protected ArrayList<String> valid = new ArrayList<>();
+    protected ArrayList<String> notreachable = new ArrayList<>();
 
     public SingleTargetCont(SingleTarget model) {
         this.model = model;
@@ -22,17 +25,23 @@ public abstract class SingleTargetCont implements Observer<TargetSetEv>, EffectC
         }
     }
 
-    public abstract void acquireTarget();
+    protected void acquireTarget(){
+        for (int i = 0; i < 5; i++) {
+            if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker)){
+                if (Table.getPlayers(i).isVisible(attacker)){
+                    valid.add(Table.getPlayers(i).getNickname());
+                }else {
+                    notreachable.add(Table.getPlayers(i).getNickname());
+                }
+            }
+        }
+    }
 
-    @Override
     public void update(TargetSetEv message) {
-        Player target;
         int i = 0;
         while ((i < 5) && !(Table.getPlayers(i).getNickname().equals(message.getTarget()))){
             i++;
         }
-        target = Table.getPlayers(i);
-        model.setTarget(target);
-        model.usePower(attacker);
+        model.setTarget(Table.getPlayers(i));
     }
 }
