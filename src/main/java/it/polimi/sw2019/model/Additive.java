@@ -21,9 +21,9 @@ public class Additive extends Weapon{
      * @param descriptionAdditivePower the additive power's description
      */
     public Additive (String name, Power power, String descriptionPower,
-                     Power additivePower , String additiveCost , String descriptionAdditivePower ){
+                     Power additivePower , String additiveCost , String descriptionAdditivePower, String[] rc ){
 
-        super(name, power, descriptionPower);
+        super(name, power, descriptionPower, rc);
         this.additivePower = additivePower;
         this.additiveCost = additiveCost;
         this.descriptionAdditivePower = descriptionAdditivePower;

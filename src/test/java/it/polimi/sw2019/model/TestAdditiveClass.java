@@ -9,7 +9,7 @@ public class TestAdditiveClass {
     public void testAdditive (){
 
         Additive weapon = new Additive( "name", null, "descriptionPower",
-                null, "red","descriptionAdditivePower");
+                null, "red","descriptionAdditivePower",null);
 
         Assert.assertEquals("name", weapon.getName());
         Assert.assertNull(weapon.getPower());
@@ -24,7 +24,7 @@ public class TestAdditiveClass {
     public void testGetName (){
 
         Additive weapon = new Additive( "name", null, "descriptionPower",
-                null, "red","descriptionAdditivePower");
+                null, "red","descriptionAdditivePower",null);
 
         Assert.assertEquals("name", weapon.getName());
     }
@@ -41,7 +41,7 @@ public class TestAdditiveClass {
     public void testGetDescriptionPower (){
 
         Additive weapon = new Additive( "name", null, "descriptionPower",
-                null, "red","descriptionAdditivePower");
+                null, "red","descriptionAdditivePower",null);
 
         Assert.assertEquals("descriptionPower", weapon.getDescriptionPower());
     }
@@ -50,7 +50,7 @@ public class TestAdditiveClass {
     public void testGetIsLoad (){
 
         Additive weapon = new Additive( "name", null, "descriptionPower",
-                null, "red","descriptionAdditivePower");
+                null, "red","descriptionAdditivePower",null);
 
         Assert.assertTrue(weapon.getIsLoad());
     }
@@ -59,7 +59,7 @@ public class TestAdditiveClass {
     public void testGetPower (){
 
         Additive weapon = new Additive( "name", null, "descriptionPower",
-                null, "red","descriptionAdditivePower");
+                null, "red","descriptionAdditivePower",null);
 
         Assert.assertNull(weapon.getPower());
     }
@@ -68,7 +68,7 @@ public class TestAdditiveClass {
     public void testGetAdditiveCost (){
 
         Additive weapon = new Additive( "name", null, "descriptionPower",
-                null, "red","descriptionAdditivePower");
+                null, "red","descriptionAdditivePower",null);
 
         Assert.assertEquals("red",weapon.getAdditiveCost());
     }
@@ -77,7 +77,7 @@ public class TestAdditiveClass {
     public void testGetDescriptionAdditivePower (){
 
         Additive weapon = new Additive( "name", null, "descriptionPower",
-                null, "red","descriptionAdditivePower");
+                null, "red","descriptionAdditivePower",null);
 
         Assert.assertEquals("descriptionAdditivePower", weapon.getDescriptionAdditivePower());
     }
@@ -86,7 +86,7 @@ public class TestAdditiveClass {
     public void testGetAdditivePower (){
 
         Additive weapon = new Additive( "name", null, "descriptionPower",
-                null, "red","descriptionAdditivePower");
+                null, "red","descriptionAdditivePower",null);
 
         Assert.assertNull(weapon.getPower());
     }

@@ -17,7 +17,8 @@ import java.util.ArrayList;
 public abstract class Weapon extends Observable<PowerChooseEv> implements Cloneable, Serializable {
 
     private String name;
-    private String[] rechargeCost = new String[3];
+    //at the top it cost 3 ammo to recharge [3]
+    private String[] rechargeCost;
     //0 weapon not load
     //1 weapon load
     private boolean isLoad;
@@ -30,8 +31,9 @@ public abstract class Weapon extends Observable<PowerChooseEv> implements Clonea
      * @param power weapon's power
      * @param descriptionPower weapon's description
      */
-    public Weapon (String name, Power power, String descriptionPower){
+    public Weapon (String name, Power power, String descriptionPower,String[] rechargeCost ){
         this.name = name;
+        this.rechargeCost = rechargeCost;
         this.power = power;
         this.descriptionPower = descriptionPower;
         this.isLoad = true;

@@ -1,11 +1,110 @@
 [
   {
     "imageName": "",
-    "colorFirst": "" ,
-    "colorSecond": "" ,
-    "powerUp": ""
+    "colorFirst": "red",
+    "colorSecond": "red",
+    "powerUp": null
   },
   {
-
+    "imageName": "",
+    "colorFirst": "red",
+    "colorSecond": "red",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "yellow",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "yellow",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "blue",
+    "colorSecond": "blue",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "blue",
+    "colorSecond": "blue",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "red",
+    "colorSecond": "blue",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "red",
+    "colorSecond": "blue",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "red",
+    "colorSecond": "blue",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "red",
+    "colorSecond": "blue",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "blue",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "blue",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "blue",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "blue",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "red",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "red",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "red",
+    "powerUp": null
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "red",
+    "powerUp": null
   }
 ]

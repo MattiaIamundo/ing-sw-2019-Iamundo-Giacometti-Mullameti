@@ -19,4 +19,8 @@ public class AmmoDoublePowerUp extends Ammo{
     public PowerUp getPowerUp(){
         return powerup;
     }
+
+    public void setPowerup(PowerUp pw) {
+        this.powerup = pw;
+    }
 }

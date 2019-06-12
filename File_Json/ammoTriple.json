@@ -1,11 +1,110 @@
 [
   {
-    "imageName": "" ,
-    "colorFirst": "" ,
-    "colorSecond": "" ,
-    "colorThird": ""
+    "imageName": "",
+    "colorFirst": "blue",
+    "colorSecond": "yellow",
+    "colorThird": "yellow"
   },
   {
-
+    "imageName": "",
+    "colorFirst": "blue",
+    "colorSecond": "yellow",
+    "colorThird": "yellow"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "blue",
+    "colorSecond": "yellow",
+    "colorThird": "yellow"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "blue",
+    "colorThird": "blue"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "blue",
+    "colorThird": "blue"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "blue",
+    "colorThird": "blue"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "red",
+    "colorThird": "red"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "red",
+    "colorThird": "red"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "yellow",
+    "colorSecond": "red",
+    "colorThird": "red"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "red",
+    "colorSecond": "yellow",
+    "colorThird": "yellow"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "red",
+    "colorSecond": "yellow",
+    "colorThird": "yellow"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "red",
+    "colorSecond": "yellow",
+    "colorThird": "yellow"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "red",
+    "colorSecond": "blue",
+    "colorThird": "blue"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "red",
+    "colorSecond": "blue",
+    "colorThird": "blue"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "red",
+    "colorSecond": "blue",
+    "colorThird": "blue"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "blue",
+    "colorSecond": "red",
+    "colorThird": "red"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "blue",
+    "colorSecond": "red",
+    "colorThird": "red"
+  },
+  {
+    "imageName": "",
+    "colorFirst": "blue",
+    "colorSecond": "red",
+    "colorThird": "red"
   }
 ]
