@@ -74,7 +74,7 @@ public class TestPlayerPlanceClass {
     public void testGiveDamage() {
 
         PlayerPlance board = new PlayerPlance();
-        AmmoTriple ammo = new AmmoTriple("red", "blu", "green");
+        AmmoTriple ammo = new AmmoTriple("red", "blu", "green", "name");
         SpaceAmmo position = new SpaceAmmo (null, null, null, null, "red", ammo);
         Player shooter = new Player("name", 0, position, board);
         Player player = new Player("player", 0, position, null);

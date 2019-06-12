@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class Observable <T> {
     //this is the list of the observer.
-    private ArrayList < Observer <T> > observers;
+    private ArrayList < Observer <T> > observers = new ArrayList<>(5);
 
     /**
      * this method adds an observer to the list

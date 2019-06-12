@@ -9,8 +9,8 @@ public class AmmoDoublePowerUp extends Ammo{
      * @param colorSecond the color of the second ammo
      * @param powerup the power up included in the ammo card
      */
-    public AmmoDoublePowerUp(String colorFirst, String colorSecond,PowerUp powerup){
-        super(colorFirst,colorSecond);
+    public AmmoDoublePowerUp(String colorFirst, String colorSecond,PowerUp powerup, String name){
+        super(colorFirst,colorSecond, name);
         this.powerup=powerup;
     }
     /**

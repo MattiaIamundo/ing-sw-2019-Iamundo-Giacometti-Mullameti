@@ -9,15 +9,17 @@ import java.io.Serializable;
  */
 public abstract class Ammo extends AmmoView implements Cloneable, Serializable {
 
+    private String imageName;
     private String colorFirst;
     private String colorSecond;
     /**Constructor of the class
      * @param colorFirst the color of the first ammo
      * @param colorSecond the color of the second ammo
      */
-    public Ammo(String colorFirst, String colorSecond){
+    public Ammo(String colorFirst, String colorSecond, String name){
         this.colorFirst=colorFirst;
         this.colorSecond=colorSecond;
+        this.imageName = name;
     }
 
 
@@ -32,5 +34,9 @@ public abstract class Ammo extends AmmoView implements Cloneable, Serializable {
      */
     public String getColorSecond(){
         return colorSecond;
+    }
+
+    public String getImageName () {
+        return imageName;
     }
 }

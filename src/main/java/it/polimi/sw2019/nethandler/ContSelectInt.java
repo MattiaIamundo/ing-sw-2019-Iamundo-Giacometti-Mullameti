@@ -1,4 +1,8 @@
 package it.polimi.sw2019.nethandler;
 
-public interface ContSelectInt {
+import java.rmi.Remote;
+
+public interface ContSelectInt extends Remote {
+
+
 }

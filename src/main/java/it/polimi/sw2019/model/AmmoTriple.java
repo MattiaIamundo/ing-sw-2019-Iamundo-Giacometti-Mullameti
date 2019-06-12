@@ -10,8 +10,8 @@ public class AmmoTriple extends Ammo{
      * @param colorSecond the color of the second ammo
      * @param colorThird the color of the third ammo
      */
-    public AmmoTriple(String colorFirst, String colorSecond , String colorThird){
-        super(colorFirst,colorSecond);
+    public AmmoTriple(String colorFirst, String colorSecond , String colorThird, String name){
+        super(colorFirst,colorSecond,name);
         this.colorThird = colorThird;
     }
     /**
