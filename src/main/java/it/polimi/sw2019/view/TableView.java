@@ -10,12 +10,18 @@ import it.polimi.sw2019.model.Table;
 public class TableView extends ObservableByGame implements Observer <Table> {
 
     private Table table;
+    private UIinterface ui;
+
+    public TableView() {}
+    public TableView(UIinterface userImp) {
+        ui = userImp;
+    }
 
     /**
      * this method send to the NH the query to show the game's table
      * @param message
      */
-    protected void showTable( Table message) {
+    protected void showTable(Table message) {
 
         //it calls a NH methods to show to the client the Table
     }

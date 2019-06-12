@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class TableRemoteView extends TableView{
 
-    Socket socket;
+    private Socket socket;
 
     public TableRemoteView (Socket socket) {
         this.socket = socket;

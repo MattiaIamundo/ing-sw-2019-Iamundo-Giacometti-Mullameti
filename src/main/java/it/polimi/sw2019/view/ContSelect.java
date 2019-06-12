@@ -1,18 +1,22 @@
 package it.polimi.sw2019.view;
 
-import com.google.gson.Gson;
+import it.polimi.sw2019.events.client_event.Cevent.Login;
+import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
 import it.polimi.sw2019.nethandler.ContSelectInt;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
-
-import static it.polimi.sw2019.view.PlayerView.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class ContSelect implements ContSelectInt {
 
-    private static Socket socket;
+    private Socket socket;
+    private PrintWriter out;
+    private Scanner in;
+    private boolean boo;
+    private String string;
 
     /**
      * this is the constructor
@@ -20,50 +24,64 @@ public class ContSelect implements ContSelectInt {
      */
     public ContSelect (Socket socket1) {
         socket = socket1;
-    }
+        try{
+            out = new PrintWriter(socket.getOutputStream());
+            in =  new Scanner(socket.getInputStream());
 
-    public void addPlayer() {
-
-        nickname(socket);
-    }
-
-    public static void nicknameReturnn (String name, Socket socket) {
-
-
-        PrintWriter output = null;
-        try {
-            output = new PrintWriter ( socket.getOutputStream() );
-        }catch (IOException e) {
+        } catch ( IOException e) {
             e.printStackTrace();
         }
-
-        output.println(name);
-        output.flush();
     }
 
-    public void setTimer() {
-       timer();
-    }
+    public boolean waitForNicknameRequest(PlayerView playerView) {
 
-    public static  void addTimer(int time) {
+        List<String> list = new ArrayList<> (5);
 
-        PrintWriter output = null;
-        /*Gson g = new Gson();
-        try {
-            FileWriter writer = new FileWriter("File_Json/gson_files.json");
-            g.toJson( time,  writer );
-        }catch (IOException e) {
-            e.printStackTrace();
-        }*/
+        boo = in.nextBoolean();
+        //System.out.println(boo);
+        string = in.nextLine();
+        //System.out.println(string);
+        string = in.nextLine();
+        // System.out.println(string);
+        //string = in.nextLine();
+        //System.out.println(string);
 
-        try {
-            output = new PrintWriter ( socket.getOutputStream() );
-        }catch (IOException e) {
-            e.printStackTrace();
+        if( !string.equals("name?") ) {
+
+            if (string.equals("Reconnection")) {
+                Reconnection re = new Reconnection(boo,string);
+                playerView.requestNickname(re);
+            }
+            else if ( string.equals("ok") ) {
+                playerView.sendOk();
+                return true;
+            }
+            else {
+                while (!string.equals("")) {
+
+                    list.add(string);
+                    string = in.nextLine();
+                }
+
+                Login login = new Login(boo, list);
+                playerView.requestNickname(login);
+            }
+
         }
+        else if ( string.equals("name?")) {
+            Login login = new Login(boo, list);
+            playerView.requestNickname(login);
+        }
+        return false;
+    }
 
-        output.println( time );
-        output.flush();
+    public boolean waitForPing(PlayerView playerView) {
+        string = in.nextLine();
+        if (string.equals("Ping")) {
+            playerView.waitForPing();
+            return false;
+        }
+        return true;
     }
 
 }

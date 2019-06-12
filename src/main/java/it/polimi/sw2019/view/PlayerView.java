@@ -1,20 +1,21 @@
 package it.polimi.sw2019.view;
 
+import it.polimi.sw2019.events.client_event.Cevent.Login;
+import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
+import it.polimi.sw2019.events.server_event.VCevent.VCLogin;
 import it.polimi.sw2019.model.Player;
 
-import java.io.IOException;
-import java.net.Socket;
-import java.util.Scanner;
-
-import static it.polimi.sw2019.view.ContSelect.addTimer;
 
 
 public class PlayerView extends ObservableByGame implements Observer <Player> {
 
-    private static String name = "null";
-    private static int integer = 0;
-    private static Scanner input = new Scanner ( System.in );
-    private static Scanner output;
+    private Player p;
+    private UIinterface ui;
+
+    public PlayerView() {}
+    public PlayerView(UIinterface uIinterface) {
+        this.ui = uIinterface;
+    }
 
     protected void showPlayer() {
 
@@ -27,41 +28,32 @@ public class PlayerView extends ObservableByGame implements Observer <Player> {
         showPlayer();
     }
 
-    protected static void nickname (Socket socket) {
-
-        System.out.println("What is your nickname?\n");
-
-        if (input.hasNextLine()) {
-            name = input.nextLine();
-        }
-        nicknameReturn( name, socket);
+    public void requestNickname(Login login) {
+        ui.requestNickname(login.isFirstTime(), login.getNickname());
     }
 
-    protected static void nicknameReturn (String name, Socket socket) {
-
-        ContSelect.nicknameReturnn(name, socket);
+    public void requestNickname(Reconnection re) {
+        ui.reconnection();
     }
 
-    protected static void timer () {
-
-        System.out.println("Set a timer to wait for 5 players when the third player will be set (in milliseconds):\n");
-
-            if ( input.hasNextLine() ) {
-                try {
-                    integer = Integer.parseInt(input.nextLine());
-
-                }catch ( NumberFormatException e) {
-                    System.out.println("You have to insert a number!\n");
-                    timer();
-                }
-
-            }
-            if ( integer < 5000 ) {
-
-                System.out.println("It has to be greeter than 5000 ms!\n");
-                timer();
-            }
-
-        addTimer(integer);
+    public void sendNickname(ViewContEvent vce, Reconnection re) {
+        vce.sendNickname(re);
     }
+
+    public void sendNickname(ViewContEvent vce, VCLogin vcLogin) {
+        vce.sendNickname(vcLogin);
+    }
+
+    public void sendOk() {
+        ui.sendOk();
+    }
+
+    public void waitForPing() {
+
+    }
+
+    public void sendPing(ViewContEvent vce) {
+        vce.sendPing();
+    }
+
 }

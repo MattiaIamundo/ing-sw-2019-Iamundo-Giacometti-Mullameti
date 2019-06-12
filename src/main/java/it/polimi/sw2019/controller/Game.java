@@ -1,32 +1,188 @@
 package it.polimi.sw2019.controller;
 
 
-import it.polimi.sw2019.model.Ammo;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import it.polimi.sw2019.events.client_event.Cevent.Login;
+import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
+import it.polimi.sw2019.model.*;
+import it.polimi.sw2019.network.Socket.PlayerThread;
+import it.polimi.sw2019.utility.TimerThread;
 import it.polimi.sw2019.view.ObservableByGame;
-import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.view.Observer;
+import it.polimi.sw2019.view.PlayerRemoteView;
 
-import static it.polimi.sw2019.view.PlayerRemoteView.nickname;
-import static it.polimi.sw2019.view.PlayerRemoteView.timer;
-
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Timer;
-
+import java.util.List;
+import java.util.concurrent.locks.AbstractQueuedLongSynchronizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Game implements Observer <ObservableByGame> {
-    //the max number of players is 5
-    private static ArrayList<Player> players = new ArrayList<>(5);
-    private Turn turnOf = new Turn(0,null);
-    private Table gameboard;
-    private Timer timer;
-    private String gamemode = null;
+
+    //the model
+    private final ArrayList<Player> players;
+    private final Table gameboard;
+    //the utility
+    private TimerThread timerThread;
+    //for the synchronization
+    private Object stop = new Object();
+    private Object stopArray = new Object();
+    //the main controller's variables
+    private final Turn turnOf;
+    private String gamemode;
     private State state;
-    private Player firstPlayer;
-    private String[] mapconfig = new String[3];
-    private static int secondToTimer = 0;
+    private String firstPlayer;
+    private String[] mapconfig;
+    private boolean out;
+    private boolean gameover;
+    private boolean gameStarted;
+    //to load milliseconds to the timer
+    private Gson gson = new Gson();
+    private static final Logger logger = Logger.getLogger( Game.class.getName() );
+
+    //------ Game's Methods ------
+
+    public Game() {
+
+        players  = new ArrayList<>(5);
+        turnOf = new TurnNormal(null, 0, null);
+        gameboard = new Table(null, null);
+        gamemode = "null";
+        state = new State();
+        firstPlayer = "null";
+        timerThread = new TimerThread();
+        mapconfig = new String[3];
+        out = false;
+        gameover = false;
+
+        try{
+            FileReader reader = new FileReader("File_Json/milliSecondsToTimerBeginning.json");
+            timerThread.setTime(gson.fromJson( reader , int.class));
+        } catch (IOException ee) {
+            logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
+        }
+    }
+
+    public synchronized void setTimerThreadToTheGame() {
+
+        try{
+            FileReader reader = new FileReader("File_Json/milliSecondsToTimerTurnOfGame.json");
+            timerThread.setTurnTime(gson.fromJson( reader , int.class));
+
+        } catch ( FileNotFoundException e){
+            logger.log(Level.INFO, "{Game} File not found!\n");
+        }
+        //also in the timer
+    }
+
+    public void setOut(boolean status) {
+        this.out = status;
+    }
+
+    public boolean getOut() {
+        return this.out;
+    }
+
+    public synchronized List<Player> getPlayers() {
+        return players;
+    }
+
+    public synchronized TimerThread getTimerThread() {
+        return timerThread;
+    }
+
+    public synchronized boolean getGameover() {
+        return gameover;
+    }
+
+    public synchronized void setGameover(boolean status) {
+        this.gameover = status;
+    }
+
+    public synchronized void setGameStarted(boolean status) {
+        this.gameStarted = status;
+    }
+
+    public synchronized boolean getGameStarted() {
+        return this.gameStarted;
+    }
+
+    public synchronized void addPlayers(String nickname) {
+        Player player = new Player(nickname, 0, null, null);
+        players.add(player);
+        logger.log(Level.INFO, "{Game} has added a player!\n");
+    }
+
+    public synchronized void askForNickname( PlayerRemoteView prv, boolean firstTime, List<Player> list) {
+
+        List<String> namelist = new ArrayList<>(5);
+
+        if( !list.isEmpty() ){
+
+            for( Player y : list ) {
+                namelist.add( y.getNickname() );
+            }
+        }
+        Login login = new Login(firstTime, namelist);
+        prv.requestNickname(login);
+
+    }
+
+    public synchronized void sendReconnection(boolean firstTime, PlayerRemoteView prv) {
+        Reconnection rer = new Reconnection(firstTime, "Reconnection");
+        prv.requestNickname(rer);
+    }
+
+    public void sendGoodbye(PlayerRemoteView prv) {
+        prv.sendGoodbye();
+    }
+
+    public void sendOk(PlayerRemoteView prv) {
+        prv.sendOk();
+    }
+
+    public synchronized Object getStop() {
+        return this.stop;
+    }
+
+    public synchronized Object getStopArray() {
+        return stopArray;
+    }
+
+    public void sendPing(PlayerRemoteView prv) {
+        prv.sendPing();
+    }
+
+    public synchronized  void removePlayers(PlayerThread pt) {
+
+        Iterator<Player> it = players.iterator();
+
+        while( it.hasNext() ) {
+
+            Player p = it.next();
+            if ( p.getNickname().equals(pt.getNickname()) ) {
+                it.remove();
+                break;
+            }
+        }
+    }
+
+    public void setGameStart() {
+
+        //here how to set the game!
+        System.out.println("setting the game!\n");
+    }
+
+
+    //.............................FROM HERE OLD THINGS........................
 
     public void update (ObservableByGame message) {
 
@@ -35,16 +191,6 @@ public class Game implements Observer <ObservableByGame> {
             //i have to pass the object to the remoteView
 
         }
-    }
-
-    /**
-     * this is a selection method
-     * call the remoteView method nickname to request the nickname player
-     * and player's number
-     */
-    public void addPlayer(Socket socket){
-
-        nickname(socket);
     }
 
     /**
@@ -102,7 +248,7 @@ public class Game implements Observer <ObservableByGame> {
         return gamemode;
     }
 
-    public Player getFirstPlayer(){
+    public String getFirstPlayer(){
         return firstPlayer;
     }
 
@@ -130,26 +276,10 @@ public class Game implements Observer <ObservableByGame> {
 
     }
 
-    public void setTimer() {
-        timer();
-    }
 
-    public static void addTimer(int milliseconds) {
-
-        secondToTimer = milliseconds;
-    }
-
-    public int getSecondToTimer () {
-        return secondToTimer;
-    }
-
-    public void setTurnOfPlayer (Player player) {
-
-        this.turnOf.setPlayer(player);
-    }
+  //  public void setTurnOfPlayer (Player player) { this.turnOf.setPlayer(player); }
 
     public Player getTurnOfPlayer () {
-
-        return this.turnOf.getPlayer();
+        return turnOf.getPlayer();
     }
 }

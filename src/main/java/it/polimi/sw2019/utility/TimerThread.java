@@ -1,68 +1,50 @@
 package it.polimi.sw2019.utility;
 
-import it.polimi.sw2019.network.Socket.ServerSocket;
-
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import static it.polimi.sw2019.network.Socket.ServerSocket.getPlayers;
 
 public class TimerThread implements Runnable {
 
     //almost this is the time to attend the right players number
-    private int time = 10000;
+    private int time;
     //almost this is the time for the player to play his turn
-    private int turnTime = 60000;
+    private int turnTime;
     //the game is started?
-    private boolean game = false;
-    //to set the tasks
-    private Timer timer = new Timer();
+    private boolean game;
+    //to set the timer
+    private Timer timer;
+    //to set that the timer has completed his task
+    private boolean timerDone;
+    //to set that the timer is on
+    private boolean on;
     //the logger
-    private static final Logger logger = Logger.getLogger(TimerThread.class.getName());
+    private static final Logger logger = Logger.getLogger( TimerThread.class.getName() );
 
-    //initializing a task for the timer
-    private TimerTask task = new TimerTask() {
-        @Override
-        public void run() {
-            //set true the condition to go out the loop before the fifth player go inside the game
-            System.out.println("inside the timer\n");
+    // ........ TimerThread's Methods ...........
 
-            if ( getPlayers().size() < 3 ) {
-                //there are not enough players, restart the timer
-                System.out.println("timer: restart timer\n");
-                timer.schedule(this, time);
-            }
-            else {
-                //go out the loop
-                System.out.println("timer: out = true\n");
-                ServerSocket.setOut();
-            }
-
-        }
-    };
-
-    //initializing the task for the turn timer
-    private TimerTask turnTask = new TimerTask() {
-        @Override
-        public void run() {
-            //here something to communicate to the server the player has finished the turn time
-        }
-    };
+    public TimerThread() {
+        time = 0;
+        turnTime = 0;
+        game = false;
+        timerDone = false;
+        on = false;
+    }
 
     /**
      * set the time to attend the other players
      *
      * @param seconds the time to wait
      */
-    public void setSeconds(int seconds) {
+    public synchronized void setTime(int seconds) {
         this.time = seconds;
     }
 
     /**
      * set the condition the game is started
      */
-    public void setGame() {
+    public synchronized void setGame() {
         this.game = true;
     }
 
@@ -71,33 +53,65 @@ public class TimerThread implements Runnable {
      *
      * @param secondsToTurn the turn time
      */
-    public void setTurnTime(int secondsToTurn) {
+    public synchronized void setTurnTime(int secondsToTurn) {
         this.turnTime = secondsToTurn;
     }
+
+    public synchronized boolean getTimerDone() {
+        return this.timerDone;
+    }
+
+    public synchronized void setTimerDone(boolean status) {
+        this.timerDone = status;
+    }
+
+    //public synchronized void deleteTask () { task.cancel(); }
+
+    public synchronized void deleteTimer() {
+        timer.cancel();
+        timer.purge();
+    }
+
+    public synchronized void setOn(boolean status) {
+        on = status;
+    }
+
+    public synchronized boolean getOn() {
+        return on;
+    }
+
+    public synchronized int getTurnTime() {
+        return turnTime;
+    }
+
 
     /**
      * start the timer thread
      */
     public void run() {
-
-            //the server accept the clients
+        timer = new Timer();
+        //initializing the task for the timer
+        final TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                //set true the condition to go out the loop before the fifth player go inside the game
+                //inside this class
+                setTimerDone(true);
+                //go out the loop
+                logger.log(Level.INFO, "{TimerThread} timerDone: true ");
+            }
+        };
+            //the server is accepting the clients
             if (!game) {
-                System.out.println("timer schedule task\n");
+                //the time to accept other two players
+                System.out.println("timer schedule task with time\n");
                 timer.schedule(task, time);
             }
             //the game is started
             else {
                 //the time which every player has to play his turn
-                System.out.println("timer schedule turnTime\n");
-                timer.schedule(turnTask, turnTime);
+                System.out.println("timer schedule task with turnTime\n");
+                timer.schedule(task, turnTime);
             }
-    }
-
-    public void deleteTask () {
-        task.cancel();
-    }
-
-    public void deleteTurnTask () {
-        turnTask.cancel();
     }
 }

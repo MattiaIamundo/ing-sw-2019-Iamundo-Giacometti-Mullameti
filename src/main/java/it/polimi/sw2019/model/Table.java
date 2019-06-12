@@ -24,13 +24,13 @@ public class Table extends TableView implements Cloneable, Serializable {
     /**
      * Constructor of the class
      * @param map the map of the battlefield
-     * @param killshotTrack the track of skulls
+     * @param killshottrack the track of skulls
      */
 
-    public Table(Map map , Skull[] killshotTrack ){
+    public Table(Map map , Skull[] killshottrack ){
 
         this.map=map;
-        this.killshotTrack = killshotTrack.clone();
+        this.killshotTrack = killshottrack;
 
     }
 

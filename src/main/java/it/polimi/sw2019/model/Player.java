@@ -1,5 +1,7 @@
 package it.polimi.sw2019.model;
 
+import it.polimi.sw2019.view.Observable;
+import it.polimi.sw2019.view.ObservableByGame;
 import it.polimi.sw2019.view.PlayerView;
 
 import java.io.Serializable;
@@ -9,7 +11,7 @@ import java.util.Iterator;
 /**Class Player : describes player's characteristics
  * @author Merita Mullameti
  */
-public class Player extends PlayerView implements Cloneable, Serializable {
+public class Player extends ObservableByGame implements Cloneable, Serializable {
 
     private String nickname; //player's nickname
     private int score; //player's score
@@ -52,6 +54,9 @@ public class Player extends PlayerView implements Cloneable, Serializable {
         return nickname;
     }
 
+    public void setNickname(String name) {
+        nickname = name;
+    }
     /**
      * @return the player's score
      */

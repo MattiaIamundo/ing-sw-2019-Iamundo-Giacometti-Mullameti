@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class ModViewEvent implements ModViewEventInt {
 
-    Socket socket;
+    private Socket socket;
 
     public ModViewEvent (Socket socket) {
         this.socket = socket;

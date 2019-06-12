@@ -1,14 +1,8 @@
 package it.polimi.sw2019.nethandler;
 
-import java.net.Socket;
+import java.rmi.Remote;
 
-public interface ContSelectInt {
+public interface ContSelectInt extends Remote {
 
-    static void addPlayer( Socket socket ) {
 
-    }
-
-    static void nicknameReturnn(  String name, Socket socket ) {
-
-    }
 }

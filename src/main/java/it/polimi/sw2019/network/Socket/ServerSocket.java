@@ -1,8 +1,6 @@
 package it.polimi.sw2019.network.Socket;
 
 import it.polimi.sw2019.controller.Game;
-import it.polimi.sw2019.network.PlayerThread;
-import it.polimi.sw2019.network.SocketLink;
 import it.polimi.sw2019.utility.TimerThread;
 
 import javax.swing.*;
@@ -17,54 +15,36 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ServerSocket extends JFrame implements Serializable {
+public class ServerSocket extends JFrame implements Runnable, Serializable {
 
     //the serial number
-    private static final long serialVertionUID = 11111;
+    private final long serialVertionUID = 11111;
     //the port number
-    private static final int portNumber = 12345;
+    private final int portNumber = 12345;
     //the server
     private java.net.ServerSocket server;
-    // the service which make started the game
-    private static ExecutorService runGame;
-    // the executor which make started the timer
-    private ExecutorService startTimer;
-    // the executor to the socket link
-    private ExecutorService startSocketLink;
+    //
+    ExecutorService runGame = Executors.newFixedThreadPool(5);
+    //
+    ExecutorService others = Executors.newCachedThreadPool();
     //the threads
-    private static ArrayList <PlayerThread> players = new ArrayList <>(5);
+    private ArrayList <PlayerThread> players = new ArrayList <>(5);
+    //the controller
+    private Game socketController;
     //the "main" lock
-    public static Lock gameLock;
+    private Lock gameLock;
     //the condition which set the first time which in the three player are connected
-    public static Condition otherPlayerConnected;
+    private Condition otherPlayerConnected;
     //the condition which set the turn
     private Condition otherPlayersTurn;
-    // if the game is over set this true
-    private boolean gameOver = false;
-    //number of players ( 3 to 5 )
-    private int numberThread = 5;
-    //the milliseconds that server wait for 5 players
-    private int secToTimer = 5000;
-    //the game's controller
-    private Game controller = new Game();
     //the logger for debug
     private static final Logger logger = Logger.getLogger( ServerSocket.class.getName() );
-    //thread to start the timer
-    private TimerThread timerThread = new TimerThread();
-    //
-    private static boolean out = false;
 
     /**
      * this is the server's constructor
      */
-    private ServerSocket( ){
+    public ServerSocket( Game sockContr){
 
-        //set the number of thread (players)
-        runGame = Executors.newFixedThreadPool( 5 );
-        //set the thread for the timer
-        startTimer = Executors.newSingleThreadExecutor();
-        //set the thread for the socket linker
-        startSocketLink = Executors.newSingleThreadExecutor();
         //create the game's lock
         gameLock = new ReentrantLock();
         //condition variable: all players have to be connected
@@ -72,11 +52,12 @@ public class ServerSocket extends JFrame implements Serializable {
         //condition variable: it the turn of another player
         otherPlayersTurn = gameLock.newCondition();
 
+        this.socketController = sockContr;
+
         try{
             //set the server, the number of player is set
             server = new java.net.ServerSocket( portNumber, 5);
-            System.out.println("The server is ready!\n");
-            logger.log( Level.FINE, "process { ServerSocket } is initialized");
+            logger.log( Level.INFO, "{ ServerSocket } is initialized!\n");
 
         }catch (IOException e) {
 
@@ -92,101 +73,50 @@ public class ServerSocket extends JFrame implements Serializable {
      * and locking the game until there are three clients
      * connected
      */
-    private void execute (){
+    public void run(){
 
-        System.out.println("The server is waiting for five players...\n");
-        logger.log( Level.FINE, "process { ServerSocket } is waiting for the clients");
+        logger.log( Level.INFO, "{ ServerSocket } is waiting for the clients!\n");
 
-        SocketLink link = new SocketLink(this.server);
-        //start the socket linker
-        startSocketLink.execute(link);
-        //and only that on the startSocketLink executor
-        startSocketLink.shutdown();
-        //was the timer started?
-        boolean b = false;
+        while ( !socketController.getGameover() ) {
 
-        while ( players.size() < 5 && !out ) {
-            //without this, the client's acquisition don't go on!!!!!
-            System.out.println("In the loop\n");
-            if ( players.size() >= 3 && !b ) {
-                //set the timer
-                startTimer.execute(timerThread);
-                System.out.println("execute the timer\n");
-                //the timer is activated
-                b = true;
-            }
+            try {
+                //accept a player
+                PlayerThread p = new PlayerThread( this.server.accept(), this.socketController);
 
-        }
+                if ( socketController.getPlayers().size() < 5 ) {
 
-        if ( players.size() == 5 ) {
-           //it the normal situation
-        }
-        else {
-            //there are less players then normal
-            System.out.println("Only " + players.size() + " players are connected!\n");
-        }
+                    if (socketController.getGameover()) {
+                        //don't take the request and finish the server
+                        others.execute(p);
+                        break;
 
-        timerThread.deleteTask();
-        timerThread.setGame();
-        //the game is locked until all players are connected
-        gameLock.lock();
+                    } else if (socketController.getGameStarted()) {
+                        //implements how reinsert the player
+                        runGame.execute(p);
+                    }
+                    else {
+                        getPlayers().add(p);
+                        runGame.execute(p);
+                        logger.log( Level.INFO, "process { ServerSocket } is setting a player\n");
+                    }
 
-        Iterator <PlayerThread> iterator = players.iterator();
-        //if all players are connected
-            try{
-
-                while ( iterator.hasNext() ) {
-                    iterator.next().setSuspended(false);
                 }
-                logger.log(Level.FINE, "process { ServerSocket} is calling otherPlayerConnected.signalAll");
-                //one thread is awaken
-                otherPlayerConnected.signalAll();
+                else {
+                    others.execute(p);
+                }
 
-            }finally{
-                //the game cans continue
-                gameLock.unlock();
-                System.out.println("The game can start!\n");
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, e.toString(), e);
+                logger.log(Level.INFO, "{ServerSocket} a IOException: " + e.toString());
+                e.printStackTrace();
 
             }
 
-    }// END of EXECUTE
+        }//END of WHILE
 
-    //to accept other request during the game
-    public void executeAfter () {
-/*
-        try {
-            int i = 0;
-            Player p = new Player (server.accept(), i, numberThread);
-            //wait connection, create player, set the thread
-            players.add( p );
-            //thread is set
-            runGame.execute( players.get(i) );
-            System.out.println("The #" + (i + 1) + " player is set\n");
+    }// END of RUN
 
-        } catch (IOException e) {
-
-            e.printStackTrace();
-            System.exit(1);
-        }
- */
-    }
-
-    /**
-     * set the variable out to go outside the loop
-     */
-    public static void setOut() {
-        out = true;
-    }
-
-    public static boolean getOut() {
-        return out;
-    }
-
-    /**
-     * this method set the turn for the threads
-     * @param playerNumber the thread's number (1 to 5)
-     */
-    public void endTurn (int playerNumber) {
+  /*  public void endTurn(int playerNumber) {
         //numberThread is the number of players in the game
         //playerNumber is the number of a player runnable
         Iterator <PlayerThread> iterator = players.iterator();
@@ -244,40 +174,25 @@ public class ServerSocket extends JFrame implements Serializable {
         }
 
     }//END of END TURN
-
-    /**
-     * this method call endTurn and
-     * set the player who wrote "quit" to null
-     *
-     * @param playerNumber the player's number
-     */
-    public void endTurnQuit (int playerNumber) {
+*/
+ /*   public void endTurnQuit(int playerNumber) {
 
         endTurn(playerNumber);
         players.set(playerNumber-1, null);
 
     }//END of END TURN QUIT
+*/
 
-    /**
-     * this method return true
-     * if the game is over or not
-     * @return gameOver
-     */
-    public boolean isGameOver(){
-        return this.gameOver;
-    }//END of isGameOver
-
-    public static ArrayList <PlayerThread> getPlayers () {
+    public List <PlayerThread> getPlayers() {
         return players;
     }
 
-    public static ExecutorService getRunGame () { return runGame; }
-
-    public static void main (String[] args){
-        //i set the server
-        ServerSocket application = new ServerSocket();
-        //and run it
-        application.execute();
-        //this is for the GUI: application.detDefaultCloseOperation(JFrame);
+    public void setSocketController(Game cont ) {
+        this.socketController = cont;
     }
+
+    public java.net.ServerSocket getServer() {
+        return this.server;
+    }
+
 }

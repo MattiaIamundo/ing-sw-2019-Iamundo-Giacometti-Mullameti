@@ -1,76 +1,94 @@
 package it.polimi.sw2019.view;
 
-import com.google.gson.Gson;
-import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.client_event.Cevent.Login;
+import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class PlayerRemoteView extends PlayerView {
 
-    private static Socket socket;
+    private Socket socket;
+    private String set = "pippo";
+    private PrintWriter output;
+    private Scanner input;
+
 
     public PlayerRemoteView (Socket socket1) {
         socket = socket1;
+        try{
+            output = new PrintWriter(socket.getOutputStream());
+            input = new Scanner(socket.getInputStream());
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
+    public void requestNickname(Login login) {
 
-    public static void nickname(Socket socket) {
-
-        try{
-            PrintWriter output = new PrintWriter( socket.getOutputStream());
-            output.println("nickname\n");
+        //i have to send to the client this request
+            output.println( login.isFirstTime() );
             output.flush();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
 
-    }
+            if( login.getNickname().isEmpty() ) {
 
-    public void nicknameReturnn ( Socket socket) {
+                output.println("name?");
+                output.flush();
 
-        try{
-            Scanner input = new Scanner( socket.getInputStream());
-
-            if (input.hasNextLine() ) {
-
-                Gson g = new Gson();
-                String clientName = g.fromJson( input.nextLine() , String.class);
-                //controller.nicknameReturn(clientName);
             }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+            else {
 
-    public static void timer () {
+                for( String s : login.getNickname() ) {
 
-        try{
-            PrintWriter output = new PrintWriter( socket.getOutputStream());
-            output.println("timer\n");
-            output.flush();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+                    output.println( s );
+                    output.flush();
+                }
 
-    public void addTimer () {
-        try{
-            Scanner input = new Scanner( socket.getInputStream());
-
-            if (input.hasNextInt() ) {
-
-                Game.addTimer( input.nextInt() );
+                output.println( "\n" );
+                output.flush();
             }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+
+    }
+
+    public String waitForNickname() {
+
+        set = input.nextLine();
+        return set;
+    }
+
+    public void sendPing() {
+
+        output.println("Ping");
+        output.flush();
+    }
+
+    public String waitForPong() {
+        set = input.nextLine();
+        return set;
+    }
+
+    public void requestNickname(Reconnection reconnection) {
+        output.println(reconnection.getFirstTime());
+        output.flush();
+
+        output.println(reconnection.getRecon());
+        output.flush();
+    }
+
+    public void sendGoodbye() {
+        output.print("The nickname was not found, so goodbye!");
+        output.flush();
+    }
+
+    public void sendOk() {
+
+        output.println(false);
+        output.flush();
+        output.println("ok");
+        output.flush();
     }
 
     protected void showPlayer() {
