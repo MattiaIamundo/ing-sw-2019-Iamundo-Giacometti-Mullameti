@@ -12,7 +12,7 @@ public class TestDoubleAdditive {
                 "name", null, "descriptionPower",
                 null, "green", null,
                 "red", "descriptionFirstAdditivePower",
-                "descriptionSecondAdditivePower");
+                "descriptionSecondAdditivePower",null);
 
         Assert.assertEquals("name", weapon.getName());
         Assert.assertNull(weapon.getPower());
@@ -32,7 +32,7 @@ public class TestDoubleAdditive {
                 "name", null, "descriptionPower",
                 null, "green", null,
                 "red", "descriptionFirstAdditivePower",
-                "descriptionSecondAdditivePower");
+                "descriptionSecondAdditivePower",null);
 
         Assert.assertEquals("green", weapon.getFirstExtraCost());
     }
@@ -44,7 +44,7 @@ public class TestDoubleAdditive {
                 "name", null, "descriptionPower",
                 null, "green", null,
                 "red", "descriptionFirstAdditivePower",
-                "descriptionSecondAdditivePower");
+                "descriptionSecondAdditivePower",null);
 
         Assert.assertEquals("red", weapon.getSecondExtraCost());
     }
@@ -56,7 +56,7 @@ public class TestDoubleAdditive {
                 "name", null, "descriptionPower",
                 null, "green", null,
                 "red", "descriptionFirstAdditivePower",
-                "descriptionSecondAdditivePower");
+                "descriptionSecondAdditivePower",null);
 
         Assert.assertEquals("descriptionFirstAdditivePower", weapon.getDescriptionFirstAdditivePower());
     }
@@ -68,7 +68,7 @@ public class TestDoubleAdditive {
                 "name", null, "descriptionPower",
                 null, "green", null,
                 "red", "descriptionFirstAdditivePower",
-                "descriptionSecondAdditivePower");
+                "descriptionSecondAdditivePower",null);
 
         Assert.assertEquals("descriptionSecondAdditivePower", weapon.getDescriptionSecondAdditivePower());
     }
@@ -80,7 +80,7 @@ public class TestDoubleAdditive {
                 "name", null, "descriptionPower",
                 null, "green", null,
                 "red", "descriptionFirstAdditivePower",
-                "descriptionSecondAdditivePower");
+                "descriptionSecondAdditivePower",null);
 
         Assert.assertEquals( null, weapon.getFirstAdditivePower());
     }
@@ -92,7 +92,7 @@ public class TestDoubleAdditive {
                 "name", null, "descriptionPower",
                 null, "green", null,
                 "red", "descriptionFirstAdditivePower",
-                "descriptionSecondAdditivePower");
+                "descriptionSecondAdditivePower",null);
 
         Assert.assertEquals( null, weapon.getSecondAdditivePower());
     }

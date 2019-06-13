@@ -27,9 +27,9 @@ public class DoubleAdditive extends Weapon{
     public DoubleAdditive (String name, Power power, String descriptionPower,
                             Power firstAdditivePower, String firstExtraCost, Power secondAdditivePower,
                            String secondExtraCost, String descriptionFirstAdditivePower,
-                           String descriptionSecondAdditivePower){
+                           String descriptionSecondAdditivePower, String[] rc ){
 
-        super(name, power, descriptionPower);
+        super(name, power, descriptionPower, rc);
         this.descriptionFirstAdditivePower = descriptionFirstAdditivePower;
         this.descriptionSecondAdditivePower = descriptionSecondAdditivePower;
         this.firstAdditivePower = firstAdditivePower;

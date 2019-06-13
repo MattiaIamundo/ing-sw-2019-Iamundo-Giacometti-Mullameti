@@ -1,15 +1,111 @@
 [
   {
-    "name" : "",
-    "rechargeCost" : ["", "", ""],
-    "isLoad" : "",
-    "power" : "",
-    "descriptionPower" : "",
-    "alternativePower" : "",
-    "extraCost" : "",
-    "descriptionAlternativePower" : ""
+    "name" : "Shockwave",
+    "rechargeCost" : ["yellow", "null", "null"],
+    "isLoad" : true,
+    "power" : "Shockwave",
+    "descriptionPower" : " Choose up to 3 targets on different squares, each exactly 1 move away. Deal 1 damage to each target. ",
+    "alternativePower" : "TsunamiMode",
+    "extraCost" : ["yellow", "null"],
+    "descriptionAlternativePower" : " Deal 1 damage to all targets that are exactly 1 move away.\n"
   },
   {
-
+    "name" : "Zx-2",
+    "rechargeCost" : ["yellow", "red", "null"],
+    "isLoad" : true,
+    "power" : "DamageTwoMark",
+    "descriptionPower" : "Deal 1 damage and 2 marks to 1 target you can see. ",
+    "alternativePower" : "ScannerMode",
+    "extraCost" : ["null", "null"],
+    "descriptionAlternativePower" : "Choose up to 3 targets you can see and deal 1 mark to each. "
+  },
+  {
+    "name" : "Shotgun",
+    "rechargeCost" : ["yellow", "yellow", "null"],
+    "isLoad" : true,
+    "power" : "ThreeDamageMove",
+    "descriptionPower" : "Deal 3 damage to 1 target on your square. If you want, you may then move the target 1 square. ",
+    "alternativePower" : "LongBarrelMode",
+    "extraCost" : ["null", "null"],
+    "descriptionAlternativePower" : " Deal 2 damage to 1 target on any square exactly one move away."
+  },
+  {
+    "name" : "Sledgehammer",
+    "rechargeCost" : ["yellow", "null", "null"],
+    "isLoad" : true,
+    "power" : "TwoDamageSameSpace",
+    "descriptionPower" : " Deal 2 damage to 1 target on your square. ",
+    "alternativePower" : "PulverizeMode",
+    "extraCost" : ["red", "null"],
+    "descriptionAlternativePower" : " Deal 3 damage to 1 target on your square, then move that target 0, 1, or 2 squares in one direction. "
+  },
+  {
+    "name" : "Rail Gun",
+    "rechargeCost" : ["yellow", "yellow", "blue"],
+    "isLoad" : true,
+    "power" : "RailGun",
+    "descriptionPower" : " Choose a cardinal direction and 1 target in that direction. Deal 3 damage to it. ",
+    "alternativePower" : "PiercingMode",
+    "extraCost" : ["null", "null"],
+    "descriptionAlternativePower" : " Choose a cardinal direction and 1 or 2 targets in that direction. Deal 2 damage to each. "
+  },
+  {
+  "name" : "Power Glove",
+  "rechargeCost" : ["yellow", "blue", "null"],
+  "isLoad" : true,
+  "power" : "PowerGlove",
+  "descriptionPower" : " Choose 1 target on any square exactly 1 move away. Move onto that square and give the target 1 damage and 2 marks. ",
+  "alternativePower" : "RocketFistMode",
+  "extraCost" : ["blue", "null"],
+  "descriptionAlternativePower" : " Choose a square exactly 1 move away. Move onto that square. You may deal 2 damage to 1 target there.\n If you want, you may move 1 more square in that same direction (but only if it is a legal move). You may deal 2 damage to 1 target there, as well. "
+  },{
+  "name" : "Furnace",
+  "rechargeCost" : ["red", "blue", "null"],
+  "isLoad" : true,
+  "power" : "RoomDamage",
+  "descriptionPower" : " Choose a room you can see, but not the room you are in. Deal 1 damage to everyone in that room. ",
+  "alternativePower" : "CozyFireMode",
+  "extraCost" : ["null", "null"],
+  "descriptionAlternativePower" : " Choose a square exactly one move away. Deal 1 damage and 1 mark to everyone on that square.\n"
+  },
+  {
+    "name" : "Hellion",
+    "rechargeCost" : ["red", "yellow", "null"],
+    "isLoad" : true,
+    "power" : "Hellion",
+    "descriptionPower" : " Deal 1 damage to 1 target you can see at least 1 move away.\nThen give 1 mark to that target and everyone else on that square. ",
+    "alternativePower" : "NanoTracerMode",
+    "extraCost" : ["red", "null"],
+    "descriptionAlternativePower" : " Deal 1 damage to 1 target you can see at least 1 move away.\nThen give 2 marks to that target and everyone else on that square."
+  },
+  {
+    "name" : "Flamethrower",
+    "rechargeCost" : ["red", "null", "null"],
+    "isLoad" : true,
+    "power" : "Flamethrower",
+    "descriptionPower" : " Choose a square 1 move away and possibly a second square 1 more move away in the same direction.\n On each square, you may choose 1 target and give it 1 damage.",
+    "alternativePower" : "BarbecueMode",
+    "extraCost" : ["yellow", "yellow"],
+    "descriptionAlternativePower" : " Choose 2 squares as above. Deal 2 damage to everyone on the first square and 1 damage to everyone on the second square. "
+  },
+  {
+    "name" : "Electroscythe",
+    "rechargeCost" : ["blue", "null", "null"],
+    "isLoad" : true,
+    "power" : "DamageAllSameSpace",
+    "descriptionPower" : " Deal 1 damage to every other player  on your square. ",
+    "alternativePower" : "ReaperMode",
+    "extraCost" : ["blue", "red"],
+    "descriptionAlternativePower" : " Deal 2 damage to every other player  on your square.\n"
+  },
+  {
+    "name" : "Tractor Beam",
+    "rechargeCost" : ["blue", "null", "null"],
+    "isLoad" : true,
+    "power" : "MoveDamage",
+    "descriptionPower" : " Move a target 0, 1, or 2 squares to a square you can see, and give it 1 damage. ",
+    "alternativePower" : "PunisherMode",
+    "extraCost" : ["red", "yellow"],
+    "descriptionAlternativePower" : " Choose a target 0, 1, or 2 moves away from you.\n Move the target to your square  and deal 3 damage to it. "
   }
 ]

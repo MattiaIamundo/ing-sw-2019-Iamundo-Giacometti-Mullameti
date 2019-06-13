@@ -3,6 +3,8 @@ package it.polimi.sw2019.model;
 import it.polimi.sw2019.view.TableView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**Class Table
  * @author Merita Mullameti
@@ -10,79 +12,88 @@ import java.io.Serializable;
 
 public class Table extends TableView implements Cloneable, Serializable {
 
-    private Skull[] killshotTrack = new Skull[8];
+    private ArrayList<Skull> killshotTrack;
     //the map of the battlefield ;there can be 3 different ones , based on the number of the players
     private Map map;
-    private Weapon[] weaponDeck = new Weapon[21];
-    private PowerUp[] powerupDeck = new PowerUp[24];
-    private Ammo[] ammoDeck = new Ammo[36];
+    private ArrayList<Weapon> weaponDeck; //21
+    private ArrayList<PowerUp> powerupDeck; //24
+    private ArrayList<Ammo> ammoDeck; //36
     //there can be 3 , 4 or 5 players
     private static Player[] players = new Player[5];
     //this variable indicates the player who is currently playing
-    private static Player currentPlayer;
+    private static Player currentPlayer = null;
 
-    /**
-     * Constructor of the class
-     * @param map the map of the battlefield
-     * @param killshottrack the track of skulls
-     */
+   
 
-    public Table(Map map , Skull[] killshottrack ){
+    public Table( ){
 
-        this.map=map;
-        this.killshotTrack = killshottrack;
+        killshotTrack = new ArrayList<>(8);
+        weaponDeck = new ArrayList<>(21);
+        powerupDeck = new ArrayList<>(24);
+        ammoDeck = new ArrayList<>(36);
+        this.map = null;
 
     }
 
     /**
      * this method has to show to the view the table
      */
+    @Override
     protected void showTable (Table message){
 
     }
 
-
-
     /**
      * @return the Track of skulls
      */
-    public Skull[] getKillshotTrack(){
+    public List<Skull> getKillshotTrack(){
         return killshotTrack;
     }
+
+    public void setMap(Map mappa) {
+        map = mappa;
+    }
+
     /**
      * @return the power up Deck
      */
-    public PowerUp[] getPowerUp(){
+    public List<PowerUp> getPowerUp(){
         return powerupDeck;
     }
+
     /**
      * @return the weapon Deck
      */
-    public Weapon[] getWeapon(){
+    public List<Weapon> getWeapon(){
         return weaponDeck;
     }
+
     /**
      * @return the ammo Deck
      */
-    public Ammo[] getAmmo(){
+    public List<Ammo> getAmmo(){
         return ammoDeck;
     }
+
     /**
      * @return one of the players
      */
     public static Player getPlayers(int i){
         return players[i];
     }
+
     /**
      * @return the current player
      */
     public static Player getCurrentPlayer() {
         return currentPlayer;
     }
+
     /**
      * @return the current player
      */
     public static Player setCurrentPlayer(){
         return currentPlayer;
     }
+
 }

@@ -29,6 +29,7 @@ public class PowerUp extends PowerUpView implements Cloneable, Serializable {
     /**
      * this method has to show to the view the power up
      */
+    @Override
     protected void showPowerUp() {
 
     }
@@ -45,10 +46,12 @@ public class PowerUp extends PowerUpView implements Cloneable, Serializable {
     public String getName(){
         return name;
     }
-    /**
-     * @param target it is the player which will be hit
-     */
-    public void useEffect(Player target){
 
+    public void setEffect(EffectBehaviour eff) {
+        this.effect = eff;
+    }
+
+    public String getEffectToString() {
+        return this.effect.toString();
     }
 }

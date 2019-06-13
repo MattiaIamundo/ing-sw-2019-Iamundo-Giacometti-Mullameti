@@ -1,18 +1,67 @@
 [
   {
-    "name" : "",
-    "rechargeCost" : ["", "", ""],
-    "isLoad" : "",
-    "power" : "",
-    "descriptionPower" : "",
-    "firstAdditivePower" : "",
-    "firstExtraCost" : "",
-    "secondAdditivePower" : "",
-    "secondExtraCost" : "",
-    "descriptionFirstAdditivePower" : "",
-    "descriptionSecondAdditivePower" : ""
+    "name" : "CyberBlade",
+    "rechargeCost" : ["yellow", "red", "null"],
+    "isLoad" : true,
+    "power" : "TwoDamageSameSpace",
+    "descriptionPower" : " Deal 2 damage to 1 target on your square. ",
+    "firstAdditivePower" : "Shadowstep",
+    "firstExtraCost" : "null",
+    "secondAdditivePower" : "SliceAndDice",
+    "secondExtraCost" : "yellow",
+    "descriptionFirstAdditivePower" : " Move 1 square before or after the basic effect. ",
+    "descriptionSecondAdditivePower" : " Deal 2 damage to a different target on your square. The shadowstep may be used before or after this effect. "
   },
   {
-
+    "name" : "Machine Gun",
+    "rechargeCost" : ["blue", "red", "null"],
+    "isLoad" : true,
+    "power" : "TwoTargetDamage",
+    "descriptionPower" : " Choose 1 or 2 targets you can see and deal 1 damage to each.",
+    "firstAdditivePower" : "FocusShot",
+    "firstExtraCost" : "yellow",
+    "secondAdditivePower" : "TurretTripod",
+    "secondExtraCost" : "blue",
+    "descriptionFirstAdditivePower" : " Deal 1 additional damage to one of those targets.",
+    "descriptionSecondAdditivePower" : " Deal 1 additional damage to the other of those targets and/or deal 1 damage to a different target you can see. "
+  },
+  {
+    "name" : "Rocket Launcher",
+    "rechargeCost" : ["red", "red", "null"],
+    "isLoad" : true,
+    "power" : "RocketLauncher",
+    "descriptionPower" : " Deal 2 damage to 1 target you can see that is not on your square. Then you may move the target 1 square. ",
+    "firstAdditivePower" : "RocketJump",
+    "firstExtraCost" : "blue",
+    "secondAdditivePower" : "FragmentingWarhead",
+    "secondExtraCost" : "yellow",
+    "descriptionFirstAdditivePower" : " Move 1 or 2 squares. This effect can be used either before or after the basic effect. ",
+    "descriptionSecondAdditivePower" : " During the basic effect, deal 1 damage to every player on your target's original square – including the target, even if you move it. "
+  },
+  {
+    "name" : "Plasma Gun",
+    "rechargeCost" : ["blue", "yellow", "null"],
+    "isLoad" : true,
+    "power" : "TwoDamage",
+    "descriptionPower" : "Deal 2 damage to 1 target you can see. ",
+    "firstAdditivePower" : "PhaseGlide",
+    "firstExtraCost" : "null",
+    "secondAdditivePower" : "ChargedShot",
+    "secondExtraCost" : "blue",
+    "descriptionFirstAdditivePower" : "Move 1 or 2 squares. This effect can be used either before or after the basic effect. ",
+    "descriptionSecondAdditivePower" : "Deal 1 additional damage to your target. "
+  },
+  {
+    "name" : "T.H.O.R.",
+    "rechargeCost" : ["blue", "red", "null"],
+    "isLoad" : true,
+    "power" : "TwoDamage",
+    "descriptionPower" : " Deal 2 damage to 1 target you can see.",
+    "firstAdditivePower" : "ChainReaction",
+    "firstExtraCost" : "blue",
+    "secondAdditivePower" : "HighVoltage",
+    "secondExtraCost" : "blue",
+    "descriptionFirstAdditivePower" : " Deal 1 damage to a second target that your first target can see. ",
+    "descriptionSecondAdditivePower" : " Deal 2 damage to a third target that your second target can see. You cannot use this effect unless you first use the chain reaction. "
   }
 ]

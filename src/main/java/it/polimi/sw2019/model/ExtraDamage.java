@@ -14,9 +14,9 @@ public class ExtraDamage implements EffectBehaviour {
     public void useEffect(Player target) {
 
         Player currentPlayer; //variable to memorise the player who´s currently playing
-        currentPlayer=Table.getCurrentPlayer();
+        //currentPlayer=Table.getCurrentPlayer();
 
-        target.getPlance().giveDamage(currentPlayer,1);
+        //target.getPlance().giveDamage(currentPlayer,1);
 
     }
 }
