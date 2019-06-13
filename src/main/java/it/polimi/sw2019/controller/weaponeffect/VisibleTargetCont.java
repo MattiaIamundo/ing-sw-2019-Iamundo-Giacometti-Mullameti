@@ -7,13 +7,13 @@ import it.polimi.sw2019.model.weapon_power.SingleTarget;
 
 import java.util.ArrayList;
 
-public abstract class SingleTargetCont implements EffectController {
+public abstract class VisibleTargetCont implements EffectController {
     private SingleTarget model;
     protected Player attacker;
     protected ArrayList<String> valid = new ArrayList<>();
     protected ArrayList<String> notreachable = new ArrayList<>();
 
-    public SingleTargetCont(SingleTarget model) {
+    public VisibleTargetCont(SingleTarget model) {
         this.model = model;
     }
 
@@ -28,6 +28,18 @@ public abstract class SingleTargetCont implements EffectController {
     protected void acquireTarget(){
         for (int i = 0; i < 5; i++) {
             if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker)){
+                if (Table.getPlayers(i).isVisible(attacker)){
+                    valid.add(Table.getPlayers(i).getNickname());
+                }else {
+                    notreachable.add(Table.getPlayers(i).getNickname());
+                }
+            }
+        }
+    }
+
+    protected void acquireTarget(ArrayList<String> notselctable){
+        for (int i = 0; i < 5; i++) {
+            if ((Table.getPlayers(i) != null) && !(notselctable.contains(Table.getPlayers(i).getNickname()))){
                 if (Table.getPlayers(i).isVisible(attacker)){
                     valid.add(Table.getPlayers(i).getNickname());
                 }else {

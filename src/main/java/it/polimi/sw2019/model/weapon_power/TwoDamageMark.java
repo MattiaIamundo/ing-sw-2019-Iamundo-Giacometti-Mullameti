@@ -1,64 +1,35 @@
 package it.polimi.sw2019.model.weapon_power;
 
-import it.polimi.sw2019.exception.ErrorCode;
-import it.polimi.sw2019.exception.IllegalPlayerException;
-import it.polimi.sw2019.exception.InvalidPlayerException;
-import it.polimi.sw2019.exception.UnreachablePlayerException;
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.model.events.LockRifleChooseEv;
+import it.polimi.sw2019.view.Observable;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * This class implements the basic effect of Lock Rifle
  * @author Mattia Iamundo
  */
-public class TwoDamageMark implements Power{
+public class TwoDamageMark extends Observable<LockRifleChooseEv> implements Power, SingleTarget{
 
-    Player target;
+    private Player target;
 
     @Override
     public void usePower(Player attacker){
-        while (true){
-            try {
-                acquireTarget(attacker);
-                break;
-            }catch (InvalidPlayerException e){
-                System.out.println(e.getMessage()+" isn't an existing player's nickname\n");
-            }catch (IllegalPlayerException e){
-                System.out.println("You can't select yourself as the target\n");
-            }catch (UnreachablePlayerException e){
-                System.out.println("You can't see "+e.getMessage()+", so you can't select him as the target\n");
-            }
-        }
         target.getPlance().giveDamage(attacker, 2);
         target.getPlance().setMark(attacker);
     }
 
-    /**
-     * This method acquire and check the validity of the target
-     * @param attacker identify the attacker
-     * @throws InvalidPlayerException caused by a mistake in the insertion of the player's nickname
-     * @throws IllegalPlayerException caused by selecting as target the attacker
-     * @throws UnreachablePlayerException caused by selecting a player that the attacker can't see
-     */
-    private void acquireTarget(Player attacker) throws InvalidPlayerException, IllegalPlayerException, UnreachablePlayerException{
-        Scanner scanner = new Scanner(System.in);
-        int i = 0;
-        String name;
-        System.out.println("Insert the nickname of a player that you can see");
-        name = scanner.nextLine();
-        while ((i < 5) && !(Table.getPlayers(i).getNickname().equals(name))){
-            i++;
-        }
-        if (i == 5){
-            throw new InvalidPlayerException(name);
-        }else if (attacker.getNickname().equals(name)){
-            throw new IllegalPlayerException(name, ErrorCode.ATTACKERSELECTED);
-        }else if (!Table.getPlayers(i).isVisible(attacker)){
-            throw new UnreachablePlayerException(name);
-        }else {
-            target = Table.getPlayers(i);
-        }
+    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){
+        notify(new LockRifleChooseEv(attacker, valid, notreachable));
+    }
+
+    @Override
+    public void setTarget(Player target) {
+        this.target = target;
+    }
+
+    public Player getTarget() {
+        return target;
     }
 }

@@ -8,7 +8,7 @@ import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 
-public class PunishModeCont extends SingleTargetCont implements Observer<PunisherModeSetEv> {
+public class PunishModeCont extends VisibleTargetCont implements Observer<PunisherModeSetEv> {
 
     public PunishModeCont(PunisherMode model) {
         super(model);

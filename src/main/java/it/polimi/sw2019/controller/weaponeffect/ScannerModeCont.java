@@ -7,7 +7,7 @@ import it.polimi.sw2019.model.weapon_power.ScannerMode;
 import it.polimi.sw2019.model.weapon_power.SingleTarget;
 import it.polimi.sw2019.view.Observer;
 
-public class ScannerModeCont extends SingleTargetCont implements Observer<ScannerModeSetEv> {
+public class ScannerModeCont extends VisibleTargetCont implements Observer<ScannerModeSetEv> {
 
     private ScannerMode model1;
 

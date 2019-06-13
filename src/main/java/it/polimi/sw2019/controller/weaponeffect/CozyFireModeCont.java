@@ -1,6 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.model.events.CozyFireSetEv;
+import it.polimi.sw2019.model.events.CozyFireModeSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.weapon_power.CozyFireMode;
@@ -9,12 +9,12 @@ import it.polimi.sw2019.view.Observer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CozyFireCont implements Observer<CozyFireSetEv>, EffectController {
+public class CozyFireModeCont implements Observer<CozyFireModeSetEv>, EffectController {
     private CozyFireMode model;
     private Player attacker;
-    HashMap<String, Space> valid = new HashMap<>();
+    private HashMap<String, Space> valid = new HashMap<>();
 
-    public CozyFireCont(CozyFireMode model) {
+    public CozyFireModeCont(CozyFireMode model) {
         this.model = model;
     }
 
@@ -39,11 +39,12 @@ public class CozyFireCont implements Observer<CozyFireSetEv>, EffectController {
         if (!attacker.getPosition().getEast().isWall()){
             valid.put("east", attacker.getPosition().getEast().getSpaceSecond());
         }
-        model.chooseTargetArea(new ArrayList<>(valid.keySet()), attacker);
+        model.chooseTargetArea(attacker, new ArrayList<>(valid.keySet()));
     }
 
     @Override
-    public void update(CozyFireSetEv message) {
-        model.setTargetarea(valid.get(message.getPosition()));
+    public void update(CozyFireModeSetEv message) {
+        model.setTargetarea(valid.get(message.getDirection()));
+        model.usePower(attacker);
     }
 }

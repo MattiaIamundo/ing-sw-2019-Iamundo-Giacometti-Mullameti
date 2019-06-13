@@ -6,7 +6,7 @@ import it.polimi.sw2019.model.weapon_power.SingleTarget;
 
 import java.util.ArrayList;
 
-public class OneMoveAway extends SingleTargetCont {
+public class OneMoveAway extends VisibleTargetCont {
 
     public OneMoveAway(SingleTarget model) {
         super(model);

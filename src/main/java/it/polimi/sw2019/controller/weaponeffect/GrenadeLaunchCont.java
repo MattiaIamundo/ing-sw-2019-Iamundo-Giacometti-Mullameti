@@ -8,7 +8,7 @@ import it.polimi.sw2019.view.Observer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GrenadeLaunchCont extends SingleTargetCont implements Observer<GrenadeLaunchSetEv>{
+public class GrenadeLaunchCont extends VisibleTargetCont implements Observer<GrenadeLaunchSetEv>{
 
     private GrenadeLauncher model;
     private HashMap<String, Space> squares = new HashMap<>();

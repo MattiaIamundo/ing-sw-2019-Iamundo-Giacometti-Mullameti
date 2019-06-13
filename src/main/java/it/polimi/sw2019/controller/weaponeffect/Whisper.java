@@ -6,7 +6,7 @@ import it.polimi.sw2019.model.weapon_power.SingleTarget;
 
 import java.util.ArrayList;
 
-public class Whisper extends SingleTargetCont {
+public class Whisper extends VisibleTargetCont {
 
     public Whisper(SingleTarget model) {
         super(model);

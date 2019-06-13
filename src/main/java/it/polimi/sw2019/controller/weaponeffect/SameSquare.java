@@ -5,7 +5,7 @@ import it.polimi.sw2019.model.weapon_power.SingleTarget;
 
 import java.util.ArrayList;
 
-public class SameSquare extends SingleTargetCont{
+public class SameSquare extends VisibleTargetCont {
 
     public SameSquare(SingleTarget model) {
         super(model);
