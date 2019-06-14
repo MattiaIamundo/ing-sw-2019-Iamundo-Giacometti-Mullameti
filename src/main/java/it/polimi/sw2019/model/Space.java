@@ -35,24 +35,43 @@ public abstract class Space implements Serializable {
     public Connection getNorth() {
         return north;
     }
+
+    public void setNorth(Connection c) {
+        this.north = c;
+    }
     /**
      * @return the east adjacent space
      */
     public Connection getEast() {
         return east;
     }
+
+    public void setEast(Connection c) {
+        this.east = c;
+    }
+
     /**
      * @return the oveast adjacent space
      */
     public Connection getWest() {
         return west;
     }
+
+    public void setSouth(Connection c) {
+        this.south = c;
+    }
+
     /**
      * @return the sud adjacent space
      */
     public Connection getSouth() {
         return south;
     }
+
+    public void setWest(Connection c) {
+        this.west = c;
+    }
+
     /**
      * @return the room where the space is in
      */

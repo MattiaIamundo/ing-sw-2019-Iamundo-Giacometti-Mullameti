@@ -3,6 +3,7 @@ package it.polimi.sw2019.controller;
 import it.polimi.sw2019.model.Ammo;
 import it.polimi.sw2019.model.PowerUp;
 import it.polimi.sw2019.model.Weapon;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class TestGameClass {
@@ -39,6 +40,8 @@ public class TestGameClass {
             System.out.println(pon.getCost());
         }
 
+        controller.createWeapon();
+
         System.out.println(controller.getGameboard().getWeapon().size());
     }
 
@@ -54,5 +57,46 @@ public class TestGameClass {
             System.out.println(am.getColorSecond());
             System.out.println(am.getImageName());
         }
+
+        controller.createAmmo();
+    }
+
+    @Test
+    public void testcreateMap1() {
+
+        Game controller = new Game();
+
+        controller.createMap(0);
+        Assert.assertNotNull(controller.getGameboard().getMap());
+
+    }
+
+    @Test
+    public void testcreateMap2() {
+
+        Game controller = new Game();
+
+        controller.createMap(1);
+        Assert.assertNotNull( controller.getGameboard().getMap() );
+
+    }
+
+    @Test
+    public void testcreateMap3() {
+
+        Game controller = new Game();
+
+        controller.createMap(2);
+        Assert.assertNotNull( controller.getGameboard().getMap() );
+
+    }
+
+    @Test
+    public void testcreateMap4() {
+
+        Game controller = new Game();
+
+        controller.createMap(3);
+        Assert.assertNotNull( controller.getGameboard().getMap() );
     }
 }

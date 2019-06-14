@@ -54,6 +54,10 @@ public class Table extends TableView implements Cloneable, Serializable {
         map = mappa;
     }
 
+    public Map getMap() {
+        return map;
+    }
+
     /**
      * @return the power up Deck
      */

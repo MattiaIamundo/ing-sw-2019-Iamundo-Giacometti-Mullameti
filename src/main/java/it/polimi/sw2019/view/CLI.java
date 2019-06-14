@@ -50,7 +50,7 @@ public class CLI implements UIinterface{
     public void reconnection() {
 
         System.out.println("Welcome to ADRENALINE!\n");
-        System.out.println("If you want to reconnect to the game, write 'reconnect'!\n");
+        System.out.println("If you want to reconnect to the game, write 'Reconnection'!\n");
         System.out.println("Else write" + " 'quit'" + "\n");
     }
 
