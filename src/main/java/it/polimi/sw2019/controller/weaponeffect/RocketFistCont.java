@@ -1,8 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
-import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.RocketFistSetEv;
 import it.polimi.sw2019.model.weapon_power.RocketFistMode;
 import it.polimi.sw2019.view.Observer;

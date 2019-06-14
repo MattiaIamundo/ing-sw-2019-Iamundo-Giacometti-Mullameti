@@ -8,8 +8,11 @@ import it.polimi.sw2019.view.Observer;
 
 public class RailGunCont extends ThoughWall implements Observer<RailGunSetEv>{
 
-    public RailGunCont(ThroughWalls model) {
-        super(model);
+    private RailGun realmodel;
+
+    public RailGunCont(RailGun realmodel) {
+        super(realmodel);
+        this.realmodel = realmodel;
     }
 
     @Override
@@ -19,7 +22,7 @@ public class RailGunCont extends ThoughWall implements Observer<RailGunSetEv>{
         while ((i < 5) && !(Table.getPlayers(i).getNickname().equals(message.getTarget()))){
             i++;
         }
-        ((RailGun) model).setTarget(Table.getPlayers(i));
-        ((RailGun) model).usePower(attacker);
+        realmodel.setTarget(Table.getPlayers(i));
+        realmodel.usePower(attacker);
     }
 }

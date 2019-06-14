@@ -10,18 +10,19 @@ import java.util.HashMap;
 
 public class GrenadeLaunchCont extends VisibleTargetCont implements Observer<GrenadeLaunchSetEv>{
 
-    private GrenadeLauncher model;
+    private GrenadeLauncher realmodel;
     private HashMap<String, Space> squares = new HashMap<>();
 
-    public GrenadeLaunchCont(GrenadeLauncher model){
-        super(model);
+    public GrenadeLaunchCont(GrenadeLauncher realmodel){
+        super(realmodel);
+        this.realmodel = realmodel;
     }
 
     @Override
     public void acquireTarget() {
         super.acquireTarget();
         acquireSquares(attacker.getPosition());
-        model.chooseTarget(attacker, valid, notreachable, new ArrayList<>(squares.keySet()));
+        realmodel.chooseTarget(attacker, valid, notreachable, new ArrayList<>(squares.keySet()));
     }
 
     private void acquireSquares(Space attpos){
@@ -42,7 +43,7 @@ public class GrenadeLaunchCont extends VisibleTargetCont implements Observer<Gre
     @Override
     public void update(GrenadeLaunchSetEv message) {
         super.update(message);
-        model.setMoveto(squares.get(message.getMoveto()));
-        model.usePower(attacker);
+        realmodel.setMoveto(squares.get(message.getMoveto()));
+        realmodel.usePower(attacker);
     }
 }

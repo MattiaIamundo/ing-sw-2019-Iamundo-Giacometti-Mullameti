@@ -39,8 +39,8 @@ public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController
                 }
             }
         }
-        model.chooseTargets(targets, invalid.getNickname(), attacker);
         model.setVortex(vortex);
+        model.chooseTargets(targets, invalid.getNickname(), attacker);
     }
 
     private ArrayList<Space> initPositions(Space vortex){

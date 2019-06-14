@@ -8,13 +8,15 @@ import it.polimi.sw2019.view.Observer;
 
 public class PiercingModeCont extends ThoughWall implements Observer<PiercingModeSetEv> {
 
-    public PiercingModeCont(ThroughWalls model) {
-        super(model);
+    private PiercingMode realmodel;
+
+    public PiercingModeCont(PiercingMode realmodel) {
+        super(realmodel);
+        this.realmodel = realmodel;
     }
 
     @Override
     public void update(PiercingModeSetEv message) {
-        PiercingMode realmodel = (PiercingMode) model;
         for (int i = 0; i < 5; i++) {
             if (Table.getPlayers(i).getNickname().equals(message.getTarget1())){
                 realmodel.setTarget1(Table.getPlayers(i));

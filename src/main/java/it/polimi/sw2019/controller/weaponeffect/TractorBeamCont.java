@@ -9,13 +9,14 @@ import it.polimi.sw2019.view.Observer;
 
 import java.util.*;
 
-public class TractorBeam implements Observer<TracBeamSetEv>, EffectController{
+public class TractorBeamCont implements Observer<TracBeamSetEv>, EffectController{
+
    private Map<Player, Map<String, Space>> movingmap = new HashMap<>();
    private ArrayList<String> validroom = new ArrayList<>();
    private MoveDamage model;
    private Player attacker;
 
-    public TractorBeam(MoveDamage model) {
+    public TractorBeamCont(MoveDamage model) {
         this.model = model;
     }
 

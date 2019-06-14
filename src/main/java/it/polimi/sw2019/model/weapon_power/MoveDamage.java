@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MoveDamage extends Observable<TracBeamChooseEv> implements Power{
-    //base effect for TractorBeam
+    //base effect for TractorBeamCont
     private Player target = null;
 
     @Override

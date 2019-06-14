@@ -14,9 +14,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class VortexCont implements Observer<VortexSetEv> {
-    Vortex model;
-    Player attacker;
-    HashMap<String, ArrayList<String>> valid = new HashMap<>();
+    private Vortex model;
+    private Player attacker;
+    private HashMap<String, ArrayList<String>> valid = new HashMap<>();
 
     public VortexCont(Vortex model, Player attacker) {
         this.model = model;
@@ -102,5 +102,6 @@ public class VortexCont implements Observer<VortexSetEv> {
         }catch (InvalidSpaceException e){
             logger.log(Level.SEVERE, "Left the boundaries of the map");
         }
+        model.usePower(attacker);
     }
 }

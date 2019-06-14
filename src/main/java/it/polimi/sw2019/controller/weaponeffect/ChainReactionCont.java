@@ -2,67 +2,52 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.events.ChainReactSetEv;
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.ChainReaction;
-import it.polimi.sw2019.model.weapon_power.TwoDamage;
+import it.polimi.sw2019.model.weapon_power.Thor;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 
-public class ChainReactionCont implements Observer<ChainReactSetEv>, EffectController{
+public class ChainReactionCont extends VisibleTargetCont implements Observer<ChainReactSetEv>{
 
-    private ChainReaction model;
-    private Player attacker;
+    private ChainReaction realmodel;
 
-    public ChainReactionCont(ChainReaction model) {
-        this.model = model;
+    public ChainReactionCont(ChainReaction realmodel) {
+        super(realmodel);
+        this.realmodel = realmodel;
     }
 
     @Override
     public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)) {
+        if (realmodel.toString().equals(effectname)) {
             this.attacker = attacker;
-            acquireTarget();
+            acquireTarget(notselectable());
         }
     }
 
-    private void acquireTarget(){
-        ArrayList<String> valid = new ArrayList<>();
+    @Override
+    protected void acquireTarget(ArrayList<String> notselctable) {
+        super.acquireTarget(notselctable);
+        realmodel.chooseTarget(attacker, valid, notselctable, notreachable);
+    }
+
+    private ArrayList<String> notselectable(){
         ArrayList<String> notselectable = new ArrayList<>();
-        ArrayList<String> notreachable = new ArrayList<>();
-        Player notvalid = getPreviousTarget();
-        notselectable.add(attacker.getNickname());
-        notselectable.add(notvalid.getNickname());
-        for (int i = 0; i < 5; i++) {
-            if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker) && (Table.getPlayers(i) != notvalid)){
-                if (Table.getPlayers(i).isVisible(notvalid)){
-                    valid.add(Table.getPlayers(i).getNickname());
-                }else {
-                    notreachable.add(Table.getPlayers(i).getNickname());
-                }
-            }
-        }
-        model.chooseTarget(valid, notselectable, notreachable, attacker);
-    }
-
-    private Player getPreviousTarget(){
-        Weapon thor;
         int i = 0;
-
+        Weapon thor;
+        notselectable.add(attacker.getNickname());
         while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("T.H.O.R."))){
             i++;
         }
         thor = attacker.listWeapon()[i];
-        return ((TwoDamage) thor.getPower()).getTarget();
+        notselectable.add(((Thor) thor.getPower()).getTarget().getNickname());
+        return notselectable;
     }
 
     @Override
     public void update(ChainReactSetEv message) {
-        int i = 0;
-        while ((i< 5) && !(Table.getPlayers(i).getNickname().equals(message.getTarget()))){
-            i++;
-        }
-        model.setTarget(Table.getPlayers(i));
+        super.update(message);
+        realmodel.usePower(attacker);
     }
 }

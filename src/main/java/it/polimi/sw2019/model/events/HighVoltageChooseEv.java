@@ -4,9 +4,34 @@ import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
 
-public class HighVoltageChooseEv extends TargetAcquisitionEv{
+public class HighVoltageChooseEv implements WeaponEvent{
 
-    public HighVoltageChooseEv(Player attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable, String message) {
-        super(attacker, valid, notselectable, notreachable, message);
+    protected Player attacker;
+    protected ArrayList<String> valid;
+    protected ArrayList<String> notselectable;
+    protected ArrayList<String> notreachable;
+
+    public HighVoltageChooseEv(Player attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable) {
+        this.attacker = attacker;
+        this.valid = valid;
+        this.notselectable = notselectable;
+        this.notreachable = notreachable;
+    }
+
+    @Override
+    public String getAttacker() {
+        return attacker.getNickname();
+    }
+
+    public ArrayList<String> getValid() {
+        return valid;
+    }
+
+    public ArrayList<String> getNotselectable() {
+        return notselectable;
+    }
+
+    public ArrayList<String> getNotreachable() {
+        return notreachable;
     }
 }

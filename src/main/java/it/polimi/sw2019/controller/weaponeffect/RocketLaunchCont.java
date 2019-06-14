@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RocketLaunchCont implements Observer<RocketLaunchSetEv>, EffectController{
+
     private RocketLauncher model;
     private Player attacker;
     private HashMap<String, HashMap<String, Space>> targets = new HashMap<>();
@@ -67,5 +68,6 @@ public class RocketLaunchCont implements Observer<RocketLaunchSetEv>, EffectCont
         target = Table.getPlayers(i);
         position = targets.get(message.getTarget()).get(message.getPosition());
         model.setTarget(target, position);
+        model.usePower(attacker);
     }
 }

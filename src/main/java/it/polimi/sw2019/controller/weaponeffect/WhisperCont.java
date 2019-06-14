@@ -2,21 +2,26 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.model.events.WhisperSetEv;
 import it.polimi.sw2019.model.weapon_power.SingleTarget;
+import it.polimi.sw2019.model.weapon_power.Whisper;
+import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 
-public class Whisper extends VisibleTargetCont {
+public class WhisperCont extends VisibleTargetCont implements Observer<WhisperSetEv> {
 
-    public Whisper(SingleTarget model) {
-        super(model);
+    private Whisper realmodel;
+
+    public WhisperCont(Whisper realmodel) {
+        super(realmodel);
+        this.realmodel = realmodel;
     }
 
     @Override
     public void acquireTarget(){
         ArrayList<Space> invalidpos = new ArrayList<>();
         ArrayList<String> valid = new ArrayList<>();
-        ArrayList<String> notselectable = new ArrayList<>();
         ArrayList<String> notreachable = new ArrayList<>();
         initializePos(attacker.getPosition(), invalidpos);
         for (int i = 0; i < 5; i++) {
@@ -28,8 +33,7 @@ public class Whisper extends VisibleTargetCont {
                 }
             }
         }
-        notselectable.add(attacker.getNickname());
-        model.chooseTarget(valid, notselectable, notreachable, attacker);
+        realmodel.chooseTarget(attacker, valid, notreachable);
     }
 
     private void initializePos(Space attpos, ArrayList<Space> invalidpos){
@@ -46,5 +50,11 @@ public class Whisper extends VisibleTargetCont {
         if (!attpos.getEast().isWall()){
             invalidpos.add(attpos.getEast().getSpaceSecond());
         }
+    }
+
+    @Override
+    public void update(WhisperSetEv message) {
+        super.update(message);
+        realmodel.usePower(attacker);
     }
 }

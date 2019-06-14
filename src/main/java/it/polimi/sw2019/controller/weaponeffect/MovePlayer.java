@@ -9,7 +9,7 @@ import it.polimi.sw2019.view.Observer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MovePlayer implements Observer<MoveTargetEv>, EffectController {
+public abstract class MovePlayer implements EffectController {
     protected WithMove model;
     protected Player attacker;
     private Map<String, Space> positions = new HashMap<>();
@@ -114,7 +114,6 @@ public class MovePlayer implements Observer<MoveTargetEv>, EffectController {
         model.changePosition(attacker, positions);
     }
 
-    @Override
     public void update(MoveTargetEv message) {
         model.setNewPosition(positions.get(message.getMoveto()));
     }

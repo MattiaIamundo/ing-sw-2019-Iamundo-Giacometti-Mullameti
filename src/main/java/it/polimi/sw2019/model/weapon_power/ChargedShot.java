@@ -7,15 +7,15 @@ import it.polimi.sw2019.model.Player;
  * @author Mattia Iamundo
  */
 public class ChargedShot implements Power{
-    private TwoDamage basiceffect;
-    private int i = 0;
+
+    private Player target;
 
     @Override
     public void usePower(Player attacker){
-        while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("PlasmaGun"))){
-            i++;
-        }
-        basiceffect = (TwoDamage) attacker.listWeapon()[i].getPower();
-        basiceffect.target.getPlance().giveDamage(attacker, 1);
+        target.getPlance().giveDamage(attacker,1);
+    }
+
+    public void setTarget(Player target) {
+        this.target = target;
     }
 }

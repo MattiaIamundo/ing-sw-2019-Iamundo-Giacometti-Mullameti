@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PulverizeModeCont implements Observer<PulvModeSetEv>, EffectController {
+
     private PulverizeMode model;
     private Player attacker;
     private HashMap<String, Space> positions = new HashMap<>();
@@ -74,5 +75,6 @@ public class PulverizeModeCont implements Observer<PulvModeSetEv>, EffectControl
             }
         }
         model.setMoveto(positions.get(message.getMoveto()));
+        model.usePower(attacker);
     }
 }

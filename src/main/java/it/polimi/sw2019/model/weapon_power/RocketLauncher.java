@@ -14,8 +14,8 @@ import java.util.HashMap;
  */
 public class RocketLauncher extends Observable<RocketLaunchChooseEv> implements Power{
 
-    Player target;
-    Space origin;
+    private Player target;
+    private Space origin;
 
     @Override
     public void usePower(Player attacker){
@@ -30,5 +30,13 @@ public class RocketLauncher extends Observable<RocketLaunchChooseEv> implements 
 
     public void chooseTarget(HashMap<String, ArrayList<String>> targets, Player attacker){
         notify(new RocketLaunchChooseEv(targets, attacker));
+    }
+
+    public Player getTarget() {
+        return target;
+    }
+
+    public Space getOrigin() {
+        return origin;
     }
 }

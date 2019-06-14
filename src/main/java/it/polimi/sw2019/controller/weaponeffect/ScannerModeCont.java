@@ -9,25 +9,25 @@ import it.polimi.sw2019.view.Observer;
 
 public class ScannerModeCont extends VisibleTargetCont implements Observer<ScannerModeSetEv> {
 
-    private ScannerMode model1;
+    private ScannerMode realmodel;
 
-    public ScannerModeCont(SingleTarget model, ScannerMode model1) {
-        super(model);
-        this.model1 = model1;
+    public ScannerModeCont(ScannerMode realmodel) {
+        super(realmodel);
+        this.realmodel = realmodel;
     }
 
     @Override
     protected void acquireTarget() {
         super.acquireTarget();
-        model1.chooseTargets(attacker, valid, notreachable);
+        realmodel.chooseTargets(attacker, valid, notreachable);
     }
 
     @Override
     public void update(ScannerModeSetEv message) {
-        model1.setTarget(checkPlayer(message.getTarget1()));
-        model1.setTarget2(checkPlayer(message.getTarget2()));
-        model1.setTarget3(checkPlayer(message.getTarget3()));
-        model1.usePower(attacker);
+        realmodel.setTarget(checkPlayer(message.getTarget1()));
+        realmodel.setTarget2(checkPlayer(message.getTarget2()));
+        realmodel.setTarget3(checkPlayer(message.getTarget3()));
+        realmodel.usePower(attacker);
     }
 
     private Player checkPlayer(String name){

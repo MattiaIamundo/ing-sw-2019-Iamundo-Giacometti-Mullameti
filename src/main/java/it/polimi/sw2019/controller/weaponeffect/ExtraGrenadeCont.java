@@ -51,7 +51,6 @@ public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectCont
         if (chechkIsMoved()) {
             model.chooseSquare(attacker, new ArrayList<>(squares.keySet()));
         }else {
-            loadSquares(attacker.getPosition());
             model.chooseSquare(attacker, new ArrayList<>(squares.keySet()), new ArrayList<>(moveto.keySet()));
         }
     }
@@ -80,21 +79,26 @@ public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectCont
         while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("Grenade Launcher"))){
             i++;
         }
-        return ((GrenadeLauncher) attacker.listWeapon()[i].getPower()).isIsmoved();
+        if (((GrenadeLauncher) attacker.listWeapon()[i].getPower()).isIsmoved()){
+            return true;
+        }else {
+            loadSquares(((GrenadeLauncher) attacker.listWeapon()[i].getPower()).getTarget().getPosition());
+            return false;
+        }
     }
 
-    private void loadSquares(Space attpos){
-        if (!attpos.getWest().isWall()){
-            moveto.put("west", attpos.getWest().getSpaceSecond());
+    private void loadSquares(Space tarpos){
+        if (!tarpos.getWest().isWall()){
+            moveto.put("west", tarpos.getWest().getSpaceSecond());
         }
-        if (!attpos.getEast().isWall()){
-            moveto.put("east", attpos.getEast().getSpaceSecond());
+        if (!tarpos.getEast().isWall()){
+            moveto.put("east", tarpos.getEast().getSpaceSecond());
         }
-        if (!attpos.getNorth().isWall()) {
-            moveto.put("north", attpos.getNorth().getSpaceSecond());
+        if (!tarpos.getNorth().isWall()) {
+            moveto.put("north", tarpos.getNorth().getSpaceSecond());
         }
-        if (!attpos.getSouth().isWall()){
-            moveto.put("south", attpos.getSouth().getSpaceSecond());
+        if (!tarpos.getSouth().isWall()){
+            moveto.put("south", tarpos.getSouth().getSpaceSecond());
         }
     }
 

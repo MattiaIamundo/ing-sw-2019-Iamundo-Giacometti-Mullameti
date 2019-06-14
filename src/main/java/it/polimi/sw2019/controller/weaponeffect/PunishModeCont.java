@@ -10,8 +10,11 @@ import java.util.ArrayList;
 
 public class PunishModeCont extends VisibleTargetCont implements Observer<PunisherModeSetEv> {
 
-    public PunishModeCont(PunisherMode model) {
-        super(model);
+    private PunisherMode realmodel;
+
+    public PunishModeCont(PunisherMode realmodel) {
+        super(realmodel);
+        this.realmodel = realmodel;
     }
 
     @Override
@@ -32,7 +35,7 @@ public class PunishModeCont extends VisibleTargetCont implements Observer<Punish
             }
         }
         notselectable.add(attacker.getNickname());
-        model.chooseTarget(valid, notselectable, notreachable, attacker);
+        realmodel.chooseTarget(valid, notselectable, notreachable, attacker);
     }
 
     private ArrayList<Space> loadPositions(){
@@ -116,6 +119,6 @@ public class PunishModeCont extends VisibleTargetCont implements Observer<Punish
     @Override
     public void update(PunisherModeSetEv message) {
         super.update(message);
-        model.usePower(attacker);
+        realmodel.usePower(attacker);
     }
 }

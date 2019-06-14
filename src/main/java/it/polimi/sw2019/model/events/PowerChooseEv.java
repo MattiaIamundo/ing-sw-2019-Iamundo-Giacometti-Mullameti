@@ -3,7 +3,7 @@ package it.polimi.sw2019.model.events;
 import java.util.ArrayList;
 
 public class PowerChooseEv {
-    ArrayList<String> power = new ArrayList<>();
+    ArrayList<String> power;
 
     public PowerChooseEv(ArrayList<String> power) {
         this.power = power;

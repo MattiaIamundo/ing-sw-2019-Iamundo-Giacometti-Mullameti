@@ -72,5 +72,6 @@ public class ShockwaveCont implements Observer<ShockwaveSetEv>, EffectController
             model.setTarget2(null);
             model.setTarget3(null);
         }
+        model.usePower(attacker);
     }
 }
