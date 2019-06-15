@@ -15,7 +15,7 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
 
     private String nickname; //player's nickname
     private int score; //player's score
-    private static String color = "Green";
+    private String color = "bho";
     //first red, second blue, third yellow
     private static int[] ammo = new int[3];
     //list of weapons the player owns , every player can own at top 3 weapons
@@ -43,7 +43,6 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
         this.score = score;
         this.position = position;
         this.plance = plance;
-        //this.color = color;
     }
 
     protected void showPlayer() {
@@ -322,9 +321,12 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
         }
     }
 
-    public static String getColor(){
+    public String getColor(){
+        return this.color;
+    }
 
-        return color;
+    public void setColor(String color) {
+        this.color = color;
     }
 
 }

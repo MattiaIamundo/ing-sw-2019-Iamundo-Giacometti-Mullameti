@@ -1,6 +1,7 @@
-package it.polimi.sw2019.view;
+package it.polimi.sw2019.nethandler;
 
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
+import it.polimi.sw2019.events.server_event.VCevent.VCColor;
 import it.polimi.sw2019.events.server_event.VCevent.VCLogin;
 import it.polimi.sw2019.nethandler.ViewContEventInt;
 
@@ -25,6 +26,12 @@ public class ViewContEvent implements ViewContEventInt {
         }catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendColor(VCColor vcColor) {
+
+        output.println(vcColor.getColor() );
+        output.flush();
     }
 
     public void sendNickname( VCLogin nick ) {

@@ -3,9 +3,11 @@ package it.polimi.sw2019.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
 import it.polimi.sw2019.model.*;
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.PowerUpJson;
 import it.polimi.sw2019.model.weapon_power.*;
 import it.polimi.sw2019.network.Socket.PlayerThread;
@@ -13,11 +15,14 @@ import it.polimi.sw2019.utility.TimerThread;
 import it.polimi.sw2019.view.ObservableByGame;
 import it.polimi.sw2019.view.Observer;
 import it.polimi.sw2019.view.PlayerRemoteView;
+import it.polimi.sw2019.view.PlayerView;
 
+import java.awt.*;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.*;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -138,6 +143,35 @@ public class Game implements Observer <ObservableByGame> {
 
     }
 
+    public synchronized void askForColor(PlayerRemoteView prv, boolean firstTime, boolean duplicated, List<Player> list) {
+
+        List<String> colorlist = new ArrayList<>(5);
+        colorlist.add("blue");  colorlist.add("gray");  colorlist.add("yellow");  colorlist.add("purple");  colorlist.add("green");
+
+        if ( list.isEmpty() ) {
+
+            Color color = new Color(firstTime, duplicated, colorlist);
+            prv.requestColor(color);
+        }
+        else {
+
+            for (Player p : list) {
+                Iterator<String> colo = colorlist.iterator();
+
+                while ( colo.hasNext() ) {
+                    String es = colo.next();
+                    if (p.getColor().equals(es)) {
+                        colo.remove();
+                    }
+                }
+            }
+
+
+            Color color = new Color(firstTime, duplicated, colorlist);
+            prv.requestColor(color);
+        }
+    }
+
     public synchronized void sendReconnection(boolean firstTime, PlayerRemoteView prv) {
         Reconnection rer = new Reconnection(firstTime, "Reconnection");
         prv.requestNickname(rer);
@@ -149,6 +183,10 @@ public class Game implements Observer <ObservableByGame> {
 
     public void sendOk(PlayerRemoteView prv) {
         prv.sendOk();
+    }
+
+    public void sendNotOk(PlayerRemoteView prv) {
+        prv.sendNotOk();
     }
 
     public synchronized Object getStop() {
@@ -198,9 +236,9 @@ public class Game implements Observer <ObservableByGame> {
 
         if ( gameboard.getPowerUp().isEmpty() ) {
 
-            try {
+            try ( FileReader reader = new FileReader("File_Json/powerUp.json") ) {
+
                 List <PowerUpJson> pow = new ArrayList<>(24);
-                FileReader reader = new FileReader("File_Json/powerUp.json");
                 Type REVIEW_TYPE = new TypeToken<List<PowerUpJson>>() {}.getType();
                 pow = gson.fromJson(reader, REVIEW_TYPE);
 
@@ -222,7 +260,7 @@ public class Game implements Observer <ObservableByGame> {
                     PowerUp p = new PowerUp(pow.get(i).getColor(),pow.get(i).getName(), eff);
                     this.gameboard.getPowerUp().add(p);
                 }
-                reader.close();
+
             } catch (IOException ee) {
                 logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
             }
@@ -244,9 +282,9 @@ public class Game implements Observer <ObservableByGame> {
 
     private void createAdditiveWeapons() {
 
-        try {
+        try ( FileReader reader = new FileReader("File_Json/weaponAdditive.json") ) {
+
             List <AdditiveJson> additiveJsons = new ArrayList<> (5);
-            FileReader reader = new FileReader("File_Json/weaponAdditive.json");
             Type REVIEW_TYPE = new TypeToken<List<AdditiveJson>>() {}.getType();
             additiveJsons = gson.fromJson(reader, REVIEW_TYPE);
 
@@ -258,7 +296,7 @@ public class Game implements Observer <ObservableByGame> {
                     firstEff = new Vortex();
                     secondEff = new BlackHole();
                 }
-                else if (additiveJsons.get(i).getName().equals("Grenade Launcher")) {
+                else if (additiveJsons.get(i).getName().equals("Granade Launcher")) {
 
                     firstEff = new DamageMove();
                     secondEff = new ExtraGrenade();
@@ -285,7 +323,7 @@ public class Game implements Observer <ObservableByGame> {
 
                 this.gameboard.getWeapon().add(additive);
             }
-            reader.close();
+
         } catch (IOException ee) {
             logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
         }
@@ -293,9 +331,9 @@ public class Game implements Observer <ObservableByGame> {
 
     private void createDoubleAdditiveWeapons() {
 
-        try {
+        try ( FileReader reader = new FileReader("File_Json/weaponDoubleAdditive.json") ) {
+
             List <DoubleAdditiveJson> doubleAdditiveJsons = new ArrayList<> (5);
-            FileReader reader = new FileReader("File_Json/weaponDoubleAdditive.json");
             Type REVIEW_TYPE = new TypeToken<List<DoubleAdditiveJson>>() {}.getType();
             doubleAdditiveJsons = gson.fromJson(reader, REVIEW_TYPE);
 
@@ -341,7 +379,7 @@ public class Game implements Observer <ObservableByGame> {
 
                 this.gameboard.getWeapon().add(doubleAdditive);
             }
-            reader.close();
+
         } catch (IOException ee) {
             logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
         }
@@ -349,9 +387,8 @@ public class Game implements Observer <ObservableByGame> {
 
     private void createAlternativeWeapons() {
 
-        try {
+        try ( FileReader reader = new FileReader("File_Json/weaponAlternative.json") ) {
             List <AlternativeJson> alternativeJsons = new ArrayList<> (11);
-            FileReader reader = new FileReader("File_Json/weaponAlternative.json");
             Type REVIEW_TYPE = new TypeToken<List<AlternativeJson>>() {}.getType();
             alternativeJsons = gson.fromJson(reader, REVIEW_TYPE);
 
@@ -420,7 +457,7 @@ public class Game implements Observer <ObservableByGame> {
 
                 this.gameboard.getWeapon().add(alternative);
             }
-            reader.close();
+
         } catch (IOException ee) {
             logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
         }
@@ -447,35 +484,423 @@ public class Game implements Observer <ObservableByGame> {
 
     }
 
-    public void createAmmoDoublePowerUp() {
+    private void createAmmoDoublePowerUp() {
 
-        try{
+        try ( FileReader reader = new FileReader("File_Json/ammoDoublePowerUp.json") ) {
+
             List <AmmoDoublePowerUp> ammoDoublePowerUps = new ArrayList<> (18);
-            FileReader reader = new FileReader("File_Json/ammoDoublePowerUp.json");
             Type REVIEW_TYPE = new TypeToken<List<AmmoDoublePowerUp>>() {}.getType();
             ammoDoublePowerUps = gson.fromJson(reader, REVIEW_TYPE);
 
             this.getGameboard().getAmmo().addAll(ammoDoublePowerUps);
-            reader.close();
         } catch( IOException ee ) {
             logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
         }
     }
 
-    public void createAmmoTriple() {
+    private void createAmmoTriple() {
 
-        try{
+        try ( FileReader reader = new FileReader("File_Json/ammoTriple.json") ) {
+
             List <AmmoTriple> ammoTriples = new ArrayList<> (18);
-            FileReader reader = new FileReader("File_Json/ammoTriple.json");
             Type REVIEW_TYPE = new TypeToken<List<AmmoTriple>>() {}.getType();
             ammoTriples = gson.fromJson(reader, REVIEW_TYPE);
 
             this.getGameboard().getAmmo().addAll(ammoTriples);
-            reader.close();
         } catch( IOException ee ) {
             logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
         }
     }
+
+    public void createMap(int mapNumber) {
+
+        if( mapNumber == 0 ) {
+            createMap1();
+        }
+        else if ( mapNumber == 1 ) {
+            createMap2();
+        }
+        else if ( mapNumber == 2 ) {
+            createMap3();
+        }
+        else {
+            createMap4();
+        }
+    }
+
+    private void createMap1() {
+
+        List<Space> list1 = new ArrayList<>(3);
+        List<Space> list2 = new ArrayList<>(3);
+        List<Space> list3 = new ArrayList<>(3);
+        List<Space> list4 = new ArrayList<>(3);
+
+        String white = "white";
+        String red = "red";
+        String yellow = "yellow";
+        String blue = "blue";
+
+        Space space1 = new SpaceAmmo(null,null,null,null, white);
+        Space space2 = new SpaceGeneration(null,null,null,null, red);
+        Space space3 = new SpaceAmmo(null,null,null,null, red);
+        Space space4 = new SpaceAmmo(null,null,null,null, white);
+        Space space5 = new SpaceAmmo(null,null,null,null,"purple");
+        Space space6 = new SpaceAmmo(null,null,null,null,blue);
+        Space space7 = new SpaceAmmo(null,null,null,null,yellow);
+        Space space8 = new SpaceAmmo(null,null,null,null,yellow);
+        Space space9 = new SpaceGeneration(null,null,null,null,blue);
+        Space space10 = new SpaceGeneration(null,null,null,null,yellow);
+        Space space11 = new SpaceAmmo(null,null,null,null,yellow);
+        Space space12 = new SpaceAmmo(null, null, null, null, "green");
+
+        Connection c11 = new Connection(space1,space2,false);               space1.setNorth(c11);
+        Connection c12 = new Connection(space1,space4,false);               space1.setEast(c12);
+        Connection c13 = new Connection(space1,null,true);      space1.setSouth(c13);
+        Connection c14 = new Connection(space1,null,true);      space1.setWest(c14);
+
+        Connection c21 = new Connection(space2, space3, false);             space2.setNorth(c21);
+        Connection c22 = new Connection(space2, space5, true);              space2.setEast(c22);
+        Connection c23 = new Connection(space2, space1, false);             space2.setSouth(c23);
+        Connection c24 = new Connection(space2, null, true);    space2.setWest(c24);
+
+        Connection c31 = new Connection(space3, null,  true);   space3.setNorth(c31);
+        Connection c32 = new Connection(space3, space6, false);             space3.setEast(c32);
+        Connection c33 = new Connection(space3, space2, false);             space3.setSouth(c33);
+        Connection c34 = new Connection(space3, null, true);    space3.setWest(c34);
+
+        list1.add(space1);  list1.add(space2);  list1.add(space3);
+
+        Connection c41 = new Connection(space4, space5,  false);            space4.setNorth(c41);
+        Connection c42 = new Connection(space4, space7,  false);            space4.setEast(c42);
+        Connection c43 = new Connection(space4, null,  true);   space4.setSouth(c43);
+        Connection c44 = new Connection(space4, space1,  false);            space4.setWest(c44);
+
+        Connection c51 = new Connection(space5, space6,  false);            space5.setNorth(c51);
+        Connection c52 = new Connection(space5, space8,  true);             space5.setEast(c52);
+        Connection c53 = new Connection(space5, space4,  false);            space5.setSouth(c53);
+        Connection c54 = new Connection(space5, space2,  true);             space5.setWest(c54);
+
+        Connection c61 = new Connection(space6, null,  true);   space6.setNorth(c61);
+        Connection c62 = new Connection(space6, space9,  false);            space6.setEast(c62);
+        Connection c63 = new Connection(space6, space5,  false);            space6.setSouth(c63);
+        Connection c64 = new Connection(space6, space3,  false);            space6.setWest(c64);
+
+        list2.add(space4);  list2.add(space5);  list2.add(space6);
+
+        Connection c71 = new Connection(space7, space8, false);             space7.setNorth(c71);
+        Connection c72 = new Connection(space7, space10, false);            space7.setEast(c72);
+        Connection c73 = new Connection(space7, null, true);    space7.setSouth(c73);
+        Connection c74 = new Connection(space7, space4, false);             space7.setWest(c74);
+
+        Connection c81 = new Connection(space8, space9, false);             space8.setNorth(c81);
+        Connection c82 = new Connection(space8, space11, false);            space8.setEast(c82);
+        Connection c83 = new Connection(space8, space7, false);             space8.setSouth(c83);
+        Connection c84 = new Connection(space8, space5, true);              space8.setWest(c84);
+
+        Connection c91 = new Connection(space9, null, true);    space9.setNorth(c91);
+        Connection c92 = new Connection(space9, space12, false);            space9.setEast(c92);
+        Connection c93 = new Connection(space9, space8, false);             space9.setSouth(c93);
+        Connection c94 = new Connection(space9, space6, false);             space9.setWest(c94);
+
+        list3.add(space7);  list3.add(space8);  list3.add(space9);
+
+        Connection c101 = new Connection(space10, space11, false);          space10.setNorth(c101);
+        Connection c102 = new Connection(space10, null, true);  space10.setEast(c102);
+        Connection c103 = new Connection(space10, null, true);  space10.setSouth(c103);
+        Connection c104 = new Connection(space10, space7, false);           space10.setWest(c104);
+
+        Connection c111 = new Connection(space11, space12, false);          space11.setNorth(c111);
+        Connection c112 = new Connection(space11, null, true);  space11.setEast(c112);
+        Connection c113 = new Connection(space11, space10, false);          space11.setSouth(c113);
+        Connection c114 = new Connection(space11, space8, false);           space11.setWest(c114);
+
+        Connection c121 = new Connection(space12, null, true);  space12.setNorth(c121);
+        Connection c122 = new Connection(space12, null, true);  space12.setEast(c122);
+        Connection c123 = new Connection(space12, space11, false);          space12.setSouth(c123);
+        Connection c124 = new Connection(space12, space9, false);           space12.setWest(c124);
+
+        list4.add(space10);  list4.add(space11);  list4.add(space12);
+
+        Map map = new Map( list1, list2, list3, list4 );
+        this.gameboard.setMap(map);
+    }
+
+    private void createMap2() {
+
+        List<Space> spaceList1 = new ArrayList<>(3);
+        List<Space> spaceList2 = new ArrayList<>(3);
+        List<Space> spaceList3 = new ArrayList<>(3);
+        List<Space> spaceList4 = new ArrayList<>(3);
+
+        String white = "white";
+        String red = "red";
+        String yellow = "yellow";
+        String blue = "blue";
+        String purple = "purple";
+
+        Space space1 = new SpaceAmmo(null, null, null, null, white);
+        Space space2 = new SpaceGeneration(null, null, null, null, red);
+        Space space3 = new SpaceAmmo(null, null, null, null, red);
+        Space space4 = new SpaceAmmo(null, null, null, null, white);
+        Space space5 = new SpaceAmmo(null, null, null, null, purple);
+        Space space6 = new SpaceAmmo(null, null, null, null, blue);
+        Space space7 = new SpaceAmmo(null, null, null, null, white);
+        Space space8 = new SpaceAmmo(null, null, null, null, purple);
+        Space space9 = new SpaceGeneration(null, null, null, null, blue);
+        Space space10 = new SpaceGeneration(null, null, null, null, yellow);
+        Space space11 = new SpaceAmmo(null, null, null, null, yellow);
+
+        Connection c11 = new Connection( space1, space2, false);                space1.setNorth(c11);
+        Connection c12 = new Connection( space1, space4, false);                space1.setEast(c12);
+        Connection c13 = new Connection( space1, null, true);       space1.setSouth(c13);
+        Connection c14 = new Connection( space1, null, true);       space1.setWest(c14);
+
+        Connection c21 = new Connection( space2, space3, false);                space2.setNorth(c21);
+        Connection c22 = new Connection( space2, space5, true);                 space2.setEast(c22);
+        Connection c23 = new Connection( space2, space1, false);                space2.setSouth(c23);
+        Connection c24 = new Connection( space2, null, true);       space2.setWest(c24);
+
+        Connection c31 = new Connection( space3, null, true);       space3.setNorth(c31);
+        Connection c32 = new Connection( space3, space6, false);                space3.setEast(c32);
+        Connection c33 = new Connection( space3, space2, false);                space3.setSouth(c33);
+        Connection c34 = new Connection( space3, null, true);       space3.setWest(c34);
+
+        spaceList1.add(space1); spaceList1.add(space2); spaceList1.add(space3);
+
+        Connection c41 = new Connection( space4, space5, false);                space4.setNorth(c41);
+        Connection c42 = new Connection( space4, space7, false);                space4.setEast(c42);
+        Connection c43 = new Connection( space4, null, true);       space4.setSouth(c43);
+        Connection c44 = new Connection( space4, space1, false);                space4.setWest(c44);
+
+        Connection c51 = new Connection( space5, space6, false);                space5.setNorth(c51);
+        Connection c52 = new Connection( space5, space8, false);                space5.setEast(c52);
+        Connection c53 = new Connection( space5, space4, false);                space5.setSouth(c53);
+        Connection c54 = new Connection( space5, space2, true);                 space5.setWest(c54);
+
+        Connection c61 = new Connection( space6, null, true);       space6.setNorth(c61);
+        Connection c62 = new Connection( space6, space9, false);                space6.setEast(c62);
+        Connection c63 = new Connection( space6, space5, false);                space6.setSouth(c63);
+        Connection c64 = new Connection( space6, space3, false);                space6.setWest(c64);
+
+        spaceList2.add(space4); spaceList2.add(space5); spaceList2.add(space6);
+
+        Connection c71 = new Connection( space7, space8, true);                 space7.setNorth(c71);
+        Connection c72 = new Connection( space7, space10, false);               space7.setEast(c72);
+        Connection c73 = new Connection( space7, null, true);       space7.setSouth(c73);
+        Connection c74 = new Connection( space7, space4, false);                space7.setWest(c74);
+
+        Connection c81 = new Connection( space8, space9, false);                space8.setNorth(c81);
+        Connection c82 = new Connection( space8, space11, false);               space8.setEast(c82);
+        Connection c83 = new Connection( space8, space7, true);                 space8.setSouth(c83);
+        Connection c84 = new Connection( space8, space5, false);                space8.setWest(c84);
+
+        Connection c91 = new Connection( space9, null, true);       space9.setNorth(c91);
+        Connection c92 = new Connection( space9, null, true);       space9.setEast(c92);
+        Connection c93 = new Connection( space9, space8, false);                space9.setSouth(c93);
+        Connection c94 = new Connection( space9, space6, false);                space9.setWest(c94);
+
+        spaceList3.add(space7); spaceList3.add(space8); spaceList3.add(space9);
+
+        Connection c101 = new Connection( space10, space11, false);             space10.setNorth(c101);
+        Connection c102 = new Connection( space10, null, true);     space10.setEast(c102);
+        Connection c103 = new Connection( space10, null, true);     space10.setSouth(c103);
+        Connection c104 = new Connection( space10, space7, false);              space10.setWest(c104);
+
+        Connection c111 = new Connection( space11, null, true);     space11.setNorth(c111);
+        Connection c112 = new Connection( space11, null, true);     space11.setEast(c112);
+        Connection c113 = new Connection( space11, space10, false);             space11.setSouth(c113);
+        Connection c114 = new Connection( space11, space8, false);              space11.setWest(c114);
+
+        spaceList4.add(space10); spaceList4.add(space11); spaceList4.add(2,null);
+
+        Map map = new Map( spaceList1, spaceList2, spaceList3, spaceList4 );
+        this.gameboard.setMap(map);
+
+    }
+
+    private void createMap3() {
+
+        List<Space> lista = new ArrayList<>(3);
+        List<Space> listb = new ArrayList<>(3);
+        List<Space> listc = new ArrayList<>(3);
+        List<Space> listd = new ArrayList<>(3);
+
+        String blue = "blue";
+        String red = "red";
+        String white = "white";
+        String green = "green";
+        String yellow = "yellow";
+
+        //space1 is null
+        Space space2 = new SpaceGeneration(null, null, null, null, red);
+        Space space3 = new SpaceAmmo(null, null, null, null, blue);
+        Space space4 = new SpaceAmmo(null, null, null, null, white);
+        Space space5 = new SpaceAmmo(null, null, null, null, red);
+        Space space6 = new SpaceAmmo(null, null, null, null, blue);
+        Space space7 = new SpaceAmmo(null, null, null, null, yellow);
+        Space space8 = new SpaceAmmo(null, null, null, null, yellow);
+        Space space9 = new SpaceGeneration(null, null, null, null, blue);
+        Space space10 = new SpaceGeneration(null, null, null, null, yellow);
+        Space space11 = new SpaceAmmo(null, null, null, null, yellow);
+        Space space12 = new SpaceAmmo(null, null, null, null, green);
+
+
+        Connection c21 = new Connection( space2, space3, false);                space2.setNorth(c21);
+        Connection c22 = new Connection( space2, space5, false);                space2.setEast(c22);
+        Connection c23 = new Connection( space2, null, true);       space2.setSouth(c23);
+        Connection c24 = new Connection( space2, null, true);       space2.setWest(c24);
+
+        Connection c31 = new Connection( space3, null, true);       space3.setNorth(c31);
+        Connection c32 = new Connection( space3, space6, false);                space3.setEast(c32);
+        Connection c33 = new Connection( space3, space2, false);                space3.setSouth(c33);
+        Connection c34 = new Connection( space3, null, true);       space3.setWest(c34);
+
+        lista.add(null);    lista.add(space2);  lista.add(space3);
+
+        Connection c41 = new Connection( space4, space5, false);                space4.setNorth(c41);
+        Connection c42 = new Connection( space4, space7, false);                space4.setEast(c42);
+        Connection c43 = new Connection( space4, null, true);       space4.setSouth(c43);
+        Connection c44 = new Connection( space4, null, true);       space4.setWest(c44);
+
+        Connection c51 = new Connection( space5, space6, true);                 space5.setNorth(c51);
+        Connection c52 = new Connection( space5, space8, true);                 space5.setEast(c52);
+        Connection c53 = new Connection( space5, space4, false);                space5.setSouth(c53);
+        Connection c54 = new Connection( space5, space2, false);                space5.setWest(c54);
+
+        Connection c61 = new Connection( space6, null, true);       space6.setNorth(c61);
+        Connection c62 = new Connection( space6, space9, false);                space6.setEast(c62);
+        Connection c63 = new Connection( space6, space3, false);                space6.setSouth(c63);
+        Connection c64 = new Connection( space6, space5, true);                 space6.setWest(c64);
+
+        listb.add(space4);    listb.add(space5);  listb.add(space6);
+
+        Connection c71 = new Connection( space7, space8, false);                space7.setNorth(c71);
+        Connection c72 = new Connection( space7, space10, false);               space7.setEast(c72);
+        Connection c73 = new Connection( space7, null, true);       space7.setSouth(c73);
+        Connection c74 = new Connection( space7, space4, false);                space7.setWest(c74);
+
+        Connection c81 = new Connection( space8, space9, false);                space8.setNorth(c81);
+        Connection c82 = new Connection( space8, space11, false);               space8.setEast(c82);
+        Connection c83 = new Connection( space8, space7, false);                space8.setSouth(c83);
+        Connection c84 = new Connection( space8, space5, true);                 space8.setWest(c84);
+
+        Connection c91 = new Connection( space9, null, true);       space9.setNorth(c91);
+        Connection c92 = new Connection( space9, space12, false);               space9.setEast(c92);
+        Connection c93 = new Connection( space9, space8, false);                space9.setSouth(c93);
+        Connection c94 = new Connection( space9, space6, false);                space9.setWest(c94);
+
+        listc.add(space7);    listc.add(space8);  listc.add(space9);
+
+        Connection c101 = new Connection( space10, space11, false);             space10.setNorth(c101);
+        Connection c102 = new Connection( space10, null, true);     space10.setEast(c102);
+        Connection c103 = new Connection( space10, null, true);     space10.setSouth(c103);
+        Connection c104 = new Connection( space10, space7, false);              space10.setWest(c104);
+
+        Connection c111 = new Connection( space11, space12, false);             space11.setNorth(c111);
+        Connection c112 = new Connection( space11, null, true);     space11.setEast(c112);
+        Connection c113 = new Connection( space11, space10, false);             space11.setSouth(c113);
+        Connection c114 = new Connection( space11, space8, false);              space11.setWest(c114);
+
+        Connection c121 = new Connection( space12, null, true);     space12.setNorth(c121);
+        Connection c122 = new Connection( space12, null, true);     space12.setEast(c122);
+        Connection c123 = new Connection( space12, space11, false);             space12.setSouth(c123);
+        Connection c124 = new Connection( space12, space9, false);              space12.setWest(c124);
+
+        listd.add(space10);    listd.add(space11);  listd.add(space12);
+
+        Map map = new Map( lista, listb, listc, listd );
+        this.gameboard.setMap(map);
+    }
+
+    private void createMap4() {
+
+        List<Space> lista = new ArrayList<>(3);
+        List<Space> listb = new ArrayList<>(3);
+        List<Space> listc = new ArrayList<>(3);
+        List<Space> listd = new ArrayList<>(3);
+
+        String blue = "blue";
+        String red = "red";
+        String white = "white";
+        String yellow = "yellow";
+
+        //space1 is null
+        Space space2 = new SpaceGeneration(null, null, null, null, red);
+        Space space3 = new SpaceAmmo(null, null, null, null, blue);
+        Space space4 = new SpaceAmmo(null, null, null, null, white);
+        Space space5 = new SpaceAmmo(null, null, null, null, red);
+        Space space6 = new SpaceAmmo(null, null, null, null, blue);
+        Space space7 = new SpaceAmmo(null, null, null, null, white);
+        Space space8 = new SpaceAmmo(null, null, null, null, red);
+        Space space9 = new SpaceGeneration(null, null, null, null, blue);
+        Space space10 = new SpaceGeneration(null, null, null, null, yellow);
+        Space space11 = new SpaceAmmo(null, null, null, null, yellow);
+        //space12 is null
+
+
+        Connection c21 = new Connection( space2, space3, false);                space2.setNorth(c21);
+        Connection c22 = new Connection( space2, space5, false);                space2.setEast(c22);
+        Connection c23 = new Connection( space2, null, true);       space2.setSouth(c23);
+        Connection c24 = new Connection( space2, null, true);       space2.setWest(c24);
+
+        Connection c31 = new Connection( space3, null, true);       space3.setNorth(c31);
+        Connection c32 = new Connection( space3, space6, false);                space3.setEast(c32);
+        Connection c33 = new Connection( space3, space2, false);                space3.setSouth(c33);
+        Connection c34 = new Connection( space3, null, true);       space3.setWest(c34);
+
+        lista.add(null);    lista.add(space2);  lista.add(space3);
+
+        Connection c41 = new Connection( space4, space5, false);                space4.setNorth(c41);
+        Connection c42 = new Connection( space4, space7, false);                space4.setEast(c42);
+        Connection c43 = new Connection( space4, null, true);       space4.setSouth(c43);
+        Connection c44 = new Connection( space4, null, true);       space4.setWest(c44);
+
+        Connection c51 = new Connection( space5, space6, true);                 space5.setNorth(c51);
+        Connection c52 = new Connection( space5, space8, true);                 space5.setEast(c52);
+        Connection c53 = new Connection( space5, space4, false);                space5.setSouth(c53);
+        Connection c54 = new Connection( space5, space2, false);                space5.setWest(c54);
+
+        Connection c61 = new Connection( space6, null, true);       space6.setNorth(c61);
+        Connection c62 = new Connection( space6, space9, false);                space6.setEast(c62);
+        Connection c63 = new Connection( space6, space3, false);                space6.setSouth(c63);
+        Connection c64 = new Connection( space6, space5, true);                 space6.setWest(c64);
+
+        listb.add(space4);    listb.add(space5);  listb.add(space6);
+
+        Connection c71 = new Connection( space7, space8, true);                 space7.setNorth(c71);
+        Connection c72 = new Connection( space7, space10, false);               space7.setEast(c72);
+        Connection c73 = new Connection( space7, null, true);       space7.setSouth(c73);
+        Connection c74 = new Connection( space7, space4, false);                space7.setWest(c74);
+
+        Connection c81 = new Connection( space8, space9, false);                space8.setNorth(c81);
+        Connection c82 = new Connection( space8, space11, false);               space8.setEast(c82);
+        Connection c83 = new Connection( space8, space7, true);                 space8.setSouth(c83);
+        Connection c84 = new Connection( space8, space5, false);                space8.setWest(c84);
+
+        Connection c91 = new Connection( space9, null, true);       space9.setNorth(c91);
+        Connection c92 = new Connection( space9, null, true);       space9.setEast(c92);
+        Connection c93 = new Connection( space9, space8, false);                space9.setSouth(c93);
+        Connection c94 = new Connection( space9, space6, false);                space9.setWest(c94);
+
+        listc.add(space7); listc.add(space8); listc.add(space9);
+
+        Connection c101 = new Connection( space10, space11, false);             space10.setNorth(c101);
+        Connection c102 = new Connection( space10, null, true);     space10.setEast(c102);
+        Connection c103 = new Connection( space10, null, true);     space10.setSouth(c103);
+        Connection c104 = new Connection( space10, space7, false);              space10.setWest(c104);
+
+        Connection c111 = new Connection( space11, null, true);     space11.setNorth(c111);
+        Connection c112 = new Connection( space11, null, true);     space11.setEast(c112);
+        Connection c113 = new Connection( space11, space10, false);             space11.setSouth(c113);
+        Connection c114 = new Connection( space11, space8, false);              space11.setWest(c114);
+
+        listd.add(space10); listd.add(space11); listd.add(2,null);
+
+        Map map = new Map( lista, listb, listc, listd );
+        this.gameboard.setMap(map);
+
+    }
+
 
     //.............................FROM HERE OLD THINGS........................
 
@@ -489,14 +914,6 @@ public class Game implements Observer <ObservableByGame> {
     }
 
 
-    public void selectGameboard(String type ){
-
-    }
-
-    public void setGamemode(String type){
-
-    }
-
     public String[] listGameboard(){
         return mapconfig;
     }
@@ -508,23 +925,6 @@ public class Game implements Observer <ObservableByGame> {
     public State getState(){
         return state;
     }
-
-    private void loadMap(int maptype){
-
-    }
-
-    private void initializeWeaponDeck(){
-
-    }
-
-    private void initializeAmmoDeck(){
-
-    }
-
-    private void initializeTable(){
-
-    }
-
 
   //  public void setTurnOfPlayer (Player player) { this.turnOf.setPlayer(player); }
 

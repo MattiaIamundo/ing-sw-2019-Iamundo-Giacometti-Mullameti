@@ -12,7 +12,8 @@ public class Teleport implements EffectBehaviour {
     /**
      * @param target the player  who is going to be attacked using this power up card
      */
-
+    public void useEffect(Player target) {}
+/*
     @Override
     public  void useEffect(Player target) {
 
@@ -50,4 +51,6 @@ public class Teleport implements EffectBehaviour {
 
         target.setPosition(moveto);
     }
+
+ */
 }

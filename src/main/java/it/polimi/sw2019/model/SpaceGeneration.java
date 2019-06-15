@@ -1,11 +1,17 @@
 package it.polimi.sw2019.model;
+
+import it.polimi.sw2019.exception.FullWeaponDeckException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * this class stands of the generation point
  * @author Luca Giacometti
  */
 public class SpaceGeneration extends Space {
 
-    private Weapon[] weapon = new Weapon[3];
+    private ArrayList<Weapon> weapon = new ArrayList<>(3);
 
     /**
      * this is the constructor
@@ -19,23 +25,20 @@ public class SpaceGeneration extends Space {
         super(north, east, south, west, room);
     }
 
-    public void setWeapon( Weapon weapon){
-        //to go out the loop before
-        boolean out = false;
+    public void setWeapon( Weapon weap) throws FullWeaponDeckException {
 
-        for (int i = 0; (i < 3) || out ; i++){
-            //a weapon cans be inserted and i can go out the loop
-            if ( this.weapon[i] == null ){
-
-                this.weapon[i] = weapon;
-                out = true;
-            }
-
+        if(this.weapon.isEmpty() || this.weapon.size() < 3) {
+            this.weapon.add(weap);
         }
-        if ( !out ){
-
-            System.out.println("This point of generation has already 3 weapons!\n");
+        else {
+            throw new FullWeaponDeckException ();
         }
+
+    }
+
+    public Weapon getWeapon(int weaponNumber) {
+
+        return this.weapon.remove(weaponNumber);
     }
 
     /**
@@ -43,12 +46,12 @@ public class SpaceGeneration extends Space {
      * @return the weapon chosen
      */
     public Weapon takeWeapon(Integer weaponNum){
-        return weapon[weaponNum];
+        return weapon.get(weaponNum);
     }
     /**
      * @return the list of 3 weapon which a player can choose
      */
-    public Weapon[] listWeapon(){
+    public List<Weapon> listWeapon(){
         return weapon;
     }
 }

@@ -1,8 +1,10 @@
-package it.polimi.sw2019.view;
+package it.polimi.sw2019.nethandler;
 
+import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
 import it.polimi.sw2019.nethandler.ContSelectInt;
+import it.polimi.sw2019.view.PlayerView;
 
 import java.io.*;
 import java.net.Socket;
@@ -33,17 +35,20 @@ public class ContSelect implements ContSelectInt {
         }
     }
 
-    public boolean waitForNicknameRequest(PlayerView playerView) {
+    public void waitForNicknameRequest(PlayerView playerView) {
 
         List<String> list = new ArrayList<> (5);
 
+        while ( !in.hasNextBoolean() ) {
+            in.nextLine();
+        }
         boo = in.nextBoolean();
-        //System.out.println(boo);
+        System.out.println(boo);
         string = in.nextLine();
-        //System.out.println(string);
+        System.out.println(string);
         string = in.nextLine();
-        // System.out.println(string);
-        //string = in.nextLine();
+        System.out.println(string);
+        //in.nextLine();
         //System.out.println(string);
 
         if( !string.equals("name?") ) {
@@ -51,10 +56,6 @@ public class ContSelect implements ContSelectInt {
             if (string.equals("Reconnection")) {
                 Reconnection re = new Reconnection(boo,string);
                 playerView.requestNickname(re);
-            }
-            else if ( string.equals("ok") ) {
-                playerView.sendOk();
-                return true;
             }
             else {
                 while (!string.equals("")) {
@@ -72,7 +73,41 @@ public class ContSelect implements ContSelectInt {
             Login login = new Login(boo, list);
             playerView.requestNickname(login);
         }
-        return false;
+    }
+
+    public void waitingForColorRequest(PlayerView playerView) {
+
+        List<String> colorlist = new ArrayList<> (5);
+        boolean bii;
+
+        while ( !in.hasNextBoolean() ) {
+            in.nextLine();
+        }
+
+        boo = in.nextBoolean();
+        System.out.println(boo);
+        string = in.nextLine();
+        System.out.println(string);
+        bii = in.nextBoolean();
+        System.out.println(bii);
+        string = in.nextLine();
+        System.out.println(string);
+        string = in.nextLine();
+        System.out.println(string);
+
+        if (!string.equals("ok")) {
+
+            while (!string.equals("")) {
+
+                colorlist.add(string);
+                string = in.nextLine();
+            }
+
+            Color color = new Color(boo, bii, colorlist);
+            playerView.requestColor(color);
+
+        }
+
     }
 
     public boolean waitForPing(PlayerView playerView) {
@@ -82,6 +117,15 @@ public class ContSelect implements ContSelectInt {
             return false;
         }
         return true;
+    }
+
+    public boolean waitForOk(PlayerView playerView) {
+        string = in.nextLine();
+        while ( string.equals("") ) {
+            string = in.nextLine();
+        }
+
+        return string.equals("ok");
     }
 
 }

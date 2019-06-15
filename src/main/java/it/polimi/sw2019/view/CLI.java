@@ -1,14 +1,23 @@
 package it.polimi.sw2019.view;
 
+import it.polimi.sw2019.events.server_event.VCevent.VCColor;
+import it.polimi.sw2019.events.server_event.VCevent.VCLogin;
+import it.polimi.sw2019.nethandler.ViewContEvent;
+
 import java.util.List;
 import java.util.Scanner;
 
 public class CLI implements UIinterface{
 
-    private Scanner s;
+    private PlayerView pv = null;
+    private ViewContEvent vce = null;
+    private Scanner s = null;
+    private String string = "nope";
 
-    public CLI() {
+    public CLI(PlayerView playerView, ViewContEvent viewContEvent) {
         s = new Scanner(System.in);
+        pv = playerView;
+        vce = viewContEvent;
     }
 
     @Override
@@ -31,7 +40,9 @@ public class CLI implements UIinterface{
             }
 
             System.out.println("Now choose your nickname!\n");
-
+            string = s.nextLine();
+            VCLogin vcLogin = new VCLogin(string);
+            pv.sendNickname(vce, vcLogin);
         }
         else {
         //that nickname is already inserted
@@ -43,14 +54,60 @@ public class CLI implements UIinterface{
             }
 
             System.out.println("Choose again your nickname please:\n");
+            string = s.nextLine();
+            VCLogin vcLogin = new VCLogin(string);
+            pv.sendNickname(vce, vcLogin);
         }
 
+    }
+
+    @Override
+    public void requestColor(boolean firstTime, boolean duplicated, List<String> colorlist) {
+
+        String idiom = "Now choose your color please:";
+
+        if ( firstTime ) {
+            System.out.println("This is the list of player's color:\n");
+
+            for (String col : colorlist) {
+                System.out.println(" -  " + col + " \n");
+            }
+
+            System.out.println(idiom + "\n");
+            string = s.nextLine();
+        }
+        else {
+            if ( duplicated ) {
+                System.out.println("This color is already chosen:\n");
+                System.out.println("This is the list of color you can choose:\n");
+
+                for (String col : colorlist) {
+                    System.out.println(" -  " + col + " \n");
+                }
+                System.out.println(idiom + "\n");
+                string = s.nextLine();
+            }
+            else {
+                System.out.println("This color is not present in the list:\n");
+                System.out.println("This is the list of color you can choose:\n");
+
+                for (String col : colorlist) {
+                    System.out.println(" -  " + col + " \n");
+                }
+                System.out.println(idiom + "\n");
+                string = s.nextLine();
+            }
+        }
+
+
+        VCColor vcColor = new VCColor(string);
+        pv.sendColor(vce,vcColor);
     }
 
     public void reconnection() {
 
         System.out.println("Welcome to ADRENALINE!\n");
-        System.out.println("If you want to reconnect to the game, write 'reconnect'!\n");
+        System.out.println("If you want to reconnect to the game, write 'Reconnection'!\n");
         System.out.println("Else write" + " 'quit'" + "\n");
     }
 

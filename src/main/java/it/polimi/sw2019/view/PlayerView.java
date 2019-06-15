@@ -1,10 +1,12 @@
 package it.polimi.sw2019.view;
 
+import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
+import it.polimi.sw2019.events.server_event.VCevent.VCColor;
 import it.polimi.sw2019.events.server_event.VCevent.VCLogin;
 import it.polimi.sw2019.model.Player;
-
+import it.polimi.sw2019.nethandler.ViewContEvent;
 
 
 public class PlayerView extends ObservableByGame implements Observer <Player> {
@@ -16,6 +18,8 @@ public class PlayerView extends ObservableByGame implements Observer <Player> {
     public PlayerView(UIinterface uIinterface) {
         this.ui = uIinterface;
     }
+
+
 
     protected void showPlayer() {
 
@@ -32,6 +36,10 @@ public class PlayerView extends ObservableByGame implements Observer <Player> {
         ui.requestNickname(login.isFirstTime(), login.getNickname());
     }
 
+    public void requestColor(Color color) {
+        ui.requestColor(color.isFirstTime(), color.isDuplicated(), color.getColors());
+    }
+
     public void requestNickname(Reconnection re) {
         ui.reconnection();
     }
@@ -42,6 +50,10 @@ public class PlayerView extends ObservableByGame implements Observer <Player> {
 
     public void sendNickname(ViewContEvent vce, VCLogin vcLogin) {
         vce.sendNickname(vcLogin);
+    }
+
+    public void sendColor(ViewContEvent vce, VCColor vcColor) {
+        vce.sendColor(vcColor);
     }
 
     public void sendOk() {

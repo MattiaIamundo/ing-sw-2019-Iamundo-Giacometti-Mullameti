@@ -75,7 +75,7 @@ public class TestPlayerPlanceClass {
 
         PlayerPlance board = new PlayerPlance();
         AmmoTriple ammo = new AmmoTriple("red", "blu", "green", "name");
-        SpaceAmmo position = new SpaceAmmo (null, null, null, null, "red", ammo);
+        SpaceAmmo position = new SpaceAmmo (null, null, null, null, "red");
         Player shooter = new Player("name", 0, position, board);
         Player player = new Player("player", 0, position, null);
         String[] trackDamage = new String[12];

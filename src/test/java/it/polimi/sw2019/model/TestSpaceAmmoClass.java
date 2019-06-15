@@ -7,7 +7,7 @@ public class TestSpaceAmmoClass {
 
     @Test
     public void testSpaceAmmo(){
-        SpaceAmmo spaceAmmo = new SpaceAmmo(null, null , null ,null ,null ,null);
+        SpaceAmmo spaceAmmo = new SpaceAmmo(null, null , null ,null ,null);
 
         Assert.assertNull(spaceAmmo.getNorth());
         Assert.assertNull(spaceAmmo.getEast());
@@ -21,41 +21,41 @@ public class TestSpaceAmmoClass {
     @Test
     public void testGetNorth() {
 
-        SpaceAmmo spaceAmmo = new SpaceAmmo(null, null , null ,null ,null ,null);
+        SpaceAmmo spaceAmmo = new SpaceAmmo(null, null , null ,null ,null);
         Assert.assertNull(spaceAmmo.getNorth());
     }
 
     @Test
     public void testGetEast() {
 
-        SpaceAmmo spaceAmmo = new SpaceAmmo(null, null , null ,null ,null ,null);
+        SpaceAmmo spaceAmmo = new SpaceAmmo(null, null , null ,null ,null);
         Assert.assertNull(spaceAmmo.getEast());
     }
 
     @Test
     public void testGetSouth() {
 
-        SpaceAmmo spaceAmmo = new SpaceAmmo(null, null , null ,null ,null ,null);
+        SpaceAmmo spaceAmmo = new SpaceAmmo(null, null , null ,null ,null);
         Assert.assertNull(spaceAmmo.getSouth());
     }
 
     @Test
     public void testGetWest() {
 
-        SpaceAmmo spaceAmmo = new SpaceAmmo(null, null , null ,null ,null ,null);
+        SpaceAmmo spaceAmmo = new SpaceAmmo(null, null , null ,null ,null);
         Assert.assertNull(spaceAmmo.getWest());
     }
 
     @Test
     public void testGetRoom() {
 
-        SpaceAmmo spaceAmmo = new SpaceAmmo(null, null , null ,null ,null ,null);
+        SpaceAmmo spaceAmmo = new SpaceAmmo(null, null , null ,null ,null);
         Assert.assertNull(spaceAmmo.getRoom());
     }
 
     @Test
     public void testTakeAmmo(){
-        SpaceAmmo spaceAmmo = new SpaceAmmo(null, null , null ,null ,null ,null);
+        SpaceAmmo spaceAmmo = new SpaceAmmo(null, null , null ,null ,null);
         Assert.assertNull(spaceAmmo.takeAmmo());
     }
 
