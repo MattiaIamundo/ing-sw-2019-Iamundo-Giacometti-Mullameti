@@ -26,7 +26,7 @@ public abstract class SameSquare implements EffectController{
         }
     }
 
-    public void acquireTarget() {
+    protected void acquireTarget() {
         for (int i = 0; i < 5; i++) {
             if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker)) {
                 if (Table.getPlayers(i).getPosition() == attacker.getPosition()){

@@ -1,16 +1,16 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.model.events.MoveTargetEv;
+import it.polimi.sw2019.model.events.MoveTargetSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.weapon_power.WithMove;
-import it.polimi.sw2019.view.Observer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class MovePlayer implements EffectController {
-    protected WithMove model;
+    private WithMove model;
     protected Player attacker;
     private Map<String, Space> positions = new HashMap<>();
 
@@ -35,7 +35,7 @@ public abstract class MovePlayer implements EffectController {
             acquireSouth(playerpos);
             acquireEast(playerpos);
         }
-        model.changePosition(attacker, positions);
+        model.changePosition(attacker, new ArrayList<>(positions.keySet()));
     }
 
     private void acquireNorth(Space playerpos){
@@ -98,7 +98,7 @@ public abstract class MovePlayer implements EffectController {
         }
     }
 
-    public void acquireSingle(Space playerpos){
+    private void acquireSingle(Space playerpos){
         if (!playerpos.getNorth().isWall()){
             positions.put("north", playerpos.getNorth().getSpaceSecond());
         }
@@ -111,10 +111,10 @@ public abstract class MovePlayer implements EffectController {
         if (!playerpos.getEast().isWall()){
             positions.put("east", playerpos.getEast().getSpaceSecond());
         }
-        model.changePosition(attacker, positions);
+        model.changePosition(attacker, new ArrayList<>(positions.keySet()));
     }
 
-    public void update(MoveTargetEv message) {
-        model.setNewPosition(positions.get(message.getMoveto()));
+    public void update(MoveTargetSetEv message) {
+        model.setMoveto(positions.get(message.getMoveto()));
     }
 }

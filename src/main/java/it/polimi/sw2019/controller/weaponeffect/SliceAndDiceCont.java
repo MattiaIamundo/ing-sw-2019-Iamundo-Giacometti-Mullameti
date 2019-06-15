@@ -4,8 +4,8 @@ import it.polimi.sw2019.model.events.SliceAndDiceSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.Weapon;
+import it.polimi.sw2019.model.weapon_power.Cyberblade;
 import it.polimi.sw2019.model.weapon_power.SliceAndDice;
-import it.polimi.sw2019.model.weapon_power.TwoDamageSameSpace;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public class SliceAndDiceCont implements Observer<SliceAndDiceSetEv>, EffectCont
             i++;
         }
         cyberblade = attacker.listWeapon()[i];
-        notselectable.add(((TwoDamageSameSpace) cyberblade.getPower()).getTarget().getNickname());
+        notselectable.add(((Cyberblade) cyberblade.getPower()).getTarget().getNickname());
     }
 
     @Override

@@ -1,26 +1,28 @@
 package it.polimi.sw2019.model.weapon_power;
 
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.model.events.LongBarrelChooseEv;
+import it.polimi.sw2019.model.events.ZX2ChooseEv;
 import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 
 /**
- * This class implements the alternative effect of Shotgun
+ * This class implements the basic effect of Zx-2
  * @author Mattia Iamundo
  */
-public class LongBarrelMode extends Observable<LongBarrelChooseEv> implements Power, SingleTarget{
+public class ZX2 extends Observable<ZX2ChooseEv> implements Power, SingleTarget{
 
     private Player target;
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().giveDamage(attacker, 2);
+        target.getPlance().giveDamage(attacker, 1);
+        target.getPlance().setMark(attacker);
+        target.getPlance().setMark(attacker);
     }
 
     public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){
-        notify(new LongBarrelChooseEv(attacker, valid, notreachable));
+        notify(new ZX2ChooseEv(attacker, valid, notreachable));
     }
 
     @Override
