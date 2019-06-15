@@ -9,7 +9,7 @@ public class TurnEnd {
     static JFrame frame;
 
 
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
         String color ;
         color=Player.getColor();
         String actionIcon=new String();
@@ -33,9 +33,9 @@ public class TurnEnd {
             case ("Black"):{
                 /*actionIcon="res/greenMenu1.png";
                 reloadIcon="res/greenMenu2.png";*/
-            }
-            break;
-
+ //           }
+//            break;
+/*
             case ("Green"):{
                 actionIcon="res/greenReload1.png";
                 reloadIcon="res/greenReload2.png";
@@ -55,7 +55,9 @@ public class TurnEnd {
 
 
 
-    private static void actionWindow(String action, String reload ) {
+ */
+
+  /*  private static void actionWindow(String action, String reload ) {
         frame = new JFrame("It's your turn !");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(395,258);
@@ -81,6 +83,8 @@ public class TurnEnd {
         frame.setVisible(true);
         frame.setResizable(true);
     }
+
+   */
 }
 
 

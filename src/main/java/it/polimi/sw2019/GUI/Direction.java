@@ -11,7 +11,7 @@ public class Direction {
 
     static JFrame frame;
 
-    public static void directionWindow (String moveIcon){
+  /*  public static void directionWindow (String moveIcon){
         frame = new JFrame("Move");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300,150);
@@ -76,7 +76,9 @@ public class Direction {
 
     }
 
-    public static void main(String[]args){
+   */
+
+  /*  public static void main(String[]args){
         String color ;
         color=Player.getColor();
         String moveIcon=new String();
@@ -109,5 +111,7 @@ public class Direction {
         }
         Direction.directionWindow(moveIcon);
     }
+
+   */
 }
 

@@ -9,9 +9,6 @@ public class ConnectionJson {
     //boolean variable to decide if there is a wall or not , if there is possibile to move from spaceFirst to spaceSecond
     private boolean isWall;
 
-    public String getSpaceFirst() {
-        return spaceFirst;
-    }
 
     public String getSpaceSecond() {
         return spaceSecond;
@@ -19,5 +16,9 @@ public class ConnectionJson {
 
     public boolean isWall() {
         return isWall;
+    }
+
+    public String getSpaceFirst() {
+        return spaceFirst;
     }
 }

@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class Server implements Runnable{
 
     //the two "sub" server: RMI e Socket
-    private ServerRMI serverRMI;
+    //private ServerRMI serverRMI;
     private ServerSocket serverSocket;
     //the controller
     private Game controller;
@@ -21,8 +21,8 @@ public class Server implements Runnable{
 
     public Server() {
 
-        serverRMI = new ServerRMI();
         controller = new Game();
+        //serverRMI = new ServerRMI(this.controller);
         serverSocket = new ServerSocket(this.controller);
         run();
     }

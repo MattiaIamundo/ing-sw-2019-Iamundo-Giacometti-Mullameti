@@ -1,7 +1,9 @@
 package it.polimi.sw2019.network.Socket;
 
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
-import it.polimi.sw2019.events.server_event.VCevent.VCLogin;
+import it.polimi.sw2019.nethandler.ContSelect;
+import it.polimi.sw2019.nethandler.ModViewEvent;
+import it.polimi.sw2019.nethandler.ViewContEvent;
 import it.polimi.sw2019.view.*;
 
 import javax.swing.*;
@@ -10,6 +12,7 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -18,16 +21,12 @@ import java.util.logging.Logger;
 
 public class ClientSocket extends JFrame implements Runnable, Serializable{
 
-    //the serial number
-    private final long serialVersionUID = 11111;
     //the port number
     private final int portNumber = 12345;
     //connection to the server
     private Socket connection;
     //input from the server
     private Scanner input;
-    //this is for the player input
-    private Scanner scanner;
     //output for the server
     private PrintWriter output;
     //host name for the server
@@ -55,6 +54,7 @@ public class ClientSocket extends JFrame implements Runnable, Serializable{
     private ModViewEvent modViewEvent;
     private ViewContEvent viewContEvent;
 
+    private ExecutorService worker = Executors.newFixedThreadPool( 1 );
 
     /**
      * this is the constructor
@@ -80,16 +80,21 @@ public class ClientSocket extends JFrame implements Runnable, Serializable{
             //getting the input and output stream
             input = new Scanner( connection.getInputStream() );
             output = new PrintWriter( connection.getOutputStream() );
-            //get the player stream
-            scanner = new Scanner( System.in );
 
             //set the socket to the NH
             contSelect = new ContSelect( connection );
             modViewEvent = new ModViewEvent( connection );
             viewContEvent = new ViewContEvent( connection );
 
+            //set the view
+            playerView = new PlayerView(null);
+            tableView = new TableView(null);
+            weaponView = new WeaponView(null);
+            ammoView = new AmmoView( null);
+            powerUpView = new PowerUpView(null);
+
             if (cli) {
-                userImp = new CLI();
+                userImp = new CLI(playerView,viewContEvent);
             }
             else {
                 userImp = new GUI();
@@ -102,13 +107,11 @@ public class ClientSocket extends JFrame implements Runnable, Serializable{
             ammoView = new AmmoView(userImp);
             powerUpView = new PowerUpView(userImp);
 
-
-
         }catch(IOException e){
             logger.log(Level.SEVERE, e.toString(), e);
         }
         //it creates and starts the thread for this client
-        ExecutorService worker = Executors.newFixedThreadPool( 1 );
+
         //client is executed
         worker.execute( this );
 
@@ -119,15 +122,12 @@ public class ClientSocket extends JFrame implements Runnable, Serializable{
      * and with a loop it can control every server's message send to it
      */
     public void run(){
-
-        //GUI component, now the view of the message is only CLI
-        //take the messages send by server and print it
+        ok = false;
+        //welcome, set the nickname
         try{
-            ok = contSelect.waitForNicknameRequest(this.playerView);
+            contSelect.waitForNicknameRequest(this.playerView);
 
-            while ( !ok ) {
-
-                string = scanner.nextLine();
+ /*           while ( !ok ) {
 
                 if (string.equals("quit")) {
 
@@ -143,16 +143,42 @@ public class ClientSocket extends JFrame implements Runnable, Serializable{
                     Reconnection rec = new Reconnection(true, string);
                     playerView.sendNickname(viewContEvent, rec);
 
-                } else {
-
-                    VCLogin vcLogin = new VCLogin(string);
-                    playerView.sendNickname(viewContEvent, vcLogin);
-
                 }
-
-                ok = contSelect.waitForNicknameRequest(this.playerView);
             }
+
+  */        do {
+                ok = contSelect.waitForOk(this.playerView);
+                if ( !ok ) {
+                    contSelect.waitForNicknameRequest(this.playerView);
+                }
+            }
+            while ( !ok );
+
+
+
+            System.out.println("Please for others!\n");
             ok = false;
+            //select the color
+            contSelect.waitingForColorRequest(this.playerView);
+            while (!ok) {
+
+                ok = contSelect.waitForOk(this.playerView);
+                if( !ok  ) {
+                    contSelect.waitingForColorRequest(this.playerView);;
+                }
+            }
+
+
+            System.out.println("Please waiting for others playersssssssss!\n");
+            ok = false;
+
+            //to see if i'm the first player
+   /*         while (!ok) {
+
+            }
+
+    */
+
             System.out.println("Please waiting for others players!\n");
 
             //ping to pong
@@ -160,10 +186,24 @@ public class ClientSocket extends JFrame implements Runnable, Serializable{
 
                 ok = contSelect.waitForPing(this.playerView);
                 playerView.sendPing(viewContEvent);
-
+//i'm here
             }
 
             System.out.println("The game is starting!\n");
+
+            while ( !gameover ) {
+
+                //game is started!
+                while ( !ok ) {
+
+                    //ok = contSelect.waitForMyTurn(this.playerView);
+                    playerView.sendPing(viewContEvent);
+
+                }
+
+
+            }
+
 
         }finally {
 
@@ -183,13 +223,14 @@ public class ClientSocket extends JFrame implements Runnable, Serializable{
         output.close();
         try {
             connection.close();
-        }catch (IOException e) {
+        }catch ( IOException | NoSuchElementException | IllegalStateException e) {
 
             logger.log( Level.SEVERE, e.toString(), e);
             System.exit(1);
+            worker.shutdown();
         }
         System.out.println("The connection with the server is closed!\n");
-        return;
+        worker.shutdown();
 
     }//END of CLOSE CONNECTION
 

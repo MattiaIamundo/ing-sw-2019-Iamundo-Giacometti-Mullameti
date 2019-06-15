@@ -146,12 +146,14 @@ public class PlayerThread implements Runnable {
         }
         else if ( gameController.getGameover() ) {
             gameController.sendGoodbye(playerRemoteView);
+
             try{
                 //the client connection is closed
-                logger.log(Level.FINE, " {ServerSocket} The connection with the player  is closed!\n");
+                logger.log(Level.FINE, " {ServerSocket} The connection with a player is closed!\n");
                 this.connection.close();
                 this.input.close();
                 this.output.close();
+                gameController.removePlayers(this);
 
             }catch(IOException e) {
 
@@ -174,6 +176,8 @@ public class PlayerThread implements Runnable {
 
                 synchronized (gameController.getStop()) {
 
+                    //gameController.addPlayers("mimmo");
+                    //gameController.getPlayers().get(0).setColor("gray");
                     do {
 
                         if ( !gameController.getGameStarted() ) {
@@ -181,24 +185,106 @@ public class PlayerThread implements Runnable {
                             this.gameController.askForNickname(this.playerRemoteView, firstTime, gameController.getPlayers());
                             String s = this.playerRemoteView.waitForNickname();
 
+                            //FIRST PLAYER
                             if (gameController.getPlayers().isEmpty()) {
+
                                 goOut = true;
                                 gameController.addPlayers(s);
                                 this.nickname = s;
+                                gameController.sendOk(this.playerRemoteView);
+
+                                boolean duplicated = false;
+                                boolean canGoOut = false;
+                                firstTime = true;
+
+                                while ( !canGoOut ) {
+
+                                    canGoOut = true;
+                                    this.gameController.askForColor( this.playerRemoteView, firstTime, duplicated, gameController.getPlayers() );
+                                    String si = this.playerRemoteView.waitForColor();
+
+                                    if ( !si.equals("blue") &&  !si.equals("yellow") &&  !si.equals("purple") &&  !si.equals("green") &&  !si.equals("gray") ) {
+                                        canGoOut = false;
+                                        firstTime = false;
+                                        gameController.sendNotOk(this.playerRemoteView);
+                                    }
+                                    else {
+                                        for (Player e : gameController.getPlayers()) {
+
+                                            if (e.getColor().equals(s)) {
+                                                canGoOut = false;
+                                                firstTime = false;
+                                                duplicated = true;
+                                                gameController.sendNotOk(this.playerRemoteView);
+                                            }
+                                        }
+                                        if ( canGoOut ) {
+                                            gameController.getPlayers().get(0).setColor(si);
+                                        }
+                                    }
+
+                                }
 
                             } else {
+                                //OTHERS PLAYERS
                                 goOut = true;
                                 for (Player p : gameController.getPlayers()) {
 
                                     if (p.getNickname().equals(s)) {
                                         goOut = false;
                                         firstTime = false;
+                                        gameController.sendNotOk(this.playerRemoteView);
                                     }
                                 }
                                 if (goOut) {
                                     gameController.addPlayers(s);
                                     this.nickname = s;
+                                    gameController.sendOk(this.playerRemoteView);
+
+                                    boolean canGoOut = false;
+                                    firstTime = true;
+                                    boolean duplicated = false;
+
+                                    while ( !canGoOut ) {
+
+                                        canGoOut = true;
+                                        this.gameController.askForColor(this.playerRemoteView, firstTime, duplicated, gameController.getPlayers());
+                                        String si = this.playerRemoteView.waitForColor();
+
+                                        if ( !si.equals("blue") &&  !si.equals("yellow") &&  !si.equals("purple") &&  !si.equals("green") &&  !si.equals("gray") ) {
+                                            canGoOut = false;
+                                            firstTime = false;
+                                            gameController.sendNotOk(this.playerRemoteView);
+                                        }
+                                        else {
+                                            for (Player e : gameController.getPlayers()) {
+
+                                                if ( e.getColor().equals(si)) {
+                                                    canGoOut = false;
+                                                    firstTime = false;
+                                                    duplicated = true;
+                                                    gameController.sendNotOk(this.playerRemoteView);
+                                                }
+                                            }
+                                            if( canGoOut ) {
+                                                //add color
+                                                for (Player player : gameController.getPlayers()) {
+
+                                                    if ( player.getNickname().equals(this.nickname) ) {
+                                                        player.setColor(si);
+                                                    }
+
+                                                }
+
+                                            }
+                                        }
+
+                                    }
                                 }
+                            }
+
+                            if (this.gameController.getPlayers().get(0).getNickname().equals(s)) {
+                                //scegli il numero di skulls e la mappa
                             }
                         }
                         else {
@@ -243,21 +329,22 @@ public class PlayerThread implements Runnable {
 
                 logger.log(Level.INFO, "{ PlayerThread } loop until there are 5 players or the timer finishes" );
 
-                while (gameController.getPlayers().size() < 5 && !gameController.getTimerThread().getTimerDone()) {
+                while ( gameController.getPlayers().size() < 5 && !gameController.getTimerThread().getTimerDone() ) {
 
                     gameController.sendPing(playerRemoteView);
                     string = playerRemoteView.waitForPong();
 
                     synchronized ( gameController.getTimerThread() ) {
 
-                        if ( gameController.getPlayers().size() < 3 && gameController.getTimerThread().getOn()) {
+                        if ( gameController.getPlayers().size() < 3 && gameController.getTimerThread().getOn() ) {
                             logger.log(Level.INFO, "{PlayerThread "+ this.nickname +"} has stopped the timer!");
                             gameController.getTimerThread().deleteTimer();
                             gameController.getTimerThread().setTimerDone(false);
                             gameController.getTimerThread().setOn(false);
                         }
 
-                        if ( gameController.getPlayers().size() >= 3 && !gameController.getTimerThread().getOn() && gameController.getTimerThread().getTurnTime() == 0) {
+                        if ( gameController.getPlayers().size() >= 3 && !gameController.getTimerThread().getOn()
+                                && gameController.getTimerThread().getTurnTime() == 0 && !gameController.getPlayers().get(2).getColor().equals("bho") ) {
                             logger.log(Level.INFO, "{PlayerThread "+ this.nickname +"} has started the timer!");
                             gameController.getTimerThread().run();
                             gameController.getTimerThread().setOn(true);
@@ -293,7 +380,7 @@ public class PlayerThread implements Runnable {
 
                     logger.log(Level.INFO, "{ PlayerThread " + this.nickname + "} is removed: " + ex.toString());
                     gameController.removePlayers(this);
-                    return;
+                    //throw new CancellPlayerException ();
                 }
             }
         }

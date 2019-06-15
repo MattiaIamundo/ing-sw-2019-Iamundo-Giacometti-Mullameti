@@ -3,6 +3,7 @@ package it.polimi.sw2019.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
 import it.polimi.sw2019.model.*;
@@ -14,11 +15,14 @@ import it.polimi.sw2019.utility.TimerThread;
 import it.polimi.sw2019.view.ObservableByGame;
 import it.polimi.sw2019.view.Observer;
 import it.polimi.sw2019.view.PlayerRemoteView;
+import it.polimi.sw2019.view.PlayerView;
 
+import java.awt.*;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.*;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -139,6 +143,35 @@ public class Game implements Observer <ObservableByGame> {
 
     }
 
+    public synchronized void askForColor(PlayerRemoteView prv, boolean firstTime, boolean duplicated, List<Player> list) {
+
+        List<String> colorlist = new ArrayList<>(5);
+        colorlist.add("blue");  colorlist.add("gray");  colorlist.add("yellow");  colorlist.add("purple");  colorlist.add("green");
+
+        if ( list.isEmpty() ) {
+
+            Color color = new Color(firstTime, duplicated, colorlist);
+            prv.requestColor(color);
+        }
+        else {
+
+            for (Player p : list) {
+                Iterator<String> colo = colorlist.iterator();
+
+                while ( colo.hasNext() ) {
+                    String es = colo.next();
+                    if (p.getColor().equals(es)) {
+                        colo.remove();
+                    }
+                }
+            }
+
+
+            Color color = new Color(firstTime, duplicated, colorlist);
+            prv.requestColor(color);
+        }
+    }
+
     public synchronized void sendReconnection(boolean firstTime, PlayerRemoteView prv) {
         Reconnection rer = new Reconnection(firstTime, "Reconnection");
         prv.requestNickname(rer);
@@ -150,6 +183,10 @@ public class Game implements Observer <ObservableByGame> {
 
     public void sendOk(PlayerRemoteView prv) {
         prv.sendOk();
+    }
+
+    public void sendNotOk(PlayerRemoteView prv) {
+        prv.sendNotOk();
     }
 
     public synchronized Object getStop() {

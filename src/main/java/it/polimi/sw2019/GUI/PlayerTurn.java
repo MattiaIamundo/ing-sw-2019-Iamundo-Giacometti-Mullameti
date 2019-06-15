@@ -8,7 +8,7 @@ public class PlayerTurn {
     static JFrame frame;
 
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         String color ;
         color=Player.getColor();
         String moveIcon=new String();
@@ -33,8 +33,8 @@ public class PlayerTurn {
                 /*moveIcon="Images/greenMenu1.png";
                 grabIcon="Images/greenMenu2.png";
                 shootIcon="Images/greenMenu3.png";*/
-            }
-            break;
+  //          }
+  /*          break;
 
             case ("Green"):{
                 moveIcon="Images/greenMenu1.png";
@@ -51,11 +51,11 @@ public class PlayerTurn {
             break;
         }
         PlayerTurn.actionWindow(moveIcon , grabIcon , shootIcon);
-    }
+    }*/
 
 
 
-    private static void actionWindow(String move, String grab ,String shoot) {
+   /* private static void actionWindow(String move, String grab ,String shoot) {
         frame = new JFrame("It's your turn !");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(435,295);
@@ -87,5 +87,6 @@ public class PlayerTurn {
         frame.setVisible(true);
         frame.setResizable(false);
     }
+    */
 }
 

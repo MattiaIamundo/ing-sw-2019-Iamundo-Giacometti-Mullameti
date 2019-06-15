@@ -1,7 +1,8 @@
-package it.polimi.sw2019.view;
+package it.polimi.sw2019.nethandler;
 
 import it.polimi.sw2019.model.Ammo;
 import it.polimi.sw2019.nethandler.ModViewEventInt;
+import it.polimi.sw2019.view.AmmoView;
 
 import java.net.Socket;
 

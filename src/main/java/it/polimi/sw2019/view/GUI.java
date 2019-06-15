@@ -14,6 +14,11 @@ public class GUI implements UIinterface {
     }
 
     @Override
+    public void requestColor(boolean firstTime, boolean duplicated, List<String> colorlist) {
+
+    }
+
+    @Override
     public void reconnection() {
 
     }

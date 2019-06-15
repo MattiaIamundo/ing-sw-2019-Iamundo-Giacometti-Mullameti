@@ -1,5 +1,6 @@
 package it.polimi.sw2019.view;
 
+import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
 
@@ -47,13 +48,19 @@ public class PlayerRemoteView extends PlayerView {
                     output.flush();
                 }
 
-                output.println( "\n" );
+                output.println( "" );
                 output.flush();
             }
 
     }
 
     public String waitForNickname() {
+
+        set = input.nextLine();
+        return set;
+    }
+
+    public String waitForColor() {
 
         set = input.nextLine();
         return set;
@@ -78,6 +85,24 @@ public class PlayerRemoteView extends PlayerView {
         output.flush();
     }
 
+    public void requestColor(Color color) {
+
+        output.println( color.isFirstTime() );
+        output.flush();
+
+        output.println( color.isDuplicated() );
+        output.flush();
+
+        for( String s : color.getColors()) {
+
+            output.println( s );
+            output.flush();
+        }
+
+        output.println( "" );
+        output.flush();
+    }
+
     public void sendGoodbye() {
         output.print("The nickname was not found, so goodbye!");
         output.flush();
@@ -85,9 +110,12 @@ public class PlayerRemoteView extends PlayerView {
 
     public void sendOk() {
 
-        output.println(false);
-        output.flush();
         output.println("ok");
+        output.flush();
+    }
+
+    public void sendNotOk() {
+        output.println("notok");
         output.flush();
     }
 
