@@ -43,11 +43,11 @@ public class ContSelect implements ContSelectInt {
             in.nextLine();
         }
         boo = in.nextBoolean();
-        System.out.println(boo);
+        //System.out.println(boo);
         string = in.nextLine();
-        System.out.println(string);
+        //System.out.println(string);
         string = in.nextLine();
-        System.out.println(string);
+        //System.out.println(string);
         //in.nextLine();
         //System.out.println(string);
 
@@ -85,15 +85,15 @@ public class ContSelect implements ContSelectInt {
         }
 
         boo = in.nextBoolean();
-        System.out.println(boo);
+        //System.out.println(boo);
         string = in.nextLine();
-        System.out.println(string);
+        //System.out.println(string);
         bii = in.nextBoolean();
-        System.out.println(bii);
+        //System.out.println(bii);
         string = in.nextLine();
-        System.out.println(string);
+        //System.out.println(string);
         string = in.nextLine();
-        System.out.println(string);
+        //System.out.println(string);
 
         if (!string.equals("ok")) {
 
@@ -107,6 +107,21 @@ public class ContSelect implements ContSelectInt {
             playerView.requestColor(color);
 
         }
+
+    }
+
+    public void waitingForSkull(PlayerView playerView) {
+
+        boolean skull;
+        while ( !in.hasNextBoolean() ) {}
+
+        skull = in.nextBoolean();
+        in.nextLine();
+        string = in.nextLine();
+
+        playerView.requestSkull(skull);
+
+
 
     }
 
@@ -128,4 +143,18 @@ public class ContSelect implements ContSelectInt {
         return string.equals("ok");
     }
 
+    public boolean waitForAmIFirstPlayer(PlayerView playerView) {
+
+        while ( !in.hasNextLine() ) {}
+
+        string = in.nextLine();
+
+        while ( string.equals("") ) {
+            string = in.nextLine();
+        }
+        if (string.equals("first")  ) {
+            return false;
+        }
+        return true;
+    }
 }

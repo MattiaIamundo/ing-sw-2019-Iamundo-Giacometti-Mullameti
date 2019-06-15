@@ -13,8 +13,8 @@ import java.util.Scanner;
  * @author Luca Giacometti
  */
 public abstract class Turn {
-    private static Player player;
-    private Integer usedAction;
+    private Player player;
+    private int usedAction;
     private Action action;
 
     /**
@@ -23,7 +23,7 @@ public abstract class Turn {
      * @param usedAction how many actions he used during this turn
      * @param action the action on air
      */
-    public Turn (Player player, Integer usedAction, Action action){
+    public Turn (Player player, int usedAction, Action action){
 
         this.player = player;
         this.action = action;
@@ -34,9 +34,36 @@ public abstract class Turn {
      *
      * @return the player who is playing this turn
      */
-    public static Player getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 
+    public void setPlayer(Player actualGamer) {
+        player = actualGamer;
+    }
+
+    public Action getAction() {
+        return this.action;
+    }
+
+    public void setAction(Action action) {
+        this.action = action;
+    }
+
+    public int getUsedAction() {
+        return this.usedAction;
+    }
+
+    public void setUsedAction(int usedAction) {
+        this.usedAction = usedAction;
+    }
+
+    public void addUsedAction() {
+        this.usedAction++;
+    }
+
+    public void minusUsedAction() {
+        this.usedAction--;
+    }
 
 }

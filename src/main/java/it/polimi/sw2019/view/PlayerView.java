@@ -68,4 +68,11 @@ public class PlayerView extends ObservableByGame implements Observer <Player> {
         vce.sendPing();
     }
 
+    public void requestSkull(boolean firstTime) {
+        ui.requestSkull(firstTime);
+    }
+
+    public void sendSkull( ViewContEvent vce, String sku) {
+        vce.sendSkull(sku);
+    }
 }

@@ -77,6 +77,19 @@ public class PlayerRemoteView extends PlayerView {
         return set;
     }
 
+    public void requestSkull(boolean firstTime) {
+        output.println(firstTime);
+        output.flush();
+
+        output.println("skull");
+        output.flush();
+    }
+
+    public String waitForSkull() {
+        set = input.nextLine();
+        return set;
+    }
+
     public void requestNickname(Reconnection reconnection) {
         output.println(reconnection.getFirstTime());
         output.flush();
@@ -116,6 +129,16 @@ public class PlayerRemoteView extends PlayerView {
 
     public void sendNotOk() {
         output.println("notok");
+        output.flush();
+    }
+
+    public void sendYouAreFirstPlayer() {
+        output.println("first");
+        output.flush();
+    }
+
+    public void sendYouAreNotFirstPlayer() {
+        output.println("oneother");
         output.flush();
     }
 

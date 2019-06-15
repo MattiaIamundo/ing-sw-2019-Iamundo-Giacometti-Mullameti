@@ -19,7 +19,7 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ClientSocket extends JFrame implements Runnable, Serializable{
+public class ClientSocket extends JFrame implements Runnable {
 
     //the port number
     private final int portNumber = 12345;
@@ -31,11 +31,9 @@ public class ClientSocket extends JFrame implements Runnable, Serializable{
     private PrintWriter output;
     //host name for the server
     private String serverHost;
-    //it contains the what the client is writing
-    private String string = "nope";
-    //
+    //boolean to set the condition to go out the loops
     private boolean ok = false;
-    //
+    //boolean to set that the game is finished
     private boolean gameover = false;
     //the GUI or CLI
     private UIinterface userImp;
@@ -43,18 +41,18 @@ public class ClientSocket extends JFrame implements Runnable, Serializable{
     private static final Logger logger = Logger.getLogger( ClientSocket.class.getName() );
 
     //view
-    private PlayerView playerView;
-    private TableView tableView;
-    private WeaponView weaponView;
-    private AmmoView ammoView;
-    private PowerUpView powerUpView;
+    private transient PlayerView playerView;
+    private transient TableView tableView;
+    private transient WeaponView weaponView;
+    private transient AmmoView ammoView;
+    private transient PowerUpView powerUpView;
 
     //the NH
-    private ContSelect contSelect;
-    private ModViewEvent modViewEvent;
-    private ViewContEvent viewContEvent;
+    private transient ContSelect contSelect;
+    private transient ModViewEvent modViewEvent;
+    private transient ViewContEvent viewContEvent;
 
-    private ExecutorService worker = Executors.newFixedThreadPool( 1 );
+    private transient ExecutorService worker = Executors.newFixedThreadPool( 1 );
 
     /**
      * this is the constructor
@@ -125,6 +123,7 @@ public class ClientSocket extends JFrame implements Runnable, Serializable{
         ok = false;
         //welcome, set the nickname
         try{
+            logger.log(Level.INFO, "{ClientSocket} nickname selection ");
             contSelect.waitForNicknameRequest(this.playerView);
 
  /*           while ( !ok ) {
@@ -154,42 +153,48 @@ public class ClientSocket extends JFrame implements Runnable, Serializable{
             }
             while ( !ok );
 
-
-
-            System.out.println("Please for others!\n");
+            logger.log(Level.INFO, "{ClientSocket} color selection");
             ok = false;
+
             //select the color
             contSelect.waitingForColorRequest(this.playerView);
             while (!ok) {
 
                 ok = contSelect.waitForOk(this.playerView);
                 if( !ok  ) {
-                    contSelect.waitingForColorRequest(this.playerView);;
+                    contSelect.waitingForColorRequest(this.playerView);
                 }
             }
 
+            logger.log(Level.INFO, "{ClientSocket} first player selection");
 
-            System.out.println("Please waiting for others playersssssssss!\n");
-            ok = false;
+            ok = contSelect.waitForAmIFirstPlayer(this.playerView);
 
             //to see if i'm the first player
-   /*         while (!ok) {
+            while ( !ok ) {
+
+
+                logger.log(Level.INFO, "{ClientSocket} skull selection");
+                contSelect.waitingForSkull(this.playerView);
+                ok = contSelect.waitForOk(this.playerView);
+
 
             }
 
-    */
+            ok = false;
 
-            System.out.println("Please waiting for others players!\n");
+            //devo implementare come fare per la mappa//
 
+            logger.log(Level.INFO, "{ClientSocket} ping pong action");
             //ping to pong
             while ( !ok ) {
 
                 ok = contSelect.waitForPing(this.playerView);
                 playerView.sendPing(viewContEvent);
-//i'm here
+
             }
 
-            System.out.println("The game is starting!\n");
+            logger.log(Level.INFO, "{ClientSocket} the game is starting");
 
             while ( !gameover ) {
 
@@ -226,19 +231,12 @@ public class ClientSocket extends JFrame implements Runnable, Serializable{
         }catch ( IOException | NoSuchElementException | IllegalStateException e) {
 
             logger.log( Level.SEVERE, e.toString(), e);
-            System.exit(1);
             worker.shutdown();
         }
-        System.out.println("The connection with the server is closed!\n");
+        logger.log( Level.INFO, "The connection with the server is closed!\n");
         worker.shutdown();
 
     }//END of CLOSE CONNECTION
-
-    public void setGameover(boolean status) {
-        this.gameover = status;
-    }
-
-    public void receiveEvent() {}
 
     public static void main (String[] args){
 

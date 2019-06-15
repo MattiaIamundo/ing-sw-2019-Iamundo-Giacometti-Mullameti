@@ -104,6 +104,30 @@ public class CLI implements UIinterface{
         pv.sendColor(vce,vcColor);
     }
 
+    @Override
+    public void requestSkull(boolean firstTime) {
+        if ( firstTime ) {
+            System.out.println("You are the first player\n");
+            System.out.println("Choose how many skulls you want:\n");
+            System.out.println(" - five \n");
+            System.out.println(" - six \n");
+            System.out.println(" - seven \n");
+            System.out.println(" - eight \n");
+            string = s.nextLine();
+        }
+        else {
+            System.out.println("Your choose is not in the list!\n");
+            System.out.println("Choose how many skulls you want:\n");
+            System.out.println(" - five \n");
+            System.out.println(" - six \n");
+            System.out.println(" - seven \n");
+            System.out.println(" - eight \n");
+            string = s.nextLine();
+        }
+
+        pv.sendSkull(vce,string);
+    }
+
     public void reconnection() {
 
         System.out.println("Welcome to ADRENALINE!\n");

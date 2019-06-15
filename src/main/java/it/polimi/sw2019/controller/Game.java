@@ -37,11 +37,11 @@ public class Game implements Observer <ObservableByGame> {
     private Object stop = new Object();
     private Object stopArray = new Object();
     //the main controller's variables
-    private final Turn turnOf;
+    private Turn turnOf;
     private String gamemode;
     private State state;
     private String firstPlayer;
-    private String[] mapconfig;
+    private int mapconfig;
     private boolean out;
     private boolean gameover;
     private boolean gameStarted;
@@ -61,7 +61,7 @@ public class Game implements Observer <ObservableByGame> {
         state = new State();
         firstPlayer = "null";
         timerThread = new TimerThread();
-        mapconfig = new String[3];
+        mapconfig = 0;
         out = false;
         gameover = false;
 
@@ -177,6 +177,10 @@ public class Game implements Observer <ObservableByGame> {
         prv.requestNickname(rer);
     }
 
+    public synchronized void askForSkull(PlayerRemoteView prv, boolean firstTime) {
+        prv.requestSkull(firstTime);
+    }
+
     public void sendGoodbye(PlayerRemoteView prv) {
         prv.sendGoodbye();
     }
@@ -187,6 +191,14 @@ public class Game implements Observer <ObservableByGame> {
 
     public void sendNotOk(PlayerRemoteView prv) {
         prv.sendNotOk();
+    }
+
+    public synchronized void sendYouAreFirstPlayer(PlayerRemoteView prv) {
+        prv.sendYouAreFirstPlayer();
+    }
+
+    public synchronized void sendYouAreNotFirstPlayer(PlayerRemoteView prv) {
+        prv.sendYouAreNotFirstPlayer();
     }
 
     public synchronized Object getStop() {
@@ -232,7 +244,7 @@ public class Game implements Observer <ObservableByGame> {
     /**
      * create the powerupDeck for the gameboard
      */
-    public void createPowerUp() {
+    public synchronized void createPowerUp() {
 
         if ( gameboard.getPowerUp().isEmpty() ) {
 
@@ -267,7 +279,7 @@ public class Game implements Observer <ObservableByGame> {
         }
     }
 
-    public void createWeapon() {
+    public synchronized void createWeapon() {
 
         if ( this.getGameboard().getWeapon().isEmpty() ) {
             //create the Additive weapons
@@ -463,17 +475,31 @@ public class Game implements Observer <ObservableByGame> {
         }
     }
 
-    public void initializeKillShotTrack(int numberOfSkulls) {
+    public synchronized void initializeKillShotTrack(String numberOfSkulls) {
 
-        for (  int i = 0; i < numberOfSkulls; i++) {
+        int nOfSkull = 5;
+        if (numberOfSkulls.equals("five")) {
+            nOfSkull = 5;
+        }
+        else if (numberOfSkulls.equals("six")) {
+            nOfSkull = 6;
+        }
+        else if (numberOfSkulls.equals("seven")) {
+            nOfSkull = 7;
+        }
+        else {
+            nOfSkull = 8;
+        }
+
+        for (  int i = 0; i < nOfSkull; i++ ) {
 
             Skull skull = new Skull();
-            this.getGameboard().getKillshotTrack().add(skull);
+            this.gameboard.getKillshotTrack().add(skull);
         }
 
     }
 
-    public void createAmmo() {
+    public synchronized void createAmmo() {
 
         if ( this.getGameboard().getAmmo().isEmpty() ) {
 
@@ -512,15 +538,15 @@ public class Game implements Observer <ObservableByGame> {
         }
     }
 
-    public void createMap(int mapNumber) {
+    public synchronized void createMap(String mapNumber) {
 
-        if( mapNumber == 0 ) {
+        if( mapNumber.equals("zero") ) {
             createMap1();
         }
-        else if ( mapNumber == 1 ) {
+        else if ( mapNumber.equals("one") ) {
             createMap2();
         }
-        else if ( mapNumber == 2 ) {
+        else if ( mapNumber.equals("two") ) {
             createMap3();
         }
         else {
@@ -901,6 +927,9 @@ public class Game implements Observer <ObservableByGame> {
 
     }
 
+    public int getMapconfig(){
+        return mapconfig;
+    }
 
     //.............................FROM HERE OLD THINGS........................
 
@@ -914,9 +943,7 @@ public class Game implements Observer <ObservableByGame> {
     }
 
 
-    public String[] listGameboard(){
-        return mapconfig;
-    }
+
 
     public String listGamemode(){
         return gamemode;

@@ -1,6 +1,7 @@
 package it.polimi.sw2019.network.Socket;
 
 import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.exception.CancellPlayerException;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.utility.TimerThread;
 import it.polimi.sw2019.view.PlayerRemoteView;
@@ -220,9 +221,59 @@ public class PlayerThread implements Runnable {
                                         }
                                         if ( canGoOut ) {
                                             gameController.getPlayers().get(0).setColor(si);
+                                            gameController.sendOk(this.playerRemoteView);
                                         }
                                     }
 
+                                }
+                                if ( this.gameController.getGameboard().getKillshotTrack().isEmpty() ) {
+
+                                    this.gameController.sendYouAreFirstPlayer(this.playerRemoteView);
+                                    canGoOut = false;
+                                    firstTime = true;
+                                    //you have to choose the number of the skull
+
+
+                                    while (!canGoOut) {
+                                        canGoOut = true;
+                                        this.gameController.askForSkull(this.playerRemoteView, firstTime);
+                                        String ss = this.playerRemoteView.waitForSkull();
+
+                                        if (!ss.equals("five") && !ss.equals("six") && !ss.equals("seven") && !ss.equals("eight")) {
+                                            firstTime = false;
+                                            canGoOut = false;
+                                            gameController.sendNotOk(this.playerRemoteView);
+                                        } else {
+                                            this.gameController.initializeKillShotTrack(ss);
+                                            gameController.sendOk(this.playerRemoteView);
+                                        }
+                                    }
+                                }
+                                else {
+                                    this.gameController.sendYouAreNotFirstPlayer(this.playerRemoteView);
+                                }
+
+                                System.out.println("ciaooooo\n");
+
+                                canGoOut = false;
+                                firstTime = true;
+                                //you have to choose the number of the skull
+                                if ( this.gameController.getGameboard().getMap().getList().isEmpty() ) {
+/*
+                                    while (!canGoOut) {
+                                        canGoOut = true;
+                                        this.gameController.askForMap(firstTime);
+                                        String nmap = this.playerRemoteView.waitForMap();
+
+                                        if (!nmap.equals("five") && !nmap.equals("six") && !nmap.equals("seven") && !nmap.equals("eight")) {
+                                            firstTime = false;
+                                            canGoOut = false;
+                                        } else {
+                                            this.gameController.createMap(nmap);
+                                        }
+                                    }
+
+ */
                                 }
 
                             } else {
@@ -272,6 +323,7 @@ public class PlayerThread implements Runnable {
 
                                                     if ( player.getNickname().equals(this.nickname) ) {
                                                         player.setColor(si);
+                                                        gameController.sendOk(this.playerRemoteView);
                                                     }
 
                                                 }
@@ -281,11 +333,14 @@ public class PlayerThread implements Runnable {
 
                                     }
                                 }
+
+                                this.gameController.sendYouAreNotFirstPlayer(this.playerRemoteView);
+                                if ( this.gameController.getGameStarted() ) {
+
+                                    throw new NoSuchElementException ();
+                                }
                             }
 
-                            if (this.gameController.getPlayers().get(0).getNickname().equals(s)) {
-                                //scegli il numero di skulls e la mappa
-                            }
                         }
                         else {
                             boolean gooutside = false;
@@ -313,9 +368,6 @@ public class PlayerThread implements Runnable {
                     } while (!goOut);
 
                 }
-
-                gameController.sendOk(playerRemoteView);
-
                 //announcing the number of missed player
                 if (gameController.getPlayers().size() < 5) {
 
@@ -360,7 +412,8 @@ public class PlayerThread implements Runnable {
                         gameController.getTimerThread().deleteTimer();
                     }
 
-                    gameController.getTimerThread().setTimerDone(false);
+                    //this would block some thread
+                    //gameController.getTimerThread().setTimerDone(false);
                     gameController.getTimerThread().setOn(false);
                     gameController.setGameStarted(true);
                     //setting the timer for the game
@@ -368,6 +421,14 @@ public class PlayerThread implements Runnable {
                     gameController.setTimerThreadToTheGame();
 
                 }
+
+                if( gameController.getPlayers().get(0).getNickname().equals(this.nickname) ) {
+                    gameController.setFirstPlayer();
+                }
+
+                gameController.createAmmo();
+                gameController.createWeapon();
+                gameController.createPowerUp();
 
                 logger.log(Level.INFO, "{ PlayerThread "+ this.nickname +"} is start to game" );
                 // the game can start!!
@@ -380,20 +441,18 @@ public class PlayerThread implements Runnable {
 
                     logger.log(Level.INFO, "{ PlayerThread " + this.nickname + "} is removed: " + ex.toString());
                     gameController.removePlayers(this);
-                    //throw new CancellPlayerException ();
                 }
             }
         }
+
     }//END of RUN
-
-
 
     private void startGame() {
 
         while ( !gameController.getGameover() ) {
 
 
-            logger.log(Level.INFO, "{PT} is starting the game\n ");
+            logger.log(Level.INFO, "{PT " + this.nickname + "} is starting the game\n ");
             gameLocker.lock();
 
             try {

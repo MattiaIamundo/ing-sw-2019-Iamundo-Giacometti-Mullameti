@@ -8,6 +8,8 @@ public interface UIinterface {
 
     void requestColor(boolean firstTime, boolean duplicated, List<String> colorlist);
 
+    void requestSkull(boolean firstTime);
+
     void reconnection();
 
     void sendOk();

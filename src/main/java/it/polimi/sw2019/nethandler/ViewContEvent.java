@@ -28,6 +28,11 @@ public class ViewContEvent implements ViewContEventInt {
         }
     }
 
+    public void sendSkull(String st) {
+        output.println(st);
+        output.flush();
+    }
+
     public void sendColor(VCColor vcColor) {
 
         output.println(vcColor.getColor() );

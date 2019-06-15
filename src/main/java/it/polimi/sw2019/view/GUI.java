@@ -19,6 +19,11 @@ public class GUI implements UIinterface {
     }
 
     @Override
+    public void requestSkull(boolean firstTime) {
+
+    }
+
+    @Override
     public void reconnection() {
 
     }

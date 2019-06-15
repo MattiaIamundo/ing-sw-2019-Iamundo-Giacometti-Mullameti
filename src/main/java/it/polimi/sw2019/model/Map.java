@@ -49,4 +49,8 @@ public class Map implements Serializable {
         else
             return (list.get(x)).get(y);
     }
+
+    public List <List<Space>> getList() {
+        return this.list;
+    }
 }

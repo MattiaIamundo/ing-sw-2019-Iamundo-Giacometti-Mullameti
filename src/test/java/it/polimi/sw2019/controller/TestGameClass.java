@@ -66,7 +66,7 @@ public class TestGameClass {
 
         Game controller = new Game();
 
-        controller.createMap(0);
+        controller.createMap("zero");
         Assert.assertNotNull(controller.getGameboard().getMap());
 
     }
@@ -76,7 +76,7 @@ public class TestGameClass {
 
         Game controller = new Game();
 
-        controller.createMap(1);
+        controller.createMap("one");
         Assert.assertNotNull( controller.getGameboard().getMap() );
 
     }
@@ -86,7 +86,7 @@ public class TestGameClass {
 
         Game controller = new Game();
 
-        controller.createMap(2);
+        controller.createMap("two");
         Assert.assertNotNull( controller.getGameboard().getMap() );
 
     }
@@ -96,7 +96,7 @@ public class TestGameClass {
 
         Game controller = new Game();
 
-        controller.createMap(3);
+        controller.createMap("three");
         Assert.assertNotNull( controller.getGameboard().getMap() );
     }
 }

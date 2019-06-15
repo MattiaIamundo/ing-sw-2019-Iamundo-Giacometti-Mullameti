@@ -1,6 +1,7 @@
 package it.polimi.sw2019.network.Socket;
 
 import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.exception.CancellPlayerException;
 import it.polimi.sw2019.utility.TimerThread;
 
 import javax.swing.*;
