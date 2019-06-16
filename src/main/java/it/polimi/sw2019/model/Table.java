@@ -31,7 +31,7 @@ public class Table extends TableView implements Cloneable, Serializable {
         weaponDeck = new ArrayList<>(21);
         powerupDeck = new ArrayList<>(24);
         ammoDeck = new ArrayList<>(36);
-        this.map = null;
+        map = new Map( null, null, null, null);
 
     }
 
