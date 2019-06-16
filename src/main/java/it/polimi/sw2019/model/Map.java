@@ -50,6 +50,30 @@ public class Map implements Serializable {
             return (list.get(x)).get(y);
     }
 
+
+    public int[] getCoordinates(Space position) throws InvalidSpaceException {
+        int x = 0;
+        int y = 0;
+        int[] coordinates = {x, y};
+
+        for (x = 0; x < list.size(); x++) {
+            for (y = 0; y < list.get(x).size(); y++) {
+                if (position == getSpace(x, y)) {
+                    return coordinates;
+                }
+            }
+        }
+        throw new InvalidSpaceException("space not exist");
+    }
+
+    public int getMaxX(){
+        return list.size();
+    }
+
+    public int getMaxY(){
+        return list.get(0).size();
+    }
+
     public List <List<Space>> getList() {
         return this.list;
     }
