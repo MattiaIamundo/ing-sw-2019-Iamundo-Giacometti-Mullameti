@@ -1,10 +1,8 @@
 package it.polimi.sw2019.model;
 
-import it.polimi.sw2019.model.Events.PowerChooseEv;
-import it.polimi.sw2019.model.Events.WeaponSelectEv;
+import it.polimi.sw2019.model.events.PowerChooseEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observable;
-import it.polimi.sw2019.view.WeaponView;
 
 import java.io.Serializable;
 import java.util.ArrayList;

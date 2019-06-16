@@ -27,7 +27,7 @@ public class Teleport implements EffectBehaviour {
                 int i = scanner.nextInt(); //abscissa
                 System.out.println("Enter the coordinate Y : ");
                 int j = scanner.nextInt(); //ordinate
-                moveto = Map.getSpace(i, j);
+                moveto = Table.getMap().getSpace(i, j);
                 break;
 
             }catch(InvalidSpaceException e){

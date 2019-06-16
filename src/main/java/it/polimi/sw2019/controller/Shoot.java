@@ -1,8 +1,6 @@
 package it.polimi.sw2019.controller;
 
-import it.polimi.sw2019.controller.weaponeffect.WeaponEffectMenager;
-import it.polimi.sw2019.model.Alternative;
-import it.polimi.sw2019.model.Events.WeaponSelectEv;
+import it.polimi.sw2019.model.events.WeaponSelectEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.Weapon;
@@ -31,9 +29,7 @@ public class Shoot implements Action, Observer<WeaponSelectEv> {
                 attacker = Table.getPlayers(i);
                 for (int j = 0; j < 3; j++) {
                     if (attacker.listWeapon()[j].getName().equals(message.getWeapon())){
-                        weapon = attacker.listWeapon()[j];
-                        WeaponEffectMenager effectMenager = new WeaponEffectMenager(attacker, weapon);
-                        effectMenager.acquirePower();
+                        //Server.WeaponeffectManager.acquirepower()
                     }
                 }
             }

@@ -1,5 +1,6 @@
 package it.polimi.sw2019.model;
 
+import it.polimi.sw2019.exception.InvalidDirectionException;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 
 import java.io.Serializable;

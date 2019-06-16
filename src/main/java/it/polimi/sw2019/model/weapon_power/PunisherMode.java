@@ -1,20 +1,16 @@
 package it.polimi.sw2019.model.weapon_power;
 
-import it.polimi.sw2019.exception.*;
-import it.polimi.sw2019.model.Events.TargetAcquisitionEv;
+import it.polimi.sw2019.model.events.PunisherModeChooseEv;
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.model.Space;
-import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 
 /**
  * This class implements the alternative effect of Tractor Beam
  * @author Mattia Iamundo
  */
-public class PunisherMode extends SingleTarget implements Power{
+public class PunisherMode extends Observable<PunisherModeChooseEv> implements Power, SingleTarget{
 
     private Player target;
 
@@ -26,7 +22,7 @@ public class PunisherMode extends SingleTarget implements Power{
 
     @Override
     public void chooseTarget(ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable, Player attacker) {
-        notify(new TargetAcquisitionEv(attacker, valid, notselectable, notreachable, "Select a player that is at most 2 moves away from you"));
+        notify(new PunisherModeChooseEv(attacker, valid, notselectable, notreachable));
     }
 
     @Override
