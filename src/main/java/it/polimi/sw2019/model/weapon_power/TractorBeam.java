@@ -8,8 +8,8 @@ import it.polimi.sw2019.view.Observable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MoveDamage extends Observable<TracBeamChooseEv> implements Power{
-    //base effect for TractorBeamCont
+public class TractorBeam extends Observable<TracBeamChooseEv> implements Power{
+    //base effect for TractorBeam
     private Player target = null;
 
     @Override

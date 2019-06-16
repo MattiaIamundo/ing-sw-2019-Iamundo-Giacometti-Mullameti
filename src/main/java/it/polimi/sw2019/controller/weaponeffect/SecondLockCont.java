@@ -4,7 +4,7 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.events.SecondLockSetEv;
 import it.polimi.sw2019.model.weapon_power.SecondLock;
-import it.polimi.sw2019.model.weapon_power.TwoDamageMark;
+import it.polimi.sw2019.model.weapon_power.LockRifle;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class SecondLockCont extends VisibleTargetCont implements Observer<Second
             i++;
         }
         lockrifle = attacker.listWeapon()[i];
-        notselectable.add(((TwoDamageMark) lockrifle.getPower()).getTarget().getNickname());
+        notselectable.add(((LockRifle) lockrifle.getPower()).getTarget().getNickname());
         return notselectable;
     }
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * This class implement the basic effect of Machine Gun
  * @author Mattia Iamundo
  */
-public class TwoTargetDamage extends Observable<MachineGunChooseEv> implements Power, SingleTarget{
+public class MachineGun extends Observable<MachineGunChooseEv> implements Power, SingleTarget{
 
     private Player target1;
     private Player target2;

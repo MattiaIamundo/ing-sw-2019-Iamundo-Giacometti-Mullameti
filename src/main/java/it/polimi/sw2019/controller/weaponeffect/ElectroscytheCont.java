@@ -1,13 +1,13 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.model.weapon_power.DamageAllSameSpace;
+import it.polimi.sw2019.model.weapon_power.Electroscythe;
 
 public class ElectroscytheCont implements EffectController{
 
-    private DamageAllSameSpace model;
+    private Electroscythe model;
 
-    public ElectroscytheCont(DamageAllSameSpace model) {
+    public ElectroscytheCont(Electroscythe model) {
         this.model = model;
     }
 

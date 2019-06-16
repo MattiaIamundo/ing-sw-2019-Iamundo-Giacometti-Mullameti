@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * This class implement the basic effect of Furnace
  * @author Mattia Iamundo
  */
-public class RoomDamage extends Observable<FurnaceChooseEv> implements Power{
+public class Furnace extends Observable<FurnaceChooseEv> implements Power{
 
     private String room;
 

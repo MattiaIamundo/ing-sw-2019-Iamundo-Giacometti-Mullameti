@@ -50,10 +50,10 @@ public class Map implements Serializable {
             return (list.get(x)).get(y);
     }
 
-    public Integer[] getCoordinates(Space position) throws InvalidSpaceException {
-        Integer x = 0;
-        Integer y = 0;
-        Integer[] coordinates = {x, y};
+    public int[] getCoordinates(Space position) throws InvalidSpaceException {
+        int x = 0;
+        int y = 0;
+        int[] coordinates = {x, y};
 
         for (x = 0; x < list.size(); x++) {
             for (y = 0; y < list.get(x).size(); y++) {

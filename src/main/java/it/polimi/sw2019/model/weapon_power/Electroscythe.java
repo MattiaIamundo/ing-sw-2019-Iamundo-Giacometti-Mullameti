@@ -7,7 +7,7 @@ import it.polimi.sw2019.model.Table;
  * This class implements the basic effect of the Electroscythe
  * @author Mattia Iamundo
  */
-public class DamageAllSameSpace implements Power{
+public class Electroscythe implements Power{
 
     @Override
     public void usePower(Player attacker){

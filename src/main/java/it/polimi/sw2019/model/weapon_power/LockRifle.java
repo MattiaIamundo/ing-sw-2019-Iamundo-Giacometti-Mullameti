@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * This class implements the basic effect of Lock Rifle
  * @author Mattia Iamundo
  */
-public class TwoDamageMark extends Observable<LockRifleChooseEv> implements Power, SingleTarget{
+public class LockRifle extends Observable<LockRifleChooseEv> implements Power, SingleTarget{
 
     private Player target;
 

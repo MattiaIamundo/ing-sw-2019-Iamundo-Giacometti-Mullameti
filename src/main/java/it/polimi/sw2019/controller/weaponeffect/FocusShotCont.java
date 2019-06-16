@@ -4,7 +4,7 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.FocusShotSetEv;
 import it.polimi.sw2019.model.weapon_power.FocusShot;
-import it.polimi.sw2019.model.weapon_power.TwoTargetDamage;
+import it.polimi.sw2019.model.weapon_power.MachineGun;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
@@ -29,13 +29,13 @@ public class FocusShotCont implements Observer<FocusShotSetEv>, EffectController
 
     public void acquireTarget(){
         ArrayList<String> targets = new ArrayList<>();
-        TwoTargetDamage basiceffect;
+        MachineGun basiceffect;
         int i = 0;
 
         while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("Machine Gun"))){
             i++;
         }
-        basiceffect = (TwoTargetDamage) attacker.listWeapon()[i].getPower();
+        basiceffect = (MachineGun) attacker.listWeapon()[i].getPower();
         targets.add(basiceffect.getTarget1().getNickname());
         if (basiceffect.getTarget2() != null){
             targets.add(basiceffect.getTarget2().getNickname());

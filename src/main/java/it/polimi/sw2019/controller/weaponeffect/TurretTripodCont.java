@@ -5,7 +5,7 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.events.TurretTripodSetEv;
 import it.polimi.sw2019.model.weapon_power.FocusShot;
 import it.polimi.sw2019.model.weapon_power.TurretTripod;
-import it.polimi.sw2019.model.weapon_power.TwoTargetDamage;
+import it.polimi.sw2019.model.weapon_power.MachineGun;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
@@ -41,22 +41,22 @@ public class TurretTripodCont extends VisibleTargetCont implements Observer<Turr
             i++;
         }
         machinegun = (DoubleAdditive) attacker.listWeapon()[i];
-        if ((((TwoTargetDamage) machinegun.getPower()).getTarget2() == null) || (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((TwoTargetDamage) machinegun.getPower()).getTarget2())){
-            realmodel.setPrevioustarget(((TwoTargetDamage) machinegun.getPower()).getTarget1());
-        }else if ((((TwoTargetDamage) machinegun.getPower()).getTarget2() != null) && (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((TwoTargetDamage) machinegun.getPower()).getTarget1())){
-            realmodel.setPrevioustarget(((TwoTargetDamage) machinegun.getPower()).getTarget2());
+        if ((((MachineGun) machinegun.getPower()).getTarget2() == null) || (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((MachineGun) machinegun.getPower()).getTarget2())){
+            realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget1());
+        }else if ((((MachineGun) machinegun.getPower()).getTarget2() != null) && (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((MachineGun) machinegun.getPower()).getTarget1())){
+            realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget2());
         }
     }
 
     private ArrayList<String> notselectable(){
         int i = 0;
         ArrayList<String> notselectable = new ArrayList<>();
-        TwoTargetDamage basiceffect;
+        MachineGun basiceffect;
         notselectable.add(attacker.getNickname());
         while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("Machine Gun"))){
             i++;
         }
-        basiceffect = (TwoTargetDamage) attacker.listWeapon()[i].getPower();
+        basiceffect = (MachineGun) attacker.listWeapon()[i].getPower();
         notselectable.add(basiceffect.getTarget1().getNickname());
         if (basiceffect.getTarget2() != null){
             notselectable.add(basiceffect.getTarget2().getNickname());

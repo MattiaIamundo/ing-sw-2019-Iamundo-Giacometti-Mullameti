@@ -4,7 +4,7 @@ import it.polimi.sw2019.model.events.TracBeamSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
-import it.polimi.sw2019.model.weapon_power.MoveDamage;
+import it.polimi.sw2019.model.weapon_power.TractorBeam;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.*;
@@ -13,10 +13,10 @@ public class TractorBeamCont implements Observer<TracBeamSetEv>, EffectControlle
 
    private Map<Player, Map<String, Space>> movingmap = new HashMap<>();
    private ArrayList<String> validroom = new ArrayList<>();
-   private MoveDamage model;
+   private TractorBeam model;
    private Player attacker;
 
-    public TractorBeamCont(MoveDamage model) {
+    public TractorBeamCont(TractorBeam model) {
         this.model = model;
     }
 

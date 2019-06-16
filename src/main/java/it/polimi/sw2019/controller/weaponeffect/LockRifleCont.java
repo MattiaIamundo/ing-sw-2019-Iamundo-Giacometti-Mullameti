@@ -1,14 +1,14 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.events.LockRifleSetEv;
-import it.polimi.sw2019.model.weapon_power.TwoDamageMark;
+import it.polimi.sw2019.model.weapon_power.LockRifle;
 import it.polimi.sw2019.view.Observer;
 
 public class LockRifleCont extends VisibleTargetCont implements Observer<LockRifleSetEv> {
 
-    private TwoDamageMark realmodel;
+    private LockRifle realmodel;
 
-    public LockRifleCont(TwoDamageMark realmodel) {
+    public LockRifleCont(LockRifle realmodel) {
         super(realmodel);
         this.realmodel = realmodel;
     }
