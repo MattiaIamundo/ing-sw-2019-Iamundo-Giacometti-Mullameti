@@ -146,7 +146,7 @@ public class ClientSocket extends JFrame implements Runnable {
             }
 
   */        do {
-                ok = contSelect.waitForOk(this.playerView);
+                ok = contSelect.waitForOk();
                 if ( !ok ) {
                     contSelect.waitForNicknameRequest(this.playerView);
                 }
@@ -160,30 +160,45 @@ public class ClientSocket extends JFrame implements Runnable {
             contSelect.waitingForColorRequest(this.playerView);
             while (!ok) {
 
-                ok = contSelect.waitForOk(this.playerView);
+                ok = contSelect.waitForOk();
                 if( !ok  ) {
                     contSelect.waitingForColorRequest(this.playerView);
                 }
             }
 
             logger.log(Level.INFO, "{ClientSocket} first player selection");
-
-            ok = contSelect.waitForAmIFirstPlayer(this.playerView);
-
             //to see if i'm the first player
-            while ( !ok ) {
+            ok = contSelect.waitForAmIFirstPlayer();
 
+            if (!ok) {
 
-                logger.log(Level.INFO, "{ClientSocket} skull selection");
-                contSelect.waitingForSkull(this.playerView);
-                ok = contSelect.waitForOk(this.playerView);
+                ok = contSelect.waitForThereAreSkull();
 
+                if (!ok) {
+
+                    while ( !ok ) {
+                        logger.log(Level.INFO, "{ClientSocket} skull selection");
+                        contSelect.waitingForSkull(this.playerView);
+                        ok = contSelect.waitForOk();
+
+                    }
+                }
+
+                ok = contSelect.waitForThereIsMap();
+
+                if ( !ok ) {
+
+                    while ( !ok ) {
+
+                        logger.log(Level.INFO, "{ClientSocket} map selection");
+                        contSelect.waitingForMap(this.playerView);
+                        ok = contSelect.waitForOk();
+                    }
+                }
 
             }
 
             ok = false;
-
-            //devo implementare come fare per la mappa//
 
             logger.log(Level.INFO, "{ClientSocket} ping pong action");
             //ping to pong
@@ -191,7 +206,6 @@ public class ClientSocket extends JFrame implements Runnable {
 
                 ok = contSelect.waitForPing(this.playerView);
                 playerView.sendPing(viewContEvent);
-
             }
 
             logger.log(Level.INFO, "{ClientSocket} the game is starting");
@@ -210,7 +224,13 @@ public class ClientSocket extends JFrame implements Runnable {
             }
 
 
-        }finally {
+        } catch (NoSuchElementException e) {
+            input.close();
+            output.close();
+            logger.log( Level.INFO, "The connection with the server is closed: the game is already started!\n");
+            worker.shutdown();
+        }
+        finally {
 
             closeConnection();
         }
@@ -229,6 +249,8 @@ public class ClientSocket extends JFrame implements Runnable {
         try {
             connection.close();
         }catch ( IOException | NoSuchElementException | IllegalStateException e) {
+            input.close();
+            output.close();
 
             logger.log( Level.SEVERE, e.toString(), e);
             worker.shutdown();

@@ -177,8 +177,10 @@ public class PlayerThread implements Runnable {
 
                 synchronized (gameController.getStop()) {
 
-                    //gameController.addPlayers("mimmo");
-                    //gameController.getPlayers().get(0).setColor("gray");
+                    //gameController.addPlayers("mimmo"); gameController.getPlayers().get(0).setColor("gray");
+                    //gameController.addPlayers("eta"); gameController.getPlayers().get(1).setColor("blue");
+                    //gameController.addPlayers("beta"); gameController.getPlayers().get(2).setColor("yellow");
+                    //gameController.setGameStarted(true);
                     do {
 
                         if ( !gameController.getGameStarted() ) {
@@ -226,14 +228,15 @@ public class PlayerThread implements Runnable {
                                     }
 
                                 }
+                                this.gameController.sendYouAreFirstPlayer(this.playerRemoteView);
+
+                                //if you to choose skull
                                 if ( this.gameController.getGameboard().getKillshotTrack().isEmpty() ) {
 
-                                    this.gameController.sendYouAreFirstPlayer(this.playerRemoteView);
+                                    this.gameController.sendThereAreNotSkull(this.playerRemoteView);
                                     canGoOut = false;
                                     firstTime = true;
                                     //you have to choose the number of the skull
-
-
                                     while (!canGoOut) {
                                         canGoOut = true;
                                         this.gameController.askForSkull(this.playerRemoteView, firstTime);
@@ -250,34 +253,43 @@ public class PlayerThread implements Runnable {
                                     }
                                 }
                                 else {
-                                    this.gameController.sendYouAreNotFirstPlayer(this.playerRemoteView);
+                                    this.gameController.sendThereAreSkull(this.playerRemoteView);
                                 }
 
-                                System.out.println("ciaooooo\n");
 
-                                canGoOut = false;
-                                firstTime = true;
-                                //you have to choose the number of the skull
-                                if ( this.gameController.getGameboard().getMap().getList().isEmpty() ) {
-/*
+                                //you have to choose the number of the map
+                                if ( this.gameController.getGameboard().getMap().getList().get(0).isEmpty() ) {
+
+                                    this.gameController.sendThereIsNotMap(this.playerRemoteView);
+                                    canGoOut = false;
+                                    firstTime = true;
                                     while (!canGoOut) {
                                         canGoOut = true;
-                                        this.gameController.askForMap(firstTime);
+                                        this.gameController.askForMap(this.playerRemoteView, firstTime);
                                         String nmap = this.playerRemoteView.waitForMap();
 
-                                        if (!nmap.equals("five") && !nmap.equals("six") && !nmap.equals("seven") && !nmap.equals("eight")) {
+                                        if (!nmap.equals("zero") && !nmap.equals("one") && !nmap.equals("two") && !nmap.equals("three")) {
                                             firstTime = false;
                                             canGoOut = false;
+                                            gameController.sendNotOk(this.playerRemoteView);
                                         } else {
                                             this.gameController.createMap(nmap);
+                                            gameController.sendOk(this.playerRemoteView);
                                         }
                                     }
 
- */
+                                }
+                                else {
+                                    this.gameController.sendThereIsMap(this.playerRemoteView);
                                 }
 
                             } else {
                                 //OTHERS PLAYERS
+                                if ( this.gameController.getGameStarted() ) {
+
+                                    this.gameController.sendOut(this.playerRemoteView);
+                                    throw new NoSuchElementException ();
+                                }
                                 goOut = true;
                                 for (Player p : gameController.getPlayers()) {
 
@@ -301,6 +313,12 @@ public class PlayerThread implements Runnable {
                                         canGoOut = true;
                                         this.gameController.askForColor(this.playerRemoteView, firstTime, duplicated, gameController.getPlayers());
                                         String si = this.playerRemoteView.waitForColor();
+
+                                        if ( this.gameController.getGameStarted() ) {
+
+                                            this.gameController.sendOut(this.playerRemoteView);
+                                            throw new NoSuchElementException ();
+                                        }
 
                                         if ( !si.equals("blue") &&  !si.equals("yellow") &&  !si.equals("purple") &&  !si.equals("green") &&  !si.equals("gray") ) {
                                             canGoOut = false;
@@ -335,8 +353,10 @@ public class PlayerThread implements Runnable {
                                 }
 
                                 this.gameController.sendYouAreNotFirstPlayer(this.playerRemoteView);
+
                                 if ( this.gameController.getGameStarted() ) {
 
+                                    this.gameController.sendOut(this.playerRemoteView);
                                     throw new NoSuchElementException ();
                                 }
                             }

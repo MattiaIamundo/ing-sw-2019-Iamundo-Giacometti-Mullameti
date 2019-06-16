@@ -10,6 +10,7 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ContSelect implements ContSelectInt {
@@ -110,6 +111,16 @@ public class ContSelect implements ContSelectInt {
 
     }
 
+    public void waitingForMap(PlayerView playerView) {
+        boolean map;
+        while ( !in.hasNextBoolean() ) {}
+
+        map = in.nextBoolean();
+        in.nextLine();
+
+        playerView.requestMap(map);
+    }
+
     public void waitingForSkull(PlayerView playerView) {
 
         boolean skull;
@@ -131,19 +142,25 @@ public class ContSelect implements ContSelectInt {
             playerView.waitForPing();
             return false;
         }
+        else if ( string.equals("out") ) {
+            throw new NoSuchElementException();
+        }
         return true;
     }
 
-    public boolean waitForOk(PlayerView playerView) {
+    public boolean waitForOk() {
         string = in.nextLine();
         while ( string.equals("") ) {
             string = in.nextLine();
+        }
+        if ( string.equals("out") ) {
+            throw new NoSuchElementException();
         }
 
         return string.equals("ok");
     }
 
-    public boolean waitForAmIFirstPlayer(PlayerView playerView) {
+    public boolean waitForAmIFirstPlayer() {
 
         while ( !in.hasNextLine() ) {}
 
@@ -156,5 +173,35 @@ public class ContSelect implements ContSelectInt {
             return false;
         }
         return true;
+    }
+
+    public boolean waitForThereAreSkull() {
+
+        while ( !in.hasNextLine() ) {}
+
+        string = in.nextLine();
+
+        while ( string.equals("") ) {
+            string = in.nextLine();
+        }
+        if (string.equals("true")  ) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean waitForThereIsMap() {
+
+        while ( !in.hasNextLine() ) {}
+
+        string = in.nextLine();
+
+        while ( string.equals("") ) {
+            string = in.nextLine();
+        }
+        if (string.equals("true")  ) {
+            return true;
+        }
+        return false;
     }
 }

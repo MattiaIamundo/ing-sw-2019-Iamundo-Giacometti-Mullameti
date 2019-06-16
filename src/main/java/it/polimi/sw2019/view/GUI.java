@@ -32,4 +32,9 @@ public class GUI implements UIinterface {
     public void sendOk() {
 
     }
+
+    @Override
+    public void requestMap(boolean firstTime) {
+
+    }
 }

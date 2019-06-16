@@ -113,7 +113,7 @@ public class CLI implements UIinterface{
             System.out.println(" - six \n");
             System.out.println(" - seven \n");
             System.out.println(" - eight \n");
-            string = s.nextLine();
+
         }
         else {
             System.out.println("Your choose is not in the list!\n");
@@ -122,10 +122,32 @@ public class CLI implements UIinterface{
             System.out.println(" - six \n");
             System.out.println(" - seven \n");
             System.out.println(" - eight \n");
-            string = s.nextLine();
-        }
 
+        }
+        string = s.nextLine();
         pv.sendSkull(vce,string);
+    }
+
+    public void requestMap(boolean firstTime) {
+
+        if ( firstTime ) {
+            System.out.println("You are the first player\n");
+            System.out.println("Choose the map you want:\n");
+            System.out.println(" - zero (12 spaces, good choose for 5 players!) \n");
+            System.out.println(" - one (11 space, ok for 4 players )\n");
+            System.out.println(" - two (11 space, ok for 4 players )\n");
+            System.out.println(" - three (10 space, the best for 3 players )\n");
+        }
+        else {
+            System.out.println("Your choose is not present in the list!\n");
+            System.out.println("Choose the map you want:\n");
+            System.out.println(" - zero (12 spaces, good choose for 5 players!) \n");
+            System.out.println(" - one (11 space, ok for 4 players )\n");
+            System.out.println(" - two (11 space, ok for 4 players )\n");
+            System.out.println(" - three (10 space, the best for 3 players )\n");
+        }
+        string = s.nextLine();
+        pv.sendMap(vce, string);
     }
 
     public void reconnection() {

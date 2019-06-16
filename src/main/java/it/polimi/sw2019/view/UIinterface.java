@@ -14,4 +14,5 @@ public interface UIinterface {
 
     void sendOk();
 
+    void requestMap(boolean firstTime);
 }
