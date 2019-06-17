@@ -47,7 +47,7 @@ public class ChainReactionCont extends VisibleTargetCont implements Observer<Cha
 
     @Override
     public void update(ChainReactSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

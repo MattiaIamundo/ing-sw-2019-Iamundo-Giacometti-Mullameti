@@ -33,6 +33,11 @@ public class ViewContEvent implements ViewContEventInt {
         output.flush();
     }
 
+    public void sendMap(String map) {
+        output.println(map);
+        output.flush();
+    }
+
     public void sendColor(VCColor vcColor) {
 
         output.println(vcColor.getColor() );

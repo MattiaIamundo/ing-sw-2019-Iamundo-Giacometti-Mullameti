@@ -13,7 +13,11 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * ho commentato per fare il sonar
+ */
 public class VortexCont implements Observer<VortexSetEv> {
+
     private Vortex model;
     private Player attacker;
     private HashMap<String, ArrayList<String>> valid = new HashMap<>();
@@ -24,6 +28,7 @@ public class VortexCont implements Observer<VortexSetEv> {
     }
 
     public void acquireTarget(){
+        /*
         Logger logger = Logger.getLogger("controller.WeaponEffct.Vortex.acquireTarget");
         ArrayList<String> validrooms = validRooms(attacker.getPosition());
         for (int x = 0; x < Table.getMap().getMaxX(); x++) {
@@ -37,8 +42,12 @@ public class VortexCont implements Observer<VortexSetEv> {
                 }
             }
         }
+
+         */
         model.chooseVortexAndTarget(valid, attacker);
     }
+
+
 
     private ArrayList<String> validRooms(Space attpos){
         ArrayList<String> rooms = new ArrayList<>();
@@ -86,6 +95,7 @@ public class VortexCont implements Observer<VortexSetEv> {
 
     @Override
     public void update(VortexSetEv message) {
+        /*
         Logger logger = Logger.getLogger("controller.WeaponEffct.Vortex.update");
         Space vorpos;
         Player target;
@@ -98,10 +108,12 @@ public class VortexCont implements Observer<VortexSetEv> {
         String[] coordinates= message.getPosition().split("-");
         try {
             vorpos = Table.getMap().getSpace(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
-            model.setVortex(vorpos);
+           model.setVortex(vorpos);
         }catch (InvalidSpaceException e){
             logger.log(Level.SEVERE, "Left the boundaries of the map");
         }
         model.usePower(attacker);
+
+         */
     }
 }

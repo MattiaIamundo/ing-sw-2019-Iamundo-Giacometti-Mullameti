@@ -75,4 +75,12 @@ public class PlayerView extends ObservableByGame implements Observer <Player> {
     public void sendSkull( ViewContEvent vce, String sku) {
         vce.sendSkull(sku);
     }
+
+    public void requestMap(boolean firstTime) {
+        ui.requestMap(firstTime);
+    }
+
+    public void sendMap(ViewContEvent vce, String maptype) {
+        vce.sendMap(maptype);
+    }
 }

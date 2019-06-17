@@ -65,8 +65,6 @@ public class TimerThread implements Runnable {
         this.timerDone = status;
     }
 
-    //public synchronized void deleteTask () { task.cancel(); }
-
     public synchronized void deleteTimer() {
         timer.cancel();
         timer.purge();
@@ -102,6 +100,7 @@ public class TimerThread implements Runnable {
             }
         };
             //the server is accepting the clients
+            setTimerDone(false);
             if (!game) {
                 //the time to accept other two players
                 System.out.println("timer schedule task with time\n");
