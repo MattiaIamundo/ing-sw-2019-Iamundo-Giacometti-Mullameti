@@ -214,7 +214,7 @@ public class PlayerThread implements Runnable {
                                     else {
                                         for (Player e : gameController.getPlayers()) {
 
-                                            if (e.getColor().equals(s)) {
+                                            if (e.getCharacter().equals(s)) {
                                                 canGoOut = false;
                                                 firstTime = false;
                                                 duplicated = true;
@@ -222,7 +222,7 @@ public class PlayerThread implements Runnable {
                                             }
                                         }
                                         if ( canGoOut ) {
-                                            gameController.getPlayers().get(0).setColor(si);
+                                            gameController.getPlayers().get(0).setCharacter(si);
                                             gameController.sendOk(this.playerRemoteView);
                                         }
                                     }
@@ -328,7 +328,7 @@ public class PlayerThread implements Runnable {
                                         else {
                                             for (Player e : gameController.getPlayers()) {
 
-                                                if ( e.getColor().equals(si)) {
+                                                if ( e.getCharacter().equals(si)) {
                                                     canGoOut = false;
                                                     firstTime = false;
                                                     duplicated = true;
@@ -340,7 +340,7 @@ public class PlayerThread implements Runnable {
                                                 for (Player player : gameController.getPlayers()) {
 
                                                     if ( player.getNickname().equals(this.nickname) ) {
-                                                        player.setColor(si);
+                                                        player.setCharacter(si);
                                                         gameController.sendOk(this.playerRemoteView);
                                                     }
 
@@ -416,7 +416,7 @@ public class PlayerThread implements Runnable {
                         }
 
                         if ( gameController.getPlayers().size() >= 3 && !gameController.getTimerThread().getOn()
-                                && gameController.getTimerThread().getTurnTime() == 0 && !gameController.getPlayers().get(2).getColor().equals("bho") ) {
+                                && gameController.getTimerThread().getTurnTime() == 0 && !gameController.getPlayers().get(2).getCharacter().equals("null") ) {
                             logger.log(Level.INFO, "{PlayerThread "+ this.nickname +"} has started the timer!");
                             gameController.getTimerThread().run();
                             gameController.getTimerThread().setOn(true);

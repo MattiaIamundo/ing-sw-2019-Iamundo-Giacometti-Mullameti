@@ -15,7 +15,7 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
 
     private String nickname; //player's nickname
     private int score; //player's score
-    private String color = "null";
+    private String character = "null";
     //first red, second blue, third yellow
     private static int[] ammo = new int[3];
     //list of weapons the player owns , every player can own at top 3 weapons
@@ -321,12 +321,12 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
         }
     }
 
-    public String getColor() {
-        return color;
+    public String getCharacter() {
+        return character;
     }
 
-    public void setColor(String character) {
-        this.color = character;
+    public void setCharacter(String character) {
+        this.character = character;
     }
 
 }

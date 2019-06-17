@@ -160,7 +160,7 @@ public class Game implements Observer <ObservableByGame> {
 
                 while ( colo.hasNext() ) {
                     String es = colo.next();
-                    if (p.getColor().equals(es)) {
+                    if (p.getCharacter().equals(es)) {
                         colo.remove();
                     }
                 }
