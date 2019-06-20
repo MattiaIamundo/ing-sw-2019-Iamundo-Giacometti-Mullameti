@@ -1,6 +1,7 @@
 package it.polimi.sw2019.network.Socket;
 
 import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.controller.MultiGame;
 import it.polimi.sw2019.exception.CancellPlayerException;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.utility.TimerThread;
@@ -42,6 +43,7 @@ public class PlayerThread implements Runnable {
     private Condition turnOfOtherPlayers;
     private Condition otherPlayerConnected;
     //the controller
+    private MultiGame multiGameController;
     private Game gameController;
     //the logger
     private static final Logger logger = Logger.getLogger( PlayerThread.class.getName() );
@@ -52,7 +54,7 @@ public class PlayerThread implements Runnable {
     private WeaponRemoteView weaponRemoteView;
     private PowerUpRemoteView powerUpRemoteView;
 
-
+    //anzichè il Game, devo passargli il multigame dal socket
     public PlayerThread(Socket socket, Game controller){
         //set the player's number and the socket
         connection = socket;
@@ -205,7 +207,7 @@ public class PlayerThread implements Runnable {
                                     canGoOut = true;
                                     this.gameController.askForColor( this.playerRemoteView, firstTime, duplicated, gameController.getPlayers() );
                                     String si = this.playerRemoteView.waitForColor();
-
+                                    duplicated = false;
                                     if ( !si.equals("blue") &&  !si.equals("yellow") &&  !si.equals("purple") &&  !si.equals("green") &&  !si.equals("gray") ) {
                                         canGoOut = false;
                                         firstTime = false;
@@ -313,7 +315,7 @@ public class PlayerThread implements Runnable {
                                         canGoOut = true;
                                         this.gameController.askForColor(this.playerRemoteView, firstTime, duplicated, gameController.getPlayers());
                                         String si = this.playerRemoteView.waitForColor();
-
+                                        duplicated = true;
                                         if ( this.gameController.getGameStarted() ) {
 
                                             this.gameController.sendOut(this.playerRemoteView);
@@ -432,8 +434,6 @@ public class PlayerThread implements Runnable {
                         gameController.getTimerThread().deleteTimer();
                     }
 
-                    //this would block some thread
-                    //gameController.getTimerThread().setTimerDone(false);
                     gameController.getTimerThread().setOn(false);
                     gameController.setGameStarted(true);
                     //setting the timer for the game
