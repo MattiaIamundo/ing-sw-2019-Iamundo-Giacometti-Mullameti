@@ -4,6 +4,7 @@ import it.polimi.sw2019.model.events.PulvModeSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.PulverizeMode;
 import it.polimi.sw2019.view.Observer;
 
@@ -16,8 +17,8 @@ public class PulverizeModeCont implements Observer<PulvModeSetEv>, EffectControl
     private Player attacker;
     private HashMap<String, Space> positions = new HashMap<>();
 
-    public PulverizeModeCont(PulverizeMode model) {
-        this.model = model;
+    public PulverizeModeCont(Power model) {
+        this.model = (PulverizeMode) model;
     }
 
     @Override

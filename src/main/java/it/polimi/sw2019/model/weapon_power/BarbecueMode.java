@@ -47,4 +47,9 @@ public class BarbecueMode extends Observable<BarbecueChooseEv> implements Power{
     public void setTargetarea2(Space targetarea2) {
         this.targetarea2 = targetarea2;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

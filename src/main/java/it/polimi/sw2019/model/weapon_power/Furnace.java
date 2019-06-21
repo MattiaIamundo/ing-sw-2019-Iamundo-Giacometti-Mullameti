@@ -31,4 +31,9 @@ public class Furnace extends Observable<FurnaceChooseEv> implements Power{
     public void setRoom(String room) {
         this.room = room;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

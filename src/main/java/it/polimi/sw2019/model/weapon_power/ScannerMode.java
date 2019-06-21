@@ -39,4 +39,9 @@ public class ScannerMode extends Observable<ScannerModeChooseEv> implements Powe
     public void setTarget3(Player target3) {
         this.target3 = target3;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

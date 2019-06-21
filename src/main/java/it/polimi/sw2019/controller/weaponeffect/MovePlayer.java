@@ -3,6 +3,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.events.MoveTargetSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.WithMove;
 
 import java.util.ArrayList;
@@ -14,8 +15,8 @@ public abstract class MovePlayer implements EffectController {
     protected Player attacker;
     private Map<String, Space> positions = new HashMap<>();
 
-    public MovePlayer(WithMove model) {
-        this.model = model;
+    public MovePlayer(Power model) {
+        this.model = (WithMove) model;
     }
 
     @Override

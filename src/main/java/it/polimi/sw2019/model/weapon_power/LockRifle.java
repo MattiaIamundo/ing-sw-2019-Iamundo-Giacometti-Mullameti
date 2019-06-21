@@ -32,4 +32,9 @@ public class LockRifle extends Observable<LockRifleChooseEv> implements Power, S
     public Player getTarget() {
         return target;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

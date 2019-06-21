@@ -3,6 +3,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.events.PiercingModeSetEv;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.weapon_power.PiercingMode;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.ThroughWalls;
 import it.polimi.sw2019.view.Observer;
 
@@ -10,9 +11,9 @@ public class PiercingModeCont extends ThoughWall implements Observer<PiercingMod
 
     private PiercingMode realmodel;
 
-    public PiercingModeCont(PiercingMode realmodel) {
+    public PiercingModeCont(Power realmodel) {
         super(realmodel);
-        this.realmodel = realmodel;
+        this.realmodel = (PiercingMode) realmodel;
     }
 
     @Override

@@ -3,6 +3,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.events.SecondLockSetEv;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.SecondLock;
 import it.polimi.sw2019.model.weapon_power.LockRifle;
 import it.polimi.sw2019.view.Observer;
@@ -13,9 +14,9 @@ public class SecondLockCont extends VisibleTargetCont implements Observer<Second
 
     private SecondLock realmodel;
 
-    public SecondLockCont(SecondLock realmodel) {
+    public SecondLockCont(Power realmodel) {
         super(realmodel);
-        this.realmodel = realmodel;
+        this.realmodel = (SecondLock) realmodel;
     }
 
     @Override

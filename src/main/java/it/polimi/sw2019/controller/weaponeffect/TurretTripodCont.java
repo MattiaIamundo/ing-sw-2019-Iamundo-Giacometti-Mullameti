@@ -4,6 +4,7 @@ import it.polimi.sw2019.model.DoubleAdditive;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.events.TurretTripodSetEv;
 import it.polimi.sw2019.model.weapon_power.FocusShot;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.TurretTripod;
 import it.polimi.sw2019.model.weapon_power.MachineGun;
 import it.polimi.sw2019.view.Observer;
@@ -14,9 +15,9 @@ public class TurretTripodCont extends VisibleTargetCont implements Observer<Turr
 
     private TurretTripod realmodel;
 
-    public TurretTripodCont(TurretTripod realmodel) {
+    public TurretTripodCont(Power realmodel) {
         super(realmodel);
-        this.realmodel = realmodel;
+        this.realmodel = (TurretTripod) realmodel;
     }
 
     @Override

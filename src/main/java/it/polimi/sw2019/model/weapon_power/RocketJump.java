@@ -29,4 +29,9 @@ public class RocketJump extends Observable<RocketJumpChooseEv> implements Power,
     public void setMoveto(Space moveto) {
         this.moveto = moveto;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

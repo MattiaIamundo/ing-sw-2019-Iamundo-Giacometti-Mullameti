@@ -5,6 +5,7 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.weapon_power.BlackHole;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.Vortex;
 import it.polimi.sw2019.view.Observer;
 
@@ -15,8 +16,8 @@ public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController
     private BlackHole model;
     private Player attacker;
 
-    public BlackHoleCont(BlackHole model) {
-        this.model = model;
+    public BlackHoleCont(Power model) {
+        this.model = (BlackHole) model;
     }
 
     @Override

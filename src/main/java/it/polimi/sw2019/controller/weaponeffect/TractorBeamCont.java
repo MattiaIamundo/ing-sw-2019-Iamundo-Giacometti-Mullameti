@@ -4,6 +4,7 @@ import it.polimi.sw2019.model.events.TracBeamSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.TractorBeam;
 import it.polimi.sw2019.view.Observer;
 
@@ -16,8 +17,8 @@ public class TractorBeamCont implements Observer<TracBeamSetEv>, EffectControlle
    private TractorBeam model;
    private Player attacker;
 
-    public TractorBeamCont(TractorBeam model) {
-        this.model = model;
+    public TractorBeamCont(Power model) {
+        this.model = (TractorBeam) model;
     }
 
     @Override

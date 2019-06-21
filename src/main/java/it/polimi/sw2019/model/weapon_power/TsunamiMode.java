@@ -24,4 +24,9 @@ public class TsunamiMode implements Power{
     public void setTargets(ArrayList<Player> targets) {
         this.targets = targets;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

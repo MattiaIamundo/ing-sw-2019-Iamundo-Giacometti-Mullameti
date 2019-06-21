@@ -3,15 +3,16 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.MachineGunSetEv;
 import it.polimi.sw2019.model.weapon_power.MachineGun;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
 
 public class MachineGunCont extends VisibleTargetCont implements Observer<MachineGunSetEv> {
 
     private MachineGun realmodel;
 
-    public MachineGunCont(MachineGun realmodel) {
+    public MachineGunCont(Power realmodel) {
         super(realmodel);
-        this.realmodel = realmodel;
+        this.realmodel = (MachineGun) realmodel;
     }
 
     @Override

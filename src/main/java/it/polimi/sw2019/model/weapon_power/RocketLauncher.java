@@ -39,4 +39,9 @@ public class RocketLauncher extends Observable<RocketLaunchChooseEv> implements 
     public Space getOrigin() {
         return origin;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

@@ -2,13 +2,14 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.weapon_power.Electroscythe;
+import it.polimi.sw2019.model.weapon_power.Power;
 
 public class ElectroscytheCont implements EffectController{
 
     private Electroscythe model;
 
-    public ElectroscytheCont(Electroscythe model) {
-        this.model = model;
+    public ElectroscytheCont(Power model) {
+        this.model = (Electroscythe) model;
     }
 
     @Override

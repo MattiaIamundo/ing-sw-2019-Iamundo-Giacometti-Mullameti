@@ -2,15 +2,16 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.events.HeatseekerSetEv;
 import it.polimi.sw2019.model.weapon_power.Heatseeker;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
 
 public class HeatseekerCont extends VisibleTargetCont implements Observer<HeatseekerSetEv> {
 
     private Heatseeker realmodel;
 
-    public HeatseekerCont(Heatseeker realmodel) {
+    public HeatseekerCont(Power realmodel) {
         super(realmodel);
-        this.realmodel = realmodel;
+        this.realmodel = (Heatseeker) realmodel;
     }
 
     @Override

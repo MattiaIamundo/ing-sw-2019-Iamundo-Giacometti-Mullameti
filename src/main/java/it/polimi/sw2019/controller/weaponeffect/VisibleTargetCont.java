@@ -3,6 +3,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.events.TargetSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.SingleTarget;
 
 import java.util.ArrayList;
@@ -13,8 +14,8 @@ public abstract class VisibleTargetCont implements EffectController {
     protected ArrayList<String> valid = new ArrayList<>();
     protected ArrayList<String> notreachable = new ArrayList<>();
 
-    public VisibleTargetCont(SingleTarget model) {
-        this.model = model;
+    public VisibleTargetCont(Power model) {
+        this.model = (SingleTarget) model;
     }
 
     @Override

@@ -38,4 +38,9 @@ public class Vortex extends Observable<VortexChooseEv> implements Power{
     public Player getTarget() {
         return target;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

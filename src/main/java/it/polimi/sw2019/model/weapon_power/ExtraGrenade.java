@@ -40,4 +40,9 @@ public class ExtraGrenade extends Observable<ExtraGrenadeChooseEv> implements Po
     public void moveTarget(Space moveto, Player target){
         target.setPosition(moveto);
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

@@ -7,6 +7,7 @@ import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.ExtraGrenadeSetEv;
 import it.polimi.sw2019.model.weapon_power.ExtraGrenade;
 import it.polimi.sw2019.model.weapon_power.GrenadeLauncher;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
@@ -21,8 +22,8 @@ public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectCont
     private HashMap<String, Space> squares = new HashMap<>();
     private HashMap<String, Space> moveto = new HashMap<>();
 
-    public ExtraGrenadeCont(ExtraGrenade model) {
-        this.model = model;
+    public ExtraGrenadeCont(Power model) {
+        this.model = (ExtraGrenade) model;
     }
 
     @Override
@@ -36,7 +37,7 @@ public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectCont
     private void acquireSquares(){
         ArrayList<String> romms = loadRooms();
         Logger logger = Logger.getLogger("controller.WeaponEffct.ExtraGrenade");
-
+/*
         try {
             for (int i = 0; i < Table.getMap().getMaxX(); i++) {
                 for (int j = 0; j < Table.getMap().getMaxY(); j++) {
@@ -53,6 +54,8 @@ public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectCont
         }else {
             model.chooseSquare(attacker, new ArrayList<>(squares.keySet()), new ArrayList<>(moveto.keySet()));
         }
+
+ */
     }
 
     private ArrayList<String> loadRooms(){
@@ -118,4 +121,5 @@ public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectCont
         }
         return ((GrenadeLauncher) attacker.listWeapon()[i].getPower()).getTarget();
     }
+
 }

@@ -5,6 +5,7 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.Cyberblade;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.SliceAndDice;
 import it.polimi.sw2019.view.Observer;
 
@@ -15,8 +16,8 @@ public class SliceAndDiceCont implements Observer<SliceAndDiceSetEv>, EffectCont
     private SliceAndDice model;
     private Player attacker;
 
-    public SliceAndDiceCont(SliceAndDice model) {
-        this.model = model;
+    public SliceAndDiceCont(Power model) {
+        this.model = (SliceAndDice) model;
     }
 
     @Override

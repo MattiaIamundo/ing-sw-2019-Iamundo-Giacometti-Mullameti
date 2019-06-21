@@ -35,4 +35,9 @@ public class TurretTripod extends Observable<TurretTripodChooseEv> implements Po
     public void setPrevioustarget(Player previoustarget) {
         this.previoustarget = previoustarget;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

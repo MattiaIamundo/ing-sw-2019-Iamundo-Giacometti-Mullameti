@@ -33,4 +33,9 @@ public class CozyFireMode extends Observable<CozyFireModeChooseEv> implements Po
     public void setTargetarea(Space targetarea) {
         this.targetarea = targetarea;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

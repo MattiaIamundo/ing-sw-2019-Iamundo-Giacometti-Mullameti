@@ -3,6 +3,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.ThroughWalls;
 
 import java.util.ArrayList;
@@ -12,8 +13,8 @@ public abstract class ThoughWall implements EffectController{
     protected ThroughWalls model;
     protected Player attacker;
 
-    public ThoughWall(ThroughWalls model) {
-        this.model = model;
+    public ThoughWall(Power model) {
+        this.model = (ThroughWalls) model;
     }
 
 

@@ -3,6 +3,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.TsunamiMode;
 
 import java.util.ArrayList;
@@ -12,8 +13,8 @@ public class TsunamiModeCont implements EffectController{
     private TsunamiMode model;
     private Player attacker;
 
-    public TsunamiModeCont(TsunamiMode model) {
-        this.model = model;
+    public TsunamiModeCont(Power model) {
+        this.model = (TsunamiMode) model;
     }
 
     @Override

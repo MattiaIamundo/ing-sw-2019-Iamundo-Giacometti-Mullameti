@@ -26,4 +26,9 @@ public class SliceAndDice extends Observable<SliceAndDiceChooseEv> implements Po
     public void chooseTarget(ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable, Player attacker){
         notify(new SliceAndDiceChooseEv(attacker, valid, notselectable, notreachable));
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

@@ -310,12 +310,12 @@ public class Game implements Observer <ObservableByGame> {
                 }
                 else if (additiveJsons.get(i).getName().equals("Granade Launcher")) {
 
-                    firstEff = new DamageMove();
+                    firstEff = new GrenadeLauncher();
                     secondEff = new ExtraGrenade();
                 }
                 else if (additiveJsons.get(i).getName().equals("Lock Rifle")) {
 
-                    firstEff = new TwoDamageMark();
+                    firstEff = new LockRifle();
                     secondEff = new SecondLock();
                 }
                 else if (additiveJsons.get(i).getName().equals("Heatseeker")) {
@@ -355,13 +355,13 @@ public class Game implements Observer <ObservableByGame> {
                 Power thirdEff = null;
 
                 if (doubleAdditiveJsons.get(i).getName().equals("Cyberblade")) {
-                    firstEff = new TwoDamageSameSpace();
+                    firstEff = new Cyberblade();
                     secondEff = new Shadowstep();
                     thirdEff = new SliceAndDice();
                 }
                 else if (doubleAdditiveJsons.get(i).getName().equals("Machine Gun")) {
 
-                    firstEff = new TwoTargetDamage();
+                    firstEff = new MachineGun();
                     secondEff = new FocusShot();
                     thirdEff = new TurretTripod();
                 }
@@ -373,13 +373,13 @@ public class Game implements Observer <ObservableByGame> {
                 }
                 else if (doubleAdditiveJsons.get(i).getName().equals("Plasma Gun")) {
 
-                    firstEff = new TwoDamage();
+                    firstEff = new PlasmaGun();
                     secondEff = new PhaseGlide();
                     thirdEff = new ChargedShot();
                 }
                 else {
 
-                    firstEff = new TwoDamage();
+                    firstEff = new Thor();
                     secondEff = new ChainReaction();
                     thirdEff = new HighVoltage();
                 }
@@ -414,17 +414,17 @@ public class Game implements Observer <ObservableByGame> {
                 }
                 else if (alternativeJsons.get(i).getName().equals("Zx-2")) {
 
-                    firstEff = new DamageTwoMark();
+                    firstEff = new ZX2();
                     secondEff = new ScannerMode();
                 }
                 else if (alternativeJsons.get(i).getName().equals("Shotgun")) {
 
-                    firstEff = new ThreeDamageMove();
+                    firstEff = new Shotgun();
                     secondEff = new LongBarrelMode();
                 }
                 else if (alternativeJsons.get(i).getName().equals("Sledgehammer")) {
 
-                    firstEff = new TwoDamageSameSpace();
+                    firstEff = new Sledgehammer();
                     secondEff = new PulverizeMode();
                 }
                 else if (alternativeJsons.get(i).getName().equals("Rail Gun")) {
@@ -439,7 +439,7 @@ public class Game implements Observer <ObservableByGame> {
                 }
                 else if (alternativeJsons.get(i).getName().equals("Furnace")) {
 
-                    firstEff = new RoomDamage();
+                    firstEff = new Furnace();
                     secondEff = new CozyFireMode();
                 }
                 else if (alternativeJsons.get(i).getName().equals("Hellion")) {
@@ -454,12 +454,12 @@ public class Game implements Observer <ObservableByGame> {
                 }
                 else if (alternativeJsons.get(i).getName().equals("Electroscythe")) {
 
-                    firstEff = new DamageAllSameSpace();
+                    firstEff = new Electroscythe();
                     secondEff = new ReaperMode();
                 }
                 else {
 
-                    firstEff = new MoveDamage();
+                    firstEff = new TractorBeam();
                     secondEff = new PunisherMode();
                 }
 

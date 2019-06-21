@@ -3,6 +3,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.FragmentingWarhead;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.RocketLauncher;
 
 public class FragmentingWarheadCont implements EffectController{
@@ -10,8 +11,8 @@ public class FragmentingWarheadCont implements EffectController{
     private FragmentingWarhead model;
     private Player attacker;
 
-    public FragmentingWarheadCont(FragmentingWarhead model) {
-        this.model = model;
+    public FragmentingWarheadCont(Power model) {
+        this.model = (FragmentingWarhead) model;
     }
 
     @Override

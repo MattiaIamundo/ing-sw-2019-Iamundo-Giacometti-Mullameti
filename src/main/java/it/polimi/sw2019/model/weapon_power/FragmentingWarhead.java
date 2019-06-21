@@ -32,4 +32,9 @@ public class FragmentingWarhead implements Power{
     public void setOriginsquare(Space originsquare) {
         this.originsquare = originsquare;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

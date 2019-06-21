@@ -3,6 +3,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.WhisperSetEv;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.SingleTarget;
 import it.polimi.sw2019.model.weapon_power.Whisper;
 import it.polimi.sw2019.view.Observer;
@@ -13,9 +14,9 @@ public class WhisperCont extends VisibleTargetCont implements Observer<WhisperSe
 
     private Whisper realmodel;
 
-    public WhisperCont(Whisper realmodel) {
+    public WhisperCont(Power realmodel) {
         super(realmodel);
-        this.realmodel = realmodel;
+        this.realmodel = (Whisper) realmodel;
     }
 
     @Override

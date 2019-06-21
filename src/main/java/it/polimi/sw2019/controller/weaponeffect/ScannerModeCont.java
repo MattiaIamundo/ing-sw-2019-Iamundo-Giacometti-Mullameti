@@ -3,6 +3,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.ScannerModeSetEv;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.ScannerMode;
 import it.polimi.sw2019.model.weapon_power.SingleTarget;
 import it.polimi.sw2019.view.Observer;
@@ -11,9 +12,9 @@ public class ScannerModeCont extends VisibleTargetCont implements Observer<Scann
 
     private ScannerMode realmodel;
 
-    public ScannerModeCont(ScannerMode realmodel) {
+    public ScannerModeCont(Power realmodel) {
         super(realmodel);
-        this.realmodel = realmodel;
+        this.realmodel = (ScannerMode) realmodel;
     }
 
     @Override

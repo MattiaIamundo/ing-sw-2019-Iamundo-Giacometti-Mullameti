@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller;
 
+import it.polimi.sw2019.controller.weaponeffect.WeaponEffectManager;
 import it.polimi.sw2019.model.events.WeaponSelectEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
@@ -9,6 +10,8 @@ import it.polimi.sw2019.view.Observer;
 import java.util.ArrayList;
 
 public class Shoot implements Action, Observer<WeaponSelectEv> {
+
+    private WeaponEffectManager weaponEffectManager = new WeaponEffectManager();
 
     public static void useAction(Player attacker){
         ArrayList<String> weapons = new ArrayList<>();
@@ -29,7 +32,7 @@ public class Shoot implements Action, Observer<WeaponSelectEv> {
                 attacker = Table.getPlayers(i);
                 for (int j = 0; j < 3; j++) {
                     if (attacker.listWeapon()[j].getName().equals(message.getWeapon())){
-                        //Server.WeaponeffectManager.acquirepower()
+                        weaponEffectManager.acquirePower(attacker.listWeapon()[j], attacker);
                     }
                 }
             }

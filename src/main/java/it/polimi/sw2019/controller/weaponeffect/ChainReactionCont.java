@@ -4,6 +4,7 @@ import it.polimi.sw2019.model.events.ChainReactSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.ChainReaction;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.Thor;
 import it.polimi.sw2019.view.Observer;
 
@@ -13,9 +14,9 @@ public class ChainReactionCont extends VisibleTargetCont implements Observer<Cha
 
     private ChainReaction realmodel;
 
-    public ChainReactionCont(ChainReaction realmodel) {
+    public ChainReactionCont(Power realmodel) {
         super(realmodel);
-        this.realmodel = realmodel;
+        this.realmodel = (ChainReaction) realmodel;
     }
 
     @Override

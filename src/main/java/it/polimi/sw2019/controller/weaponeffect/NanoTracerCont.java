@@ -4,6 +4,7 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.NanoTracerSetEv;
 import it.polimi.sw2019.model.weapon_power.NanoTracerMode;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.SingleTarget;
 import it.polimi.sw2019.view.Observer;
 
@@ -13,9 +14,9 @@ public class NanoTracerCont extends VisibleTargetCont implements Observer<NanoTr
 
     private NanoTracerMode realmodel;
 
-    public NanoTracerCont(NanoTracerMode realmodel) {
+    public NanoTracerCont(Power realmodel) {
         super(realmodel);
-        this.realmodel = realmodel;
+        this.realmodel = (NanoTracerMode) realmodel;
     }
 
     @Override

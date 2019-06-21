@@ -4,6 +4,7 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.LineFireSetEv;
 import it.polimi.sw2019.model.weapon_power.LineFire;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
@@ -15,6 +16,10 @@ public abstract class LineFireCont implements EffectController{
     protected Player attacker;
     protected HashMap<String, ArrayList<String>> firststep = new HashMap<>();
     protected HashMap<String, ArrayList<String>> secondstep = new HashMap<>();
+
+    public LineFireCont(Power model) {
+        this.model = (LineFire) model;
+    }
 
     @Override
     public void useEffect(String effectname, Player attacker) {

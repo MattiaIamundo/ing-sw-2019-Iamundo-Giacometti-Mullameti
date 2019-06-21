@@ -4,6 +4,7 @@ import it.polimi.sw2019.model.events.RocketLaunchSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.RocketLauncher;
 import it.polimi.sw2019.view.Observer;
 
@@ -15,6 +16,10 @@ public class RocketLaunchCont implements Observer<RocketLaunchSetEv>, EffectCont
     private RocketLauncher model;
     private Player attacker;
     private HashMap<String, HashMap<String, Space>> targets = new HashMap<>();
+
+    public RocketLaunchCont(Power model) {
+        this.model = (RocketLauncher) model;
+    }
 
     @Override
     public void useEffect(String effectname, Player attacker) {

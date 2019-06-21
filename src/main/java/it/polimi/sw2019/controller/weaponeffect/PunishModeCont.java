@@ -3,6 +3,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.PunisherModeSetEv;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.PunisherMode;
 import it.polimi.sw2019.view.Observer;
 
@@ -12,9 +13,9 @@ public class PunishModeCont extends VisibleTargetCont implements Observer<Punish
 
     private PunisherMode realmodel;
 
-    public PunishModeCont(PunisherMode realmodel) {
+    public PunishModeCont(Power realmodel) {
         super(realmodel);
-        this.realmodel = realmodel;
+        this.realmodel = (PunisherMode) realmodel;
     }
 
     @Override

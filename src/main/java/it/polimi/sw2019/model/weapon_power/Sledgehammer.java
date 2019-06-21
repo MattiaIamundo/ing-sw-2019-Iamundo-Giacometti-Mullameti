@@ -23,4 +23,9 @@ public class Sledgehammer extends Observable<SledgehammerChooseEv> implements Po
     public void setTarget(Player target) {
         this.target = target;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

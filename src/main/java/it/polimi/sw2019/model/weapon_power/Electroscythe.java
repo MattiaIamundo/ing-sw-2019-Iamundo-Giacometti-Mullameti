@@ -17,4 +17,9 @@ public class Electroscythe implements Power{
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

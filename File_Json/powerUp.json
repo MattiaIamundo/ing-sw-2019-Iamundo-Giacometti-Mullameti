@@ -1,74 +1,74 @@
 [
   {
-    "color" : "yellow", "name" : "Teleport", "effect" : "Teleport"
+    "color" : "yellow", "power": "Teleport", "effect" : "Teleport"
   },
   {
-    "color" : "yellow", "name" : "Teleport", "effect" : "Teleport"
+    "color" : "yellow", "power": "Teleport", "effect" : "Teleport"
   },
   {
-    "color" : "red", "name" : "Teleport", "effect" : "Teleport"
+    "color" : "red", "power": "Teleport", "effect" : "Teleport"
   },
   {
-    "color" : "red", "name" : "Teleport", "effect" : "Teleport"
+    "color" : "red", "power": "Teleport", "effect" : "Teleport"
   },
   {
-    "color" : "blue", "name" : "Teleport", "effect" : "Teleport"
+    "color" : "blue", "power": "Teleport", "effect" : "Teleport"
   },
   {
-    "color" : "blue", "name" : "Teleport", "effect" : "Teleport"
+    "color" : "blue", "power": "Teleport", "effect" : "Teleport"
   },
   {
-    "color" : "yellow", "name" : "Marked", "effect" : "Marked"
+    "color" : "yellow", "power": "Marked", "effect" : "Marked"
   },
   {
-    "color" : "yellow", "name" : "Marked", "effect" : "Marked"
+    "color" : "yellow", "power": "Marked", "effect" : "Marked"
   },
   {
-    "color" : "red", "name" : "Marked", "effect" : "Marked"
+    "color" : "red", "power": "Marked", "effect" : "Marked"
   },
   {
-    "color" : "red", "name" : "Marked", "effect" : "Marked"
+    "color" : "red", "power": "Marked", "effect" : "Marked"
   },
   {
-    "color" : "blue", "name" : "Marked", "effect" : "Marked"
+    "color" : "blue", "power": "Marked", "effect" : "Marked"
   },
   {
-    "color" : "blue", "name" : "Marked", "effect" : "Marked"
+    "color" : "blue", "power": "Marked", "effect" : "Marked"
   },
   {
-    "color" : "yellow", "name" : "MoveEnemy", "effect" : "MoveEnemy"
+    "color" : "yellow", "power": "MoveEnemy", "effect" : "MoveEnemy"
   },
   {
-    "color" : "yellow", "name" : "MoveEnemy", "effect" : "MoveEnemy"
+    "color" : "yellow", "power": "MoveEnemy", "effect" : "MoveEnemy"
   },
   {
-    "color" : "red", "name" : "MoveEnemy", "effect" : "MoveEnemy"
+    "color" : "red", "power": "MoveEnemy", "effect" : "MoveEnemy"
   },
   {
-    "color" : "red", "name" : "MoveEnemy", "effect" : "MoveEnemy"
+    "color" : "red", "power": "MoveEnemy", "effect" : "MoveEnemy"
   },
   {
-    "color" : "blue", "name" : "MoveEnemy", "effect" : "MoveEnemy"
+    "color" : "blue", "power": "MoveEnemy", "effect" : "MoveEnemy"
   },
   {
-    "color" : "blue", "name" : "MoveEnemy", "effect" : "MoveEnemy"
+    "color" : "blue", "power": "MoveEnemy", "effect" : "MoveEnemy"
   },
   {
-    "color" : "yellow", "name" : "ExtraDamage", "effect" : "ExtraDamage"
+    "color" : "yellow", "power": "ExtraDamage", "effect" : "ExtraDamage"
   },
   {
-    "color" : "yellow", "name" : "ExtraDamage", "effect" : "ExtraDamage"
+    "color" : "yellow", "power": "ExtraDamage", "effect" : "ExtraDamage"
   },
   {
-    "color" : "red", "name" : "ExtraDamage", "effect" : "ExtraDamage"
+    "color" : "red", "power": "ExtraDamage", "effect" : "ExtraDamage"
   },
   {
-    "color" : "red", "name" : "ExtraDamage", "effect" : "ExtraDamage"
+    "color" : "red", "power": "ExtraDamage", "effect" : "ExtraDamage"
   },
   {
-    "color" : "blue", "name" : "ExtraDamage", "effect" : "ExtraDamage"
+    "color" : "blue", "power": "ExtraDamage", "effect" : "ExtraDamage"
   },
   {
-    "color" : "blue", "name" : "ExtraDamage", "effect" : "ExtraDamage"
+    "color" : "blue", "power": "ExtraDamage", "effect" : "ExtraDamage"
   }
 ]

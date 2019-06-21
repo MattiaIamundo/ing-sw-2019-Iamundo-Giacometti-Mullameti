@@ -31,4 +31,9 @@ public class ChainReaction extends Observable<ChainReactChooseEv> implements Pow
     public Player getTarget(){
         return target;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

@@ -20,7 +20,6 @@ public class PunisherMode extends Observable<PunisherModeChooseEv> implements Po
         target.getPlance().giveDamage(attacker, 3);
     }
 
-    @Override
     public void chooseTarget(ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable, Player attacker) {
         notify(new PunisherModeChooseEv(attacker, valid, notselectable, notreachable));
     }
@@ -28,5 +27,10 @@ public class PunisherMode extends Observable<PunisherModeChooseEv> implements Po
     @Override
     public void setTarget(Player target) {
         this.target = target;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
     }
 }

@@ -2,6 +2,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.events.RailGunSetEv;
 import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.RailGun;
 import it.polimi.sw2019.model.weapon_power.ThroughWalls;
 import it.polimi.sw2019.view.Observer;
@@ -10,9 +11,9 @@ public class RailGunCont extends ThoughWall implements Observer<RailGunSetEv>{
 
     private RailGun realmodel;
 
-    public RailGunCont(RailGun realmodel) {
+    public RailGunCont(Power realmodel) {
         super(realmodel);
-        this.realmodel = realmodel;
+        this.realmodel = (RailGun) realmodel;
     }
 
     @Override

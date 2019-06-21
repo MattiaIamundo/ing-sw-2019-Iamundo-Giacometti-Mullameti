@@ -34,4 +34,9 @@ public class Shotgun extends Observable<ShotgunChooseEv> implements Power, Singl
     public void setMoveto(Space moveto) {
         this.moveto = moveto;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

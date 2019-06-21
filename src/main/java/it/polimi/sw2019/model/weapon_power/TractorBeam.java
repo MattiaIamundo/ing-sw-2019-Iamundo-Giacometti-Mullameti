@@ -25,4 +25,9 @@ public class TractorBeam extends Observable<TracBeamChooseEv> implements Power{
         this.target = target;
         target.setPosition(position);
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

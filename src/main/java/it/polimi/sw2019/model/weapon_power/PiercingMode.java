@@ -35,4 +35,9 @@ public class PiercingMode extends Observable<PiercingModeChooseEv> implements Po
     public void setTarget2(Player target2) {
         this.target2 = target2;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

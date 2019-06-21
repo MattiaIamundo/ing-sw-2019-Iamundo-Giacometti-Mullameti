@@ -5,6 +5,7 @@ import it.polimi.sw2019.model.events.VortexSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.Vortex;
 import it.polimi.sw2019.view.Observer;
 
@@ -13,18 +14,25 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class VortexCont implements Observer<VortexSetEv> {
+public class VortexCont implements Observer<VortexSetEv>, EffectController{
     private Vortex model;
     private Player attacker;
     private HashMap<String, ArrayList<String>> valid = new HashMap<>();
 
-    public VortexCont(Vortex model, Player attacker) {
-        this.model = model;
-        this.attacker = attacker;
+    public VortexCont(Power model) {
+        this.model = (Vortex) model;
+    }
+
+    @Override
+    public void useEffect(String effectname, Player attacker) {
+        if (model.toString().equals(effectname)){
+            this.attacker = attacker;
+            acquireTarget();
+        }
     }
 
     public void acquireTarget(){
-        Logger logger = Logger.getLogger("controller.WeaponEffct.Vortex.acquireTarget");
+      /*  Logger logger = Logger.getLogger("controller.WeaponEffct.Vortex.acquireTarget");
         ArrayList<String> validrooms = validRooms(attacker.getPosition());
         for (int x = 0; x < Table.getMap().getMaxX(); x++) {
             for (int y = 0; y < Table.getMap().getMaxY(); y++) {
@@ -38,6 +46,8 @@ public class VortexCont implements Observer<VortexSetEv> {
             }
         }
         model.chooseVortexAndTarget(valid, attacker);
+
+       */
     }
 
     private ArrayList<String> validRooms(Space attpos){
@@ -86,6 +96,7 @@ public class VortexCont implements Observer<VortexSetEv> {
 
     @Override
     public void update(VortexSetEv message) {
+        /*
         Logger logger = Logger.getLogger("controller.WeaponEffct.Vortex.update");
         Space vorpos;
         Player target;
@@ -103,5 +114,8 @@ public class VortexCont implements Observer<VortexSetEv> {
             logger.log(Level.SEVERE, "Left the boundaries of the map");
         }
         model.usePower(attacker);
+
+         */
     }
+
 }

@@ -4,6 +4,7 @@ import it.polimi.sw2019.model.events.CozyFireModeSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.weapon_power.CozyFireMode;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
@@ -14,8 +15,8 @@ public class CozyFireModeCont implements Observer<CozyFireModeSetEv>, EffectCont
     private Player attacker;
     private HashMap<String, Space> valid = new HashMap<>();
 
-    public CozyFireModeCont(CozyFireMode model) {
-        this.model = model;
+    public CozyFireModeCont(Power model) {
+        this.model = (CozyFireMode) model;
     }
 
     @Override

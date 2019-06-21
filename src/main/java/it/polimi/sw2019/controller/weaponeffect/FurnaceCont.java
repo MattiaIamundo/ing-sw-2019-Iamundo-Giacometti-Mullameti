@@ -3,6 +3,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.events.FurnaceSetEv;
 import it.polimi.sw2019.model.weapon_power.Furnace;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
@@ -12,9 +13,8 @@ public class FurnaceCont implements Observer<FurnaceSetEv>, EffectController {
     private Furnace model;
     private Player attacker;
 
-    public FurnaceCont(Furnace model, Player attacker) {
-        this.model = model;
-        this.attacker = attacker;
+    public FurnaceCont(Power model) {
+        this.model = (Furnace) model;
     }
 
     @Override

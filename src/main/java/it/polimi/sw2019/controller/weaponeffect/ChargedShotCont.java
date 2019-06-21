@@ -4,14 +4,15 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.ChargedShot;
 import it.polimi.sw2019.model.weapon_power.PlasmaGun;
+import it.polimi.sw2019.model.weapon_power.Power;
 
 public class ChargedShotCont implements EffectController{
 
     private ChargedShot model;
     private Player attacker;
 
-    public ChargedShotCont(ChargedShot model) {
-        this.model = model;
+    public ChargedShotCont(Power model) {
+        this.model = (ChargedShot) model;
     }
 
     @Override

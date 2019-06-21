@@ -4,6 +4,7 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.ShockwaveSetEv;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.Shockwave;
 import it.polimi.sw2019.view.Observer;
 
@@ -16,8 +17,8 @@ public class ShockwaveCont implements Observer<ShockwaveSetEv>, EffectController
     private Player attacker;
     private HashMap<String, ArrayList<String>> targets = new HashMap<>();
 
-    public ShockwaveCont(Shockwave model) {
-        this.model = model;
+    public ShockwaveCont(Power model) {
+        this.model = (Shockwave) model;
     }
 
     @Override

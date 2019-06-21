@@ -42,4 +42,9 @@ public class BlackHole extends Observable<BlackHoleChooseEv> implements Power{
     public void setVortex(Space vortex) {
         this.vortex = vortex;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

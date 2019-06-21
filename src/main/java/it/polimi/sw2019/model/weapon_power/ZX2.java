@@ -29,4 +29,9 @@ public class ZX2 extends Observable<ZX2ChooseEv> implements Power, SingleTarget{
     public void setTarget(Player target) {
         this.target = target;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

@@ -4,6 +4,7 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.events.BarbecueSetEv;
 import it.polimi.sw2019.model.weapon_power.BarbecueMode;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
@@ -15,8 +16,8 @@ public class BarbecueModeCont implements Observer<BarbecueSetEv>, EffectControll
     private Player attacker;
     private HashMap<String, ArrayList<Space>> directions = new HashMap<>();
 
-    public BarbecueModeCont(BarbecueMode model) {
-        this.model = model;
+    public BarbecueModeCont(Power model) {
+        this.model = (BarbecueMode) model;
     }
 
     @Override

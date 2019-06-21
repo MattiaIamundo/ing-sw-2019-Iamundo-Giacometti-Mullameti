@@ -4,6 +4,7 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.TargetSetEv;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.SingleTarget;
 
 import java.util.ArrayList;
@@ -16,8 +17,8 @@ public abstract class OneMoveAway implements EffectController{
     protected ArrayList<String> notreachable = new ArrayList<>();
     private ArrayList<Space> validposition = new ArrayList<>();
 
-    public OneMoveAway(SingleTarget model) {
-        this.model = model;
+    public OneMoveAway(Power model) {
+        this.model = (SingleTarget) model;
     }
 
     @Override

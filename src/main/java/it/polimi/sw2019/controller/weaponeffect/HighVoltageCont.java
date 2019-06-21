@@ -4,10 +4,7 @@ import it.polimi.sw2019.model.DoubleAdditive;
 import it.polimi.sw2019.model.events.HighVoltageSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
-import it.polimi.sw2019.model.weapon_power.ChainReaction;
-import it.polimi.sw2019.model.weapon_power.HighVoltage;
-import it.polimi.sw2019.model.weapon_power.SingleTarget;
-import it.polimi.sw2019.model.weapon_power.Thor;
+import it.polimi.sw2019.model.weapon_power.*;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
@@ -16,9 +13,9 @@ public class HighVoltageCont extends VisibleTargetCont implements Observer<HighV
 
     private HighVoltage realmodel;
 
-    public HighVoltageCont(HighVoltage realmodel) {
+    public HighVoltageCont(Power realmodel) {
         super(realmodel);
-        this.realmodel = realmodel;
+        this.realmodel = (HighVoltage) realmodel;
     }
 
     @Override

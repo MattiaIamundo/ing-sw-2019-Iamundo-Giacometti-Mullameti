@@ -5,6 +5,7 @@ import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.FocusShotSetEv;
 import it.polimi.sw2019.model.weapon_power.FocusShot;
 import it.polimi.sw2019.model.weapon_power.MachineGun;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
@@ -14,9 +15,8 @@ public class FocusShotCont implements Observer<FocusShotSetEv>, EffectController
     private FocusShot model;
     private Player attacker;
 
-    public FocusShotCont(FocusShot model, Player attacker) {
-        this.model = model;
-        this.attacker = attacker;
+    public FocusShotCont(Power model) {
+        this.model = (FocusShot) model;
     }
 
     @Override

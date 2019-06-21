@@ -2,22 +2,24 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.events.RocketFistSetEv;
+import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.RocketFistMode;
 import it.polimi.sw2019.view.Observer;
 
 public class RocketFistCont extends LineFireCont implements EffectController, Observer<RocketFistSetEv> {
 
-    private RocketFistMode model;
+    private RocketFistMode realmodel;
 
-    public RocketFistCont(RocketFistMode model) {
-        this.model = model;
+    public RocketFistCont(Power realmodel) {
+        super(realmodel);
+        this.realmodel = (RocketFistMode) realmodel;
     }
 
     @Override
     public void update(RocketFistSetEv message) {
-        model.setMoveto(moveto(message.getDirection()));
+        realmodel.setMoveto(moveto(message.getDirection()));
         super.update(message);
-        model.usePower(attacker);
+        realmodel.usePower(attacker);
     }
 
     private Space moveto(String direction){
