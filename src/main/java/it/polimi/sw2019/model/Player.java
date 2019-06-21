@@ -1,8 +1,7 @@
 package it.polimi.sw2019.model;
 
-import it.polimi.sw2019.view.Observable;
+
 import it.polimi.sw2019.view.ObservableByGame;
-import it.polimi.sw2019.view.PlayerView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
 
     private String nickname; //player's nickname
     private int score; //player's score
-    private String color = "bho";
+    private String character = "null";
     //first red, second blue, third yellow
     private static int[] ammo = new int[3];
     //list of weapons the player owns , every player can own at top 3 weapons
@@ -30,6 +29,8 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     private static PowerUp[] powerup = new PowerUp[3];
     //
     private int playerNumber;
+    //
+    private boolean connected;
 
     /**Constructor of the class
      * @param nickname the player's nickname
@@ -57,7 +58,7 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     }
 
     public void setNickname(String name) {
-        nickname = name;
+        this.nickname = name;
     }
     /**
      * @return the player's score
@@ -321,12 +322,12 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
         }
     }
 
-    public String getColor(){
-        return this.color;
+    public String getCharacter() {
+        return character;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setCharacter(String character) {
+        this.character = character;
     }
 
 }

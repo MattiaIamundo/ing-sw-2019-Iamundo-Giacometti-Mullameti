@@ -1,12 +1,6 @@
 package it.polimi.sw2019.controller;
 
-import it.polimi.sw2019.exception.IllegalDirectionException;
-import it.polimi.sw2019.exception.InvalidDirectionException;
-import it.polimi.sw2019.exception.InvalidNrOfMoves;
 import it.polimi.sw2019.model.*;
-
-
-import java.util.Scanner;
 
 /**
  * this class stands for the game's turn

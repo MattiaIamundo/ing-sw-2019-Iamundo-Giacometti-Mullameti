@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="218.0" maxWidth="-Infinity" minHeight="218.0" minWidth="-Infinity" prefHeight="218.0" prefWidth="377.0" stylesheets="@themeGreen.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.sw2019.GUI.ActionReloadController">
+   <children>
+      <ImageView fitHeight="218.0" fitWidth="92.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="285.0">
+         <image>
+            <Image url="@../../../../../../../Resources/Images/greenReload.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="91.0" prefHeight="218.0" prefWidth="285.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="92.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#actionButtonPushed" prefHeight="109.0" prefWidth="285.0" text="Action" />
+            <Button mnemonicParsing="false" onAction="#reloadButtonPushed" prefHeight="109.0" prefWidth="285.0" stylesheets="@themeGreen.css" text="Reload" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,6 +1,7 @@
 package it.polimi.sw2019.network.Socket;
 
 import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.controller.MultiGame;
 import it.polimi.sw2019.exception.CancellPlayerException;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.utility.TimerThread;
@@ -32,16 +33,19 @@ public class PlayerThread implements Runnable {
     private PrintWriter output;
     //if the thread is suspended
     private boolean suspended;
-    //
+    //the player's nickname
     private String nickname = "pippo";
-    //to contain what the player write ( his move )
+    //
+    private String nameOfMatch;
+    //to contain what the player write ( his actions )
     private String string;
     //the lock
-    private Lock gameLocker;
+    //private Lock gameLocker;
     //the condition to put the thread in wait
-    private Condition turnOfOtherPlayers;
-    private Condition otherPlayerConnected;
+    //private Condition turnOfOtherPlayers;
+    //private Condition otherPlayerConnected;
     //the controller
+    private MultiGame multiGameController;
     private Game gameController;
     //the logger
     private static final Logger logger = Logger.getLogger( PlayerThread.class.getName() );
@@ -52,15 +56,15 @@ public class PlayerThread implements Runnable {
     private WeaponRemoteView weaponRemoteView;
     private PowerUpRemoteView powerUpRemoteView;
 
-
+    //anzichè il Game, devo passargli il multigame dal socket
     public PlayerThread(Socket socket, Game controller){
         //set the player's number and the socket
         connection = socket;
         suspended = true;
         string = "bho";
-        gameLocker = new ReentrantLock();
-        turnOfOtherPlayers = gameLocker.newCondition();
-        otherPlayerConnected = gameLocker.newCondition();
+        //gameLocker = new ReentrantLock();
+        //turnOfOtherPlayers = gameLocker.newCondition();
+        //otherPlayerConnected = gameLocker.newCondition();
         gameController = controller;
         playerRemoteView = new PlayerRemoteView(socket);
         tableRemoteView = new TableRemoteView(socket);
@@ -177,8 +181,10 @@ public class PlayerThread implements Runnable {
 
                 synchronized (gameController.getStop()) {
 
-                    //gameController.addPlayers("mimmo");
-                    //gameController.getPlayers().get(0).setColor("gray");
+                    //gameController.addPlayers("mimmo"); gameController.getPlayers().get(0).setColor("gray");
+                    //gameController.addPlayers("eta"); gameController.getPlayers().get(1).setColor("blue");
+                    //gameController.addPlayers("beta"); gameController.getPlayers().get(2).setColor("yellow");
+                    //gameController.setGameStarted(true);
                     do {
 
                         if ( !gameController.getGameStarted() ) {
@@ -203,7 +209,7 @@ public class PlayerThread implements Runnable {
                                     canGoOut = true;
                                     this.gameController.askForColor( this.playerRemoteView, firstTime, duplicated, gameController.getPlayers() );
                                     String si = this.playerRemoteView.waitForColor();
-
+                                    duplicated = false;
                                     if ( !si.equals("blue") &&  !si.equals("yellow") &&  !si.equals("purple") &&  !si.equals("green") &&  !si.equals("gray") ) {
                                         canGoOut = false;
                                         firstTime = false;
@@ -212,7 +218,7 @@ public class PlayerThread implements Runnable {
                                     else {
                                         for (Player e : gameController.getPlayers()) {
 
-                                            if (e.getColor().equals(s)) {
+                                            if (e.getCharacter().equals(s)) {
                                                 canGoOut = false;
                                                 firstTime = false;
                                                 duplicated = true;
@@ -220,20 +226,21 @@ public class PlayerThread implements Runnable {
                                             }
                                         }
                                         if ( canGoOut ) {
-                                            gameController.getPlayers().get(0).setColor(si);
+                                            gameController.getPlayers().get(0).setCharacter(si);
                                             gameController.sendOk(this.playerRemoteView);
                                         }
                                     }
 
                                 }
+                                this.gameController.sendYouAreFirstPlayer(this.playerRemoteView);
+
+                                //if you to choose skull
                                 if ( this.gameController.getGameboard().getKillshotTrack().isEmpty() ) {
 
-                                    this.gameController.sendYouAreFirstPlayer(this.playerRemoteView);
+                                    this.gameController.sendThereAreNotSkull(this.playerRemoteView);
                                     canGoOut = false;
                                     firstTime = true;
                                     //you have to choose the number of the skull
-
-
                                     while (!canGoOut) {
                                         canGoOut = true;
                                         this.gameController.askForSkull(this.playerRemoteView, firstTime);
@@ -250,34 +257,43 @@ public class PlayerThread implements Runnable {
                                     }
                                 }
                                 else {
-                                    this.gameController.sendYouAreNotFirstPlayer(this.playerRemoteView);
+                                    this.gameController.sendThereAreSkull(this.playerRemoteView);
                                 }
 
-                                System.out.println("ciaooooo\n");
 
-                                canGoOut = false;
-                                firstTime = true;
-                                //you have to choose the number of the skull
-                                if ( this.gameController.getGameboard().getMap().getList().isEmpty() ) {
-/*
+                                //you have to choose the number of the map
+                                if ( this.gameController.getGameboard().getMap().getList().get(0).isEmpty() ) {
+
+                                    this.gameController.sendThereIsNotMap(this.playerRemoteView);
+                                    canGoOut = false;
+                                    firstTime = true;
                                     while (!canGoOut) {
                                         canGoOut = true;
-                                        this.gameController.askForMap(firstTime);
+                                        this.gameController.askForMap(this.playerRemoteView, firstTime);
                                         String nmap = this.playerRemoteView.waitForMap();
 
-                                        if (!nmap.equals("five") && !nmap.equals("six") && !nmap.equals("seven") && !nmap.equals("eight")) {
+                                        if (!nmap.equals("zero") && !nmap.equals("one") && !nmap.equals("two") && !nmap.equals("three")) {
                                             firstTime = false;
                                             canGoOut = false;
+                                            gameController.sendNotOk(this.playerRemoteView);
                                         } else {
                                             this.gameController.createMap(nmap);
+                                            gameController.sendOk(this.playerRemoteView);
                                         }
                                     }
 
- */
+                                }
+                                else {
+                                    this.gameController.sendThereIsMap(this.playerRemoteView);
                                 }
 
                             } else {
                                 //OTHERS PLAYERS
+                                if ( this.gameController.getGameStarted() ) {
+
+                                    this.gameController.sendOut(this.playerRemoteView);
+                                    throw new NoSuchElementException ();
+                                }
                                 goOut = true;
                                 for (Player p : gameController.getPlayers()) {
 
@@ -301,6 +317,12 @@ public class PlayerThread implements Runnable {
                                         canGoOut = true;
                                         this.gameController.askForColor(this.playerRemoteView, firstTime, duplicated, gameController.getPlayers());
                                         String si = this.playerRemoteView.waitForColor();
+                                        duplicated = true;
+                                        if ( this.gameController.getGameStarted() ) {
+
+                                            this.gameController.sendOut(this.playerRemoteView);
+                                            throw new NoSuchElementException ();
+                                        }
 
                                         if ( !si.equals("blue") &&  !si.equals("yellow") &&  !si.equals("purple") &&  !si.equals("green") &&  !si.equals("gray") ) {
                                             canGoOut = false;
@@ -310,7 +332,7 @@ public class PlayerThread implements Runnable {
                                         else {
                                             for (Player e : gameController.getPlayers()) {
 
-                                                if ( e.getColor().equals(si)) {
+                                                if ( e.getCharacter().equals(si)) {
                                                     canGoOut = false;
                                                     firstTime = false;
                                                     duplicated = true;
@@ -322,7 +344,7 @@ public class PlayerThread implements Runnable {
                                                 for (Player player : gameController.getPlayers()) {
 
                                                     if ( player.getNickname().equals(this.nickname) ) {
-                                                        player.setColor(si);
+                                                        player.setCharacter(si);
                                                         gameController.sendOk(this.playerRemoteView);
                                                     }
 
@@ -335,8 +357,10 @@ public class PlayerThread implements Runnable {
                                 }
 
                                 this.gameController.sendYouAreNotFirstPlayer(this.playerRemoteView);
+
                                 if ( this.gameController.getGameStarted() ) {
 
+                                    this.gameController.sendOut(this.playerRemoteView);
                                     throw new NoSuchElementException ();
                                 }
                             }
@@ -396,7 +420,7 @@ public class PlayerThread implements Runnable {
                         }
 
                         if ( gameController.getPlayers().size() >= 3 && !gameController.getTimerThread().getOn()
-                                && gameController.getTimerThread().getTurnTime() == 0 && !gameController.getPlayers().get(2).getColor().equals("bho") ) {
+                                && gameController.getTimerThread().getTurnTime() == 0 && !gameController.getPlayers().get(2).getCharacter().equals("null") ) {
                             logger.log(Level.INFO, "{PlayerThread "+ this.nickname +"} has started the timer!");
                             gameController.getTimerThread().run();
                             gameController.getTimerThread().setOn(true);
@@ -412,8 +436,6 @@ public class PlayerThread implements Runnable {
                         gameController.getTimerThread().deleteTimer();
                     }
 
-                    //this would block some thread
-                    //gameController.getTimerThread().setTimerDone(false);
                     gameController.getTimerThread().setOn(false);
                     gameController.setGameStarted(true);
                     //setting the timer for the game
@@ -449,33 +471,9 @@ public class PlayerThread implements Runnable {
 
     private void startGame() {
 
-        while ( !gameController.getGameover() ) {
-
-
-            logger.log(Level.INFO, "{PT " + this.nickname + "} is starting the game\n ");
-            gameLocker.lock();
-
-            try {
-
-                while (suspended) {
-                    //waiting all the others players
-                    turnOfOtherPlayers.await();
-                }
-
-            } catch (InterruptedException e) {
-
-                logger.log(Level.WARNING, e.toString(), e);
-                Thread.currentThread().interrupt();
-
-            } finally {
-
-                gameLocker.unlock();
-            }
-
-            System.out.println("It's not your turn, please wait!\n");
-            output.println("It's not your turn, please wait!\n");
-            output.flush();
-        }
+        System.out.println("It's not your turn, please wait!\n");
+        output.println("It's not your turn, please wait!\n");
+        output.flush();
 
     }
 
@@ -491,8 +489,9 @@ public class PlayerThread implements Runnable {
         return nickname;
     }
 
-    public void setGameLocker(Lock gl) {
-        this.gameLocker = gl;
+    public void setGameController(Game controller) {
+        this.gameController = controller;
     }
+
 
 }//END of CLASS PLAYER THREAD

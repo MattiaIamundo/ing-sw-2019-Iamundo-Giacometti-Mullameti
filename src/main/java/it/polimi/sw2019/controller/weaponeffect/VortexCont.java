@@ -32,7 +32,8 @@ public class VortexCont implements Observer<VortexSetEv>, EffectController{
     }
 
     public void acquireTarget(){
-      /*  Logger logger = Logger.getLogger("controller.WeaponEffct.Vortex.acquireTarget");
+        /*
+        Logger logger = Logger.getLogger("controller.WeaponEffct.Vortex.acquireTarget");
         ArrayList<String> validrooms = validRooms(attacker.getPosition());
         for (int x = 0; x < Table.getMap().getMaxX(); x++) {
             for (int y = 0; y < Table.getMap().getMaxY(); y++) {
@@ -49,6 +50,8 @@ public class VortexCont implements Observer<VortexSetEv>, EffectController{
 
        */
     }
+
+
 
     private ArrayList<String> validRooms(Space attpos){
         ArrayList<String> rooms = new ArrayList<>();
@@ -109,7 +112,7 @@ public class VortexCont implements Observer<VortexSetEv>, EffectController{
         String[] coordinates= message.getPosition().split("-");
         try {
             vorpos = Table.getMap().getSpace(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
-            model.setVortex(vorpos);
+           model.setVortex(vorpos);
         }catch (InvalidSpaceException e){
             logger.log(Level.SEVERE, "Left the boundaries of the map");
         }

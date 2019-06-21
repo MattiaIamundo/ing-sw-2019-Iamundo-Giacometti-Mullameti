@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1230.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.sw2019.GUI.TableController">
+   <children>
+      <ImageView fitHeight="705.0" fitWidth="917.0" layoutX="156.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="157.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../../../../../../../Resources/Images/Tabella.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="83.0" layoutY="48.0" prefHeight="660.0" prefWidth="155.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label prefHeight="45.0" prefWidth="155.0" text="Players" />
+            <Button fx:id="firstPlayer" mnemonicParsing="false" onAction="#firstPlayerButtonPushed" prefHeight="165.0" prefWidth="155.0" text="FirstPlayer" />
+            <Button fx:id="secondPlayer" mnemonicParsing="false" onAction="#secondPlayerButtonPushed" prefHeight="165.0" prefWidth="155.0" text="SecondPlayer" />
+            <Button fx:id="thirdPlayer" mnemonicParsing="false" onAction="#thirdPlayerButtonPushed" prefHeight="165.0" prefWidth="155.0" text="ThirdPlayer" />
+            <Button fx:id="fourthPlayer" mnemonicParsing="false" onAction="#fourthPlayerButtonPushed" prefHeight="165.0" prefWidth="155.0" text="ForthPlayer" />
+         </children>
+      </VBox>
+      <VBox layoutX="1210.0" layoutY="58.0" maxWidth="155.0" minWidth="155.0" prefHeight="705.0" prefWidth="155.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="You" />
+            <Button mnemonicParsing="false" onAction="#pointsButtonPushed" prefHeight="99.0" prefWidth="155.0" text="Points" />
+            <Button mnemonicParsing="false" onAction="#ammoButtonPushed" prefHeight="99.0" prefWidth="155.0" text="Ammo" />
+            <Button mnemonicParsing="false" onAction="#powerUpButtonPushed" prefHeight="99.0" prefWidth="155.0" text="Power Up" />
+            <Button mnemonicParsing="false" onAction="#weaponButtonPushed" prefHeight="99.0" prefWidth="155.0" text="Weapon" />
+            <Button fx:id="thisPlayer" mnemonicParsing="false" onAction="#thisPlayerButtonPushed" prefHeight="165.0" prefWidth="155.0" text="Player" />
+            <Button mnemonicParsing="false" onAction="#yourTurnButtonPushed" prefHeight="99.0" prefWidth="155.0" text="Your Turn" />
+         </children>
+      </VBox>
+      <AnchorPane fx:id="firstPlayerBoard" layoutX="156.0" layoutY="49.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="155.0" prefWidth="705.0">
+         <children>
+            <ImageView fitHeight="155.0" fitWidth="705.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../Resources/Images/Immagine1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="thirdPlayerBoard" layoutX="156.0" layoutY="380.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="155.0" prefWidth="705.0">
+         <children>
+            <ImageView fitHeight="155.0" fitWidth="705.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../Resources/Images/Immagine1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="fourthPlayerBoard" layoutX="156.0" layoutY="543.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="155.0" prefWidth="705.0">
+         <children>
+            <ImageView fitHeight="155.0" fitWidth="705.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../Resources/Images/Immagine1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="secondPlayerBoard" layoutX="156.0" layoutY="215.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="155.0" prefWidth="705.0">
+         <children>
+            <ImageView fitHeight="155.0" fitWidth="705.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../Resources/Images/Immagine1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="thisPlayerBoard" layoutX="166.0" layoutY="553.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="155.0" prefWidth="705.0" AnchorPane.bottomAnchor="135.0" AnchorPane.rightAnchor="157.0">
+         <children>
+            <ImageView fitHeight="155.0" fitWidth="705.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../Resources/Images/Immagine1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pointsBoard" layoutX="875.0" layoutY="14.0" prefHeight="99.0" prefWidth="300.0" AnchorPane.rightAnchor="155.0" />
+      <AnchorPane fx:id="ammoBoard" layoutX="777.0" layoutY="115.0" prefHeight="99.0" prefWidth="300.0" />
+      <AnchorPane fx:id="weaponBoard" layoutX="40.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="555.0" AnchorPane.bottomAnchor="150.0" AnchorPane.rightAnchor="157.0">
+         <children>
+            <GridPane maxWidth="542.0" minWidth="542.0" prefHeight="378.0" prefWidth="542.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="318.0" minHeight="10.0" prefHeight="318.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button fx:id="descriptionWeapon_1" mnemonicParsing="false" onAction="#descriptionButtonPushed" prefHeight="50.0" prefWidth="318.0" text="Description" GridPane.rowIndex="1" />
+                  <Button fx:id="descriptionWeapon_2" mnemonicParsing="false" onAction="#descriptionButtonPushed" prefHeight="50.0" prefWidth="318.0" text="Description" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button fx:id="descriptionWeapon_3" mnemonicParsing="false" onAction="#descriptionButtonPushed" prefHeight="50.0" prefWidth="318.0" text="Description" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <ImageView fitHeight="318.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="318.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                  <ImageView fitHeight="318.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+               </children>
+            </GridPane>
+            <TextArea fx:id="descriptionWeapon" prefHeight="318.0" prefWidth="555.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

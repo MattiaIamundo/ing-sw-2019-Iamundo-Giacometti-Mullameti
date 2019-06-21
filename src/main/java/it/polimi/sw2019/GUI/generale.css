@@ -1,0 +1,68 @@
+.background {
+    -fx-background-color: #1d1d1d;
+}
+
+.backgroundMenu{
+    -fx-background-image: url("../../../../../../../Resources/Images/background.jpg");
+}
+
+.label {
+    -fx-font-size: 16pt;
+    -fx-font-family: Stencil;
+    -fx-text-fill: white;
+    -fx-opacity: 0.9;
+}
+
+.buttonYellow{
+    -fx-background-image: url("../../../../../../../Resources/Images/yellowFigurine.png");
+}
+
+.buttonBlue{
+    -fx-background-image: url("../../../../../../../Resources/Images/blueFigurine.png");
+}
+
+.buttonGray{
+    -fx-background-image: url("../../../../../../../Resources/Images/grayFigurine.png");
+}
+
+.buttonGreen{
+    -fx-background-image: url("../../../../../../../Resources/Images/greenFigurine.png");
+}
+
+.buttonPurple{
+    -fx-background-image: url("../../../../../../../Resources/Images/purpleFigurine.png");
+}
+
+.buttonMap{
+    -fx-background-image: url("../../../../../../../Resources/Images/map1.png")
+}
+
+.backgroundSkull{
+    -fx-background-image: url("../../../../../../../Resources/Images/Skulls.png");
+}
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #008CBA;
+  overflow: hidden;
+  width: 0;
+  height: 100%;
+  transition: .5s ease;
+}
+
+.buttonYellow:hover .overlay {
+  width: 100%;
+}
+
+.text {
+  white-space: nowrap;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+
+}

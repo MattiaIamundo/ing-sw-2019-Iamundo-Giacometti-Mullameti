@@ -85,7 +85,17 @@ public class PlayerRemoteView extends PlayerView {
         output.flush();
     }
 
+    public void requestMap(boolean firstTime) {
+        output.println(firstTime);
+        output.flush();
+    }
+
     public String waitForSkull() {
+        set = input.nextLine();
+        return set;
+    }
+
+    public String waitForMap() {
         set = input.nextLine();
         return set;
     }
@@ -117,7 +127,12 @@ public class PlayerRemoteView extends PlayerView {
     }
 
     public void sendGoodbye() {
-        output.print("The nickname was not found, so goodbye!");
+        output.println("The nickname was not found, so goodbye!");
+        output.flush();
+    }
+
+    public void sendOut() {
+        output.println("out");
         output.flush();
     }
 
@@ -139,6 +154,26 @@ public class PlayerRemoteView extends PlayerView {
 
     public void sendYouAreNotFirstPlayer() {
         output.println("oneother");
+        output.flush();
+    }
+
+    public void sendThereAreSkull() {
+        output.println("true");
+        output.flush();
+    }
+
+    public void sendThereAreNotSkull() {
+        output.println("false");
+        output.flush();
+    }
+
+    public void sendThereIsMap() {
+        output.println("true");
+        output.flush();
+    }
+
+    public void sendThereIsNotMap() {
+        output.println("false");
         output.flush();
     }
 

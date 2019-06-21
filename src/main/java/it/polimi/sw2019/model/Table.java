@@ -15,6 +15,8 @@ public class Table extends TableView implements Cloneable, Serializable {
     private ArrayList<Skull> killshotTrack;
     //the map of the battlefield ;there can be 3 different ones , based on the number of the players
     private Map map;
+    private String nrSkulls;
+    private String Map;
     private ArrayList<Weapon> weaponDeck; //21
     private ArrayList<PowerUp> powerupDeck; //24
     private ArrayList<Ammo> ammoDeck; //36
@@ -31,7 +33,12 @@ public class Table extends TableView implements Cloneable, Serializable {
         weaponDeck = new ArrayList<>(21);
         powerupDeck = new ArrayList<>(24);
         ammoDeck = new ArrayList<>(36);
-        map = new Map( null, null, null, null);
+        List<Space> list1 = new ArrayList<>(3);
+        List<Space> list2 = new ArrayList<>(3);
+        List<Space> list3 = new ArrayList<>(3);
+        List<Space> list4 = new ArrayList<>(3);
+
+        map = new Map( list1, list2, list3, list4);
 
     }
 
@@ -98,6 +105,24 @@ public class Table extends TableView implements Cloneable, Serializable {
      */
     public static Player setCurrentPlayer(){
         return currentPlayer;
+    }
+
+
+    public String getNrMap() {
+        return Map;
+    }
+
+    public void setNrMap(String nrMap) {
+        this.Map=nrMap;
+    }
+
+
+    public String getNrSkulls() {
+        return nrSkulls;
+    }
+
+    public void setNrSkulls(String nrSkulls) {
+        this.nrSkulls=nrSkulls;
     }
 
 }

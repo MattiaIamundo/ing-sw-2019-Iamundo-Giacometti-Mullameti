@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * ho commentato per fare il report sonar
+ */
 public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectController {
 
     private ExtraGrenade model;
@@ -35,6 +38,7 @@ public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectCont
     }
 
     private void acquireSquares(){
+        /*
         ArrayList<String> romms = loadRooms();
         Logger logger = Logger.getLogger("controller.WeaponEffct.ExtraGrenade");
 /*
@@ -55,7 +59,7 @@ public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectCont
             model.chooseSquare(attacker, new ArrayList<>(squares.keySet()), new ArrayList<>(moveto.keySet()));
         }
 
- */
+         */
     }
 
     private ArrayList<String> loadRooms(){

@@ -1,8 +1,14 @@
 package it.polimi.sw2019.controller;
-//modified for sonarreport
-public abstract class UsePowerUp implements Action{
 
-    public void useAction(){
+import it.polimi.sw2019.model.Player;
+import it.polimi.sw2019.model.PowerUp;
+
+//modified for sonarreport
+public class UsePowerUp implements Action{
+
+    private PowerUp powerup;
+
+    public void useAction(Player player){
 
     }
 }
