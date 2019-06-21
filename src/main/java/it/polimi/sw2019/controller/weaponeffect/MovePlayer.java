@@ -13,6 +13,8 @@ import java.util.Map;
 public abstract class MovePlayer implements EffectController {
     private WithMove model;
     protected Player attacker;
+    protected ArrayList<Player> players;
+    protected it.polimi.sw2019.model.Map map;
     private Map<String, Space> positions = new HashMap<>();
 
     public MovePlayer(Power model) {
@@ -20,11 +22,11 @@ public abstract class MovePlayer implements EffectController {
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquirePosition(attacker.getPosition(), false);
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, it.polimi.sw2019.model.Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        this.map = gamemap;
+        acquirePosition(attacker.getPosition(), false);
     }
 
     public void acquirePosition(Space playerpos, boolean singlespace){

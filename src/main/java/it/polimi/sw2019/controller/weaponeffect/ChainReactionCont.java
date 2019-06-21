@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.events.ChainReactSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
@@ -14,17 +15,18 @@ public class ChainReactionCont extends VisibleTargetCont implements Observer<Cha
 
     private ChainReaction realmodel;
 
+
     public ChainReactionCont(Power realmodel) {
         super(realmodel);
         this.realmodel = (ChainReaction) realmodel;
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (realmodel.toString().equals(effectname)) {
-            this.attacker = attacker;
-            acquireTarget(notselectable());
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        this.map = gamemap;
+        acquireTarget(notselectable());
     }
 
     @Override
@@ -48,7 +50,7 @@ public class ChainReactionCont extends VisibleTargetCont implements Observer<Cha
 
     @Override
     public void update(ChainReactSetEv message) {
-        //super.update(message);
+        super.update(message);
         realmodel.usePower(attacker);
     }
 }

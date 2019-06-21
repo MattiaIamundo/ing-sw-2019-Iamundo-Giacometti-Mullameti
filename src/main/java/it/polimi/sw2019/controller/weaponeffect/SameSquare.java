@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.TargetSetEv;
@@ -12,6 +13,8 @@ public abstract class SameSquare implements EffectController{
 
     private SingleTarget model;
     protected Player attacker;
+    protected ArrayList<Player> players;
+    protected Map map;
     protected ArrayList<String> valid = new ArrayList<>();
     protected ArrayList<String> notreachable = new ArrayList<>();
 
@@ -20,30 +23,28 @@ public abstract class SameSquare implements EffectController{
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireTarget();
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        this.map = gamemap;
+        acquireTarget();
     }
 
     protected void acquireTarget() {
-        for (int i = 0; i < 5; i++) {
-            if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker)) {
-                if (Table.getPlayers(i).getPosition() == attacker.getPosition()){
-                    valid.add(Table.getPlayers(i).getNickname());
-                }else {
-                    notreachable.add(Table.getPlayers(i).getNickname());
-                }
+        for (Player player : players){
+            if ((player != attacker) && (player.getPosition() == attacker.getPosition())){
+                valid.add(player.getNickname());
+            }else if ((player != attacker) && (player.getPosition() != attacker.getPosition())){
+                notreachable.add(player.getNickname());
             }
         }
     }
 
     public void update(TargetSetEv message) {
         int i = 0;
-        while ((i < 5) && !(Table.getPlayers(i).getNickname().equals(message.getTarget()))){
+        while ((i < players.size()) && !(players.get(i).getNickname().equals(message.getTarget()))){
             i++;
         }
-        model.setTarget(Table.getPlayers(i));
+        model.setTarget(players.get(i));
     }
 }

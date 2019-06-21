@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
@@ -12,6 +13,8 @@ import java.util.HashMap;
 public abstract class ThoughWall implements EffectController{
     protected ThroughWalls model;
     protected Player attacker;
+    protected ArrayList<Player> players;
+    protected Map map;
 
     public ThoughWall(Power model) {
         this.model = (ThroughWalls) model;
@@ -19,11 +22,11 @@ public abstract class ThoughWall implements EffectController{
 
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireTarget();
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        this.map = gamemap;
+        acquireTarget();
     }
 
     public void acquireTarget(){
@@ -82,9 +85,9 @@ public abstract class ThoughWall implements EffectController{
 
     private ArrayList<String> loadTargets(ArrayList<Space> spaces){
         ArrayList<String> targets = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker) && (spaces.contains(Table.getPlayers(i).getPosition()))){
-                targets.add(Table.getPlayers(i).getNickname());
+        for (Player player : players){
+            if ((player != attacker) && (spaces.contains(player.getPosition()))){
+                targets.add(player.getNickname());
             }
         }
         return targets;

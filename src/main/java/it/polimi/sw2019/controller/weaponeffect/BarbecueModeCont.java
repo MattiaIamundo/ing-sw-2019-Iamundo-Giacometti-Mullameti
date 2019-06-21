@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.events.BarbecueSetEv;
@@ -14,6 +15,8 @@ public class BarbecueModeCont implements Observer<BarbecueSetEv>, EffectControll
 
     private BarbecueMode model;
     private Player attacker;
+    private ArrayList<Player> players;
+    private Map map;
     private HashMap<String, ArrayList<Space>> directions = new HashMap<>();
 
     public BarbecueModeCont(Power model) {
@@ -21,11 +24,11 @@ public class BarbecueModeCont implements Observer<BarbecueSetEv>, EffectControll
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireDirections();
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        this.map = gamemap;
+        acquireDirections();
     }
 
     private void acquireDirections(){

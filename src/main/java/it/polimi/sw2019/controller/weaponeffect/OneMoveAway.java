@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
@@ -13,6 +14,8 @@ public abstract class OneMoveAway implements EffectController{
 
     private SingleTarget model;
     protected Player attacker;
+    protected ArrayList<Player> players;
+    protected Map map;
     protected ArrayList<String> valid = new ArrayList<>();
     protected ArrayList<String> notreachable = new ArrayList<>();
     private ArrayList<Space> validposition = new ArrayList<>();
@@ -22,19 +25,20 @@ public abstract class OneMoveAway implements EffectController{
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireTarget();
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        this.map = gamemap;
+        loadSquares();
+        acquireTarget();
     }
 
     protected void acquireTarget(){
-        for (int i = 0; i < 5; i++) {
-            if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker) && (validposition.contains(Table.getPlayers(i).getPosition()))){
-                valid.add(Table.getPlayers(i).getNickname());
-            }else if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker)){
-                notreachable.add(Table.getPlayers(i).getNickname());
+        for (Player player : players){
+            if ((player != attacker) && (validposition.contains(player.getPosition()))){
+                valid.add(player.getNickname());
+            }else if ((player != attacker) && !(validposition.contains(player.getPosition()))){
+                notreachable.add(player.getNickname());
             }
         }
     }
@@ -55,9 +59,9 @@ public abstract class OneMoveAway implements EffectController{
     }
 
     public void update(TargetSetEv message){
-        for (int i = 0; i < 5; i++) {
-            if (Table.getPlayers(i).getNickname().equals(message.getTarget())){
-                model.setTarget(Table.getPlayers(i));
+        for (Player player : players){
+            if (player.getNickname().equals(message.getTarget())){
+                model.setTarget(player);
                 break;
             }
         }

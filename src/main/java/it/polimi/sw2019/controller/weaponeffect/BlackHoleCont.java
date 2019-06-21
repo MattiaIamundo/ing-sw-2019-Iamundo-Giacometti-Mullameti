@@ -1,10 +1,12 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.events.BlackHoleSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.weapon_power.BlackHole;
+import it.polimi.sw2019.model.weapon_power.PlasmaGun;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.Vortex;
 import it.polimi.sw2019.view.Observer;
@@ -15,17 +17,19 @@ public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController
 
     private BlackHole model;
     private Player attacker;
+    private ArrayList<Player> players;
+    private Map map;
 
     public BlackHoleCont(Power model) {
         this.model = (BlackHole) model;
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireTargets();
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        this.map = gamemap;
+        acquireTargets();
     }
 
     public void acquireTargets(){
@@ -33,11 +37,9 @@ public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController
         Player invalid = getFirstTarget();
         Space vortex = getVortex();
         ArrayList<Space> validpos = initPositions(vortex);
-        for (int i = 0; i < 5; i++) {
-            if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker) && (Table.getPlayers(i) != invalid)){
-                if (validpos.contains(Table.getPlayers(i).getPosition())){
-                    targets.add(Table.getPlayers(i).getNickname());
-                }
+        for (Player player : players) {
+            if ((player != attacker) && (player != invalid) && (validpos.contains(player.getPosition()))){
+                targets.add(player.getNickname());
             }
         }
         model.setVortex(vortex);

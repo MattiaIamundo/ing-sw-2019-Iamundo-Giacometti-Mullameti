@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.LineFireSetEv;
@@ -14,6 +15,8 @@ public abstract class LineFireCont implements EffectController{
 
     protected LineFire model;
     protected Player attacker;
+    protected ArrayList<Player> players;
+    protected Map map;
     protected HashMap<String, ArrayList<String>> firststep = new HashMap<>();
     protected HashMap<String, ArrayList<String>> secondstep = new HashMap<>();
 
@@ -22,11 +25,11 @@ public abstract class LineFireCont implements EffectController{
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireTargets();
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        this.map = gamemap;
+        acquireTargets();
     }
 
     protected void acquireTargets(){
@@ -42,16 +45,16 @@ public abstract class LineFireCont implements EffectController{
         ArrayList<String> second = new ArrayList<>();
 
         if (!attacker.getPosition().getNorth().isWall()){
-            for (int i = 0; i < 5; i++) {
-                if (Table.getPlayers(i).getPosition() == attacker.getPosition().getNorth().getSpaceSecond()){
-                    first.add(Table.getPlayers(i).getNickname());
+            for (Player player : players){
+                if (player.getPosition() == attacker.getPosition().getNorth().getSpaceSecond()){
+                    first.add(player.getNickname());
                 }
             }
             firststep.put("north", first);
             if (!attacker.getPosition().getNorth().getSpaceSecond().getNorth().isWall()){
-                for (int i = 0; i < 5; i++) {
-                    if (Table.getPlayers(i).getPosition() == attacker.getPosition().getNorth().getSpaceSecond().getNorth().getSpaceSecond()){
-                        second.add(Table.getPlayers(i).getNickname());
+                for (Player player : players){
+                    if (player.getPosition() == attacker.getPosition().getNorth().getSpaceSecond().getNorth().getSpaceSecond()){
+                        second.add(player.getNickname());
                     }
                 }
                 secondstep.put("north", second);
@@ -64,16 +67,16 @@ public abstract class LineFireCont implements EffectController{
         ArrayList<String> second = new ArrayList<>();
 
         if (!attacker.getPosition().getWest().isWall()){
-            for (int i = 0; i < 5; i++) {
-                if (Table.getPlayers(i).getPosition() == attacker.getPosition().getWest().getSpaceSecond()){
-                    first.add(Table.getPlayers(i).getNickname());
+            for (Player player : players){
+                if (player.getPosition() == attacker.getPosition().getWest().getSpaceSecond()){
+                    first.add(player.getNickname());
                 }
             }
             firststep.put("west", first);
             if (!attacker.getPosition().getWest().getSpaceSecond().getWest().isWall()){
-                for (int i = 0; i < 5; i++) {
-                    if (Table.getPlayers(i).getPosition() == attacker.getPosition().getWest().getSpaceSecond().getWest().getSpaceSecond()){
-                        second.add(Table.getPlayers(i).getNickname());
+                for (Player player : players){
+                    if (player.getPosition() == attacker.getPosition().getWest().getSpaceSecond().getWest().getSpaceSecond()){
+                        second.add(player.getNickname());
                     }
                 }
                 secondstep.put("west", second);
@@ -86,16 +89,16 @@ public abstract class LineFireCont implements EffectController{
         ArrayList<String> second = new ArrayList<>();
 
         if (!attacker.getPosition().getSouth().isWall()){
-            for (int i = 0; i < 5; i++) {
-                if (Table.getPlayers(i).getPosition() == attacker.getPosition().getSouth().getSpaceSecond()){
-                    first.add(Table.getPlayers(i).getNickname());
+            for (Player player : players){
+                if (player.getPosition() == attacker.getPosition().getSouth().getSpaceSecond()){
+                    first.add(player.getNickname());
                 }
             }
             firststep.put("south", first);
             if (!attacker.getPosition().getSouth().getSpaceSecond().getSouth().isWall()){
-                for (int i = 0; i < 5; i++) {
-                    if (Table.getPlayers(i).getPosition() == attacker.getPosition().getSouth().getSpaceSecond().getSouth().getSpaceSecond()){
-                        second.add(Table.getPlayers(i).getNickname());
+                for (Player player : players){
+                    if (player.getPosition() == attacker.getPosition().getSouth().getSpaceSecond().getSouth().getSpaceSecond()){
+                        second.add(player.getNickname());
                     }
                 }
             }
@@ -108,16 +111,16 @@ public abstract class LineFireCont implements EffectController{
         ArrayList<String> second = new ArrayList<>();
 
         if(!attacker.getPosition().getEast().isWall()){
-            for (int i = 0; i < 5; i++) {
-                if (Table.getPlayers(i).getPosition() == attacker.getPosition().getEast().getSpaceSecond()){
-                    first.add(Table.getPlayers(i).getNickname());
+            for (Player player : players){
+                if (player.getPosition() == attacker.getPosition().getEast().getSpaceSecond()){
+                    first.add(player.getNickname());
                 }
             }
             firststep.put("east", first);
             if (!attacker.getPosition().getEast().getSpaceSecond().getEast().isWall()){
-                for (int i = 0; i < 5; i++) {
-                    if (Table.getPlayers(i).getPosition() == attacker.getPosition().getEast().getSpaceSecond().getEast().getSpaceSecond()){
-                        second.add(Table.getPlayers(i).getNickname());
+                for (Player player : players){
+                    if (player.getPosition() == attacker.getPosition().getEast().getSpaceSecond().getEast().getSpaceSecond()){
+                        second.add(player.getNickname());
                     }
                 }
             }
@@ -127,20 +130,22 @@ public abstract class LineFireCont implements EffectController{
 
     public void update(LineFireSetEv message){
         if (message.getTarget1() != null){
-            int i = 0;
-            while ((i < 5) && !(Table.getPlayers(i).getNickname().equals(message.getTarget1()))){
-                i++;
+            for (Player player : players){
+                if (player.getNickname().equals(message.getTarget1())){
+                    model.setTarget1(player);
+                    break;
+                }
             }
-            model.setTarget1(Table.getPlayers(i));
         }else {
             model.setTarget1(null);
         }
         if (message.getTarget2() != null){
-            int i = 0;
-            while ((i < 5) && !(Table.getPlayers(i).getNickname().equals(message.getTarget2()))){
-                i++;
+            for (Player player : players){
+                if (player.getNickname().equals(message.getTarget2())){
+                    model.setTarget2(player);
+                    break;
+                }
             }
-            model.setTarget2(Table.getPlayers(i));
         }else {
             model.setTarget2(null);
         }
