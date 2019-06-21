@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.events.PulvModeSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
@@ -15,6 +16,7 @@ public class PulverizeModeCont implements Observer<PulvModeSetEv>, EffectControl
 
     private PulverizeMode model;
     private Player attacker;
+    private ArrayList<Player> players;
     private HashMap<String, Space> positions = new HashMap<>();
 
     public PulverizeModeCont(Power model) {
@@ -22,18 +24,17 @@ public class PulverizeModeCont implements Observer<PulvModeSetEv>, EffectControl
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireTarget();
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        acquireTarget();
     }
 
     private void acquireTarget(){
         ArrayList<String> targets = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker) && (Table.getPlayers(i).getPosition() == attacker.getPosition())){
-                targets.add(Table.getPlayers(i).getNickname());
+        for (Player player : players){
+            if ((player != attacker) && (player.getPosition() == attacker.getPosition())){
+                targets.add(player.getNickname());
             }
         }
         initializePositions();
@@ -70,9 +71,10 @@ public class PulverizeModeCont implements Observer<PulvModeSetEv>, EffectControl
 
     @Override
     public void update(PulvModeSetEv message) {
-        for (int i = 0; i < 5; i++) {
-            if (Table.getPlayers(i).getNickname().equals(message.getTarget())){
-                model.setTarget(Table.getPlayers(i));
+        for (Player player : players){
+            if (player.getNickname().equals(message.getTarget())){
+                model.setTarget(player);
+                break;
             }
         }
         model.setMoveto(positions.get(message.getMoveto()));

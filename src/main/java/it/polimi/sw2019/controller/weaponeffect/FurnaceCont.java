@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.events.FurnaceSetEv;
 import it.polimi.sw2019.model.weapon_power.Furnace;
@@ -18,11 +19,9 @@ public class FurnaceCont implements Observer<FurnaceSetEv>, EffectController {
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireRooms();
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        acquireRooms();
     }
 
     private void acquireRooms(){

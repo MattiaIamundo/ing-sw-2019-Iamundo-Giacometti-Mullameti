@@ -1,6 +1,7 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.exception.InvalidSpaceException;
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
@@ -22,6 +23,8 @@ public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectCont
 
     private ExtraGrenade model;
     private Player attacker;
+    private ArrayList<Player> players;
+    private Map map;
     private HashMap<String, Space> squares = new HashMap<>();
     private HashMap<String, Space> moveto = new HashMap<>();
 
@@ -30,23 +33,21 @@ public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectCont
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireSquares();
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        this.map = gamemap;
+        acquireSquares();
     }
 
     private void acquireSquares(){
-        /*
         ArrayList<String> romms = loadRooms();
         Logger logger = Logger.getLogger("controller.WeaponEffct.ExtraGrenade");
-/*
         try {
-            for (int i = 0; i < Table.getMap().getMaxX(); i++) {
-                for (int j = 0; j < Table.getMap().getMaxY(); j++) {
-                    if (romms.contains(Table.getMap().getSpace(i, j).getRoom())){
-                        squares.put(i+"-"+j, Table.getMap().getSpace(i,j));
+            for (int i = 0; i < map.getMaxX(); i++) {
+                for (int j = 0; j < map.getMaxY(); j++) {
+                    if (romms.contains(map.getSpace(i, j).getRoom())){
+                        squares.put(i+"-"+j, map.getSpace(i,j));
                     }
                 }
             }
@@ -58,8 +59,6 @@ public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectCont
         }else {
             model.chooseSquare(attacker, new ArrayList<>(squares.keySet()), new ArrayList<>(moveto.keySet()));
         }
-
-         */
     }
 
     private ArrayList<String> loadRooms(){

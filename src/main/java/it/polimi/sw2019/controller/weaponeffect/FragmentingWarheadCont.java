@@ -1,10 +1,13 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.FragmentingWarhead;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.RocketLauncher;
+
+import java.util.ArrayList;
 
 public class FragmentingWarheadCont implements EffectController{
 
@@ -16,11 +19,9 @@ public class FragmentingWarheadCont implements EffectController{
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            initialize();
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        initialize();
     }
 
     private void initialize(){

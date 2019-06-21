@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.PunisherModeSetEv;
@@ -24,15 +25,13 @@ public class PunishModeCont extends VisibleTargetCont implements Observer<Punish
         ArrayList<String> valid = new ArrayList<>();
         ArrayList<String> notselectable = new ArrayList<>();
         ArrayList<String> notreachable = new ArrayList<>();
-        position = loadPositions();
 
-        for (int i = 0; i < 5; i++) {
-            if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker)){
-                if (!position.contains(Table.getPlayers(i).getPosition())){
-                    notreachable.add(Table.getPlayers(i).getNickname());
-                }else {
-                    valid.add(Table.getPlayers(i).getNickname());
-                }
+        position = loadPositions();
+        for (Player player : players){
+            if ((player != attacker) && !(position.contains(player.getPosition()))){
+                notreachable.add(player.getNickname());
+            }else if ((player != attacker) && (position.contains(player.getPosition()))){
+                valid.add(player.getNickname());
             }
         }
         notselectable.add(attacker.getNickname());

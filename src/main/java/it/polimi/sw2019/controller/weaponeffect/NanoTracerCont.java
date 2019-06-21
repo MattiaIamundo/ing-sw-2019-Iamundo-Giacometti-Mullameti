@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.NanoTracerSetEv;
@@ -20,11 +21,11 @@ public class NanoTracerCont extends VisibleTargetCont implements Observer<NanoTr
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (realmodel.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireTarget(notSelectable());
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        this.map = gamemap;
+        acquireTarget(notSelectable());
     }
 
     @Override
@@ -37,12 +38,11 @@ public class NanoTracerCont extends VisibleTargetCont implements Observer<NanoTr
 
     private ArrayList<String> notSelectable(){
         ArrayList<String> notselectable = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            if (Table.getPlayers(i).getPosition() == attacker.getPosition()){
-                notselectable.add(Table.getPlayers(i).getNickname());
+        for (Player player : players){
+            if (player.getPosition() == attacker.getPosition()){
+                notselectable.add(player.getNickname());
             }
         }
-        notselectable.add(attacker.getNickname());
         return notselectable;
     }
 
