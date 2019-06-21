@@ -33,15 +33,17 @@ public class PlayerThread implements Runnable {
     private PrintWriter output;
     //if the thread is suspended
     private boolean suspended;
-    //
+    //the player's nickname
     private String nickname = "pippo";
-    //to contain what the player write ( his move )
+    //
+    private String nameOfMatch;
+    //to contain what the player write ( his actions )
     private String string;
     //the lock
-    private Lock gameLocker;
+    //private Lock gameLocker;
     //the condition to put the thread in wait
-    private Condition turnOfOtherPlayers;
-    private Condition otherPlayerConnected;
+    //private Condition turnOfOtherPlayers;
+    //private Condition otherPlayerConnected;
     //the controller
     private MultiGame multiGameController;
     private Game gameController;
@@ -60,9 +62,9 @@ public class PlayerThread implements Runnable {
         connection = socket;
         suspended = true;
         string = "bho";
-        gameLocker = new ReentrantLock();
-        turnOfOtherPlayers = gameLocker.newCondition();
-        otherPlayerConnected = gameLocker.newCondition();
+        //gameLocker = new ReentrantLock();
+        //turnOfOtherPlayers = gameLocker.newCondition();
+        //otherPlayerConnected = gameLocker.newCondition();
         gameController = controller;
         playerRemoteView = new PlayerRemoteView(socket);
         tableRemoteView = new TableRemoteView(socket);
@@ -469,33 +471,9 @@ public class PlayerThread implements Runnable {
 
     private void startGame() {
 
-        while ( !gameController.getGameover() ) {
-
-
-            logger.log(Level.INFO, "{PT " + this.nickname + "} is starting the game\n ");
-            gameLocker.lock();
-
-            try {
-
-                while (suspended) {
-                    //waiting all the others players
-                    turnOfOtherPlayers.await();
-                }
-
-            } catch (InterruptedException e) {
-
-                logger.log(Level.WARNING, e.toString(), e);
-                Thread.currentThread().interrupt();
-
-            } finally {
-
-                gameLocker.unlock();
-            }
-
-            System.out.println("It's not your turn, please wait!\n");
-            output.println("It's not your turn, please wait!\n");
-            output.flush();
-        }
+        System.out.println("It's not your turn, please wait!\n");
+        output.println("It's not your turn, please wait!\n");
+        output.flush();
 
     }
 
@@ -511,8 +489,9 @@ public class PlayerThread implements Runnable {
         return nickname;
     }
 
-    public void setGameLocker(Lock gl) {
-        this.gameLocker = gl;
+    public void setGameController(Game controller) {
+        this.gameController = controller;
     }
+
 
 }//END of CLASS PLAYER THREAD

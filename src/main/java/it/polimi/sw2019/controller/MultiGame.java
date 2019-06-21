@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MultiGame {
-    //it is not a fixed capacity, but it is only to initialize the array list to accelerate for the first ten games
-    //avoiding the realloc
+    //it is not a fixed capacity, but it is only to initialize the array list
+    //to avoid the realloc for the first ten games
     private List<Match> games;
 
     public MultiGame() {
@@ -18,4 +18,16 @@ public class MultiGame {
         return games;
     }
 
+    public void setGames(Match match) {
+        this.games.add(match);
+    }
+
+    public String createGame() {
+
+        Match match = new Match();
+        match.setNameMatch( this.games );
+        this.games.add(match);
+
+        return match.getNameMatch();
+    }
 }

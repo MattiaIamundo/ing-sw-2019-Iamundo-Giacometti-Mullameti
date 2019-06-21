@@ -1,6 +1,7 @@
 package it.polimi.sw2019.network;
 
 import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.controller.MultiGame;
 import it.polimi.sw2019.network.RMI.ServerRMI;
 import it.polimi.sw2019.network.Socket.ServerSocket;
 
@@ -15,12 +16,13 @@ public class Server implements Runnable{
     //private ServerRMI serverRMI;
     private ServerSocket serverSocket;
     //the controller
+    private MultiGame multiGame;
     private Game controller;
     //logger
     private static final Logger logger = Logger.getLogger( Server.class.getName() );
 
     public Server() {
-
+        multiGame = new MultiGame();
         controller = new Game();
         //serverRMI = new ServerRMI(this.controller);
         serverSocket = new ServerSocket(this.controller);

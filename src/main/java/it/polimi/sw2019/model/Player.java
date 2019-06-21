@@ -3,7 +3,6 @@ package it.polimi.sw2019.model;
 
 import it.polimi.sw2019.view.ObservableByGame;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -30,6 +29,8 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     private static PowerUp[] powerup = new PowerUp[3];
     //
     private int playerNumber;
+    //
+    private boolean connected;
 
     /**Constructor of the class
      * @param nickname the player's nickname

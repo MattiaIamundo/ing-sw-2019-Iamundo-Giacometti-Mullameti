@@ -29,9 +29,10 @@ import java.util.logging.Logger;
 public class Game implements Observer <ObservableByGame> {
 
     //the model
-    private final ArrayList<Player> players;
+    private final List<Player> players;
+    private List<PlayerThread> playerThreads;
     private final Table gameboard;
-    //the utility and for the synchronization
+    //the utility
     private TimerThread timerThread;
     //for the synchronization
     private Object stop = new Object();
@@ -39,7 +40,7 @@ public class Game implements Observer <ObservableByGame> {
     //the main controller's variables
     private Turn turnOf;
     private String gamemode;
-    private State state;
+    //private State state;
     private String firstPlayer;
     private int mapconfig;
     private boolean out;
@@ -55,16 +56,16 @@ public class Game implements Observer <ObservableByGame> {
     public Game() {
 
         players  = new ArrayList<>(5);
+        playerThreads = new ArrayList<>(5);
         turnOf = new TurnNormal(null, 0, null);
         gameboard = new Table();
         gamemode = "null";
-        state = new State();
+        //state = new State();
         firstPlayer = "null";
         timerThread = new TimerThread();
         mapconfig = 0;
         out = false;
         gameover = false;
-
         try{
             FileReader reader = new FileReader("File_Json/milliSecondsToTimerBeginning.json");
             timerThread.setTime(gson.fromJson( reader , int.class));
@@ -76,6 +77,17 @@ public class Game implements Observer <ObservableByGame> {
 
     public Table getGameboard() {
         return gameboard;
+    }
+
+    public synchronized  void setTimerThreadToTheLogin() {
+
+        try{
+            FileReader reader = new FileReader("File_Json/milliSecondsToTimerBeginning.json");
+            timerThread.setTime(gson.fromJson( reader , int.class));
+            reader.close();
+        } catch (IOException ee) {
+            logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
+        }
     }
 
     public synchronized void setTimerThreadToTheGame() {
@@ -975,9 +987,11 @@ public class Game implements Observer <ObservableByGame> {
         return gamemode;
     }
 
-    public State getState(){
+    /*public State getState(){
         return state;
     }
+
+     */
 
   //  public void setTurnOfPlayer (Player player) { this.turnOf.setPlayer(player); }
 
