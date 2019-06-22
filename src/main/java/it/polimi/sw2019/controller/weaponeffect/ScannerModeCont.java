@@ -32,9 +32,9 @@ public class ScannerModeCont extends VisibleTargetCont implements Observer<Scann
     }
 
     private Player checkPlayer(String name){
-        for (int i = 0; i < 5; i++) {
-            if (Table.getPlayers(i).getNickname().equals(name)){
-                return Table.getPlayers(i);
+        for (Player player : players){
+            if (player.getNickname().equals(name)){
+                return player;
             }
         }
         return null;

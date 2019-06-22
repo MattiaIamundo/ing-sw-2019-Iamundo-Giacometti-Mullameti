@@ -15,12 +15,6 @@ public class RocketFistCont extends LineFireCont implements EffectController, Ob
         this.realmodel = (RocketFistMode) realmodel;
     }
 
-    @Override
-    public void update(RocketFistSetEv message) {
-        realmodel.setMoveto(moveto(message.getDirection()));
-        super.update(message);
-        realmodel.usePower(attacker);
-    }
 
     private Space moveto(String direction){
         switch (direction){
@@ -52,4 +46,12 @@ public class RocketFistCont extends LineFireCont implements EffectController, Ob
                 return attacker.getPosition();
         }
     }
+
+    @Override
+    public void update(RocketFistSetEv message) {
+        realmodel.setMoveto(moveto(message.getDirection()));
+        super.update(message);
+        realmodel.usePower(attacker);
+    }
+
 }

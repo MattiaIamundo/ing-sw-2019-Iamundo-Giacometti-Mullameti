@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
@@ -15,6 +16,7 @@ public class ShockwaveCont implements Observer<ShockwaveSetEv>, EffectController
 
     private Shockwave model;
     private Player attacker;
+    private ArrayList<Player> players;
     private HashMap<String, ArrayList<String>> targets = new HashMap<>();
 
     public ShockwaveCont(Power model) {
@@ -22,11 +24,10 @@ public class ShockwaveCont implements Observer<ShockwaveSetEv>, EffectController
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireTargets();
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        acquireTargets();
     }
 
     private void acquireTargets(){
@@ -47,9 +48,10 @@ public class ShockwaveCont implements Observer<ShockwaveSetEv>, EffectController
 
     private ArrayList<String> searchPlayers(Space squarepos){
         ArrayList<String> valid = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            if (Table.getPlayers(i).getPosition() == squarepos){
-                valid.add(Table.getPlayers(i).getNickname());
+
+        for (Player player : players){
+            if (player.getPosition() == squarepos){
+                valid.add(player.getNickname());
             }
         }
         return valid;
@@ -57,20 +59,19 @@ public class ShockwaveCont implements Observer<ShockwaveSetEv>, EffectController
 
     @Override
     public void update(ShockwaveSetEv message) {
-        HashMap<String, Player> players = new HashMap<>();
-        for (int i = 0; i < 5; i++) {
-            players.put(Table.getPlayers(i).getNickname(), Table.getPlayers(i));
-        }
-        model.setTarget1(players.get(message.getTarget1()));
-        if (message.getTarget2() != null){
-            model.setTarget2(players.get(message.getTarget2()));
-            if (message.getTarget3() != null){
-                model.setTarget3(players.get(message.getTarget3()));
-            }else {
-                model.setTarget3(null);
+        for (Player player : players){
+            if (player.getNickname().equals(message.getTarget1())){
+                model.setTarget1(player);
+            }else if (player.getNickname().equals(message.getTarget2())){
+                model.setTarget2(player);
+            }else if (player.getNickname().equals(message.getTarget3())){
+                model.setTarget3(player);
             }
-        }else {
+        }
+        if (message.getTarget2() == null){
             model.setTarget2(null);
+        }
+        if (message.getTarget3() == null){
             model.setTarget3(null);
         }
         model.usePower(attacker);

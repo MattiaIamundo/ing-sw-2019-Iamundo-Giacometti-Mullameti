@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.events.RailGunSetEv;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.weapon_power.Power;
@@ -18,12 +19,11 @@ public class RailGunCont extends ThoughWall implements Observer<RailGunSetEv>{
 
     @Override
     public void update(RailGunSetEv message) {
-        int i = 0;
-
-        while ((i < 5) && !(Table.getPlayers(i).getNickname().equals(message.getTarget()))){
-            i++;
+        for (Player player : players){
+            if (player.getNickname().equals(message.getTarget())){
+                realmodel.setTarget(player);
+            }
         }
-        realmodel.setTarget(Table.getPlayers(i));
         realmodel.usePower(attacker);
     }
 }

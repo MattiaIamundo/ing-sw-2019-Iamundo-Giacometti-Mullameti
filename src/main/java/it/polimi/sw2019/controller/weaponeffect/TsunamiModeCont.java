@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
@@ -12,26 +13,26 @@ public class TsunamiModeCont implements EffectController{
 
     private TsunamiMode model;
     private Player attacker;
+    private ArrayList<Player> players;
 
     public TsunamiModeCont(Power model) {
         this.model = (TsunamiMode) model;
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireTargets();
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        acquireTargets();
     }
 
     private void acquireTargets(){
         ArrayList<Player> targets = new ArrayList<>();
         ArrayList<Space> validpos = loadPositions();
 
-        for (int i = 0; i < 5; i++) {
-            if (validpos.contains(Table.getPlayers(i).getPosition())){
-                targets.add(Table.getPlayers(i));
+        for (Player player : players){
+            if (validpos.contains(player.getPosition())){
+                targets.add(player);
             }
         }
         model.setTargets(targets);

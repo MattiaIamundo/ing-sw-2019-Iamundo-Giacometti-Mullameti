@@ -16,25 +16,25 @@ public class TractorBeamCont implements Observer<TracBeamSetEv>, EffectControlle
    private ArrayList<String> validroom = new ArrayList<>();
    private TractorBeam model;
    private Player attacker;
+   private ArrayList<Player> players;
 
     public TractorBeamCont(Power model) {
         this.model = (TractorBeam) model;
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireTarget();
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, it.polimi.sw2019.model.Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        acquireTarget();
     }
 
     public void acquireTarget() {
         ArrayList<String> notselectable = new ArrayList<>();
         initializeRooms();
-        for (int i = 0; i < 5; i++) {
-            if (Table.getPlayers(i)!=null && Table.getPlayers(i)!=attacker){
-                checkTarget(Table.getPlayers(i));
+        for (Player player : players){
+            if (player != attacker){
+                checkTarget(player);
             }
         }
         notselectable.add(attacker.getNickname());

@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.events.WhisperSetEv;
@@ -25,12 +26,12 @@ public class WhisperCont extends VisibleTargetCont implements Observer<WhisperSe
         ArrayList<String> valid = new ArrayList<>();
         ArrayList<String> notreachable = new ArrayList<>();
         initializePos(attacker.getPosition(), invalidpos);
-        for (int i = 0; i < 5; i++) {
-            if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker)){
-                if (invalidpos.contains(Table.getPlayers(i).getPosition())){
-                    notreachable.add(Table.getPlayers(i).getNickname());
+        for (Player player : players){
+            if (player != attacker){
+                if (invalidpos.contains(player.getPosition())){
+                    notreachable.add(player.getNickname());
                 }else {
-                    valid.add(Table.getPlayers(i).getNickname());
+                    valid.add(player.getNickname());
                 }
             }
         }

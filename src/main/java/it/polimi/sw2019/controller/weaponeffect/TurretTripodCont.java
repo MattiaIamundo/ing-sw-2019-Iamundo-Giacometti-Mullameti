@@ -1,6 +1,7 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.DoubleAdditive;
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.events.TurretTripodSetEv;
 import it.polimi.sw2019.model.weapon_power.FocusShot;
@@ -21,11 +22,11 @@ public class TurretTripodCont extends VisibleTargetCont implements Observer<Turr
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (realmodel.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireTarget(notselectable());
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        this.map = gamemap;
+        acquireTarget(notselectable());
     }
 
     @Override

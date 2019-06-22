@@ -1,6 +1,7 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.exception.InvalidSpaceException;
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.events.VortexSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
@@ -17,6 +18,8 @@ import java.util.logging.Logger;
 public class VortexCont implements Observer<VortexSetEv>, EffectController{
     private Vortex model;
     private Player attacker;
+    private ArrayList<Player> players;
+    private Map map;
     private HashMap<String, ArrayList<String>> valid = new HashMap<>();
 
     public VortexCont(Power model) {
@@ -24,22 +27,21 @@ public class VortexCont implements Observer<VortexSetEv>, EffectController{
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireTarget();
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        this.map = gamemap;
+        acquireTarget();
     }
 
     public void acquireTarget(){
-        /*
         Logger logger = Logger.getLogger("controller.WeaponEffct.Vortex.acquireTarget");
         ArrayList<String> validrooms = validRooms(attacker.getPosition());
-        for (int x = 0; x < Table.getMap().getMaxX(); x++) {
-            for (int y = 0; y < Table.getMap().getMaxY(); y++) {
+        for (int x = 0; x < map.getMaxX(); x++) {
+            for (int y = 0; y < map.getMaxY(); y++) {
                 try {
-                    if (validrooms.contains(Table.getMap().getSpace(x, y).getRoom())){
-                        valid.put(x+"-"+y, validPlayer(Table.getMap().getSpace(x,y)));
+                    if (validrooms.contains(map.getSpace(x, y).getRoom())){
+                        valid.put(x+"-"+y, validPlayer(map.getSpace(x,y)));
                     }
                 }catch (InvalidSpaceException e){
                     logger.log(Level.SEVERE, "Left the boundaries of the map");
@@ -47,8 +49,6 @@ public class VortexCont implements Observer<VortexSetEv>, EffectController{
             }
         }
         model.chooseVortexAndTarget(valid, attacker);
-
-       */
     }
 
 
@@ -75,22 +75,22 @@ public class VortexCont implements Observer<VortexSetEv>, EffectController{
     private ArrayList<String> validPlayer(Space vorpos) {
         ArrayList<String> validtarget = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
-            if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker)) {
-                if (Table.getPlayers(i).getPosition() == vorpos) {
-                    validtarget.add(Table.getPlayers(i).getNickname());
+        for (Player player : players) {
+            if (player != attacker) {
+                if (player.getPosition() == vorpos) {
+                    validtarget.add(player.getNickname());
                 }
-                if ((!vorpos.getNorth().isWall()) && (Table.getPlayers(i).getPosition() == vorpos.getNorth().getSpaceSecond())) {
-                    validtarget.add(Table.getPlayers(i).getNickname());
+                if ((!vorpos.getNorth().isWall()) && (player.getPosition() == vorpos.getNorth().getSpaceSecond())) {
+                    validtarget.add(player.getNickname());
                 }
-                if ((!vorpos.getWest().isWall()) && (Table.getPlayers(i).getPosition() == vorpos.getWest().getSpaceSecond())) {
-                    validtarget.add(Table.getPlayers(i).getNickname());
+                if ((!vorpos.getWest().isWall()) && (player.getPosition() == vorpos.getWest().getSpaceSecond())) {
+                    validtarget.add(player.getNickname());
                 }
-                if ((!vorpos.getSouth().isWall()) && (Table.getPlayers(i).getPosition() == vorpos.getSouth().getSpaceSecond())) {
-                    validtarget.add(Table.getPlayers(i).getNickname());
+                if ((!vorpos.getSouth().isWall()) && (player.getPosition() == vorpos.getSouth().getSpaceSecond())) {
+                    validtarget.add(player.getNickname());
                 }
-                if ((!vorpos.getEast().isWall()) && (Table.getPlayers(i).getPosition() == vorpos.getEast().getSpaceSecond())) {
-                    validtarget.add(Table.getPlayers(i).getNickname());
+                if ((!vorpos.getEast().isWall()) && (player.getPosition() == vorpos.getEast().getSpaceSecond())) {
+                    validtarget.add(player.getNickname());
                 }
             }
         }
@@ -99,26 +99,21 @@ public class VortexCont implements Observer<VortexSetEv>, EffectController{
 
     @Override
     public void update(VortexSetEv message) {
-        /*
         Logger logger = Logger.getLogger("controller.WeaponEffct.Vortex.update");
         Space vorpos;
-        Player target;
-        for (int i = 0; i < 5; i++) {
-            if (Table.getPlayers(i).getNickname().equals(message.getTarget())){
-                target = Table.getPlayers(i);
-                model.setTarget(target);
+        for (Player player : players) {
+            if (player.getNickname().equals(message.getTarget())){
+                model.setTarget(player);
             }
         }
         String[] coordinates= message.getPosition().split("-");
         try {
-            vorpos = Table.getMap().getSpace(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
+            vorpos = map.getSpace(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
            model.setVortex(vorpos);
         }catch (InvalidSpaceException e){
             logger.log(Level.SEVERE, "Left the boundaries of the map");
         }
         model.usePower(attacker);
-
-         */
     }
 
 }

@@ -1,10 +1,13 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.events.ShadowstepSetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.Shadowstep;
 import it.polimi.sw2019.view.Observer;
+
+import java.util.ArrayList;
 
 public class ShadowstepCont extends MovePlayer implements Observer<ShadowstepSetEv> {
 
@@ -16,11 +19,11 @@ public class ShadowstepCont extends MovePlayer implements Observer<ShadowstepSet
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (realmodel.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquirePosition(attacker.getPosition(), true);
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        this.map = gamemap;
+        acquirePosition(attacker.getPosition(), true);
     }
 
     @Override

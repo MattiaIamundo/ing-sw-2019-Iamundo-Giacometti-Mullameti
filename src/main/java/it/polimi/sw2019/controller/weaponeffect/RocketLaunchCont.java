@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.events.RocketLaunchSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
@@ -15,6 +16,7 @@ public class RocketLaunchCont implements Observer<RocketLaunchSetEv>, EffectCont
 
     private RocketLauncher model;
     private Player attacker;
+    private ArrayList<Player> players;
     private HashMap<String, HashMap<String, Space>> targets = new HashMap<>();
 
     public RocketLaunchCont(Power model) {
@@ -22,17 +24,16 @@ public class RocketLaunchCont implements Observer<RocketLaunchSetEv>, EffectCont
     }
 
     @Override
-    public void useEffect(String effectname, Player attacker) {
-        if (model.toString().equals(effectname)){
-            this.attacker = attacker;
-            acquireTarget();
-        }
+    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
+        this.attacker = attacker;
+        this.players = players;
+        acquireTarget();
     }
 
     public void acquireTarget() {
-        for (int i = 0; i < 5; i++) {
-            if ((Table.getPlayers(i) != null) && (Table.getPlayers(i) != attacker) && (Table.getPlayers(i).isVisible(attacker)) && (Table.getPlayers(i).getPosition() != attacker.getPosition())){
-                targets.put(Table.getPlayers(i).getNickname(), acquireMovements(Table.getPlayers(i).getPosition()));
+        for (Player player : players){
+            if ((player != attacker) && (player.isVisible(attacker)) && (player.getPosition() != attacker.getPosition())){
+                targets.put(player.getNickname(), acquireMovements(player.getPosition()));
             }
         }
         HashMap<String, ArrayList<String>> valid = new HashMap<>();
@@ -63,16 +64,12 @@ public class RocketLaunchCont implements Observer<RocketLaunchSetEv>, EffectCont
 
     @Override
     public void update(RocketLaunchSetEv message) {
-        int i = 0;
-        Player target;
-        Space position;
-
-        while ((i < 5) && (!Table.getPlayers(i).getNickname().equals(message.getTarget()))){
-            i++;
+        for (Player player : players){
+            if (player.getNickname().equals(message.getTarget())){
+                model.setTarget(player, targets.get(player.getNickname()).get(message.getPosition()));
+                model.usePower(attacker);
+                break;
+            }
         }
-        target = Table.getPlayers(i);
-        position = targets.get(message.getTarget()).get(message.getPosition());
-        model.setTarget(target, position);
-        model.usePower(attacker);
     }
 }
