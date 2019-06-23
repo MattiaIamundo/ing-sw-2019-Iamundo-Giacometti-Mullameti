@@ -1,5 +1,6 @@
 [
   {
+    "name" : "Vortex Cannon",
     "power": "Vortex Cannon",
     "rechargeCost" : ["red", "blue", "null"],
     "isLoad" : true,
@@ -10,6 +11,7 @@
     "descriptionAdditivePower" : " Choose up to 2 other targets on the vortex or 1 move away from it. Move them onto the vortex and give them each 1 damage."
   },
   {
+    "name" : "Grenade Launcher",
     "power": "Grenade Launcher",
     "rechargeCost" : ["red", "null", "null"],
     "isLoad" : true,
@@ -20,6 +22,7 @@
     "descriptionAdditivePower" : " Deal 1 damage to every player on a square you can see. You can use this before or after the basic effect's move."
   },
   {
+    "name" : "Lock Rifle",
     "power": "Lock Rifle",
     "rechargeCost" : ["blue", "blue", "null"],
     "isLoad" : true,
@@ -30,6 +33,7 @@
     "descriptionAdditivePower" : " Deal 1 mark to a different target  you can see."
   },
   {
+    "name" : "Heatseeker",
     "power": "Heatseeker",
     "rechargeCost" : ["red", "red", "yellow"],
     "isLoad" : true,
@@ -40,6 +44,7 @@
     "descriptionAdditivePower" : null
   },
   {
+    "name" : "Whisper",
     "power": "Whisper",
     "rechargeCost" : ["blue", "blue", "yellow"],
     "isLoad" : true,

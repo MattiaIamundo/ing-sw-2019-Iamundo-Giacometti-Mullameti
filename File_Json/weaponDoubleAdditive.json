@@ -1,6 +1,7 @@
 [
   {
-    "power": "CyberBlade",
+    "name" : "Cyberblade",
+    "power": "Cyberblade",
     "rechargeCost" : ["yellow", "red", "null"],
     "isLoad" : true,
     "power" : "TwoDamageSameSpace",
@@ -13,6 +14,7 @@
     "descriptionSecondAdditivePower" : " Deal 2 damage to a different target on your square. The shadowstep may be used before or after this effect. "
   },
   {
+    "name" : "Machine Gun",
     "power": "Machine Gun",
     "rechargeCost" : ["blue", "red", "null"],
     "isLoad" : true,
@@ -26,6 +28,7 @@
     "descriptionSecondAdditivePower" : " Deal 1 additional damage to the other of those targets and/or deal 1 damage to a different target you can see. "
   },
   {
+    "name" : "Rocket Launcher",
     "power": "Rocket Launcher",
     "rechargeCost" : ["red", "red", "null"],
     "isLoad" : true,
@@ -39,6 +42,7 @@
     "descriptionSecondAdditivePower" : " During the basic effect, deal 1 damage to every player on your target's original square – including the target, even if you move it. "
   },
   {
+    "name" : "Plasma Gun",
     "power": "Plasma Gun",
     "rechargeCost" : ["blue", "yellow", "null"],
     "isLoad" : true,
@@ -52,6 +56,7 @@
     "descriptionSecondAdditivePower" : "Deal 1 additional damage to your target. "
   },
   {
+    "name" : "T.H.O.R.",
     "power": "T.H.O.R.",
     "rechargeCost" : ["blue", "red", "null"],
     "isLoad" : true,

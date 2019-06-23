@@ -1,5 +1,6 @@
-package it.polimi.sw2019.controller;
+package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.controller.weaponeffect.BarbecueModeCont;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.Map;
