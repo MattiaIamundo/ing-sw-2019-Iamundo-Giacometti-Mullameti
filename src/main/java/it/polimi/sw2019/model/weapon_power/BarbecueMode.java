@@ -2,8 +2,7 @@ package it.polimi.sw2019.model.weapon_power;
 
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
-import it.polimi.sw2019.model.Table;
-import it.polimi.sw2019.model.events.BarbecueChooseEv;
+import it.polimi.sw2019.events.weaponEffectController_events.BarbecueChooseEv;
 import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
@@ -16,22 +15,18 @@ public class BarbecueMode extends Observable<BarbecueChooseEv> implements Power{
 
     private Space targetarea1;
     private Space targetarea2;
+    private ArrayList<Player> players;
 
     /**
      * @param attacker the player who throws the attack
      */
     @Override
     public void usePower(Player attacker){
-        for (int i = 0; i < 5; i++) {
-            if (Table.getPlayers(i).getPosition() == targetarea1){
-                Table.getPlayers(i).getPlance().giveDamage(attacker, 2);
-            }
-        }
-        if (targetarea2 != null){
-            for (int i = 0; i < 5; i++) {
-                if (Table.getPlayers(i).getPosition() == targetarea2){
-                    Table.getPlayers(i).getPlance().giveDamage(attacker,1);
-                }
+        for (Player player : players) {
+            if (player.getPosition() == targetarea1){
+                player.getPlance().giveDamage(attacker, 2);
+            }else if ((targetarea2 != null) && (player.getPosition() == targetarea2)){
+                player.getPlance().giveDamage(attacker,1);
             }
         }
     }
@@ -46,6 +41,18 @@ public class BarbecueMode extends Observable<BarbecueChooseEv> implements Power{
 
     public void setTargetarea2(Space targetarea2) {
         this.targetarea2 = targetarea2;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+
+    public Space getTargetarea1() {
+        return targetarea1;
+    }
+
+    public Space getTargetarea2() {
+        return targetarea2;
     }
 
     @Override

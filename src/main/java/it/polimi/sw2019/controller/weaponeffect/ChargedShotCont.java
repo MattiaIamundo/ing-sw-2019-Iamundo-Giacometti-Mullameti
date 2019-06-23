@@ -6,8 +6,11 @@ import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.ChargedShot;
 import it.polimi.sw2019.model.weapon_power.PlasmaGun;
 import it.polimi.sw2019.model.weapon_power.Power;
+import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ChargedShotCont implements EffectController{
 
@@ -29,13 +32,18 @@ public class ChargedShotCont implements EffectController{
     }
 
     private void acquireTarget(){
-        Weapon plasmagun;
-        int i = 0;
-        while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("Plasma Gun"))){
-            i++;
+        Logger logger = Logger.getLogger("controller.ChargedShot");
+        Weapon plasmagun = null;
+        for (Weapon weapon : attacker.getWeapons()){
+            if (weapon.getName().equals("Plasma Gun")){
+                plasmagun = weapon;
+            }
         }
-        plasmagun = attacker.listWeapon()[i];
-        model.setTarget(((PlasmaGun) plasmagun.getPower()).getTarget());
-        model.usePower(attacker);
+        try {
+            model.setTarget(((PlasmaGun) plasmagun.getPower()).getTarget());
+            model.usePower(attacker);
+        }catch (NullPointerException e){
+            logger.log(Level.SEVERE,"weapon not found");
+        }
     }
 }

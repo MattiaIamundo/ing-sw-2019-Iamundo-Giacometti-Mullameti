@@ -3,10 +3,9 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
-import it.polimi.sw2019.model.events.HellionSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.HellionSetEv;
 import it.polimi.sw2019.model.weapon_power.Hellion;
 import it.polimi.sw2019.model.weapon_power.Power;
-import it.polimi.sw2019.model.weapon_power.SingleTarget;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;

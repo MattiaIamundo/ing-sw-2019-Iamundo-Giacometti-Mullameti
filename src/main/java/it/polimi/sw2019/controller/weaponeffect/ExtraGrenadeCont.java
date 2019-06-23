@@ -4,8 +4,8 @@ import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
-import it.polimi.sw2019.model.Table;
-import it.polimi.sw2019.model.events.ExtraGrenadeSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.ExtraGrenadeSetEv;
+import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.ExtraGrenade;
 import it.polimi.sw2019.model.weapon_power.GrenadeLauncher;
 import it.polimi.sw2019.model.weapon_power.Power;
@@ -81,16 +81,17 @@ public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectCont
     }
 
     private boolean chechkIsMoved(){
-        int i = 0;
-        while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("Grenade Launcher"))){
-            i++;
+        for (Weapon weapon : attacker.getWeapons()){
+            if (weapon.getName().equals("Grenade Launcher")){
+                if (((GrenadeLauncher) weapon.getPower()).isIsmoved()){
+                    return true;
+                }else {
+                    loadSquares(((GrenadeLauncher) weapon.getPower()).getTarget().getPosition());
+                    return false;
+                }
+            }
         }
-        if (((GrenadeLauncher) attacker.listWeapon()[i].getPower()).isIsmoved()){
-            return true;
-        }else {
-            loadSquares(((GrenadeLauncher) attacker.listWeapon()[i].getPower()).getTarget().getPosition());
-            return false;
-        }
+        return false;
     }
 
     private void loadSquares(Space tarpos){
@@ -118,11 +119,11 @@ public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectCont
     }
 
     private Player loadTarget(){
-        int i = 0;
-        while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("Grenade Launcher"))){
-            i++;
+        for(Weapon weapon : attacker.getWeapons()){
+            if (weapon.getName().equals("Grenade Launcher")){
+                return ((GrenadeLauncher) weapon.getPower()).getTarget();
+            }
         }
-        return ((GrenadeLauncher) attacker.listWeapon()[i].getPower()).getTarget();
+        return null;
     }
-
 }

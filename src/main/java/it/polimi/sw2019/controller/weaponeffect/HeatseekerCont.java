@@ -1,6 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.model.events.HeatseekerSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.HeatseekerSetEv;
 import it.polimi.sw2019.model.weapon_power.Heatseeker;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;

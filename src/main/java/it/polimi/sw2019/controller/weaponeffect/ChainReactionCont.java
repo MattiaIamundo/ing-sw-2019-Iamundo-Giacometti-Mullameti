@@ -1,7 +1,7 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.Map;
-import it.polimi.sw2019.model.events.ChainReactSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.ChainReactSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.ChainReaction;
@@ -10,6 +10,8 @@ import it.polimi.sw2019.model.weapon_power.Thor;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ChainReactionCont extends VisibleTargetCont implements Observer<ChainReactSetEv>{
 
@@ -36,15 +38,20 @@ public class ChainReactionCont extends VisibleTargetCont implements Observer<Cha
     }
 
     private ArrayList<String> notselectable(){
+        Logger logger = Logger.getLogger("controller.ChainReaction");
         ArrayList<String> notselectable = new ArrayList<>();
-        int i = 0;
-        Weapon thor;
+        Weapon thor = null;
         notselectable.add(attacker.getNickname());
-        while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("T.H.O.R."))){
-            i++;
+        for (Weapon weapon : attacker.getWeapons()){
+            if (weapon.getName().equals("T.H.O.R.")){
+                thor = weapon;
+            }
         }
-        thor = attacker.listWeapon()[i];
-        notselectable.add(((Thor) thor.getPower()).getTarget().getNickname());
+        try {
+            notselectable.add(((Thor) thor.getPower()).getTarget().getNickname());
+        }catch (NullPointerException e){
+            logger.log(Level.SEVERE,"weapon not found");
+        }
         return notselectable;
     }
 

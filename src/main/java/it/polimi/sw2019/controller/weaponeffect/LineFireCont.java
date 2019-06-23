@@ -2,11 +2,9 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.model.Table;
-import it.polimi.sw2019.model.events.LineFireSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.LineFireSetEv;
 import it.polimi.sw2019.model.weapon_power.LineFire;
 import it.polimi.sw2019.model.weapon_power.Power;
-import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 import java.util.HashMap;

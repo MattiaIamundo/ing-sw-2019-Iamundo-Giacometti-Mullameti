@@ -3,7 +3,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
-import it.polimi.sw2019.model.events.BarbecueSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.BarbecueSetEv;
 import it.polimi.sw2019.model.weapon_power.BarbecueMode;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
@@ -46,7 +46,9 @@ public class BarbecueModeCont implements Observer<BarbecueSetEv>, EffectControll
             if (!attacker.getPosition().getNorth().getSpaceSecond().getNorth().isWall()){
                 valid.add(attacker.getPosition().getNorth().getSpaceSecond().getNorth().getSpaceSecond());
             }
-            directions.put("north", valid);
+            if (existTargets(valid)) {
+                directions.put("north", valid);
+            }
         }
     }
 
@@ -57,7 +59,9 @@ public class BarbecueModeCont implements Observer<BarbecueSetEv>, EffectControll
             if (!attacker.getPosition().getWest().getSpaceSecond().getWest().isWall()){
                 valid.add(attacker.getPosition().getWest().getSpaceSecond().getWest().getSpaceSecond());
             }
-            directions.put("west", valid);
+            if (existTargets(valid)) {
+                directions.put("west", valid);
+            }
         }
     }
 
@@ -68,7 +72,9 @@ public class BarbecueModeCont implements Observer<BarbecueSetEv>, EffectControll
             if (!attacker.getPosition().getSouth().getSpaceSecond().getSouth().isWall()){
                 valid.add(attacker.getPosition().getSouth().getSpaceSecond().getSouth().getSpaceSecond());
             }
-            directions.put("south", valid);
+            if (existTargets(valid)) {
+                directions.put("south", valid);
+            }
         }
     }
 
@@ -79,8 +85,19 @@ public class BarbecueModeCont implements Observer<BarbecueSetEv>, EffectControll
             if (!attacker.getPosition().getEast().getSpaceSecond().getEast().isWall()){
                 valid.add(attacker.getPosition().getEast().getSpaceSecond().getEast().getSpaceSecond());
             }
-            directions.put("south", valid);
+            if (existTargets(valid)) {
+                directions.put("east", valid);
+            }
         }
+    }
+
+    private Boolean existTargets(ArrayList<Space> valid){
+        for (Player player : players){
+            if (valid.contains(player.getPosition())){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -92,6 +109,11 @@ public class BarbecueModeCont implements Observer<BarbecueSetEv>, EffectControll
         }else {
             model.setTargetarea2(null);
         }
+        model.setPlayers(players);
         model.usePower(attacker);
+    }
+
+    public HashMap<String, ArrayList<Space>> getDirections() {
+        return directions;
     }
 }

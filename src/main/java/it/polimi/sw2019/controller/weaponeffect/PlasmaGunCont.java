@@ -1,6 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.model.events.PlasmaGunSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.PlasmaGunSetEv;
 import it.polimi.sw2019.model.weapon_power.PlasmaGun;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;

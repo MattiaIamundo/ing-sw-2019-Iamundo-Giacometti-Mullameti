@@ -1,7 +1,7 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.Space;
-import it.polimi.sw2019.model.events.GrenadeLaunchSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.GrenadeLaunchSetEv;
 import it.polimi.sw2019.model.weapon_power.GrenadeLauncher;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;

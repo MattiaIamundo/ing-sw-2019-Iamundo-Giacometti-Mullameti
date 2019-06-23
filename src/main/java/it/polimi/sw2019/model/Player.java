@@ -1,6 +1,7 @@
 package it.polimi.sw2019.model;
 
 
+import it.polimi.sw2019.exception.WeaponOutOfBoundException;
 import it.polimi.sw2019.view.ObservableByGame;
 
 import java.io.Serializable;
@@ -18,8 +19,7 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     //first red, second blue, third yellow
     private static int[] ammo = new int[3];
     //list of weapons the player owns , every player can own at top 3 weapons
-    //if null there isn't a weapon in that position
-    private Weapon[] weapon = new Weapon[3];
+    private ArrayList<Weapon> weapons = new ArrayList<>();
     //the position the player's in
     private Space position;
     //the opponents who the player has marked
@@ -178,9 +178,32 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     }
 
     /**
-     * @return a pointer to the list of weapons the player owns
+     * @return the list of the player's weapons
      */
-    public Weapon[] listWeapon() { return weapon; }
+    public ArrayList<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    /**
+     * This method add a weapon to the player's weapons list
+     * @param weap the weapon to be added
+     * @throws WeaponOutOfBoundException if the player already have 3 weapon
+     */
+    public void addWeapon(Weapon weap) throws WeaponOutOfBoundException {
+        if (weapons.size() == 3){
+            throw new WeaponOutOfBoundException(this.nickname);
+        }else {
+            weapons.add(weap);
+        }
+    }
+
+    /**
+     * This method remove a weapon from the player's weapons list
+     * @param weap the weapon that have to be removed
+     */
+    public void removeWeapon(Weapon weap) {
+        weapons.remove(weap);
+    }
 
     /**
      * @return a pointer to the list of powerup the player ownes

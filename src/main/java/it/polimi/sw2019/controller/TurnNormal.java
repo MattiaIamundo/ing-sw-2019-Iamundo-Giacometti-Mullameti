@@ -23,6 +23,7 @@ public class TurnNormal extends Turn {
     }
 
     public void useAction(Player player) throws InvalidDirectionException, IllegalDirectionException, InvalidNrOfMoves {
+        /*
         Scanner scanner = new Scanner(System.in);
         int nrSpaces;
         String direction;
@@ -80,7 +81,7 @@ public class TurnNormal extends Turn {
             }
 
         }
-
+*/
     }
 
     public void reload(Weapon weapon){

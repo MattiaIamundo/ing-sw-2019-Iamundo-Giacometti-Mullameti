@@ -2,13 +2,15 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.DoubleAdditive;
 import it.polimi.sw2019.model.Map;
-import it.polimi.sw2019.model.events.HighVoltageSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.HighVoltageSetEv;
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.*;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class HighVoltageCont extends VisibleTargetCont implements Observer<HighVoltageSetEv> {
 
@@ -28,16 +30,21 @@ public class HighVoltageCont extends VisibleTargetCont implements Observer<HighV
     }
 
     private ArrayList<String> notselectable(){
+        Logger logger = Logger.getLogger("controller.HighVoltage");
         ArrayList<String> notselectable = new ArrayList<>();
-        int i = 0;
-        DoubleAdditive thor;
-        while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("T.H.O.R."))){
-            i++;
+        DoubleAdditive thor = null;
+        for (Weapon weapon : attacker.getWeapons()){
+            if (weapon.getName().equals("T.H.O.R.")){
+                thor = (DoubleAdditive) weapon;
+            }
         }
-        thor = (DoubleAdditive) attacker.listWeapon()[i];
-        notselectable.add(attacker.getNickname());
-        notselectable.add(((Thor) thor.getPower()).getTarget().getNickname());
-        notselectable.add(((ChainReaction) thor.getFirstAdditivePower()).getTarget().getNickname());
+        try {
+            notselectable.add(attacker.getNickname());
+            notselectable.add(((Thor) thor.getPower()).getTarget().getNickname());
+            notselectable.add(((ChainReaction) thor.getFirstAdditivePower()).getTarget().getNickname());
+        }catch (NullPointerException e){
+            logger.log(Level.SEVERE,"weapon not found");
+        }
         return notselectable;
     }
 

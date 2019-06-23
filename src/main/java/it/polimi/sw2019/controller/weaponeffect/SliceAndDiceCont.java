@@ -1,9 +1,8 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.Map;
-import it.polimi.sw2019.model.events.SliceAndDiceSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.SliceAndDiceSetEv;
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.Cyberblade;
 import it.polimi.sw2019.model.weapon_power.Power;
@@ -11,6 +10,8 @@ import it.polimi.sw2019.model.weapon_power.SliceAndDice;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SliceAndDiceCont implements Observer<SliceAndDiceSetEv>, EffectController{
 
@@ -47,14 +48,19 @@ public class SliceAndDiceCont implements Observer<SliceAndDiceSetEv>, EffectCont
     }
 
     private void initialize(ArrayList<String> notselectable){
-        int i = 0;
-        Weapon cyberblade;
-
-        while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("Cyberblade"))){
-            i++;
+        Logger logger = Logger.getLogger("controller.SlinceAndDice");
+        Weapon cyberblade = null;
+        for (Weapon weapon : attacker.getWeapons()){
+            if (weapon.getName().equals("Cyberblade")){
+                cyberblade = weapon;
+                break;
+            }
         }
-        cyberblade = attacker.listWeapon()[i];
-        notselectable.add(((Cyberblade) cyberblade.getPower()).getTarget().getNickname());
+        try {
+            notselectable.add(((Cyberblade) cyberblade.getPower()).getTarget().getNickname());
+        }catch (NullPointerException e){
+            logger.log(Level.SEVERE, "weapon not found");
+        }
     }
 
     @Override

@@ -1,6 +1,6 @@
 package it.polimi.sw2019.model.weapon_power;
 
-import it.polimi.sw2019.model.events.BlackHoleChooseEv;
+import it.polimi.sw2019.events.weaponEffectController_events.BlackHoleChooseEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.view.Observable;
@@ -37,6 +37,14 @@ public class BlackHole extends Observable<BlackHoleChooseEv> implements Power{
 
     public void setTarget2(Player target2) {
         this.target2 = target2;
+    }
+
+    public Player getTarget1() {
+        return target1;
+    }
+
+    public Player getTarget2() {
+        return target2;
     }
 
     public void setVortex(Space vortex) {

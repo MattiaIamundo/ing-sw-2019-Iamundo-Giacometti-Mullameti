@@ -2,8 +2,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
-import it.polimi.sw2019.model.Table;
-import it.polimi.sw2019.model.events.PunisherModeSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.PunisherModeSetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.PunisherMode;
 import it.polimi.sw2019.view.Observer;

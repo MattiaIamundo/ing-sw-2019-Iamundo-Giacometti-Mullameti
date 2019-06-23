@@ -8,6 +8,8 @@ import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.RocketLauncher;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FragmentingWarheadCont implements EffectController{
 
@@ -25,15 +27,20 @@ public class FragmentingWarheadCont implements EffectController{
     }
 
     private void initialize(){
-        Weapon rocketlauncher;
-        int i = 0;
-
-        while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("Rocket Launcher"))){
-            i++;
+        Logger logger = Logger.getLogger("controller.FragmentingWarHead");
+        Weapon rocketlauncher = null;
+        for (Weapon weapon : attacker.getWeapons()){
+            if (weapon.getName().equals("Rocket Launcher")){
+                rocketlauncher = weapon;
+                break;
+            }
         }
-        rocketlauncher = attacker.listWeapon()[i];
-        model.setTarget(((RocketLauncher) rocketlauncher.getPower()).getTarget());
-        model.setOriginsquare(((RocketLauncher) rocketlauncher.getPower()).getOrigin());
-        model.usePower(attacker);
+        try {
+            model.setTarget(((RocketLauncher) rocketlauncher.getPower()).getTarget());
+            model.setOriginsquare(((RocketLauncher) rocketlauncher.getPower()).getOrigin());
+            model.usePower(attacker);
+        }catch (NullPointerException e){
+            logger.log(Level.SEVERE, "Weapon not found");
+        }
     }
 }

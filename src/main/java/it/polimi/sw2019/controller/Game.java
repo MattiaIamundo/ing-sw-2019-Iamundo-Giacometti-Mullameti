@@ -135,7 +135,7 @@ public class Game implements Observer <ObservableByGame> {
     }
 
     public synchronized void addPlayers(String nickname) {
-        Player player = new Player(nickname, 0, null, null);
+        Player player = new Player(nickname, 0, null, new PlayerPlance());
         players.add(player);
         logger.log(Level.INFO, "{Game} has added a player!\n");
     }

@@ -3,13 +3,15 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
-import it.polimi.sw2019.model.events.SecondLockSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.SecondLockSetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.SecondLock;
 import it.polimi.sw2019.model.weapon_power.LockRifle;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SecondLockCont extends VisibleTargetCont implements Observer<SecondLockSetEv> {
 
@@ -29,16 +31,20 @@ public class SecondLockCont extends VisibleTargetCont implements Observer<Second
     }
 
     private ArrayList<String> notselectable(){
-        int i = 0;
+        Logger logger = Logger.getLogger("controller.SecondLock");
         ArrayList<String> notselectable = new ArrayList<>();
-        Weapon lockrifle;
+        Weapon lockrifle = null;
         notselectable.add(attacker.getNickname());
-
-        while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("Lock Rifle"))){
-            i++;
+        for (Weapon weapon : attacker.getWeapons()){
+            if (weapon.getName().equals("Lock Rifle")){
+                lockrifle = weapon;
+            }
         }
-        lockrifle = attacker.listWeapon()[i];
-        notselectable.add(((LockRifle) lockrifle.getPower()).getTarget().getNickname());
+        try {
+            notselectable.add(((LockRifle) lockrifle.getPower()).getTarget().getNickname());
+        }catch (NullPointerException e){
+            logger.log(Level.SEVERE, "weapon not found");
+        }
         return notselectable;
     }
 

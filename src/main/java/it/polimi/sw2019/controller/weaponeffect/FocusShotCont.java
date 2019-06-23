@@ -2,14 +2,16 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.model.Table;
-import it.polimi.sw2019.model.events.FocusShotSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.FocusShotSetEv;
+import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.FocusShot;
 import it.polimi.sw2019.model.weapon_power.MachineGun;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FocusShotCont implements Observer<FocusShotSetEv>, EffectController {
 
@@ -31,19 +33,23 @@ public class FocusShotCont implements Observer<FocusShotSetEv>, EffectController
     }
 
     public void acquireTarget(){
+        Logger logger = Logger.getLogger("controller.FocusShot");
         ArrayList<String> targets = new ArrayList<>();
-        MachineGun basiceffect;
-        int i = 0;
-
-        while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("Machine Gun"))){
-            i++;
+        MachineGun basiceffect = null;
+        for (Weapon weapon : attacker.getWeapons()){
+            if (weapon.getName().equals("Machine Gun")){
+                basiceffect = (MachineGun) weapon.getPower();
+            }
         }
-        basiceffect = (MachineGun) attacker.listWeapon()[i].getPower();
-        targets.add(basiceffect.getTarget1().getNickname());
-        if (basiceffect.getTarget2() != null){
-            targets.add(basiceffect.getTarget2().getNickname());
+        try {
+            targets.add(basiceffect.getTarget1().getNickname());
+            if (basiceffect.getTarget2() != null) {
+                targets.add(basiceffect.getTarget2().getNickname());
+            }
+            model.chooseTarget(attacker, targets);
+        }catch (NullPointerException e){
+            logger.log(Level.SEVERE,"weapon not found");
         }
-        model.chooseTarget(attacker, targets);
     }
 
     @Override

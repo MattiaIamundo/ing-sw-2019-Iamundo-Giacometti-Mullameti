@@ -1,12 +1,8 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.model.Map;
-import it.polimi.sw2019.model.events.BlackHoleSetEv;
-import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.model.Space;
-import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.model.*;
+import it.polimi.sw2019.events.weaponEffectController_events.BlackHoleSetEv;
 import it.polimi.sw2019.model.weapon_power.BlackHole;
-import it.polimi.sw2019.model.weapon_power.PlasmaGun;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.Vortex;
 import it.polimi.sw2019.view.Observer;
@@ -32,7 +28,7 @@ public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController
         acquireTargets();
     }
 
-    public void acquireTargets(){
+    private void acquireTargets(){
         ArrayList<String> targets = new ArrayList<>();
         Player invalid = getFirstTarget();
         Space vortex = getVortex();
@@ -65,37 +61,40 @@ public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController
     }
 
     private Space getVortex(){
-        int i = 0;
-        while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("Vortex Cannon"))){
-            i++;
+        for (Weapon weapon : attacker.getWeapons()){
+            if (weapon.getName().equals("Vortex Cannon")){
+                return ((Vortex) weapon.getPower()).getVortex();
+            }
         }
-        return ((Vortex) attacker.listWeapon()[i].getPower()).getVortex();
+        return null;
     }
 
     private Player getFirstTarget(){
-        int i = 0;
-        while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("Vortex Cannon"))){
-            i++;
+        for (Weapon weapon : attacker.getWeapons()){
+            if (weapon.getName().equals("Vortex Cannon")){
+                return ((Vortex) weapon.getPower()).getTarget();
+            }
         }
-        return ((Vortex) attacker.listWeapon()[i].getPower()).getTarget();
+        return null;
     }
 
     @Override
     public void update(BlackHoleSetEv message) {
-        int i = 0;
-        while ((i < 5) && !(Table.getPlayers(i).getNickname().equals(message.getTarget1()))){
-            i++;
-        }
-        model.setTarget1(Table.getPlayers(i));
-        if (message.getTarget2() != null){
-            i = 0;
-            while ((i < 5) && !(Table.getPlayers(i).getNickname().equals(message.getTarget2()))){
-                i++;
-            }
-            model.setTarget2(Table.getPlayers(i));
-        }else {
+        if (message.getTarget2() == null){
             model.setTarget2(null);
+            for (Player player : players){
+                if (player.getNickname().equals(message.getTarget1())){
+                    model.setTarget1(player);
+                }
+            }
+        }else {
+            for (Player player : players) {
+                if (player.getNickname().equals(message.getTarget1())) {
+                    model.setTarget1(player);
+                } else if (player.getNickname().equals(message.getTarget2())) {
+                    model.setTarget2(player);
+                }
+            }
         }
-        model.usePower(attacker);
     }
 }

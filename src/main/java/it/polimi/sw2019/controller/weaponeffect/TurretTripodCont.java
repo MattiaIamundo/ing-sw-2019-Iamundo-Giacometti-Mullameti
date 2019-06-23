@@ -3,14 +3,19 @@ package it.polimi.sw2019.controller.weaponeffect;
 import it.polimi.sw2019.model.DoubleAdditive;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.model.events.TurretTripodSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.TurretTripodSetEv;
+import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.FocusShot;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.TurretTripod;
 import it.polimi.sw2019.model.weapon_power.MachineGun;
 import it.polimi.sw2019.view.Observer;
+import sun.rmi.runtime.Log;
 
+import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TurretTripodCont extends VisibleTargetCont implements Observer<TurretTripodSetEv> {
 
@@ -37,31 +42,42 @@ public class TurretTripodCont extends VisibleTargetCont implements Observer<Turr
     }
 
     private void additionalDamage(){
-        DoubleAdditive machinegun;
-        int i = 0;
-        while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("Machine Gun"))){
-            i++;
+        Logger logger = Logger.getLogger("controller.TurretTripod");
+        DoubleAdditive machinegun = null;
+        for (Weapon weapon : attacker.getWeapons()){
+            if (weapon.getName().equals("Machine Gun")){
+                machinegun = (DoubleAdditive) weapon;
+            }
         }
-        machinegun = (DoubleAdditive) attacker.listWeapon()[i];
-        if ((((MachineGun) machinegun.getPower()).getTarget2() == null) || (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((MachineGun) machinegun.getPower()).getTarget2())){
-            realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget1());
-        }else if ((((MachineGun) machinegun.getPower()).getTarget2() != null) && (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((MachineGun) machinegun.getPower()).getTarget1())){
-            realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget2());
+        try {
+            if ((((MachineGun) machinegun.getPower()).getTarget2() == null) || (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((MachineGun) machinegun.getPower()).getTarget2())) {
+                realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget1());
+            } else if ((((MachineGun) machinegun.getPower()).getTarget2() != null) && (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((MachineGun) machinegun.getPower()).getTarget1())) {
+                realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget2());
+            }
+        }catch (NullPointerException e){
+            logger.log(Level.SEVERE,"weapon not found");
         }
     }
 
     private ArrayList<String> notselectable(){
-        int i = 0;
+        Logger logger = Logger.getLogger("controller.TurretTripod");
         ArrayList<String> notselectable = new ArrayList<>();
-        MachineGun basiceffect;
         notselectable.add(attacker.getNickname());
-        while ((i < 3) && !(attacker.listWeapon()[i].getName().equals("Machine Gun"))){
-            i++;
+        MachineGun basiceffect = null;
+
+        for (Weapon weapon : attacker.getWeapons()){
+            if (weapon.getName().equals("Machine Gun")){
+                basiceffect = (MachineGun) weapon.getPower();
+            }
         }
-        basiceffect = (MachineGun) attacker.listWeapon()[i].getPower();
-        notselectable.add(basiceffect.getTarget1().getNickname());
-        if (basiceffect.getTarget2() != null){
-            notselectable.add(basiceffect.getTarget2().getNickname());
+        try {
+            notselectable.add(basiceffect.getTarget1().getNickname());
+            if (basiceffect.getTarget2() != null) {
+                notselectable.add(basiceffect.getTarget2().getNickname());
+            }
+        }catch (NullPointerException e){
+            logger.log(Level.SEVERE,"weapon not found");
         }
         return notselectable;
     }

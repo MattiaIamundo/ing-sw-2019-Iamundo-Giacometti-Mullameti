@@ -2,10 +2,9 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.Map;
-import it.polimi.sw2019.model.events.VortexSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.VortexSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
-import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.Vortex;
 import it.polimi.sw2019.view.Observer;

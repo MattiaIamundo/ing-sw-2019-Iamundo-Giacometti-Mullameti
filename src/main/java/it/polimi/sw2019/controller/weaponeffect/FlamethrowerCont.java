@@ -1,6 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.model.events.FlamethrowerSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.FlamethrowerSetEv;
 import it.polimi.sw2019.model.weapon_power.Flamethrower;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;

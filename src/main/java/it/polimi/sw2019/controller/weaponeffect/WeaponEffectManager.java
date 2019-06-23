@@ -2,11 +2,8 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import it.polimi.sw2019.model.Alternative;
-import it.polimi.sw2019.model.DoubleAdditive;
-import it.polimi.sw2019.model.events.PowerSelectEv;
-import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.model.Weapon;
+import it.polimi.sw2019.model.*;
+import it.polimi.sw2019.events.weaponEffectController_events.PowerSelectEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
 
@@ -19,13 +16,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class WeaponEffectManager implements Observer<PowerSelectEv> {
+    private ArrayList<Player> players;
+    private Map map;
     private Player attacker;
     private Weapon weapon;
     private Power power;
     private String basicpower = "basic";
     private HashMap<String, EffectController> effectControllers = new HashMap<>();
 
-    public WeaponEffectManager() {
+    public WeaponEffectManager(ArrayList<Player> players, Map map) {
+        this.players = players;
+        this.map = map;
         initEffectCont();
     }
 
@@ -75,20 +76,20 @@ public class WeaponEffectManager implements Observer<PowerSelectEv> {
             weapon.choosePower(powers);
         }else {
             power = weapon.getPower();
-            effectControllers.get(power.toString()).useEffect(power.toString(), attacker);
+            effectControllers.get(power.toString()).useEffect(attacker, players, map);
         }
     }
 
     @Override
     public void update(PowerSelectEv message) {
         if (message.getPower().equals(basicpower)){
-            effectControllers.get(weapon.getPower().toString()).useEffect(weapon.getPower().toString(), attacker);
+            effectControllers.get(weapon.getPower().toString()).useEffect(attacker, players, map);
         }else if (weapon instanceof Alternative){
             power = ((Alternative) weapon).getAlternativePower();
-            effectControllers.get(power.toString()).useEffect(power.toString(), attacker);
+            effectControllers.get(power.toString()).useEffect(attacker, players, map);
         }else {
             power = ((DoubleAdditive) weapon).getFirstAdditivePower();
-            effectControllers.get(power.toString()).useEffect(power.toString(), attacker);
+            effectControllers.get(power.toString()).useEffect(attacker, players, map);
         }
     }
 
