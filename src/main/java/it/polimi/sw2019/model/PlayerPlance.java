@@ -11,7 +11,7 @@ import java.util.Iterator;
 public class PlayerPlance implements Serializable {
 
     //the vector is set to 12 space due to every player can be hit at top 12 times
-    private String[] damageTrack = new String[12];
+    private ArrayList<String> damageTrack = new ArrayList<>();
     private static boolean isFirstAdrenaline;
     private static boolean isSecondAdrenaline;
     private static boolean isKilled;
@@ -63,28 +63,19 @@ public class PlayerPlance implements Serializable {
     public static boolean getOverkilled(){
         return isOverkilled;
     }
+
     /**
      * @param shooter it is the opponent who provoked the damage
      * @param quantity it is the amount of damage
      */
     public void giveDamage(Player shooter, Integer quantity){
 
-        int i = 0;
-        while(quantity > 0 && i < 12) {
-
-            if (damageTrack[i] != null) {
-                i++;
-            }
-            else {
-                this.damageTrack[i] = shooter.getNickname();
-                quantity--;
-            }
-        }
-        if (damageTrack[11] != null && quantity > 0) {
-
-            System.out.println("The player is already overkilled, you can't damage him again...\n");
+        while((quantity > 0) && (damageTrack.size() <= 12)) {
+            damageTrack.add(shooter.getNickname());
+            quantity--;
         }
     }
+
     /**
      * @param shooter it is the opponent who marked the player
      */
@@ -104,35 +95,25 @@ public class PlayerPlance implements Serializable {
     }
 
     /**
-     * this method remove marks given by "shooter" player
+     * this method remove marks given by "shooter" player and assign it as damage
      * @param shooter the marks of this player has to be removed
      */
     public void removeMark(Player shooter){
-
-        Iterator <Player> iterator = markedBy.iterator();
-        //the arrayList is not empty
-        if ( !markedBy.isEmpty() ){
-
-            while ( iterator.hasNext() ){
-
-                Player p = iterator.next();
-                //if in the list there are some marks of the "shooter" player, those have to be removed
-                if( p == shooter){
-
-                    iterator.remove();
-                }
+        int count = 0;
+        for (Player player : markedBy){
+            if (player == shooter){
+                count++;
             }
         }
-        else{
-            System.out.println("The player is not marked by anybody!\n ");
-        }
+        this.giveDamage(shooter,count);
+        markedBy.removeIf(player -> player == shooter);
     }
 
     /**
      * this method return the damage track
      * @return plance's damage track
      */
-    public String[] getDamageTrack() {
+    public ArrayList<String> getDamageTrack() {
         return damageTrack;
     }
 

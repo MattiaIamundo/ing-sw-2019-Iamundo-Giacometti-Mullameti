@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.events.weaponEffectController_events.SliceAndDiceSetEv;
 import it.polimi.sw2019.model.Player;
@@ -49,17 +50,13 @@ public class SliceAndDiceCont implements Observer<SliceAndDiceSetEv>, EffectCont
 
     private void initialize(ArrayList<String> notselectable){
         Logger logger = Logger.getLogger("controller.SlinceAndDice");
-        Weapon cyberblade = null;
-        for (Weapon weapon : attacker.getWeapons()){
-            if (weapon.getName().equals("Cyberblade")){
-                cyberblade = weapon;
-                break;
-            }
-        }
+        Weapon cyberblade;
+
         try {
+            cyberblade = attacker.getWeapon("Cyberblade");
             notselectable.add(((Cyberblade) cyberblade.getPower()).getTarget().getNickname());
-        }catch (NullPointerException e){
-            logger.log(Level.SEVERE, "weapon not found");
+        }catch (InexistentWeaponException e){
+            logger.log(Level.SEVERE, e.getMessage()+" doesn't have Cyberblade");
         }
     }
 

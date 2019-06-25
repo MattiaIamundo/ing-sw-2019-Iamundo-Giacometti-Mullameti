@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.events.weaponEffectController_events.ChainReactSetEv;
 import it.polimi.sw2019.model.Player;
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
 public class ChainReactionCont extends VisibleTargetCont implements Observer<ChainReactSetEv>{
 
     private ChainReaction realmodel;
-
+    private Logger logger = Logger.getLogger("controller.ChainReaction");
 
     public ChainReactionCont(Power realmodel) {
         super(realmodel);
@@ -24,35 +25,26 @@ public class ChainReactionCont extends VisibleTargetCont implements Observer<Cha
     }
 
     @Override
-    public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
-        this.attacker = attacker;
-        this.players = players;
-        this.map = gamemap;
-        acquireTarget(notselectable());
-    }
-
-    @Override
-    protected void acquireTarget(ArrayList<String> notselctable) {
-        super.acquireTarget(notselctable);
-        realmodel.chooseTarget(attacker, valid, notselctable, notreachable);
-    }
-
-    private ArrayList<String> notselectable(){
-        Logger logger = Logger.getLogger("controller.ChainReaction");
-        ArrayList<String> notselectable = new ArrayList<>();
-        Weapon thor = null;
-        notselectable.add(attacker.getNickname());
-        for (Weapon weapon : attacker.getWeapons()){
-            if (weapon.getName().equals("T.H.O.R.")){
-                thor = weapon;
-            }
-        }
+    protected void acquireTarget() {
+        ArrayList<String> notselctable = new ArrayList<>();
+        Weapon thor;
+        Player prevtarget;
         try {
-            notselectable.add(((Thor) thor.getPower()).getTarget().getNickname());
-        }catch (NullPointerException e){
-            logger.log(Level.SEVERE,"weapon not found");
+            notselctable.add(attacker.getNickname());
+            thor = attacker.getWeapon("T.H.O.R.");
+            prevtarget = ((Thor) thor.getPower()).getTarget();
+            notselctable.add(prevtarget.getNickname());
+            for (Player player : players){
+                if ((player != attacker) && (player != prevtarget) && (player.isVisible(prevtarget))){
+                    valid.add(player.getNickname());
+                }else if ((player != attacker) && (player != prevtarget) && !(player.isVisible(prevtarget))){
+                    notreachable.add(player.getNickname());
+                }
+            }
+            realmodel.chooseTarget(attacker, valid, notselctable, notreachable);
+        }catch (InexistentWeaponException e){
+            logger.log(Level.SEVERE, e.getMessage()+" doesn't have T.H.O.R.");
         }
-        return notselectable;
     }
 
     @Override

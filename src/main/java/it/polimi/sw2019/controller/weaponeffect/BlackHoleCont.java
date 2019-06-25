@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.*;
 import it.polimi.sw2019.events.weaponEffectController_events.BlackHoleSetEv;
 import it.polimi.sw2019.model.weapon_power.BlackHole;
@@ -8,6 +9,8 @@ import it.polimi.sw2019.model.weapon_power.Vortex;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController {
 
@@ -15,6 +18,7 @@ public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController
     private Player attacker;
     private ArrayList<Player> players;
     private Map map;
+    private Logger logger = Logger.getLogger("controller.BlackHole");
 
     public BlackHoleCont(Power model) {
         this.model = (BlackHole) model;
@@ -30,16 +34,20 @@ public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController
 
     private void acquireTargets(){
         ArrayList<String> targets = new ArrayList<>();
-        Player invalid = getFirstTarget();
-        Space vortex = getVortex();
-        ArrayList<Space> validpos = initPositions(vortex);
-        for (Player player : players) {
-            if ((player != attacker) && (player != invalid) && (validpos.contains(player.getPosition()))){
-                targets.add(player.getNickname());
+        try {
+            Player invalid = getFirstTarget();
+            Space vortex = getVortex();
+            ArrayList<Space> validpos = initPositions(vortex);
+            for (Player player : players) {
+                if ((player != attacker) && (player != invalid) && (validpos.contains(player.getPosition()))){
+                    targets.add(player.getNickname());
+                }
             }
+            model.setVortex(vortex);
+            model.chooseTargets(targets, invalid.getNickname(), attacker);
+        }catch (InexistentWeaponException e){
+            logger.log(Level.SEVERE,e.getMessage()+" doesn't have Vortex Cannon");
         }
-        model.setVortex(vortex);
-        model.chooseTargets(targets, invalid.getNickname(), attacker);
     }
 
     private ArrayList<Space> initPositions(Space vortex){
@@ -60,22 +68,18 @@ public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController
         return positions;
     }
 
-    private Space getVortex(){
-        for (Weapon weapon : attacker.getWeapons()){
-            if (weapon.getName().equals("Vortex Cannon")){
-                return ((Vortex) weapon.getPower()).getVortex();
-            }
-        }
-        return null;
+    private Space getVortex() throws InexistentWeaponException{
+        Weapon vortex;
+
+        vortex = attacker.getWeapon("Vortex Cannon");
+        return ((Vortex) vortex.getPower()).getVortex();
     }
 
-    private Player getFirstTarget(){
-        for (Weapon weapon : attacker.getWeapons()){
-            if (weapon.getName().equals("Vortex Cannon")){
-                return ((Vortex) weapon.getPower()).getTarget();
-            }
-        }
-        return null;
+    private Player getFirstTarget() throws InexistentWeaponException{
+        Weapon vortex;
+
+        vortex = attacker.getWeapon("Vortex Cannon");
+        return ((Vortex) vortex.getPower()).getTarget();
     }
 
     @Override

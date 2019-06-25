@@ -14,14 +14,12 @@ import java.util.ArrayList;
  */
 public class ExtraGrenade extends Observable<ExtraGrenadeChooseEv> implements Power{
 
-    private Space targetarea;
+    private ArrayList<Player> players;
 
     @Override
     public void usePower(Player attacker){
-        for (int i = 0; i < 5; i++) {
-            if (Table.getPlayers(i).getPosition() == targetarea){
-                Table.getPlayers(i).getPlance().giveDamage(attacker, 1);
-            }
+        for (Player player : players){
+            player.getPlance().giveDamage(attacker,1);
         }
     }
 
@@ -33,8 +31,12 @@ public class ExtraGrenade extends Observable<ExtraGrenadeChooseEv> implements Po
         notify(new ExtraGrenadeChooseEv(attacker, validsquare, moveto));
     }
 
-    public void setTargetarea(Space targetarea) {
-        this.targetarea = targetarea;
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 
     public void moveTarget(Space moveto, Player target){

@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.DoubleAdditive;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
@@ -20,6 +21,7 @@ import java.util.logging.Logger;
 public class TurretTripodCont extends VisibleTargetCont implements Observer<TurretTripodSetEv> {
 
     private TurretTripod realmodel;
+    private Logger logger = Logger.getLogger("controller.TurretTripod");
 
     public TurretTripodCont(Power realmodel) {
         super(realmodel);
@@ -31,7 +33,12 @@ public class TurretTripodCont extends VisibleTargetCont implements Observer<Turr
         this.attacker = attacker;
         this.players = players;
         this.map = gamemap;
-        acquireTarget(notselectable());
+
+        try {
+            acquireTarget(notselectable());
+        }catch (InexistentWeaponException e){
+            logger.log(Level.SEVERE, e.getMessage()+" doesn't have Machine Gun");
+        }
     }
 
     @Override
@@ -42,42 +49,29 @@ public class TurretTripodCont extends VisibleTargetCont implements Observer<Turr
     }
 
     private void additionalDamage(){
-        Logger logger = Logger.getLogger("controller.TurretTripod");
-        DoubleAdditive machinegun = null;
-        for (Weapon weapon : attacker.getWeapons()){
-            if (weapon.getName().equals("Machine Gun")){
-                machinegun = (DoubleAdditive) weapon;
-            }
-        }
+        DoubleAdditive machinegun;
+
         try {
+            machinegun = (DoubleAdditive) attacker.getWeapon("Machine Gun");
             if ((((MachineGun) machinegun.getPower()).getTarget2() == null) || (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((MachineGun) machinegun.getPower()).getTarget2())) {
                 realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget1());
             } else if ((((MachineGun) machinegun.getPower()).getTarget2() != null) && (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((MachineGun) machinegun.getPower()).getTarget1())) {
                 realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget2());
             }
-        }catch (NullPointerException e){
-            logger.log(Level.SEVERE,"weapon not found");
+        }catch (InexistentWeaponException e){
+            logger.log(Level.SEVERE,e.getMessage()+" doesn't have Machine Gun");
         }
     }
 
-    private ArrayList<String> notselectable(){
-        Logger logger = Logger.getLogger("controller.TurretTripod");
+    private ArrayList<String> notselectable() throws InexistentWeaponException{
         ArrayList<String> notselectable = new ArrayList<>();
+        MachineGun basiceffect;
         notselectable.add(attacker.getNickname());
-        MachineGun basiceffect = null;
 
-        for (Weapon weapon : attacker.getWeapons()){
-            if (weapon.getName().equals("Machine Gun")){
-                basiceffect = (MachineGun) weapon.getPower();
-            }
-        }
-        try {
-            notselectable.add(basiceffect.getTarget1().getNickname());
-            if (basiceffect.getTarget2() != null) {
-                notselectable.add(basiceffect.getTarget2().getNickname());
-            }
-        }catch (NullPointerException e){
-            logger.log(Level.SEVERE,"weapon not found");
+        basiceffect = (MachineGun) attacker.getWeapon("Machine Gun").getPower();
+        notselectable.add(basiceffect.getTarget1().getNickname());
+        if (basiceffect.getTarget2() != null) {
+            notselectable.add(basiceffect.getTarget2().getNickname());
         }
         return notselectable;
     }

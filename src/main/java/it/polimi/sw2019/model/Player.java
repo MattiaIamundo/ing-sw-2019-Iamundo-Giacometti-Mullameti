@@ -1,6 +1,7 @@
 package it.polimi.sw2019.model;
 
 
+import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.exception.WeaponOutOfBoundException;
 import it.polimi.sw2019.view.ObservableByGame;
 
@@ -88,24 +89,27 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
      */
     public boolean isVisible(Player callerPlayer) {
         //the players are in the same room
-        if (this.getPosition().getRoom() == callerPlayer.getPosition().getRoom()) {
+        if (this.getPosition().getRoom().equals(callerPlayer.getPosition().getRoom())) {
             return true;
         } else {
             //the players are in different rooms
             if (!(callerPlayer.getPosition().getNorth().isWall())) {
-                if (callerPlayer.getPosition().getNorth().getSpaceSecond().getRoom() == this.getPosition().getRoom()) {
+                if (callerPlayer.getPosition().getNorth().getSpaceSecond().getRoom().equals(this.getPosition().getRoom())) {
                     return true;
                 }
-            } else if (!(callerPlayer.getPosition().getSouth().isWall())) {
-                if (callerPlayer.getPosition().getSouth().getSpaceSecond().getRoom() == this.getPosition().getRoom()) {
+            }
+            if (!(callerPlayer.getPosition().getSouth().isWall())) {
+                if (callerPlayer.getPosition().getSouth().getSpaceSecond().getRoom().equals(this.getPosition().getRoom())) {
                     return true;
                 }
-            } else if (!(callerPlayer.getPosition().getEast().isWall())) {
-                if (callerPlayer.getPosition().getEast().getSpaceSecond().getRoom() == this.getPosition().getRoom()) {
+            }
+            if (!(callerPlayer.getPosition().getEast().isWall())) {
+                if (callerPlayer.getPosition().getEast().getSpaceSecond().getRoom().equals(this.getPosition().getRoom())) {
                     return true;
                 }
-            } else if (!(callerPlayer.getPosition().getWest().isWall())) {
-                if (callerPlayer.getPosition().getWest().getSpaceSecond().getRoom() == this.getPosition().getRoom()) {
+            }
+            if (!(callerPlayer.getPosition().getWest().isWall())) {
+                if (callerPlayer.getPosition().getWest().getSpaceSecond().getRoom().equals(this.getPosition().getRoom())) {
                     return true;
                 }
             }
@@ -182,6 +186,21 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
      */
     public ArrayList<Weapon> getWeapons() {
         return weapons;
+    }
+
+    /**
+     * This method return a specific weapon
+     * @param name The name of the searched weapon
+     * @return the searched weapon
+     * @throws InexistentWeaponException if the player doesn't have the specified weapon or if the weapon's name is incorrect
+     */
+    public Weapon getWeapon (String name) throws InexistentWeaponException {
+        for (Weapon weapon : weapons){
+            if (weapon.getName().equals(name)){
+                return weapon;
+            }
+        }
+        throw new InexistentWeaponException(this.nickname);
     }
 
     /**

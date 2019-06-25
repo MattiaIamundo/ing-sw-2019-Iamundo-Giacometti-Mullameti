@@ -108,7 +108,7 @@ public class VortexCont implements Observer<VortexSetEv>, EffectController{
         String[] coordinates= message.getPosition().split("-");
         try {
             vorpos = map.getSpace(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
-           model.setVortex(vorpos);
+            model.setVortex(vorpos);
         }catch (InvalidSpaceException e){
             logger.log(Level.SEVERE, "Left the boundaries of the map");
         }

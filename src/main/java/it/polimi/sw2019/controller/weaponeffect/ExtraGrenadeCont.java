@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
@@ -16,9 +17,6 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * ho commentato per fare il report sonar
- */
 public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectController {
 
     private ExtraGrenade model;
@@ -41,12 +39,12 @@ public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectCont
     }
 
     private void acquireSquares(){
-        ArrayList<String> romms = loadRooms();
+        ArrayList<String> rooms = loadRooms();
         Logger logger = Logger.getLogger("controller.WeaponEffct.ExtraGrenade");
         try {
             for (int i = 0; i < map.getMaxX(); i++) {
                 for (int j = 0; j < map.getMaxY(); j++) {
-                    if (romms.contains(map.getSpace(i, j).getRoom())){
+                    if (rooms.contains(map.getSpace(i, j).getRoom())){
                         squares.put(i+"-"+j, map.getSpace(i,j));
                     }
                 }
@@ -111,19 +109,27 @@ public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectCont
 
     @Override
     public void update(ExtraGrenadeSetEv message) {
-        model.setTargetarea(squares.get(message.getSquare()));
-        model.usePower(attacker);
-        if (message.getMoveto() != null){
-            model.moveTarget(moveto.get(message.getMoveto()), loadTarget());
-        }
-    }
+        Logger logger = Logger.getLogger("controller.ExtraGrenade");
+        ArrayList<Player> targets = new ArrayList<>();
+        Space targetarea = squares.get(message.getSquare());
+        Weapon grenadelauncher;
+        Player target;
 
-    private Player loadTarget(){
-        for(Weapon weapon : attacker.getWeapons()){
-            if (weapon.getName().equals("Grenade Launcher")){
-                return ((GrenadeLauncher) weapon.getPower()).getTarget();
+        for (Player player : players){
+            if ((player != attacker) && (player.getPosition() == targetarea)){
+                targets.add(player);
             }
         }
-        return null;
+        model.setPlayers(targets);
+        model.usePower(attacker);
+        if (message.getMoveto() != null){
+            try {
+                grenadelauncher = attacker.getWeapon("Grenade Launcher");
+                target = ((GrenadeLauncher) grenadelauncher.getPower()).getTarget();
+                model.moveTarget(moveto.get(message.getMoveto()), target);
+            }catch (InexistentWeaponException e){
+                logger.log(Level.SEVERE, e.getMessage()+" doesn't have weapon");
+            }
+        }
     }
 }

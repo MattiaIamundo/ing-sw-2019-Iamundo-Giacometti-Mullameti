@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
@@ -16,6 +17,7 @@ import java.util.logging.Logger;
 public class SecondLockCont extends VisibleTargetCont implements Observer<SecondLockSetEv> {
 
     private SecondLock realmodel;
+    private Logger logger = Logger.getLogger("controller.SecondLock");
 
     public SecondLockCont(Power realmodel) {
         super(realmodel);
@@ -27,24 +29,20 @@ public class SecondLockCont extends VisibleTargetCont implements Observer<Second
         this.attacker = attacker;
         this.players = players;
         this.map = gamemap;
-        acquireTarget(notselectable());
+        try {
+            acquireTarget(notselectable());
+        }catch (InexistentWeaponException e){
+            logger.log(Level.SEVERE, e.getMessage()+"Lock Rifle");
+        }
     }
 
-    private ArrayList<String> notselectable(){
-        Logger logger = Logger.getLogger("controller.SecondLock");
+    private ArrayList<String> notselectable() throws InexistentWeaponException{
         ArrayList<String> notselectable = new ArrayList<>();
-        Weapon lockrifle = null;
+        Weapon lockrifle;
+
         notselectable.add(attacker.getNickname());
-        for (Weapon weapon : attacker.getWeapons()){
-            if (weapon.getName().equals("Lock Rifle")){
-                lockrifle = weapon;
-            }
-        }
-        try {
-            notselectable.add(((LockRifle) lockrifle.getPower()).getTarget().getNickname());
-        }catch (NullPointerException e){
-            logger.log(Level.SEVERE, "weapon not found");
-        }
+        lockrifle = attacker.getWeapon("Lock Rifle");
+        notselectable.add(((LockRifle) lockrifle.getPower()).getTarget().getNickname());
         return notselectable;
     }
 

@@ -14,15 +14,14 @@ import java.util.ArrayList;
  */
 public class CozyFireMode extends Observable<CozyFireModeChooseEv> implements Power{
 
-    private Space targetarea;
+    private ArrayList<Player> players;
 
     @Override
     public void usePower(Player attacker){
-        for (int i = 0; i < 5; i++) {
-            if (Table.getPlayers(i).getPosition() == targetarea){
-                Table.getPlayers(i).getPlance().giveDamage(attacker, 1);
-                Table.getPlayers(i).getPlance().setMark(attacker);
-            }
+        for (Player player : players){
+            player.getPlance().giveDamage(attacker,1);
+            player.getPlance().removeMark(attacker);
+            player.getPlance().setMark(attacker);
         }
     }
 
@@ -30,8 +29,8 @@ public class CozyFireMode extends Observable<CozyFireModeChooseEv> implements Po
         notify(new CozyFireModeChooseEv(attacker, directions));
     }
 
-    public void setTargetarea(Space targetarea) {
-        this.targetarea = targetarea;
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
     }
 
     @Override

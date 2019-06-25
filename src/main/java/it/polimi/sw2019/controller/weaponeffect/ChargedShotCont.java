@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
@@ -33,16 +34,12 @@ public class ChargedShotCont implements EffectController{
 
     private void acquireTarget(){
         Logger logger = Logger.getLogger("controller.ChargedShot");
-        Weapon plasmagun = null;
-        for (Weapon weapon : attacker.getWeapons()){
-            if (weapon.getName().equals("Plasma Gun")){
-                plasmagun = weapon;
-            }
-        }
+        Weapon plasmagun;
         try {
+            plasmagun = attacker.getWeapon("Plasma Gun");
             model.setTarget(((PlasmaGun) plasmagun.getPower()).getTarget());
             model.usePower(attacker);
-        }catch (NullPointerException e){
+        }catch (InexistentWeaponException e){
             logger.log(Level.SEVERE,"weapon not found");
         }
     }

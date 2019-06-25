@@ -38,11 +38,6 @@ public class HellionCont extends VisibleTargetCont implements Observer<HellionSe
     private ArrayList<String> notSelectable(){
         ArrayList<String> notselectable = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
-            if (Table.getPlayers(i).getPosition() == attacker.getPosition()){
-                notselectable.add(Table.getPlayers(i).getNickname());
-            }
-        }
         for (Player player : players){
             if (player.getPosition() == attacker.getPosition()){
                 notselectable.add(player.getNickname());

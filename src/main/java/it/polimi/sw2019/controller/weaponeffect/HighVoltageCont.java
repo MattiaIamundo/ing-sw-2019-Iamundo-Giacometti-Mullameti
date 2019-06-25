@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.DoubleAdditive;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.events.weaponEffectController_events.HighVoltageSetEv;
@@ -15,6 +16,7 @@ import java.util.logging.Logger;
 public class HighVoltageCont extends VisibleTargetCont implements Observer<HighVoltageSetEv> {
 
     private HighVoltage realmodel;
+    private Logger logger = Logger.getLogger("controller.HighVoltage");
 
     public HighVoltageCont(Power realmodel) {
         super(realmodel);
@@ -26,25 +28,22 @@ public class HighVoltageCont extends VisibleTargetCont implements Observer<HighV
         this.attacker = attacker;
         this.players = players;
         this.map = gamemap;
-        acquireTarget(notselectable());
+        try {
+            acquireTarget(notselectable());
+        }catch (InexistentWeaponException e){
+            logger.log(Level.SEVERE,e.getMessage()+" doesn't have T.H.O.R.");
+        }
     }
 
-    private ArrayList<String> notselectable(){
-        Logger logger = Logger.getLogger("controller.HighVoltage");
+    private ArrayList<String> notselectable() throws InexistentWeaponException{
+
         ArrayList<String> notselectable = new ArrayList<>();
-        DoubleAdditive thor = null;
-        for (Weapon weapon : attacker.getWeapons()){
-            if (weapon.getName().equals("T.H.O.R.")){
-                thor = (DoubleAdditive) weapon;
-            }
-        }
-        try {
-            notselectable.add(attacker.getNickname());
-            notselectable.add(((Thor) thor.getPower()).getTarget().getNickname());
-            notselectable.add(((ChainReaction) thor.getFirstAdditivePower()).getTarget().getNickname());
-        }catch (NullPointerException e){
-            logger.log(Level.SEVERE,"weapon not found");
-        }
+        DoubleAdditive thor;
+
+        thor = (DoubleAdditive) attacker.getWeapon("T.H.O.R.");
+        notselectable.add(attacker.getNickname());
+        notselectable.add(((Thor) thor.getPower()).getTarget().getNickname());
+        notselectable.add(((ChainReaction) thor.getFirstAdditivePower()).getTarget().getNickname());
         return notselectable;
     }
 

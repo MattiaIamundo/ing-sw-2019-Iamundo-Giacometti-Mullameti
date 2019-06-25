@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.events.weaponEffectController_events.FocusShotSetEv;
@@ -35,20 +36,17 @@ public class FocusShotCont implements Observer<FocusShotSetEv>, EffectController
     public void acquireTarget(){
         Logger logger = Logger.getLogger("controller.FocusShot");
         ArrayList<String> targets = new ArrayList<>();
-        MachineGun basiceffect = null;
-        for (Weapon weapon : attacker.getWeapons()){
-            if (weapon.getName().equals("Machine Gun")){
-                basiceffect = (MachineGun) weapon.getPower();
-            }
-        }
+        MachineGun basiceffect;
+
         try {
+            basiceffect = (MachineGun) attacker.getWeapon("Machine Gun").getPower();
             targets.add(basiceffect.getTarget1().getNickname());
             if (basiceffect.getTarget2() != null) {
                 targets.add(basiceffect.getTarget2().getNickname());
             }
             model.chooseTarget(attacker, targets);
-        }catch (NullPointerException e){
-            logger.log(Level.SEVERE,"weapon not found");
+        }catch (InexistentWeaponException e){
+            logger.log(Level.SEVERE,e.getMessage()+" doesn't have Machine Gun");
         }
     }
 

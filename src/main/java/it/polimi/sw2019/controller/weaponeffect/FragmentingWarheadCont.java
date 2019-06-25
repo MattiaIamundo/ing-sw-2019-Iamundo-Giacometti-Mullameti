@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
@@ -28,19 +29,14 @@ public class FragmentingWarheadCont implements EffectController{
 
     private void initialize(){
         Logger logger = Logger.getLogger("controller.FragmentingWarHead");
-        Weapon rocketlauncher = null;
-        for (Weapon weapon : attacker.getWeapons()){
-            if (weapon.getName().equals("Rocket Launcher")){
-                rocketlauncher = weapon;
-                break;
-            }
-        }
+        Weapon rocketlauncher;
         try {
+            rocketlauncher = attacker.getWeapon("Rocket Launcher");
             model.setTarget(((RocketLauncher) rocketlauncher.getPower()).getTarget());
             model.setOriginsquare(((RocketLauncher) rocketlauncher.getPower()).getOrigin());
             model.usePower(attacker);
-        }catch (NullPointerException e){
-            logger.log(Level.SEVERE, "Weapon not found");
+        }catch (InexistentWeaponException e){
+            logger.log(Level.SEVERE, e.getMessage()+" doesn't have Rocket Launcher");
         }
     }
 }

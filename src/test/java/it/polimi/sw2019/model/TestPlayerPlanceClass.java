@@ -3,6 +3,7 @@ package it.polimi.sw2019.model;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 
 
 public class TestPlayerPlanceClass {
@@ -78,30 +79,30 @@ public class TestPlayerPlanceClass {
         SpaceAmmo position = new SpaceAmmo (null, null, null, null, "red");
         Player shooter = new Player("name", 0, position, board);
         Player player = new Player("player", 0, position, null);
-        String[] trackDamage = new String[12];
-        trackDamage[0] = "name";
-        trackDamage[1] = "name";
-        trackDamage[2] = "name";
-        trackDamage[3] = "name";
+        ArrayList<String> trackDamage = new ArrayList<>();
+        trackDamage.add("name");
+        trackDamage.add("name");
+        trackDamage.add("name");
+        trackDamage.add("name");
 
         board.giveDamage( shooter, 4);
-        Assert.assertArrayEquals( board.getDamageTrack(), trackDamage );
+        Assert.assertArrayEquals( board.getDamageTrack().toArray(), trackDamage.toArray());
 
-        trackDamage[4] = "player";
-        trackDamage[5] = "player";
-        trackDamage[6] = "player";
+        trackDamage.add("player");
+        trackDamage.add("player");
+        trackDamage.add("player");
 
         board.giveDamage( player,3);
-        Assert.assertArrayEquals( board.getDamageTrack(), trackDamage );
+        Assert.assertArrayEquals( board.getDamageTrack().toArray(), trackDamage.toArray());
 
-        trackDamage[7] = "name";
-        trackDamage[8] = "name";
-        trackDamage[9] = "name";
-        trackDamage[10] = "name";
-        trackDamage[11] = "name";
+        trackDamage.add("name");
+        trackDamage.add("name");
+        trackDamage.add("name");
+        trackDamage.add("name");
+        trackDamage.add("name");
 
         board.giveDamage( shooter, 5);
-        Assert.assertArrayEquals( board.getDamageTrack(), trackDamage );
+        Assert.assertArrayEquals( board.getDamageTrack().toArray(), trackDamage.toArray());
         //we have to implement the exception
         //to go out the bounds
     }

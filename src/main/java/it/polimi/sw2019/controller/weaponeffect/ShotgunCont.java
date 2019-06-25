@@ -13,7 +13,6 @@ import java.util.HashMap;
 public class ShotgunCont extends SameSquare implements Observer<ShotgunSetEv> {
 
     private Shotgun realmodel;
-    private Player attacker;
     private HashMap<String, Space> moveto = new HashMap<>();
 
     public ShotgunCont(Power realmodel) {
