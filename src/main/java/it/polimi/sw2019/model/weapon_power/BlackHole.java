@@ -27,8 +27,8 @@ public class BlackHole extends Observable<BlackHoleChooseEv> implements Power{
         }
     }
 
-    public void chooseTargets(ArrayList<String> targets, String notselectable, Player attacker){
-        notify(new BlackHoleChooseEv(targets, notselectable, attacker));
+    public void chooseTargets(Player attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable){
+        notify(new BlackHoleChooseEv(attacker, valid, notselectable, notreachable));
     }
 
     public void setTarget1(Player target1) {

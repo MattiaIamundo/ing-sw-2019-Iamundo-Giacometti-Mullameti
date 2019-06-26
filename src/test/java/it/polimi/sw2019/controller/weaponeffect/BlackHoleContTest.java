@@ -64,7 +64,7 @@ public class BlackHoleContTest {
         expected.add("target");
         expected.add("target2");
 
-        Assert.assertArrayEquals(expected.toArray(), capturer.message.getTargets().toArray());
+        Assert.assertArrayEquals(expected.toArray(), capturer.message.getValid().toArray());
         Assert.assertEquals("attacker", capturer.message.getAttacker());
         Assert.assertEquals("prevtarget", capturer.message.getNotselectable());
     }
