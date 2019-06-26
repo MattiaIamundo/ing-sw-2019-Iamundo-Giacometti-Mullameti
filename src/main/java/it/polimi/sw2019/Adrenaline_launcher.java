@@ -62,7 +62,7 @@ public class Adrenaline_launcher
         }
         else {
 
-            new ClientSocket(host, true);
+            new ClientSocket(host, false);
         }
         //devo implementare il modo per dire con la gui
     }

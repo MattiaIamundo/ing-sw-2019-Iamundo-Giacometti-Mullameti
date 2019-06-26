@@ -1,10 +1,12 @@
 package it.polimi.sw2019.network.Socket;
 
-import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
+
+
 import it.polimi.sw2019.nethandler.ContSelect;
 import it.polimi.sw2019.nethandler.ModViewEvent;
 import it.polimi.sw2019.nethandler.ViewContEvent;
 import it.polimi.sw2019.view.*;
+
 
 import javax.swing.*;
 import java.io.IOException;
@@ -19,7 +21,7 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ClientSocket extends JFrame implements Runnable {
+public class ClientSocket implements Runnable {
 
     //the port number
     private final int portNumber = 12345;
@@ -95,7 +97,8 @@ public class ClientSocket extends JFrame implements Runnable {
                 userImp = new CLI(playerView,viewContEvent);
             }
             else {
-                userImp = new GUI();
+                userImp = new GUI(); //(MERITA)
+
             }
 
             //set the view
@@ -260,17 +263,23 @@ public class ClientSocket extends JFrame implements Runnable {
 
     }//END of CLOSE CONNECTION
 
+    public void setView(UIinterface view){
+        this.userImp=view;
+    }//(MERITA)
+
     public static void main (String[] args){
 
         ClientSocket application;
 
+        //Application.launch(Main.class);//(MERITA)
+
         if (args.length == 0){
             //set the client: localhost
-            application = new ClientSocket("127.0.0.1", true);
+            application = new ClientSocket("127.0.0.1", false);
         }
         else{
             //set the client: other host
-            application = new ClientSocket( args[0], true );
+            application = new ClientSocket( args[0], false );
         }
 
     }
