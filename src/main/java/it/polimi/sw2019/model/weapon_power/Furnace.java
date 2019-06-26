@@ -13,14 +13,12 @@ import java.util.ArrayList;
  */
 public class Furnace extends Observable<FurnaceChooseEv> implements Power{
 
-    private String room;
+    private ArrayList<Player> targets;
 
     @Override
     public void usePower(Player attacker){
-        for (int i = 0; i < 5; i++) {
-            if (Table.getPlayers(i).getPosition().getRoom().equals(room)){
-                Table.getPlayers(i).getPlance().giveDamage(attacker, 1);
-            }
+        for (Player player : targets){
+            player.getPlance().giveDamage(attacker,1);
         }
     }
 
@@ -28,8 +26,12 @@ public class Furnace extends Observable<FurnaceChooseEv> implements Power{
         notify(new FurnaceChooseEv(attacker, rooms));
     }
 
-    public void setRoom(String room) {
-        this.room = room;
+    public ArrayList<Player> getTargets() {
+        return targets;
+    }
+
+    public void setTargets(ArrayList<Player> targets) {
+        this.targets = targets;
     }
 
     @Override

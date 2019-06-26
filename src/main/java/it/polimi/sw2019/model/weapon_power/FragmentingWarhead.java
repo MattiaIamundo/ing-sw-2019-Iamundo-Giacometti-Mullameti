@@ -4,6 +4,8 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
 
+import java.util.ArrayList;
+
 /**
  * This class implements the second optional effect of Rocket Launcher
  * @author Mattia Iamundo
@@ -11,26 +13,32 @@ import it.polimi.sw2019.model.Table;
 public class FragmentingWarhead implements Power{
 
     private Player target;
-    private Space originsquare;
+    private ArrayList<Player> players;
 
     @Override
     public void usePower(Player attacker){
-        for (int i = 0; i < 5; i++) {
-            if (Table.getPlayers(i).getPosition() == originsquare){
-                Table.getPlayers(i).getPlance().giveDamage(attacker,1);
-            }
+        for (Player player : players){
+            player.getPlance().giveDamage(attacker, 1);
         }
-        if (target.getPosition() != originsquare){
+        if (target != null){
             target.getPlance().giveDamage(attacker,1);
         }
+    }
+
+    public Player getTarget() {
+        return target;
     }
 
     public void setTarget(Player target) {
         this.target = target;
     }
 
-    public void setOriginsquare(Space originsquare) {
-        this.originsquare = originsquare;
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
     }
 
     @Override

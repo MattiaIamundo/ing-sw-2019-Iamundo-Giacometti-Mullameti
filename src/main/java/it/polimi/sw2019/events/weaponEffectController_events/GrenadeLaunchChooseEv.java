@@ -3,15 +3,16 @@ package it.polimi.sw2019.events.weaponEffectController_events;
 import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GrenadeLaunchChooseEv implements WeaponEvent{
 
     private Player attacker;
     private ArrayList<String> valid;
     private ArrayList<String> notreachable;
-    private ArrayList<String> moveto;
+    private HashMap<String, ArrayList<String>> moveto;
 
-    public GrenadeLaunchChooseEv(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable, ArrayList<String> moveto) {
+    public GrenadeLaunchChooseEv(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable, HashMap<String, ArrayList<String>> moveto) {
         this.attacker = attacker;
         this.valid = valid;
         this.notreachable = notreachable;
@@ -31,7 +32,7 @@ public class GrenadeLaunchChooseEv implements WeaponEvent{
         return notreachable;
     }
 
-    public ArrayList<String> getMoveto() {
+    public HashMap<String, ArrayList<String>> getMoveto() {
         return moveto;
     }
 }
