@@ -34,6 +34,9 @@ public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController
 
     private void acquireTargets(){
         ArrayList<String> targets = new ArrayList<>();
+        ArrayList<String> notreachable = new ArrayList<>();
+        ArrayList<String> notselectable = new ArrayList<>();
+
         try {
             Player invalid = getFirstTarget();
             Space vortex = getVortex();
@@ -41,8 +44,12 @@ public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController
             for (Player player : players) {
                 if ((player != attacker) && (player != invalid) && (validpos.contains(player.getPosition()))){
                     targets.add(player.getNickname());
+                }else if ((player != attacker) && (player != invalid) && !(validpos.contains(player.getPosition()))){
+                    notreachable.add(player.getNickname());
                 }
             }
+            notselectable.add(attacker.getNickname());
+            notselectable.add(invalid.getNickname());
             model.setVortex(vortex);
             model.chooseTargets(targets, invalid.getNickname(), attacker);
         }catch (InexistentWeaponException e){

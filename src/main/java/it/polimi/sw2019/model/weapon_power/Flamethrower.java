@@ -39,6 +39,14 @@ public class Flamethrower extends Observable<FlamethrowerChooseEv> implements Po
         this.target2 = target2;
     }
 
+    public Player getTarget1() {
+        return target1;
+    }
+
+    public Player getTarget2() {
+        return target2;
+    }
+
     @Override
     public String toString() {
         return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);

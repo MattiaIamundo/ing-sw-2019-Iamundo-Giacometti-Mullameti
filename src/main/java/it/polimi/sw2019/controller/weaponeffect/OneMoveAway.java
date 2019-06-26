@@ -28,11 +28,11 @@ public abstract class OneMoveAway implements EffectController{
         this.attacker = attacker;
         this.players = players;
         this.map = gamemap;
-        loadSquares();
         acquireTarget();
     }
 
     protected void acquireTarget(){
+        loadSquares();
         for (Player player : players){
             if ((player != attacker) && (validposition.contains(player.getPosition()))){
                 valid.add(player.getNickname());

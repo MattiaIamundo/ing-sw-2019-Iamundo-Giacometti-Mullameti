@@ -4,6 +4,7 @@ import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.events.weaponEffectController_events.FurnaceSetEv;
 import it.polimi.sw2019.model.weapon_power.Furnace;
+import it.polimi.sw2019.model.weapon_power.PlasmaGun;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
 
@@ -13,6 +14,7 @@ public class FurnaceCont implements Observer<FurnaceSetEv>, EffectController {
 
     private Furnace model;
     private Player attacker;
+    private ArrayList<Player> players;
 
     public FurnaceCont(Power model) {
         this.model = (Furnace) model;
@@ -21,6 +23,7 @@ public class FurnaceCont implements Observer<FurnaceSetEv>, EffectController {
     @Override
     public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
         this.attacker = attacker;
+        this.players = players;
         acquireRooms();
     }
 
@@ -44,7 +47,14 @@ public class FurnaceCont implements Observer<FurnaceSetEv>, EffectController {
 
     @Override
     public void update(FurnaceSetEv message) {
-        model.setRoom(message.getRoom());
+        ArrayList<Player> targets = new ArrayList<>();
+
+        for (Player player : players){
+            if (player.getPosition().getRoom().equals(message.getRoom())){
+                targets.add(player);
+            }
+        }
+        model.setTargets(targets);
         model.usePower(attacker);
     }
 }

@@ -5,6 +5,7 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.events.weaponEffectController_events.HellionSetEv;
 import it.polimi.sw2019.model.weapon_power.Hellion;
+import it.polimi.sw2019.model.weapon_power.PlasmaGun;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
 
@@ -48,7 +49,15 @@ public class HellionCont extends VisibleTargetCont implements Observer<HellionSe
 
     @Override
     public void update(HellionSetEv message) {
+        ArrayList<Player> targets = new ArrayList<>();
+
         super.update(message);
+        for (Player player : players){
+            if (player.getPosition() == realmodel.getTarget().getPosition()){
+                targets.add(player);
+            }
+        }
+        realmodel.setMarkTargets(targets);
         realmodel.usePower(attacker);
     }
 }

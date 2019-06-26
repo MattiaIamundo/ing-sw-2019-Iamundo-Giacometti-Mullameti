@@ -10,6 +10,11 @@ public class GrenadeLaunchSetEv implements TargetSetEv{
         this.moveto = moveto;
     }
 
+    public GrenadeLaunchSetEv(String target) {
+        this.target = target;
+        moveto = null;
+    }
+
     public String getTarget() {
         return target;
     }

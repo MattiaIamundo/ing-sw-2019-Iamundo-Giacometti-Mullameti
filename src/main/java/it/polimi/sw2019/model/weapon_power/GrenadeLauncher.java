@@ -6,6 +6,7 @@ import it.polimi.sw2019.events.weaponEffectController_events.GrenadeLaunchChoose
 import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * This class implements the basic effect for GrenadeLauncher
@@ -13,9 +14,9 @@ import java.util.ArrayList;
  */
 public class GrenadeLauncher extends Observable<GrenadeLaunchChooseEv> implements Power, SingleTarget{
 
-    private Player target = null;
+    private Player target;
     private boolean ismoved;
-    private Space moveto = null;
+    private Space moveto;
 
     @Override
     public void usePower(Player attacker){
@@ -28,7 +29,7 @@ public class GrenadeLauncher extends Observable<GrenadeLaunchChooseEv> implement
         }
     }
 
-    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable, ArrayList<String> moveto) {
+    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable, HashMap<String, ArrayList<String>> moveto) {
         notify(new GrenadeLaunchChooseEv(attacker, valid, notreachable, moveto));
     }
 
@@ -47,6 +48,10 @@ public class GrenadeLauncher extends Observable<GrenadeLaunchChooseEv> implement
 
     public Player getTarget() {
         return target;
+    }
+
+    public Space getMoveto() {
+        return moveto;
     }
 
     @Override

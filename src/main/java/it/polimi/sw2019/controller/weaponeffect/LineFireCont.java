@@ -40,21 +40,28 @@ public abstract class LineFireCont implements EffectController{
 
     private void loadNorth(){
         ArrayList<String> first = new ArrayList<>();
-        ArrayList<String> second = new ArrayList<>();
 
         if (!attacker.getPosition().getNorth().isWall()){
             for (Player player : players){
                 if (player.getPosition() == attacker.getPosition().getNorth().getSpaceSecond()){
                     first.add(player.getNickname());
                 }
+            }if (!first.isEmpty()) {
+                firststep.put("north", first);
+                loadNorthSecond();
             }
-            firststep.put("north", first);
-            if (!attacker.getPosition().getNorth().getSpaceSecond().getNorth().isWall()){
-                for (Player player : players){
-                    if (player.getPosition() == attacker.getPosition().getNorth().getSpaceSecond().getNorth().getSpaceSecond()){
-                        second.add(player.getNickname());
-                    }
+        }
+    }
+
+    private void loadNorthSecond(){
+        ArrayList<String> second = new ArrayList<>();
+
+        if (!attacker.getPosition().getNorth().getSpaceSecond().getNorth().isWall()) {
+            for (Player player : players) {
+                if (player.getPosition() == attacker.getPosition().getNorth().getSpaceSecond().getNorth().getSpaceSecond()) {
+                    second.add(player.getNickname());
                 }
+            }if (!second.isEmpty()) {
                 secondstep.put("north", second);
             }
         }
@@ -62,21 +69,28 @@ public abstract class LineFireCont implements EffectController{
 
     private void loadWest(){
         ArrayList<String> first = new ArrayList<>();
-        ArrayList<String> second = new ArrayList<>();
 
         if (!attacker.getPosition().getWest().isWall()){
             for (Player player : players){
                 if (player.getPosition() == attacker.getPosition().getWest().getSpaceSecond()){
                     first.add(player.getNickname());
                 }
+            }if (!first.isEmpty()) {
+                firststep.put("west", first);
+                loadWestSecond();
             }
-            firststep.put("west", first);
-            if (!attacker.getPosition().getWest().getSpaceSecond().getWest().isWall()){
-                for (Player player : players){
-                    if (player.getPosition() == attacker.getPosition().getWest().getSpaceSecond().getWest().getSpaceSecond()){
-                        second.add(player.getNickname());
-                    }
+        }
+    }
+
+    private void loadWestSecond(){
+        ArrayList<String> second = new ArrayList<>();
+
+        if (!attacker.getPosition().getWest().getSpaceSecond().getWest().isWall()) {
+            for (Player player : players) {
+                if (player.getPosition() == attacker.getPosition().getWest().getSpaceSecond().getWest().getSpaceSecond()) {
+                    second.add(player.getNickname());
                 }
+            }if (!second.isEmpty()) {
                 secondstep.put("west", second);
             }
         }
@@ -84,45 +98,58 @@ public abstract class LineFireCont implements EffectController{
 
     private void loadSouth(){
         ArrayList<String> first = new ArrayList<>();
-        ArrayList<String> second = new ArrayList<>();
 
         if (!attacker.getPosition().getSouth().isWall()){
             for (Player player : players){
                 if (player.getPosition() == attacker.getPosition().getSouth().getSpaceSecond()){
                     first.add(player.getNickname());
                 }
+            }if (!first.isEmpty()) {
+                firststep.put("south", first);
+                loadSouthSecond();
             }
-            firststep.put("south", first);
-            if (!attacker.getPosition().getSouth().getSpaceSecond().getSouth().isWall()){
-                for (Player player : players){
-                    if (player.getPosition() == attacker.getPosition().getSouth().getSpaceSecond().getSouth().getSpaceSecond()){
-                        second.add(player.getNickname());
-                    }
+        }
+    }
+
+    private void loadSouthSecond(){
+        ArrayList<String> second = new ArrayList<>();
+
+        if (!attacker.getPosition().getSouth().getSpaceSecond().getSouth().isWall()) {
+            for (Player player : players) {
+                if (player.getPosition() == attacker.getPosition().getSouth().getSpaceSecond().getSouth().getSpaceSecond()) {
+                    second.add(player.getNickname());
                 }
+            }if (!second.isEmpty()){
+                secondstep.put("south", second);
             }
-            secondstep.put("south", second);
         }
     }
 
     private void loadEast(){
         ArrayList<String> first = new ArrayList<>();
-        ArrayList<String> second = new ArrayList<>();
 
         if(!attacker.getPosition().getEast().isWall()){
             for (Player player : players){
                 if (player.getPosition() == attacker.getPosition().getEast().getSpaceSecond()){
                     first.add(player.getNickname());
                 }
+            }if (!first.isEmpty()) {
+                firststep.put("east", first);
+                loadEastSecond();
             }
-            firststep.put("east", first);
-            if (!attacker.getPosition().getEast().getSpaceSecond().getEast().isWall()){
-                for (Player player : players){
-                    if (player.getPosition() == attacker.getPosition().getEast().getSpaceSecond().getEast().getSpaceSecond()){
-                        second.add(player.getNickname());
-                    }
+        }
+    }
+
+    private void loadEastSecond(){
+        ArrayList<String> second = new ArrayList<>();
+
+        if (!attacker.getPosition().getEast().getSpaceSecond().getEast().isWall()) {
+            for (Player player : players) {
+                if (player.getPosition() == attacker.getPosition().getEast().getSpaceSecond().getEast().getSpaceSecond()) {
+                    second.add(player.getNickname());
                 }
-            }
-            secondstep.put("east", second);
+            }if (!second.isEmpty())
+                secondstep.put("east", second);
         }
     }
 

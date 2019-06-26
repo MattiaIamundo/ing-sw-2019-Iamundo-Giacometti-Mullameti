@@ -14,14 +14,13 @@ import java.util.ArrayList;
 public class Hellion extends Observable<HellionChooseEv> implements Power, SingleTarget{
 
     private Player target;
+    private ArrayList<Player> markTargets = new ArrayList<>();
 
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 1);
-        for (int i = 0; i < 5; i++) {
-            if (Table.getPlayers(i).getPosition() == target.getPosition()){
-                Table.getPlayers(i).getPlance().setMark(attacker);
-            }
+        for (Player player : markTargets){
+            player.getPlance().setMark(attacker);
         }
     }
 
@@ -29,8 +28,21 @@ public class Hellion extends Observable<HellionChooseEv> implements Power, Singl
         notify(new HellionChooseEv(attacker, valid, notreachable));
     }
 
+    public Player getTarget() {
+        return target;
+    }
+
+    @Override
     public void setTarget(Player target) {
         this.target = target;
+    }
+
+    public ArrayList<Player> getMarkTargets() {
+        return markTargets;
+    }
+
+    public void setMarkTargets(ArrayList<Player> markTargets) {
+        this.markTargets = markTargets;
     }
 
     @Override
