@@ -11,13 +11,13 @@ import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.PowerUpJson;
 import it.polimi.sw2019.model.weapon_power.*;
 import it.polimi.sw2019.network.Socket.PlayerThread;
+import it.polimi.sw2019.utility.AdditiveJson;
+import it.polimi.sw2019.utility.AlternativeJson;
 import it.polimi.sw2019.utility.TimerThread;
 import it.polimi.sw2019.view.ObservableByGame;
 import it.polimi.sw2019.view.Observer;
 import it.polimi.sw2019.view.PlayerRemoteView;
-import it.polimi.sw2019.view.PlayerView;
 
-import java.awt.*;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;

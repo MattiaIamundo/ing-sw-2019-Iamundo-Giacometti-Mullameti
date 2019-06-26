@@ -12,8 +12,7 @@ import java.util.logging.Logger;
 
 public class Server implements Runnable{
 
-    //the two "sub" server: RMI e Socket
-    //private ServerRMI serverRMI;
+
     private ServerSocket serverSocket;
     //the controller
     private MultiGame multiGame;
@@ -24,15 +23,12 @@ public class Server implements Runnable{
     public Server() {
         multiGame = new MultiGame();
         controller = new Game();
-        //serverRMI = new ServerRMI(this.controller);
         serverSocket = new ServerSocket(this.controller);
         run();
     }
 
     public void run() {
 
-        //start the two sub server
-        //serverRMI.startServerRMI();
         serverSocket.run();
         logger.log(Level.INFO, "{Server} has started serverRMI and serverSocket\n");
 

@@ -35,9 +35,9 @@ public class ServerSocket extends JFrame implements Runnable, Serializable {
     //the "main" lock
     private Lock gameLock;
     //the condition which set the first time which in the three player are connected
-    private Condition otherPlayerConnected;
+    //private Condition otherPlayerConnected;
     //the condition which set the turn
-    private Condition otherPlayersTurn;
+    //private Condition otherPlayersTurn;
     //the logger for debug
     private static final Logger logger = Logger.getLogger( ServerSocket.class.getName() );
 
@@ -49,9 +49,9 @@ public class ServerSocket extends JFrame implements Runnable, Serializable {
         //create the game's lock
         gameLock = new ReentrantLock();
         //condition variable: all players have to be connected
-        otherPlayerConnected = gameLock.newCondition();
+        //otherPlayerConnected = gameLock.newCondition();
         //condition variable: it the turn of another player
-        otherPlayersTurn = gameLock.newCondition();
+        //otherPlayersTurn = gameLock.newCondition();
 
         this.socketController = sockContr;
 
