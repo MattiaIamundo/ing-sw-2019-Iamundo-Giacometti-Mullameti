@@ -14,15 +14,14 @@ import java.util.ArrayList;
 public class NanoTracerMode extends Observable<NanoTracerChooseEv> implements Power, SingleTarget{
 
     private Player target;
+    private ArrayList<Player> targets;
 
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 1);
-        for (int i = 0; i < 5; i++) {
-            if (target.getPosition() == Table.getPlayers(i).getPosition()){
-                Table.getPlayers(i).getPlance().setMark(attacker);
-                Table.getPlayers(i).getPlance().setMark(attacker);
-            }
+        for (Player player : targets){
+            player.getPlance().setMark(attacker);
+            player.getPlance().setMark(attacker);
         }
     }
 
@@ -30,9 +29,21 @@ public class NanoTracerMode extends Observable<NanoTracerChooseEv> implements Po
         notify(new NanoTracerChooseEv(attacker, valid, notreachable));
     }
 
+    public Player getTarget() {
+        return target;
+    }
+
     @Override
     public void setTarget(Player target) {
         this.target = target;
+    }
+
+    public ArrayList<Player> getTargets() {
+        return targets;
+    }
+
+    public void setTargets(ArrayList<Player> targets) {
+        this.targets = targets;
     }
 
     @Override

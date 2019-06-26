@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 public class HighVoltageCont extends VisibleTargetCont implements Observer<HighVoltageSetEv> {
 
     private HighVoltage realmodel;
+    private Player prevTarget;
     private Logger logger = Logger.getLogger("controller.HighVoltage");
 
     public HighVoltageCont(Power realmodel) {
@@ -36,7 +37,6 @@ public class HighVoltageCont extends VisibleTargetCont implements Observer<HighV
     }
 
     private ArrayList<String> notselectable() throws InexistentWeaponException{
-
         ArrayList<String> notselectable = new ArrayList<>();
         DoubleAdditive thor;
 
@@ -44,12 +44,19 @@ public class HighVoltageCont extends VisibleTargetCont implements Observer<HighV
         notselectable.add(attacker.getNickname());
         notselectable.add(((Thor) thor.getPower()).getTarget().getNickname());
         notselectable.add(((ChainReaction) thor.getFirstAdditivePower()).getTarget().getNickname());
+        prevTarget = ((ChainReaction) thor.getFirstAdditivePower()).getTarget();
         return notselectable;
     }
 
     @Override
     protected void acquireTarget(ArrayList<String> notselctable) {
-        super.acquireTarget(notselctable);
+        for (Player player : players){
+            if (!(notselctable.contains(player.getNickname())) && (player.isVisible(prevTarget))){
+                valid.add(player.getNickname());
+            }else if (!(notselctable.contains(player.getNickname()))){
+                notreachable.add(player.getNickname());
+            }
+        }
         realmodel.chooseTarget(attacker, valid, notselctable, notreachable);
     }
 
