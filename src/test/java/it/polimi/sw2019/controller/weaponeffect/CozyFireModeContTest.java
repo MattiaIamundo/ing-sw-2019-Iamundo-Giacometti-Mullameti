@@ -75,6 +75,7 @@ public class CozyFireModeContTest {
         CozyFireModeCont cozyFireModeCont = new CozyFireModeCont(cozyFireMode);
         Thrower thrower = new Thrower("north");
 
+        thrower.addObserver(cozyFireModeCont);
         cozyFireModeCont.useEffect(players.get(0), players, map);
         thrower.throwMessage();
 

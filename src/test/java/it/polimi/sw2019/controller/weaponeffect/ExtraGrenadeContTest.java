@@ -148,11 +148,10 @@ public class ExtraGrenadeContTest {
         basicEffect.setMoveto(null);
         thrower.addObserver(extraGrenadeCont);
         extraGrenadeCont.useEffect(players.get(0), players, map);
-        thrower.throwMessageMoved();
+        thrower.throwMessageToMove();
         expected.add(players.get(2));
 
         Assert.assertArrayEquals(expected.toArray(), optEffect.getPlayers().toArray());
-        Assert.assertNotNull(thrower.moveto);
     }
 
     private class Thrower extends Observable<ExtraGrenadeSetEv>{

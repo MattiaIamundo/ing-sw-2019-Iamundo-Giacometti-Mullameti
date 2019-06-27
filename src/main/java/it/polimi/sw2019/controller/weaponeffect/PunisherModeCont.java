@@ -9,11 +9,11 @@ import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 
-public class PunishModeCont extends VisibleTargetCont implements Observer<PunisherModeSetEv> {
+public class PunisherModeCont extends VisibleTargetCont implements Observer<PunisherModeSetEv> {
 
     private PunisherMode realmodel;
 
-    public PunishModeCont(Power realmodel) {
+    public PunisherModeCont(Power realmodel) {
         super(realmodel);
         this.realmodel = (PunisherMode) realmodel;
     }
@@ -22,7 +22,6 @@ public class PunishModeCont extends VisibleTargetCont implements Observer<Punish
     public void acquireTarget(){
         ArrayList<Space> position;
         ArrayList<String> valid = new ArrayList<>();
-        ArrayList<String> notselectable = new ArrayList<>();
         ArrayList<String> notreachable = new ArrayList<>();
 
         position = loadPositions();
@@ -33,8 +32,7 @@ public class PunishModeCont extends VisibleTargetCont implements Observer<Punish
                 valid.add(player.getNickname());
             }
         }
-        notselectable.add(attacker.getNickname());
-        realmodel.chooseTarget(valid, notselectable, notreachable, attacker);
+        realmodel.chooseTarget(valid, notreachable, attacker);
     }
 
     private ArrayList<Space> loadPositions(){

@@ -25,12 +25,20 @@ public class PulverizeMode extends Observable<PulvModeChooseEv> implements Power
         notify(new PulvModeChooseEv(targets, positions, attacker));
     }
 
-    public void setTarget(Player target) {
-        this.target = target;
+    public Space getMoveto() {
+        return moveto;
     }
 
     public void setMoveto(Space moveto) {
         this.moveto = moveto;
+    }
+
+    public Player getTarget() {
+        return target;
+    }
+
+    public void setTarget(Player target) {
+        this.target = target;
     }
 
     @Override

@@ -13,8 +13,8 @@ import java.util.HashMap;
  */
 public class PiercingMode extends Observable<PiercingModeChooseEv> implements Power, ThroughWalls{
 
-    private Player target1 = null;
-    private Player target2 = null;
+    private Player target1;
+    private Player target2;
 
     @Override
     public void usePower(Player attacker){
@@ -28,8 +28,16 @@ public class PiercingMode extends Observable<PiercingModeChooseEv> implements Po
         notify(new PiercingModeChooseEv(targets, attacker));
     }
 
+    public Player getTarget1() {
+        return target1;
+    }
+
     public void setTarget1(Player target1) {
         this.target1 = target1;
+    }
+
+    public Player getTarget2() {
+        return target2;
     }
 
     public void setTarget2(Player target2) {

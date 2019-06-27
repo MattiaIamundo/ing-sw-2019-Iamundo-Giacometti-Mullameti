@@ -51,7 +51,7 @@ public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController
             notselectable.add(attacker.getNickname());
             notselectable.add(invalid.getNickname());
             model.setVortex(vortex);
-            model.chooseTargets(targets, invalid.getNickname(), attacker);
+            model.chooseTargets(attacker, targets, notselectable, notreachable);
         }catch (InexistentWeaponException e){
             logger.log(Level.SEVERE,e.getMessage()+" doesn't have Vortex Cannon");
         }

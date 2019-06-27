@@ -12,12 +12,11 @@ import java.util.HashMap;
  * @author Mattia Iamundo
  */
 public class RailGun extends Observable<RailGunChooseEv> implements Power, ThroughWalls{
-    private Player target = null;
+    private Player target;
 
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 3);
-        target = null;
     }
 
     public void chooseTarget(HashMap<String, ArrayList<String>> valid, Player attacker){
@@ -26,6 +25,10 @@ public class RailGun extends Observable<RailGunChooseEv> implements Power, Throu
 
     public void setTarget(Player target){
         this.target = target;
+    }
+
+    public Player getTarget() {
+        return target;
     }
 
     @Override

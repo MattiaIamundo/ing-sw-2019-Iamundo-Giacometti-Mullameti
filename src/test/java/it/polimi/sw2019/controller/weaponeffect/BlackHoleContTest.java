@@ -23,28 +23,31 @@ public class BlackHoleContTest {
     private Map map;
     private Logger logger = Logger.getLogger("test.controller.BlackHoleCont");
     private Vortex vortex = new Vortex();
+    private BlackHole blackHole = new BlackHole();
+    private BlackHoleCont controller = new BlackHoleCont(blackHole);
+    private Alternative weapon = new Alternative("Vortex Cannon", vortex, null, blackHole, null, null, null);
 
     @Before
     public void setUp(){
         Game game = new Game();
         game.createMap("zero");
-        String rechargecost[] = {"red", "blue"};
-        String extracost[] = {"red"};
         game.addPlayers("attacker");
         game.addPlayers("target");
         game.addPlayers("target2");
         game.addPlayers("notarget");
+        game.addPlayers("prevtarget");
         players = (ArrayList<Player>) game.getPlayers();
         map = game.getGameboard().getMap();
 
         try {
-            vortex.setTarget(new Player("prevtarget", 0, map.getSpace(1,1), new PlayerPlance()));
-            players.get(0).addWeapon(new Alternative("Vortex Cannon", vortex, null, new BlackHole(), extracost, null, rechargecost));
-            ((Vortex) players.get(0).getWeapons().get(0).getPower()).setVortex(map.getSpace(1,1));
+            vortex.setTarget(players.get(4));
+            players.get(0).addWeapon(weapon);
+            ((Vortex) weapon.getPower()).setVortex(map.getSpace(1,1));
             players.get(0).setPosition(map.getSpace(1,0));
             players.get(1).setPosition(map.getSpace(1,2));
             players.get(2).setPosition(map.getSpace(1,0));
             players.get(3).setPosition(map.getSpace(0,1));
+            players.get(4).setPosition(map.getSpace(1,1));
         }catch (WeaponOutOfBoundException e){
             logger.log(Level.SEVERE, "you already have 3 weapons");
         }catch (InvalidSpaceException e){
@@ -54,19 +57,22 @@ public class BlackHoleContTest {
 
     @Test
     public void acquireTargetTest(){
-        BlackHole model = new BlackHole();
         Capturer capturer = new Capturer();
-        BlackHoleCont blackHoleCont = new BlackHoleCont(model);
-        ArrayList<String> expected = new ArrayList<>();
+        ArrayList<String> expectedValid = new ArrayList<>();
+        ArrayList<String> expectedNotSelectable = new ArrayList<>();
+        ArrayList<String> expectedNotReachable = new ArrayList<>();
 
-        model.addObserver(capturer);
-        blackHoleCont.useEffect(players.get(0), players, map);
-        expected.add("target");
-        expected.add("target2");
+        blackHole.addObserver(capturer);
+        controller.useEffect(players.get(0), players, map);
+        expectedValid.add("target");
+        expectedValid.add("target2");
+        expectedNotSelectable.add("attacker");
+        expectedNotSelectable.add("prevtarget");
+        expectedNotReachable.add("notarget");
 
-        Assert.assertArrayEquals(expected.toArray(), capturer.message.getValid().toArray());
-        Assert.assertEquals("attacker", capturer.message.getAttacker());
-        Assert.assertEquals("prevtarget", capturer.message.getNotselectable());
+        Assert.assertArrayEquals(expectedValid.toArray(), capturer.message.getValid().toArray());
+        Assert.assertArrayEquals(expectedNotSelectable.toArray(), capturer.message.getNotselectable().toArray());
+        Assert.assertArrayEquals(expectedNotReachable.toArray(), capturer.message.getNotreachable().toArray());
     }
 
     private class Capturer implements Observer<BlackHoleChooseEv> {

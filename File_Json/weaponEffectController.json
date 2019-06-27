@@ -101,7 +101,7 @@
   },
   {
     "power": "it.polimi.sw2019.model.weapon_power.PunisherMode",
-    "controller":   "it.polimi.sw2019.controller.weaponeffect.PunishModeCont"
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.PunisherModeCont"
   },
   {
     "power": "it.polimi.sw2019.model.weapon_power.RailGun",
