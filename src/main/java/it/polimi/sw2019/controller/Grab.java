@@ -6,7 +6,7 @@ import it.polimi.sw2019.model.*;
  */
 public class Grab implements Action {
 
-    private static Ammo ammo;
+    private Ammo ammo;
     /**
      * @param player the player  who is going to be attacked using this power up card
      */

@@ -1,5 +1,7 @@
 package it.polimi.sw2019.view;
 
+import com.google.gson.Gson;
+import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
@@ -14,7 +16,7 @@ public class PlayerRemoteView extends PlayerView {
     private String set = "pippo";
     private PrintWriter output;
     private Scanner input;
-
+    private Gson gson;
 
     public PlayerRemoteView (Socket socket1) {
         socket = socket1;
@@ -179,5 +181,13 @@ public class PlayerRemoteView extends PlayerView {
 
     protected void showPlayer() {
 
+    }
+
+    public ActionEv waitForAction() {
+        //  i have to wait for a ActionEv
+        set = input.nextLine();
+        //  tramite Gson devo deserializzare l evento e castarlo con ActionEv
+        //  e chiamare la giusta procedura per svolegere l evento
+        return gson.fromJson(set, ActionEv.class);
     }
 }

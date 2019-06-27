@@ -2,6 +2,7 @@ package it.polimi.sw2019.network.Socket;
 
 import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.controller.MultiGame;
+import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.exception.CancellPlayerException;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.utility.TimerThread;
@@ -236,8 +237,8 @@ public class PlayerThread implements Runnable {
                                 this.gameController.sendYouAreFirstPlayer(this.playerRemoteView);
 
                                 //if you to choose skull
-                                if ( this.gameController.getGameboard().getKillshotTrack().isEmpty() ) {
-
+                                //if ( this.gameController.getGameboard().getKillshotTrack().isEmpty() ) {
+                                //if ( true ) {
                                     this.gameController.sendThereAreNotSkull(this.playerRemoteView);
                                     canGoOut = false;
                                     firstTime = true;
@@ -256,14 +257,14 @@ public class PlayerThread implements Runnable {
                                             gameController.sendOk(this.playerRemoteView);
                                         }
                                     }
-                                }
-                                else {
-                                    this.gameController.sendThereAreSkull(this.playerRemoteView);
-                                }
+                                //}
+                                //else {
+                                 //   this.gameController.sendThereAreSkull(this.playerRemoteView);
+                                //}
 
 
                                 //you have to choose the number of the map
-                                if ( this.gameController.getGameboard().getMap().getList().get(0).isEmpty() ) {
+                                //if ( this.gameController.getGameboard().getMap().getList().get(0).isEmpty() ) {
 
                                     this.gameController.sendThereIsNotMap(this.playerRemoteView);
                                     canGoOut = false;
@@ -283,10 +284,10 @@ public class PlayerThread implements Runnable {
                                         }
                                     }
 
-                                }
-                                else {
-                                    this.gameController.sendThereIsMap(this.playerRemoteView);
-                                }
+                                //}
+                                //else {
+                                 //   this.gameController.sendThereIsMap(this.playerRemoteView);
+                                //}
 
                             } else {
                                 //OTHERS PLAYERS
@@ -472,9 +473,29 @@ public class PlayerThread implements Runnable {
 
     private void startGame() {
 
-        System.out.println("It's not your turn, please wait!\n");
-        output.println("It's not your turn, please wait!\n");
-        output.flush();
+        try {
+
+            while ( !gameController.getGameover() ) {
+
+                while ( !gameController.getTurnOfPlayer().getNickname().equals(this.nickname) ) {
+                    //qui controllo per il timer in modo tale da sapere se il timer è scaduto e capire come gestire
+                    //immediatamente lo scatto del turno
+                }
+
+                ActionEv actionEv = playerRemoteView.waitForAction();
+                gameController.handleEvent(actionEv);
+            }
+
+        } catch (NoSuchElementException | IllegalStateException ex) {
+
+            synchronized (gameController.getStopArray()){
+
+                logger.log(Level.INFO, "{ PlayerThread " + this.nickname + "} is removed: " + ex.toString());
+                //gameController.setPlayerDisconnected();
+                //gameController.removePlayerThread(this);
+            }
+            
+        }
 
     }
 

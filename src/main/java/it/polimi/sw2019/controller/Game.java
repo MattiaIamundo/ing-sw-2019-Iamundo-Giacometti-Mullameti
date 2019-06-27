@@ -3,17 +3,15 @@ package it.polimi.sw2019.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
 import it.polimi.sw2019.model.*;
 import it.polimi.sw2019.model.Map;
-import it.polimi.sw2019.model.PowerUpJson;
+import it.polimi.sw2019.utility.*;
 import it.polimi.sw2019.model.weapon_power.*;
 import it.polimi.sw2019.network.Socket.PlayerThread;
-import it.polimi.sw2019.utility.AdditiveJson;
-import it.polimi.sw2019.utility.AlternativeJson;
-import it.polimi.sw2019.utility.TimerThread;
 import it.polimi.sw2019.view.ObservableByGame;
 import it.polimi.sw2019.view.Observer;
 import it.polimi.sw2019.view.PlayerRemoteView;
@@ -23,6 +21,8 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,6 +38,7 @@ public class Game implements Observer <ObservableByGame> {
     private Object stop = new Object();
     private Object stopArray = new Object();
     //the main controller's variables
+    private List<ActionEv> eventActualPlayer = new ArrayList<>();
     private Turn turnOf;
     private String gamemode;
     //private State state;
@@ -969,6 +970,20 @@ public class Game implements Observer <ObservableByGame> {
         return mapconfig;
     }
 
+    public void setTurnOfPlayer (Player player) { this.turnOf.setPlayer(player); }
+
+    public Player getTurnOfPlayer () {
+        return turnOf.getPlayer();
+    }
+
+    public List<ActionEv> getEventActualPlayer() {
+        return eventActualPlayer;
+    }
+
+    public void handleEvent(ActionEv actionEv) {
+
+    }
+
     //.............................FROM HERE OLD THINGS........................
 
     public void update (ObservableByGame message) {
@@ -980,23 +995,8 @@ public class Game implements Observer <ObservableByGame> {
         }
     }
 
-
-
-
     public String listGamemode(){
         return gamemode;
-    }
-
-    /*public State getState(){
-        return state;
-    }
-
-     */
-
-  //  public void setTurnOfPlayer (Player player) { this.turnOf.setPlayer(player); }
-
-    public Player getTurnOfPlayer () {
-        return turnOf.getPlayer();
     }
 
 }

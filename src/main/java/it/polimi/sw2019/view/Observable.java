@@ -1,7 +1,5 @@
 package it.polimi.sw2019.view;
 
-import it.polimi.sw2019.model.Ammo;
-
 import java.util.ArrayList;
 
 /**
