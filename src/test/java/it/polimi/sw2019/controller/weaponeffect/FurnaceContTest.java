@@ -52,9 +52,27 @@ public class FurnaceContTest {
         model.addObserver(catcher);
         controller.useEffect(players.get(0), players, map);
         expected.add("yellow");
-        expected.add("green");
 
         Assert.assertArrayEquals(expected.toArray(), catcher.message.getRooms().toArray());
+    }
+
+    @Test
+    public void acquireTargetTest_NoRoomAvailable(){
+        Catcher catcher = new Catcher();
+        Furnace model = new Furnace();
+        FurnaceCont controller = new FurnaceCont(model);
+        ArrayList<String> expected = new ArrayList<>();
+
+        try {
+            players.get(0).setPosition(map.getSpace(2,0));
+            players.get(1).setPosition(map.getSpace(2,2));
+            model.addObserver(catcher);
+            controller.useEffect(players.get(0), players, map);
+
+            Assert.assertTrue(catcher.message.getRooms().isEmpty());
+        }catch (InvalidSpaceException e){
+            logger.log(Level.SEVERE, "out of map boundaries");
+        }
     }
 
     private class Catcher implements Observer<FurnaceChooseEv>{
@@ -79,6 +97,26 @@ public class FurnaceContTest {
         expectedTarget.add(players.get(1));
 
         Assert.assertArrayEquals(expectedTarget.toArray(), model.getTargets().toArray());
+    }
+
+    @Test
+    public void updateTest_NoRoomSelected(){
+        Thrower thrower = new Thrower(null);
+        Furnace model = new Furnace();
+        FurnaceCont controller = new FurnaceCont(model);
+
+        try {
+            players.get(0).setPosition(map.getSpace(2,0));
+            players.get(1).setPosition(map.getSpace(2,2));
+            thrower.addObserver(controller);
+            controller.useEffect(players.get(0), players, map);
+            thrower.throwMessage();
+
+        }catch (InvalidSpaceException e){
+            logger.log(Level.SEVERE, "out of map boundaries");
+        }
+
+        Assert.assertTrue(model.getTargets().isEmpty());
     }
 
     private class Thrower extends Observable<FurnaceSetEv>{

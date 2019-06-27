@@ -4,6 +4,9 @@ import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
 
+/**
+ * These class represent the choose event of Black hole, the optional effect of Vortex Cannon
+ */
 public class BlackHoleChooseEv implements WeaponEvent {
     private Player attacker;
     private ArrayList<String> valid;
@@ -11,7 +14,6 @@ public class BlackHoleChooseEv implements WeaponEvent {
     private ArrayList<String> notreachable;
 
     /**
-     * These class represent the choose event of Black hole, the optional effect of Vortex Cannon
      * @param attacker the player the invoke the effect
      * @param valid is the list of the players that can be selected as a valid target for the effect
      * @param notselectable is the list of the players that can't be selected as a valid target, in first position there is the attacker, the other is the
