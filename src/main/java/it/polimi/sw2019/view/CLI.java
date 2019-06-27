@@ -1,5 +1,5 @@
 package it.polimi.sw2019.view;
-
+/*
 import it.polimi.sw2019.events.server_event.VCevent.VCColor;
 import it.polimi.sw2019.events.server_event.VCevent.VCLogin;
 import it.polimi.sw2019.nethandler.ViewContEvent;
@@ -7,7 +7,7 @@ import it.polimi.sw2019.nethandler.ViewContEvent;
 import java.util.List;
 import java.util.Scanner;
 
-public class CLI implements UIinterface{
+public class CLI{
 
     private PlayerView pv = null;
     private ViewContEvent vce = null;
@@ -160,4 +160,4 @@ public class CLI implements UIinterface{
     public void sendOk() {
         //System.out.println("ok\n");
     }
-}
+}*/

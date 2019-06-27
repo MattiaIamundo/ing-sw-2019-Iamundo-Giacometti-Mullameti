@@ -4,21 +4,27 @@ package it.polimi.sw2019.view.ControllerClasses;
 
 import it.polimi.sw2019.model.Player;
 
+import it.polimi.sw2019.network.Socket.ClientSocket;
 import it.polimi.sw2019.view.GUI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
+
 
 
 
 import java.io.IOException;
 
 public class PlayerCharacterController {
-    private GUI gui = new GUI();
+    private ClientSocket clientSocket ;
     Player tempPlayer = new Player("",0,null,null);
+
+
+    public void setClientSocket(ClientSocket clientSocket){
+        this.clientSocket=clientSocket;
+    }
 
 
 
@@ -48,7 +54,7 @@ public class PlayerCharacterController {
 
 
     @FXML
-    public String chooseCharacter(){
+    public void chooseCharacter(){
 
         if(this.characterGroup.getSelectedToggle().equals(this.yellowButton)) {stringCharacter="Yellow";}
         if(this.characterGroup.getSelectedToggle().equals(this.blueButton)) {stringCharacter="Blue";}
@@ -57,7 +63,8 @@ public class PlayerCharacterController {
         if(this.characterGroup.getSelectedToggle().equals(this.purpleButton)) {stringCharacter="Purple";}
 
         this.nextButton.setVisible(true);
-        return stringCharacter;
+        this.clientSocket.setInfo("character",stringCharacter);
+
     }
 
 
@@ -66,8 +73,9 @@ public class PlayerCharacterController {
     @FXML
     public void nextButtonPushed() {
 
+        clientSocket.getContSelect().waitingForSkull(clientSocket.getPlayerView());
 
-        try{
+        /*try{
             Parent chooseMapSkull= FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/ChooseSkull.fxml"));
             Scene chooseMapSkullScene = new Scene(chooseMapSkull);
 
@@ -77,7 +85,7 @@ public class PlayerCharacterController {
             window.show();
         }catch(IOException e){
 
-        }
+        }*/
 
 
     }

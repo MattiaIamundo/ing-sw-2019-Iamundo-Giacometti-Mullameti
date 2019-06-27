@@ -203,7 +203,7 @@ public class PlayerThread implements Runnable {
                                 boolean duplicated = false;
                                 boolean canGoOut = false;
                                 firstTime = true;
-
+                                logger.log(Level.INFO, "{PlayerThread "+ this.nickname +"} has memorized the nickname!");
                                 while ( !canGoOut ) {
 
                                     canGoOut = true;
@@ -232,6 +232,7 @@ public class PlayerThread implements Runnable {
                                     }
 
                                 }
+                                logger.log(Level.INFO, "{PlayerThread "+ this.nickname +"} has memorized the character!");
                                 this.gameController.sendYouAreFirstPlayer(this.playerRemoteView);
 
                                 //if you to choose skull

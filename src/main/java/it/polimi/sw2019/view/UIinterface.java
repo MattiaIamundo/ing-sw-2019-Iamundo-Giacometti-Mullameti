@@ -1,18 +1,18 @@
 package it.polimi.sw2019.view;
 
-import java.util.List;
+
 
 public interface UIinterface {
 
-    void requestNickname(boolean isTheFirstTime, List<String> nicknameInTheGame);
+    void requestNickname(String string);
 
-    void requestColor(boolean firstTime, boolean duplicated, List<String> colorlist);
+    void requestColor(String string);
 
-    void requestSkull(boolean firstTime);
+    void requestSkull(String string);
 
     void reconnection();
 
     void sendOk();
 
-    void requestMap(boolean firstTime);
+    void requestMap(String string);
 }

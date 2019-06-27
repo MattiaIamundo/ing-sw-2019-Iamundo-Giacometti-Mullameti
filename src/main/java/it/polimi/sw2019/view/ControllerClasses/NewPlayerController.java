@@ -3,28 +3,24 @@ package it.polimi.sw2019.view.ControllerClasses;
 
 
 
+
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.view.GUI;
+import it.polimi.sw2019.network.Socket.ClientSocket;
+
+
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
-
-
-import java.io.IOException;
 
 
 public class NewPlayerController {
 
 
-    private GUI gui = new GUI();
+    private ClientSocket clientSocket ;
     Player tempPlayer = new Player("",0,null,null);
 
-    private String validnickname ="true";
+
 
 
     @FXML private TextField nicknameField;
@@ -46,35 +42,41 @@ public class NewPlayerController {
 
     }
 
-    public void isValid(String valid){
-        this.validnickname=valid;
 
+    public void setClientSocket(ClientSocket clientSocket){
+        this.clientSocket=clientSocket;
     }
 
-    @FXML
-    public String submitButtonClicked() {
 
-        if (nicknameField.getText() == null ||nicknameField.getText().length() == 0 ||(validnickname.equals("false"))) {
+    @FXML
+    public void submitButtonClicked() {
+
+        if (nicknameField.getText() == null ||nicknameField.getText().length() == 0 ) {
 
             this.validInput.setText( "Invalid nickname!");
 
         }else {
                 this.validInput.setText( "");
                 nickname=nicknameField.getText();
+
+                this.clientSocket.setInfo("nickname",nickname);
+
+
                 this.nextButton.setVisible(true);
 
-            }
+        }
 
-        return nickname ;
+
 
     }
 
 
     @FXML
     public void nextButtonClicked(){
+        clientSocket.getContSelect().waitingForColorRequest(clientSocket.getPlayerView());
 
-        try{
-            Parent chooseMapSkull= FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/PlayerCharacter.fxml"));
+        /*try{
+           Parent chooseMapSkull= FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/PlayerCharacter.fxml"));
             Scene chooseMapSkullScene = new Scene(chooseMapSkull);
 
             Stage window = (Stage)nextButton.getScene().getWindow();
@@ -85,7 +87,7 @@ public class NewPlayerController {
 
         }catch(IOException e){
 
-        }
+        }*/
 
     }
 
