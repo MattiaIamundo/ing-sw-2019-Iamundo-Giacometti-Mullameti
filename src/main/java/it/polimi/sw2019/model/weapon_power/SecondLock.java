@@ -28,6 +28,10 @@ public class SecondLock extends Observable<SecondLockChooseEv> implements Power,
         this.target = target;
     }
 
+    public Player getTarget() {
+        return target;
+    }
+
     @Override
     public String toString() {
         return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);

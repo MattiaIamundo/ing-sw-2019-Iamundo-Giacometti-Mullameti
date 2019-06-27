@@ -31,12 +31,24 @@ public class Shockwave extends Observable<ShockwaveChooseEv> implements Power{
         notify(new ShockwaveChooseEv(attacker, targets));
     }
 
+    public Player getTarget1() {
+        return target1;
+    }
+
     public void setTarget1(Player target1) {
         this.target1 = target1;
     }
 
+    public Player getTarget2() {
+        return target2;
+    }
+
     public void setTarget2(Player target2) {
         this.target2 = target2;
+    }
+
+    public Player getTarget3() {
+        return target3;
     }
 
     public void setTarget3(Player target3) {

@@ -19,12 +19,20 @@ public class ScannerMode extends Observable<ScannerModeChooseEv> implements Powe
     @Override
     public void usePower(Player attacker){
         target1.getPlance().setMark(attacker);
-        target2.getPlance().setMark(attacker);
-        target3.getPlance().setMark(attacker);
+        if (target2 != null) {
+            target2.getPlance().setMark(attacker);
+        }
+        if (target3 != null) {
+            target3.getPlance().setMark(attacker);
+        }
     }
 
     public void chooseTargets(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){
         notify(new ScannerModeChooseEv(attacker, valid, notreachable));
+    }
+
+    public Player getTarget1() {
+        return target1;
     }
 
     @Override
@@ -32,8 +40,16 @@ public class ScannerMode extends Observable<ScannerModeChooseEv> implements Powe
         this.target1 = target1;
     }
 
+    public Player getTarget2() {
+        return target2;
+    }
+
     public void setTarget2(Player target2) {
         this.target2 = target2;
+    }
+
+    public Player getTarget3() {
+        return target3;
     }
 
     public void setTarget3(Player target3) {

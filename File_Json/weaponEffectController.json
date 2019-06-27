@@ -121,7 +121,7 @@
   },
   {
     "power": "it.polimi.sw2019.model.weapon_power.RocketLauncher",
-    "controller":   "it.polimi.sw2019.controller.weaponeffect.RocketLaunchCont"
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.RocketLauncherCont"
   },
   {
     "power": "it.polimi.sw2019.model.weapon_power.ScannerMode",

@@ -53,6 +53,7 @@ public class FlamethrowerContTest {
 
         model.addObserver(catcher);
         controller.useEffect(players.get(0), players, map);
+        expectedDirections.add("south");
         expectedDirections.add("west");
         expectedTarget1.add("target1");
         expectedTarget2.add("target2");

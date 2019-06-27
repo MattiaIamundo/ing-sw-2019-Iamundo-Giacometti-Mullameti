@@ -46,10 +46,9 @@ public abstract class LineFireCont implements EffectController{
                 if (player.getPosition() == attacker.getPosition().getNorth().getSpaceSecond()){
                     first.add(player.getNickname());
                 }
-            }if (!first.isEmpty()) {
-                firststep.put("north", first);
-                loadNorthSecond();
             }
+            firststep.put("north", first);
+            loadNorthSecond();
         }
     }
 
@@ -61,9 +60,8 @@ public abstract class LineFireCont implements EffectController{
                 if (player.getPosition() == attacker.getPosition().getNorth().getSpaceSecond().getNorth().getSpaceSecond()) {
                     second.add(player.getNickname());
                 }
-            }if (!second.isEmpty()) {
-                secondstep.put("north", second);
             }
+            secondstep.put("north", second);
         }
     }
 
@@ -75,10 +73,9 @@ public abstract class LineFireCont implements EffectController{
                 if (player.getPosition() == attacker.getPosition().getWest().getSpaceSecond()){
                     first.add(player.getNickname());
                 }
-            }if (!first.isEmpty()) {
-                firststep.put("west", first);
-                loadWestSecond();
             }
+            firststep.put("west", first);
+            loadWestSecond();
         }
     }
 
@@ -90,9 +87,8 @@ public abstract class LineFireCont implements EffectController{
                 if (player.getPosition() == attacker.getPosition().getWest().getSpaceSecond().getWest().getSpaceSecond()) {
                     second.add(player.getNickname());
                 }
-            }if (!second.isEmpty()) {
-                secondstep.put("west", second);
             }
+            secondstep.put("west", second);
         }
     }
 
@@ -104,10 +100,9 @@ public abstract class LineFireCont implements EffectController{
                 if (player.getPosition() == attacker.getPosition().getSouth().getSpaceSecond()){
                     first.add(player.getNickname());
                 }
-            }if (!first.isEmpty()) {
-                firststep.put("south", first);
-                loadSouthSecond();
             }
+            firststep.put("south", first);
+            loadSouthSecond();
         }
     }
 
@@ -119,9 +114,8 @@ public abstract class LineFireCont implements EffectController{
                 if (player.getPosition() == attacker.getPosition().getSouth().getSpaceSecond().getSouth().getSpaceSecond()) {
                     second.add(player.getNickname());
                 }
-            }if (!second.isEmpty()){
-                secondstep.put("south", second);
             }
+            secondstep.put("south", second);
         }
     }
 
@@ -133,10 +127,9 @@ public abstract class LineFireCont implements EffectController{
                 if (player.getPosition() == attacker.getPosition().getEast().getSpaceSecond()){
                     first.add(player.getNickname());
                 }
-            }if (!first.isEmpty()) {
-                firststep.put("east", first);
-                loadEastSecond();
             }
+            firststep.put("east", first);
+            loadEastSecond();
         }
     }
 
@@ -148,8 +141,8 @@ public abstract class LineFireCont implements EffectController{
                 if (player.getPosition() == attacker.getPosition().getEast().getSpaceSecond().getEast().getSpaceSecond()) {
                     second.add(player.getNickname());
                 }
-            }if (!second.isEmpty())
-                secondstep.put("east", second);
+            }
+            secondstep.put("east", second);
         }
     }
 

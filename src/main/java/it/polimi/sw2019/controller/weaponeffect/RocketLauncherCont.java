@@ -11,14 +11,14 @@ import it.polimi.sw2019.view.Observer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RocketLaunchCont implements Observer<RocketLaunchSetEv>, EffectController{
+public class RocketLauncherCont implements Observer<RocketLaunchSetEv>, EffectController{
 
     private RocketLauncher model;
     private Player attacker;
     private ArrayList<Player> players;
     private HashMap<String, HashMap<String, Space>> targets = new HashMap<>();
 
-    public RocketLaunchCont(Power model) {
+    public RocketLauncherCont(Power model) {
         this.model = (RocketLauncher) model;
     }
 
@@ -29,7 +29,7 @@ public class RocketLaunchCont implements Observer<RocketLaunchSetEv>, EffectCont
         acquireTarget();
     }
 
-    public void acquireTarget() {
+    private void acquireTarget() {
         for (Player player : players){
             if ((player != attacker) && (player.isVisible(attacker)) && (player.getPosition() != attacker.getPosition())){
                 targets.put(player.getNickname(), acquireMovements(player.getPosition()));
@@ -45,7 +45,7 @@ public class RocketLaunchCont implements Observer<RocketLaunchSetEv>, EffectCont
     private HashMap<String, Space> acquireMovements(Space tarpos){
         HashMap<String, Space> positions = new HashMap<>();
 
-        positions.put("basic", tarpos);
+        positions.put("zero", tarpos);
         if (!tarpos.getEast().isWall()){
             positions.put("east", tarpos.getEast().getSpaceSecond());
         }

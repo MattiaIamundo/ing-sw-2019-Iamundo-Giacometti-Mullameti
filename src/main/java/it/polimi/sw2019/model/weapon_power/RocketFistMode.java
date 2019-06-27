@@ -33,14 +33,28 @@ public class RocketFistMode extends Observable<RocketFistChooseEv> implements Po
         notify(new RocketFistChooseEv(attacker, firstline, secondline));
     }
 
+    public Space getMoveto() {
+        return moveto;
+    }
+
     public void setMoveto(Space moveto) {
         this.moveto = moveto;
     }
 
+    public Player getTarget1() {
+        return target1;
+    }
+
+    @Override
     public void setTarget1(Player target1) {
         this.target1 = target1;
     }
 
+    public Player getTarget2() {
+        return target2;
+    }
+
+    @Override
     public void setTarget2(Player target2) {
         this.target2 = target2;
     }

@@ -15,43 +15,51 @@ public class RocketFistCont extends LineFireCont implements EffectController, Ob
         this.realmodel = (RocketFistMode) realmodel;
     }
 
+    @Override
+    public void update(RocketFistSetEv message) {
+        super.update(message);
+        realmodel.setMoveto(moveto(message.getDirection(), message.getMoveAmount()));
+        realmodel.usePower(attacker);
+    }
 
-    private Space moveto(String direction){
+    private Space moveto(String direction, int amount){
         switch (direction){
             case "north":
-                if (!attacker.getPosition().getNorth().getSpaceSecond().getNorth().isWall()){
+                if (amount == 2){
                     return attacker.getPosition().getNorth().getSpaceSecond().getNorth().getSpaceSecond();
-                }else {
+                }else if (amount == 1){
                     return attacker.getPosition().getNorth().getSpaceSecond();
+                }else {
+                    break;
                 }
             case "west":
-                if (!attacker.getPosition().getWest().getSpaceSecond().getWest().isWall()){
+                if (amount == 2){
                     return attacker.getPosition().getWest().getSpaceSecond().getWest().getSpaceSecond();
-                }else {
+                }else if (amount == 1){
                     return attacker.getPosition().getWest().getSpaceSecond();
+                }else {
+                    break;
                 }
             case "south":
-                if (!attacker.getPosition().getSouth().getSpaceSecond().getSouth().isWall()){
+                if (amount == 2){
                     return attacker.getPosition().getSouth().getSpaceSecond().getSouth().getSpaceSecond();
-                }else {
+                }else if (amount == 1){
                     return attacker.getPosition().getSouth().getSpaceSecond();
+                }else {
+                    break;
                 }
             case "east":
-                if (!attacker.getPosition().getEast().getSpaceSecond().getEast().isWall()){
+                if (amount == 2){
                     return attacker.getPosition().getEast().getSpaceSecond().getEast().getSpaceSecond();
-                }else {
+                }else if (amount == 1){
                     return attacker.getPosition().getEast().getSpaceSecond();
+                }else {
+                    break;
                 }
             default:
                 return attacker.getPosition();
         }
-    }
-
-    @Override
-    public void update(RocketFistSetEv message) {
-        realmodel.setMoveto(moveto(message.getDirection()));
-        super.update(message);
-        realmodel.usePower(attacker);
+        return attacker.getPosition();
     }
 
 }
