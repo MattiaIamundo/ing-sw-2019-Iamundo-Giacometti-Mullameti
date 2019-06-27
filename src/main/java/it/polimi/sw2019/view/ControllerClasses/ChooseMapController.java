@@ -2,6 +2,7 @@ package it.polimi.sw2019.view.ControllerClasses;
 
 
 import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.network.Socket.ClientSocket;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ChooseMapController {
+    private ClientSocket clientSocket ;
 
     private Table table =new Table();
     private String map =new String();
@@ -31,6 +33,9 @@ public class ChooseMapController {
    @FXML private ToggleGroup mapGroup;
 
    @FXML private Button startButton;
+    public void setClientSocket(ClientSocket clientSocket){
+        this.clientSocket=clientSocket;
+    }
 
 
     @FXML
@@ -55,6 +60,7 @@ public class ChooseMapController {
         }
 
 
+        clientSocket.setInfo("map",map);
         this.startButton.setVisible(true);
         return map;
 
@@ -66,13 +72,14 @@ public class ChooseMapController {
     @FXML
     public void startButtonPushed() throws IOException {
 
-        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/Table.fxml"));
+        clientSocket.getContSelect().waitingForMap(clientSocket.getPlayerView());
+        /*Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/Table.fxml"));
         Scene tableScene = new Scene(table);
 
         Stage window = (Stage) startButton.getScene().getWindow();
 
         window.setScene(tableScene);
-        window.show();
+        window.show();*/
     }
 
 

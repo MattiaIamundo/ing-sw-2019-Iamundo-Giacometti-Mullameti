@@ -7,16 +7,19 @@ import it.polimi.sw2019.events.server_event.VCevent.VCColor;
 import it.polimi.sw2019.events.server_event.VCevent.VCLogin;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.nethandler.ViewContEvent;
+import it.polimi.sw2019.network.Socket.ClientSocket;
 
 
 public class PlayerView extends ObservableByGame implements Observer <Player> {
 
     private Player p;
     private UIinterface ui;
+    private ClientSocket clientSocket;
 
     public PlayerView() {}
-    public PlayerView(UIinterface uIinterface) {
+    public PlayerView(UIinterface uIinterface, ClientSocket clientSocket) {
         this.ui = uIinterface;
+        this.clientSocket = clientSocket;
     }
 
 
@@ -33,11 +36,11 @@ public class PlayerView extends ObservableByGame implements Observer <Player> {
     }
 
     public void requestNickname(Login login) {
-        ui.requestNickname(login.isFirstTime(), login.getNickname());
+        clientSocket.notifyGUI("RequestNickname");
     }
 
     public void requestColor(Color color) {
-        ui.requestColor(color.isFirstTime(), color.isDuplicated(), color.getColors());
+        clientSocket.notifyGUI("RequestCharacter");
     }
 
     public void requestNickname(Reconnection re) {
@@ -57,7 +60,7 @@ public class PlayerView extends ObservableByGame implements Observer <Player> {
     }
 
     public void sendOk() {
-        ui.sendOk();
+        //clientSocket.sendOk();
     }
 
     public void waitForPing() {
@@ -69,7 +72,8 @@ public class PlayerView extends ObservableByGame implements Observer <Player> {
     }
 
     public void requestSkull(boolean firstTime) {
-        ui.requestSkull(firstTime);
+        if(firstTime){clientSocket.notifyGUI("RequestSkullNr");}
+
     }
 
     public void sendSkull( ViewContEvent vce, String sku) {
@@ -77,7 +81,7 @@ public class PlayerView extends ObservableByGame implements Observer <Player> {
     }
 
     public void requestMap(boolean firstTime) {
-        ui.requestMap(firstTime);
+        if(firstTime){clientSocket.notifyGUI("RequestMapType");}
     }
 
     public void sendMap(ViewContEvent vce, String maptype) {

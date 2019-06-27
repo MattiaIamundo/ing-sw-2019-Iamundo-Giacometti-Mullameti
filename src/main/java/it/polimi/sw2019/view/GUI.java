@@ -18,17 +18,21 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 public class GUI extends Application implements UIinterface {
 
 
+    private MenuController menuController;
     private Stage stage;
     private ClientSocket clientSocket;
     private String string;
     private PlayerView pv ;
     private ViewContEvent vce ;
 
-    public GUI(){
+    public GUI() {
+
+
     }
 
 
@@ -50,70 +54,78 @@ public class GUI extends Application implements UIinterface {
         });
 
         this.stage=stage;
-        this.clientSocket=new ClientSocket("127.0.0.1" , false);
-        clientSocket.setView( this);
+        this.clientSocket=new ClientSocket("127.0.0.1");
+        clientSocket.setUI(this);
         MenuController menuController = loader.getController();
         menuController.setClientSocket(clientSocket);
 
-    }
-
-
-    @Override
-    public void requestNickname(boolean isTheFirstTime, List<String> nicknameInTheGame) {
-
-        NewPlayerController newPlayerController = new NewPlayerController();
-
-
-        newPlayerController.isValid("true");
-
-
-        if( isTheFirstTime ) {
-
-
-            string = newPlayerController.submitButtonClicked();
-            VCLogin vcLogin = new VCLogin(string);
-            pv.sendNickname(vce, vcLogin);
-        }
-        else {
-
-            string = newPlayerController.submitButtonClicked();
-            VCLogin vcLogin = new VCLogin(string);
-            pv.sendNickname(vce, vcLogin);
-        }
 
 
     }
 
+
     @Override
-    public void requestColor(boolean firstTime, boolean duplicated, List<String> colorlist) {
+    public void requestNickname(String string) {
 
+        if(string.equals("ok")) {
 
-        PlayerCharacterController playerCharacterController= new PlayerCharacterController();
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/NewPlayer.fxml"));
+                Parent newPlayer = loader.load();
 
-        string = playerCharacterController.chooseCharacter();
-        VCColor vcColor = new VCColor(string);
-        pv.sendColor(vce,vcColor);
+                NewPlayerController newPlayerController = loader.getController();
+                newPlayerController.setClientSocket(clientSocket);
+
+                Stage mainStage = stage;
+                mainStage.getScene().setRoot(newPlayer);
+            } catch (IOException e) {
+            }
+        }else{
+            System.out.println("Error");
+        }
+    }
+
+    @Override
+    public void requestColor(String string) {
+
+        if(string.equals("ok")){
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/PlayerCharacter.fxml"));
+                Parent playerCharacter = loader.load();
+
+                PlayerCharacterController playerCharacterController = loader.getController();
+                playerCharacterController.setClientSocket(clientSocket);
+
+                Stage mainStage = stage;
+                mainStage.getScene().setRoot(playerCharacter);
+            }catch (IOException e){}
+        }else{
+            System.out.println("ko");
+        }
 
     }
 
     @Override
-    public void requestSkull(boolean firstTime) {
+    public void requestSkull(String string) {
 
+        if(string.equals("ok")){
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/ChooseSkull.fxml"));
+                Parent chooseSkull = loader.load();
 
-        ChooseSkullController chooseSkullController = new ChooseSkullController();
+                ChooseSkullController chooseSkullController = loader.getController();
+                chooseSkullController.setClientSocket(clientSocket);
 
-        if ( firstTime ) {
-
-            string = chooseSkullController.chooseNrSkulls();
-
+                Stage mainStage = stage;
+                mainStage.getScene().setRoot(chooseSkull);
+            }catch (IOException e){}
+        }else{
+            System.out.println("ko");
         }
-        else {
 
-
-        }
-
-
-        pv.sendSkull(vce,string);
     }
 
 
@@ -125,25 +137,28 @@ public class GUI extends Application implements UIinterface {
     @Override
     public void sendOk() {
 
+
     }
 
     @Override
-    public void requestMap(boolean firstTime) {
-        ChooseMapController chooseMapController = new ChooseMapController();
+    public void requestMap(String string) {
 
-        if ( firstTime ) {
+        if (string.equals("ok")){
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/ChooseMap.fxml"));
+                Parent chooseMap = loader.load();
 
-            string = chooseMapController.chooseMap();
+                ChooseMapController chooseMapController = loader.getController();
+                chooseMapController.setClientSocket(clientSocket);
 
+                Stage mainStage = stage;
+                mainStage.getScene().setRoot(chooseMap);
+            } catch (IOException e) {
+            }
+        }else {
+            System.out.println("ko");
         }
-        else {
-
-
-        }
-
-
-        pv.sendSkull(vce,string);
-
     }
 
     public static void main(String[]args){

@@ -2,16 +2,19 @@ package it.polimi.sw2019.network.Socket;
 
 
 
+import it.polimi.sw2019.events.server_event.VCevent.VCColor;
+import it.polimi.sw2019.events.server_event.VCevent.VCLogin;
 import it.polimi.sw2019.nethandler.ContSelect;
 import it.polimi.sw2019.nethandler.ModViewEvent;
 import it.polimi.sw2019.nethandler.ViewContEvent;
 import it.polimi.sw2019.view.*;
+import javafx.application.Application;
 
 
-import javax.swing.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serializable;
+
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.NoSuchElementException;
@@ -38,12 +41,13 @@ public class ClientSocket implements Runnable {
     //boolean to set that the game is finished
     private boolean gameover = false;
     //the GUI or CLI
-    private UIinterface userImp;
+    private UIinterface uIinterface;
+    private String nickname;
     //the logger for debugging
     private static final Logger logger = Logger.getLogger( ClientSocket.class.getName() );
 
     //view
-    private transient PlayerView playerView;
+    private PlayerView playerView;
     private transient TableView tableView;
     private transient WeaponView weaponView;
     private transient AmmoView ammoView;
@@ -60,19 +64,21 @@ public class ClientSocket implements Runnable {
      * this is the constructor
      * @param host the server name
      */
-    public ClientSocket(String host, boolean setTheCLI){
+    public ClientSocket(String host){
         //set the server name
         serverHost = host;
         //commands for set the GUI
-        startClient(setTheCLI);
+        startClient();
 
     }//END of the CONSTRUCTOR
+
+
 
     /**
      * in this method are set the connection with the server,
      * get the streams and run the thread's client
      */
-    private void startClient(boolean cli){
+    private void startClient(){
 
         try{
             //set the connection
@@ -87,26 +93,11 @@ public class ClientSocket implements Runnable {
             viewContEvent = new ViewContEvent( connection );
 
             //set the view
-            playerView = new PlayerView(null);
-            tableView = new TableView(null);
-            weaponView = new WeaponView(null);
-            ammoView = new AmmoView( null);
-            powerUpView = new PowerUpView(null);
-
-            if (cli) {
-                userImp = new CLI(playerView,viewContEvent);
-            }
-            else {
-                userImp = new GUI(); //(MERITA)
-
-            }
-
-            //set the view
-            playerView = new PlayerView(userImp);
-            tableView = new TableView(userImp);
-            weaponView = new WeaponView(userImp);
-            ammoView = new AmmoView(userImp);
-            powerUpView = new PowerUpView(userImp);
+            playerView = new PlayerView(uIinterface, this);
+            tableView = new TableView(uIinterface);
+            weaponView = new WeaponView(uIinterface);
+            ammoView = new AmmoView(uIinterface);
+            powerUpView = new PowerUpView(uIinterface);
 
         }catch(IOException e){
             logger.log(Level.SEVERE, e.toString(), e);
@@ -114,7 +105,7 @@ public class ClientSocket implements Runnable {
         //it creates and starts the thread for this client
 
         //client is executed
-        worker.execute( this );
+        //worker.execute( this );
 
     }//END of START CLIENT
 
@@ -122,6 +113,60 @@ public class ClientSocket implements Runnable {
      * it is control the thread which are updating a GUI component
      * and with a loop it can control every server's message send to it
      */
+
+    public ContSelect getContSelect(){
+        return contSelect;
+    }
+
+    public PlayerView getPlayerView() {
+        return playerView;
+    }
+
+    public void setUI(UIinterface uIinterface){
+        this.uIinterface=uIinterface;
+    }
+
+    public void setInfo(String string , String info) {
+        if (string.equals("nickname")) {
+
+            VCLogin vcLogin = new VCLogin(info);
+            playerView.sendNickname(viewContEvent, vcLogin);
+
+        } else if (string.equals("character")) {
+
+            VCColor vcColor = new VCColor(info);
+            playerView.sendColor(viewContEvent, vcColor);
+
+        }else if (string.equals("skull")) {
+
+            playerView.sendSkull(viewContEvent, info);
+
+        }else if (string.equals("map")) {
+
+            playerView.sendMap(viewContEvent, info);
+
+        }
+    }
+    public void notifyGUI(String string){
+        switch(string){
+            case "RequestNickname" : uIinterface.requestNickname("ok");
+                break;
+            case "RequestCharacter": uIinterface.requestColor("ok");
+                break;
+            case "RequestSkullNr" : uIinterface.requestSkull("ok");
+                break;
+            case "RequestMapType":uIinterface.requestMap("ok");
+                break;
+
+        }
+
+    }
+
+
+
+    public String inform(){
+        return "obk";
+    }
     public void run(){
         ok = false;
         //welcome, set the nickname
@@ -240,7 +285,6 @@ public class ClientSocket implements Runnable {
 
     }//END of RUN
 
-
     /**
      * this method close the connection with the server
      * and the input, output stream
@@ -264,23 +308,15 @@ public class ClientSocket implements Runnable {
     }//END of CLOSE CONNECTION
 
     public void setView(UIinterface view){
-        this.userImp=view;
+        this.uIinterface=view;
     }//(MERITA)
 
     public static void main (String[] args){
 
         ClientSocket application;
 
-        //Application.launch(Main.class);//(MERITA)
+        Application.launch(GUI.class);//(MERITA)
 
-        if (args.length == 0){
-            //set the client: localhost
-            application = new ClientSocket("127.0.0.1", false);
-        }
-        else{
-            //set the client: other host
-            application = new ClientSocket( args[0], false );
-        }
-
+        application = new ClientSocket("127.0.0.1");
     }
 }
