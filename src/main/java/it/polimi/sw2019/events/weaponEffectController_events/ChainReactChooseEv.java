@@ -4,6 +4,9 @@ import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
 
+/**
+ * These class represent the choose event of Chain reaction, the first optional effect of T.H.O.R.
+ */
 public class ChainReactChooseEv implements WeaponEvent{
     private Player attacker;
     private ArrayList<String> valid;
@@ -11,7 +14,6 @@ public class ChainReactChooseEv implements WeaponEvent{
     private ArrayList<String> notreachable;
 
     /**
-     * These class represent the choose event of Chain reaction, the first optional effect of T.H.O.R.
      * @param attacker is the player that invoke the effect
      * @param valid is the list of the players that can be selected as a valid target for the effect
      * @param notselectable is the list of the players that can't be selected as a target, the first one is the attacker, the other is the player selected as

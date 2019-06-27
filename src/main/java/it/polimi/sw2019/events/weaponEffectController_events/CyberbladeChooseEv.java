@@ -4,12 +4,19 @@ import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
 
+/**
+ * These class represent the choose event of Cyberblade, the basic effect of Cyberblade
+ */
 public class CyberbladeChooseEv implements WeaponEvent{
-
     private Player attacker;
     private ArrayList<String> valid;
     private ArrayList<String> notreachable;
 
+    /**
+     * @param attacker is the player that invokes the effect
+     * @param valid is the list of the players that can be selected as a valid target
+     * @param notreachable is the list of the players that can't be selected as target due to be out of the effect's range
+     */
     public CyberbladeChooseEv(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable) {
         this.attacker = attacker;
         this.valid = valid;
