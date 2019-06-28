@@ -19,8 +19,10 @@ public class PiercingMode extends Observable<PiercingModeChooseEv> implements Po
     @Override
     public void usePower(Player attacker){
         target1.getPlance().giveDamage(attacker, 2);
+        target1.getPlance().removeMark(attacker);
         if (target2 != null){
             target2.getPlance().giveDamage(attacker, 2);
+            target2.getPlance().removeMark(attacker);
         }
     }
 

@@ -20,6 +20,7 @@ public class ExtraGrenade extends Observable<ExtraGrenadeChooseEv> implements Po
     public void usePower(Player attacker){
         for (Player player : players){
             player.getPlance().giveDamage(attacker,1);
+            player.getPlance().removeMark(attacker);
         }
     }
 

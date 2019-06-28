@@ -17,6 +17,7 @@ public class HighVoltage extends Observable<HighVoltageChooseEv> implements Powe
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 2);
+        target.getPlance().removeMark(attacker);
     }
 
     public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable) {

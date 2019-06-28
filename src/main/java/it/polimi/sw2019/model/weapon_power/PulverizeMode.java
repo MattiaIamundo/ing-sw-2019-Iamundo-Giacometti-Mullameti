@@ -18,6 +18,7 @@ public class PulverizeMode extends Observable<PulvModeChooseEv> implements Power
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 3);
+        target.getPlance().removeMark(attacker);
         target.setPosition(moveto);
     }
 

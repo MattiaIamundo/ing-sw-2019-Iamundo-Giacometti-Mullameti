@@ -19,9 +19,11 @@ public class FragmentingWarhead implements Power{
     public void usePower(Player attacker){
         for (Player player : players){
             player.getPlance().giveDamage(attacker, 1);
+            player.getPlance().removeMark(attacker);
         }
         if (target != null){
             target.getPlance().giveDamage(attacker,1);
+            target.getPlance().removeMark(attacker);
         }
     }
 

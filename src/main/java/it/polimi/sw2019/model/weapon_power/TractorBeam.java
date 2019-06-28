@@ -15,6 +15,7 @@ public class TractorBeam extends Observable<TractorBeamChooseEv> implements Powe
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 1);
+        target.getPlance().removeMark(attacker);
     }
 
     public void chooseTarget(HashMap<String, ArrayList<String>> valid, Player attacker){

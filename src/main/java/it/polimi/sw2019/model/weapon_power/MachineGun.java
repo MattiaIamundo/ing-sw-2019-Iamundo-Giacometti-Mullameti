@@ -18,8 +18,10 @@ public class MachineGun extends Observable<MachineGunChooseEv> implements Power,
     @Override
     public void usePower(Player attacker){
         target1.getPlance().giveDamage(attacker,1);
+        target1.getPlance().removeMark(attacker);
         if (target2 != null){
             target2.getPlance().giveDamage(attacker,1);
+            target2.getPlance().removeMark(attacker);
         }
     }
 

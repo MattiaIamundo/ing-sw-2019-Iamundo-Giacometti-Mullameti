@@ -17,6 +17,7 @@ public class ReaperMode implements Power{
     public void usePower(Player attacker){
         for (Player player : targets){
             player.getPlance().giveDamage(attacker,2);
+            player.getPlance().removeMark(attacker);
         }
     }
 

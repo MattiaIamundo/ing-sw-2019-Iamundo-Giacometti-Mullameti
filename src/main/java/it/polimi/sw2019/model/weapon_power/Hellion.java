@@ -19,6 +19,7 @@ public class Hellion extends Observable<HellionChooseEv> implements Power, Singl
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 1);
+        target.getPlance().removeMark(attacker);
         for (Player player : markTargets){
             player.getPlance().setMark(attacker);
         }

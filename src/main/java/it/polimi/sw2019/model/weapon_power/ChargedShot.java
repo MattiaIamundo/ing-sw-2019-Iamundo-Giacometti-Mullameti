@@ -13,6 +13,7 @@ public class ChargedShot implements Power{
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker,1);
+        target.getPlance().removeMark(attacker);
     }
 
     public void setTarget(Player target) {

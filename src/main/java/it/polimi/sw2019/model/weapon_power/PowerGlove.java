@@ -18,6 +18,7 @@ public class PowerGlove extends Observable<PowerGloveChooseEv> implements Power,
     public void usePower(Player attacker){
         attacker.setPosition(target.getPosition());
         target.getPlance().giveDamage(attacker, 1);
+        target.getPlance().removeMark(attacker);
         target.getPlance().setMark(attacker);
         target.getPlance().setMark(attacker);
     }

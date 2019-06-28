@@ -13,6 +13,7 @@ public class Whisper extends Observable<WhisperChooseEv> implements Power, Singl
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker,3);
+        target.getPlance().removeMark(attacker);
         target.getPlance().setMark(attacker);
     }
 

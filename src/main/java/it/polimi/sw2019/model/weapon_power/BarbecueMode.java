@@ -15,19 +15,20 @@ public class BarbecueMode extends Observable<BarbecueChooseEv> implements Power{
 
     private Space targetarea1;
     private Space targetarea2;
-    private ArrayList<Player> players;
+    private ArrayList<Player> targets;
 
     /**
      * @param attacker the player who throws the attack
      */
     @Override
     public void usePower(Player attacker){
-        for (Player player : players) {
+        for (Player player : targets) {
             if (player.getPosition() == targetarea1){
                 player.getPlance().giveDamage(attacker, 2);
             }else if ((targetarea2 != null) && (player.getPosition() == targetarea2)){
                 player.getPlance().giveDamage(attacker,1);
             }
+            player.getPlance().removeMark(attacker);
         }
     }
 
@@ -43,8 +44,8 @@ public class BarbecueMode extends Observable<BarbecueChooseEv> implements Power{
         this.targetarea2 = targetarea2;
     }
 
-    public void setPlayers(ArrayList<Player> players) {
-        this.players = players;
+    public void setTargets(ArrayList<Player> targets) {
+        this.targets = targets;
     }
 
     public Space getTargetarea1() {

@@ -18,6 +18,7 @@ public class Shotgun extends Observable<ShotgunChooseEv> implements Power, Singl
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 3);
+        target.getPlance().removeMark(attacker);
         if (moveto != null){
             target.setPosition(moveto);
         }

@@ -17,6 +17,7 @@ public class Vortex extends Observable<VortexChooseEv> implements Power{
     public void usePower(Player attacker){
         target.setPosition(vortex);
         target.getPlance().giveDamage(attacker, 2);
+        target.getPlance().removeMark(attacker);
     }
 
     public void setVortex(Space vortex) {

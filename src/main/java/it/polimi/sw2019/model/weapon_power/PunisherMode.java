@@ -18,6 +18,7 @@ public class PunisherMode extends Observable<PunisherModeChooseEv> implements Po
     public void usePower(Player attacker){
         target.setPosition(attacker.getPosition());
         target.getPlance().giveDamage(attacker, 3);
+        target.getPlance().removeMark(attacker);
     }
 
     public void chooseTarget(ArrayList<String> valid, ArrayList<String> notreachable, Player attacker) {

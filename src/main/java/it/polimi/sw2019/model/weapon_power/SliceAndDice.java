@@ -17,6 +17,7 @@ public class SliceAndDice extends Observable<SliceAndDiceChooseEv> implements Po
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 2);
+        target.getPlance().removeMark(attacker);
     }
 
     public void chooseTarget(ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable, Player attacker){

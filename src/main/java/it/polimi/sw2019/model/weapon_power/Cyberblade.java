@@ -13,6 +13,7 @@ public class Cyberblade extends Observable<CyberbladeChooseEv> implements Power,
     @Override
     public void usePower(Player attacker) {
         target.getPlance().giveDamage(attacker,2);
+        target.getPlance().removeMark(attacker);
     }
 
     public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){

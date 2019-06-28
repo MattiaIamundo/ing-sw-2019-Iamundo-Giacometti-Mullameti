@@ -17,6 +17,7 @@ public class ZX2 extends Observable<ZX2ChooseEv> implements Power, SingleTarget{
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 1);
+        target.getPlance().removeMark(attacker);
         target.getPlance().setMark(attacker);
         target.getPlance().setMark(attacker);
     }

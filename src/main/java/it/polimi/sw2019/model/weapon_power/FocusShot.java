@@ -16,6 +16,7 @@ public class FocusShot extends Observable<FocusShotChooseEv> implements Power{
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 1);
+        target.getPlance().removeMark(attacker);
     }
 
     public void chooseTarget(Player attacker, ArrayList<String> targets){

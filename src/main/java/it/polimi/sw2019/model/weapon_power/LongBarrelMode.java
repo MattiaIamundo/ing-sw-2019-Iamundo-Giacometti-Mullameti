@@ -17,6 +17,7 @@ public class LongBarrelMode extends Observable<LongBarrelChooseEv> implements Po
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 2);
+        target.getPlance().removeMark(attacker);
     }
 
     public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){

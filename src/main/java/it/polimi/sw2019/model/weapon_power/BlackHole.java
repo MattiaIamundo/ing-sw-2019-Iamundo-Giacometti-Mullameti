@@ -21,9 +21,11 @@ public class BlackHole extends Observable<BlackHoleChooseEv> implements Power{
     public void usePower(Player attacker){
         target1.setPosition(vortex);
         target1.getPlance().giveDamage(attacker, 1);
+        target1.getPlance().removeMark(attacker);
         if (target2 != null){
             target2.setPosition(vortex);
             target2.getPlance().giveDamage(attacker, 1);
+            target2.getPlance().removeMark(attacker);
         }
     }
 

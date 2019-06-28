@@ -17,6 +17,7 @@ public class Electroscythe implements Power{
     public void usePower(Player attacker){
         for (Player player : players){
             player.getPlance().giveDamage(attacker,1);
+            player.getPlance().removeMark(attacker);
         }
     }
 

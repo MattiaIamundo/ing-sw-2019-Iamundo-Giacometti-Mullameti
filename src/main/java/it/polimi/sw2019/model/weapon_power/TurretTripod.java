@@ -18,8 +18,10 @@ public class TurretTripod extends Observable<TurretTripodChooseEv> implements Po
     @Override
     public void usePower(Player attacker){
         previoustarget.getPlance().giveDamage(attacker, 1);
+        previoustarget.getPlance().removeMark(attacker);
         if (target != null){
             target.getPlance().giveDamage(attacker,1);
+            target.getPlance().removeMark(attacker);
         }
     }
 

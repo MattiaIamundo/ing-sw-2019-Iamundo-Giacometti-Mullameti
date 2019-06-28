@@ -102,6 +102,7 @@ public class BarbecueModeCont implements Observer<BarbecueSetEv>, EffectControll
 
     @Override
     public void update(BarbecueSetEv message) {
+        ArrayList<Player> targets = new ArrayList<>();
         ArrayList<Space> positions = directions.get(message.getDirection());
         model.setTargetarea1(positions.get(0));
         if (positions.size() == 2){
@@ -109,7 +110,12 @@ public class BarbecueModeCont implements Observer<BarbecueSetEv>, EffectControll
         }else {
             model.setTargetarea2(null);
         }
-        model.setPlayers(players);
+        for (Player player : players){
+            if (positions.contains(player.getPosition())){
+                targets.add(player);
+            }
+        }
+        model.setTargets(targets);
         model.usePower(attacker);
     }
 

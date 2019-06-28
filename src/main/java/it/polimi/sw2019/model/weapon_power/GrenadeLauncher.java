@@ -27,6 +27,7 @@ public class GrenadeLauncher extends Observable<GrenadeLaunchChooseEv> implement
         }else {
             ismoved = false;
         }
+        target.getPlance().removeMark(attacker);
     }
 
     public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable, HashMap<String, ArrayList<String>> moveto) {

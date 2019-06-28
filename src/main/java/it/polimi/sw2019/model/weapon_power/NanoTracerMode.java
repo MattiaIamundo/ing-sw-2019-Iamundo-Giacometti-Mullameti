@@ -19,6 +19,7 @@ public class NanoTracerMode extends Observable<NanoTracerChooseEv> implements Po
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 1);
+        target.getPlance().removeMark(attacker);
         for (Player player : targets){
             player.getPlance().setMark(attacker);
             player.getPlance().setMark(attacker);

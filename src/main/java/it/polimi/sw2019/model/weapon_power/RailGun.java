@@ -17,6 +17,7 @@ public class RailGun extends Observable<RailGunChooseEv> implements Power, Throu
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 3);
+        target.getPlance().removeMark(attacker);
     }
 
     public void chooseTarget(HashMap<String, ArrayList<String>> valid, Player attacker){

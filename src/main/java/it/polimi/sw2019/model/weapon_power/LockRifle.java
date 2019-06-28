@@ -17,6 +17,7 @@ public class LockRifle extends Observable<LockRifleChooseEv> implements Power, S
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 2);
+        target.getPlance().removeMark(attacker);
         target.getPlance().setMark(attacker);
     }
 

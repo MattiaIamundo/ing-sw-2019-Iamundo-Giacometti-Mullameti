@@ -18,6 +18,7 @@ public class TsunamiMode implements Power{
     public void usePower(Player attacker){
         for (Player player : targets){
             player.getPlance().giveDamage(attacker, 1);
+            player.getPlance().removeMark(attacker);
         }
     }
 
