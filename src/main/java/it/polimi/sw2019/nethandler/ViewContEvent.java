@@ -40,6 +40,7 @@ public class ViewContEvent implements ViewContEventInt {
 
     public void sendColor(VCColor vcColor) {
 
+        System.out.println("SendColorVce");
         output.println(vcColor.getColor() );
         output.flush();
     }
@@ -55,8 +56,8 @@ public class ViewContEvent implements ViewContEventInt {
         output.flush();
     }
 
-    public void sendPing() {
-        output.println( "Ping" );
+    public void sendPong() {
+        output.println( "Pong" );
         output.flush();
     }
 }

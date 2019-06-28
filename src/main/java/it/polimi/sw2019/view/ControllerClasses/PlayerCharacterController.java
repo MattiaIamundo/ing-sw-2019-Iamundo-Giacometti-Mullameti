@@ -56,14 +56,20 @@ public class PlayerCharacterController {
     @FXML
     public void chooseCharacter(){
 
-        if(this.characterGroup.getSelectedToggle().equals(this.yellowButton)) {stringCharacter="Yellow";}
-        if(this.characterGroup.getSelectedToggle().equals(this.blueButton)) {stringCharacter="Blue";}
-        if(this.characterGroup.getSelectedToggle().equals(this.grayButton)) {stringCharacter="Gray";}
-        if(this.characterGroup.getSelectedToggle().equals(this.greenButton)) {stringCharacter="Green";}
-        if(this.characterGroup.getSelectedToggle().equals(this.purpleButton)) {stringCharacter="Purple";}
-
-        this.nextButton.setVisible(true);
+        if(this.characterGroup.getSelectedToggle().equals(this.yellowButton)) {stringCharacter="yellow";}
+        if(this.characterGroup.getSelectedToggle().equals(this.blueButton)) {stringCharacter="blue";}
+        if(this.characterGroup.getSelectedToggle().equals(this.grayButton)) {stringCharacter="gray";}
+        if(this.characterGroup.getSelectedToggle().equals(this.greenButton)) {stringCharacter="green";}
+        if(this.characterGroup.getSelectedToggle().equals(this.purpleButton)) {stringCharacter="purple";}
         this.clientSocket.setInfo("character",stringCharacter);
+
+        if(clientSocket.getOk()){
+            System.out.println("entra");
+            this.nextButton.setVisible(true);
+        }else if(!(clientSocket.getOk())){
+            this.nextButton.setVisible(false);
+        }
+
 
     }
 
@@ -73,7 +79,13 @@ public class PlayerCharacterController {
     @FXML
     public void nextButtonPushed() {
 
-        clientSocket.getContSelect().waitingForSkull(clientSocket.getPlayerView());
+        if(!(clientSocket.getYouAreFirstPlayer())) {
+            System.out.println("nexButton");
+            clientSocket.getContSelect().waitingForSkull(clientSocket.getPlayerView());
+        }else {
+            clientSocket.getContSelect().waitForPing(clientSocket.getPlayerView());
+        }
+
 
         /*try{
             Parent chooseMapSkull= FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/ChooseSkull.fxml"));

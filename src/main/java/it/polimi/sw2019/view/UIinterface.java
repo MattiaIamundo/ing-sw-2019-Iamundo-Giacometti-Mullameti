@@ -15,4 +15,6 @@ public interface UIinterface {
     void sendOk();
 
     void requestMap(String string);
+
+    void requestLobby(String string);
 }

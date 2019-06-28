@@ -56,19 +56,22 @@ public class PlayerView extends ObservableByGame implements Observer <Player> {
     }
 
     public void sendColor(ViewContEvent vce, VCColor vcColor) {
+        System.out.println("sentColor");
         vce.sendColor(vcColor);
     }
 
     public void sendOk() {
-        //clientSocket.sendOk();
+        clientSocket.getOk();
     }
+
+    public void sendYouAreFirstPlayer(){clientSocket.getYouAreFirstPlayer();}
 
     public void waitForPing() {
-
+        clientSocket.notifyGUI("Ping");
     }
 
-    public void sendPing(ViewContEvent vce) {
-        vce.sendPing();
+    public void sendPong(ViewContEvent vce) {
+        vce.sendPong();
     }
 
     public void requestSkull(boolean firstTime) {

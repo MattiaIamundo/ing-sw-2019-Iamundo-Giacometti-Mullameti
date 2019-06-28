@@ -59,10 +59,15 @@ public class NewPlayerController {
                 this.validInput.setText( "");
                 nickname=nicknameField.getText();
 
-                this.clientSocket.setInfo("nickname",nickname);
+                this.clientSocket.setInfo("nickname" , nickname);
 
+
+            if(clientSocket.getOk()){
 
                 this.nextButton.setVisible(true);
+            }else if(!(clientSocket.getOk())){
+                this.nextButton.setVisible(false);
+            }
 
         }
 

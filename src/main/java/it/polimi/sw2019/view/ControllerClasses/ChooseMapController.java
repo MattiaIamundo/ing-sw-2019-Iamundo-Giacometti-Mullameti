@@ -47,7 +47,7 @@ public class ChooseMapController {
 
 
     @FXML
-    public String chooseMap(){
+    public void chooseMap(){
 
         if(this.mapGroup.getSelectedToggle().equals(this.firstMapButton)) {
             map="zero";
@@ -58,11 +58,14 @@ public class ChooseMapController {
         } else if(this.mapGroup.getSelectedToggle().equals(this.fourthMapButton)) {
             map="three";
         }
-
-
         clientSocket.setInfo("map",map);
-        this.startButton.setVisible(true);
-        return map;
+        if(clientSocket.getOk()){
+            System.out.println("entra");
+            this.startButton.setVisible(true);
+        }else if(!(clientSocket.getOk())){
+            this.startButton.setVisible(false);
+        }
+
 
     }
 
@@ -72,7 +75,8 @@ public class ChooseMapController {
     @FXML
     public void startButtonPushed() throws IOException {
 
-        clientSocket.getContSelect().waitingForMap(clientSocket.getPlayerView());
+        clientSocket.getContSelect().waitForPing(clientSocket.getPlayerView());
+        System.out.println("ok");
         /*Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/Table.fxml"));
         Scene tableScene = new Scene(table);
 

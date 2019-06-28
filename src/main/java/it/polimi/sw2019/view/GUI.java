@@ -161,6 +161,26 @@ public class GUI extends Application implements UIinterface {
         }
     }
 
+    @Override
+    public void requestLobby(String string) {
+        if (string.equals("ok")){
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/Lobby.fxml"));
+                Parent lobby = loader.load();
+
+                LobbyController lobbyController = loader.getController();
+                lobbyController.setClientSocket(clientSocket);
+
+                Stage mainStage = stage;
+                mainStage.getScene().setRoot(lobby);
+            } catch (IOException e) {
+            }
+        }else {
+            System.out.println("ko");
+        }
+    }
+
     public static void main(String[]args){
         launch(args);
     }
