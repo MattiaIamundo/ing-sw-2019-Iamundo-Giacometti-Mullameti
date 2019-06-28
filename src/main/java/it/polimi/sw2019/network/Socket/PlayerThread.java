@@ -236,7 +236,7 @@ public class PlayerThread implements Runnable {
                                 //if you to choose skull
                                 //if ( this.gameController.getGameboard().getKillshotTrack().isEmpty() ) {
                                 //if ( true ) {
-                                    this.gameController.sendThereAreNotSkull(this.playerRemoteView);
+                                    //this.gameController.sendThereAreNotSkull(this.playerRemoteView);
                                     canGoOut = false;
                                     firstTime = true;
                                     //you have to choose the number of the skull
@@ -263,7 +263,7 @@ public class PlayerThread implements Runnable {
                                 //you have to choose the number of the map
                                 //if ( this.gameController.getGameboard().getMap().getList().get(0).isEmpty() ) {
 
-                                    this.gameController.sendThereIsNotMap(this.playerRemoteView);
+                                    //this.gameController.sendThereIsNotMap(this.playerRemoteView);
                                     canGoOut = false;
                                     firstTime = true;
                                     while (!canGoOut) {

@@ -33,16 +33,16 @@ public class Move implements Action {
             //is the firstTime, the player press the button for the first time
             this.moveto = null;
         }
-        else if ( moveEv.getMoves().equals("North") ) {
+        else if ( moveEv.getMoves().get(0).equals("North") ) {
             this.moveto = player.getPosition().getNorth().getSpaceSecond();
         }
-        else if (moveEv.getMoves().equals("East")) {
+        else if (moveEv.getMoves().get(0).equals("East")) {
             this.moveto = player.getPosition().getEast().getSpaceSecond();
         }
-        else if (moveEv.getMoves().equals("South")) {
+        else if (moveEv.getMoves().get(0).equals("South")) {
             this.moveto = player.getPosition().getSouth().getSpaceSecond();
         }
-        else if (moveEv.getMoves().equals("West")) {
+        else if (moveEv.getMoves().get(0).equals("West")) {
             this.moveto = player.getPosition().getWest().getSpaceSecond();
         }
         else {
