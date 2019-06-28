@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.sw2019.controller.weaponeffect.EffectController;
 import it.polimi.sw2019.model.*;
-import it.polimi.sw2019.events.weaponEffectController_events.PowerSelectEv;
+import it.polimi.sw2019.events.weaponEffectController_events.PowerSetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
 
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class WeaponEffectManager implements Observer<PowerSelectEv> {
+public class WeaponEffectManager implements Observer<PowerSetEv> {
     private ArrayList<Player> players;
     private Map map;
     private Player attacker;
@@ -82,7 +82,7 @@ public class WeaponEffectManager implements Observer<PowerSelectEv> {
     }
 
     @Override
-    public void update(PowerSelectEv message) {
+    public void update(PowerSetEv message) {
         if (message.getPower().equals(basicpower)){
             effectControllers.get(weapon.getPower().toString()).useEffect(attacker, players, map);
         }else if (weapon instanceof Alternative){

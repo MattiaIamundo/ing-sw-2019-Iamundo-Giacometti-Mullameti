@@ -1,9 +1,9 @@
 package it.polimi.sw2019.events.weaponEffectController_events;
 
-public class PowerSelectEv {
+public class PowerSetEv {
     private String power;
 
-    public PowerSelectEv(String power) {
+    public PowerSetEv(String power) {
         this.power = power;
     }
 
