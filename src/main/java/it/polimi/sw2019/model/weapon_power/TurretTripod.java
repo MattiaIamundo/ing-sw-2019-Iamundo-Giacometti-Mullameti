@@ -27,9 +27,17 @@ public class TurretTripod extends Observable<TurretTripodChooseEv> implements Po
         notify(new TurretTripodChooseEv(attacker, valid, notselectable, notreachable));
     }
 
+    public Player getTarget() {
+        return target;
+    }
+
     @Override
     public void setTarget(Player target) {
         this.target = target;
+    }
+
+    public Player getPrevioustarget() {
+        return previoustarget;
     }
 
     public void setPrevioustarget(Player previoustarget) {

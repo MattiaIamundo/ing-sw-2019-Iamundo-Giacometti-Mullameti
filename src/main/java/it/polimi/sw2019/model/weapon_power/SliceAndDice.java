@@ -19,12 +19,16 @@ public class SliceAndDice extends Observable<SliceAndDiceChooseEv> implements Po
         target.getPlance().giveDamage(attacker, 2);
     }
 
-    public void setTarget(Player target) {
-        this.target = target;
-    }
-
     public void chooseTarget(ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable, Player attacker){
         notify(new SliceAndDiceChooseEv(attacker, valid, notselectable, notreachable));
+    }
+
+    public Player getTarget() {
+        return target;
+    }
+
+    public void setTarget(Player target) {
+        this.target = target;
     }
 
     @Override

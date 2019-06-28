@@ -1,6 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponEffectController_events.TracBeamSetEv;
+import it.polimi.sw2019.events.weaponEffectController_events.TractorBeamSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.weapon_power.Power;
@@ -9,7 +9,7 @@ import it.polimi.sw2019.view.Observer;
 
 import java.util.*;
 
-public class TractorBeamCont implements Observer<TracBeamSetEv>, EffectController{
+public class TractorBeamCont implements Observer<TractorBeamSetEv>, EffectController{
 
    private Map<Player, Map<String, Space>> movingmap = new HashMap<>();
    private ArrayList<String> validroom = new ArrayList<>();
@@ -28,20 +28,18 @@ public class TractorBeamCont implements Observer<TracBeamSetEv>, EffectControlle
         acquireTarget();
     }
 
-    public void acquireTarget() {
-        ArrayList<String> notselectable = new ArrayList<>();
+    private void acquireTarget() {
         initializeRooms();
         for (Player player : players){
             if (player != attacker){
                 checkTarget(player);
             }
         }
-        notselectable.add(attacker.getNickname());
         HashMap<String, ArrayList<String>> valid = new HashMap<>();
         for (Map.Entry<Player, Map<String, Space>> a : movingmap.entrySet()){
             valid.put(a.getKey().getNickname(), new ArrayList<>(a.getValue().keySet()));
         }
-        model.chooseTarget(valid, notselectable, attacker);
+        model.chooseTarget(valid, attacker);
     }
 
     private void initializeRooms(){
@@ -75,8 +73,10 @@ public class TractorBeamCont implements Observer<TracBeamSetEv>, EffectControlle
     }
 
     private void checkNorth(HashMap<String, Space> positions, Player target){
-        if ((!target.getPosition().getNorth().isWall()) && (validroom.contains(target.getPosition().getNorth().getSpaceSecond().getRoom()))){
-            positions.put("north", target.getPosition().getNorth().getSpaceSecond());
+        if (!target.getPosition().getNorth().isWall()){
+            if (validroom.contains(target.getPosition().getNorth().getSpaceSecond().getRoom())) {
+                positions.put("north", target.getPosition().getNorth().getSpaceSecond());
+            }
             if ((!target.getPosition().getNorth().getSpaceSecond().getNorth().isWall()) && (validroom.contains(target.getPosition().getNorth().getSpaceSecond().getNorth().getSpaceSecond().getRoom()))){
                 positions.put("north-north", target.getPosition().getNorth().getSpaceSecond().getNorth().getSpaceSecond());
             }
@@ -90,8 +90,10 @@ public class TractorBeamCont implements Observer<TracBeamSetEv>, EffectControlle
     }
 
     private void checkWest(HashMap<String, Space> positions, Player target){
-        if ((!target.getPosition().getWest().isWall()) && (validroom.contains(target.getPosition().getWest().getSpaceSecond().getRoom()))){
-            positions.put("west", target.getPosition().getWest().getSpaceSecond());
+        if (!target.getPosition().getWest().isWall()){
+            if (validroom.contains(target.getPosition().getWest().getSpaceSecond().getRoom())) {
+                positions.put("west", target.getPosition().getWest().getSpaceSecond());
+            }
             if ((!target.getPosition().getWest().getSpaceSecond().getWest().isWall()) && (validroom.contains(target.getPosition().getWest().getSpaceSecond().getWest().getSpaceSecond().getRoom()))){
                 positions.put("west-west", target.getPosition().getWest().getSpaceSecond().getWest().getSpaceSecond());
             }
@@ -107,8 +109,10 @@ public class TractorBeamCont implements Observer<TracBeamSetEv>, EffectControlle
     }
 
     private void checkSouth(HashMap<String, Space> positions, Player target){
-        if ((!target.getPosition().getSouth().isWall()) && (validroom.contains(target.getPosition().getSouth().getSpaceSecond().getRoom()))){
-            positions.put("south", target.getPosition().getSouth().getSpaceSecond());
+        if (!target.getPosition().getSouth().isWall()){
+            if (validroom.contains(target.getPosition().getSouth().getSpaceSecond().getRoom())) {
+                positions.put("south", target.getPosition().getSouth().getSpaceSecond());
+            }
             if ((!target.getPosition().getSouth().getSpaceSecond().getSouth().isWall()) && (validroom.contains(target.getPosition().getSouth().getSpaceSecond().getSouth().getSpaceSecond().getRoom()))){
                 positions.put("south-south", target.getPosition().getSouth().getSpaceSecond().getSouth().getSpaceSecond());
             }
@@ -124,8 +128,10 @@ public class TractorBeamCont implements Observer<TracBeamSetEv>, EffectControlle
     }
 
     private void checkEast(HashMap<String, Space> positions, Player target){
-        if ((!target.getPosition().getEast().isWall()) && (validroom.contains(target.getPosition().getEast().getSpaceSecond().getRoom()))){
-            positions.put("east", target.getPosition().getEast().getSpaceSecond());
+        if (!target.getPosition().getEast().isWall()){
+            if (validroom.contains(target.getPosition().getEast().getSpaceSecond().getRoom())) {
+                positions.put("east", target.getPosition().getEast().getSpaceSecond());
+            }
             if ((!target.getPosition().getEast().getSpaceSecond().getEast().isWall()) && (validroom.contains(target.getPosition().getEast().getSpaceSecond().getEast().getSpaceSecond().getRoom()))){
                 positions.put("east-east", target.getPosition().getEast().getSpaceSecond().getEast().getSpaceSecond());
             }
@@ -141,7 +147,7 @@ public class TractorBeamCont implements Observer<TracBeamSetEv>, EffectControlle
     }
 
     @Override
-    public void update(TracBeamSetEv message) {
+    public void update(TractorBeamSetEv message) {
         for (Map.Entry<Player, Map<String, Space>> a:movingmap.entrySet()){
             if (a.getKey().getNickname().equals(message.getTarget())){
                 model.setTarget(a.getKey(), a.getValue().get(message.getPosition()));

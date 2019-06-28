@@ -39,7 +39,7 @@ public class VortexCont implements Observer<VortexSetEv>, EffectController{
         for (int x = 0; x < map.getMaxX(); x++) {
             for (int y = 0; y < map.getMaxY(); y++) {
                 try {
-                    if (validrooms.contains(map.getSpace(x, y).getRoom())){
+                    if ((validrooms.contains(map.getSpace(x, y).getRoom())) && (attacker.getPosition() != map.getSpace(x, y))){
                         valid.put(x+"-"+y, validPlayer(map.getSpace(x,y)));
                     }
                 }catch (InvalidSpaceException e){

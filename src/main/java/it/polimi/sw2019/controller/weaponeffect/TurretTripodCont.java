@@ -44,8 +44,8 @@ public class TurretTripodCont extends VisibleTargetCont implements Observer<Turr
     @Override
     protected void acquireTarget(ArrayList<String> notselctable) {
         super.acquireTarget(notselctable);
-        realmodel.chooseTarget(attacker, valid, notselctable, notreachable);
         additionalDamage();
+        realmodel.chooseTarget(attacker, valid, notselctable, notreachable);
     }
 
     private void additionalDamage(){
@@ -53,10 +53,12 @@ public class TurretTripodCont extends VisibleTargetCont implements Observer<Turr
 
         try {
             machinegun = (DoubleAdditive) attacker.getWeapon("Machine Gun");
-            if ((((MachineGun) machinegun.getPower()).getTarget2() == null) || (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((MachineGun) machinegun.getPower()).getTarget2())) {
+            if ((((MachineGun) machinegun.getPower()).getTarget2() != null) && (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((MachineGun) machinegun.getPower()).getTarget2())) {
                 realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget1());
             } else if ((((MachineGun) machinegun.getPower()).getTarget2() != null) && (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((MachineGun) machinegun.getPower()).getTarget1())) {
                 realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget2());
+            }else if (((MachineGun) machinegun.getPower()).getTarget2() == null){
+                realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget1());
             }
         }catch (InexistentWeaponException e){
             logger.log(Level.SEVERE,e.getMessage()+" doesn't have Machine Gun");

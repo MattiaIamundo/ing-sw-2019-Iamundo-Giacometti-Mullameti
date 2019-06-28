@@ -16,13 +16,17 @@ public class Whisper extends Observable<WhisperChooseEv> implements Power, Singl
         target.getPlance().setMark(attacker);
     }
 
-    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){
-        notify(new WhisperChooseEv(attacker, valid, notreachable));
+    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable){
+        notify(new WhisperChooseEv(attacker, valid, notselectable, notreachable));
     }
 
     @Override
     public void setTarget(Player target) {
         this.target = target;
+    }
+
+    public Player getTarget() {
+        return target;
     }
 
     @Override

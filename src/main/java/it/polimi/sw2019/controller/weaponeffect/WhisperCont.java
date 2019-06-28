@@ -23,17 +23,21 @@ public class WhisperCont extends VisibleTargetCont implements Observer<WhisperSe
         ArrayList<Space> invalidpos = new ArrayList<>();
         ArrayList<String> valid = new ArrayList<>();
         ArrayList<String> notreachable = new ArrayList<>();
+        ArrayList<String> notselectable = new ArrayList<>();
         initializePos(attacker.getPosition(), invalidpos);
+        notselectable.add(attacker.getNickname());
         for (Player player : players){
             if (player != attacker){
                 if (invalidpos.contains(player.getPosition())){
-                    notreachable.add(player.getNickname());
-                }else {
+                    notselectable.add(player.getNickname());
+                }else if (player.isVisible(attacker)){
                     valid.add(player.getNickname());
+                }else {
+                    notreachable.add(player.getNickname());
                 }
             }
         }
-        realmodel.chooseTarget(attacker, valid, notreachable);
+        realmodel.chooseTarget(attacker, valid, notselectable, notreachable);
     }
 
     private void initializePos(Space attpos, ArrayList<Space> invalidpos){

@@ -27,8 +27,17 @@ public class Shotgun extends Observable<ShotgunChooseEv> implements Power, Singl
         notify(new ShotgunChooseEv(attacker, valid, notreachable, moveto));
     }
 
+    public Player getTarget() {
+        return target;
+    }
+
+    @Override
     public void setTarget(Player target) {
         this.target = target;
+    }
+
+    public Space getMoveto() {
+        return moveto;
     }
 
     public void setMoveto(Space moveto) {
