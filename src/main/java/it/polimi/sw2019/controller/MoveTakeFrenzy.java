@@ -12,7 +12,9 @@ public class MoveTakeFrenzy implements Action{
     private Space moveto;
 
     public void useAction(Player player) {
+      /*
         Scanner scanner = new Scanner(System.in);
+
         int nrSpaces;
         String direction;
         while (true) {
@@ -50,6 +52,8 @@ public class MoveTakeFrenzy implements Action{
         Ammo ammoCard = SpaceAmmo.takeAmmo();
 
         Player.addAmmo(ammoCard);
+
+       */
 
     }
 

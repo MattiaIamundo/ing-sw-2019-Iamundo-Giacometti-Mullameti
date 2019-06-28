@@ -3,6 +3,7 @@ package it.polimi.sw2019.network.Socket;
 import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.controller.MultiGame;
 import it.polimi.sw2019.events.ActionEv;
+import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.exception.CancellPlayerException;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.utility.TimerThread;
@@ -40,14 +41,10 @@ public class PlayerThread implements Runnable {
     private String nameOfMatch;
     //to contain what the player write ( his actions )
     private String string;
-    //the lock
-    //private Lock gameLocker;
-    //the condition to put the thread in wait
-    //private Condition turnOfOtherPlayers;
-    //private Condition otherPlayerConnected;
     //the controller
     private MultiGame multiGameController;
     private Game gameController;
+
     //the logger
     private static final Logger logger = Logger.getLogger( PlayerThread.class.getName() );
 
@@ -483,6 +480,7 @@ public class PlayerThread implements Runnable {
                 }
 
                 ActionEv actionEv = playerRemoteView.waitForAction();
+                actionEv.setPlayerNickname(this.nickname);
                 gameController.handleEvent(actionEv);
             }
 

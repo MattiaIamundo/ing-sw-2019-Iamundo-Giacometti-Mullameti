@@ -7,9 +7,11 @@ import it.polimi.sw2019.model.*;
  * @author Luca Giacometti
  */
 public abstract class Turn {
+
     private Player player;
     private int usedAction;
     private Action action;
+    private int subAction = 0;
 
     /**
      * this is the constructor
@@ -60,4 +62,19 @@ public abstract class Turn {
         this.usedAction--;
     }
 
+    public int getSubAction() {
+        return subAction;
+    }
+
+    public void setSubAction(int i) {
+        this.subAction = i;
+    }
+
+    public void addSubAction() {
+        this.subAction++;
+    }
+
+    public void minusSubAction() {
+        this.subAction--;
+    }
 }

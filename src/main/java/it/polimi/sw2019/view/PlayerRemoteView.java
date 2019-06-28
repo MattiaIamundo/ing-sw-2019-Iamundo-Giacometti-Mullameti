@@ -187,7 +187,7 @@ public class PlayerRemoteView extends PlayerView {
         //  i have to wait for a ActionEv
         set = input.nextLine();
         //  tramite Gson devo deserializzare l evento e castarlo con ActionEv
-        //  e chiamare la giusta procedura per svolegere l evento
-        return gson.fromJson(set, ActionEv.class);
+        ActionEv actionEv = gson.fromJson(set, ActionEv.class);
+        return actionEv;
     }
 }
