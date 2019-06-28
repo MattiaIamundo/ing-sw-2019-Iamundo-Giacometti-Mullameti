@@ -170,10 +170,10 @@ public class PlayerThread implements Runnable {
             //you are connected with the game
             try {
 
-                this.playerRemoteView.addObserver(this.gameController);
-                this.tableRemoteView.addObserver(this.gameController);
-                this.weaponRemoteView.addObserver(this.gameController);
-                this.powerUpRemoteView.addObserver(this.gameController);
+                //this.playerRemoteView.addObserver(this.gameController);
+                //this.tableRemoteView.addObserver(this.gameController);
+                //this.weaponRemoteView.addObserver(this.gameController);
+                //this.powerUpRemoteView.addObserver(this.gameController);
                 boolean goOut = false;
                 boolean firstTime = true;
 
@@ -402,6 +402,7 @@ public class PlayerThread implements Runnable {
                     }
                 }
 
+                this.gameController.searchPlayer(this.nickname).addObserver(this.gameController);
                 logger.log(Level.INFO, "{ PlayerThread } loop until there are 5 players or the timer finishes" );
 
                 while ( gameController.getPlayers().size() < 5 && !gameController.getTimerThread().getTimerDone() ) {

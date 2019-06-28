@@ -15,7 +15,7 @@ public class Grab implements Action {
         if(player.getPosition() instanceof SpaceAmmo){
             Ammo ammoCard = SpaceAmmo.takeAmmo();
 
-            Player.addAmmo(ammoCard);
+            player.addAmmo(ammoCard);
         }else{
             System.out.println("There is no ammo in this space !");
         }

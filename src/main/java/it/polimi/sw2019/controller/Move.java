@@ -1,9 +1,6 @@
 package it.polimi.sw2019.controller;
 
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
-import it.polimi.sw2019.exception.IllegalDirectionException;
-import it.polimi.sw2019.exception.InvalidDirectionException;
-import it.polimi.sw2019.model.Connection;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 
@@ -14,10 +11,11 @@ import java.util.List;
  * @author Merita Mullameti
  */
 
-public class Move implements  Action {
+public class Move implements Action {
 
     private Space moveto;
     private List<String> movesPlayerCanDo = new ArrayList<>();
+    private int nrOfMoves = 0;
 
     public Move() {
 
@@ -60,8 +58,8 @@ public class Move implements  Action {
             //control on what position the player can set
             //and create the new MoveEv
             findDirection(player);
-            MoveEv moveEv = new MoveEv(movesPlayerCanDo);
-
+            //MoveEv moveEv = new MoveEv(movesPlayerCanDo);
+            this.nrOfMoves++;
 
         } else {
             player.setPosition(moveto);
@@ -69,7 +67,9 @@ public class Move implements  Action {
             //qui devo notificare al giocatore stesso
             //se vuole andare avanti se gli è concesso
         }
+
         //notifica generale + notifica alla persona
+        //player.notify();
     }
 
     private void findDirection(Player player) {
@@ -88,65 +88,6 @@ public class Move implements  Action {
         }
 
     }
-/*
-
-
-    public void findDirection(Player player) throws InvalidDirectionException, IllegalDirectionException {
-        String direction;
-        String nrSpaces;
-        Scanner scanner=new Scanner(System.in);
-        System.out.println("Enter the direction you want to move to : ");
-        direction = scanner.nextLine();
-
-        switch (direction) {
-
-            case "north":
-                if (player.getPosition().getNorth().isWall()) {
-                    throw new IllegalDirectionException(direction);
-                } else {
-
-                    moveto = player.getPosition().getNorth().getSpaceSecond();
-                    player.setPosition(moveto);
-
-                }
-                break;
-
-            case "south":
-                if (player.getPosition().getSouth().isWall()) {
-                    throw new IllegalDirectionException(direction);
-                } else {
-
-                    moveto = player.getPosition().getSouth().getSpaceSecond();
-                    player.setPosition(moveto);
-
-                }
-                break;
-            case "west":
-                if (player.getPosition().getWest().isWall()) {
-                    throw new IllegalDirectionException(direction);
-                } else {
-
-                    moveto = player.getPosition().getWest().getSpaceSecond();
-                    player.setPosition(moveto);
-                }
-                break;
-            case "east":
-                if (player.getPosition().getEast().isWall()) {
-                    throw new IllegalDirectionException(direction);
-                } else {
-
-                    moveto = player.getPosition().getEast().getSpaceSecond();
-                    player.setPosition(moveto);
-
-                }
-                break;
-            default:
-                throw new InvalidDirectionException(direction);
-        }
-
-    }
-
- */
 
 
 }

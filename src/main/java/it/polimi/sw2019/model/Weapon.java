@@ -17,8 +17,7 @@ public abstract class Weapon extends Observable<PowerChooseEv> implements Clonea
     private String name;
     //at the top it cost 3 ammo to recharge [3]
     private String[] rechargeCost;
-    //0 weapon not load
-    //1 weapon load
+    //true weapon load, false not load
     private boolean isLoad;
     private Power power;
     private String descriptionPower;

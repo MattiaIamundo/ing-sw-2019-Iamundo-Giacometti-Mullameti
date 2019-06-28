@@ -1,9 +1,13 @@
 package it.polimi.sw2019.model;
 
 
+import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.exception.WeaponOutOfBoundException;
+import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.ObservableByGame;
+import it.polimi.sw2019.view.Observer;
+import it.polimi.sw2019.view.PlayerView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,7 +22,7 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     private int score; //player's score
     private String character = "null";
     //first red, second blue, third yellow
-    private static int[] ammo = new int[3];
+    private int[] ammo = new int[3];
     //list of weapons the player owns , every player can own at top 3 weapons
     private ArrayList<Weapon> weapons = new ArrayList<>();
     //the position the player's in
@@ -61,6 +65,7 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     public void setNickname(String name) {
         this.nickname = name;
     }
+
     /**
      * @return the player's score
      */
@@ -254,7 +259,7 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
         return this.playerNumber;
     }
 
-    public static void addAmmo(Ammo ammocard){
+    public void addAmmo(Ammo ammocard){
             //add the first ammo in the ammo array
             if (ammocard.getColorFirst() == "red") {
 
@@ -362,6 +367,10 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
             }
 
         }
+    }
+
+    public int[] getAmmo() {
+        return this.ammo;
     }
 
     public String getCharacter() {
