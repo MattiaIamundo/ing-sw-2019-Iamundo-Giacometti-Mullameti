@@ -1,6 +1,5 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import com.sun.beans.editors.DoubleEditor;
 import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.events.weaponEffectController_events.TurretTripodChooseEv;
 import it.polimi.sw2019.events.weaponEffectController_events.TurretTripodSetEv;
