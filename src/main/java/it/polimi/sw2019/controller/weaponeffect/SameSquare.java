@@ -40,10 +40,11 @@ public abstract class SameSquare implements EffectController{
     }
 
     public void update(TargetSetEv message) {
-        int i = 0;
-        while ((i < players.size()) && !(players.get(i).getNickname().equals(message.getTarget()))){
-            i++;
+        for (Player player : players){
+            if (player.getNickname().equals(message.getTarget())){
+                model.setTarget(player);
+                break;
+            }
         }
-        model.setTarget(players.get(i));
     }
 }

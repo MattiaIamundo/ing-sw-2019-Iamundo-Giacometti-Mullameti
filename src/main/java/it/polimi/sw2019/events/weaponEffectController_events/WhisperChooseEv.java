@@ -8,11 +8,13 @@ public class WhisperChooseEv implements WeaponEvent{
 
     private Player attacker;
     private ArrayList<String> valid;
+    private ArrayList<String> notselectable;
     private ArrayList<String> notreachable;
 
-    public WhisperChooseEv(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable) {
+    public WhisperChooseEv(Player attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable) {
         this.attacker = attacker;
         this.valid = valid;
+        this.notselectable = notselectable;
         this.notreachable = notreachable;
     }
 
@@ -23,6 +25,10 @@ public class WhisperChooseEv implements WeaponEvent{
 
     public ArrayList<String> getValid() {
         return valid;
+    }
+
+    public ArrayList<String> getNotselectable() {
+        return notselectable;
     }
 
     public ArrayList<String> getNotreachable() {

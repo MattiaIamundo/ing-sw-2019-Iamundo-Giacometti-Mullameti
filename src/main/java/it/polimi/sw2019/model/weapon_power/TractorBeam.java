@@ -1,6 +1,6 @@
 package it.polimi.sw2019.model.weapon_power;
 
-import it.polimi.sw2019.events.weaponEffectController_events.TracBeamChooseEv;
+import it.polimi.sw2019.events.weaponEffectController_events.TractorBeamChooseEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.view.Observable;
@@ -8,7 +8,7 @@ import it.polimi.sw2019.view.Observable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TractorBeam extends Observable<TracBeamChooseEv> implements Power{
+public class TractorBeam extends Observable<TractorBeamChooseEv> implements Power{
     //base effect for TractorBeam
     private Player target = null;
 
@@ -17,13 +17,17 @@ public class TractorBeam extends Observable<TracBeamChooseEv> implements Power{
         target.getPlance().giveDamage(attacker, 1);
     }
 
-    public void chooseTarget(HashMap<String, ArrayList<String>> valid, ArrayList<String> notselectable, Player attacker){
-        notify(new TracBeamChooseEv(valid, notselectable, attacker));
+    public void chooseTarget(HashMap<String, ArrayList<String>> valid, Player attacker){
+        notify(new TractorBeamChooseEv(valid, attacker));
     }
 
     public void setTarget(Player target, Space position){
         this.target = target;
         target.setPosition(position);
+    }
+
+    public Player getTarget() {
+        return target;
     }
 
     @Override
