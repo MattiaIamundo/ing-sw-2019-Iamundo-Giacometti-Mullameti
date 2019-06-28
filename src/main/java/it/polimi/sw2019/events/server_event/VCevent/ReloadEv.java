@@ -1,4 +1,8 @@
 package it.polimi.sw2019.events.server_event.VCevent;
 
-public class ReloadEv {
+import it.polimi.sw2019.events.ActionEv;
+
+public class ReloadEv extends ActionEv {
+
+
 }

@@ -4,9 +4,12 @@ package it.polimi.sw2019.controller;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.sw2019.events.ActionEv;
+import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
+import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
+import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
 import it.polimi.sw2019.model.*;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.utility.*;
@@ -37,6 +40,14 @@ public class Game implements Observer <ObservableByGame> {
     //for the synchronization
     private Object stop = new Object();
     private Object stopArray = new Object();
+    //others controllers to handle event
+    private FinalFrenzy finalFrenzyController;
+    private Grab grabController;
+    private Killshot killshotController;
+    private Move moveController;
+    private Reload reloadController;
+    private Shoot shootController;
+    private UsePowerUp usePowerUpController;
     //the main controller's variables
     private List<ActionEv> eventActualPlayer = new ArrayList<>();
     private Turn turnOf;
@@ -47,6 +58,8 @@ public class Game implements Observer <ObservableByGame> {
     private boolean out;
     private boolean gameover;
     private boolean gameStarted;
+    //for visit pattern
+    private ExecutorEventImp executorEventImp = new ExecutorEventImp();
     //to load milliseconds to the timer
     //and to load cards and maps
     private Gson gson = new Gson();
@@ -67,6 +80,9 @@ public class Game implements Observer <ObservableByGame> {
         mapconfig = 0;
         out = false;
         gameover = false;
+        //controllers
+        moveController = new Move();
+        //da rimuovere e chiamare da metodo, il metodo c'è già
         try{
             FileReader reader = new FileReader("File_Json/milliSecondsToTimerBeginning.json");
             timerThread.setTime(gson.fromJson( reader , int.class));
@@ -980,10 +996,39 @@ public class Game implements Observer <ObservableByGame> {
         return eventActualPlayer;
     }
 
-    public void handleEvent(ActionEv actionEv) {
+    private Player searchPlayer(String nickname) {
 
+        Player playerToReturn = null;
+
+        for(Player p : this.players) {
+
+            if (p.getNickname().equals(nickname)) {
+                playerToReturn = p;
+            }
+        }
+
+        return playerToReturn;
     }
 
+    public void handleEvent(ActionEv actionEv) {
+        actionEv.handle(this.executorEventImp, this);
+    }
+
+    private void handleEvent(MoveEv moveEv) {
+
+        Player player = searchPlayer( moveEv.getPlayerNickname() );
+        this.moveController.handleEvent(moveEv, player);
+    }
+
+
+  /*
+    public void handleEvent(ReloadEv reloadEv) {
+        Player player = searchPlayer( reloadEv.getPlayerNickname() );
+        this.reloadController.handleEvent(reloadEv, player);
+    }
+
+
+   */
     //.............................FROM HERE OLD THINGS........................
 
     public void update (ObservableByGame message) {
