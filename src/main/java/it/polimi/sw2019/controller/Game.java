@@ -8,7 +8,9 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
+import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
+import it.polimi.sw2019.events.server_event.VCevent.PowerupEv;
 import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
 import it.polimi.sw2019.model.*;
 import it.polimi.sw2019.model.Map;
@@ -996,7 +998,7 @@ public class Game implements Observer <ObservableByGame> {
         return eventActualPlayer;
     }
 
-    private Player searchPlayer(String nickname) {
+    public Player searchPlayer(String nickname) {
 
         Player playerToReturn = null;
 
@@ -1011,6 +1013,7 @@ public class Game implements Observer <ObservableByGame> {
     }
 
     public void handleEvent(ActionEv actionEv) {
+
         actionEv.handle(this.executorEventImp, this);
     }
 
@@ -1020,15 +1023,28 @@ public class Game implements Observer <ObservableByGame> {
         this.moveController.handleEvent(moveEv, player);
     }
 
-
-  /*
     public void handleEvent(ReloadEv reloadEv) {
+
         Player player = searchPlayer( reloadEv.getPlayerNickname() );
         this.reloadController.handleEvent(reloadEv, player);
     }
+/*
+    public void handleEvent(GrabEv grabEv) {
+
+        Player player = searchPlayer( grabEv.getPlayerNickname() );
+        this.grabController.handleEvent(grabEv, player);
+    }
+
+    public void handleEvent(PowerupEv powerupEv) {
+
+        Player player = searchPlayer( powerupEv.getPlayerNickname() );
+        this.usePowerUpController.handleEvent(powerupEv, player);
+    }
 
 
-   */
+
+ */
+
     //.............................FROM HERE OLD THINGS........................
 
     public void update (ObservableByGame message) {
@@ -1044,4 +1060,7 @@ public class Game implements Observer <ObservableByGame> {
         return gamemode;
     }
 
+    public void update() {
+
+    }
 }
