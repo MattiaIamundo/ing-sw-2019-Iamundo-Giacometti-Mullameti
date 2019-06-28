@@ -39,17 +39,23 @@ public class ChooseSkullController {
 
 
         @FXML
-        public String chooseNrSkulls(){
+        public void chooseNrSkulls(){
 
             if(this.skullsGroup.getSelectedToggle().equals(this.fiveSkullsButton)) {skulls="five"; }
             else if(this.skullsGroup.getSelectedToggle().equals(this.sixSkullsButton)) {skulls="six";}
             else if(this.skullsGroup.getSelectedToggle().equals(this.sevenSkullsButton)) {skulls="seven";}
             else if(this.skullsGroup.getSelectedToggle().equals(this.eightSkullsButton)) {skulls="eight";}
 
-            this.nextButton.setVisible(true);
 
             clientSocket.setInfo("skull",skulls);
-            return skulls;
+
+            if(clientSocket.getOk()){
+                System.out.println("entra");
+                this.nextButton.setVisible(true);
+            }else if(!(clientSocket.getOk())){
+                this.nextButton.setVisible(false);
+            }
+
         }
 
         public void setClientSocket(ClientSocket clientSocket){

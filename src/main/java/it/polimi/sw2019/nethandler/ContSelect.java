@@ -123,8 +123,10 @@ public class ContSelect implements ContSelectInt {
 
     public void waitingForSkull(PlayerView playerView) {
 
+        System.out.println("ok");
         boolean skull;
         while ( !in.hasNextBoolean() ) {}
+
 
         skull = in.nextBoolean();
         in.nextLine();

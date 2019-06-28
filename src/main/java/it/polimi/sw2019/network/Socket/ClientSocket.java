@@ -24,7 +24,7 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ClientSocket implements Runnable {
+public class ClientSocket  {
 
     //the port number
     private final int portNumber = 12345;
@@ -126,6 +126,17 @@ public class ClientSocket implements Runnable {
         this.uIinterface=uIinterface;
     }
 
+    /*public void setNickname(String string){
+        VCLogin vcLogin = new VCLogin(string);
+        playerView.sendNickname(viewContEvent, vcLogin);
+    }
+
+    public void setColor(String string){
+        System.out.println("setColor");
+        VCColor vcColor = new VCColor(string);
+        playerView.sendColor(viewContEvent, vcColor);
+    }*/
+
     public void setInfo(String string , String info) {
         if (string.equals("nickname")) {
 
@@ -157,6 +168,10 @@ public class ClientSocket implements Runnable {
                 break;
             case "RequestMapType":uIinterface.requestMap("ok");
                 break;
+            case "Ping":
+                uIinterface.requestLobby("ok");
+                playerView.sendPong(this.viewContEvent);
+                break;
 
         }
 
@@ -164,17 +179,15 @@ public class ClientSocket implements Runnable {
 
 
 
-    public String inform(){
-        return "obk";
-    }
-    public void run(){
+
+    /*public void run(){
         ok = false;
         //welcome, set the nickname
         try{
             logger.log(Level.INFO, "{ClientSocket} nickname selection ");
             contSelect.waitForNicknameRequest(this.playerView);
 
- /*           while ( !ok ) {
+            while ( !ok ) {
 
                 if (string.equals("quit")) {
 
@@ -192,8 +205,7 @@ public class ClientSocket implements Runnable {
 
                 }
             }
-
-  */        do {
+            do {
                 ok = contSelect.waitForOk();
                 if ( !ok ) {
                     contSelect.waitForNicknameRequest(this.playerView);
@@ -283,7 +295,7 @@ public class ClientSocket implements Runnable {
             closeConnection();
         }
 
-    }//END of RUN
+    }//END of RUN */
 
     /**
      * this method close the connection with the server
@@ -317,6 +329,12 @@ public class ClientSocket implements Runnable {
 
         Application.launch(GUI.class);//(MERITA)
 
-        application = new ClientSocket("127.0.0.1");
+        //application = new ClientSocket("127.0.0.1");
     }
+
+    public Boolean getOk() {
+        return contSelect.waitForOk();
+    }
+    public Boolean getYouAreFirstPlayer(){return contSelect.waitForAmIFirstPlayer();}
+
 }
