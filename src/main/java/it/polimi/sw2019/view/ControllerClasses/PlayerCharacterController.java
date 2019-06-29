@@ -73,16 +73,14 @@ public class PlayerCharacterController {
 
     }
 
-
-
-
     @FXML
     public void nextButtonPushed() {
 
         if(!(clientSocket.getYouAreFirstPlayer())) {
-            System.out.println("nexButton");
+
             clientSocket.getContSelect().waitingForSkull(clientSocket.getPlayerView());
         }else {
+
             clientSocket.getContSelect().waitForPing(clientSocket.getPlayerView());
         }
 
