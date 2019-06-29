@@ -17,6 +17,8 @@ import java.io.PrintWriter;
 
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
@@ -43,6 +45,7 @@ public class ClientSocket  {
     //the GUI or CLI
     private UIinterface uIinterface;
     private String nickname;
+    private List<String>colorList=new ArrayList<>(5);
     //the logger for debugging
     private static final Logger logger = Logger.getLogger( ClientSocket.class.getName() );
 
@@ -336,5 +339,16 @@ public class ClientSocket  {
         return contSelect.waitForOk();
     }
     public Boolean getYouAreFirstPlayer(){return contSelect.waitForAmIFirstPlayer();}
+
+    public void setColorList(List<String> colorList){
+
+        this.colorList=colorList;
+
+
+    }
+    public List<String> getColorList(){
+        System.out.println("colorget");
+        return this.colorList;
+    }
 
 }

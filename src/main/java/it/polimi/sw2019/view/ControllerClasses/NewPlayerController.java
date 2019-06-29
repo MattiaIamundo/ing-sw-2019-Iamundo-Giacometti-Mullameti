@@ -57,7 +57,7 @@ public class NewPlayerController {
 
 
         if(clientSocket.getOk()){
-
+            this.submitButton.setVisible(false);
             this.nextButton.setVisible(true);
         }else if(!(clientSocket.getOk())){
 

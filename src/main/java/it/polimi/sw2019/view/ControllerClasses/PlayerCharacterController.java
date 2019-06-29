@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 
 
 import java.io.IOException;
+import java.util.List;
 
 public class PlayerCharacterController {
     private ClientSocket clientSocket ;
@@ -38,23 +39,63 @@ public class PlayerCharacterController {
     @FXML private RadioButton purpleButton;
     @FXML private ToggleGroup characterGroup;
     @FXML private Button nextButton;
-
+    @FXML private Button getCharacterButton;
     private String stringCharacter;
 
 
 
     @FXML
     public void initialize(){
+
         this.nextButton.setDefaultButton(true);
         this.nextButton.setVisible(false);
+        this.yellowButton.setDisable(true);
+        this.blueButton.setDisable(true);
+        this.grayButton.setDisable(true);
+        this.greenButton.setDisable(true);
+        this.purpleButton.setDisable(true);
+
 
     }
 
 
+    public void enableButtons(List<String> colorList){
+
+        this.getCharacterButton.setVisible(false);
+        for (String color : colorList) {
+
+            switch (color) {
+                case "yellow":
+
+                    this.yellowButton.setDisable(false);
+                    break;
+                case "blue":
+                    this.blueButton.setDisable(false);
+                    break;
+                case "gray":
+                    this.grayButton.setDisable(false);
+                    break;
+                case "green":
+                    this.greenButton.setDisable(false);
+                    break;
+                case "purple":
+                    this.purpleButton.setDisable(false);
+                    break;
+            }
+
+        }
+
+
+    }
 
 
     @FXML
+    public void getCharactersButtonClicked(){
+        enableButtons(clientSocket.getColorList());
+    }
+    @FXML
     public void chooseCharacter(){
+
 
         if(this.characterGroup.getSelectedToggle().equals(this.yellowButton)) {stringCharacter="yellow";}
         if(this.characterGroup.getSelectedToggle().equals(this.blueButton)) {stringCharacter="blue";}
@@ -64,6 +105,7 @@ public class PlayerCharacterController {
         this.clientSocket.setInfo("character",stringCharacter);
 
         if(clientSocket.getOk()){
+
             System.out.println("entra");
             this.nextButton.setVisible(true);
         }else if(!(clientSocket.getOk())){
