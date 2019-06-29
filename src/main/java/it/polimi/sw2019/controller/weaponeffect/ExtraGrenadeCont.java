@@ -5,7 +5,7 @@ import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
-import it.polimi.sw2019.events.weaponEffectController_events.ExtraGrenadeSetEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.ExtraGrenadeSetEv;
 import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.ExtraGrenade;
 import it.polimi.sw2019.model.weapon_power.GrenadeLauncher;

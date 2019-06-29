@@ -9,6 +9,22 @@ import java.util.ArrayList;
 public class TestPlayerPlanceClass {
 
     @Test
+    public void removeMarkedTest(){
+        Player attacker = new Player("attacker", 0, null, new PlayerPlance());
+        Player attacker2 = new Player("attacker2", 0, null, new PlayerPlance());
+        Player target = new Player("target", 0, null, new PlayerPlance());
+
+        target.getPlance().setMark(attacker);
+        target.getPlance().setMark(attacker2);
+        target.getPlance().setMark(attacker);
+        target.getPlance().setMark(attacker);
+        target.getPlance().setMark(attacker2);
+        target.getPlance().removeMark(attacker);
+
+        Assert.assertEquals(3, target.getPlance().getDamageTrack().size());
+    }
+
+    @Test
     public void testPlayerPlance(){
 
         PlayerPlance board = new PlayerPlance();

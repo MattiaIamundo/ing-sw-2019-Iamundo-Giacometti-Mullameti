@@ -2,9 +2,8 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.events.weaponEffectController_events.FurnaceSetEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.FurnaceSetEv;
 import it.polimi.sw2019.model.weapon_power.Furnace;
-import it.polimi.sw2019.model.weapon_power.PlasmaGun;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
 

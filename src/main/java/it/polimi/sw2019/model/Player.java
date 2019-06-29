@@ -1,17 +1,15 @@
 package it.polimi.sw2019.model;
 
 
-import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.exception.InexistentWeaponException;
+import it.polimi.sw2019.exception.PowerUpOutOfBoundException;
 import it.polimi.sw2019.exception.WeaponOutOfBoundException;
-import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.ObservableByGame;
-import it.polimi.sw2019.view.Observer;
-import it.polimi.sw2019.view.PlayerView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**Class Player : describes player's characteristics
  * @author Merita Mullameti
@@ -27,15 +25,14 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     private ArrayList<Weapon> weapons = new ArrayList<>();
     //the position the player's in
     private Space position;
-    //the opponents who the player has marked
-    private ArrayList<Player> marked = new ArrayList<> (12);
     private PlayerPlance plance;
     //list of power up cards  the player owns , every player can own at top 3 weapons
-    private static PowerUp[] powerup = new PowerUp[3];
+    private  ArrayList<PowerUp> powerup = new ArrayList<>();
     //
     private int playerNumber;
     //
     private boolean connected;
+    private ArrayList<Player> lastHittedPlayers = new ArrayList<>();
 
     /**Constructor of the class
      * @param nickname the player's nickname
@@ -78,7 +75,7 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
      * @param points the points which the player has to gain
      */
     public void addPoints(int points) {
-        this.score = this.score + points;
+        score = score + points;
     }
 
     /**
@@ -120,63 +117,6 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
             }
         }
         return false;
-    }
-
-    /**
-     * this method set the marks which the player gave to the others players
-     * @param markedPlayer the player who is marked
-     * @param numberOfMarks the number of mark given
-     */
-    public void addMarked(Player markedPlayer, int numberOfMarks) {
-        //the arrayList is empty and the number of marks is ok
-        if( marked.isEmpty() && numberOfMarks < 12 ){
-
-            for (int i = 0; i < numberOfMarks; i++){
-
-                marked.add(markedPlayer);
-            }
-        }
-        //the arrayList is not empty but the number of marks is not big enough
-        else if ( !marked.isEmpty() && (marked.size() + numberOfMarks) < 12 ){
-
-            for ( int i = marked.size() + 1; i < marked.size() + numberOfMarks; i++) {
-
-                marked.add(markedPlayer);
-            }
-        }
-        //the arrayList is not empty but the number of marks is big enough to create a problem
-        else if ( !marked.isEmpty() && (marked.size() + numberOfMarks) > 12 ){
-
-            for (int i = marked.size() + 1; i < 12 ; i++){
-
-                marked.add(markedPlayer);
-            }
-        }
-    }
-
-    /**
-     * this method remove the marks which are transformed in damages
-     * @param markedPlayer the player who is damaged and has got also some of attacker's marks
-     */
-    public void removeMarked (Player markedPlayer){
-
-        Iterator <Player> iterator = marked.iterator();
-        //there is almost one marked
-        if ( !marked.isEmpty() ){
-
-            while (iterator.hasNext()){
-
-                Player p = iterator.next();
-                //if the arrayList marked contains the markedPlayer, it is to be removed
-                if (p == markedPlayer){
-
-                    iterator.remove();
-                }
-            }
-        }
-        else{
-            System.out.println("The player didn't marked any players!\n ");
-        }
     }
 
     /**
@@ -232,8 +172,20 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     /**
      * @return a pointer to the list of powerup the player ownes
      */
-    public PowerUp[] listPowerUp() {
+    public ArrayList<PowerUp> getPowerup() {
         return powerup;
+    }
+
+    public void addPowerUp(PowerUp powerUp) throws PowerUpOutOfBoundException {
+        if (powerup.size() <= 3){
+            powerup.add(powerUp);
+        }else {
+            throw new PowerUpOutOfBoundException(this.getNickname());
+        }
+    }
+
+    public void removePowerUp(PowerUp powerUp){
+        powerup.remove(powerUp);
     }
 
     /**
@@ -260,112 +212,47 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     }
 
     public void addAmmo(Ammo ammocard){
-            //add the first ammo in the ammo array
-            if (ammocard.getColorFirst() == "red") {
 
-                if(ammo[0]>=3){
+        //add the first ammo in the ammo array
+        loadAmmo(ammocard.getColorFirst());
 
-                }else{
-                    ammo[0]++;
-                }
-
-
-
-            } else if (ammocard.getColorFirst() == "blue") {
-
-                if(ammo[1]>=3){
-
-                }else{
-                    ammo[1]++;
-                }
-
-            } else if (ammocard.getColorFirst() == "yellow") {
-
-                if(ammo[2]>=3){
-
-                }else{
-                    ammo[2]++;
-                }
-
-            }
-
-            //add the second ammo in the ammo array
-
-            if(ammocard.getColorFirst()=="red"){
-
-                if(ammo[0]>=3){
-
-                }else{
-                    ammo[0]++;
-                }
-
-            }else if(ammocard.getColorFirst()=="blue"){
-
-                if(ammo[1]>=3){
-
-                }else{
-                    ammo[1]++;
-                }
-
-            }else if (ammocard.getColorFirst()=="yellow"){
-
-                if(ammo[2]>=3){
-
-                }else{
-                    ammo[2]++;
-                }
-
-            }
-
-
+        //add the second ammo in the ammo array
+        loadAmmo(ammocard.getColorSecond());
         if (ammocard instanceof AmmoTriple) {
 
-
-                //add the third ammo in the ammo array
-
-                if(((AmmoTriple) ammocard).getColorThird()=="red"){
-
-                    if(ammo[0]>=3){
-
-                    }else{
-                        ammo[0]++;
-                    }
-
-                }else if(((AmmoTriple) ammocard).getColorThird()=="blue"){
-
-                    if(ammo[1]>=3){
-
-                    }else{
-                        ammo[1]++;
-                    }
-
-                }else if((((AmmoTriple) ammocard).getColorThird()=="yellow")){
-
-                    if(ammo[2]>=3){
-
-                    }else{
-                        ammo[2]++;
-                    }
-
-                }
-
-
+            //add the third ammo in the ammo array
+            loadAmmo(((AmmoTriple) ammocard).getColorThird());
         }
         else if (ammocard instanceof AmmoDoublePowerUp) {
+            Logger logger = Logger.getLogger("model.Player.addAmmo.AmmoDoublePowerUp");
 
-            if (powerup[2]!=null) {
-                System.out.println("You already have three powerup cards !!");
-                System.out.println("Don't pick up a new power up card");
-            }else{
-                for (int i = 0; i < 3; i++) {
-                    if (powerup[i] == null) {
-
-                        powerup[i] = ((AmmoDoublePowerUp) ammocard).getPowerUp();
-                        break;
-                    }
-                }
+            try {
+                addPowerUp(((AmmoDoublePowerUp) ammocard).getPowerUp());
+            }catch (PowerUpOutOfBoundException e){
+                logger.log(Level.WARNING, e.getMessage()+" already have 3 PowerUps");
             }
+        }
+    }
 
+    private void loadAmmo(String color){
+        switch (color){
+            case "red":
+                if (ammo[0] < 3){
+                    ammo[0]++;
+                }
+                break;
+            case "blue":
+                if (ammo[1] < 3){
+                    ammo[1]++;
+                }
+                break;
+            case "yellow":
+                if (ammo[2] < 3){
+                    ammo[2]++;
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -381,6 +268,9 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
         this.character = character;
     }
 
+    public ArrayList<Player> getLastHittedPlayers() {
+        return lastHittedPlayers;
+    }
 }
 
 

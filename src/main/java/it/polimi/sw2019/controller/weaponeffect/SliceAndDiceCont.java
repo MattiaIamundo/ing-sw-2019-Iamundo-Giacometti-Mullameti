@@ -2,7 +2,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.Map;
-import it.polimi.sw2019.events.weaponEffectController_events.SliceAndDiceSetEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.SliceAndDiceSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.Cyberblade;

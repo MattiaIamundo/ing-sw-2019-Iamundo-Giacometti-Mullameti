@@ -16,12 +16,12 @@
 
     <!-- Java version -->
     <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.attacker>1.8</maven.compiler.attacker>
 
     <!-- Integrating Sonar with Jacoco -->
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-    <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+    <sonar.jacoco.reportPath>${project.basedir}/../attacker/jacoco.exec</sonar.jacoco.reportPath>
     <sonar.language>java</sonar.language>
 
     <sonar.host.url>http://localhost:9000/</sonar.host.url>

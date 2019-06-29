@@ -1,8 +1,8 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.controller.Game;
-import it.polimi.sw2019.events.weaponEffectController_events.ChainReactChooseEv;
-import it.polimi.sw2019.events.weaponEffectController_events.ChainReactSetEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.ChainReactChooseEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.ChainReactSetEv;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.exception.WeaponOutOfBoundException;
 import it.polimi.sw2019.model.DoubleAdditive;
@@ -11,7 +11,6 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.weapon_power.ChainReaction;
 import it.polimi.sw2019.model.weapon_power.HighVoltage;
 import it.polimi.sw2019.model.weapon_power.Thor;
-import it.polimi.sw2019.model.weapon_power.Vortex;
 import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 import org.junit.Assert;

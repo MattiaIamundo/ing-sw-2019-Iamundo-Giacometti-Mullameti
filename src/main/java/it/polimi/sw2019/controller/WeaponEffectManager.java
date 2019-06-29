@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.sw2019.controller.weaponeffect.EffectController;
 import it.polimi.sw2019.model.*;
-import it.polimi.sw2019.events.weaponEffectController_events.PowerSetEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.PowerSetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
 

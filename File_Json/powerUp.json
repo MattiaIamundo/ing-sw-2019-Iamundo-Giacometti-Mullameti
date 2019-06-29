@@ -1,74 +1,74 @@
 [
   {
-    "color" : "yellow", "power": "Teleport", "effect" : "Teleport"
+    "color" : "yellow", "power": "Teleporter", "effect" : "Teleporter"
+,},
+  {
+    "color" : "yellow", "power": "Teleporter", "effect" : "Teleporter"
+,},
+  {
+    "color" : "red", "power": "Teleporter", "effect" : "Teleporter"
+,},
+  {
+    "color" : "red", "power": "Teleporter", "effect" : "Teleporter"
+,},
+  {
+    "color" : "blue", "power": "Teleporter", "effect" : "Teleporter"
+,},
+  {
+    "color" : "blue", "power": "Teleporter", "effect" : "Teleporter"
+,},
+  {
+    "color" : "yellow", "power": "TagbackGrenade", "effect" : "TagbackGrenade"
   },
   {
-    "color" : "yellow", "power": "Teleport", "effect" : "Teleport"
+    "color" : "yellow", "power": "TagbackGrenade", "effect" : "TagbackGrenade"
   },
   {
-    "color" : "red", "power": "Teleport", "effect" : "Teleport"
+    "color" : "red", "power": "TagbackGrenade", "effect" : "TagbackGrenade"
   },
   {
-    "color" : "red", "power": "Teleport", "effect" : "Teleport"
+    "color" : "red", "power": "TagbackGrenade", "effect" : "TagbackGrenade"
   },
   {
-    "color" : "blue", "power": "Teleport", "effect" : "Teleport"
+    "color" : "blue", "power": "TagbackGrenade", "effect" : "TagbackGrenade"
   },
   {
-    "color" : "blue", "power": "Teleport", "effect" : "Teleport"
+    "color" : "blue", "power": "TagbackGrenade", "effect" : "TagbackGrenade"
   },
   {
-    "color" : "yellow", "power": "Marked", "effect" : "Marked"
+    "color" : "yellow", "power": "Newton", "effect" : "Newton"
   },
   {
-    "color" : "yellow", "power": "Marked", "effect" : "Marked"
+    "color" : "yellow", "power": "Newton", "effect" : "Newton"
   },
   {
-    "color" : "red", "power": "Marked", "effect" : "Marked"
+    "color" : "red", "power": "Newton", "effect" : "Newton"
   },
   {
-    "color" : "red", "power": "Marked", "effect" : "Marked"
+    "color" : "red", "power": "Newton", "effect" : "Newton"
   },
   {
-    "color" : "blue", "power": "Marked", "effect" : "Marked"
+    "color" : "blue", "power": "Newton", "effect" : "Newton"
   },
   {
-    "color" : "blue", "power": "Marked", "effect" : "Marked"
+    "color" : "blue", "power": "Newton", "effect" : "Newton"
   },
   {
-    "color" : "yellow", "power": "MoveEnemy", "effect" : "MoveEnemy"
+    "color" : "yellow", "power": "TargetingScope", "effect" : "TargetingScope"
   },
   {
-    "color" : "yellow", "power": "MoveEnemy", "effect" : "MoveEnemy"
+    "color" : "yellow", "power": "TargetingScope", "effect" : "TargetingScope"
   },
   {
-    "color" : "red", "power": "MoveEnemy", "effect" : "MoveEnemy"
+    "color" : "red", "power": "TargetingScope", "effect" : "TargetingScope"
   },
   {
-    "color" : "red", "power": "MoveEnemy", "effect" : "MoveEnemy"
+    "color" : "red", "power": "TargetingScope", "effect" : "TargetingScope"
   },
   {
-    "color" : "blue", "power": "MoveEnemy", "effect" : "MoveEnemy"
+    "color" : "blue", "power": "TargetingScope", "effect" : "TargetingScope"
   },
   {
-    "color" : "blue", "power": "MoveEnemy", "effect" : "MoveEnemy"
-  },
-  {
-    "color" : "yellow", "power": "ExtraDamage", "effect" : "ExtraDamage"
-  },
-  {
-    "color" : "yellow", "power": "ExtraDamage", "effect" : "ExtraDamage"
-  },
-  {
-    "color" : "red", "power": "ExtraDamage", "effect" : "ExtraDamage"
-  },
-  {
-    "color" : "red", "power": "ExtraDamage", "effect" : "ExtraDamage"
-  },
-  {
-    "color" : "blue", "power": "ExtraDamage", "effect" : "ExtraDamage"
-  },
-  {
-    "color" : "blue", "power": "ExtraDamage", "effect" : "ExtraDamage"
+    "color" : "blue", "power": "TargetingScope", "effect" : "TargetingScope"
   }
 ]

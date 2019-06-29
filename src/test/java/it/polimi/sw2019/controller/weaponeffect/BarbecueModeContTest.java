@@ -1,11 +1,10 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.controller.Game;
-import it.polimi.sw2019.controller.weaponeffect.BarbecueModeCont;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.events.weaponEffectController_events.BarbecueSetEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.BarbecueSetEv;
 import it.polimi.sw2019.model.weapon_power.BarbecueMode;
 import it.polimi.sw2019.view.Observable;
 import org.junit.Assert;

@@ -1,13 +1,12 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.controller.Game;
-import it.polimi.sw2019.events.weaponEffectController_events.CozyFireModeChooseEv;
-import it.polimi.sw2019.events.weaponEffectController_events.CozyFireModeSetEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.CozyFireModeChooseEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.CozyFireModeSetEv;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.weapon_power.CozyFireMode;
-import it.polimi.sw2019.model.weapon_power.Furnace;
 import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 import org.junit.Assert;

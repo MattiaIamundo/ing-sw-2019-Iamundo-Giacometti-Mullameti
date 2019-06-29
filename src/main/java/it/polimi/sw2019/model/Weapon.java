@@ -1,6 +1,6 @@
 package it.polimi.sw2019.model;
 
-import it.polimi.sw2019.events.weaponEffectController_events.PowerChooseEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.PowerChooseEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observable;
 

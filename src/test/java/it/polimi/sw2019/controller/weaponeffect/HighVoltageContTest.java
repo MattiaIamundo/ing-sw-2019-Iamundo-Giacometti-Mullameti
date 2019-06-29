@@ -1,8 +1,8 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.controller.Game;
-import it.polimi.sw2019.events.weaponEffectController_events.HighVoltageChooseEv;
-import it.polimi.sw2019.events.weaponEffectController_events.HighVoltageSetEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.HighVoltageChooseEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.HighVoltageSetEv;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.exception.WeaponOutOfBoundException;
 import it.polimi.sw2019.model.DoubleAdditive;

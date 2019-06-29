@@ -1,8 +1,8 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.controller.Game;
-import it.polimi.sw2019.events.weaponEffectController_events.PhaseGlideChooseEv;
-import it.polimi.sw2019.events.weaponEffectController_events.PhaseGlideSetEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.PhaseGlideChooseEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.PhaseGlideSetEv;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;

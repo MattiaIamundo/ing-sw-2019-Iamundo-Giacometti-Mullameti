@@ -1,8 +1,8 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.controller.Game;
-import it.polimi.sw2019.events.weaponEffectController_events.LongBarrelChooseEv;
-import it.polimi.sw2019.events.weaponEffectController_events.LongBarrelSetEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.LongBarrelChooseEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.LongBarrelSetEv;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;

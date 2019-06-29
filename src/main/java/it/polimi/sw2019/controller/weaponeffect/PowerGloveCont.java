@@ -1,6 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponEffectController_events.PowerGloveSetEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.PowerGloveSetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.PowerGlove;
 import it.polimi.sw2019.view.Observer;

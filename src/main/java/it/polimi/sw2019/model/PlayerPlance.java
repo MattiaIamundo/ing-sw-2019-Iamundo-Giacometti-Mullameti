@@ -1,7 +1,10 @@
 package it.polimi.sw2019.model;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 
 /**
@@ -20,7 +23,7 @@ public class PlayerPlance implements Serializable {
     //so the controller will be able to calculate the points
     private boolean[] killed = new boolean[6];
     //the initial capacity is set to 12 since every player could be marked at top 12 times
-    private ArrayList<Player> markedBy = new ArrayList <> (12);
+    private ArrayList<Player> markedBy = new ArrayList <> ();
 
     /**
      * this is the constructor
@@ -80,17 +83,8 @@ public class PlayerPlance implements Serializable {
      * @param shooter it is the opponent who marked the player
      */
     public void setMark(Player shooter) {
-        //the arrayList is empty
-        if ( markedBy.isEmpty() ) {
-            markedBy.add( 0,shooter);
-        }
-        //the arrayList is not full
-        else if ( (markedBy.size()) < 12 ) {
-            //the arrayList is not full
+        if (Collections.frequency(markedBy, shooter) < 3){
             markedBy.add(shooter);
-        }
-        else {
-            System.out.println("The target player's mark list is already full...\n");
         }
     }
 
@@ -106,6 +100,7 @@ public class PlayerPlance implements Serializable {
             }
         }
         this.giveDamage(shooter,count);
+        //markedBy.removeAll(Collections.singletonList(shooter));
         markedBy.removeIf(player -> player == shooter);
     }
 

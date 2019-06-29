@@ -4,16 +4,13 @@ import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.DoubleAdditive;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.events.weaponEffectController_events.TurretTripodSetEv;
-import it.polimi.sw2019.model.Weapon;
+import it.polimi.sw2019.events.weaponeffect_controller_events.TurretTripodSetEv;
 import it.polimi.sw2019.model.weapon_power.FocusShot;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.TurretTripod;
 import it.polimi.sw2019.model.weapon_power.MachineGun;
 import it.polimi.sw2019.view.Observer;
-import sun.rmi.runtime.Log;
 
-import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;

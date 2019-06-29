@@ -8,12 +8,14 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
-import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
-import it.polimi.sw2019.events.server_event.VCevent.PowerupEv;
 import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
 import it.polimi.sw2019.model.*;
 import it.polimi.sw2019.model.Map;
+import it.polimi.sw2019.model.powerup.Newton;
+import it.polimi.sw2019.model.powerup.TagbackGrenade;
+import it.polimi.sw2019.model.powerup.TargetingScope;
+import it.polimi.sw2019.model.powerup.Teleporter;
 import it.polimi.sw2019.utility.*;
 import it.polimi.sw2019.model.weapon_power.*;
 import it.polimi.sw2019.network.Socket.PlayerThread;
@@ -26,8 +28,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -313,17 +313,17 @@ public class Game implements Observer <ObservableByGame> {
 
                 for ( int i=0; i<24; i++) {
                     EffectBehaviour eff;
-                    if (  pow.get(i).getEffect().equals("Marked") ) {
-                        eff = new Marked();
+                    if (  pow.get(i).getEffect().equals("TagbackGrenade") ) {
+                        eff = new TagbackGrenade();
                     }
-                    else if ( pow.get(i).getEffect().equals("Teleport") ) {
-                        eff = new Teleport();
+                    else if ( pow.get(i).getEffect().equals("Teleporter") ) {
+                        eff = new Teleporter();
                     }
-                    else if ( pow.get(i).getEffect().equals("MoveEnemy") ) {
-                        eff = new MoveEnemy();
+                    else if ( pow.get(i).getEffect().equals("Newton") ) {
+                        eff = new Newton();
                     }
                     else {
-                        eff = new ExtraDamage();
+                        eff = new TargetingScope();
                     }
 
                     PowerUp p = new PowerUp(pow.get(i).getColor(),pow.get(i).getName(), eff);
