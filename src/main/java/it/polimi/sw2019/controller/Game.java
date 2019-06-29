@@ -6,10 +6,8 @@ import com.google.gson.reflect.TypeToken;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.events.NotifyReturn;
-import it.polimi.sw2019.events.client_event.Cevent.Color;
-import it.polimi.sw2019.events.client_event.Cevent.DirectionChooseEv;
-import it.polimi.sw2019.events.client_event.Cevent.Login;
-import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
+import it.polimi.sw2019.events.client_event.Cevent.*;
+import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
 import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.events.server_event.VCevent.PowerupEv;
@@ -19,9 +17,9 @@ import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.utility.*;
 import it.polimi.sw2019.model.weapon_power.*;
 import it.polimi.sw2019.network.Socket.PlayerThread;
-import it.polimi.sw2019.view.ObservableByGame;
+import it.polimi.sw2019.view.*;
+import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
-import it.polimi.sw2019.view.PlayerRemoteView;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -86,7 +84,9 @@ public class Game implements Observer <ObservableByGame> {
         gameover = false;
         //controllers
         moveController = new Move(this);
-        reloadController = new Reload();
+        moveController.addObserver(this);
+        reloadController = new Reload(this);
+        reloadController.addObserver(this);
         grabController = new Grab();
         usePowerUpController = new UsePowerUp();
         shootController = new Shoot(this.players, this.gameboard.getMap());
@@ -1002,6 +1002,10 @@ public class Game implements Observer <ObservableByGame> {
         return turnOf.getPlayer();
     }
 
+    public Turn getTurnOf() {
+        return this.turnOf;
+    }
+
     public List<ActionEv> getEventActualPlayer() {
         return eventActualPlayer;
     }
@@ -1068,7 +1072,10 @@ public class Game implements Observer <ObservableByGame> {
         return gamemode;
     }
 
-    public List<PlayerRemoteView> searchAllPlayerRemoteViews() {
+    //.............................TO HERE OLD THINGS........................
+
+
+    private List<PlayerRemoteView> searchAllPlayerRemoteViews() {
 
         List<PlayerRemoteView> playerRemoteViews = new ArrayList<>(5);
 
@@ -1080,7 +1087,7 @@ public class Game implements Observer <ObservableByGame> {
         return playerRemoteViews;
     }
 
-    public PlayerRemoteView searchSpecificPlayerRemoteView(String nickname) {
+    private PlayerRemoteView searchSpecificPlayerRemoteView(String nickname) {
 
         PlayerRemoteView playerRemoteView = null;
         for(PlayerThread pt : this.playerThreads) {
@@ -1093,10 +1100,22 @@ public class Game implements Observer <ObservableByGame> {
         return playerRemoteView;
     }
 
-    public void notify(DirectionChooseEv directionChooseEv) {
+    public void update(DirectionChooseEv directionChooseEv) {
 
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(directionChooseEv.getNickname());
         playerRemoteView.sendEvent( directionChooseEv );
 
+    }
+
+    public void update(NotifyMoveEv notifyMoveEv) {
+        List<PlayerRemoteView> playerRemoteViews = searchAllPlayerRemoteViews();
+        for (PlayerRemoteView p : playerRemoteViews) {
+            p.sendEvent(notifyMoveEv);
+        }
+    }
+
+    public void update(NotifyEndMoveEv notifyEndMoveEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView( notifyEndMoveEv.getNickname());
+        playerRemoteView.sendEvent( notifyEndMoveEv );
     }
 }

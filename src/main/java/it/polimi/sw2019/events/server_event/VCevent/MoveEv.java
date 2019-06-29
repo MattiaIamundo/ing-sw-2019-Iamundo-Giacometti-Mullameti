@@ -4,20 +4,18 @@ import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.ExecutorEventImp;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class MoveEv extends ActionEv {
 
     private String playerNickname;
-    private List<String> moves = new ArrayList<>();
+    private String move;
 
-    public MoveEv(List<String> possibleMoves) {
-        this.moves = possibleMoves;
+    public MoveEv(String move) {
+        this.move = move;
     }
 
-    public List<String> getMoves() {
-        return this.moves;
+    public String getMove() {
+        return this.move;
     }
 
     public void setPlayerNickname(String nickname) {

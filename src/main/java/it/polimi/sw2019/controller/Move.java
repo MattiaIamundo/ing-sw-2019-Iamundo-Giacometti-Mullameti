@@ -1,9 +1,12 @@
 package it.polimi.sw2019.controller;
 
+import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.client_event.Cevent.DirectionChooseEv;
+import it.polimi.sw2019.events.client_event.Cevent.NotifyEndMoveEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
+import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +15,7 @@ import java.util.List;
  * @author Merita Mullameti
  */
 
-public class Move implements Action {
+public class Move extends Observable<NotifyReturn> implements Action {
 
     private Space moveto = null;
     private List<String> movesPlayerCanDo = new ArrayList<>();
@@ -31,20 +34,20 @@ public class Move implements Action {
      */
     public void handleEvent(MoveEv moveEv, Player player) {
 
-        if( moveEv.getMoves().isEmpty() ) {
+        if( moveEv.getMove().isEmpty() ) {
             //is the firstTime, the player press the button for the first time
             this.moveto = null;
         }
-        else if ( moveEv.getMoves().get(0).equals("North") ) {
+        else if ( moveEv.getMove().equals("north") ) {
             this.moveto = player.getPosition().getNorth().getSpaceSecond();
         }
-        else if (moveEv.getMoves().get(0).equals("East")) {
+        else if (moveEv.getMove().equals("east")) {
             this.moveto = player.getPosition().getEast().getSpaceSecond();
         }
-        else if (moveEv.getMoves().get(0).equals("South")) {
+        else if (moveEv.getMove().equals("south")) {
             this.moveto = player.getPosition().getSouth().getSpaceSecond();
         }
-        else if (moveEv.getMoves().get(0).equals("West")) {
+        else if (moveEv.getMove().equals("west")) {
             this.moveto = player.getPosition().getWest().getSpaceSecond();
         }
         else {
@@ -54,42 +57,69 @@ public class Move implements Action {
         useAction( player );
     }
 
+    /**
+     * if it is the first time, or it is after a single move,
+     * a new event is send to the player to do another move
+     * after a "stop by the player or three single move
+     * the action is terminated
+     * @param player the player who call the MoveEv
+     */
     public void useAction(Player player) {
 
         if (moveto == null) {
             //control on what position the player can set
             //and create the new MoveEv
+            controller.getTurnOf().setAction(this);
             findDirection(player);
             DirectionChooseEv directionChooseEv = new DirectionChooseEv(movesPlayerCanDo);
             directionChooseEv.setNickname(player.getNickname());
             //viene notificato al player che mosse vuole fare
-            this.controller.notify(directionChooseEv);
+            notify(directionChooseEv);
 
-
-        } else {
-            player.setPosition(moveto);
-            //come notificare a tutti??
-            // qui devo notificare al giocatore stesso
-            //se vuole andare avanti se gli è concesso
+        }
+        else if (player.getPosition().equals(this.moveto)) {
+            //the player stop the action
+            nrOfMoves = 0;
+            controller.getTurnOf().addUsedAction();
+            notify(new NotifyEndMoveEv(player.getNickname()));
+        }
+        else {
+            if (nrOfMoves < 2) {
+                //the player can choose another
+                player.setPosition(moveto);
+                nrOfMoves++;
+                findDirection(player);
+                DirectionChooseEv directionChooseEv = new DirectionChooseEv(movesPlayerCanDo);
+                directionChooseEv.setNickname(player.getNickname());
+                notify(directionChooseEv);
+            }
+            if (nrOfMoves == 3) {
+                //the player finish the action
+                nrOfMoves = 0;
+                controller.getTurnOf().addUsedAction();
+                notify(new NotifyEndMoveEv(player.getNickname()));
+            }
         }
 
-        //notifica generale + notifica alla persona
-        //player.notify();
     }
 
+    /**
+     * find the possible directions which the player can choose
+     * @param player the player who send the MoveEv
+     */
     private void findDirection(Player player) {
 
         if ( !player.getPosition().getNorth().isWall() ) {
-            this.movesPlayerCanDo.add("North");
+            this.movesPlayerCanDo.add("north");
         }
         if ( !player.getPosition().getEast().isWall() ) {
-            this.movesPlayerCanDo.add("East");
+            this.movesPlayerCanDo.add("east");
         }
         if ( !player.getPosition().getSouth().isWall() ) {
-            this.movesPlayerCanDo.add("South");
+            this.movesPlayerCanDo.add("south");
         }
         if ( !player.getPosition().getWest().isWall() ) {
-            this.movesPlayerCanDo.add("West");
+            this.movesPlayerCanDo.add("west");
         }
 
         this.movesPlayerCanDo.add("stop");
