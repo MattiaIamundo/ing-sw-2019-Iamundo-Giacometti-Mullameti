@@ -6,6 +6,7 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.PowerUp;
 import it.polimi.sw2019.model.powerup.Newton;
 import it.polimi.sw2019.model.powerup.TagbackGrenade;
+import it.polimi.sw2019.model.powerup.TargetingScope;
 import it.polimi.sw2019.model.powerup.Teleporter;
 
 import java.util.ArrayList;
@@ -16,8 +17,13 @@ public class UsePowerUp implements Action{
     private ArrayList<Player> players;
     private Map map;
 
+    public UsePowerUp(ArrayList<Player> players, Map map) {
+        this.players = players;
+        this.map = map;
+    }
+
     public UsePowerUp() {
-        powerUpControllers.put("TargetingScope", new TargetingScopeCont());
+        powerUpControllers.put("TargetingScope", new TargetingScopeCont(new TargetingScope(), players));
         powerUpControllers.put("Newton", new NewtonCont(new Newton(), players));
         powerUpControllers.put("TagbackGrenade", new TagbackGrenadeCont(new TagbackGrenade(), players));
         powerUpControllers.put("Teleporter", new TeleporterCont(new Teleporter(), players, map));
