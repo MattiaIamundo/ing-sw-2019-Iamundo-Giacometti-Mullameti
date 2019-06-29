@@ -40,7 +40,10 @@ public class PlayerView extends ObservableByGame implements Observer <Player> {
     }
 
     public void requestColor(Color color) {
+
         clientSocket.notifyGUI("RequestCharacter");
+        clientSocket.setColorList(color.getColors());
+
     }
 
     public void requestNickname(Reconnection re) {

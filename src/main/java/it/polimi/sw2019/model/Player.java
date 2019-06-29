@@ -1,6 +1,8 @@
 package it.polimi.sw2019.model;
 
 
+import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
 import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.exception.PowerUpOutOfBoundException;
 import it.polimi.sw2019.exception.WeaponOutOfBoundException;
@@ -201,6 +203,7 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
      */
     public void setPosition(Space position) {
         this.position = position;
+        //notify( new NotifyMoveEv(this.nickname, null, null) );
     }
 
     public void setPlayerNumber (int number) {

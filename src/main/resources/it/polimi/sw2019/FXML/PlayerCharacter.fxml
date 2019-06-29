@@ -36,6 +36,7 @@
                   <RadioButton fx:id="purpleButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#chooseCharacter" prefHeight="170.0" prefWidth="155.0" styleClass="buttonPurple" stylesheets="@../CssStyle/generale.css" text="Purple" toggleGroup="$characterGroup" />
                </buttons>
             </ButtonBar>
+            <Button fx:id="getCharacterButton" layoutX="36.0" layoutY="329.0" mnemonicParsing="false" onAction="#getCharactersButtonClicked" prefHeight="70.0" prefWidth="323.0" text="Get available characters" />
          </children>
       </AnchorPane>
    </children>

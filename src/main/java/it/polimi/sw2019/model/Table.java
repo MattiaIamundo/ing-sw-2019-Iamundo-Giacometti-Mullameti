@@ -20,12 +20,7 @@ public class Table extends TableView implements Cloneable, Serializable {
     private ArrayList<Weapon> weaponDeck; //21
     private ArrayList<PowerUp> powerupDeck; //24
     private ArrayList<Ammo> ammoDeck; //36
-    //there can be 3 , 4 or 5 players
-    private static Player[] players = new Player[5];
-    //this variable indicates the player who is currently playing
-    private static Player currentPlayer = null;
 
-   
 
     public Table( ){
 
@@ -85,28 +80,6 @@ public class Table extends TableView implements Cloneable, Serializable {
     public List<Ammo> getAmmo(){
         return ammoDeck;
     }
-
-    /**
-     * @return one of the players
-     */
-    public static Player getPlayers(int i){
-        return players[i];
-    }
-
-    /**
-     * @return the current player
-     */
-    public static Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    /**
-     * @return the current player
-     */
-    public static Player setCurrentPlayer(){
-        return currentPlayer;
-    }
-
 
     public String getNrMap() {
         return Map;

@@ -232,7 +232,6 @@ public class PlayerThread implements Runnable {
                                 }
                                 logger.log(Level.INFO, "{PlayerThread "+ this.nickname +"} has memorized the character!");
                                 this.gameController.sendYouAreFirstPlayer(this.playerRemoteView);
-
                                 //if you to choose skull
                                 //if ( this.gameController.getGameboard().getKillshotTrack().isEmpty() ) {
                                 //if ( true ) {
@@ -512,6 +511,10 @@ public class PlayerThread implements Runnable {
 
     public void setGameController(Game controller) {
         this.gameController = controller;
+    }
+
+    public PlayerRemoteView getPlayerRemoteView() {
+        return this.playerRemoteView;
     }
 
 

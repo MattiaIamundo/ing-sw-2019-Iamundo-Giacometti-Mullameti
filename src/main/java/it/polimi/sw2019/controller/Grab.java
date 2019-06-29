@@ -1,10 +1,12 @@
 package it.polimi.sw2019.controller;
 
 import it.polimi.sw2019.model.*;
+import it.polimi.sw2019.view.ObservableByGame;
+
 /**Class Grab: One of player`s basic action
  * @author Merita Mullameti
  */
-public class Grab implements Action {
+public class Grab extends ObservableByGame implements Action {
 
     private Ammo ammo;
     /**
@@ -13,9 +15,9 @@ public class Grab implements Action {
     public void useAction(Player player) {
 
         if(player.getPosition() instanceof SpaceAmmo){
-            Ammo ammoCard = SpaceAmmo.takeAmmo();
+            //Ammo ammoCard = SpaceAmmo.takeAmmo();
 
-            player.addAmmo(ammoCard);
+            //player.addAmmo(ammoCard);
         }else{
             System.out.println("There is no ammo in this space !");
         }

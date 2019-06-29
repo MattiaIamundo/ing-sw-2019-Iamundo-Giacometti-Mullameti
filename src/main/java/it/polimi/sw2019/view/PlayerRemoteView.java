@@ -2,6 +2,7 @@ package it.polimi.sw2019.view;
 
 import com.google.gson.Gson;
 import it.polimi.sw2019.events.ActionEv;
+import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
@@ -186,8 +187,18 @@ public class PlayerRemoteView extends PlayerView {
     public ActionEv waitForAction() {
         //  i have to wait for a ActionEv
         set = input.nextLine();
-        //  tramite Gson devo deserializzare l evento e castarlo con ActionEv
         ActionEv actionEv = gson.fromJson(set, ActionEv.class);
         return actionEv;
     }
+
+    public void sendEvent(NotifyReturn notifyReturn) {
+        set = gson.toJson(notifyReturn);
+        output.println(set);
+        output.flush();
+    }
+
+
+
+
+
 }

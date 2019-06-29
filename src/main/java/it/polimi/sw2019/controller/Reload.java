@@ -4,14 +4,20 @@ import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
 import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
+import it.polimi.sw2019.view.ObservableByGame;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Reload implements Action {
+public class Reload extends ObservableByGame implements Action {
 
     private String nameWeapon;
+    private Game controller;
+
+    public Reload(Game controller) {
+        this.controller = controller;
+    }
 
     public void handleEvent(ReloadEv reloadEv, Player player) {
 
@@ -48,6 +54,7 @@ public class Reload implements Action {
         try{
             player.getWeapon( nameWeapon );
             player.getWeapon( nameWeapon ).setIsLoad(true);
+            //diminuire le ammo del personaggio
             //inviare la notifica tramite notify ai giocatori...
 
         } catch (InexistentWeaponException ex) {

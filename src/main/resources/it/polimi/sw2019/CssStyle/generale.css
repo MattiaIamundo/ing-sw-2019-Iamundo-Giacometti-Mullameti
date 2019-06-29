@@ -14,7 +14,7 @@
     -fx-opacity: 0.9;
 }
 .labelInvalidInfo{
-    -fx-font-size: 19pt;
+    -fx-font-size: 36pt;
     -fx-font-family: Stencil;
     -fx-text-fill: red;
     -fx-opacity: 0.9;

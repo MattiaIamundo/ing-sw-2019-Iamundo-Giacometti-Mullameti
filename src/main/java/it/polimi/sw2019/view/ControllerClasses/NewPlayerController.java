@@ -22,11 +22,10 @@ public class NewPlayerController {
 
 
 
-
+    @FXML private Label enterNickname;
     @FXML private TextField nicknameField;
-
     @FXML private Button submitButton;
-
+    @FXML private Button okButton;
     @FXML private Button nextButton;
     @FXML private Label validInput;
 
@@ -38,7 +37,8 @@ public class NewPlayerController {
         this.submitButton.setDefaultButton(true);
         this.submitButton.setVisible(true);
         this.nextButton.setVisible(false);
-        this.validInput.setText("");
+        this.validInput.setVisible(false);
+        this.okButton.setVisible(false);
 
     }
 
@@ -51,30 +51,30 @@ public class NewPlayerController {
     @FXML
     public void submitButtonClicked() {
 
-        if (nicknameField.getText() == null ||nicknameField.getText().length() == 0 ) {
 
-            this.validInput.setText( "Invalid nickname!");
-
-        }else {
-                this.validInput.setText( "");
-                nickname=nicknameField.getText();
-
-                this.clientSocket.setInfo("nickname" , nickname);
+        nickname=nicknameField.getText();
+        this.clientSocket.setInfo("nickname" , nickname);
 
 
-            if(clientSocket.getOk()){
+        if(clientSocket.getOk()){
+            this.submitButton.setVisible(false);
+            this.nextButton.setVisible(true);
+        }else if(!(clientSocket.getOk())){
 
-                this.nextButton.setVisible(true);
-            }else if(!(clientSocket.getOk())){
-                this.nextButton.setVisible(false);
-            }
-
+            this.enterNickname.setVisible(false);
+            this.nicknameField.setVisible(false);
+            this.submitButton.setVisible(false);
+            this.nextButton.setVisible(false);
+            this.validInput.setVisible(true);
+            this.okButton.setVisible(true);
         }
-
-
 
     }
 
+    @FXML
+    public void handleOkButton(){
+        clientSocket.getContSelect().waitForNicknameRequest(clientSocket.getPlayerView());
+    }
 
     @FXML
     public void nextButtonClicked(){
