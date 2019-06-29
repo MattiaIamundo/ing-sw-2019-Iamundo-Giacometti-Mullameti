@@ -513,5 +513,9 @@ public class PlayerThread implements Runnable {
         this.gameController = controller;
     }
 
+    public PlayerRemoteView getPlayerRemoteView() {
+        return this.playerRemoteView;
+    }
+
 
 }//END of CLASS PLAYER THREAD

@@ -31,7 +31,7 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     private ArrayList<Player> marked = new ArrayList<> (12);
     private PlayerPlance plance;
     //list of power up cards  the player owns , every player can own at top 3 weapons
-    private static PowerUp[] powerup = new PowerUp[3];
+    private PowerUp[] powerup = new PowerUp[3];
     //
     private int playerNumber;
     //

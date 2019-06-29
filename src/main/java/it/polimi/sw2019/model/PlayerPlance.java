@@ -3,6 +3,7 @@ package it.polimi.sw2019.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * this class stands for the player's plance
@@ -11,16 +12,16 @@ import java.util.Iterator;
 public class PlayerPlance implements Serializable {
 
     //the vector is set to 12 space due to every player can be hit at top 12 times
-    private ArrayList<String> damageTrack = new ArrayList<>();
-    private static boolean isFirstAdrenaline;
-    private static boolean isSecondAdrenaline;
-    private static boolean isKilled;
-    private static boolean isOverkilled;
+    private List<String> damageTrack = new ArrayList<>(12);
+    private boolean isFirstAdrenaline;
+    private boolean isSecondAdrenaline;
+    private boolean isKilled;
+    private boolean isOverkilled;
     //this vector shows how many times the player is dead
     //so the controller will be able to calculate the points
     private boolean[] killed = new boolean[6];
     //the initial capacity is set to 12 since every player could be marked at top 12 times
-    private ArrayList<Player> markedBy = new ArrayList <> (12);
+    private List<Player> markedBy = new ArrayList <> (12);
 
     /**
      * this is the constructor
@@ -42,25 +43,25 @@ public class PlayerPlance implements Serializable {
     /**
      * @return true if the player got the first adrenaline
      */
-    public static boolean getFirstAdrenaline(){
+    public boolean getFirstAdrenaline(){
         return isFirstAdrenaline;
     }
     /**
      * @return true if the player got the second adrenaline
      */
-    public static boolean getSecondAdrenaline(){
+    public boolean getSecondAdrenaline(){
         return isSecondAdrenaline;
     }
     /**
      * @return true if the player is dead
      */
-    public static boolean getIsKilled(){
+    public boolean getIsKilled(){
         return isKilled;
     }
     /**
      * @return true if the player is raged
      */
-    public static boolean getOverkilled(){
+    public boolean getOverkilled(){
         return isOverkilled;
     }
 
@@ -113,7 +114,7 @@ public class PlayerPlance implements Serializable {
      * this method return the damage track
      * @return plance's damage track
      */
-    public ArrayList<String> getDamageTrack() {
+    public List<String> getDamageTrack() {
         return damageTrack;
     }
 

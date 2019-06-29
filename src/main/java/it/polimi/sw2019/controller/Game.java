@@ -5,7 +5,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.ExecutorEventImp;
+import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.client_event.Cevent.Color;
+import it.polimi.sw2019.events.client_event.Cevent.DirectionChooseEv;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
 import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
@@ -34,7 +36,7 @@ import java.util.logging.Logger;
 public class Game implements Observer <ObservableByGame> {
 
     //the model
-    private final List<Player> players;
+    private final ArrayList<Player> players;
     private List<PlayerThread> playerThreads;
     private final Table gameboard;
     //the utility
@@ -83,7 +85,13 @@ public class Game implements Observer <ObservableByGame> {
         out = false;
         gameover = false;
         //controllers
-        moveController = new Move();
+        moveController = new Move(this);
+        reloadController = new Reload();
+        grabController = new Grab();
+        usePowerUpController = new UsePowerUp();
+        shootController = new Shoot(this.players, this.gameboard.getMap());
+        killshotController = new Killshot();
+        finalFrenzyController = new FinalFrenzy();
         //da rimuovere e chiamare da metodo, il metodo c'è già
         try{
             FileReader reader = new FileReader("File_Json/milliSecondsToTimerBeginning.json");
@@ -1060,7 +1068,35 @@ public class Game implements Observer <ObservableByGame> {
         return gamemode;
     }
 
-    public void update() {
+    public List<PlayerRemoteView> searchAllPlayerRemoteViews() {
+
+        List<PlayerRemoteView> playerRemoteViews = new ArrayList<>(5);
+
+        for(PlayerThread pt : this.playerThreads) {
+
+            playerRemoteViews.add(pt.getPlayerRemoteView());
+        }
+
+        return playerRemoteViews;
+    }
+
+    public PlayerRemoteView searchSpecificPlayerRemoteView(String nickname) {
+
+        PlayerRemoteView playerRemoteView = null;
+        for(PlayerThread pt : this.playerThreads) {
+
+            if ( pt.getNickname().equals(nickname) ) {
+                playerRemoteView = pt.getPlayerRemoteView();
+            }
+        }
+
+        return playerRemoteView;
+    }
+
+    public void notify(DirectionChooseEv directionChooseEv) {
+
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(directionChooseEv.getNickname());
+        playerRemoteView.sendEvent( directionChooseEv );
 
     }
 }

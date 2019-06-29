@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller;
 
+import it.polimi.sw2019.events.client_event.Cevent.DirectionChooseEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
@@ -13,12 +14,13 @@ import java.util.List;
 
 public class Move implements Action {
 
-    private Space moveto;
+    private Space moveto = null;
     private List<String> movesPlayerCanDo = new ArrayList<>();
+    private Game controller;
     private int nrOfMoves = 0;
 
-    public Move() {
-
+    public Move(Game controller) {
+        this.controller = controller;
     }
 
     /**
@@ -58,13 +60,16 @@ public class Move implements Action {
             //control on what position the player can set
             //and create the new MoveEv
             findDirection(player);
-            //MoveEv moveEv = new MoveEv(movesPlayerCanDo);
-            this.nrOfMoves++;
+            DirectionChooseEv directionChooseEv = new DirectionChooseEv(movesPlayerCanDo);
+            directionChooseEv.setNickname(player.getNickname());
+            //viene notificato al player che mosse vuole fare
+            this.controller.notify(directionChooseEv);
+
 
         } else {
             player.setPosition(moveto);
             //come notificare a tutti??
-            //qui devo notificare al giocatore stesso
+            // qui devo notificare al giocatore stesso
             //se vuole andare avanti se gli è concesso
         }
 
@@ -87,6 +92,7 @@ public class Move implements Action {
             this.movesPlayerCanDo.add("West");
         }
 
+        this.movesPlayerCanDo.add("stop");
     }
 
 
