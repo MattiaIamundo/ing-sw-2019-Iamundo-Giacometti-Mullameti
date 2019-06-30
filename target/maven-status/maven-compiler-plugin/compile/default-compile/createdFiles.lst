@@ -31,6 +31,7 @@ it\polimi\sw2019\controller\TurnNormal.class
 it\polimi\sw2019\model\weapon_power\Thor.class
 it\polimi\sw2019\events\weaponeffect_controller_events\HeatseekerSetEv.class
 it\polimi\sw2019\nethandler\ModViewEventInt.class
+it\polimi\sw2019\events\WeaponSetEv.class
 it\polimi\sw2019\controller\Game$2.class
 it\polimi\sw2019\view\WeaponRemoteView.class
 it\polimi\sw2019\model\DoubleAdditive.class
@@ -245,6 +246,7 @@ it\polimi\sw2019\model\weapon_power\ThroughWalls.class
 it\polimi\sw2019\model\weapon_power\RocketJump.class
 it\polimi\sw2019\events\powerup_events\TargetingScopeChooseEv.class
 it\polimi\sw2019\model\Space.class
+it\polimi\sw2019\events\WeaponChooseEv.class
 it\polimi\sw2019\events\weaponeffect_controller_events\GrenadeLaunchSetEv.class
 it\polimi\sw2019\model\weapon_power\RocketFistMode.class
 it\polimi\sw2019\events\weaponeffect_controller_events\PowerSetEv.class
@@ -325,7 +327,6 @@ it\polimi\sw2019\model\weapon_power\Furnace.class
 it\polimi\sw2019\events\weaponeffect_controller_events\RocketJumpChooseEv.class
 it\polimi\sw2019\events\weaponeffect_controller_events\ShotgunSetEv.class
 it\polimi\sw2019\controller\Game$5.class
-it\polimi\sw2019\events\weaponeffect_controller_events\WeaponSelectEv.class
 it\polimi\sw2019\controller\weaponeffect\FlamethrowerCont.class
 it\polimi\sw2019\events\client_event\MVevent\MVevent.class
 it\polimi\sw2019\controller\weaponeffect\HighVoltageCont.class

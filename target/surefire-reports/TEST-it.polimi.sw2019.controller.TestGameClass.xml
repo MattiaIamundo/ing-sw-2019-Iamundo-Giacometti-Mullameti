@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="7" failures="0" name="it.polimi.sw2019.controller.TestGameClass" time="0.381" errors="0" skipped="0">
+<testsuite tests="7" failures="0" name="it.polimi.sw2019.controller.TestGameClass" time="0.231" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_212\jre\bin"/>
@@ -62,11 +62,11 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="it.polimi.sw2019.controller.TestGameClass" name="testCreateWeapon" time="0.327"/>
-  <testcase classname="it.polimi.sw2019.controller.TestGameClass" name="testcreateMap1" time="0.007"/>
-  <testcase classname="it.polimi.sw2019.controller.TestGameClass" name="testcreateMap2" time="0.005"/>
-  <testcase classname="it.polimi.sw2019.controller.TestGameClass" name="testcreateMap3" time="0.006"/>
-  <testcase classname="it.polimi.sw2019.controller.TestGameClass" name="testcreateMap4" time="0.005"/>
-  <testcase classname="it.polimi.sw2019.controller.TestGameClass" name="testCreatePowerUp" time="0.012"/>
-  <testcase classname="it.polimi.sw2019.controller.TestGameClass" name="testCreateAmmo" time="0.019"/>
+  <testcase classname="it.polimi.sw2019.controller.TestGameClass" name="testCreateWeapon" time="0.194"/>
+  <testcase classname="it.polimi.sw2019.controller.TestGameClass" name="testcreateMap1" time="0.006"/>
+  <testcase classname="it.polimi.sw2019.controller.TestGameClass" name="testcreateMap2" time="0.004"/>
+  <testcase classname="it.polimi.sw2019.controller.TestGameClass" name="testcreateMap3" time="0.004"/>
+  <testcase classname="it.polimi.sw2019.controller.TestGameClass" name="testcreateMap4" time="0.003"/>
+  <testcase classname="it.polimi.sw2019.controller.TestGameClass" name="testCreatePowerUp" time="0.007"/>
+  <testcase classname="it.polimi.sw2019.controller.TestGameClass" name="testCreateAmmo" time="0.013"/>
 </testsuite>

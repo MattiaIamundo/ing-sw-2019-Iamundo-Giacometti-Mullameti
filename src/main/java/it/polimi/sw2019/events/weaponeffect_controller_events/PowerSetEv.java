@@ -1,13 +1,21 @@
 package it.polimi.sw2019.events.weaponeffect_controller_events;
 
-public class PowerSetEv {
-    private String power;
+import java.util.ArrayList;
 
-    public PowerSetEv(String power) {
-        this.power = power;
+public class PowerSetEv {
+    private ArrayList<String> powers;
+    private ArrayList<String> usedPowerUps;
+
+    public PowerSetEv(ArrayList<String> powers, ArrayList<String> usedPowerUps) {
+        this.powers = powers;
+        this.usedPowerUps = usedPowerUps;
     }
 
-    public String getPower() {
-        return power;
+    public ArrayList<String> getPowers() {
+        return powers;
+    }
+
+    public ArrayList<String> getUsedPowerUps() {
+        return usedPowerUps;
     }
 }

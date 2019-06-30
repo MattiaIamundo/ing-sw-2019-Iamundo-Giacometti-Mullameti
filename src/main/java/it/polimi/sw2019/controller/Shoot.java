@@ -1,14 +1,14 @@
 package it.polimi.sw2019.controller;
 
 import it.polimi.sw2019.model.Map;
-import it.polimi.sw2019.events.weaponeffect_controller_events.WeaponSelectEv;
+import it.polimi.sw2019.events.WeaponSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 
-public class Shoot implements Action, Observer<WeaponSelectEv> {
+public class Shoot implements Action, Observer<WeaponSetEv> {
 
     private ArrayList<Player> players;
     private Map map;
@@ -27,10 +27,11 @@ public class Shoot implements Action, Observer<WeaponSelectEv> {
                 weapons.add(weapon.getName());
             }
         }
+        //TODO notify the player to choose a weapon using WeaponChooseEv
     }
 
     @Override
-    public void update(WeaponSelectEv message) {
+    public void update(WeaponSetEv message) {
         for (Player player : players){
             if (player.getNickname().equals(message.getNickname())){
                 for (Weapon weapon : player.getWeapons()){

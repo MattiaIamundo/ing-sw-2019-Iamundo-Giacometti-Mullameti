@@ -27,6 +27,7 @@ C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\ja
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\view\PowerUpView.java
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\controller\weaponeffect\ChainReactionCont.java
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\controller\weaponeffect\PunisherModeCont.java
+C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\events\WeaponSetEv.java
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\exception\InvalidNrOfMoves.java
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\nethandler\ModViewEvent.java
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\events\weaponeffect_controller_events\ExtraGrenadeChooseEv.java
@@ -86,7 +87,6 @@ C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\ja
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\events\weaponeffect_controller_events\GrenadeLaunchChooseEv.java
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\model\weapon_power\WithMove.java
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\events\weaponeffect_controller_events\FlamethrowerSetEv.java
-C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\events\weaponeffect_controller_events\WeaponSelectEv.java
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\nethandler\ModViewEventInt.java
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\nethandler\ViewContEventInt.java
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\controller\weaponeffect\HeatseekerCont.java
@@ -124,6 +124,7 @@ C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\ja
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\model\weapon_power\TurretTripod.java
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\controller\weaponeffect\FlamethrowerCont.java
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\events\weaponeffect_controller_events\ThorChooseEv.java
+C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\events\WeaponChooseEv.java
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\model\weapon_power\HighVoltage.java
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\model\Ammo.java
 C:\Users\matti\IdeaProjects\ing-sw-2019-Iamundo-Giacometti-Mullameti\src\main\java\it\polimi\sw2019\controller\weaponeffect\ThoughWall.java
