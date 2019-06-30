@@ -13,7 +13,7 @@ import java.util.List;
 public class Table extends TableView implements Cloneable, Serializable {
 
     private ArrayList<Skull> killshotTrack;
-    //the map of the battlefield ;there can be 3 different ones , based on the number of the players
+    //the map of the battlefield ;there can be 4 different ones , based on the choose of the first player
     private Map map;
     private String nrSkulls;
     private String Map;
@@ -89,13 +89,16 @@ public class Table extends TableView implements Cloneable, Serializable {
         this.Map=nrMap;
     }
 
-
     public String getNrSkulls() {
         return nrSkulls;
     }
 
     public void setNrSkulls(String nrSkulls) {
         this.nrSkulls=nrSkulls;
+    }
+
+    public Object cloneTable() throws CloneNotSupportedException{
+        return super.clone();
     }
 
 }

@@ -12,7 +12,7 @@ import java.util.List;
  * this class stands for the player's plance
  * @author Luca Giacometti
  */
-public class PlayerPlance implements Serializable {
+public class PlayerPlance implements Cloneable, Serializable {
 
     //the vector is set to 12 space due to every player can be hit at top 12 times
     private List<String> damageTrack = new ArrayList<>(12);

@@ -11,7 +11,7 @@ import java.util.List;
  * this class is stand of the game's maps
  * @author Luca Giacometti
  */
-public class Map implements Serializable {
+public class Map implements Cloneable, Serializable {
     //list is set to 4 because the map is a 4 x-coordinate x 3 y-coordinate
     private List <List<Space>> list = new ArrayList <> (4);
 

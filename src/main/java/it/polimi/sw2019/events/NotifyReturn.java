@@ -1,5 +1,6 @@
 package it.polimi.sw2019.events;
 
+
 public class NotifyReturn {
 
     private String nickname;
@@ -11,4 +12,6 @@ public class NotifyReturn {
     public String getNickname() {
         return this.nickname;
     }
+
+
 }

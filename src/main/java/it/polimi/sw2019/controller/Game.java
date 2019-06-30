@@ -1110,8 +1110,23 @@ public class Game implements Observer <ObservableByGame> {
 
     public void update(NotifyMoveEv notifyMoveEv) {
         List<PlayerRemoteView> playerRemoteViews = searchAllPlayerRemoteViews();
-        for (PlayerRemoteView p : playerRemoteViews) {
-            p.sendEvent(notifyMoveEv);
+        List<Player> clonePlayers = new ArrayList<>(5);
+
+        try{
+            for(Player p : this.players) {
+                clonePlayers.add( (Player) p.clonePlayer() );
+            }
+
+            notifyMoveEv.setBoardGame( (Table) this.gameboard.cloneTable() );
+            notifyMoveEv.setPlayerList(clonePlayers);
+
+            for (PlayerRemoteView playerRemoteView : playerRemoteViews) {
+
+                playerRemoteView.sendEvent(notifyMoveEv);
+            }
+
+        } catch (CloneNotSupportedException ex) {
+            //do nothing
         }
     }
 

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * this class symbolizes the skulls which are present on the table
  * @author Luca Giacometti
  */
-public class Skull implements Serializable {
+public class Skull implements Cloneable, Serializable {
 
     private boolean isPresent;
     private boolean isOverkilled;

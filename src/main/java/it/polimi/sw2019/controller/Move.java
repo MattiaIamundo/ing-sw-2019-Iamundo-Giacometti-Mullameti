@@ -84,7 +84,7 @@ public class Move extends Observable<NotifyReturn> implements Action {
             notify(new NotifyEndMoveEv(player.getNickname()));
         }
         else {
-            if (nrOfMoves < 2) {
+            if (nrOfMoves < 3) {
                 //the player can choose another
                 player.setPosition(moveto);
                 nrOfMoves++;

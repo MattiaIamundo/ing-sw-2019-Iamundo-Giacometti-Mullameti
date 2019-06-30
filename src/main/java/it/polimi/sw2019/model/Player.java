@@ -203,7 +203,7 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
      */
     public void setPosition(Space position) {
         this.position = position;
-        //notify( new NotifyMoveEv(this.nickname, null, null) );
+        notify( new NotifyMoveEv(this.nickname, "move") );
     }
 
     public void setPlayerNumber (int number) {
@@ -269,6 +269,10 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
 
     public void setCharacter(String character) {
         this.character = character;
+    }
+
+    public Object clonePlayer() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public ArrayList<Player> getLastHittedPlayers() {

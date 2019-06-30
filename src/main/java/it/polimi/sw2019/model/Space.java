@@ -6,7 +6,7 @@ import java.io.Serializable;
  * this class indicates the table's squares
  * @author Luca Giacometti
  */
-public abstract class Space implements Serializable {
+public abstract class Space implements Cloneable, Serializable {
 
     private Connection north;
     private Connection east;

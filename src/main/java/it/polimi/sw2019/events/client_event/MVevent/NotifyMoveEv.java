@@ -1,41 +1,43 @@
 package it.polimi.sw2019.events.client_event.MVevent;
 
 import it.polimi.sw2019.events.NotifyReturn;
+import it.polimi.sw2019.model.Player;
+import it.polimi.sw2019.model.Table;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NotifyMoveEv extends NotifyReturn {
 
-    private String north;
-    private String east;
-    private String south;
-    private String west;
-    private String room;
+    private String changeName;
+    private List<Player> playerList;
+    private Table boardGame;
 
-    public NotifyMoveEv(String nickname, String north, String east, String south, String west, String room) {
-        this.setNickname(nickname);
-        this.north = north;
-        this.east = east;
-        this.south = south;
-        this.west = west;
-        this.room = room;
+    public NotifyMoveEv(String nickname, String changeName) {
+        setNickname(nickname);
+        this.changeName = changeName;
+        playerList = new ArrayList<>(5);
+        boardGame = new Table();
     }
 
-    public String getNorth() {
-        return north;
+    public String getChangeName() {
+        return this.changeName;
     }
 
-    public String getEast() {
-        return east;
+    public List<Player> getPlayerList() {
+        return playerList;
     }
 
-    public String getSouth() {
-        return south;
+    public void setPlayerList(List<Player> playerList) {
+        this.playerList = playerList;
     }
 
-    public String getWest() {
-        return west;
+    public Table getBoardGame() {
+        return boardGame;
     }
 
-    public String getRoom() {
-        return room;
+    public void setBoardGame(Table boardGame) {
+        this.boardGame = boardGame;
     }
+
 }
