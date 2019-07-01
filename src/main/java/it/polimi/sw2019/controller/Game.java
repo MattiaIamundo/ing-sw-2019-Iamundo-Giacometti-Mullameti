@@ -1040,6 +1040,26 @@ public class Game implements Observer <NotifyReturn> {
         return playerToReturn;
     }
 
+    public void sendStartGame(PlayerRemoteView playerRemoteView) {
+        playerRemoteView.sendStartGame();
+    }
+
+    public void sendAllModel(PlayerRemoteView playerRemoteView) {
+        try{
+            List<Player> playerss = new ArrayList<>(5);
+            for( Player p : this.players ) {
+                playerss.add( (Player) p.clonePlayer() );
+            }
+            StartGameEv startGameEv = new StartGameEv(  playerss, (Table) this.gameboard.cloneTable());
+            playerRemoteView.sendAllModel(startGameEv);
+        } catch (CloneNotSupportedException ex) {
+            //do nothing
+        }
+
+    }
+
+
+
     public void handleEvent(ActionEv actionEv) {
 
         actionEv.handle(this.executorEventImp, this);
@@ -1078,7 +1098,6 @@ public class Game implements Observer <NotifyReturn> {
 
  */
 
-    //.............................FROM HERE OLD THINGS........................
 
     public void update(NotifyReturn notifyReturn) {
         notifyReturn.updateObject(this.executorEventImp, this);
@@ -1087,8 +1106,6 @@ public class Game implements Observer <NotifyReturn> {
     public String listGamemode(){
         return gamemode;
     }
-
-    //.............................TO HERE OLD THINGS........................
 
 
     private List<PlayerRemoteView> searchAllPlayerRemoteViews() {
