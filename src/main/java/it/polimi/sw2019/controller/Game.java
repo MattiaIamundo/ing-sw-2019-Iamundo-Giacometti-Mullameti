@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.events.NotifyReturn;
+import it.polimi.sw2019.events.WeaponChooseEv;
 import it.polimi.sw2019.events.client_event.Cevent.*;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyGrabEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
@@ -1197,7 +1198,12 @@ public class Game implements Observer <NotifyReturn> {
 
     }
 
-
+    public void update(WeaponChooseEv weaponChooseEv){
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView( weaponChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent( weaponChooseEv );
+        }
+    }
 
 
 

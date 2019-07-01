@@ -12,6 +12,8 @@ import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.events.server_event.VCevent.PowerupEv;
 import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.PaymentInvalidEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.PowerChooseEv;
 
 public class ExecutorEventImp implements ExecutorEvent {
 
@@ -67,5 +69,21 @@ public class ExecutorEventImp implements ExecutorEvent {
 
     public void updateObject(WeaponReloadChooseEv weaponReloadChooseEv, Game game) {
         game.update(weaponReloadChooseEv);
+    }
+
+    public void updateObject(WeaponChooseEv weaponChooseEv, Game game){
+        game.update(weaponChooseEv);
+    }
+
+    public void updateObject(PowerUpChooseEv powerUpChooseEv, Game game){
+
+    }
+
+    public void updateObject(PowerChooseEv powerChooseEv, Game game){
+
+    }
+
+    public void updateObject(PaymentInvalidEv paymentInvalidEv, Game game){
+
     }
 }
