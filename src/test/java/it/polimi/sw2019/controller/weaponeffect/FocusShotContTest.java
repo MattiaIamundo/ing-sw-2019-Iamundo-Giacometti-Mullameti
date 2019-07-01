@@ -61,7 +61,7 @@ public class FocusShotContTest {
         Catcher catcher = new Catcher();
         ArrayList<String> expected = new ArrayList<>();
 
-        focusShot.addObserver(catcher);
+        controller.addObserver(catcher);
         controller.useEffect(players.get(0), players, map);
         expected.add("prevtarget1");
         expected.add("prevtarget2");

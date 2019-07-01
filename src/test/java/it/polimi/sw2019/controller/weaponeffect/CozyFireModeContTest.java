@@ -51,7 +51,7 @@ public class CozyFireModeContTest {
         Catcher catcher = new Catcher();
         ArrayList<String> excpected = new ArrayList<>();
 
-        model.addObserver(catcher);
+        cozyFireModeCont.addObserver(catcher);
         cozyFireModeCont.useEffect(players.get(0), players, map);
         excpected.add("south");
         excpected.add("north");

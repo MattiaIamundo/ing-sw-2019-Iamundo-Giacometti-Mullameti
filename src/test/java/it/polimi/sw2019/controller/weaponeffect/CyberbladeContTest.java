@@ -51,7 +51,7 @@ public class CyberbladeContTest {
         ArrayList<String> excpectedValid = new ArrayList<>();
         ArrayList<String> excpectedNotReachable = new ArrayList<>();
 
-        cyberblade.addObserver(catcher);
+        cyberbladeCont.addObserver(catcher);
         cyberbladeCont.useEffect(players.get(0), players, map);
         excpectedValid.add("target");
         excpectedNotReachable.add("notvalid");

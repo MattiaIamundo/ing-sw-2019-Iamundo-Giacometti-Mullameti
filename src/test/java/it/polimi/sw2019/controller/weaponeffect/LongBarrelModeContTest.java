@@ -50,7 +50,7 @@ public class LongBarrelModeContTest {
         ArrayList<String> expectedValid = new ArrayList<>();
         ArrayList<String> expectedNotReachable = new ArrayList<>();
 
-        model.addObserver(catcher);
+        controller.addObserver(catcher);
         controller.useEffect(players.get(0), players, map);
         expectedNotReachable.add("noTarget");
         expectedValid.add("target");
