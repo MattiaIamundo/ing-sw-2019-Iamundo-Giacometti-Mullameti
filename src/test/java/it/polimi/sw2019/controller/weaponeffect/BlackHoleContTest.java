@@ -62,7 +62,7 @@ public class BlackHoleContTest {
         ArrayList<String> expectedNotSelectable = new ArrayList<>();
         ArrayList<String> expectedNotReachable = new ArrayList<>();
 
-        controller.addObserver(capturer);
+        blackHole.addObserver(capturer);
         controller.useEffect(players.get(0), players, map);
         expectedValid.add("target");
         expectedValid.add("target2");

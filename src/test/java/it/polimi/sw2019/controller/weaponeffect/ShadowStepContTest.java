@@ -40,7 +40,7 @@ public class ShadowStepContTest {
         ArrayList<String> expectedDirection = new ArrayList<>();
 
         try {
-            controller.addObserver(catcher);
+            model.addObserver(catcher);
             players.get(0).setPosition(map.getSpace(2,1));
             controller.useEffect(players.get(0), players, map);
             expectedDirection.add("east");
@@ -59,7 +59,7 @@ public class ShadowStepContTest {
         ArrayList<String> expectedDirection = new ArrayList<>();
 
         try {
-            controller.addObserver(catcher);
+            model.addObserver(catcher);
             players.get(0).setPosition(map.getSpace(3,0));
             controller.useEffect(players.get(0), players, map);
             expectedDirection.add("north");

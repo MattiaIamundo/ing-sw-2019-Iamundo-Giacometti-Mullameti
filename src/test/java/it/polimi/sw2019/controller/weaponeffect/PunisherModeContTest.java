@@ -46,7 +46,7 @@ public class PunisherModeContTest {
             players.get(0).setPosition(map.getSpace(3,2));
             players.get(1).setPosition(map.getSpace(2,1));
             players.get(2).setPosition(map.getSpace(1,1));
-            controller.addObserver(catcher);
+            model.addObserver(catcher);
             controller.useEffect(players.get(0), players, map);
             expectedValid.add("target");
             expectedNotReachable.add("noTarget");
@@ -68,7 +68,7 @@ public class PunisherModeContTest {
             players.get(0).setPosition(map.getSpace(0,0));
             players.get(1).setPosition(map.getSpace(2,0));
             players.get(2).setPosition(map.getSpace(2,2));
-            controller.addObserver(catcher);
+            model.addObserver(catcher);
             controller.useEffect(players.get(0), players, map);
             expectedValid.add("target");
             expectedNotReachable.add("noTarget");

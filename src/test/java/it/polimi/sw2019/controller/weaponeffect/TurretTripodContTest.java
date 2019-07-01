@@ -60,7 +60,7 @@ public class TurretTripodContTest {
         ArrayList<String> expectedNotReachable = new ArrayList<>();
 
         try {
-            controller.addObserver(catcher);
+            turretTripod.addObserver(catcher);
             players.get(1).setPosition(map.getSpace(3,0));
             players.get(2).setPosition(map.getSpace(2,0));
             players.get(3).setPosition(map.getSpace(0,0));
@@ -76,6 +76,7 @@ public class TurretTripodContTest {
             Assert.assertTrue(catcher.message.getValid().isEmpty());
             Assert.assertArrayEquals(expectedNotSelectable.toArray(), catcher.message.getNotselectable().toArray());
             Assert.assertArrayEquals(expectedNotReachable.toArray(), catcher.message.getNotreachable().toArray());
+            Assert.assertEquals(catcher.message.getAttacker(), catcher.message.getNotselectable().get(0));
             Assert.assertEquals(players.get(2), turretTripod.getPrevioustarget());
         }catch (InvalidSpaceException e){
             logger.log(Level.SEVERE, "out of map boundaries");
@@ -89,7 +90,7 @@ public class TurretTripodContTest {
         ArrayList<String> expectedvalid = new ArrayList<>();
 
         try {
-            controller.addObserver(catcher);
+            turretTripod.addObserver(catcher);
             players.get(1).setPosition(map.getSpace(3,0));
             players.get(2).setPosition(map.getSpace(2,0));
             players.get(3).setPosition(map.getSpace(3,1));
@@ -105,6 +106,7 @@ public class TurretTripodContTest {
             Assert.assertArrayEquals(expectedvalid.toArray(), catcher.message.getValid().toArray());
             Assert.assertArrayEquals(expectedNotSelectable.toArray(), catcher.message.getNotselectable().toArray());
             Assert.assertArrayEquals(expectedvalid.toArray(), catcher.message.getValid().toArray());
+            Assert.assertEquals(catcher.message.getAttacker(), catcher.message.getNotselectable().get(0));
             Assert.assertEquals(players.get(2), turretTripod.getPrevioustarget());
         }catch (InvalidSpaceException e){
             logger.log(Level.SEVERE, "out of map boundaries");
@@ -118,7 +120,7 @@ public class TurretTripodContTest {
         ArrayList<String> expectedNotReachable = new ArrayList<>();
 
         try {
-            controller.addObserver(catcher);
+            turretTripod.addObserver(catcher);
             players.get(1).setPosition(map.getSpace(3,0));
             players.get(2).setPosition(map.getSpace(0,0));
             players.get(3).setPosition(map.getSpace(0,0));
@@ -134,6 +136,7 @@ public class TurretTripodContTest {
             Assert.assertTrue(catcher.message.getValid().isEmpty());
             Assert.assertArrayEquals(expectedNotSelectable.toArray(), catcher.message.getNotselectable().toArray());
             Assert.assertArrayEquals(expectedNotReachable.toArray(), catcher.message.getNotreachable().toArray());
+            Assert.assertEquals(catcher.message.getAttacker(), catcher.message.getNotselectable().get(0));
             Assert.assertEquals(players.get(1), turretTripod.getPrevioustarget());
         }catch (InvalidSpaceException e){
             logger.log(Level.SEVERE, "out of map boundaries");

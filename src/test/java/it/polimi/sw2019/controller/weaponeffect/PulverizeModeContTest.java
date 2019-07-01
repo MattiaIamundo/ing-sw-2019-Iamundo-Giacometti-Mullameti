@@ -44,7 +44,7 @@ public class PulverizeModeContTest {
         try {
             players.get(0).setPosition(map.getSpace(3,2));
             players.get(1).setPosition(map.getSpace(3,2));
-            controller.addObserver(catcher);
+            model.addObserver(catcher);
             controller.useEffect(players.get(0), players, map);
             expectedValid.add("target");
             expectedDirection.add("zero");
@@ -69,7 +69,7 @@ public class PulverizeModeContTest {
         try {
             players.get(0).setPosition(map.getSpace(0,0));
             players.get(1).setPosition(map.getSpace(0,0));
-            controller.addObserver(catcher);
+            model.addObserver(catcher);
             controller.useEffect(players.get(0), players, map);
             expectedValid.add("target");
             expectedDirection.add("zero");

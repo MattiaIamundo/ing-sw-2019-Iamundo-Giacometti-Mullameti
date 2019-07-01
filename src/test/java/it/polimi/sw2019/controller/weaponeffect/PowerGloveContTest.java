@@ -50,7 +50,7 @@ public class PowerGloveContTest {
         ArrayList<String> expectedValid = new ArrayList<>();
         ArrayList<String> expectedNotReachable = new ArrayList<>();
 
-        controller.addObserver(catcher);
+        model.addObserver(catcher);
         controller.useEffect(players.get(0), players ,map);
         expectedValid.add("target");
         expectedNotReachable.add("noTarget");

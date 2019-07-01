@@ -18,7 +18,7 @@ public class HeatseekerCont extends VisibleTargetCont implements Observer<Heatse
     @Override
     protected void acquireTarget() {
         super.acquireTarget();
-        notify(new HeatseekerChooseEv(attacker.getNickname(), notreachable, valid));
+        notify(new HeatseekerChooseEv(attacker.getNickname(), valid, notreachable));
     }
 
     @Override

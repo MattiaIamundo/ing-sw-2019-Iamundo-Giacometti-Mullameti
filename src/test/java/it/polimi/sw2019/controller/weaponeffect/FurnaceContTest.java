@@ -49,7 +49,7 @@ public class FurnaceContTest {
         FurnaceCont controller = new FurnaceCont(model);
         ArrayList<String> expected = new ArrayList<>();
 
-        controller.addObserver(catcher);
+        model.addObserver(catcher);
         controller.useEffect(players.get(0), players, map);
         expected.add("yellow");
 
@@ -66,7 +66,7 @@ public class FurnaceContTest {
         try {
             players.get(0).setPosition(map.getSpace(2,0));
             players.get(1).setPosition(map.getSpace(2,2));
-            controller.addObserver(catcher);
+            model.addObserver(catcher);
             controller.useEffect(players.get(0), players, map);
 
             Assert.assertTrue(catcher.message.getRooms().isEmpty());
