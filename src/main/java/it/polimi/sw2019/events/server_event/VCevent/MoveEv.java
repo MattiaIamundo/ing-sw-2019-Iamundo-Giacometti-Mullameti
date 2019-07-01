@@ -7,7 +7,6 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 
 public class MoveEv extends ActionEv {
 
-    private String playerNickname;
     private String move;
 
     public MoveEv(String move) {
@@ -16,14 +15,6 @@ public class MoveEv extends ActionEv {
 
     public String getMove() {
         return this.move;
-    }
-
-    public void setPlayerNickname(String nickname) {
-        this.playerNickname = nickname;
-    }
-
-    public String getPlayerNickname() {
-        return this.playerNickname;
     }
 
     public void handle(ExecutorEventImp executorEventImp, Game controller) {

@@ -1,7 +1,7 @@
 package it.polimi.sw2019.model;
 
 
-import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.client_event.MVevent.NotifyGrabEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
 import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.exception.PowerUpOutOfBoundException;
@@ -10,6 +10,7 @@ import it.polimi.sw2019.view.ObservableByGame;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,7 +25,7 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     //first red, second blue, third yellow
     private int[] ammo = new int[3];
     //list of weapons the player owns , every player can own at top 3 weapons
-    private ArrayList<Weapon> weapons = new ArrayList<>();
+    private List<Weapon> weapons = new ArrayList<>();
     //the position the player's in
     private Space position;
     private PlayerPlance plance;
@@ -32,8 +33,6 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     private  ArrayList<PowerUp> powerup = new ArrayList<>();
     //
     private int playerNumber;
-    //
-    private boolean connected;
     private ArrayList<Player> lastHittedPlayers = new ArrayList<>();
 
     /**Constructor of the class
@@ -131,7 +130,7 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     /**
      * @return the list of the player's weapons
      */
-    public ArrayList<Weapon> getWeapons() {
+    public List<Weapon> getWeapons() {
         return weapons;
     }
 
@@ -174,7 +173,7 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     /**
      * @return a pointer to the list of powerup the player ownes
      */
-    public ArrayList<PowerUp> getPowerup() {
+    public List<PowerUp> getPowerup() {
         return powerup;
     }
 
@@ -188,13 +187,6 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
 
     public void removePowerUp(PowerUp powerUp){
         powerup.remove(powerUp);
-    }
-
-    /**
-     * @return the player's ammo
-     */
-    public int[] listAmmo() {
-        return ammo;
     }
 
     /**
@@ -235,6 +227,8 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
                 logger.log(Level.WARNING, e.getMessage()+" already have 3 PowerUps");
             }
         }
+
+        notify( new NotifyGrabEv(this.nickname, "ammo") );
     }
 
     private void loadAmmo(String color){
@@ -261,6 +255,10 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
 
     public int[] getAmmo() {
         return this.ammo;
+    }
+
+    public Object getCopyAmmo() {
+        return getAmmo().clone();
     }
 
     public String getCharacter() {

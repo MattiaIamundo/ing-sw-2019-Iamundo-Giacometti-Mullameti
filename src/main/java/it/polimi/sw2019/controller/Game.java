@@ -5,9 +5,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.ExecutorEventImp;
-import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.client_event.Cevent.*;
+import it.polimi.sw2019.events.client_event.MVevent.NotifyGrabEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
+import it.polimi.sw2019.events.client_event.MVevent.NotifyReloadEv;
 import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
@@ -21,7 +22,6 @@ import it.polimi.sw2019.utility.*;
 import it.polimi.sw2019.model.weapon_power.*;
 import it.polimi.sw2019.network.Socket.PlayerThread;
 import it.polimi.sw2019.view.*;
-import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.io.FileReader;
@@ -88,7 +88,8 @@ public class Game implements Observer <ObservableByGame> {
         moveController.addObserver(this);
         reloadController = new Reload(this);
         reloadController.addObserver(this);
-        grabController = new Grab();
+        grabController = new Grab(this);
+        grabController.addObserver(this);
         usePowerUpController = new UsePowerUp();
         shootController = new Shoot(this.players, this.gameboard.getMap());
         killshotController = new Killshot();
@@ -1041,19 +1042,24 @@ public class Game implements Observer <ObservableByGame> {
         Player player = searchPlayer( reloadEv.getPlayerNickname() );
         this.reloadController.handleEvent(reloadEv, player);
     }
-/*
+
     public void handleEvent(GrabEv grabEv) {
 
         Player player = searchPlayer( grabEv.getPlayerNickname() );
         this.grabController.handleEvent(grabEv, player);
     }
 
+/*
     public void handleEvent(PowerupEv powerupEv) {
 
         Player player = searchPlayer( powerupEv.getPlayerNickname() );
         this.usePowerUpController.handleEvent(powerupEv, player);
     }
 
+    public void handleEvent() {
+
+
+    }
 
 
  */
@@ -1062,11 +1068,6 @@ public class Game implements Observer <ObservableByGame> {
 
     public void update (ObservableByGame message) {
 
-        if ( message instanceof Ammo ) {
-
-            //i have to pass the object to the remoteView
-
-        }
     }
 
     public String listGamemode(){
@@ -1134,4 +1135,46 @@ public class Game implements Observer <ObservableByGame> {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView( notifyEndMoveEv.getNickname());
         playerRemoteView.sendEvent( notifyEndMoveEv );
     }
+
+    public void update(WeaponReloadChooseEv weaponReloadChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView( weaponReloadChooseEv.getNickname());
+        playerRemoteView.sendEvent( weaponReloadChooseEv );
+    }
+
+    public void update(NotifyEndReloadEv notifyEndReloadEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView( notifyEndReloadEv.getNickname());
+        playerRemoteView.sendEvent( notifyEndReloadEv );
+    }
+
+    public void update(NotifyReloadEv notifyReloadEv) {
+        List<PlayerRemoteView> playerRemoteViews = searchAllPlayerRemoteViews();
+        List<Player> clonePlayers = new ArrayList<>(5);
+
+        try{
+            for(Player p : this.players) {
+                clonePlayers.add( (Player) p.clonePlayer() );
+            }
+
+            notifyReloadEv.setBoardGame( (Table) this.gameboard.cloneTable() );
+            notifyReloadEv.setPlayerList(clonePlayers);
+
+            for (PlayerRemoteView playerRemoteView : playerRemoteViews) {
+
+                playerRemoteView.sendEvent(notifyReloadEv);
+            }
+
+        } catch (CloneNotSupportedException ex) {
+            //do nothing
+        }
+    }
+
+
+    public void update (NotifyGrabEv notifyGrabEv) {
+
+    }
+
+
+
+
+
 }

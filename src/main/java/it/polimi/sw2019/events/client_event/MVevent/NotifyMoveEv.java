@@ -14,7 +14,7 @@ public class NotifyMoveEv extends NotifyReturn {
     private Table boardGame;
 
     public NotifyMoveEv(String nickname, String changeName) {
-        setNickname(nickname);
+        super(nickname);
         this.changeName = changeName;
         playerList = new ArrayList<>(5);
         boardGame = new Table();

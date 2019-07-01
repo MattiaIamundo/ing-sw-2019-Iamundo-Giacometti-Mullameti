@@ -1,5 +1,6 @@
 package it.polimi.sw2019.model;
 
+import it.polimi.sw2019.events.client_event.MVevent.NotifyReloadEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.PowerChooseEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observable;
@@ -87,8 +88,9 @@ public abstract class Weapon extends Observable<PowerChooseEv> implements Clonea
     /**
      * @param set this variable is true if the weapon is load and false if it is discharged
      */
-    public void setIsLoad(boolean set) {
+    public void setIsLoad(String nickname, boolean set) {
         this.isLoad = set;
+        //notify(new NotifyReloadEv(player.getNickname(), "reload"));
     }
     /**
      *

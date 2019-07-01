@@ -60,7 +60,7 @@ public class Move extends Observable<NotifyReturn> implements Action {
     /**
      * if it is the first time, or it is after a single move,
      * a new event is send to the player to do another move
-     * after a "stop by the player or three single move
+     * after a "stop" by the player or three single move
      * the action is terminated
      * @param player the player who call the MoveEv
      */
@@ -71,9 +71,8 @@ public class Move extends Observable<NotifyReturn> implements Action {
             //and create the new MoveEv
             controller.getTurnOf().setAction(this);
             findDirection(player);
-            DirectionChooseEv directionChooseEv = new DirectionChooseEv(movesPlayerCanDo);
-            directionChooseEv.setNickname(player.getNickname());
-            //viene notificato al player che mosse vuole fare
+            DirectionChooseEv directionChooseEv = new DirectionChooseEv(player.getNickname(), movesPlayerCanDo);
+            //send notify to the player
             notify(directionChooseEv);
 
         }
@@ -89,8 +88,7 @@ public class Move extends Observable<NotifyReturn> implements Action {
                 player.setPosition(moveto);
                 nrOfMoves++;
                 findDirection(player);
-                DirectionChooseEv directionChooseEv = new DirectionChooseEv(movesPlayerCanDo);
-                directionChooseEv.setNickname(player.getNickname());
+                DirectionChooseEv directionChooseEv = new DirectionChooseEv(player.getNickname(), movesPlayerCanDo);
                 notify(directionChooseEv);
             }
             if (nrOfMoves == 3) {

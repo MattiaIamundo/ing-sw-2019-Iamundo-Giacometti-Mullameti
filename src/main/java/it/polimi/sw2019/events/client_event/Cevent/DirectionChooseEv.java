@@ -9,7 +9,8 @@ public class DirectionChooseEv extends NotifyReturn {
 
     private List<String> movesPlayerCanDo = new ArrayList<>(3);
 
-    public DirectionChooseEv(List<String> movesPlayerCanDo) {
+    public DirectionChooseEv(String nickname, List<String> movesPlayerCanDo) {
+        super(nickname);
         this.movesPlayerCanDo = movesPlayerCanDo;
     }
 

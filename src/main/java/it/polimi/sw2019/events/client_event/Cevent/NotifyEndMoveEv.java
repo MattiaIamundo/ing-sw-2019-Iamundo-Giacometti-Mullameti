@@ -5,6 +5,6 @@ import it.polimi.sw2019.events.NotifyReturn;
 public class NotifyEndMoveEv extends NotifyReturn {
 
     public NotifyEndMoveEv(String nickname) {
-        this.setNickname(nickname);
+        super(nickname);
     }
 }

@@ -482,6 +482,11 @@ public class PlayerThread implements Runnable {
                 ActionEv actionEv = playerRemoteView.waitForAction();
                 actionEv.setPlayerNickname(this.nickname);
                 gameController.handleEvent(actionEv);
+
+                if ( gameController.getTurnOf().getUsedAction() == 2 ) {
+                    //cambio turno al giocatore
+                }
+
             }
 
         } catch (NoSuchElementException | IllegalStateException ex) {
