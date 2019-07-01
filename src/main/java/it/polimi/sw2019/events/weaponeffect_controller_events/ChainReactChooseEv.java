@@ -1,5 +1,7 @@
 package it.polimi.sw2019.events.weaponeffect_controller_events;
 
+import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
  * These class represent the choose event of Chain reaction, the first optional effect of T.H.O.R.
  */
 public class ChainReactChooseEv implements WeaponEvent{
-    private Player attacker;
+    private String attacker;
     private ArrayList<String> valid;
     private ArrayList<String> notselectable;
     private ArrayList<String> notreachable;
@@ -20,7 +22,7 @@ public class ChainReactChooseEv implements WeaponEvent{
      *                      target of the basic effect of the weapon
      * @param notreachable is the list of the players that can't be selected as a target due to be out of the range of the effect
      */
-    public ChainReactChooseEv(Player attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable) {
+    public ChainReactChooseEv(String attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable) {
         this.attacker = attacker;
         this.valid = valid;
         this.notselectable = notselectable;
@@ -28,8 +30,13 @@ public class ChainReactChooseEv implements WeaponEvent{
     }
 
     @Override
-    public String getAttacker() {
-        return attacker.getNickname();
+    public void setNickname(String nickname) {
+        attacker = nickname;
+    }
+
+    @Override
+    public String getNickname(){
+        return attacker;
     }
 
     public ArrayList<String> getValid() {
@@ -42,5 +49,10 @@ public class ChainReactChooseEv implements WeaponEvent{
 
     public ArrayList<String> getNotreachable() {
         return notreachable;
+    }
+
+    @Override
+    public void updateObject(ExecutorEventImp executorEventImp, Game controller) {
+        executorEventImp.updateObject(this, controller);
     }
 }

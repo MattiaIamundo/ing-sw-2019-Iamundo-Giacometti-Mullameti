@@ -1,5 +1,7 @@
 package it.polimi.sw2019.events.weaponeffect_controller_events;
 
+import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
  * These class represent the choose event of Shotgun, the basic effect of Shotgun
  */
 public class ShotgunChooseEv implements WeaponEvent{
-    private Player attacker;
+    private String attacker;
     private ArrayList<String> valid;
     private ArrayList<String> notreachable;
     private ArrayList<String> moveto;
@@ -19,7 +21,7 @@ public class ShotgunChooseEv implements WeaponEvent{
      * @param notreachable is the list of the players that can't be selected as target due to be out of the effect's range
      * @param moveto is the list of the valid direction in which the target can be moved in, the direction are expressed by their cardinal direction e.g. north, south
      */
-    public ShotgunChooseEv(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable, ArrayList<String> moveto) {
+    public ShotgunChooseEv(String attacker, ArrayList<String> valid, ArrayList<String> notreachable, ArrayList<String> moveto) {
         this.attacker = attacker;
         this.valid = valid;
         this.notreachable = notreachable;
@@ -27,8 +29,13 @@ public class ShotgunChooseEv implements WeaponEvent{
     }
 
     @Override
-    public String getAttacker() {
-        return attacker.getNickname();
+    public void setNickname(String nickname) {
+        attacker = nickname;
+    }
+
+    @Override
+    public String getNickname() {
+        return attacker;
     }
 
     public ArrayList<String> getValid() {
@@ -41,5 +48,10 @@ public class ShotgunChooseEv implements WeaponEvent{
 
     public ArrayList<String> getMoveto() {
         return moveto;
+    }
+
+    @Override
+    public void updateObject(ExecutorEventImp executorEventImp, Game controller) {
+        executorEventImp.updateObject(this, controller);
     }
 }

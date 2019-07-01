@@ -18,6 +18,7 @@ public class WeaponChooseEv implements NotifyReturn{
         attacker = nickname;
     }
 
+    @Override
     public String getNickname() {
         return attacker;
     }
