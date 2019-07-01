@@ -6,6 +6,7 @@ import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
+import it.polimi.sw2019.events.client_event.Cevent.StartGameEv;
 
 import java.io.*;
 import java.net.Socket;
@@ -189,6 +190,16 @@ public class PlayerRemoteView extends PlayerView {
         set = input.nextLine();
 
         return gson.fromJson(set, ActionEv.class);
+    }
+
+    public void sendStartGame() {
+        output.println("start");
+        output.flush();
+    }
+
+    public void sendAllModel(StartGameEv startGameEv) {
+        output.println(gson.toJson(startGameEv));
+        output.flush();
     }
 
     public void sendEvent(NotifyReturn notifyReturn) {

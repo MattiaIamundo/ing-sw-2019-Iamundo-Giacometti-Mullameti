@@ -472,9 +472,9 @@ public class PlayerThread implements Runnable {
 
         try {
             //send the string "start" to activate a new scene in the client
-            //this.gameController.sendStartGame();
+            this.gameController.sendStartGame(this.playerRemoteView);
             //send the whole model so every client can memorize it in a view to handle the ShowEv
-            //this.gameController.sendAllModel();
+            this.gameController.sendAllModel(this.playerRemoteView);
 
             while ( !gameController.getGameover() ) {
 
@@ -485,7 +485,10 @@ public class PlayerThread implements Runnable {
                         this.gameController.getTimerThread().setOn(true);
                     }
 
-                    //how to handle the the timerDone == TRUE??
+                    if ( this.gameController.getTimerThread().getTimerDone() ) {
+                        //how to handle the the timerDone == TRUE??
+                        //bisogna buttare fuori questo player
+                    }
                 }
 
                 ActionEv actionEv = playerRemoteView.waitForAction();
