@@ -1,15 +1,17 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.WeaponEvent;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.events.weaponeffect_controller_events.LineFireSetEv;
 import it.polimi.sw2019.model.weapon_power.LineFire;
 import it.polimi.sw2019.model.weapon_power.Power;
+import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class LineFireCont implements EffectController{
+public abstract class LineFireCont extends Observable<WeaponEvent> implements EffectController{
 
     protected LineFire model;
     protected Player attacker;
@@ -35,7 +37,6 @@ public abstract class LineFireCont implements EffectController{
         loadWest();
         loadSouth();
         loadEast();
-        model.chooseTarget(firststep, secondstep, attacker);
     }
 
     private void loadNorth(){

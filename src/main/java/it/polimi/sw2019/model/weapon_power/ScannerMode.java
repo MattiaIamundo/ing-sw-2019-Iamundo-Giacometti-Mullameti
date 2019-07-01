@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * This class implements the alternative effect of Zx-2
  * @author Mattia Iamundo
  */
-public class ScannerMode extends Observable<ScannerModeChooseEv> implements Power, SingleTarget{
+public class ScannerMode implements Power, SingleTarget{
 
     private Player target1;
     private Player target2;
@@ -25,10 +25,6 @@ public class ScannerMode extends Observable<ScannerModeChooseEv> implements Powe
         if (target3 != null) {
             target3.getPlance().setMark(attacker);
         }
-    }
-
-    public void chooseTargets(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){
-        notify(new ScannerModeChooseEv(attacker, valid, notreachable));
     }
 
     public Player getTarget1() {

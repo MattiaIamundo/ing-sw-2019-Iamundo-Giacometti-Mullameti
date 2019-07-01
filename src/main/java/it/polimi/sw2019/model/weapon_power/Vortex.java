@@ -8,7 +8,7 @@ import it.polimi.sw2019.view.Observable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Vortex extends Observable<VortexChooseEv> implements Power{
+public class Vortex implements Power{
     //basic effect for Vortex
     private Space vortex; //save vortex position
     private Player target;
@@ -26,10 +26,6 @@ public class Vortex extends Observable<VortexChooseEv> implements Power{
 
     public void setTarget(Player target) {
         this.target = target;
-    }
-
-    public void chooseVortexAndTarget(HashMap<String, ArrayList<String>> valid, Player attacker){
-        notify(new VortexChooseEv(valid, attacker));
     }
 
     public Space getVortex() {

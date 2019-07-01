@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * This class implements the alternative effect of Shotgun
  * @author Mattia Iamundo
  */
-public class LongBarrelMode extends Observable<LongBarrelChooseEv> implements Power, SingleTarget{
+public class LongBarrelMode implements Power, SingleTarget{
 
     private Player target;
 
@@ -18,10 +18,6 @@ public class LongBarrelMode extends Observable<LongBarrelChooseEv> implements Po
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 2);
         target.getPlance().removeMark(attacker);
-    }
-
-    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){
-        notify(new LongBarrelChooseEv(attacker, valid, notreachable));
     }
 
     @Override

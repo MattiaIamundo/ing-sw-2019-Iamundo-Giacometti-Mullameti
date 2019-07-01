@@ -2,6 +2,7 @@ package it.polimi.sw2019.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import it.polimi.sw2019.controller.weaponeffect.BarbecueModeCont;
 import it.polimi.sw2019.controller.weaponeffect.EffectController;
 import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.weaponeffect_controller_events.PaymentInvalidEv;
@@ -9,6 +10,7 @@ import it.polimi.sw2019.events.weaponeffect_controller_events.PowerChooseEv;
 import it.polimi.sw2019.exception.NotEnoughtAmmoException;
 import it.polimi.sw2019.model.*;
 import it.polimi.sw2019.events.weaponeffect_controller_events.PowerSetEv;
+import it.polimi.sw2019.model.weapon_power.BarbecueMode;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;

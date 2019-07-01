@@ -12,7 +12,7 @@ import java.util.HashMap;
  * This class implements the basic effect of Rocket Launcher
  * @author Mattia Iamundo
  */
-public class RocketLauncher extends Observable<RocketLaunchChooseEv> implements Power{
+public class RocketLauncher implements Power{
 
     private Player target;
     private Space origin;
@@ -27,10 +27,6 @@ public class RocketLauncher extends Observable<RocketLaunchChooseEv> implements 
         this.target = target;
         origin = target.getPosition();
         this.target.setPosition(newposition);
-    }
-
-    public void chooseTarget(HashMap<String, ArrayList<String>> targets, Player attacker){
-        notify(new RocketLaunchChooseEv(targets, attacker));
     }
 
     public Player getTarget() {

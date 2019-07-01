@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * This class implements the basic effect of Shotgun
  * @author Mattia Iamundo
  */
-public class Shotgun extends Observable<ShotgunChooseEv> implements Power, SingleTarget{
+public class Shotgun implements Power, SingleTarget{
     private Player target;
     private Space moveto;
 
@@ -22,10 +22,6 @@ public class Shotgun extends Observable<ShotgunChooseEv> implements Power, Singl
         if (moveto != null){
             target.setPosition(moveto);
         }
-    }
-
-    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable, ArrayList<String> moveto){
-        notify(new ShotgunChooseEv(attacker, valid, notreachable, moveto));
     }
 
     public Player getTarget() {

@@ -7,5 +7,4 @@ import java.util.HashMap;
 
 public interface ThroughWalls {
 
-    public void chooseTarget(HashMap<String, ArrayList<String>> targets, Player attacker);
 }

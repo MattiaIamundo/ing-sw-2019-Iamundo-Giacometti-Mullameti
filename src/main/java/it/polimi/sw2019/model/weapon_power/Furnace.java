@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * This class implement the basic effect of Furnace
  * @author Mattia Iamundo
  */
-public class Furnace extends Observable<FurnaceChooseEv> implements Power{
+public class Furnace implements Power{
 
     private ArrayList<Player> targets;
 
@@ -20,10 +20,6 @@ public class Furnace extends Observable<FurnaceChooseEv> implements Power{
             player.getPlance().giveDamage(attacker,1);
             player.getPlance().removeMark(attacker);
         }
-    }
-
-    public void chooseRoom(Player attacker, ArrayList<String> rooms){
-        notify(new FurnaceChooseEv(attacker, rooms));
     }
 
     public ArrayList<Player> getTargets() {

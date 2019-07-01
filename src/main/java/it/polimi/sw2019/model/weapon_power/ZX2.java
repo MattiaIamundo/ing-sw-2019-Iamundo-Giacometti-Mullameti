@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * This class implements the basic effect of Zx-2
  * @author Mattia Iamundo
  */
-public class ZX2 extends Observable<ZX2ChooseEv> implements Power, SingleTarget{
+public class ZX2 implements Power, SingleTarget{
 
     private Player target;
 
@@ -20,10 +20,6 @@ public class ZX2 extends Observable<ZX2ChooseEv> implements Power, SingleTarget{
         target.getPlance().removeMark(attacker);
         target.getPlance().setMark(attacker);
         target.getPlance().setMark(attacker);
-    }
-
-    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){
-        notify(new ZX2ChooseEv(attacker, valid, notreachable));
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * This class implements the first optional power for the T.H.O.R.
  * @author Mattia Iamundo
  */
-public class ChainReaction extends Observable<ChainReactChooseEv> implements Power, SingleTarget{
+public class ChainReaction implements Power, SingleTarget{
 
     private Player target;
 
@@ -18,10 +18,6 @@ public class ChainReaction extends Observable<ChainReactChooseEv> implements Pow
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 1);
         target.getPlance().removeMark(attacker);
-    }
-
-    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable) {
-        notify(new ChainReactChooseEv(attacker, valid, notselectable, notreachable));
     }
 
     @Override

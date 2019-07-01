@@ -6,7 +6,7 @@ import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 
-public class Thor extends Observable<ThorChooseEv> implements Power, SingleTarget{
+public class Thor implements Power, SingleTarget{
 
     private Player target;
 
@@ -14,10 +14,6 @@ public class Thor extends Observable<ThorChooseEv> implements Power, SingleTarge
     public void usePower(Player attacker) {
         target.getPlance().giveDamage(attacker, 2);
         target.getPlance().removeMark(attacker);
-    }
-
-    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){
-        notify(new ThorChooseEv(attacker, valid, notreachable));
     }
 
     public Player getTarget() {

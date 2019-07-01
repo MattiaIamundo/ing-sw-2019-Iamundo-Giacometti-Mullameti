@@ -11,18 +11,13 @@ import java.util.ArrayList;
  * This class implement the first optional effect of Cyberblade
  * @author Mattia Iamundo
  */
-public class Shadowstep extends Observable<ShadowstepChooseEv> implements Power, WithMove{
+public class Shadowstep implements Power, WithMove{
 
     private Space moveto;
 
     @Override
     public void usePower(Player attacker){
         attacker.setPosition(moveto);
-    }
-
-    @Override
-    public void changePosition(Player attacker, ArrayList<String> positions) {
-        notify(new ShadowstepChooseEv(attacker, positions));
     }
 
     @Override

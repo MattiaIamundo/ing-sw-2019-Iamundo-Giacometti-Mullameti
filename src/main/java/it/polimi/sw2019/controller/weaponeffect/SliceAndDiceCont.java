@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.SliceAndDiceChooseEv;
 import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.events.weaponeffect_controller_events.SliceAndDiceSetEv;
@@ -8,13 +9,14 @@ import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.Cyberblade;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.SliceAndDice;
+import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SliceAndDiceCont implements Observer<SliceAndDiceSetEv>, EffectController{
+public class SliceAndDiceCont extends Observable<SliceAndDiceChooseEv> implements Observer<SliceAndDiceSetEv>, EffectController{
 
     private SliceAndDice model;
     private Player attacker;
@@ -45,7 +47,7 @@ public class SliceAndDiceCont implements Observer<SliceAndDiceSetEv>, EffectCont
                 notreachable.add(player.getNickname());
             }
         }
-        model.chooseTarget(valid, notselectable, notreachable, attacker);
+        notify(new SliceAndDiceChooseEv(attacker.getNickname(), valid, notselectable, notreachable));
     }
 
     private void initialize(ArrayList<String> notselectable){
