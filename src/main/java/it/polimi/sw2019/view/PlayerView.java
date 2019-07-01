@@ -1,5 +1,7 @@
 package it.polimi.sw2019.view;
 
+import it.polimi.sw2019.events.ActionEv;
+import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
@@ -10,11 +12,12 @@ import it.polimi.sw2019.nethandler.ViewContEvent;
 import it.polimi.sw2019.network.Socket.ClientSocket;
 
 
-public class PlayerView extends ObservableByGame implements Observer <Player> {
+public class PlayerView extends Observable<ActionEv> implements Observer <NotifyReturn> {
 
     private Player p;
     private UIinterface ui;
     private ClientSocket clientSocket;
+    private boolean firstTime = true;
 
     public PlayerView() {}
     public PlayerView(UIinterface uIinterface, ClientSocket clientSocket) {
@@ -22,18 +25,6 @@ public class PlayerView extends ObservableByGame implements Observer <Player> {
         this.clientSocket = clientSocket;
     }
 
-
-
-    protected void showPlayer() {
-
-    }
-
-    /**
-     * this method show the update that one player did
-     */
-    public void update(Player message) {
-        showPlayer();
-    }
 
     public void requestNickname(Login login) {
         clientSocket.notifyGUI("RequestNickname");
@@ -71,6 +62,8 @@ public class PlayerView extends ObservableByGame implements Observer <Player> {
 
     public void waitForPing() {
         clientSocket.notifyGUI("Ping");
+        this.clientSocket.getViewContEvent().sendPong();
+        this.clientSocket.getContSelect().waitForPing(this);
     }
 
     public void sendPong(ViewContEvent vce) {
@@ -92,5 +85,17 @@ public class PlayerView extends ObservableByGame implements Observer <Player> {
 
     public void sendMap(ViewContEvent vce, String maptype) {
         vce.sendMap(maptype);
+    }
+
+    public void waitForStart() {
+
+    }
+
+    public void notify(ActionEv actionEv) {
+
+    }
+
+    public void update(NotifyReturn notifyReturn) {
+
     }
 }

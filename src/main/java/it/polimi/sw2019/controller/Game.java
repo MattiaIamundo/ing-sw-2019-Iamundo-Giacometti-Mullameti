@@ -43,6 +43,7 @@ public class Game implements Observer <NotifyReturn> {
     private final Table gameboard;
     //the utility
     private TimerThread timerThread;
+    private TimerPingThread timerPingThread;
     //for the synchronization
     private Object stop = new Object();
     private Object stopArray = new Object();
@@ -83,6 +84,7 @@ public class Game implements Observer <NotifyReturn> {
         //state = new State();
         firstPlayer = "null";
         timerThread = new TimerThread();
+        timerPingThread = new TimerPingThread();
         mapconfig = 0;
         out = false;
         gameover = false;
@@ -148,6 +150,10 @@ public class Game implements Observer <NotifyReturn> {
 
     public synchronized TimerThread getTimerThread() {
         return timerThread;
+    }
+
+    public synchronized TimerPingThread getTimerPingThread() {
+        return timerPingThread;
     }
 
     public synchronized boolean getGameover() {

@@ -12,6 +12,7 @@ import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.events.server_event.VCevent.PowerupEv;
 import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
+import it.polimi.sw2019.view.PlayerRemoteView;
 
 public class ExecutorEventImp implements ExecutorEvent {
 
