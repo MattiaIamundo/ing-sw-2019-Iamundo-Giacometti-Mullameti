@@ -20,7 +20,10 @@ it\polimi\sw2019\controller\Killshot.class
 it\polimi\sw2019\controller\weaponeffect\RailGunCont.class
 it\polimi\sw2019\controller\weaponeffect\RocketLauncherCont.class
 it\polimi\sw2019\events\weaponeffect_controller_events\BlackHoleSetEv.class
+<<<<<<< HEAD
 it\polimi\sw2019\events\client_event\MVevent\NotifyReloadEv.class
+=======
+>>>>>>> master
 it\polimi\sw2019\controller\Shoot.class
 it\polimi\sw2019\events\weaponeffect_controller_events\FocusShotSetEv.class
 it\polimi\sw2019\utility\TimerThread$1.class
@@ -32,6 +35,7 @@ it\polimi\sw2019\controller\TurnNormal.class
 it\polimi\sw2019\model\weapon_power\Thor.class
 it\polimi\sw2019\events\weaponeffect_controller_events\HeatseekerSetEv.class
 it\polimi\sw2019\nethandler\ModViewEventInt.class
+it\polimi\sw2019\events\WeaponSetEv.class
 it\polimi\sw2019\controller\Game$2.class
 it\polimi\sw2019\view\WeaponRemoteView.class
 it\polimi\sw2019\model\DoubleAdditive.class
@@ -106,7 +110,10 @@ it\polimi\sw2019\view\ControllerClasses\ChooseSkullController.class
 it\polimi\sw2019\controller\weaponeffect\TractorBeamCont.class
 it\polimi\sw2019\events\client_event\Cevent\NotifyEndMoveEv.class
 it\polimi\sw2019\controller\Turn.class
+<<<<<<< HEAD
 it\polimi\sw2019\events\client_event\MVevent\NotifyGrabEv.class
+=======
+>>>>>>> master
 it\polimi\sw2019\events\weaponeffect_controller_events\BlackHoleChooseEv.class
 it\polimi\sw2019\model\weapon_power\CozyFireMode.class
 it\polimi\sw2019\events\powerup_events\PowerUpChooseEv.class
@@ -166,7 +173,10 @@ it\polimi\sw2019\events\powerup_events\NewtonSetEv.class
 it\polimi\sw2019\controller\Game$1.class
 it\polimi\sw2019\model\EffectBehaviour.class
 it\polimi\sw2019\events\weaponeffect_controller_events\ThorSetEv.class
+<<<<<<< HEAD
 it\polimi\sw2019\events\client_event\Cevent\WeaponReloadChooseEv.class
+=======
+>>>>>>> master
 it\polimi\sw2019\events\weaponeffect_controller_events\PowerGloveChooseEv.class
 it\polimi\sw2019\exception\InvalidInputException.class
 it\polimi\sw2019\controller\weaponeffect\RocketFistCont.class
@@ -248,6 +258,10 @@ it\polimi\sw2019\model\weapon_power\ThroughWalls.class
 it\polimi\sw2019\model\weapon_power\RocketJump.class
 it\polimi\sw2019\events\powerup_events\TargetingScopeChooseEv.class
 it\polimi\sw2019\model\Space.class
+<<<<<<< HEAD
+=======
+it\polimi\sw2019\events\WeaponChooseEv.class
+>>>>>>> master
 it\polimi\sw2019\events\weaponeffect_controller_events\GrenadeLaunchSetEv.class
 it\polimi\sw2019\model\weapon_power\RocketFistMode.class
 it\polimi\sw2019\events\weaponeffect_controller_events\PowerSetEv.class

@@ -7,6 +7,7 @@ import it.polimi.sw2019.view.Observable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -62,15 +63,6 @@ public abstract class Weapon extends Observable<PowerChooseEv> implements Clonea
 
     /**
      *
-     * @param attacker the player who called the attack
-     */
-    public void attack(Player attacker){
-
-        power.usePower(attacker);
-    }
-
-    /**
-     *
      * @return weapon's description
      */
     public String getDescriptionPower(){
@@ -100,7 +92,7 @@ public abstract class Weapon extends Observable<PowerChooseEv> implements Clonea
         return power;
     }
 
-    public void choosePower(ArrayList<String> powers){
-        notify(new PowerChooseEv(powers));
+    public void choosePower(Boolean itsAlternative, HashMap<String, ArrayList<String>> powers, HashMap<String, Integer> availableAmmo, HashMap<String, String> availablePowerUps){
+        notify(new PowerChooseEv(itsAlternative, powers, availableAmmo, availablePowerUps));
     }
 }

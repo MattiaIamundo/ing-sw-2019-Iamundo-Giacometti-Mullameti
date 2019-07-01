@@ -1,6 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: it.polimi.sw2019.controller.TestGameClass
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 7, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.129 sec <<< FAILURE!
 testCreatePowerUp(it.polimi.sw2019.controller.TestGameClass)  Time elapsed: 0.036 sec  <<< ERROR!
 com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: Expected name at line 4 column 2
@@ -49,3 +50,6 @@ Caused by: com.google.gson.stream.MalformedJsonException: Expected name at line 
 	at com.google.gson.Gson.fromJson(Gson.java:795)
 	... 32 more
 
+=======
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.232 sec
+>>>>>>> master

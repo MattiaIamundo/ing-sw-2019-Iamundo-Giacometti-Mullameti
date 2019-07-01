@@ -1,22 +1,22 @@
 [
   {
     "color" : "yellow", "power": "Teleporter", "effect" : "Teleporter"
-,},
+  },
   {
     "color" : "yellow", "power": "Teleporter", "effect" : "Teleporter"
-,},
+  },
   {
     "color" : "red", "power": "Teleporter", "effect" : "Teleporter"
-,},
+  },
   {
     "color" : "red", "power": "Teleporter", "effect" : "Teleporter"
-,},
+  },
   {
     "color" : "blue", "power": "Teleporter", "effect" : "Teleporter"
-,},
+  },
   {
     "color" : "blue", "power": "Teleporter", "effect" : "Teleporter"
-,},
+  },
   {
     "color" : "yellow", "power": "TagbackGrenade", "effect" : "TagbackGrenade"
   },
