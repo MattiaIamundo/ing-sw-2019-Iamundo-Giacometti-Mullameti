@@ -471,12 +471,21 @@ public class PlayerThread implements Runnable {
     private void startGame() {
 
         try {
+            //send the string "start" to activate a new scene in the client
+            //this.gameController.sendStartGame();
+            //send the whole model so every client can memorize it in a view to handle the ShowEv
+            //this.gameController.sendAllModel();
 
             while ( !gameController.getGameover() ) {
 
                 while ( !gameController.getTurnOfPlayer().getNickname().equals(this.nickname) ) {
-                    //qui controllo per il timer in modo tale da sapere se il timer è scaduto e capire come gestire
-                    //immediatamente lo scatto del turno
+
+                    if ( !this.gameController.getTimerThread().getOn() ) {
+                        this.gameController.getTimerThread().run();
+                        this.gameController.getTimerThread().setOn(true);
+                    }
+
+                    //how to handle the the timerDone == TRUE??
                 }
 
                 ActionEv actionEv = playerRemoteView.waitForAction();
@@ -494,7 +503,6 @@ public class PlayerThread implements Runnable {
             synchronized (gameController.getStopArray()){
 
                 logger.log(Level.INFO, "{ PlayerThread " + this.nickname + "} is removed: " + ex.toString());
-                //gameController.setPlayerDisconnected();
                 //gameController.removePlayerThread(this);
             }
             

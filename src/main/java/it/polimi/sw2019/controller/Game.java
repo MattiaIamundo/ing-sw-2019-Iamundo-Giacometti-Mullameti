@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.ExecutorEventImp;
+import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.client_event.Cevent.*;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyGrabEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
@@ -32,7 +33,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Game implements Observer <ObservableByGame> {
+import static java.util.Collections.shuffle;
+
+public class Game implements Observer <NotifyReturn> {
 
     //the model
     private final ArrayList<Player> players;
@@ -343,6 +346,10 @@ public class Game implements Observer <ObservableByGame> {
             } catch (IOException ee) {
                 logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
             }
+
+
+            //shuffle the deck
+            shuffle(this.getGameboard().getPowerUp());
         }
     }
 
@@ -355,6 +362,9 @@ public class Game implements Observer <ObservableByGame> {
             createDoubleAdditiveWeapons();
             //create the Alternative weapons
             createAlternativeWeapons();
+
+            //shuffle the deck
+            shuffle(this.getGameboard().getWeapon() );
         }
 
     }
@@ -573,6 +583,9 @@ public class Game implements Observer <ObservableByGame> {
             createAmmoDoublePowerUp();
 
             createAmmoTriple();
+
+            //shuffle the deck
+            shuffle(this.getGameboard().getAmmo());
         }
 
     }
@@ -1031,7 +1044,7 @@ public class Game implements Observer <ObservableByGame> {
         actionEv.handle(this.executorEventImp, this);
     }
 
-    private void handleEvent(MoveEv moveEv) {
+    public void handleEvent(MoveEv moveEv) {
 
         Player player = searchPlayer( moveEv.getPlayerNickname() );
         this.moveController.handleEvent(moveEv, player);
@@ -1066,8 +1079,8 @@ public class Game implements Observer <ObservableByGame> {
 
     //.............................FROM HERE OLD THINGS........................
 
-    public void update (ObservableByGame message) {
-
+    public void update(NotifyReturn notifyReturn) {
+        notifyReturn.updateObject(this.executorEventImp, this);
     }
 
     public String listGamemode(){
@@ -1092,6 +1105,7 @@ public class Game implements Observer <ObservableByGame> {
     private PlayerRemoteView searchSpecificPlayerRemoteView(String nickname) {
 
         PlayerRemoteView playerRemoteView = null;
+
         for(PlayerThread pt : this.playerThreads) {
 
             if ( pt.getNickname().equals(nickname) ) {
@@ -1105,7 +1119,11 @@ public class Game implements Observer <ObservableByGame> {
     public void update(DirectionChooseEv directionChooseEv) {
 
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(directionChooseEv.getNickname());
-        playerRemoteView.sendEvent( directionChooseEv );
+
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent( directionChooseEv );
+        }
+
 
     }
 
@@ -1133,17 +1151,23 @@ public class Game implements Observer <ObservableByGame> {
 
     public void update(NotifyEndMoveEv notifyEndMoveEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView( notifyEndMoveEv.getNickname());
-        playerRemoteView.sendEvent( notifyEndMoveEv );
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent( notifyEndMoveEv );
+        }
     }
 
     public void update(WeaponReloadChooseEv weaponReloadChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView( weaponReloadChooseEv.getNickname());
-        playerRemoteView.sendEvent( weaponReloadChooseEv );
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent( weaponReloadChooseEv );
+        }
     }
 
     public void update(NotifyEndReloadEv notifyEndReloadEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView( notifyEndReloadEv.getNickname());
-        playerRemoteView.sendEvent( notifyEndReloadEv );
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent( notifyEndReloadEv );
+        }
     }
 
     public void update(NotifyReloadEv notifyReloadEv) {

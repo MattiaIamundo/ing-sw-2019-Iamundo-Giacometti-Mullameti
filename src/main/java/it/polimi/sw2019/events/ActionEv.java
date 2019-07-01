@@ -2,18 +2,13 @@ package it.polimi.sw2019.events;
 
 import it.polimi.sw2019.controller.Game;
 
-public class ActionEv {
+public interface ActionEv {
 
-    private String playerNickname = "null";
 
-    public void setPlayerNickname(String nickname) {
-        this.playerNickname = nickname;
-    }
+    void setPlayerNickname(String nickname);
 
-    public String getPlayerNickname() {
-        return this.playerNickname;
-    }
+    String getPlayerNickname();
 
-    public void handle(ExecutorEventImp executorEventImp, Game controller){}
+    void handle(ExecutorEventImp executorEventImp, Game controller);
 
 }

@@ -4,9 +4,20 @@ import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.ExecutorEventImp;
 
-public class GrabEv extends ActionEv {
+public class GrabEv implements ActionEv {
 
+    private String playerNickname = "null";
     private String move;
+
+    @Override
+    public String getPlayerNickname() {
+        return playerNickname;
+    }
+
+    @Override
+    public void setPlayerNickname(String playerNickname) {
+        this.playerNickname = playerNickname;
+    }
 
     public GrabEv(String move) {
         this.move = move;

@@ -5,12 +5,23 @@ import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.ExecutorEventImp;
 
 
-public class MoveEv extends ActionEv {
+public class MoveEv implements ActionEv {
 
+    private String playerNickname = "null";
     private String move;
 
     public MoveEv(String move) {
         this.move = move;
+    }
+
+    @Override
+    public String getPlayerNickname() {
+        return playerNickname;
+    }
+
+    @Override
+    public void setPlayerNickname(String playerNickname) {
+        this.playerNickname = playerNickname;
     }
 
     public String getMove() {

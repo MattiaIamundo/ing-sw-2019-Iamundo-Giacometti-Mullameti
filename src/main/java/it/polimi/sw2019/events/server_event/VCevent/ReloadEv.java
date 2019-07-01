@@ -7,10 +7,21 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReloadEv extends ActionEv {
+public class ReloadEv implements ActionEv {
 
+    private String playerNickname = "null";
     private String weaponToReload = null;
     private List<String> weaponCanBeReload = new ArrayList<>();
+
+    @Override
+    public String getPlayerNickname() {
+        return playerNickname;
+    }
+
+    @Override
+    public void setPlayerNickname(String playerNickname) {
+        this.playerNickname = playerNickname;
+    }
 
     public String getWeaponToReload() {
         return weaponToReload;

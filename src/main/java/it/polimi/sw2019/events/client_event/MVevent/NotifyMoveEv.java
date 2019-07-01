@@ -1,5 +1,7 @@
 package it.polimi.sw2019.events.client_event.MVevent;
 
+import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
@@ -7,14 +9,15 @@ import it.polimi.sw2019.model.Table;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotifyMoveEv extends NotifyReturn {
+public class NotifyMoveEv implements NotifyReturn {
 
+    private String nickname;
     private String changeName;
     private List<Player> playerList;
     private Table boardGame;
 
     public NotifyMoveEv(String nickname, String changeName) {
-        super(nickname);
+        this.nickname = nickname;
         this.changeName = changeName;
         playerList = new ArrayList<>(5);
         boardGame = new Table();
@@ -40,4 +43,17 @@ public class NotifyMoveEv extends NotifyReturn {
         this.boardGame = boardGame;
     }
 
+    @Override
+    public String getNickname() {
+        return nickname;
+    }
+
+    @Override
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void updateObject(ExecutorEventImp executorEventImp, Game controller) {
+        executorEventImp.updateObject(this, controller);
+    }
 }

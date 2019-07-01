@@ -1,20 +1,37 @@
 package it.polimi.sw2019.events.client_event.Cevent;
 
+import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.events.NotifyReturn;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DirectionChooseEv extends NotifyReturn {
+public class DirectionChooseEv implements NotifyReturn {
 
+    private String nickname;
     private List<String> movesPlayerCanDo = new ArrayList<>(3);
 
     public DirectionChooseEv(String nickname, List<String> movesPlayerCanDo) {
-        super(nickname);
+        this.nickname = nickname;
         this.movesPlayerCanDo = movesPlayerCanDo;
     }
 
     public List<String> getMovesPlayerCanDo() {
         return this.movesPlayerCanDo;
+    }
+
+    @Override
+    public String getNickname() {
+        return nickname;
+    }
+
+    @Override
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void updateObject(ExecutorEventImp executorEventImp, Game controller) {
+        executorEventImp.updateObject(this, controller);
     }
 }

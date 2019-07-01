@@ -1,21 +1,16 @@
 package it.polimi.sw2019.events;
 
 
-public class NotifyReturn {
+import it.polimi.sw2019.controller.Game;
 
-    private String nickname;
+public interface NotifyReturn {
 
-    public NotifyReturn(String nickname) {
-        this.nickname = nickname;
-    }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
+    void setNickname(String nickname);
 
-    public String getNickname() {
-        return this.nickname;
-    }
+    String getNickname();
+
+    void updateObject(ExecutorEventImp executorEventImp, Game controller);
 
 
 }
