@@ -8,7 +8,7 @@ import it.polimi.sw2019.view.Observable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TractorBeam extends Observable<TractorBeamChooseEv> implements Power{
+public class TractorBeam implements Power{
     //base effect for TractorBeam
     private Player target = null;
 
@@ -16,10 +16,6 @@ public class TractorBeam extends Observable<TractorBeamChooseEv> implements Powe
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 1);
         target.getPlance().removeMark(attacker);
-    }
-
-    public void chooseTarget(HashMap<String, ArrayList<String>> valid, Player attacker){
-        notify(new TractorBeamChooseEv(valid, attacker));
     }
 
     public void setTarget(Player target, Space position){

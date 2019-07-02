@@ -11,7 +11,7 @@ import java.util.HashMap;
  * This class implements the basic effect of Flamethrower
  * @author Mattia Iamundo
  */
-public class Flamethrower extends Observable<FlamethrowerChooseEv> implements Power, LineFire{
+public class Flamethrower implements Power, LineFire{
 
     private Player target1;
     private Player target2;
@@ -26,11 +26,6 @@ public class Flamethrower extends Observable<FlamethrowerChooseEv> implements Po
             target2.getPlance().giveDamage(attacker, 1);
             target2.getPlance().removeMark(attacker);
         }
-    }
-
-    @Override
-    public void chooseTarget(HashMap<String, ArrayList<String>> firstline, HashMap<String, ArrayList<String>> secondline, Player attacker) {
-        notify(new FlamethrowerChooseEv(attacker, firstline, secondline));
     }
 
     public void setTarget1(Player target1) {

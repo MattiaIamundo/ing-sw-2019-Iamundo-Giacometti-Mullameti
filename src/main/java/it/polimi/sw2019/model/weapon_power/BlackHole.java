@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * This class implements the optional effect for the Vortex Cannon
  * @author Mattia Iamundo
  */
-public class BlackHole extends Observable<BlackHoleChooseEv> implements Power{
+public class BlackHole implements Power{
 
     private Player target1;
     private Player target2;
@@ -27,10 +27,6 @@ public class BlackHole extends Observable<BlackHoleChooseEv> implements Power{
             target2.getPlance().giveDamage(attacker, 1);
             target2.getPlance().removeMark(attacker);
         }
-    }
-
-    public void chooseTargets(Player attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable){
-        notify(new BlackHoleChooseEv(attacker, valid, notselectable, notreachable));
     }
 
     public void setTarget1(Player target1) {

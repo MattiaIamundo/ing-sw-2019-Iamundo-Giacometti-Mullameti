@@ -16,10 +16,6 @@ public class PlasmaGun extends Observable<PlasmaGunChooseEv> implements Power, S
         target.getPlance().removeMark(attacker);
     }
 
-    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){
-        notify(new PlasmaGunChooseEv(attacker, valid, notreachable));
-    }
-
     public Player getTarget() {
         return target;
     }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * This class implements the alternative effect of Tractor Beam
  * @author Mattia Iamundo
  */
-public class PunisherMode extends Observable<PunisherModeChooseEv> implements Power, SingleTarget{
+public class PunisherMode implements Power, SingleTarget{
 
     private Player target;
 
@@ -19,10 +19,6 @@ public class PunisherMode extends Observable<PunisherModeChooseEv> implements Po
         target.setPosition(attacker.getPosition());
         target.getPlance().giveDamage(attacker, 3);
         target.getPlance().removeMark(attacker);
-    }
-
-    public void chooseTarget(ArrayList<String> valid, ArrayList<String> notreachable, Player attacker) {
-        notify(new PunisherModeChooseEv(attacker, valid, notreachable));
     }
 
     @Override

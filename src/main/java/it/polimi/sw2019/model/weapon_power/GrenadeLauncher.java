@@ -12,7 +12,7 @@ import java.util.HashMap;
  * This class implements the basic effect for GrenadeLauncher
  * @author Mattia Iamundo
  */
-public class GrenadeLauncher extends Observable<GrenadeLaunchChooseEv> implements Power, SingleTarget{
+public class GrenadeLauncher implements Power, SingleTarget{
 
     private Player target;
     private boolean ismoved;
@@ -28,10 +28,6 @@ public class GrenadeLauncher extends Observable<GrenadeLaunchChooseEv> implement
             ismoved = false;
         }
         target.getPlance().removeMark(attacker);
-    }
-
-    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable, HashMap<String, ArrayList<String>> moveto) {
-        notify(new GrenadeLaunchChooseEv(attacker, valid, notreachable, moveto));
     }
 
     @Override
