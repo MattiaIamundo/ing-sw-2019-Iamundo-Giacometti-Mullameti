@@ -9,10 +9,7 @@ import java.util.ArrayList;
 /**
  * These class represent the choose event of Scanner mode, the alternative effect of Zx-2
  */
-public class ScannerModeChooseEv implements WeaponEvent{
-    private String attacker;
-    private ArrayList<String> valid;
-    private ArrayList<String> notreachable;
+public class ScannerModeChooseEv extends VisibleChooseEv{
 
     /**
      * @param attacker is the player that invoke the effect
@@ -20,27 +17,7 @@ public class ScannerModeChooseEv implements WeaponEvent{
      * @param notreachable is the list of the players that can't be selected as target due to be out of the effect's range
      */
     public ScannerModeChooseEv(String attacker, ArrayList<String> valid, ArrayList<String> notreachable) {
-        this.attacker = attacker;
-        this.valid = valid;
-        this.notreachable = notreachable;
-    }
-
-    @Override
-    public void setNickname(String nickname) {
-        attacker = nickname;
-    }
-
-    @Override
-    public String getNickname() {
-        return attacker;
-    }
-
-    public ArrayList<String> getValid() {
-        return valid;
-    }
-
-    public ArrayList<String> getNotreachable() {
-        return notreachable;
+        super(attacker, valid, notreachable);
     }
 
     @Override

@@ -6,39 +6,10 @@ import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
 
-public class TurretTripodChooseEv implements WeaponEvent{
-    private String attacker;
-    private ArrayList<String> valid;
-    private ArrayList<String> notselectable;
-    private ArrayList<String> notreachable;
+public class TurretTripodChooseEv extends VisibleChooseEv{
 
     public TurretTripodChooseEv(String attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable) {
-        this.attacker = attacker;
-        this.valid = valid;
-        this.notselectable = notselectable;
-        this.notreachable = notreachable;
-    }
-
-    @Override
-    public void setNickname(String nickname) {
-        attacker = nickname;
-    }
-
-    @Override
-    public String getNickname() {
-        return attacker;
-    }
-
-    public ArrayList<String> getValid() {
-        return valid;
-    }
-
-    public ArrayList<String> getNotselectable() {
-        return notselectable;
-    }
-
-    public ArrayList<String> getNotreachable() {
-        return notreachable;
+        super(attacker, valid, notselectable, notreachable);
     }
 
     @Override

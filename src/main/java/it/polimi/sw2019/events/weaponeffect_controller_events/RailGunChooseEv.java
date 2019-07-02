@@ -10,9 +10,7 @@ import java.util.HashMap;
 /**
  * These class represent the choose event of Railgun, the basic effect of Railgun
  */
-public class RailGunChooseEv implements WeaponEvent{
-    private String attacker;
-    private HashMap<String, ArrayList<String>> targets;
+public class RailGunChooseEv extends ThoughWallChooseEv{
 
     /**
      * @param attacker is the player that invoke the effect
@@ -20,22 +18,7 @@ public class RailGunChooseEv implements WeaponEvent{
      *                target in the key's direction
      */
     public RailGunChooseEv(String attacker, HashMap<String, ArrayList<String>> targets) {
-        this.attacker = attacker;
-        this.targets = targets;
-    }
-
-    @Override
-    public void setNickname(String nickname) {
-        attacker = nickname;
-    }
-
-    @Override
-    public String getNickname() {
-        return attacker;
-    }
-
-    public HashMap<String, ArrayList<String>> getTargets() {
-        return targets;
+        super(attacker, targets);
     }
 
     @Override

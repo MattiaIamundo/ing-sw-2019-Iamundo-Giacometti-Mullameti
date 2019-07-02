@@ -9,31 +9,14 @@ import java.util.ArrayList;
 /**
  * These class represent the choose event of Shadowstep, the first optional effect of Cyberblade
  */
-public class ShadowstepChooseEv implements WeaponEvent{
-    private String attacker;
-    private ArrayList<String> positions;
+public class ShadowstepChooseEv extends MovePlayerChooseEv{
 
     /**
      * @param attacker is the player that invoke the effect
      * @param positions is the list of the squares in which the attacker can be move in, they are expressed by their cardinal direction e.g. north, south
      */
     public ShadowstepChooseEv(String attacker, ArrayList<String> positions) {
-        this.attacker = attacker;
-        this.positions = positions;
-    }
-
-    @Override
-    public void setNickname(String nickname) {
-        attacker = nickname;
-    }
-
-    @Override
-    public String getNickname() {
-        return attacker;
-    }
-
-    public ArrayList<String> getPositions() {
-        return positions;
+        super(attacker, positions);
     }
 
     @Override

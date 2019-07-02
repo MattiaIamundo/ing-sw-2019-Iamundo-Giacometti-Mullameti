@@ -9,10 +9,7 @@ import java.util.ArrayList;
 /**
  * These class represent the choose event of Cyberblade, the basic effect of Cyberblade
  */
-public class CyberbladeChooseEv implements WeaponEvent{
-    private String attacker;
-    private ArrayList<String> valid;
-    private ArrayList<String> notreachable;
+public class CyberbladeChooseEv extends VisibleChooseEv{
 
     /**
      * @param attacker is the player that invokes the effect
@@ -20,27 +17,7 @@ public class CyberbladeChooseEv implements WeaponEvent{
      * @param notreachable is the list of the players that can't be selected as target due to be out of the effect's range
      */
     public CyberbladeChooseEv(String attacker, ArrayList<String> valid, ArrayList<String> notreachable) {
-        this.attacker = attacker;
-        this.valid = valid;
-        this.notreachable = notreachable;
-    }
-
-    @Override
-    public void setNickname(String nickname) {
-        attacker = nickname;
-    }
-
-    @Override
-    public String getNickname() {
-        return attacker;
-    }
-
-    public ArrayList<String> getValid() {
-        return valid;
-    }
-
-    public ArrayList<String> getNotreachable() {
-        return notreachable;
+        super(attacker, valid, notreachable);
     }
 
     @Override

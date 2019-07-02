@@ -6,33 +6,10 @@ import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
 
-public class ZX2ChooseEv implements WeaponEvent{
-    private String attacker;
-    private ArrayList<String> valid;
-    private ArrayList<String> notreachable;
+public class ZX2ChooseEv extends VisibleChooseEv{
 
     public ZX2ChooseEv(String attacker, ArrayList<String> valid, ArrayList<String> notreachable) {
-        this.attacker = attacker;
-        this.valid = valid;
-        this.notreachable = notreachable;
-    }
-
-    @Override
-    public void setNickname(String nickname) {
-        attacker = nickname;
-    }
-
-    @Override
-    public String getNickname() {
-        return attacker;
-    }
-
-    public ArrayList<String> getValid() {
-        return valid;
-    }
-
-    public ArrayList<String> getNotreachable() {
-        return notreachable;
+        super(attacker, valid, notreachable);
     }
 
     @Override

@@ -9,11 +9,7 @@ import java.util.ArrayList;
 /**
  * These class represent the choose event of High voltage, the second optional effect of T.H.O.R.
  */
-public class HighVoltageChooseEv implements WeaponEvent{
-    protected String attacker;
-    protected ArrayList<String> valid;
-    protected ArrayList<String> notselectable;
-    protected ArrayList<String> notreachable;
+public class HighVoltageChooseEv extends VisibleChooseEv{
 
     /**
      * @param attacker is the player that invoke the effect
@@ -22,32 +18,7 @@ public class HighVoltageChooseEv implements WeaponEvent{
      * @param notreachable is the list of the players that can't be selected as a target due to be out of the range of the effect
      */
     public HighVoltageChooseEv(String attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable) {
-        this.attacker = attacker;
-        this.valid = valid;
-        this.notselectable = notselectable;
-        this.notreachable = notreachable;
-    }
-
-    @Override
-    public void setNickname(String nickname) {
-        attacker = nickname;
-    }
-
-    @Override
-    public String getNickname() {
-        return attacker;
-    }
-
-    public ArrayList<String> getValid() {
-        return valid;
-    }
-
-    public ArrayList<String> getNotselectable() {
-        return notselectable;
-    }
-
-    public ArrayList<String> getNotreachable() {
-        return notreachable;
+        super(attacker, valid, notselectable, notreachable);
     }
 
     @Override

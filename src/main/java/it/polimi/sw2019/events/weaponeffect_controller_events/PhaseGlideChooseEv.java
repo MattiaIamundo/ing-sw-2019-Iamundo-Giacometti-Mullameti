@@ -9,31 +9,14 @@ import java.util.ArrayList;
 /**
  * These class represent the choose event of Phase glide, the first optional effect of Plasma Gun
  */
-public class PhaseGlideChooseEv implements WeaponEvent{
-    private String attacker;
-    private ArrayList<String> positions;
+public class PhaseGlideChooseEv extends MovePlayerChooseEv{
 
     /**
      * @param attacker is the player that invoke the effect
      * @param positions is the list of the valid squares in which the attacker can be moved, they are expressed by their cardinal direction e.g. north, north-north, south-east
      */
     public PhaseGlideChooseEv(String attacker, ArrayList<String> positions) {
-        this.attacker = attacker;
-        this.positions = positions;
-    }
-
-    @Override
-    public void setNickname(String nickname) {
-        attacker = nickname;
-    }
-
-    @Override
-    public String getNickname() {
-        return attacker;
-    }
-
-    public ArrayList<String> getPositions() {
-        return positions;
+        super(attacker, positions);
     }
 
     @Override
