@@ -10,30 +10,19 @@ import java.util.ArrayList;
  * This class implements the alternative effect of Zx-2
  * @author Mattia Iamundo
  */
-public class ScannerMode implements Power, SingleTarget{
-
-    private Player target1;
+public class ScannerMode extends SingleTarget implements Power{
     private Player target2;
     private Player target3;
 
     @Override
     public void usePower(Player attacker){
-        target1.getPlance().setMark(attacker);
+        super.setMark(attacker);
         if (target2 != null) {
             target2.getPlance().setMark(attacker);
         }
         if (target3 != null) {
             target3.getPlance().setMark(attacker);
         }
-    }
-
-    public Player getTarget1() {
-        return target1;
-    }
-
-    @Override
-    public void setTarget(Player target1) {
-        this.target1 = target1;
     }
 
     public Player getTarget2() {
@@ -50,10 +39,5 @@ public class ScannerMode implements Power, SingleTarget{
 
     public void setTarget3(Player target3) {
         this.target3 = target3;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
     }
 }

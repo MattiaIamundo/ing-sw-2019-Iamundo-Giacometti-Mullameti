@@ -10,28 +10,11 @@ import java.util.ArrayList;
  * This class implements the basic effect of Lock Rifle
  * @author Mattia Iamundo
  */
-public class LockRifle implements Power, SingleTarget{
-
-    private Player target;
+public class LockRifle extends SingleTarget implements Power{
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().giveDamage(attacker, 2);
-        target.getPlance().removeMark(attacker);
+        super.giveDamage(attacker,2);
         target.getPlance().setMark(attacker);
-    }
-
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
     }
 }

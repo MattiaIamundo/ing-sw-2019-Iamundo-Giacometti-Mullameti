@@ -10,27 +10,10 @@ import java.util.ArrayList;
  * This class implements the basic effect of Heatseeker
  * @author Mattia Iamundo
  */
-public class Heatseeker implements Power, SingleTarget{
-
-    private Player target;
+public class Heatseeker extends SingleTarget implements Power{
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().giveDamage(attacker, 3);
-        target.getPlance().removeMark(attacker);
-    }
-
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+        super.giveDamage(attacker,3);
     }
 }

@@ -10,28 +10,12 @@ import java.util.ArrayList;
  * This class implements the alternative effect of Tractor Beam
  * @author Mattia Iamundo
  */
-public class PunisherMode implements Power, SingleTarget{
-
-    private Player target;
+public class PunisherMode extends SingleTarget implements Power{
 
     @Override
     public void usePower(Player attacker){
+        super.giveDamage(attacker,3);
         target.setPosition(attacker.getPosition());
-        target.getPlance().giveDamage(attacker, 3);
-        target.getPlance().removeMark(attacker);
     }
 
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
-    }
 }

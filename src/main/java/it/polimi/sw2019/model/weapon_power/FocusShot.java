@@ -10,25 +10,10 @@ import java.util.ArrayList;
  * This class implements the first optional effect of Machine Gun
  * @author Mattia Iamundo
  */
-public class FocusShot implements Power{
-    private Player target;
+public class FocusShot extends SingleTarget implements Power{
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().giveDamage(attacker, 1);
-        target.getPlance().removeMark(attacker);
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    public void setTarget(Player target) {
-        this.target = target;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+        super.giveDamage(attacker,1);
     }
 }

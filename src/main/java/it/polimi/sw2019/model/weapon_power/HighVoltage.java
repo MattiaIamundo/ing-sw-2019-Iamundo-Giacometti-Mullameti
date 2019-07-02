@@ -10,27 +10,10 @@ import java.util.ArrayList;
  * This class implements the second optional effect of T.H.O.R.
  * @author Mattia Iamundo
  */
-public class HighVoltage implements Power, SingleTarget{
-
-    private Player target;
+public class HighVoltage extends SingleTarget implements Power{
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().giveDamage(attacker, 2);
-        target.getPlance().removeMark(attacker);
-    }
-
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+        super.giveDamage(attacker,2);
     }
 }

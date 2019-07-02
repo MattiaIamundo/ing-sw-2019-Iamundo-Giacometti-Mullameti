@@ -12,15 +12,12 @@ import java.util.HashMap;
  * This class implements the basic effect of Rocket Launcher
  * @author Mattia Iamundo
  */
-public class RocketLauncher implements Power{
-
-    private Player target;
+public class RocketLauncher extends SingleTarget implements Power{
     private Space origin;
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().giveDamage(attacker, 2);
-        target.getPlance().removeMark(attacker);
+        super.giveDamage(attacker,2);
     }
 
     public void setTarget(Player target, Space newposition) {
@@ -29,16 +26,8 @@ public class RocketLauncher implements Power{
         this.target.setPosition(newposition);
     }
 
-    public Player getTarget() {
-        return target;
-    }
-
     public Space getOrigin() {
         return origin;
     }
 
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
-    }
 }

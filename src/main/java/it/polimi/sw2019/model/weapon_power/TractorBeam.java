@@ -8,14 +8,11 @@ import it.polimi.sw2019.view.Observable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TractorBeam implements Power{
-    //base effect for TractorBeam
-    private Player target = null;
+public class TractorBeam extends SingleTarget implements Power{
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().giveDamage(attacker, 1);
-        target.getPlance().removeMark(attacker);
+        super.giveDamage(attacker,1);
     }
 
     public void setTarget(Player target, Space position){
@@ -23,12 +20,4 @@ public class TractorBeam implements Power{
         target.setPosition(position);
     }
 
-    public Player getTarget() {
-        return target;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
-    }
 }

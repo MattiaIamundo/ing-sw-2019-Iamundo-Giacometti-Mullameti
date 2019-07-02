@@ -12,27 +12,19 @@ import java.util.HashMap;
  * This class implements the basic effect for GrenadeLauncher
  * @author Mattia Iamundo
  */
-public class GrenadeLauncher implements Power, SingleTarget{
-
-    private Player target;
+public class GrenadeLauncher extends SingleTarget implements Power{
     private boolean ismoved;
     private Space moveto;
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().giveDamage(attacker, 1);
+        super.giveDamage(attacker,1);
         if (moveto != null){
             target.setPosition(moveto);
             ismoved = true;
         }else {
             ismoved = false;
         }
-        target.getPlance().removeMark(attacker);
-    }
-
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
     }
 
     public void setMoveto(Space moveto) {
@@ -43,16 +35,7 @@ public class GrenadeLauncher implements Power, SingleTarget{
         return ismoved;
     }
 
-    public Player getTarget() {
-        return target;
-    }
-
     public Space getMoveto() {
         return moveto;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
     }
 }

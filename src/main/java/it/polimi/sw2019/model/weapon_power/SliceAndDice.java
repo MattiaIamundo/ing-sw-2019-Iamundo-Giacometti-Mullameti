@@ -10,26 +10,11 @@ import java.util.ArrayList;
  * This class implements the optional effect of Cyberblade
  * @author Mattia Iamundo
  */
-public class SliceAndDice implements Power{
-
-    private Player target;
+public class SliceAndDice extends SingleTarget implements Power{
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().giveDamage(attacker, 2);
-        target.getPlance().removeMark(attacker);
+        super.giveDamage(attacker,2);
     }
 
-    public Player getTarget() {
-        return target;
-    }
-
-    public void setTarget(Player target) {
-        this.target = target;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
-    }
 }

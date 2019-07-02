@@ -10,29 +10,14 @@ import java.util.ArrayList;
  * This class implements the basic effect of Zx-2
  * @author Mattia Iamundo
  */
-public class ZX2 implements Power, SingleTarget{
+public class ZX2 extends SingleTarget implements Power{
 
     private Player target;
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().giveDamage(attacker, 1);
-        target.getPlance().removeMark(attacker);
-        target.getPlance().setMark(attacker);
-        target.getPlance().setMark(attacker);
-    }
-
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+        super.giveDamage(attacker,1);
+        super.setMark(attacker);
+        super.setMark(attacker);
     }
 }

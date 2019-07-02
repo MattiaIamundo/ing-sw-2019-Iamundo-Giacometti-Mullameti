@@ -52,11 +52,11 @@ public class TurretTripodCont extends VisibleTargetCont implements Observer<Turr
         try {
             machinegun = (DoubleAdditive) attacker.getWeapon("Machine Gun");
             if ((((MachineGun) machinegun.getPower()).getTarget2() != null) && (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((MachineGun) machinegun.getPower()).getTarget2())) {
-                realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget1());
-            } else if ((((MachineGun) machinegun.getPower()).getTarget2() != null) && (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((MachineGun) machinegun.getPower()).getTarget1())) {
+                realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget());
+            } else if ((((MachineGun) machinegun.getPower()).getTarget2() != null) && (((FocusShot) machinegun.getFirstAdditivePower()).getTarget() == ((MachineGun) machinegun.getPower()).getTarget())) {
                 realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget2());
             }else if (((MachineGun) machinegun.getPower()).getTarget2() == null){
-                realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget1());
+                realmodel.setPrevioustarget(((MachineGun) machinegun.getPower()).getTarget());
             }
         }catch (InexistentWeaponException e){
             logger.log(Level.SEVERE,e.getMessage()+" doesn't have Machine Gun");
@@ -69,7 +69,7 @@ public class TurretTripodCont extends VisibleTargetCont implements Observer<Turr
         notselectable.add(attacker.getNickname());
 
         basiceffect = (MachineGun) attacker.getWeapon("Machine Gun").getPower();
-        notselectable.add(basiceffect.getTarget1().getNickname());
+        notselectable.add(basiceffect.getTarget().getNickname());
         if (basiceffect.getTarget2() != null) {
             notselectable.add(basiceffect.getTarget2().getNickname());
         }

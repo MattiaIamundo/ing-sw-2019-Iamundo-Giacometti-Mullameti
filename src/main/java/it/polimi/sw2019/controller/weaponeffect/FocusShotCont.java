@@ -41,7 +41,7 @@ public class FocusShotCont extends Observable<FocusShotChooseEv> implements Obse
 
         try {
             basiceffect = (MachineGun) attacker.getWeapon("Machine Gun").getPower();
-            targets.add(basiceffect.getTarget1().getNickname());
+            targets.add(basiceffect.getTarget().getNickname());
             if (basiceffect.getTarget2() != null) {
                 targets.add(basiceffect.getTarget2().getNickname());
             }

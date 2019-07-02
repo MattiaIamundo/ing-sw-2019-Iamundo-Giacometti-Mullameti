@@ -10,26 +10,11 @@ import java.util.ArrayList;
  * This method implements the optional effect of Lock Rifle
  * @author Mattia Iamundo
  */
-public class SecondLock implements Power, SingleTarget{
-
-    private Player target;
+public class SecondLock extends SingleTarget implements Power{
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().setMark(attacker);
+        super.setMark(attacker);
     }
 
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
-    }
 }
