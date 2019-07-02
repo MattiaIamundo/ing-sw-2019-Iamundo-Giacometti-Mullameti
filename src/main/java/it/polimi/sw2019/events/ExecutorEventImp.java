@@ -162,4 +162,76 @@ public class ExecutorEventImp implements ExecutorEvent {
     public void updateObject(PulvModeChooseEv pulvModeChooseEv, Game game){
         game.update(pulvModeChooseEv);
     }
+
+    public void updateObject(PunisherModeChooseEv punisherModeChooseEv, Game game){
+        game.update(punisherModeChooseEv);
+    }
+
+    public void updateObject(RailGunChooseEv railGunChooseEv, Game game){
+        game.update(railGunChooseEv);
+    }
+
+    public void updateObject(RocketFistChooseEv rocketFistChooseEv, Game game){
+        game.update(rocketFistChooseEv);
+    }
+
+    public void updateObject(RocketJumpChooseEv rocketJumpChooseEv, Game game){
+        game.update(rocketJumpChooseEv);
+    }
+
+    public void updateObject(RocketLaunchChooseEv rocketLaunchChooseEv, Game game){
+        game.update(rocketLaunchChooseEv);
+    }
+
+    public void updateObject(ScannerModeChooseEv scannerModeChooseEv, Game game){
+        game.update(scannerModeChooseEv);
+    }
+
+    public void updateObject(SecondLockChooseEv secondLockChooseEv, Game game){
+        game.update(secondLockChooseEv);
+    }
+
+    public void updateObject(ShadowstepChooseEv shadowstepChooseEv, Game game){
+        game.update(shadowstepChooseEv);
+    }
+
+    public void updateObject(ShockwaveChooseEv shockwaveChooseEv, Game game){
+        game.update(shockwaveChooseEv);
+    }
+
+    public void updateObject(ShotgunChooseEv shotgunChooseEv, Game game){
+        game.update(shotgunChooseEv);
+    }
+
+    public void updateObject(SledgehammerChooseEv sledgehammerChooseEv, Game game){
+        game.update(sledgehammerChooseEv);
+    }
+
+    public void updateObject(SliceAndDiceChooseEv sliceAndDiceChooseEv, Game game){
+        game.update(sliceAndDiceChooseEv);
+    }
+
+    public void updateObject(ThorChooseEv thorChooseEv, Game game){
+        game.update(thorChooseEv);
+    }
+
+    public void updateObject(TractorBeamChooseEv tractorBeamChooseEv, Game game){
+        game.update(tractorBeamChooseEv);
+    }
+
+    public void updateObject(TurretTripodChooseEv turretTripodChooseEv, Game game){
+        game.update(turretTripodChooseEv);
+    }
+
+    public void updateObject(VortexChooseEv vortexChooseEv, Game game){
+        game.update(vortexChooseEv);
+    }
+
+    public void updateObject(WhisperChooseEv whisperChooseEv, Game game){
+        game.update(whisperChooseEv);
+    }
+
+    public void updateObject(ZX2ChooseEv zx2ChooseEv, Game game){
+        game.update(zx2ChooseEv);
+    }
 }

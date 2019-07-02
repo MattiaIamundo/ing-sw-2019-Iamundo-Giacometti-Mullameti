@@ -1381,4 +1381,130 @@ public class Game implements Observer <NotifyReturn> {
             playerRemoteView.sendEvent(pulvModeChooseEv);
         }
     }
+
+    public void update(PunisherModeChooseEv punisherModeChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(punisherModeChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(punisherModeChooseEv);
+        }
+    }
+
+    public void update(RailGunChooseEv railGunChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(railGunChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(railGunChooseEv);
+        }
+    }
+
+    public void update(RocketFistChooseEv rocketFistChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(rocketFistChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(rocketFistChooseEv);
+        }
+    }
+
+    public void update(RocketJumpChooseEv rocketJumpChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(rocketJumpChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(rocketJumpChooseEv);
+        }
+    }
+
+    public void update(RocketLaunchChooseEv rocketLaunchChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(rocketLaunchChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(rocketLaunchChooseEv);
+        }
+    }
+
+    public void update(ScannerModeChooseEv scannerModeChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(scannerModeChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(scannerModeChooseEv);
+        }
+    }
+
+    public void update(SecondLockChooseEv secondLockChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(secondLockChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(secondLockChooseEv);
+        }
+    }
+
+    public void update(ShadowstepChooseEv shadowstepChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(shadowstepChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(shadowstepChooseEv);
+        }
+    }
+
+    public void update(ShockwaveChooseEv shockwaveChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(shockwaveChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(shockwaveChooseEv);
+        }
+    }
+
+    public void update(ShotgunChooseEv shotgunChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(shotgunChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(shotgunChooseEv);
+        }
+    }
+
+    public void update(SledgehammerChooseEv sledgehammerChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(sledgehammerChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(sledgehammerChooseEv);
+        }
+    }
+
+    public void update(SliceAndDiceChooseEv sliceAndDiceChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(sliceAndDiceChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(sliceAndDiceChooseEv);
+        }
+    }
+
+    public void update(ThorChooseEv thorChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(thorChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(thorChooseEv);
+        }
+    }
+
+    public void update(TractorBeamChooseEv tractorBeamChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(tractorBeamChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(tractorBeamChooseEv);
+        }
+    }
+
+    public void update(TurretTripodChooseEv turretTripodChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(turretTripodChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(turretTripodChooseEv);
+        }
+    }
+
+    public void update(VortexChooseEv vortexChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(vortexChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(vortexChooseEv);
+        }
+    }
+
+    public void update(WhisperChooseEv whisperChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(whisperChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(whisperChooseEv);
+        }
+    }
+
+    public void update(ZX2ChooseEv zx2ChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(zx2ChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(zx2ChooseEv);
+        }
+    }
 }
