@@ -10,6 +10,7 @@ import it.polimi.sw2019.events.server_event.VCevent.VCLogin;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.nethandler.ViewContEvent;
 import it.polimi.sw2019.network.Socket.ClientSocket;
+import javafx.application.Platform;
 
 
 public class PlayerView extends Observable<ActionEv> implements Observer <NotifyReturn> {
@@ -61,7 +62,12 @@ public class PlayerView extends Observable<ActionEv> implements Observer <Notify
     public void sendYouAreFirstPlayer(){clientSocket.getYouAreFirstPlayer();}
 
     public void waitForPing() {
-        clientSocket.notifyGUI("Ping");
+        if(firstTime) {
+
+            clientSocket.notifyGUI("Ping");
+            firstTime = false;
+        }
+        //clientSocket.notifyGUI("Ping");
         this.clientSocket.getViewContEvent().sendPong();
         this.clientSocket.getContSelect().waitForPing(this);
     }
@@ -88,7 +94,7 @@ public class PlayerView extends Observable<ActionEv> implements Observer <Notify
     }
 
     public void waitForStart() {
-
+        clientSocket.notifyGUI("Start");
     }
 
     public void notify(ActionEv actionEv) {
