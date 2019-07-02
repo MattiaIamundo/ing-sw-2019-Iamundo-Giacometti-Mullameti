@@ -114,4 +114,52 @@ public class ExecutorEventImp implements ExecutorEvent {
     public void updateObject(HeatseekerChooseEv heatseekerChooseEv, Game game){
         game.update(heatseekerChooseEv);
     }
+
+    public void updateObject(HellionChooseEv hellionChooseEv, Game game){
+        game.update(hellionChooseEv);
+    }
+
+    public void updateObject(HighVoltageChooseEv highVoltageChooseEv, Game game){
+        game.update(highVoltageChooseEv);
+    }
+
+    public void updateObject(LockRifleChooseEv lockRifleChooseEv, Game game){
+        game.update(lockRifleChooseEv);
+    }
+
+    public void updateObject(LongBarrelChooseEv longBarrelChooseEv, Game game){
+        game.update(longBarrelChooseEv);
+    }
+
+    public void updateObject(MachineGunChooseEv machineGunChooseEv, Game game){
+        game.update(machineGunChooseEv);
+    }
+
+    public void updateObject(NanoTracerChooseEv nanoTracerChooseEv, Game game){
+        game.update(nanoTracerChooseEv);
+    }
+
+    public void updateObject(PhaseGlideChooseEv phaseGlideChooseEv, Game game){
+        game.update(phaseGlideChooseEv);
+    }
+
+    public void updateObject(PiercingModeChooseEv piercingModeChooseEv, Game game){
+        game.update(piercingModeChooseEv);
+    }
+
+    public void updateObject(PlasmaGunChooseEv plasmaGunChooseEv, Game game){
+        game.update(plasmaGunChooseEv);
+    }
+
+    public void updateObject(PowerChooseEv powerChooseEv, Game game){
+        game.update(powerChooseEv);
+    }
+
+    public void updateObject(PowerGloveChooseEv powerGloveChooseEv, Game game){
+        game.update(powerGloveChooseEv);
+    }
+
+    public void updateObject(PulvModeChooseEv pulvModeChooseEv, Game game){
+        game.update(pulvModeChooseEv);
+    }
 }
