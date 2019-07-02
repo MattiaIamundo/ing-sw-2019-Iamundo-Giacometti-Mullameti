@@ -1,18 +1,20 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.BlackHoleChooseEv;
 import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.*;
 import it.polimi.sw2019.events.weaponeffect_controller_events.BlackHoleSetEv;
 import it.polimi.sw2019.model.weapon_power.BlackHole;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.Vortex;
+import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController {
+public class BlackHoleCont extends Observable<BlackHoleChooseEv> implements Observer<BlackHoleSetEv>, EffectController {
 
     private BlackHole model;
     private Player attacker;
@@ -51,7 +53,7 @@ public class BlackHoleCont implements Observer<BlackHoleSetEv>, EffectController
             notselectable.add(attacker.getNickname());
             notselectable.add(invalid.getNickname());
             model.setVortex(vortex);
-            model.chooseTargets(attacker, targets, notselectable, notreachable);
+            notify(new BlackHoleChooseEv(attacker.getNickname(), targets, notselectable, notreachable));
         }catch (InexistentWeaponException e){
             logger.log(Level.SEVERE,e.getMessage()+" doesn't have Vortex Cannon");
         }

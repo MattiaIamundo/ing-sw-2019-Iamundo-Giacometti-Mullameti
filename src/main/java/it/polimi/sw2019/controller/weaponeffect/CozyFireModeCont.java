@@ -1,17 +1,19 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.CozyFireModeChooseEv;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.events.weaponeffect_controller_events.CozyFireModeSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.weapon_power.CozyFireMode;
 import it.polimi.sw2019.model.weapon_power.Power;
+import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CozyFireModeCont implements Observer<CozyFireModeSetEv>, EffectController {
+public class CozyFireModeCont extends Observable<CozyFireModeChooseEv> implements Observer<CozyFireModeSetEv>, EffectController {
     private CozyFireMode model;
     private Player attacker;
     private ArrayList<Player> players;
@@ -43,7 +45,7 @@ public class CozyFireModeCont implements Observer<CozyFireModeSetEv>, EffectCont
         if ((!attacker.getPosition().getEast().isWall()) && (thereIsTargets(attacker.getPosition().getEast().getSpaceSecond()))){
             valid.put("east", attacker.getPosition().getEast().getSpaceSecond());
         }
-        model.chooseTargetArea(attacker, new ArrayList<>(valid.keySet()));
+        notify(new CozyFireModeChooseEv(attacker.getNickname(), new ArrayList<>(valid.keySet())));
     }
 
     private Boolean thereIsTargets(Space space){

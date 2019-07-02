@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.MachineGunChooseEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.events.weaponeffect_controller_events.MachineGunSetEv;
 import it.polimi.sw2019.model.weapon_power.MachineGun;
@@ -18,7 +19,7 @@ public class MachineGunCont extends VisibleTargetCont implements Observer<Machin
     @Override
     protected void acquireTarget() {
         super.acquireTarget();
-        realmodel.chooseTarget(attacker, valid, notreachable);
+        notify(new MachineGunChooseEv(attacker.getNickname(), valid, notreachable));
     }
 
     @Override

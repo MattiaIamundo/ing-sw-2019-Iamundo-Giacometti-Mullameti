@@ -1,17 +1,19 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.ShockwaveChooseEv;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.events.weaponeffect_controller_events.ShockwaveSetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.Shockwave;
+import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ShockwaveCont implements Observer<ShockwaveSetEv>, EffectController {
+public class ShockwaveCont extends Observable<ShockwaveChooseEv> implements Observer<ShockwaveSetEv>, EffectController {
 
     private Shockwave model;
     private Player attacker;
@@ -42,7 +44,7 @@ public class ShockwaveCont implements Observer<ShockwaveSetEv>, EffectController
         if (!attacker.getPosition().getEast().isWall()){
             targets.put("east", searchPlayers(attacker.getPosition().getEast().getSpaceSecond()));
         }
-        model.chooseTargets(attacker, targets);
+        notify(new ShockwaveChooseEv(attacker.getNickname(), targets));
     }
 
     private ArrayList<String> searchPlayers(Space squarepos){
