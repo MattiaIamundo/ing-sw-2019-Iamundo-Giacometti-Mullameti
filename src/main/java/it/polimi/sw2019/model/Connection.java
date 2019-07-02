@@ -7,9 +7,9 @@ import java.io.Serializable;
  */
 public class Connection implements Serializable {
     //the space the player's in
-    private Space spaceFirst;
+    private transient Space spaceFirst;
     //the space the player wants to move to
-    private Space spaceSecond;
+    private transient Space spaceSecond;
     //boolean variable to decide if there is a wall or not , if there is possibile to move from spaceFirst to spaceSecond
     private boolean isWall;
     /**Constructor of the class

@@ -16,15 +16,17 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
 
     private Socket socket;
     private String set = "pippo";
-    private PrintWriter output;
+    //private PrintWriter output;
     private Scanner input;
     private Gson gson;
+    private ObjectOutputStream objectOutputStream;
 
     public PlayerRemoteView (Socket socket1) {
         socket = socket1;
         try{
-            output = new PrintWriter(socket.getOutputStream());
+            //output = new PrintWriter(socket.getOutputStream());
             input = new Scanner(socket.getInputStream());
+            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -33,28 +35,32 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
     }
 
     public void requestNickname(Login login) {
-
-        //i have to send to the client this request
-            output.println( login.isFirstTime() );
-            output.flush();
+        try{
+            //i have to send to the client this request
+            objectOutputStream.writeBoolean( login.isFirstTime() );
+            objectOutputStream.flush();
 
             if( login.getNickname().isEmpty() ) {
 
-                output.println("name?");
-                output.flush();
+                objectOutputStream.writeUTF("name?");
+                objectOutputStream.flush();
 
             }
             else {
 
                 for( String s : login.getNickname() ) {
 
-                    output.println( s );
-                    output.flush();
+                    objectOutputStream.writeUTF( s );
+                    objectOutputStream.flush();
                 }
 
-                output.println( "" );
-                output.flush();
+                objectOutputStream.writeUTF( "" );
+                objectOutputStream.flush();
             }
+        } catch (IOException ex) {
+            //
+        }
+
 
     }
 
@@ -71,9 +77,14 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
     }
 
     public void sendPing() {
-
-        output.println("Ping");
-        output.flush();
+        try {
+            objectOutputStream.writeUTF("Ping");
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+        //output.println("Ping");
+        //output.flush();
     }
 
     public String waitForPong() {
@@ -82,16 +93,30 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
     }
 
     public void requestSkull(boolean firstTime) {
-        output.println(firstTime);
-        output.flush();
+        try {
+            objectOutputStream.writeBoolean(firstTime);
+            objectOutputStream.flush();
+            objectOutputStream.writeUTF("skull");
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+        //output.println(firstTime);
+        //output.flush();
 
-        output.println("skull");
-        output.flush();
+        //output.println("skull");
+        //output.flush();
     }
 
     public void requestMap(boolean firstTime) {
-        output.println(firstTime);
-        output.flush();
+        try {
+            objectOutputStream.writeBoolean(firstTime);
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+        //output.println(firstTime);
+        //output.flush();
     }
 
     public String waitForSkull() {
@@ -105,15 +130,40 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
     }
 
     public void requestNickname(Reconnection reconnection) {
-        output.println(reconnection.getFirstTime());
-        output.flush();
+        try {
+            objectOutputStream.writeBoolean(reconnection.getFirstTime());
+            objectOutputStream.flush();
+            objectOutputStream.writeUTF(reconnection.getRecon());
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+        //output.println(reconnection.getFirstTime());
+        //output.flush();
 
-        output.println(reconnection.getRecon());
-        output.flush();
+        //output.println(reconnection.getRecon());
+        //output.flush();
     }
 
     public void requestColor(Color color) {
 
+        try {
+            objectOutputStream.writeBoolean(color.isFirstTime());
+            objectOutputStream.flush();
+            objectOutputStream.writeBoolean(color.isDuplicated());
+            objectOutputStream.flush();
+            for( String s : color.getColors()) {
+
+                objectOutputStream.writeUTF( s );
+                objectOutputStream.flush();
+            }
+
+            objectOutputStream.writeUTF( "" );
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+        /*
         output.println( color.isFirstTime() );
         output.flush();
 
@@ -128,57 +178,119 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
 
         output.println( "" );
         output.flush();
+
+         */
     }
 
     public void sendGoodbye() {
-        output.println("The nickname was not found, so goodbye!");
-        output.flush();
+        try {
+            objectOutputStream.writeUTF("The nickname was not found, so goodbye!");
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+        //output.println("The nickname was not found, so goodbye!");
+        //output.flush();
     }
 
     public void sendOut() {
-        output.println("out");
-        output.flush();
+        try {
+            objectOutputStream.writeUTF("out");
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+        //output.println("out");
+        //output.flush();
     }
 
     public void sendOk() {
 
-        output.println("ok");
-        output.flush();
+        try {
+            objectOutputStream.writeUTF("ok");
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+        //output.println("ok");
+        //output.flush();
     }
 
     public void sendNotOk() {
-        output.println("notok");
-        output.flush();
+        try {
+            objectOutputStream.writeUTF("notok");
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+        //output.println("notok");
+        //output.flush();
     }
 
     public void sendYouAreFirstPlayer() {
-        output.println("first");
-        output.flush();
+        try {
+            objectOutputStream.writeUTF("first");
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+        //output.println("first");
+        //output.flush();
     }
 
     public void sendYouAreNotFirstPlayer() {
-        output.println("oneother");
-        output.flush();
+        try {
+            objectOutputStream.writeUTF("oneother");
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+        //output.println("oneother");
+        //output.flush();
     }
 
     public void sendThereAreSkull() {
-        output.println("true");
-        output.flush();
+        try {
+            objectOutputStream.writeUTF("true");
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+        //output.println("true");
+        //output.flush();
     }
 
     public void sendThereAreNotSkull() {
-        output.println("false");
-        output.flush();
+        try {
+            objectOutputStream.writeUTF("false");
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+       //output.println("false");
+        //output.flush();
     }
 
     public void sendThereIsMap() {
-        output.println("true");
-        output.flush();
+        try {
+            objectOutputStream.writeUTF("true");
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+        //output.println("true");
+        //output.flush();
     }
 
     public void sendThereIsNotMap() {
-        output.println("false");
-        output.flush();
+        try {
+            objectOutputStream.writeUTF("false");
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+        //output.println("false");
+        //output.flush();
     }
 
 
@@ -190,21 +302,35 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
     }
 
     public void sendStartGame() {
-        output.println("start");
-        output.flush();
+        try {
+            objectOutputStream.writeUTF("start");
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            //
+        }
+        //output.println("start");
+        //output.flush();
     }
 
     public void sendAllModel(StartGameEv startGameEv) {
-        System.out.println(startGameEv);
-        set = gson.toJson(startGameEv, StartGameEv.class);
-        output.println(set);
-        output.flush();
+
+        try{
+            objectOutputStream.writeObject(startGameEv);
+            objectOutputStream.flush();
+            objectOutputStream.reset();
+        } catch (IOException ex) {
+            //do nothing
+        }
+
+
     }
+
+
 
     public void sendEvent(NotifyReturn notifyReturn) {
         set = gson.toJson(notifyReturn);
-        output.println(set);
-        output.flush();
+        //output.println(set);
+        //output.flush();
     }
 
 

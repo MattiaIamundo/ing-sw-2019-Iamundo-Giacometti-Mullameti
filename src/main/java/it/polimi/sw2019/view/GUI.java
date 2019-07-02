@@ -40,7 +40,7 @@ public class GUI extends Application implements UIinterface {
     public void start(Stage stage) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/Menu.fxml"));
+        loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/Menu.fxml"));
         Parent menu = loader.load();
         Scene scene=new Scene(menu);
         stage.setScene(scene);
@@ -71,7 +71,7 @@ public class GUI extends Application implements UIinterface {
 
             try {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/NewPlayer.fxml"));
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/NewPlayer.fxml"));
                 Parent newPlayer = loader.load();
 
                 NewPlayerController newPlayerController = loader.getController();
@@ -92,7 +92,7 @@ public class GUI extends Application implements UIinterface {
         if(string.equals("ok")){
             try {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/PlayerCharacter.fxml"));
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/PlayerCharacter.fxml"));
                 Parent playerCharacter = loader.load();
 
                 PlayerCharacterController playerCharacterController = loader.getController();
@@ -113,7 +113,7 @@ public class GUI extends Application implements UIinterface {
         if(string.equals("ok")){
             try {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/ChooseSkull.fxml"));
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/ChooseSkull.fxml"));
                 Parent chooseSkull = loader.load();
 
                 ChooseSkullController chooseSkullController = loader.getController();
@@ -146,7 +146,7 @@ public class GUI extends Application implements UIinterface {
         if (string.equals("ok")){
             try {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/ChooseMap.fxml"));
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/ChooseMap.fxml"));
                 Parent chooseMap = loader.load();
 
                 ChooseMapController chooseMapController = loader.getController();
@@ -166,7 +166,7 @@ public class GUI extends Application implements UIinterface {
         if (string.equals("ok")){
             try {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/Lobby.fxml"));
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/Lobby.fxml"));
                 Parent lobby = loader.load();
 
                 LobbyController lobbyController = loader.getController();
@@ -187,7 +187,7 @@ public class GUI extends Application implements UIinterface {
         if (string.equals("ok")){
             try {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/Table.fxml"));
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/Table.fxml"));
                 Parent lobby = loader.load();
 
                 TableController tableController = loader.getController();
