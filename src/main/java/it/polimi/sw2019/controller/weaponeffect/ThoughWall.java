@@ -12,7 +12,7 @@ import it.polimi.sw2019.view.Observable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class ThoughWall extends Observable<WeaponEvent> implements EffectController{
+public abstract class ThoughWall extends EffectController{
     protected ThroughWalls model;
     protected Player attacker;
     protected ArrayList<Player> players;

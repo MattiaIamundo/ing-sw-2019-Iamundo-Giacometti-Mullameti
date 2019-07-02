@@ -3,11 +3,15 @@ package it.polimi.sw2019.controller;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.sw2019.controller.weaponeffect.EffectController;
+import it.polimi.sw2019.events.NotifyReturn;
+import it.polimi.sw2019.events.weapon_event.PowerChooseEv;
+import it.polimi.sw2019.events.weapon_event.UnpaidEffectEv;
+import it.polimi.sw2019.exception.UnpaidEffectCostException;
 import it.polimi.sw2019.model.*;
-import it.polimi.sw2019.events.weaponeffect_controller_events.PowerSetEv;
+import it.polimi.sw2019.events.weapon_event.PowerSetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
+import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
-import sun.security.jca.GetInstance;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,17 +23,24 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class WeaponEffectManager implements Observer<PowerSetEv> {
+public class WeaponEffectManager extends Observable<NotifyReturn> implements Observer<PowerSetEv> {
     private ArrayList<Player> players;
     private Map map;
     private Player attacker;
     private Weapon weapon;
     private HashMap<String, EffectController> effectControllers = new HashMap<>();
+    //the following hash map are event specific
+    private HashMap<String, Integer> availableAmmo = new HashMap<>();
+    private HashMap<String, String> availablePowerUps = new HashMap<>();
+    private HashMap<String, Integer> remainingCosts = new HashMap<>();
 
-    public WeaponEffectManager(ArrayList<Player> players, Map map) {
+    public WeaponEffectManager(ArrayList<Player> players, Map map, Game game) {
         this.players = players;
         this.map = map;
         initEffectCont();
+        for (java.util.Map.Entry<String, EffectController> controller : effectControllers.entrySet()){
+            controller.getValue().addObserver(game);
+        }
     }
 
     private class EffectFile{
@@ -66,11 +77,11 @@ public class WeaponEffectManager implements Observer<PowerSetEv> {
         }
     }
 
-    public void acquirePower(Weapon weapon, Player attacker){
+     void acquirePower(Weapon weapon, Player attacker){
         this.attacker = attacker;
-        HashMap<String, String> availablePowerUps = new HashMap<>();
         HashMap<String, ArrayList<String>> powers = new HashMap<>();
-        HashMap<String, Integer> availableAmmo = new HashMap<>();
+        availableAmmo.clear();
+        availablePowerUps.clear();
 
         for (PowerUp powerUp : attacker.getPowerup()){
             availablePowerUps.put(powerUp.getName(), powerUp.getColor());
@@ -81,116 +92,91 @@ public class WeaponEffectManager implements Observer<PowerSetEv> {
         powers.put(weapon.getPower().toString(), null);
         if (weapon instanceof Alternative){
             powers.put(((Alternative) weapon).getAlternativePower().toString(), new ArrayList<>(Arrays.asList(((Alternative) weapon).getExtraCost())));
-            weapon.choosePower(true, powers, availableAmmo, availablePowerUps);
+            notify(new PowerChooseEv(true, powers, availableAmmo, availablePowerUps));
         }else if (weapon instanceof Additive){
             powers.put(((Additive) weapon).getAdditivePower().toString(), new ArrayList<>(Collections.singletonList(((Additive) weapon).getAdditiveCost())));
-            weapon.choosePower(false, powers, availableAmmo, availablePowerUps);
+            notify(new PowerChooseEv(false, powers, availableAmmo, availablePowerUps));
         }else {
             powers.put(((DoubleAdditive) weapon).getFirstAdditivePower().toString(), new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getFirstExtraCost())));
             powers.put(((DoubleAdditive) weapon).getSecondAdditivePower().toString(), new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getSecondExtraCost())));
-            weapon.choosePower(false, powers, availableAmmo, availablePowerUps);
+            notify(new PowerChooseEv(false, powers, availableAmmo, availablePowerUps));
         }
     }
 
     @Override
     public void update(PowerSetEv message) {
-        ArrayList<String> availablePowerUps = message.getUsedPowerUps();
+        try {
+            if (weapon instanceof Alternative) {
+                manageAlternative((Alternative) weapon, message);
+            } else if (weapon instanceof Additive) {
+                manageAdditive((Additive) weapon, message);
+            } else if (weapon instanceof DoubleAdditive) {
+                manageDoubleAdditive((DoubleAdditive) weapon, message);
+            }
+        }catch (UnpaidEffectCostException e){
+            HashMap<String, String> availablePowerUps = new HashMap<>();
+            notify(new UnpaidEffectEv(attacker.getNickname(), message.getPowers(), message.getUsedPowerUps(), remainingCosts, availablePowerUps, availableAmmo));
+        }
+    }
 
-        if (weapon instanceof Alternative){
+    private void manageAlternative(Alternative weapon, PowerSetEv message) throws UnpaidEffectCostException{
+        HashMap<String, String> availablePowerUps = message.getUsedPowerUps();
+
+        if (!weapon.getPower().toString().equals(message.getPowers().get(0))) {
+            payEffectCost(new ArrayList<>(Arrays.asList(weapon.getExtraCost())), availablePowerUps);
+        }
+        effectControllers.get(message.getPowers().get(0)).useEffect(attacker, players, map);
+    }
+
+    private void manageAdditive(Additive weapon, PowerSetEv message) throws UnpaidEffectCostException{
+        HashMap<String, String> availablePowerUps = message.getUsedPowerUps();
+
+        if (message.getPowers().size() > 1){
+            payEffectCost(new ArrayList<>(Collections.singletonList(weapon.getAdditiveCost())), availablePowerUps);
+            effectControllers.get(weapon.getPower().toString()).useEffect(attacker, players, map);
+            effectControllers.get(weapon.getAdditivePower().toString()).useEffect(attacker, players, map);
+        }else {
+            effectControllers.get(weapon.getPower().toString()).useEffect(attacker, players, map);
+        }
+    }
+
+    private void manageDoubleAdditive(DoubleAdditive weapon, PowerSetEv message) throws UnpaidEffectCostException{
+        HashMap<String, String> availablePowerUps = message.getUsedPowerUps();
+
+        if ((weapon.getName().equals("Cyberblade") || (weapon.getName().equals("Rocket Launcher")) || (weapon.getName().equals("Plasma Gun")))){
             if (!weapon.getPower().toString().equals(message.getPowers().get(0))) {
-                payEffectCost(new ArrayList<>(Arrays.asList(((Alternative) weapon).getExtraCost())), availablePowerUps);
-            }
-            effectControllers.get(message.getPowers().get(0)).useEffect(attacker, players, map);
-        }else if (weapon instanceof Additive){
-            if (message.getPowers().get(0).equals(weapon.getPower().toString())){
-                effectControllers.get(message.getPowers().get(0)).useEffect(attacker, players, map);
-                if (message.getPowers().size() > 1){
-                    payEffectCost(new ArrayList<>(Collections.singletonList(((Additive) weapon).getAdditiveCost())), availablePowerUps);
-                    effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
-                }
-            }else {
-                effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
-                if (message.getPowers().size() > 1){
-                    payEffectCost(new ArrayList<>(Collections.singletonList(((Additive) weapon).getAdditiveCost())), availablePowerUps);
-                    effectControllers.get(message.getPowers().get(0)).useEffect(attacker, players, map);
-                }
-            }
-        }else if ((weapon instanceof DoubleAdditive) && (weapon.getName().equals("Cyberblade") || weapon.getName().equals("Rocket Launcher") || weapon.getName().equals("Plasma Gun"))){
-            if (!weapon.getPower().toString().equals(message.getPowers().get(0))) {
-                payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getFirstExtraCost())), availablePowerUps);
+                payEffectCost(new ArrayList<>(Collections.singletonList(weapon.getFirstExtraCost())), availablePowerUps);
             }
             effectControllers.get(message.getPowers().get(0)).useEffect(attacker, players, map);
             if (message.getPowers().size() > 1){
                 if (weapon.getPower().toString().equals(message.getPowers().get(1))){
                     effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
                 }else {
-                    payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getFirstExtraCost())), availablePowerUps);
+                    payEffectCost(new ArrayList<>(Collections.singletonList(weapon.getFirstExtraCost())), availablePowerUps);
                     effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
                 }
-                payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getSecondExtraCost())), availablePowerUps);
+                payEffectCost(new ArrayList<>(Collections.singletonList(weapon.getSecondExtraCost())), availablePowerUps);
                 effectControllers.get(message.getPowers().get(2)).useEffect(attacker, players, map);
             }
         }else {
             effectControllers.get(message.getPowers().get(0)).useEffect(attacker, players, map);
-            if (message.getPowers().size() == 1){
-                payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getFirstExtraCost())), availablePowerUps);
+            if (message.getPowers().size() == 2){
+                payEffectCost(new ArrayList<>(Collections.singletonList(weapon.getFirstExtraCost())), availablePowerUps);
                 effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
-            }
-            if (message.getPowers().size() == 3){
-                payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getFirstExtraCost())), availablePowerUps);
-                payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getSecondExtraCost())), availablePowerUps);
+            }else if (message.getPowers().size() == 3){
+                payEffectCost(new ArrayList<>(Collections.singletonList(weapon.getFirstExtraCost())), new ArrayList<>(Collections.singletonList(weapon.getSecondExtraCost())), availablePowerUps);
                 effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
                 effectControllers.get(message.getPowers().get(2)).useEffect(attacker, players, map);
             }
         }
     }
 
-    private void payEffectCost(ArrayList<String> effectCost, ArrayList<String> availablePowerUps){
-        for (String cost : effectCost){
-            switch (cost){
-                case "red":
-                    if (attacker.getAmmo()[0] > 1){
-                        attacker.getAmmo()[0]--;
-                    }else {
-                        for (String powerCost : availablePowerUps){
-                            for (PowerUp powerUp : attacker.getPowerup()){
-                                if ((powerCost.equals(powerUp.getName())) && (powerUp.getColor().equals("red"))){
-                                    attacker.removePowerUp(powerUp);
-                                }
-                            }
-                        }
-                    }
-                    break;
-                case "blue":
-                    if (attacker.getAmmo()[1] > 1){
-                        attacker.getAmmo()[1]--;
-                    }else {
-                        for (String powerCost : availablePowerUps){
-                            for (PowerUp powerUp : attacker.getPowerup()){
-                                if ((powerCost.equals(powerUp.getName())) && (powerUp.getColor().equals("blue"))){
-                                    attacker.removePowerUp(powerUp);
-                                }
-                            }
-                        }
-                    }
-                    break;
-                case "yellow":
-                    if (attacker.getAmmo()[2] > 1){
-                        attacker.getAmmo()[2]--;
-                    }else {
-                        for (String powerCost : availablePowerUps){
-                            for (PowerUp powerUp : attacker.getPowerup()){
-                                if ((powerCost.equals(powerUp.getName())) && (powerUp.getColor().equals("yellow"))){
-                                    attacker.removePowerUp(powerUp);
-                                }
-                            }
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
+    private void payEffectCost(ArrayList<String> effectCost, HashMap<String, String> availablePowerUps) throws UnpaidEffectCostException {
+        remainingCosts = (HashMap<String, Integer>) availableAmmo.clone();
+    }
+
+    private void payEffectCost(ArrayList<String> effectCostFirst, ArrayList<String> effectCostSecond, HashMap<String, String> availablePowerUps) throws UnpaidEffectCostException{
+
     }
 
     public HashMap<String, EffectController> getEffectControllers() {

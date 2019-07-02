@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class FragmentingWarheadCont implements EffectController{
+public class FragmentingWarheadCont extends EffectController{
 
     private FragmentingWarhead model;
     private Player attacker;

@@ -10,7 +10,7 @@ import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 
-public abstract class SameSquare extends Observable<WeaponEvent> implements EffectController{
+public abstract class SameSquare extends EffectController{
 
     private SingleTarget model;
     protected Player attacker;

@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class VortexCont extends Observable<VortexChooseEv> implements Observer<VortexSetEv>, EffectController{
+public class VortexCont extends EffectController implements Observer<VortexSetEv>{
     private Vortex model;
     private Player attacker;
     private ArrayList<Player> players;

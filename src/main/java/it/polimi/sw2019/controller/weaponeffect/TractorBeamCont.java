@@ -11,7 +11,7 @@ import it.polimi.sw2019.view.Observer;
 
 import java.util.*;
 
-public class TractorBeamCont extends Observable<TractorBeamChooseEv> implements Observer<TractorBeamSetEv>, EffectController{
+public class TractorBeamCont extends EffectController implements Observer<TractorBeamSetEv>{
 
    private Map<Player, Map<String, Space>> movingmap = new HashMap<>();
    private ArrayList<String> validroom = new ArrayList<>();

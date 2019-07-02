@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class MovePlayer extends Observable<WeaponEvent> implements EffectController {
+public abstract class MovePlayer extends EffectController {
     private WithMove model;
     protected Player attacker;
     protected ArrayList<Player> players;

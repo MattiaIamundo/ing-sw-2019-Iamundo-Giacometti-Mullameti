@@ -1,4 +1,4 @@
-package it.polimi.sw2019.events.weaponeffect_controller_events;
+package it.polimi.sw2019.events.weapon_event;
 
 import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.events.ExecutorEventImp;

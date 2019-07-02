@@ -13,7 +13,7 @@ import it.polimi.sw2019.view.Observer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PulverizeModeCont extends Observable<PulvModeChooseEv> implements Observer<PulvModeSetEv>, EffectController {
+public class PulverizeModeCont extends EffectController implements Observer<PulvModeSetEv> {
 
     private PulverizeMode model;
     private Player attacker;

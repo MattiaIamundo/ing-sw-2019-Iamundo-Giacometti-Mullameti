@@ -11,7 +11,7 @@ import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 
-public class FurnaceCont extends Observable<FurnaceChooseEv> implements Observer<FurnaceSetEv>, EffectController {
+public class FurnaceCont extends EffectController implements Observer<FurnaceSetEv> {
 
     private Furnace model;
     private Player attacker;

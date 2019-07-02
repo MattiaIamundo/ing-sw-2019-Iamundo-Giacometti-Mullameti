@@ -1,4 +1,4 @@
-package it.polimi.sw2019.events;
+package it.polimi.sw2019.events.weapon_event;
 
 import java.util.ArrayList;
 

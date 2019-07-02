@@ -14,12 +14,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class BlackHoleCont extends Observable<BlackHoleChooseEv> implements Observer<BlackHoleSetEv>, EffectController {
+public class BlackHoleCont extends EffectController implements Observer<BlackHoleSetEv> {
 
     private BlackHole model;
     private Player attacker;
     private ArrayList<Player> players;
-    private Map map;
     private Logger logger = Logger.getLogger("controller.BlackHole");
 
     public BlackHoleCont(Power model) {
@@ -30,7 +29,6 @@ public class BlackHoleCont extends Observable<BlackHoleChooseEv> implements Obse
     public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
         this.attacker = attacker;
         this.players = players;
-        this.map = gamemap;
         acquireTargets();
     }
 

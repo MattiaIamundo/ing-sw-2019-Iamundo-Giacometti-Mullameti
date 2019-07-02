@@ -14,12 +14,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ChargedShotCont implements EffectController{
+public class ChargedShotCont extends EffectController{
 
     private ChargedShot model;
     private Player attacker;
-    private ArrayList<Player> players;
-    private Map map;
 
     public ChargedShotCont(Power model) {
         this.model = (ChargedShot) model;
@@ -28,8 +26,6 @@ public class ChargedShotCont implements EffectController{
     @Override
     public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
         this.attacker = attacker;
-        this.players = players;
-        this.map = gamemap;
         acquireTarget();
     }
 

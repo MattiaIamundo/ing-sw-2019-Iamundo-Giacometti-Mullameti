@@ -13,11 +13,10 @@ import it.polimi.sw2019.view.Observer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CozyFireModeCont extends Observable<CozyFireModeChooseEv> implements Observer<CozyFireModeSetEv>, EffectController {
+public class CozyFireModeCont extends EffectController implements Observer<CozyFireModeSetEv> {
     private CozyFireMode model;
     private Player attacker;
     private ArrayList<Player> players;
-    private Map map;
     private HashMap<String, Space> valid = new HashMap<>();
 
     public CozyFireModeCont(Power model) {
@@ -28,7 +27,6 @@ public class CozyFireModeCont extends Observable<CozyFireModeChooseEv> implement
     public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
         this.attacker = attacker;
         this.players = players;
-        this.map = gamemap;
         acquireSquare();
     }
 
