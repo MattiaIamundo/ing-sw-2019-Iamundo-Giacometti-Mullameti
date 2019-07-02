@@ -3,8 +3,8 @@ package it.polimi.sw2019.view;
 
 
 import it.polimi.sw2019.view.ControllerClasses.*;
-import it.polimi.sw2019.events.server_event.VCevent.VCColor;
-import it.polimi.sw2019.events.server_event.VCevent.VCLogin;
+
+
 import it.polimi.sw2019.nethandler.ViewContEvent;
 import it.polimi.sw2019.network.Socket.ClientSocket;
 import javafx.application.Application;
@@ -17,8 +17,8 @@ import javafx.stage.WindowEvent;
 
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Scanner;
+
+
 
 public class GUI extends Application implements UIinterface {
 
@@ -40,7 +40,7 @@ public class GUI extends Application implements UIinterface {
     public void start(Stage stage) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/Menu.fxml"));
+        loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/Menu.fxml"));
         Parent menu = loader.load();
         Scene scene=new Scene(menu);
         stage.setScene(scene);
@@ -71,7 +71,7 @@ public class GUI extends Application implements UIinterface {
 
             try {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/NewPlayer.fxml"));
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/NewPlayer.fxml"));
                 Parent newPlayer = loader.load();
 
                 NewPlayerController newPlayerController = loader.getController();
@@ -92,7 +92,7 @@ public class GUI extends Application implements UIinterface {
         if(string.equals("ok")){
             try {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/PlayerCharacter.fxml"));
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/PlayerCharacter.fxml"));
                 Parent playerCharacter = loader.load();
 
                 PlayerCharacterController playerCharacterController = loader.getController();
@@ -113,7 +113,7 @@ public class GUI extends Application implements UIinterface {
         if(string.equals("ok")){
             try {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/ChooseSkull.fxml"));
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/ChooseSkull.fxml"));
                 Parent chooseSkull = loader.load();
 
                 ChooseSkullController chooseSkullController = loader.getController();
@@ -142,11 +142,11 @@ public class GUI extends Application implements UIinterface {
 
     @Override
     public void requestMap(String string) {
-
+        System.out.println("5map");
         if (string.equals("ok")){
             try {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/ChooseMap.fxml"));
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/ChooseMap.fxml"));
                 Parent chooseMap = loader.load();
 
                 ChooseMapController chooseMapController = loader.getController();
@@ -163,10 +163,12 @@ public class GUI extends Application implements UIinterface {
 
     @Override
     public void requestLobby(String string) {
+        System.out.println("5");
         if (string.equals("ok")){
+
             try {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/Lobby.fxml"));
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/Lobby.fxml"));
                 Parent lobby = loader.load();
 
                 LobbyController lobbyController = loader.getController();
@@ -174,12 +176,14 @@ public class GUI extends Application implements UIinterface {
 
                 Stage mainStage = stage;
                 mainStage.getScene().setRoot(lobby);
-            } catch (IOException e) {
+            } catch (IOException e){
             }
         }else {
             System.out.println("ko");
         }
     }
+
+
 
     public static void main(String[]args){
         launch(args);

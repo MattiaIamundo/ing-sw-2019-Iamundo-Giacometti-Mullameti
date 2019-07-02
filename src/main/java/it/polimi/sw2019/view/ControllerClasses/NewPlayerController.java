@@ -78,6 +78,7 @@ public class NewPlayerController {
 
     @FXML
     public void nextButtonClicked(){
+        System.out.println("newPlayer");
         clientSocket.getContSelect().waitingForColorRequest(clientSocket.getPlayerView());
 
         /*try{

@@ -73,10 +73,12 @@ public class ChooseMapController {
 
 
     @FXML
-    public void startButtonPushed() throws IOException {
-
+    public void startButtonPushed()  {
+        System.out.println("6map");
+        System.out.println("1");
         clientSocket.getContSelect().waitForPing(clientSocket.getPlayerView());
-        System.out.println("ok");
+
+
         /*Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/Table.fxml"));
         Scene tableScene = new Scene(table);
 

@@ -59,5 +59,6 @@ public class ViewContEvent implements ViewContEventInt {
     public void sendPong() {
         output.println( "Pong" );
         output.flush();
+
     }
 }

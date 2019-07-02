@@ -1,6 +1,7 @@
 package it.polimi.sw2019.view.ControllerClasses;
 
 
+import it.polimi.sw2019.network.Socket.ClientSocket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +18,7 @@ import java.io.IOException;
 public class TableController {
 
 
-
+    private ClientSocket clientSocket;
     @FXML private Button thisPlayer;
     @FXML private Button firstPlayer;
     @FXML private Button secondPlayer;
@@ -172,7 +173,7 @@ public class TableController {
     public void yourTurnButtonPushed(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML/Action&Reload.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/Action&Reload.fxml"));
             AnchorPane playerTurn = (AnchorPane) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(playerTurn));
@@ -181,5 +182,9 @@ public class TableController {
             e.printStackTrace();
         }
 
+    }
+
+    public void setClientSocket(ClientSocket clientSocket){
+        this.clientSocket=clientSocket;
     }
 }
