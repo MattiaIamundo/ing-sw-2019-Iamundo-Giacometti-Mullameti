@@ -1,7 +1,6 @@
 package it.polimi.sw2019.model;
 
-import it.polimi.sw2019.events.NotifyReturn;
-import it.polimi.sw2019.events.weaponeffect_controller_events.PaymentInvalidEv;
+import it.polimi.sw2019.events.client_event.MVevent.NotifyReloadEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.PowerChooseEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observable;
@@ -15,7 +14,7 @@ import java.util.HashMap;
  * this class stands for the game's weapons
  * @author Luca Giacometti
  */
-public abstract class Weapon extends Observable<NotifyReturn> implements Cloneable, Serializable {
+public abstract class Weapon extends Observable<PowerChooseEv> implements Cloneable, Serializable {
 
     private String name;
     //at the top it cost 3 ammo to recharge [3]
@@ -93,4 +92,7 @@ public abstract class Weapon extends Observable<NotifyReturn> implements Cloneab
         return power;
     }
 
+    public void choosePower(Boolean itsAlternative, HashMap<String, ArrayList<String>> powers, HashMap<String, Integer> availableAmmo, HashMap<String, String> availablePowerUps){
+        notify(new PowerChooseEv(itsAlternative, powers, availableAmmo, availablePowerUps));
+    }
 }

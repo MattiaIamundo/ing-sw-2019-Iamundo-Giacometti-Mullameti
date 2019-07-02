@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * This class implements the alternative power of the Furnace
  * @author Mattia Iamundo
  */
-public class CozyFireMode implements Power{
+public class CozyFireMode extends Observable<CozyFireModeChooseEv> implements Power{
 
     private ArrayList<Player> players;
 
@@ -21,6 +21,10 @@ public class CozyFireMode implements Power{
             player.getPlance().removeMark(attacker);
             player.getPlance().setMark(attacker);
         }
+    }
+
+    public void chooseTargetArea(Player attacker, ArrayList<String> directions){
+        notify(new CozyFireModeChooseEv(attacker, directions));
     }
 
     public void setPlayers(ArrayList<Player> players) {

@@ -68,7 +68,7 @@ public class HighVoltageContTest {
         ArrayList<String> expectedNotSelectable = new ArrayList<>();
         ArrayList<String> expectedNotReachable = new ArrayList<>();
 
-        controller.addObserver(catcher);
+        highVoltage.addObserver(catcher);
         controller.useEffect(players.get(0), players, map);
         expectedValid.add("target");
         expectedNotSelectable.add("attacker");

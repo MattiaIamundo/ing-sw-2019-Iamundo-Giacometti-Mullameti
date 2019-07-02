@@ -50,7 +50,7 @@ public class HeatseekerContTest {
         ArrayList<String> expectedValid = new ArrayList<>();
         ArrayList<String> expectedNOtReachable = new ArrayList<>();
 
-        controller.addObserver(catcher);
+        model.addObserver(catcher);
         controller.useEffect(players.get(0), players, map);
         expectedValid.add("target");
         expectedNOtReachable.add("notarget");

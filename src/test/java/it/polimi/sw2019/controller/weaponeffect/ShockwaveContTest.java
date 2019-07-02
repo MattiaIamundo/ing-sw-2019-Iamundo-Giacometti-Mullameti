@@ -47,7 +47,7 @@ public class ShockwaveContTest {
             players.get(1).setPosition(map.getSpace(2,2));
             players.get(2).setPosition(map.getSpace(3,1));
             players.get(3).setPosition(map.getSpace(2,0));
-            controller.addObserver(catcher);
+            model.addObserver(catcher);
             controller.useEffect(players.get(0), players, map);
             expectedSquare.add("east");
             expectedSquare.add("south");
@@ -73,7 +73,7 @@ public class ShockwaveContTest {
             players.get(1).setPosition(map.getSpace(3,1));
             players.get(2).setPosition(map.getSpace(2,0));
             players.get(3).setPosition(map.getSpace(2,0));
-            controller.addObserver(catcher);
+            model.addObserver(catcher);
             controller.useEffect(players.get(0), players, map);
             expectedSquare.add("north");
             expectedSquare.add("west");

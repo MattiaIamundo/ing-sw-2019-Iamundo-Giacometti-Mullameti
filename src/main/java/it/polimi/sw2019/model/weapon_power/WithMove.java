@@ -7,5 +7,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public interface WithMove {
+
+    void changePosition(Player attacker, ArrayList<String> positions);
+
     void setMoveto(Space position);
 }

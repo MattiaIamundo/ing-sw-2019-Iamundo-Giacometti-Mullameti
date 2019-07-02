@@ -1,6 +1,5 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.ZX2ChooseEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.ZX2SetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.ZX2;
@@ -18,7 +17,7 @@ public class ZX2Cont extends VisibleTargetCont implements Observer<ZX2SetEv> {
     @Override
     protected void acquireTarget() {
         super.acquireTarget();
-        notify(new ZX2ChooseEv(attacker.getNickname(), valid, notreachable));
+        realmodel.chooseTarget(attacker, valid, notreachable);
     }
 
     @Override

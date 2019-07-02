@@ -63,6 +63,7 @@ public class ClientSocket  {
 
     private transient ExecutorService worker = Executors.newFixedThreadPool( 1 );
 
+    private boolean firstTime = true;
     /**
      * this is the constructor
      * @param host the server name
@@ -173,14 +174,18 @@ public class ClientSocket  {
                 break;
             case "Ping":
                 uIinterface.requestLobby("ok");
-                playerView.sendPong(this.viewContEvent);
                 break;
-
+            case "Start": //uIinterface.requestTable();
+                break;
+            default:
+                break;
         }
 
     }
 
-
+    public ViewContEvent getViewContEvent() {
+        return this.viewContEvent;
+    }
 
 
     /*public void run(){

@@ -61,7 +61,7 @@ public class SliceAndDiceContTest {
         ArrayList<String> expectedValid = new ArrayList<>();
         ArrayList<String> expectedNotSelectable = new ArrayList<>();
 
-        controller.addObserver(catcher);
+        sliceAndDice.addObserver(catcher);
         controller.useEffect(players.get(0), players, map);
         expectedValid.add("target");
         expectedNotSelectable.add("attacker");

@@ -40,7 +40,7 @@ public class RocketJumpContTest {
         ArrayList<String> expectedDirections = new ArrayList<>();
 
         try {
-            controller.addObserver(catcher);
+            model.addObserver(catcher);
             players.get(0).setPosition(map.getSpace(0,2));
             controller.useEffect(players.get(0), players, map);
             expectedDirections.add("east");
@@ -61,7 +61,7 @@ public class RocketJumpContTest {
         ArrayList<String> expectedDirections = new ArrayList<>();
 
         try {
-            controller.addObserver(catcher);
+            model.addObserver(catcher);
             players.get(0).setPosition(map.getSpace(0,0));
             controller.useEffect(players.get(0), players, map);
             expectedDirections.add("east");
@@ -82,7 +82,7 @@ public class RocketJumpContTest {
         ArrayList<String> expectedDirections = new ArrayList<>();
 
         try {
-            controller.addObserver(catcher);
+            model.addObserver(catcher);
             players.get(0).setPosition(map.getSpace(2,0));
             controller.useEffect(players.get(0), players, map);
             expectedDirections.add("north-east");
@@ -105,7 +105,7 @@ public class RocketJumpContTest {
         ArrayList<String> expectedDirections = new ArrayList<>();
 
         try {
-            controller.addObserver(catcher);
+            model.addObserver(catcher);
             players.get(0).setPosition(map.getSpace(2,2));
             controller.useEffect(players.get(0), players, map);
             expectedDirections.add("east");

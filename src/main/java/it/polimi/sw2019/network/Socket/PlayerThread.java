@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.concurrent.locks.Condition;
@@ -402,27 +403,58 @@ public class PlayerThread implements Runnable {
                 }
 
                 this.gameController.searchPlayer(this.nickname).addObserver(this.gameController);
+
                 logger.log(Level.INFO, "{ PlayerThread } loop until there are 5 players or the timer finishes" );
 
-                while ( gameController.getPlayers().size() < 5 && !gameController.getTimerThread().getTimerDone() ) {
 
-                    gameController.sendPing(playerRemoteView);
-                    string = playerRemoteView.waitForPong();
+                boolean goOutTheLoop = false;
+
+                while ( gameController.getPlayers().size() < 5 && !goOutTheLoop) {
+
+                    synchronized (gameController.getTimerPingThread()) {
+
+                        if ( gameController.getTimerPingThread().getTimePingDone() && gameController.getTimerPingThread().isOn()) {
+
+                            gameController.sendPing(playerRemoteView);
+                            logger.log(Level.INFO, "{ PlayerThread " +  this.nickname + "} sends ping ");
+                            string = playerRemoteView.waitForPong();
+                            logger.log(Level.INFO, "{ PlayerThread " +  this.nickname + "} receives pong ");
+                            gameController.getTimerPingThread().setOn(false);
+                            gameController.getTimerPingThread().deleteTimer();
+
+                        }
+
+                        if( !gameController.getTimerPingThread().isOn() ) {
+                            gameController.getTimerPingThread().run();
+                            gameController.getTimerPingThread().setOn(true);
+                        }
+
+                    }
+
 
                     synchronized ( gameController.getTimerThread() ) {
 
+                        //not enough players but the timer is on
                         if ( gameController.getPlayers().size() < 3 && gameController.getTimerThread().getOn() ) {
                             logger.log(Level.INFO, "{PlayerThread "+ this.nickname +"} has stopped the timer!");
                             gameController.getTimerThread().deleteTimer();
                             gameController.getTimerThread().setTimerDone(false);
                             gameController.getTimerThread().setOn(false);
                         }
-
+                        //enough players but the timer is off
                         if ( gameController.getPlayers().size() >= 3 && !gameController.getTimerThread().getOn()
                                 && gameController.getTimerThread().getTurnTime() == 0 && !gameController.getPlayers().get(2).getCharacter().equals("null") ) {
                             logger.log(Level.INFO, "{PlayerThread "+ this.nickname +"} has started the timer!");
                             gameController.getTimerThread().run();
                             gameController.getTimerThread().setOn(true);
+                        }
+                        //are there enough players when the timer id done?
+                        if(gameController.getPlayers().size() >= 3 && gameController.getTimerThread().getTimerDone() && !goOutTheLoop ){
+                            //gameController.sendPing(playerRemoteView);
+                            logger.log(Level.INFO, "{ PlayerThread " +  this.nickname + "} sends the ok ping ");
+                            //string = playerRemoteView.waitForPong();
+                            logger.log(Level.INFO, "{ PlayerThread " +  this.nickname + "} receives the ok pong ");
+                            goOutTheLoop = true;
                         }
                     }
 
@@ -443,13 +475,7 @@ public class PlayerThread implements Runnable {
 
                 }
 
-                if( gameController.getPlayers().get(0).getNickname().equals(this.nickname) ) {
-                    gameController.setFirstPlayer();
-                }
 
-                gameController.createAmmo();
-                gameController.createWeapon();
-                gameController.createPowerUp();
 
                 logger.log(Level.INFO, "{ PlayerThread "+ this.nickname +"} is start to game" );
                 // the game can start!!
@@ -470,12 +496,29 @@ public class PlayerThread implements Runnable {
 
     private void startGame() {
 
+        if( gameController.getPlayers().get(0).getNickname().equals(this.nickname) ) {
+            gameController.setFirstPlayer();
+
+            for (Player p : gameController.getPlayers()) {
+                if (p.getNickname().equals(this.nickname)) {
+                    gameController.getTurnOf().setPlayer(p);
+                }
+            }
+
+        }
+
+        gameController.createAmmo();
+        gameController.createWeapon();
+        gameController.createPowerUp();
+
         try {
             //send the string "start" to activate a new scene in the client
             this.gameController.sendStartGame(this.playerRemoteView);
             //send the whole model so every client can memorize it in a view to handle the ShowEv
             this.gameController.sendAllModel(this.playerRemoteView);
+            this.gameController.getTurnOf().setPlayer(this.gameController.getPlayers().get(0));
 
+            //HERE THE GAME IS ON
             while ( !gameController.getGameover() ) {
 
                 while ( !gameController.getTurnOfPlayer().getNickname().equals(this.nickname) ) {

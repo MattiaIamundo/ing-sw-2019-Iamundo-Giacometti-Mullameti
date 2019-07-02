@@ -1,10 +1,8 @@
 package it.polimi.sw2019.events;
 
-import it.polimi.sw2019.controller.Game;
-
 import java.util.ArrayList;
 
-public class WeaponChooseEv implements NotifyReturn{
+public class WeaponChooseEv {
     private String attacker;
     private ArrayList<String> weapons;
 
@@ -13,19 +11,8 @@ public class WeaponChooseEv implements NotifyReturn{
         this.weapons = weapons;
     }
 
-    @Override
-    public void setNickname(String nickname) {
-        attacker = nickname;
-    }
-
-    @Override
-    public String getNickname() {
+    public String getAttacker() {
         return attacker;
-    }
-
-    @Override
-    public void updateObject(ExecutorEventImp executorEventImp, Game controller) {
-        executorEventImp.updateObject(this, controller);
     }
 
     public ArrayList<String> getWeapons() {

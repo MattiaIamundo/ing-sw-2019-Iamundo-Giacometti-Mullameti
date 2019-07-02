@@ -181,9 +181,6 @@ public class PlayerRemoteView extends PlayerView {
         output.flush();
     }
 
-    protected void showPlayer() {
-
-    }
 
     public ActionEv waitForAction() {
         //  i have to wait for a ActionEv
@@ -209,6 +206,13 @@ public class PlayerRemoteView extends PlayerView {
     }
 
 
+    public void notify(ActionEv actionEv) {
+
+    }
+
+    public void update(NotifyReturn notifyReturn) {
+
+    }
 
 
 

@@ -6,7 +6,7 @@ import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 
-public class PlasmaGun implements Power, SingleTarget{
+public class PlasmaGun extends Observable<PlasmaGunChooseEv> implements Power, SingleTarget{
 
     private Player target;
 
@@ -14,6 +14,10 @@ public class PlasmaGun implements Power, SingleTarget{
     public void usePower(Player attacker) {
         target.getPlance().giveDamage(attacker, 2);
         target.getPlance().removeMark(attacker);
+    }
+
+    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){
+        notify(new PlasmaGunChooseEv(attacker, valid, notreachable));
     }
 
     public Player getTarget() {

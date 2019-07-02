@@ -1,6 +1,5 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.ChainReactChooseEv;
 import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.events.weaponeffect_controller_events.ChainReactSetEv;
 import it.polimi.sw2019.model.Player;
@@ -41,7 +40,7 @@ public class ChainReactionCont extends VisibleTargetCont implements Observer<Cha
                     notreachable.add(player.getNickname());
                 }
             }
-            notify(new ChainReactChooseEv(attacker.getNickname(), valid, notselctable, notreachable));
+            realmodel.chooseTarget(attacker, valid, notselctable, notreachable);
         }catch (InexistentWeaponException e){
             logger.log(Level.SEVERE, e.getMessage()+" doesn't have T.H.O.R.");
         }

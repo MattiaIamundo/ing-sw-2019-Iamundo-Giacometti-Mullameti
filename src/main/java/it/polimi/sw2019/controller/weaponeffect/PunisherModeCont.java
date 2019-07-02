@@ -1,6 +1,5 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.PunisherModeChooseEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.events.weaponeffect_controller_events.PunisherModeSetEv;
@@ -33,7 +32,7 @@ public class PunisherModeCont extends VisibleTargetCont implements Observer<Puni
                 valid.add(player.getNickname());
             }
         }
-        notify(new PunisherModeChooseEv(attacker.getNickname(), valid, notreachable));
+        realmodel.chooseTarget(valid, notreachable, attacker);
     }
 
     private ArrayList<Space> loadPositions(){

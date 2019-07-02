@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * This class implements the basic effect of Lock Rifle
  * @author Mattia Iamundo
  */
-public class LockRifle implements Power, SingleTarget{
+public class LockRifle extends Observable<LockRifleChooseEv> implements Power, SingleTarget{
 
     private Player target;
 
@@ -19,6 +19,10 @@ public class LockRifle implements Power, SingleTarget{
         target.getPlance().giveDamage(attacker, 2);
         target.getPlance().removeMark(attacker);
         target.getPlance().setMark(attacker);
+    }
+
+    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){
+        notify(new LockRifleChooseEv(attacker, valid, notreachable));
     }
 
     @Override

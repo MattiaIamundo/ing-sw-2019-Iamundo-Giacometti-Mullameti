@@ -11,13 +11,18 @@ import java.util.ArrayList;
  * This class implements the first optional effect of Rocket Launcher
  * @author Mattia Iamundo
  */
-public class RocketJump implements Power, WithMove{
+public class RocketJump extends Observable<RocketJumpChooseEv> implements Power, WithMove{
 
     private Space moveto;
 
     @Override
     public void usePower(Player attacker){
         attacker.setPosition(moveto);
+    }
+
+    @Override
+    public void changePosition(Player attacker, ArrayList<String> positions) {
+        notify(new RocketJumpChooseEv(attacker, positions));
     }
 
     @Override

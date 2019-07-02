@@ -1,23 +1,21 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.events.weaponeffect_controller_events.MoveTargetSetEv;
-import it.polimi.sw2019.events.weaponeffect_controller_events.WeaponEvent;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.WithMove;
-import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class MovePlayer extends Observable<WeaponEvent> implements EffectController {
+public abstract class MovePlayer implements EffectController {
     private WithMove model;
     protected Player attacker;
     protected ArrayList<Player> players;
     protected it.polimi.sw2019.model.Map map;
-    protected Map<String, Space> positions = new HashMap<>();
+    private Map<String, Space> positions = new HashMap<>();
 
     public MovePlayer(Power model) {
         this.model = (WithMove) model;
@@ -31,7 +29,7 @@ public abstract class MovePlayer extends Observable<WeaponEvent> implements Effe
         acquirePosition(attacker.getPosition(), false);
     }
 
-    protected void acquirePosition(Space playerpos, boolean singlespace){
+    public void acquirePosition(Space playerpos, boolean singlespace){
         if (singlespace){
             acquireSingle(playerpos);
         }else {
@@ -40,6 +38,7 @@ public abstract class MovePlayer extends Observable<WeaponEvent> implements Effe
             acquireSouth(playerpos);
             acquireEast(playerpos);
         }
+        model.changePosition(attacker, new ArrayList<>(positions.keySet()));
     }
 
     private void acquireNorth(Space playerpos){
@@ -115,6 +114,7 @@ public abstract class MovePlayer extends Observable<WeaponEvent> implements Effe
         if (!playerpos.getEast().isWall()){
             positions.put("east", playerpos.getEast().getSpaceSecond());
         }
+        model.changePosition(attacker, new ArrayList<>(positions.keySet()));
     }
 
     public void update(MoveTargetSetEv message) {

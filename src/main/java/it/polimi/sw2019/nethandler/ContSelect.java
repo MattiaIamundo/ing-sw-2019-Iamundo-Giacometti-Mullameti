@@ -138,16 +138,17 @@ public class ContSelect implements ContSelectInt {
 
     }
 
-    public boolean waitForPing(PlayerView playerView) {
+    public void waitForPing(PlayerView playerView) {
         string = in.nextLine();
         if (string.equals("Ping")) {
             playerView.waitForPing();
-            return false;
         }
         else if ( string.equals("out") ) {
             throw new NoSuchElementException();
         }
-        return true;
+        else if (string.equals("start")) {
+            //playerView.waitForStart();
+        }
     }
 
     public boolean waitForOk() {

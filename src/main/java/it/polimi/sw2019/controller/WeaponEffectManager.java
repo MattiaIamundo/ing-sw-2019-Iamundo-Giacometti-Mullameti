@@ -2,18 +2,12 @@ package it.polimi.sw2019.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import it.polimi.sw2019.controller.weaponeffect.BarbecueModeCont;
 import it.polimi.sw2019.controller.weaponeffect.EffectController;
-import it.polimi.sw2019.events.NotifyReturn;
-import it.polimi.sw2019.events.weaponeffect_controller_events.PaymentInvalidEv;
-import it.polimi.sw2019.events.weaponeffect_controller_events.PowerChooseEv;
-import it.polimi.sw2019.exception.NotEnoughtAmmoException;
 import it.polimi.sw2019.model.*;
 import it.polimi.sw2019.events.weaponeffect_controller_events.PowerSetEv;
-import it.polimi.sw2019.model.weapon_power.BarbecueMode;
 import it.polimi.sw2019.model.weapon_power.Power;
-import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
+import sun.security.jca.GetInstance;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -25,7 +19,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class WeaponEffectManager extends Observable<NotifyReturn> implements Observer<PowerSetEv> {
+public class WeaponEffectManager implements Observer<PowerSetEv> {
     private ArrayList<Player> players;
     private Map map;
     private Player attacker;
@@ -73,7 +67,6 @@ public class WeaponEffectManager extends Observable<NotifyReturn> implements Obs
     }
 
     public void acquirePower(Weapon weapon, Player attacker){
-        this.weapon = weapon;
         this.attacker = attacker;
         HashMap<String, String> availablePowerUps = new HashMap<>();
         HashMap<String, ArrayList<String>> powers = new HashMap<>();
@@ -88,132 +81,115 @@ public class WeaponEffectManager extends Observable<NotifyReturn> implements Obs
         powers.put(weapon.getPower().toString(), null);
         if (weapon instanceof Alternative){
             powers.put(((Alternative) weapon).getAlternativePower().toString(), new ArrayList<>(Arrays.asList(((Alternative) weapon).getExtraCost())));
-            notify(new PowerChooseEv(attacker.getNickname(), true, powers, availableAmmo, availablePowerUps));
+            weapon.choosePower(true, powers, availableAmmo, availablePowerUps);
         }else if (weapon instanceof Additive){
             powers.put(((Additive) weapon).getAdditivePower().toString(), new ArrayList<>(Collections.singletonList(((Additive) weapon).getAdditiveCost())));
-            notify(new PowerChooseEv(attacker.getNickname(), false, powers, availableAmmo, availablePowerUps));
+            weapon.choosePower(false, powers, availableAmmo, availablePowerUps);
         }else {
             powers.put(((DoubleAdditive) weapon).getFirstAdditivePower().toString(), new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getFirstExtraCost())));
             powers.put(((DoubleAdditive) weapon).getSecondAdditivePower().toString(), new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getSecondExtraCost())));
-            notify(new PowerChooseEv(attacker.getNickname(), false, powers, availableAmmo, availablePowerUps));
+            weapon.choosePower(false, powers, availableAmmo, availablePowerUps);
         }
     }
 
     @Override
     public void update(PowerSetEv message) {
-        ArrayList<PowerUp> availablePowerUps = new ArrayList<>();
-        ArrayList<String> chosenEffect = message.getPowers();
-        HashMap<String, Integer> nonPaidCost = new HashMap<>();
+        ArrayList<String> availablePowerUps = message.getUsedPowerUps();
 
-        for (PowerUp powerUp : attacker.getPowerup()){
-            for (java.util.Map.Entry<String, String> usablePowerUp : message.getUsedPowerUps().entrySet()){
-                if (powerUp.getName().equals(usablePowerUp.getKey()) && powerUp.getColor().equals(usablePowerUp.getValue())){
-                    availablePowerUps.add(powerUp);
-                }
+        if (weapon instanceof Alternative){
+            if (!weapon.getPower().toString().equals(message.getPowers().get(0))) {
+                payEffectCost(new ArrayList<>(Arrays.asList(((Alternative) weapon).getExtraCost())), availablePowerUps);
             }
-        }
-        try {
-            if (weapon instanceof Alternative) {
-                if (!weapon.getPower().toString().equals(message.getPowers().get(0))) {
-                    payEffectCost(new ArrayList<>(Arrays.asList(((Alternative) weapon).getExtraCost())), availablePowerUps, nonPaidCost);
-                }
+            effectControllers.get(message.getPowers().get(0)).useEffect(attacker, players, map);
+        }else if (weapon instanceof Additive){
+            if (message.getPowers().get(0).equals(weapon.getPower().toString())){
                 effectControllers.get(message.getPowers().get(0)).useEffect(attacker, players, map);
-                chosenEffect.remove(message.getPowers().get(0));
-            } else if (weapon instanceof Additive) {
-                if (message.getPowers().get(0).equals(weapon.getPower().toString())) {
+                if (message.getPowers().size() > 1){
+                    payEffectCost(new ArrayList<>(Collections.singletonList(((Additive) weapon).getAdditiveCost())), availablePowerUps);
+                    effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
+                }
+            }else {
+                effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
+                if (message.getPowers().size() > 1){
+                    payEffectCost(new ArrayList<>(Collections.singletonList(((Additive) weapon).getAdditiveCost())), availablePowerUps);
                     effectControllers.get(message.getPowers().get(0)).useEffect(attacker, players, map);
-                    chosenEffect.remove(message.getPowers().get(0));
-                    if (message.getPowers().size() > 1) {
-                        payEffectCost(new ArrayList<>(Collections.singletonList(((Additive) weapon).getAdditiveCost())), availablePowerUps, nonPaidCost);
-                        effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
-                        chosenEffect.remove(message.getPowers().get(1));
-                    }
-                } else {
-                    effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
-                    chosenEffect.remove(message.getPowers().get(1));
-                    if (message.getPowers().size() > 1) {
-                        payEffectCost(new ArrayList<>(Collections.singletonList(((Additive) weapon).getAdditiveCost())), availablePowerUps, nonPaidCost);
-                        effectControllers.get(message.getPowers().get(0)).useEffect(attacker, players, map);
-                        chosenEffect.remove(message.getPowers().get(0));
-                    }
-                }
-            } else if ((weapon instanceof DoubleAdditive) && (weapon.getName().equals("Cyberblade") || weapon.getName().equals("Rocket Launcher") || weapon.getName().equals("Plasma Gun"))) {
-                if (!weapon.getPower().toString().equals(message.getPowers().get(0))) {
-                    payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getFirstExtraCost())), availablePowerUps, nonPaidCost);
-                }
-                effectControllers.get(message.getPowers().get(0)).useEffect(attacker, players, map);
-                chosenEffect.remove(message.getPowers().get(0));
-                if (message.getPowers().size() > 1) {
-                    if (weapon.getPower().toString().equals(message.getPowers().get(1))) {
-                        effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
-                        chosenEffect.remove(message.getPowers().get(1));
-                    } else {
-                        payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getFirstExtraCost())), availablePowerUps, nonPaidCost);
-                        effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
-                        chosenEffect.remove(message.getPowers().get(1));
-                    }
-                    payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getSecondExtraCost())), availablePowerUps, nonPaidCost);
-                    effectControllers.get(message.getPowers().get(2)).useEffect(attacker, players, map);
-                    chosenEffect.remove(message.getPowers().get(2));
-                }
-            } else {
-                effectControllers.get(message.getPowers().get(0)).useEffect(attacker, players, map);
-                chosenEffect.remove(message.getPowers().get(0));
-                if (message.getPowers().size() == 1) {
-                    payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getFirstExtraCost())), availablePowerUps, nonPaidCost);
-                    effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
-                    chosenEffect.remove(message.getPowers().get(1));
-                }
-                if (message.getPowers().size() == 3) {
-                    payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getFirstExtraCost())), availablePowerUps, nonPaidCost);
-                    payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getSecondExtraCost())), availablePowerUps, nonPaidCost);
-                    effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
-                    effectControllers.get(message.getPowers().get(2)).useEffect(attacker, players, map);
-                    chosenEffect.remove(message.getPowers().get(1));
-                    chosenEffect.remove(message.getPowers().get(2));
                 }
             }
-        }catch (NotEnoughtAmmoException e){
-            notify(new PaymentInvalidEv(attacker.getNickname(), nonPaidCost, chosenEffect, message.getUsedPowerUps()));
+        }else if ((weapon instanceof DoubleAdditive) && (weapon.getName().equals("Cyberblade") || weapon.getName().equals("Rocket Launcher") || weapon.getName().equals("Plasma Gun"))){
+            if (!weapon.getPower().toString().equals(message.getPowers().get(0))) {
+                payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getFirstExtraCost())), availablePowerUps);
+            }
+            effectControllers.get(message.getPowers().get(0)).useEffect(attacker, players, map);
+            if (message.getPowers().size() > 1){
+                if (weapon.getPower().toString().equals(message.getPowers().get(1))){
+                    effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
+                }else {
+                    payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getFirstExtraCost())), availablePowerUps);
+                    effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
+                }
+                payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getSecondExtraCost())), availablePowerUps);
+                effectControllers.get(message.getPowers().get(2)).useEffect(attacker, players, map);
+            }
+        }else {
+            effectControllers.get(message.getPowers().get(0)).useEffect(attacker, players, map);
+            if (message.getPowers().size() == 1){
+                payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getFirstExtraCost())), availablePowerUps);
+                effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
+            }
+            if (message.getPowers().size() == 3){
+                payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getFirstExtraCost())), availablePowerUps);
+                payEffectCost(new ArrayList<>(Collections.singletonList(((DoubleAdditive) weapon).getSecondExtraCost())), availablePowerUps);
+                effectControllers.get(message.getPowers().get(1)).useEffect(attacker, players, map);
+                effectControllers.get(message.getPowers().get(2)).useEffect(attacker, players, map);
+            }
         }
     }
 
-    private void payEffectCost(ArrayList<String> effectCost, ArrayList<PowerUp> availablePowerUps, HashMap<String, Integer> nonPaidCost) throws NotEnoughtAmmoException {
-        int[] availableAmmo = attacker.getAmmo().clone();
-        ArrayList<String> ammoCost = (ArrayList<String>) effectCost.clone();
-
-        for (PowerUp powerUp : availablePowerUps){
-            ammoCost.remove(powerUp.getColor());
-        }
-        for (String cost : ammoCost){
+    private void payEffectCost(ArrayList<String> effectCost, ArrayList<String> availablePowerUps){
+        for (String cost : effectCost){
             switch (cost){
                 case "red":
-                    availableAmmo[0]--;
+                    if (attacker.getAmmo()[0] > 1){
+                        attacker.getAmmo()[0]--;
+                    }else {
+                        for (String powerCost : availablePowerUps){
+                            for (PowerUp powerUp : attacker.getPowerup()){
+                                if ((powerCost.equals(powerUp.getName())) && (powerUp.getColor().equals("red"))){
+                                    attacker.removePowerUp(powerUp);
+                                }
+                            }
+                        }
+                    }
                     break;
                 case "blue":
-                    availableAmmo[1]--;
+                    if (attacker.getAmmo()[1] > 1){
+                        attacker.getAmmo()[1]--;
+                    }else {
+                        for (String powerCost : availablePowerUps){
+                            for (PowerUp powerUp : attacker.getPowerup()){
+                                if ((powerCost.equals(powerUp.getName())) && (powerUp.getColor().equals("blue"))){
+                                    attacker.removePowerUp(powerUp);
+                                }
+                            }
+                        }
+                    }
                     break;
                 case "yellow":
-                    availableAmmo[2]--;
+                    if (attacker.getAmmo()[2] > 1){
+                        attacker.getAmmo()[2]--;
+                    }else {
+                        for (String powerCost : availablePowerUps){
+                            for (PowerUp powerUp : attacker.getPowerup()){
+                                if ((powerCost.equals(powerUp.getName())) && (powerUp.getColor().equals("yellow"))){
+                                    attacker.removePowerUp(powerUp);
+                                }
+                            }
+                        }
+                    }
                     break;
                 default:
                     break;
             }
-        }
-        if ((availableAmmo[0] >= 0) && (availableAmmo[1] >= 0) && (availableAmmo[2] >= 0)){
-            attacker.getPowerup().removeAll(availablePowerUps);
-            attacker.setAmmo(availableAmmo);
-        }else {
-            if (availableAmmo[0] < 0){
-                nonPaidCost.put("red", availableAmmo[0]);
-            }
-            if (availableAmmo[1] < 0){
-                nonPaidCost.put("blue", availableAmmo[1]);
-            }
-            if (availableAmmo[2] < 0){
-                nonPaidCost.put("yellow", availableAmmo[2]);
-            }
-            throw new NotEnoughtAmmoException();
         }
     }
 

@@ -1,7 +1,5 @@
 package it.polimi.sw2019.events.weaponeffect_controller_events;
 
-import it.polimi.sw2019.controller.Game;
-import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
@@ -9,10 +7,7 @@ import java.util.ArrayList;
 /**
  * These class represent the choose event of Shotgun, the basic effect of Shotgun
  */
-public class ShotgunChooseEv implements WeaponEvent{
-    private String attacker;
-    private ArrayList<String> valid;
-    private ArrayList<String> notreachable;
+public class ShotgunChooseEv extends VisibleChooseEv{
     private ArrayList<String> moveto;
 
     /**
@@ -22,36 +17,11 @@ public class ShotgunChooseEv implements WeaponEvent{
      * @param moveto is the list of the valid direction in which the target can be moved in, the direction are expressed by their cardinal direction e.g. north, south
      */
     public ShotgunChooseEv(String attacker, ArrayList<String> valid, ArrayList<String> notreachable, ArrayList<String> moveto) {
-        this.attacker = attacker;
-        this.valid = valid;
-        this.notreachable = notreachable;
+        super(attacker, valid, notreachable);
         this.moveto = moveto;
-    }
-
-    @Override
-    public void setNickname(String nickname) {
-        attacker = nickname;
-    }
-
-    @Override
-    public String getNickname() {
-        return attacker;
-    }
-
-    public ArrayList<String> getValid() {
-        return valid;
-    }
-
-    public ArrayList<String> getNotreachable() {
-        return notreachable;
     }
 
     public ArrayList<String> getMoveto() {
         return moveto;
-    }
-
-    @Override
-    public void updateObject(ExecutorEventImp executorEventImp, Game controller) {
-        executorEventImp.updateObject(this, controller);
     }
 }

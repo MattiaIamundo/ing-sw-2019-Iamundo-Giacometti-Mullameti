@@ -1,19 +1,17 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.BarbecueChooseEv;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.events.weaponeffect_controller_events.BarbecueSetEv;
 import it.polimi.sw2019.model.weapon_power.BarbecueMode;
 import it.polimi.sw2019.model.weapon_power.Power;
-import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BarbecueModeCont extends Observable<BarbecueChooseEv> implements Observer<BarbecueSetEv>, EffectController {
+public class BarbecueModeCont implements Observer<BarbecueSetEv>, EffectController {
 
     private BarbecueMode model;
     private Player attacker;
@@ -38,7 +36,7 @@ public class BarbecueModeCont extends Observable<BarbecueChooseEv> implements Ob
         loadWest();
         loadSouth();
         loadEast();
-        notify(new BarbecueChooseEv(attacker.getNickname(), new ArrayList<>(directions.keySet())));
+        model.chooseDirection(attacker, new ArrayList<>(directions.keySet()));
     }
 
     private void loadNorth(){

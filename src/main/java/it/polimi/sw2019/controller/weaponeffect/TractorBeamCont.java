@@ -1,17 +1,15 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.TractorBeamChooseEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.TractorBeamSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.TractorBeam;
-import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.*;
 
-public class TractorBeamCont extends Observable<TractorBeamChooseEv> implements Observer<TractorBeamSetEv>, EffectController{
+public class TractorBeamCont implements Observer<TractorBeamSetEv>, EffectController{
 
    private Map<Player, Map<String, Space>> movingmap = new HashMap<>();
    private ArrayList<String> validroom = new ArrayList<>();
@@ -41,7 +39,7 @@ public class TractorBeamCont extends Observable<TractorBeamChooseEv> implements 
         for (Map.Entry<Player, Map<String, Space>> a : movingmap.entrySet()){
             valid.put(a.getKey().getNickname(), new ArrayList<>(a.getValue().keySet()));
         }
-        notify(new TractorBeamChooseEv(attacker.getNickname(), valid));
+        model.chooseTarget(valid, attacker);
     }
 
     private void initializeRooms(){

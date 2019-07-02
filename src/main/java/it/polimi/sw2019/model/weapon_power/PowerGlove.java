@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * This class implements the basic effect of Power Glove
  * @author Mattia Iamundo
  */
-public class PowerGlove implements Power, SingleTarget{
+public class PowerGlove extends Observable<PowerGloveChooseEv> implements Power, SingleTarget{
 
     private Player target;
 
@@ -21,6 +21,10 @@ public class PowerGlove implements Power, SingleTarget{
         target.getPlance().removeMark(attacker);
         target.getPlance().setMark(attacker);
         target.getPlance().setMark(attacker);
+    }
+
+    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){
+        notify(new PowerGloveChooseEv(attacker, valid, notreachable));
     }
 
     @Override
