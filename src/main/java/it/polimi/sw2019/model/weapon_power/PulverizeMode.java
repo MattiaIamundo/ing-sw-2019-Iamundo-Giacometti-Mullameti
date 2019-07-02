@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * This class implements the alternative effect of Sledgehammer
  * @author Mattia Iamundo
  */
-public class PulverizeMode implements Power{
+public class PulverizeMode extends Observable<PulvModeChooseEv> implements Power{
     private Space moveto;
     private Player target;
 
@@ -20,6 +20,10 @@ public class PulverizeMode implements Power{
         target.getPlance().giveDamage(attacker, 3);
         target.getPlance().removeMark(attacker);
         target.setPosition(moveto);
+    }
+
+    public void chooseTarget(ArrayList<String> targets, ArrayList<String> positions, Player attacker){
+        notify(new PulvModeChooseEv(targets, positions, attacker));
     }
 
     public Space getMoveto() {

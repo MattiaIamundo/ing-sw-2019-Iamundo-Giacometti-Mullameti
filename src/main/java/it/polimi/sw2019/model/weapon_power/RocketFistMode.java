@@ -12,7 +12,7 @@ import java.util.HashMap;
  * This class implements the alternative effect of PowerGlove
  * @author Mattia Iamundo
  */
-public class RocketFistMode implements Power, LineFire{
+public class RocketFistMode extends Observable<RocketFistChooseEv> implements Power, LineFire{
 
     private Space moveto;
     private Player target1;
@@ -29,6 +29,10 @@ public class RocketFistMode implements Power, LineFire{
             target2.getPlance().giveDamage(attacker, 2);
             target2.getPlance().removeMark(attacker);
         }
+    }
+
+    public void chooseTarget(HashMap<String, ArrayList<String>> firstline, HashMap<String, ArrayList<String>> secondline, Player attacker){
+        notify(new RocketFistChooseEv(attacker, firstline, secondline));
     }
 
     public Space getMoveto() {

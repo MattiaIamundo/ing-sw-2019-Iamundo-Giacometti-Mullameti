@@ -11,13 +11,18 @@ import java.util.ArrayList;
  * This class implements the first optional effect of Plasma Gun
  * @author Mattia Iamundo
  */
-public class PhaseGlide implements Power, WithMove{
+public class PhaseGlide extends Observable<PhaseGlideChooseEv> implements Power, WithMove{
 
     private Space moveto;
 
     @Override
     public void usePower(Player attacker){
         attacker.setPosition(moveto);
+    }
+
+    @Override
+    public void changePosition(Player attacker, ArrayList<String> positions) {
+        notify(new PhaseGlideChooseEv(attacker, positions));
     }
 
     @Override

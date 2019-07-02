@@ -11,13 +11,17 @@ import java.util.HashMap;
  * This class implements the basic effect of Railgun
  * @author Mattia Iamundo
  */
-public class RailGun implements Power, ThroughWalls{
+public class RailGun extends Observable<RailGunChooseEv> implements Power, ThroughWalls{
     private Player target;
 
     @Override
     public void usePower(Player attacker){
         target.getPlance().giveDamage(attacker, 3);
         target.getPlance().removeMark(attacker);
+    }
+
+    public void chooseTarget(HashMap<String, ArrayList<String>> valid, Player attacker){
+        notify(new RailGunChooseEv(valid, attacker));
     }
 
     public void setTarget(Player target){

@@ -51,7 +51,7 @@ public class GrenadeLauncherContTest {
         ArrayList<String> expectedNotReachable = new ArrayList<>();
         ArrayList<String> expectedSquares = new ArrayList<>();
 
-        controller.addObserver(catcher);
+        model.addObserver(catcher);
         controller.useEffect(players.get(0), players, map);
         expectedValid.add("target");
         expectedNotReachable.add("notarget");

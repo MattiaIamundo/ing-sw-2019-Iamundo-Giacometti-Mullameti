@@ -1,6 +1,5 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.VortexChooseEv;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.events.weaponeffect_controller_events.VortexSetEv;
@@ -8,7 +7,6 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.Vortex;
-import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
@@ -16,7 +14,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class VortexCont extends Observable<VortexChooseEv> implements Observer<VortexSetEv>, EffectController{
+public class VortexCont implements Observer<VortexSetEv>, EffectController{
     private Vortex model;
     private Player attacker;
     private ArrayList<Player> players;
@@ -49,7 +47,7 @@ public class VortexCont extends Observable<VortexChooseEv> implements Observer<V
                 }
             }
         }
-        notify(new VortexChooseEv(attacker.getNickname(), valid));
+        model.chooseVortexAndTarget(valid, attacker);
     }
 
 

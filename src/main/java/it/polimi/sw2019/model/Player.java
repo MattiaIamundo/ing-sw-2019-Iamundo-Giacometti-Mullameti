@@ -1,7 +1,6 @@
 package it.polimi.sw2019.model;
 
 
-import it.polimi.sw2019.events.WeaponChooseEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyGrabEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
 import it.polimi.sw2019.exception.InexistentWeaponException;
@@ -171,10 +170,6 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
         weapons.remove(weap);
     }
 
-    public void chooseWeapon(String attacker, ArrayList<String> weapons){
-        notify(new WeaponChooseEv(attacker, weapons));
-    }
-
     /**
      * @return a pointer to the list of powerup the player ownes
      */
@@ -260,10 +255,6 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
 
     public int[] getAmmo() {
         return this.ammo;
-    }
-
-    public void setAmmo(int[] ammo) {
-        this.ammo = ammo;
     }
 
     public Object getCopyAmmo() {

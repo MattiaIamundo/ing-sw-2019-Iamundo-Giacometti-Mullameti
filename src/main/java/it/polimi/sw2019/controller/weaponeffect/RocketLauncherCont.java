@@ -1,19 +1,17 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.RocketLaunchChooseEv;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.events.weaponeffect_controller_events.RocketLaunchSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.RocketLauncher;
-import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RocketLauncherCont extends Observable<RocketLaunchChooseEv> implements Observer<RocketLaunchSetEv>, EffectController{
+public class RocketLauncherCont implements Observer<RocketLaunchSetEv>, EffectController{
 
     private RocketLauncher model;
     private Player attacker;
@@ -41,7 +39,7 @@ public class RocketLauncherCont extends Observable<RocketLaunchChooseEv> impleme
         for (HashMap.Entry<String, HashMap<String, Space>> a : targets.entrySet()){
             valid.put(a.getKey(), new ArrayList<>(a.getValue().keySet()));
         }
-        notify(new RocketLaunchChooseEv(attacker.getNickname(), valid));
+        model.chooseTarget(valid, attacker);
     }
 
     private HashMap<String, Space> acquireMovements(Space tarpos){

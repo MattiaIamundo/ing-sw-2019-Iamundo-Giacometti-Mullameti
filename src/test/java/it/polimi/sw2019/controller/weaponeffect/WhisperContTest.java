@@ -49,7 +49,7 @@ public class WhisperContTest {
             players.get(1).setPosition(map.getSpace(3,0));
             players.get(2).setPosition(map.getSpace(2,2));
             players.get(3).setPosition(map.getSpace(0,1));
-            controller.addObserver(catcher);
+            model.addObserver(catcher);
             controller.useEffect(players.get(0), players, map);
             expectedValid.add("target");
             expectedNotSelectable.add("attacker");
@@ -76,7 +76,7 @@ public class WhisperContTest {
             players.get(1).setPosition(map.getSpace(3,0));
             players.get(2).setPosition(map.getSpace(0,0));
             players.get(3).setPosition(map.getSpace(0,2));
-            controller.addObserver(catcher);
+            model.addObserver(catcher);
             controller.useEffect(players.get(0), players, map);
             expectedValid.add("target");
             expectedNotSelectable.add("attacker");

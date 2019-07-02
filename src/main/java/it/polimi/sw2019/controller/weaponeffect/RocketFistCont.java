@@ -1,6 +1,5 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.RocketFistChooseEv;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.events.weaponeffect_controller_events.RocketFistSetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
@@ -14,12 +13,6 @@ public class RocketFistCont extends LineFireCont implements EffectController, Ob
     public RocketFistCont(Power realmodel) {
         super(realmodel);
         this.realmodel = (RocketFistMode) realmodel;
-    }
-
-    @Override
-    protected void acquireTargets() {
-        super.acquireTargets();
-        notify(new RocketFistChooseEv(attacker.getNickname(), firststep, secondstep));
     }
 
     @Override

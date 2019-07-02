@@ -1,6 +1,5 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.ScannerModeChooseEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.events.weaponeffect_controller_events.ScannerModeSetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
@@ -19,7 +18,7 @@ public class ScannerModeCont extends VisibleTargetCont implements Observer<Scann
     @Override
     protected void acquireTarget() {
         super.acquireTarget();
-        notify(new ScannerModeChooseEv(attacker.getNickname(), valid, notreachable));
+        realmodel.chooseTargets(attacker, valid, notreachable);
     }
 
     @Override

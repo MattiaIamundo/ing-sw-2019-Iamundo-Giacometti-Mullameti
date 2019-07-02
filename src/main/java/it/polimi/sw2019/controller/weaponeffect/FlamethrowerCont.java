@@ -1,6 +1,5 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.FlamethrowerChooseEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.FlamethrowerSetEv;
 import it.polimi.sw2019.model.weapon_power.Flamethrower;
 import it.polimi.sw2019.model.weapon_power.Power;
@@ -14,12 +13,6 @@ public class FlamethrowerCont extends LineFireCont implements Observer<Flamethro
     public FlamethrowerCont(Power realmodel) {
         super(realmodel);
         this.realmodel = (Flamethrower) realmodel;
-    }
-
-    @Override
-    protected void acquireTargets() {
-        super.acquireTargets();
-        notify(new FlamethrowerChooseEv(attacker.getNickname(), firststep, secondstep));
     }
 
     @Override

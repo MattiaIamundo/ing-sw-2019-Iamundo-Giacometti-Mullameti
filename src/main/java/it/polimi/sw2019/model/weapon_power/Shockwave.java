@@ -10,7 +10,7 @@ import java.util.HashMap;
  * This class implements the basic effect of Shockwave
  * @author Mattia Iamundo
  */
-public class Shockwave implements Power{
+public class Shockwave extends Observable<ShockwaveChooseEv> implements Power{
 
     private Player target1;
     private Player target2;
@@ -28,6 +28,10 @@ public class Shockwave implements Power{
                 target3.getPlance().removeMark(attacker);
             }
         }
+    }
+
+    public void chooseTargets(Player attacker, HashMap<String, ArrayList<String>> targets){
+        notify(new ShockwaveChooseEv(attacker, targets));
     }
 
     public Player getTarget1() {

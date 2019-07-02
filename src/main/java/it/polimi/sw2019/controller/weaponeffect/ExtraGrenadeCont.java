@@ -1,6 +1,5 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.ExtraGrenadeChooseEv;
 import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.Map;
@@ -11,7 +10,6 @@ import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.ExtraGrenade;
 import it.polimi.sw2019.model.weapon_power.GrenadeLauncher;
 import it.polimi.sw2019.model.weapon_power.Power;
-import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ExtraGrenadeCont extends Observable<ExtraGrenadeChooseEv> implements Observer<ExtraGrenadeSetEv>, EffectController {
+public class ExtraGrenadeCont implements Observer<ExtraGrenadeSetEv>, EffectController {
 
     private ExtraGrenade model;
     private Player attacker;
@@ -42,7 +40,7 @@ public class ExtraGrenadeCont extends Observable<ExtraGrenadeChooseEv> implement
 
     private void acquireSquares(){
         ArrayList<String> rooms = loadRooms();
-        Logger logger = Logger.getLogger("controller.WeaponEffect.ExtraGrenade");
+        Logger logger = Logger.getLogger("controller.WeaponEffct.ExtraGrenade");
         try {
             for (int i = 0; i < map.getMaxX(); i++) {
                 for (int j = 0; j < map.getMaxY(); j++) {
@@ -54,10 +52,10 @@ public class ExtraGrenadeCont extends Observable<ExtraGrenadeChooseEv> implement
         }catch (InvalidSpaceException e){
             logger.log(Level.SEVERE, "Left the boundaries of the map");
         }
-        if (checkIsMoved()) {
-            notify(new ExtraGrenadeChooseEv(attacker.getNickname(), new ArrayList<>(squares.keySet())));
+        if (chechkIsMoved()) {
+            model.chooseSquare(attacker, new ArrayList<>(squares.keySet()));
         }else {
-            notify(new ExtraGrenadeChooseEv(attacker.getNickname(), new ArrayList<>(squares.keySet()), new ArrayList<>(moveto.keySet())));
+            model.chooseSquare(attacker, new ArrayList<>(squares.keySet()), new ArrayList<>(moveto.keySet()));
         }
     }
 
@@ -80,7 +78,7 @@ public class ExtraGrenadeCont extends Observable<ExtraGrenadeChooseEv> implement
         return valid;
     }
 
-    private boolean checkIsMoved(){
+    private boolean chechkIsMoved(){
         for (Weapon weapon : attacker.getWeapons()){
             if (weapon.getName().equals("Grenade Launcher")){
                 if (((GrenadeLauncher) weapon.getPower()).isIsmoved()){

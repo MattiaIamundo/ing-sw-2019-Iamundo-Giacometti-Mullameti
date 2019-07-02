@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * This class implements the basic effect of Hellion
  * @author Mattia Iamundo
  */
-public class Hellion implements Power, SingleTarget{
+public class Hellion extends Observable<HellionChooseEv> implements Power, SingleTarget{
 
     private Player target;
     private ArrayList<Player> markTargets = new ArrayList<>();
@@ -22,6 +22,10 @@ public class Hellion implements Power, SingleTarget{
         for (Player player : markTargets){
             player.getPlance().setMark(attacker);
         }
+    }
+
+    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){
+        notify(new HellionChooseEv(attacker, valid, notreachable));
     }
 
     public Player getTarget() {

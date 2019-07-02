@@ -1,19 +1,17 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.PulvModeChooseEv;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.events.weaponeffect_controller_events.PulvModeSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.PulverizeMode;
-import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PulverizeModeCont extends Observable<PulvModeChooseEv> implements Observer<PulvModeSetEv>, EffectController {
+public class PulverizeModeCont implements Observer<PulvModeSetEv>, EffectController {
 
     private PulverizeMode model;
     private Player attacker;
@@ -39,7 +37,7 @@ public class PulverizeModeCont extends Observable<PulvModeChooseEv> implements O
             }
         }
         initializePositions();
-        notify(new PulvModeChooseEv(attacker.getNickname(), targets, new ArrayList<>(positions.keySet())));
+        model.chooseTarget(targets, new ArrayList<>(positions.keySet()), attacker);
     }
 
     private void initializePositions(){

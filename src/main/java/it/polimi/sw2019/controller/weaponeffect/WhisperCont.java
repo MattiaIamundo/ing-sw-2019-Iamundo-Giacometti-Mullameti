@@ -1,6 +1,5 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.WhisperChooseEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.events.weaponeffect_controller_events.WhisperSetEv;
@@ -38,7 +37,7 @@ public class WhisperCont extends VisibleTargetCont implements Observer<WhisperSe
                 }
             }
         }
-        notify(new WhisperChooseEv(attacker.getNickname(), valid, notselectable, notreachable));
+        realmodel.chooseTarget(attacker, valid, notselectable, notreachable);
     }
 
     private void initializePos(Space attpos, ArrayList<Space> invalidpos){

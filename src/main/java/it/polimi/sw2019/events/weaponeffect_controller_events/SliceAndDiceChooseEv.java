@@ -1,7 +1,5 @@
 package it.polimi.sw2019.events.weaponeffect_controller_events;
 
-import it.polimi.sw2019.controller.Game;
-import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;

@@ -7,7 +7,6 @@ import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.ChargedShot;
 import it.polimi.sw2019.model.weapon_power.PlasmaGun;
 import it.polimi.sw2019.model.weapon_power.Power;
-import it.polimi.sw2019.view.Observable;
 import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
