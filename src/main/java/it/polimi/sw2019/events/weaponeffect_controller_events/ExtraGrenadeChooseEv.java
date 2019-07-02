@@ -1,5 +1,7 @@
 package it.polimi.sw2019.events.weaponeffect_controller_events;
 
+import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
  * These class represent the choose event of Extra grenade, the optional effect of Grenade Launcher
  */
 public class ExtraGrenadeChooseEv implements WeaponEvent{
-    private Player attacker;
+    private String attacker;
     private ArrayList<String> validsquare;
     private ArrayList<String> moveto;
 
@@ -17,7 +19,7 @@ public class ExtraGrenadeChooseEv implements WeaponEvent{
      * @param attacker is the player that invoke the effect
      * @param validsquare is the list of the squares that can be selected as a valid target area, they are represented by their absolute coordinates i.g. "x-y"
      */
-    public ExtraGrenadeChooseEv(Player attacker, ArrayList<String> validsquare) {
+    public ExtraGrenadeChooseEv(String attacker, ArrayList<String> validsquare) {
         this.attacker = attacker;
         this.validsquare = validsquare;
         moveto = null;
@@ -29,15 +31,20 @@ public class ExtraGrenadeChooseEv implements WeaponEvent{
      * @param validsquare is the list of the squares that can be selected as a valid target area, they are represented by their absolute coordinates i.g. "x-y"
      * @param moveto is the list of the valid squares were the previous target can be moved on, they are represented by their cardinal direction e.g. north, west
      */
-    public ExtraGrenadeChooseEv(Player attacker, ArrayList<String> validsquare, ArrayList<String> moveto) {
+    public ExtraGrenadeChooseEv(String attacker, ArrayList<String> validsquare, ArrayList<String> moveto) {
         this.attacker = attacker;
         this.validsquare = validsquare;
         this.moveto = moveto;
     }
 
     @Override
-    public String getAttacker() {
-        return attacker.getNickname();
+    public void setNickname(String nickname) {
+        attacker = nickname;
+    }
+
+    @Override
+    public String getNickname() {
+        return attacker;
     }
 
     public ArrayList<String> getValidsquare() {
@@ -46,5 +53,10 @@ public class ExtraGrenadeChooseEv implements WeaponEvent{
 
     public ArrayList<String> getMoveto() {
         return moveto;
+    }
+
+    @Override
+    public void updateObject(ExecutorEventImp executorEventImp, Game controller) {
+        executorEventImp.updateObject(this, controller);
     }
 }

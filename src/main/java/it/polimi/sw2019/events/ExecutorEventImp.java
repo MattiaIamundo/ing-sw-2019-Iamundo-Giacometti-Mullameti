@@ -12,7 +12,7 @@ import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.events.server_event.VCevent.PowerupEv;
 import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
-import it.polimi.sw2019.events.weaponeffect_controller_events.BarbecueChooseEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.*;
 import it.polimi.sw2019.view.PlayerRemoteView;
 
 public class ExecutorEventImp implements ExecutorEvent {
@@ -73,5 +73,45 @@ public class ExecutorEventImp implements ExecutorEvent {
 
     public void updateObject(BarbecueChooseEv barbecueChooseEv, Game game){
         game.update(barbecueChooseEv);
+    }
+
+    public void updateObject(BlackHoleChooseEv blackHoleChooseEv, Game game){
+        game.update(blackHoleChooseEv);
+    }
+
+    public void updateObject(ChainReactChooseEv chainReactChooseEv, Game game){
+        game.update(chainReactChooseEv);
+    }
+
+    public void updateObject(CozyFireModeChooseEv cozyFireModeChooseEv, Game game){
+        game.update(cozyFireModeChooseEv);
+    }
+
+    public void updateObject(CyberbladeChooseEv cyberbladeChooseEv, Game game){
+        game.update(cyberbladeChooseEv);
+    }
+
+    public void updateObject(ExtraGrenadeChooseEv extraGrenadeChooseEv, Game game){
+        game.update(extraGrenadeChooseEv);
+    }
+
+    public void updateObject(FlamethrowerChooseEv flamethrowerChooseEv, Game game){
+        game.update(flamethrowerChooseEv);
+    }
+
+    public void updateObject(FocusShotChooseEv focusShotChooseEv, Game game){
+        game.update(focusShotChooseEv);
+    }
+
+    public void updateObject(FurnaceChooseEv furnaceChooseEv, Game game){
+        game.update(furnaceChooseEv);
+    }
+
+    public void updateObject(GrenadeLaunchChooseEv grenadeLaunchChooseEv, Game game){
+        game.update(grenadeLaunchChooseEv);
+    }
+
+    public void updateObject(HeatseekerChooseEv heatseekerChooseEv, Game game){
+        game.update(heatseekerChooseEv);
     }
 }

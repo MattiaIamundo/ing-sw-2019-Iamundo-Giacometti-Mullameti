@@ -1,5 +1,7 @@
 package it.polimi.sw2019.events.weaponeffect_controller_events;
 
+import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
@@ -25,5 +27,10 @@ public class GrenadeLaunchChooseEv extends VisibleChooseEv{
 
     public HashMap<String, ArrayList<String>> getMoveto() {
         return moveto;
+    }
+
+    @Override
+    public void updateObject(ExecutorEventImp executorEventImp, Game controller) {
+        executorEventImp.updateObject(this, controller);
     }
 }
