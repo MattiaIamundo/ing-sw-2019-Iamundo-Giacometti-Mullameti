@@ -1,6 +1,7 @@
 package it.polimi.sw2019.view.ControllerClasses;
 
 
+import it.polimi.sw2019.network.Socket.ClientSocket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import java.io.IOException;
 public class TableController {
 
 
+    private ClientSocket clientSocket;
 
     @FXML private Button thisPlayer;
     @FXML private Button firstPlayer;
@@ -181,5 +183,9 @@ public class TableController {
             e.printStackTrace();
         }
 
+    }
+
+    public void setClientSocket(ClientSocket clientSocket) {
+        this.clientSocket = clientSocket;
     }
 }

@@ -163,7 +163,7 @@ public class ClientSocket  {
                 break;
             case "Ping": uIinterface.requestLobby("ok");
                 break;
-            case "Start": //uIinterface.requestTable();
+            case "Start": uIinterface.requestTable("ok");
                 break;
             default:
                 break;

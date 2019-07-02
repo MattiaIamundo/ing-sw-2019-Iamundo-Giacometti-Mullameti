@@ -17,4 +17,6 @@ public interface UIinterface {
     void requestMap(String string);
 
     void requestLobby(String string);
+
+    void requestTable(String string);
 }

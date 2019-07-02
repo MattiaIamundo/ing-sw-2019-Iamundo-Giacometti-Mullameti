@@ -4,10 +4,11 @@ package it.polimi.sw2019.events.client_event.Cevent;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StartGameEv {
+public class StartGameEv implements Serializable {
 
     private List<Player> players = new ArrayList<>(5);
     private Table gameboard;

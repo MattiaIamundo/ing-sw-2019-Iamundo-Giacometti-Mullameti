@@ -195,7 +195,9 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
     }
 
     public void sendAllModel(StartGameEv startGameEv) {
-        output.println(gson.toJson(startGameEv));
+        System.out.println(startGameEv);
+        set = gson.toJson(startGameEv, StartGameEv.class);
+        output.println(set);
         output.flush();
     }
 
