@@ -44,6 +44,7 @@ public class MenuController {
 
     public void newPlayerButtonPushed()throws IOException
     {
+
         clientSocket.getContSelect().waitForNicknameRequest(clientSocket.getPlayerView());
 
 

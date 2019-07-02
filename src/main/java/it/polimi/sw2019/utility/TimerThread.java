@@ -25,8 +25,8 @@ public class TimerThread implements Runnable {
     // ........ TimerThread's Methods ...........
 
     public TimerThread() {
-        time = 0;
-        turnTime = 0;
+        time = 100;
+        turnTime = 30000;
         game = false;
         timerDone = false;
         on = false;

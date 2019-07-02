@@ -15,7 +15,7 @@ public class ActionController {
 
     @FXML
     public void moveButtonPushed(ActionEvent event) throws IOException {
-        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/direction.fxml"));
+        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/direction.fxml"));
         Scene tableScene = new Scene(table);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -26,7 +26,7 @@ public class ActionController {
 
     @FXML
     public void grabButtonPushed(ActionEvent event) throws IOException {
-        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/direction.fxml"));
+        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/direction.fxml"));
         Scene tableScene = new Scene(table);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -37,7 +37,7 @@ public class ActionController {
 
     @FXML
     public void shootButtonPushed(ActionEvent event) throws IOException {
-        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/weapon.fxml"));
+        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/weapon.fxml"));
         Scene tableScene = new Scene(table);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

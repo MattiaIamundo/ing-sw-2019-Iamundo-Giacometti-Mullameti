@@ -5,30 +5,20 @@ package it.polimi.sw2019.view.ControllerClasses;
 import it.polimi.sw2019.model.Player;
 
 import it.polimi.sw2019.network.Socket.ClientSocket;
-import it.polimi.sw2019.view.GUI;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 
-
-
-import java.io.IOException;
 import java.util.List;
 
 public class PlayerCharacterController {
     private ClientSocket clientSocket ;
-    Player tempPlayer = new Player("",0,null,null);
+
 
 
     public void setClientSocket(ClientSocket clientSocket){
         this.clientSocket=clientSocket;
     }
-
-
-
 
 
 
