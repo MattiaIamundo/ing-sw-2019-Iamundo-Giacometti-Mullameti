@@ -6,31 +6,11 @@ import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 
-public class Sledgehammer extends Observable<SledgehammerChooseEv> implements Power, SingleTarget{
-
-    private Player target;
+public class Sledgehammer extends SingleTarget implements Power{
 
     @Override
     public void usePower(Player attacker) {
-        target.getPlance().giveDamage(attacker,2);
-        target.getPlance().removeMark(attacker);
+        super.giveDamage(attacker,2);
     }
 
-    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){
-        notify(new SledgehammerChooseEv(attacker, valid, notreachable));
-    }
-
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
-    }
 }

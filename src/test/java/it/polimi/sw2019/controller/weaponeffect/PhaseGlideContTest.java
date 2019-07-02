@@ -45,7 +45,7 @@ public class PhaseGlideContTest {
         Catcher catcher = new Catcher();
         ArrayList<String> expectedDirections = new ArrayList<>();
 
-        model.addObserver(catcher);
+        controller.addObserver(catcher);
         controller.useEffect(players.get(0), players, map);
         expectedDirections.add("north-east");
         expectedDirections.add("east");

@@ -43,7 +43,7 @@ public class RocketFistContTest {
         ArrayList<String> expectedSecondSquare = new ArrayList<>();
 
         try {
-            model.addObserver(catcher);
+            controller.addObserver(catcher);
             players.get(0).setPosition(map.getSpace(2,2));
             players.get(1).setPosition(map.getSpace(2,1));
             players.get(2).setPosition(map.getSpace(2,0));
@@ -65,7 +65,7 @@ public class RocketFistContTest {
         ArrayList<String> expectedSecondSquare = new ArrayList<>();
 
         try {
-            model.addObserver(catcher);
+            controller.addObserver(catcher);
             players.get(0).setPosition(map.getSpace(2,2));
             players.get(1).setPosition(map.getSpace(1,2));
             players.get(2).setPosition(map.getSpace(0,2));
@@ -87,7 +87,7 @@ public class RocketFistContTest {
         ArrayList<String> expectedSecondSquare = new ArrayList<>();
 
         try {
-            model.addObserver(catcher);
+            controller.addObserver(catcher);
             players.get(0).setPosition(map.getSpace(0,0));
             players.get(1).setPosition(map.getSpace(0,1));
             players.get(2).setPosition(map.getSpace(0,2));
@@ -109,7 +109,7 @@ public class RocketFistContTest {
         ArrayList<String> expectedSecondSquare = new ArrayList<>();
 
         try {
-            model.addObserver(catcher);
+            controller.addObserver(catcher);
             players.get(0).setPosition(map.getSpace(0,0));
             players.get(1).setPosition(map.getSpace(1,0));
             players.get(2).setPosition(map.getSpace(2,0));

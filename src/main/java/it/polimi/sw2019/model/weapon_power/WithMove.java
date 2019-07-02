@@ -6,9 +6,23 @@ import it.polimi.sw2019.model.Space;
 import java.util.ArrayList;
 import java.util.Map;
 
-public interface WithMove {
+public abstract class WithMove {
+    protected Space moveto;
 
-    void changePosition(Player attacker, ArrayList<String> positions);
+    public void moveAttacker(Player attacker){
+        attacker.setPosition(moveto);
+    }
 
-    void setMoveto(Space position);
+    public void setMoveto(Space moveto) {
+        this.moveto = moveto;
+    }
+
+    public Space getMoveto() {
+        return moveto;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+    }
 }

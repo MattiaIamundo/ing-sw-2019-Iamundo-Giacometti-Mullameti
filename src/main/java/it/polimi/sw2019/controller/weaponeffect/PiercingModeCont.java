@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.PiercingModeChooseEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.events.weaponeffect_controller_events.PiercingModeSetEv;
 import it.polimi.sw2019.model.weapon_power.PiercingMode;
@@ -13,6 +14,12 @@ public class PiercingModeCont extends ThoughWall implements Observer<PiercingMod
     public PiercingModeCont(Power realmodel) {
         super(realmodel);
         this.realmodel = (PiercingMode) realmodel;
+    }
+
+    @Override
+    public void acquireTarget() {
+        super.acquireTarget();
+        notify(new PiercingModeChooseEv(attacker.getNickname(), validlist));
     }
 
     @Override

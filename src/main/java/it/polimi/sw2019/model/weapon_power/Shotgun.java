@@ -11,30 +11,15 @@ import java.util.ArrayList;
  * This class implements the basic effect of Shotgun
  * @author Mattia Iamundo
  */
-public class Shotgun extends Observable<ShotgunChooseEv> implements Power, SingleTarget{
-    private Player target;
+public class Shotgun extends SingleTarget implements Power{
     private Space moveto;
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().giveDamage(attacker, 3);
-        target.getPlance().removeMark(attacker);
+        super.giveDamage(attacker,3);
         if (moveto != null){
             target.setPosition(moveto);
         }
-    }
-
-    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable, ArrayList<String> moveto){
-        notify(new ShotgunChooseEv(attacker, valid, notreachable, moveto));
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
     }
 
     public Space getMoveto() {
@@ -45,8 +30,4 @@ public class Shotgun extends Observable<ShotgunChooseEv> implements Power, Singl
         this.moveto = moveto;
     }
 
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
-    }
 }

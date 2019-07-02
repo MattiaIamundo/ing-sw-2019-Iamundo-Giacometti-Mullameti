@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.CyberbladeChooseEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.CyberbladeSetEv;
 import it.polimi.sw2019.model.weapon_power.Cyberblade;
 import it.polimi.sw2019.model.weapon_power.Power;
@@ -17,7 +18,7 @@ public class CyberbladeCont extends SameSquare implements Observer<CyberbladeSet
     @Override
     protected void acquireTarget() {
         super.acquireTarget();
-        realmodel.chooseTarget(attacker, valid, notreachable);
+        notify(new CyberbladeChooseEv(attacker.getNickname(), valid, notreachable));
     }
 
     @Override

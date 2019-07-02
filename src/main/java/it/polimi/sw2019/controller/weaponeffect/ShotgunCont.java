@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.ShotgunChooseEv;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.events.weaponeffect_controller_events.ShotgunSetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
@@ -23,7 +24,7 @@ public class ShotgunCont extends SameSquare implements Observer<ShotgunSetEv> {
     public void acquireTarget() {
         super.acquireTarget();
         acquirePositions();
-        realmodel.chooseTarget(attacker, valid, notreachable, new ArrayList<>(moveto.keySet()));
+        notify(new ShotgunChooseEv(attacker.getNickname(), valid, notreachable, new ArrayList<>(moveto.keySet())));
     }
 
     private void acquirePositions(){

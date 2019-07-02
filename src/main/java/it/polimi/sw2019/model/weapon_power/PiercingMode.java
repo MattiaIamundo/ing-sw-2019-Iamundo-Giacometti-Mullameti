@@ -11,7 +11,7 @@ import java.util.HashMap;
  * This class implements the alternative effect of Railgun
  * @author Mattia Iamundo
  */
-public class PiercingMode extends Observable<PiercingModeChooseEv> implements Power, ThroughWalls{
+public class PiercingMode implements Power, ThroughWalls{
 
     private Player target1;
     private Player target2;
@@ -24,10 +24,6 @@ public class PiercingMode extends Observable<PiercingModeChooseEv> implements Po
             target2.getPlance().giveDamage(attacker, 2);
             target2.getPlance().removeMark(attacker);
         }
-    }
-
-    public void chooseTarget(HashMap<String, ArrayList<String>> targets, Player attacker){
-        notify(new PiercingModeChooseEv(targets, attacker));
     }
 
     public Player getTarget1() {

@@ -6,32 +6,11 @@ import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 
-public class Whisper extends Observable<WhisperChooseEv> implements Power, SingleTarget{
-    //basic effect for WhisperCont
-    private Player target;
+public class Whisper extends SingleTarget implements Power{
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().giveDamage(attacker,3);
-        target.getPlance().removeMark(attacker);
-        target.getPlance().setMark(attacker);
-    }
-
-    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable){
-        notify(new WhisperChooseEv(attacker, valid, notselectable, notreachable));
-    }
-
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
+        super.giveDamage(attacker,3);
+        super.setMark(attacker);
     }
 }

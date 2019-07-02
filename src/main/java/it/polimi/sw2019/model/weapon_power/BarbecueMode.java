@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * This class implements the alternative attack for the Flamethrower
  * @author Mattia Iamundo
  */
-public class BarbecueMode extends Observable<BarbecueChooseEv> implements Power{
+public class BarbecueMode implements Power{
 
     private Space targetarea1;
     private Space targetarea2;
@@ -30,10 +30,6 @@ public class BarbecueMode extends Observable<BarbecueChooseEv> implements Power{
             }
             player.getPlance().removeMark(attacker);
         }
-    }
-
-    public void chooseDirection(Player attacker, ArrayList<String> directions){
-        notify(new BarbecueChooseEv(attacker, directions));
     }
 
     public void setTargetarea1(Space targetarea1) {

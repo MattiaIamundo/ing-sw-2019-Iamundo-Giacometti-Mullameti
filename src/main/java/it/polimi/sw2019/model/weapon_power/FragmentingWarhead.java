@@ -10,9 +10,7 @@ import java.util.ArrayList;
  * This class implements the second optional effect of Rocket Launcher
  * @author Mattia Iamundo
  */
-public class FragmentingWarhead implements Power{
-
-    private Player target;
+public class FragmentingWarhead extends SingleTarget implements Power{
     private ArrayList<Player> players;
 
     @Override
@@ -22,17 +20,8 @@ public class FragmentingWarhead implements Power{
             player.getPlance().removeMark(attacker);
         }
         if (target != null){
-            target.getPlance().giveDamage(attacker,1);
-            target.getPlance().removeMark(attacker);
+            super.giveDamage(attacker,1);
         }
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    public void setTarget(Player target) {
-        this.target = target;
     }
 
     public ArrayList<Player> getPlayers() {
@@ -43,8 +32,4 @@ public class FragmentingWarhead implements Power{
         this.players = players;
     }
 
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
-    }
 }

@@ -12,7 +12,7 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class PlayerRemoteView extends PlayerView {
+public class PlayerRemoteView extends Observable<ActionEv> implements Observer <NotifyReturn> {
 
     private Socket socket;
     private String set = "pippo";

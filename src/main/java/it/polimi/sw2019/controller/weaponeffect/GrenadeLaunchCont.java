@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.GrenadeLaunchChooseEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.events.weaponeffect_controller_events.GrenadeLaunchSetEv;
@@ -34,7 +35,7 @@ public class GrenadeLaunchCont extends VisibleTargetCont implements Observer<Gre
         for (Map.Entry<Player, HashMap<String, Space>> mapEntry : squares.entrySet()){
             moveto.put(mapEntry.getKey().getNickname(), new ArrayList<>(mapEntry.getValue().keySet()));
         }
-        realmodel.chooseTarget(attacker, valid, notreachable, moveto);
+        notify(new GrenadeLaunchChooseEv(attacker.getNickname(), valid, notreachable, moveto));
     }
 
     private void acquireSquares(Player target){

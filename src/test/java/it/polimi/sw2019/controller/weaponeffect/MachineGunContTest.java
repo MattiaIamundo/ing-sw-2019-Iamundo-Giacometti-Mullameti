@@ -52,7 +52,7 @@ public class MachineGunContTest {
         ArrayList<String> expectedValid = new ArrayList<>();
         ArrayList<String> expectedNotReachable = new ArrayList<>();
 
-        model.addObserver(catcher);
+        controller.addObserver(catcher);
         controller.useEffect(players.get(0), players, map);
         expectedValid.add("target1");
         expectedValid.add("target2");
@@ -79,7 +79,7 @@ public class MachineGunContTest {
         controller.useEffect(players.get(0), players, map);
         thrower.throwMessage();
 
-        Assert.assertEquals(players.get(1), model.getTarget1());
+        Assert.assertEquals(players.get(1), model.getTarget());
         Assert.assertNull(model.getTarget2());
     }
 
@@ -91,7 +91,7 @@ public class MachineGunContTest {
         controller.useEffect(players.get(0), players, map);
         thrower.throwMessage();
 
-        Assert.assertEquals(players.get(1), model.getTarget1());
+        Assert.assertEquals(players.get(1), model.getTarget());
         Assert.assertEquals(players.get(2), model.getTarget2());
     }
 

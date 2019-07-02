@@ -1,15 +1,17 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.FurnaceChooseEv;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.events.weaponeffect_controller_events.FurnaceSetEv;
 import it.polimi.sw2019.model.weapon_power.Furnace;
 import it.polimi.sw2019.model.weapon_power.Power;
+import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 
-public class FurnaceCont implements Observer<FurnaceSetEv>, EffectController {
+public class FurnaceCont extends Observable<FurnaceChooseEv> implements Observer<FurnaceSetEv>, EffectController {
 
     private Furnace model;
     private Player attacker;
@@ -41,7 +43,7 @@ public class FurnaceCont implements Observer<FurnaceSetEv>, EffectController {
         if (!(attacker.getPosition().getEast().isWall()) && !(attacker.getPosition().getEast().getSpaceSecond().getRoom().equals(attackerroom)) && thereIsTargets(attacker.getPosition().getEast().getSpaceSecond().getRoom())){
             rooms.add(attacker.getPosition().getEast().getSpaceSecond().getRoom());
         }
-        model.chooseRoom(attacker, rooms);
+        notify(new FurnaceChooseEv(attacker.getNickname(), rooms));
     }
 
     private Boolean thereIsTargets(String room){

@@ -1,20 +1,23 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.WeaponEvent;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.ThroughWalls;
+import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class ThoughWall implements EffectController{
+public abstract class ThoughWall extends Observable<WeaponEvent> implements EffectController{
     protected ThroughWalls model;
     protected Player attacker;
     protected ArrayList<Player> players;
     protected Map map;
+    protected HashMap<String, ArrayList<String>> validlist = new HashMap<>();
 
     public ThoughWall(Power model) {
         this.model = (ThroughWalls) model;
@@ -30,13 +33,10 @@ public abstract class ThoughWall implements EffectController{
     }
 
     public void acquireTarget(){
-        HashMap<String, ArrayList<String>> validlist = new HashMap<>();
-
         validlist.put("north", loadNorth());
         validlist.put("west", loadWest());
         validlist.put("south", loadSouth());
         validlist.put("east", loadEast());
-        model.chooseTarget(validlist, attacker);
     }
 
     private ArrayList<String> loadNorth(){

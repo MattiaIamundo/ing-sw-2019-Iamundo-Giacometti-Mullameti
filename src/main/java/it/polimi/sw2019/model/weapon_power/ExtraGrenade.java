@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * This class implements the optional effect of Grenade Launcher
  * @author Mattia Iamundo
  */
-public class ExtraGrenade extends Observable<ExtraGrenadeChooseEv> implements Power{
+public class ExtraGrenade implements Power{
 
     private ArrayList<Player> players;
 
@@ -21,14 +21,6 @@ public class ExtraGrenade extends Observable<ExtraGrenadeChooseEv> implements Po
             player.getPlance().giveDamage(attacker,1);
             player.getPlance().removeMark(attacker);
         }
-    }
-
-    public void chooseSquare(Player attacker, ArrayList<String> validsquare){
-        notify(new ExtraGrenadeChooseEv(attacker, validsquare));
-    }
-
-    public void chooseSquare(Player attacker, ArrayList<String> validsquare, ArrayList<String> moveto){
-        notify(new ExtraGrenadeChooseEv(attacker, validsquare, moveto));
     }
 
     public void setPlayers(ArrayList<Player> players) {

@@ -130,17 +130,6 @@ public class ClientSocket  {
         this.uIinterface=uIinterface;
     }
 
-    /*public void setNickname(String string){
-        VCLogin vcLogin = new VCLogin(string);
-        playerView.sendNickname(viewContEvent, vcLogin);
-    }
-
-    public void setColor(String string){
-        System.out.println("setColor");
-        VCColor vcColor = new VCColor(string);
-        playerView.sendColor(viewContEvent, vcColor);
-    }*/
-
     public void setInfo(String string , String info) {
         if (string.equals("nickname")) {
 
@@ -172,8 +161,7 @@ public class ClientSocket  {
                 break;
             case "RequestMapType":uIinterface.requestMap("ok");
                 break;
-            case "Ping":
-                uIinterface.requestLobby("ok");
+            case "Ping": uIinterface.requestLobby("ok");
                 break;
             case "Start": //uIinterface.requestTable();
                 break;
@@ -187,123 +175,6 @@ public class ClientSocket  {
         return this.viewContEvent;
     }
 
-
-    /*public void run(){
-        ok = false;
-        //welcome, set the nickname
-        try{
-            logger.log(Level.INFO, "{ClientSocket} nickname selection ");
-            contSelect.waitForNicknameRequest(this.playerView);
-
-            while ( !ok ) {
-
-                if (string.equals("quit")) {
-
-                    Reconnection rec = new Reconnection(true, string);
-                    playerView.sendNickname(viewContEvent, rec);
-                    closeConnection();
-                    return;
-
-                } else if (string.equals("Reconnection")) {
-
-                    System.out.println("Please write your nickname to reconnect to the game!\n");
-                    string = scanner.nextLine();
-                    Reconnection rec = new Reconnection(true, string);
-                    playerView.sendNickname(viewContEvent, rec);
-
-                }
-            }
-            do {
-                ok = contSelect.waitForOk();
-                if ( !ok ) {
-                    contSelect.waitForNicknameRequest(this.playerView);
-                }
-            }
-            while ( !ok );
-
-            logger.log(Level.INFO, "{ClientSocket} color selection");
-            ok = false;
-
-            //select the color
-            contSelect.waitingForColorRequest(this.playerView);
-            while (!ok) {
-
-                ok = contSelect.waitForOk();
-                if( !ok  ) {
-                    contSelect.waitingForColorRequest(this.playerView);
-                }
-            }
-
-            logger.log(Level.INFO, "{ClientSocket} first player selection");
-            //to see if i'm the first player
-            ok = contSelect.waitForAmIFirstPlayer();
-
-            if (!ok) {
-
-                ok = contSelect.waitForThereAreSkull();
-
-                if (!ok) {
-
-                    while ( !ok ) {
-                        logger.log(Level.INFO, "{ClientSocket} skull selection");
-                        contSelect.waitingForSkull(this.playerView);
-                        ok = contSelect.waitForOk();
-
-                    }
-                }
-
-                ok = contSelect.waitForThereIsMap();
-
-                if ( !ok ) {
-
-                    while ( !ok ) {
-
-                        logger.log(Level.INFO, "{ClientSocket} map selection");
-                        contSelect.waitingForMap(this.playerView);
-                        ok = contSelect.waitForOk();
-                    }
-                }
-
-            }
-
-            ok = false;
-
-            logger.log(Level.INFO, "{ClientSocket} ping pong action");
-            //ping to pong
-            while ( !ok ) {
-
-                ok = contSelect.waitForPing(this.playerView);
-                playerView.sendPing(viewContEvent);
-            }
-
-            logger.log(Level.INFO, "{ClientSocket} the game is starting");
-
-            while ( !gameover ) {
-
-                //game is started!
-                while ( !ok ) {
-
-                    //ok = contSelect.waitForMyTurn(this.playerView);
-                    playerView.sendPing(viewContEvent);
-
-                }
-
-
-            }
-
-
-        } catch (NoSuchElementException e) {
-            input.close();
-            output.close();
-            logger.log( Level.INFO, "The connection with the server is closed: the game is already started!\n");
-            worker.shutdown();
-        }
-        finally {
-
-            closeConnection();
-        }
-
-    }//END of RUN */
 
     /**
      * this method close the connection with the server
@@ -337,7 +208,7 @@ public class ClientSocket  {
 
         Application.launch(GUI.class);//(MERITA)
 
-        //application = new ClientSocket("127.0.0.1");
+
     }
 
     public Boolean getOk() {

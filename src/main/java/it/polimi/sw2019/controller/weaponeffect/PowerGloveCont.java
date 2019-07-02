@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.PowerGloveChooseEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.PowerGloveSetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.PowerGlove;
@@ -17,7 +18,7 @@ public class PowerGloveCont extends OneMoveAway implements Observer<PowerGloveSe
     @Override
     protected void acquireTarget() {
         super.acquireTarget();
-        realmodel.chooseTarget(attacker, valid, notreachable);
+        notify(new PowerGloveChooseEv(attacker.getNickname(), valid, notreachable));
     }
 
     @Override

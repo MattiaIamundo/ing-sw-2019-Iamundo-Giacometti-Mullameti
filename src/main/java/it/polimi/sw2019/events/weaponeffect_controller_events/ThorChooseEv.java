@@ -1,31 +1,19 @@
 package it.polimi.sw2019.events.weaponeffect_controller_events;
 
+import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
 
-public class ThorChooseEv implements WeaponEvent{
+public class ThorChooseEv extends VisibleChooseEv{
 
-    private Player attacker;
-    private ArrayList<String> valid;
-    private ArrayList<String> notreachable;
-
-    public ThorChooseEv(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable) {
-        this.attacker = attacker;
-        this.valid = valid;
-        this.notreachable = notreachable;
+    public ThorChooseEv(String attacker, ArrayList<String> valid, ArrayList<String> notreachable) {
+        super(attacker, valid, notreachable);
     }
 
     @Override
-    public String getAttacker() {
-        return attacker.getNickname();
-    }
-
-    public ArrayList<String> getValid() {
-        return valid;
-    }
-
-    public ArrayList<String> getNotreachable() {
-        return notreachable;
+    public void updateObject(ExecutorEventImp executorEventImp, Game controller) {
+        executorEventImp.updateObject(this, controller);
     }
 }

@@ -1,36 +1,19 @@
 package it.polimi.sw2019.events.weaponeffect_controller_events;
 
+import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.model.Player;
 
 import java.util.ArrayList;
 
-public class SliceAndDiceChooseEv implements WeaponEvent{
+public class SliceAndDiceChooseEv extends VisibleChooseEv{
 
-    private Player attacker;
-    private ArrayList<String> valid;
-    private ArrayList<String> notselectable;
-    private ArrayList<String> notreachable;
-
-    public SliceAndDiceChooseEv(Player attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable) {
-        this.attacker = attacker;
-        this.valid = valid;
-        this.notselectable = notselectable;
-        this.notreachable = notreachable;
+    public SliceAndDiceChooseEv(String attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable) {
+        super(attacker, valid, notselectable, notreachable);
     }
 
-    public ArrayList<String> getValid() {
-        return valid;
-    }
-
-    public ArrayList<String> getNotselectable() {
-        return notselectable;
-    }
-
-    public ArrayList<String> getNotreachable() {
-        return notreachable;
-    }
-
-    public String getAttacker(){
-        return attacker.getNickname();
+    @Override
+    public void updateObject(ExecutorEventImp executorEventImp, Game controller) {
+        executorEventImp.updateObject(this, controller);
     }
 }

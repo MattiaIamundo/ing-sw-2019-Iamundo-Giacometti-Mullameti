@@ -147,7 +147,7 @@ public class ContSelect implements ContSelectInt {
             throw new NoSuchElementException();
         }
         else if (string.equals("start")) {
-            //playerView.waitForStart();
+            playerView.waitForStart();
         }
     }
 

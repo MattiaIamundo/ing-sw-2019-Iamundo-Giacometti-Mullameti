@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.SledgehammerChooseEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.SledgehammerSetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.Sledgehammer;
@@ -17,7 +18,7 @@ public class SledgehammerCont extends SameSquare implements Observer<Sledgehamme
     @Override
     protected void acquireTarget() {
         super.acquireTarget();
-        realmodel.chooseTarget(attacker, valid, notreachable);
+        notify(new SledgehammerChooseEv(attacker.getNickname(), valid, notreachable));
     }
 
     @Override

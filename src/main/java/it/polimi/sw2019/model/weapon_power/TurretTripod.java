@@ -10,9 +10,7 @@ import java.util.ArrayList;
  * This class implements the second optional effect of Machine Gun
  * @author Mattia Iamundo
  */
-public class TurretTripod extends Observable<TurretTripodChooseEv> implements Power, SingleTarget{
-
-    private Player target;
+public class TurretTripod extends SingleTarget implements Power{
     private Player previoustarget;
 
     @Override
@@ -20,22 +18,8 @@ public class TurretTripod extends Observable<TurretTripodChooseEv> implements Po
         previoustarget.getPlance().giveDamage(attacker, 1);
         previoustarget.getPlance().removeMark(attacker);
         if (target != null){
-            target.getPlance().giveDamage(attacker,1);
-            target.getPlance().removeMark(attacker);
+            super.giveDamage(attacker,1);
         }
-    }
-
-    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notselectable, ArrayList<String> notreachable){
-        notify(new TurretTripodChooseEv(attacker, valid, notselectable, notreachable));
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
     }
 
     public Player getPrevioustarget() {
@@ -46,8 +30,4 @@ public class TurretTripod extends Observable<TurretTripodChooseEv> implements Po
         this.previoustarget = previoustarget;
     }
 
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
-    }
 }

@@ -51,7 +51,7 @@ public class RocketLauncherContTest {
         ArrayList<String> expectedMoveTarget1 = new ArrayList<>();
         ArrayList<String>expectedMoveTarget2 = new ArrayList<>();
 
-        model.addObserver(catcher);
+        controller.addObserver(catcher);
         controller.useEffect(players.get(0), players, map);
         expectedValid.add("target2");
         expectedValid.add("target1");

@@ -10,32 +10,16 @@ import java.util.ArrayList;
  * This class implements the alternative effect of Hellion
  * @author Mattia Iamundo
  */
-public class NanoTracerMode extends Observable<NanoTracerChooseEv> implements Power, SingleTarget{
-
-    private Player target;
+public class NanoTracerMode extends SingleTarget implements Power{
     private ArrayList<Player> targets;
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().giveDamage(attacker, 1);
-        target.getPlance().removeMark(attacker);
+        super.giveDamage(attacker,1);
         for (Player player : targets){
             player.getPlance().setMark(attacker);
             player.getPlance().setMark(attacker);
         }
-    }
-
-    public void chooseTarget(Player attacker, ArrayList<String> valid, ArrayList<String> notreachable){
-        notify(new NanoTracerChooseEv(attacker, valid, notreachable));
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
     }
 
     public ArrayList<Player> getTargets() {
@@ -46,8 +30,4 @@ public class NanoTracerMode extends Observable<NanoTracerChooseEv> implements Po
         this.targets = targets;
     }
 
-    @Override
-    public String toString() {
-        return getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
-    }
 }
