@@ -6,23 +6,13 @@ import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 
-public class Sledgehammer implements Power, SingleTarget{
+public class Sledgehammer extends SingleTarget implements Power{
 
     private Player target;
 
     @Override
     public void usePower(Player attacker) {
-        target.getPlance().giveDamage(attacker,2);
-        target.getPlance().removeMark(attacker);
-    }
-
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
-    }
-
-    public Player getTarget() {
-        return target;
+        super.usePower(attacker,2);
     }
 
     @Override

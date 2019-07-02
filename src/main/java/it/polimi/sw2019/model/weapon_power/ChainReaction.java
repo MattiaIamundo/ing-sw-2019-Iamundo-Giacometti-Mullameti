@@ -10,23 +10,11 @@ import java.util.ArrayList;
  * This class implements the first optional power for the T.H.O.R.
  * @author Mattia Iamundo
  */
-public class ChainReaction implements Power, SingleTarget{
-
-    private Player target;
+public class ChainReaction extends SingleTarget implements Power{
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().giveDamage(attacker, 1);
-        target.getPlance().removeMark(attacker);
-    }
-
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
-    }
-
-    public Player getTarget(){
-        return target;
+        super.usePower(attacker,1);
     }
 
     @Override

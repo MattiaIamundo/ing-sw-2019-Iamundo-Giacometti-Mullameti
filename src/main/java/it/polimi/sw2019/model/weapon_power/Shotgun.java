@@ -11,26 +11,15 @@ import java.util.ArrayList;
  * This class implements the basic effect of Shotgun
  * @author Mattia Iamundo
  */
-public class Shotgun implements Power, SingleTarget{
-    private Player target;
+public class Shotgun extends SingleTarget implements Power{
     private Space moveto;
 
     @Override
     public void usePower(Player attacker){
-        target.getPlance().giveDamage(attacker, 3);
-        target.getPlance().removeMark(attacker);
+        super.usePower(attacker,3);
         if (moveto != null){
             target.setPosition(moveto);
         }
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
     }
 
     public Space getMoveto() {

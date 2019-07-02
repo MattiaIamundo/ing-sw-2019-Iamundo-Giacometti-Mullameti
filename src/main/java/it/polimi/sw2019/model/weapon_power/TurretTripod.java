@@ -10,9 +10,7 @@ import java.util.ArrayList;
  * This class implements the second optional effect of Machine Gun
  * @author Mattia Iamundo
  */
-public class TurretTripod implements Power, SingleTarget{
-
-    private Player target;
+public class TurretTripod extends SingleTarget implements Power{
     private Player previoustarget;
 
     @Override
@@ -20,18 +18,8 @@ public class TurretTripod implements Power, SingleTarget{
         previoustarget.getPlance().giveDamage(attacker, 1);
         previoustarget.getPlance().removeMark(attacker);
         if (target != null){
-            target.getPlance().giveDamage(attacker,1);
-            target.getPlance().removeMark(attacker);
+            super.usePower(attacker,1);
         }
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
     }
 
     public Player getPrevioustarget() {

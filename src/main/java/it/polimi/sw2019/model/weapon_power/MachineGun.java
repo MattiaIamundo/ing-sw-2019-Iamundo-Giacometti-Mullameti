@@ -10,31 +10,21 @@ import java.util.ArrayList;
  * This class implement the basic effect of Machine Gun
  * @author Mattia Iamundo
  */
-public class MachineGun implements Power, SingleTarget{
+public class MachineGun extends SingleTarget implements Power{
 
-    private Player target1;
     private Player target2;
 
     @Override
     public void usePower(Player attacker){
-        target1.getPlance().giveDamage(attacker,1);
-        target1.getPlance().removeMark(attacker);
+        super.usePower(attacker, 1);
         if (target2 != null){
             target2.getPlance().giveDamage(attacker,1);
             target2.getPlance().removeMark(attacker);
         }
     }
 
-    public Player getTarget1() {
-        return target1;
-    }
-
     public Player getTarget2() {
         return target2;
-    }
-
-    public void setTarget(Player target1) {
-        this.target1 = target1;
     }
 
     public void setTarget2(Player target2) {

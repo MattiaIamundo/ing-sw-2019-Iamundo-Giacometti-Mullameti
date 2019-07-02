@@ -6,23 +6,11 @@ import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 
-public class Thor implements Power, SingleTarget{
-
-    private Player target;
+public class Thor extends SingleTarget implements Power{
 
     @Override
     public void usePower(Player attacker) {
-        target.getPlance().giveDamage(attacker, 2);
-        target.getPlance().removeMark(attacker);
-    }
-
-    public Player getTarget() {
-        return target;
-    }
-
-    @Override
-    public void setTarget(Player target) {
-        this.target = target;
+        super.usePower(attacker,2);
     }
 
     @Override
