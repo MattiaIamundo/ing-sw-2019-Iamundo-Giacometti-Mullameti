@@ -49,7 +49,7 @@ public class ScannerModeContTest {
         Catcher catcher = new Catcher();
         ArrayList<String> expectedValid = new ArrayList<>();
 
-        model.addObserver(catcher);
+        controller.addObserver(catcher);
         controller.useEffect(players.get(0), players, map);
         expectedValid.add("target1");
         expectedValid.add("target2");

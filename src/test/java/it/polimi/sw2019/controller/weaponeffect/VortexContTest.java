@@ -47,7 +47,7 @@ public class VortexContTest {
             players.get(1).setPosition(map.getSpace(3,1));
             players.get(2).setPosition(map.getSpace(2,0));
             players.get(3).setPosition(map.getSpace(1,2));
-            model.addObserver(catcher);
+            controller.addObserver(catcher);
             controller.useEffect(players.get(0), players, map);
             expectedVortexPositions.add("2-0");
             expectedVortexPositions.add("1-2");
@@ -80,7 +80,7 @@ public class VortexContTest {
             players.get(1).setPosition(map.getSpace(0,1));
             players.get(2).setPosition(map.getSpace(1,1));
             players.get(3).setPosition(map.getSpace(3,1));
-            model.addObserver(catcher);
+            controller.addObserver(catcher);
             controller.useEffect(players.get(0), players, map);
             expectedVortexPositions.add("0-0");
             expectedVortexPositions.add("1-1");

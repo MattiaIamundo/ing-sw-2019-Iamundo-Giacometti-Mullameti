@@ -52,7 +52,7 @@ public class MachineGunContTest {
         ArrayList<String> expectedValid = new ArrayList<>();
         ArrayList<String> expectedNotReachable = new ArrayList<>();
 
-        model.addObserver(catcher);
+        controller.addObserver(catcher);
         controller.useEffect(players.get(0), players, map);
         expectedValid.add("target1");
         expectedValid.add("target2");

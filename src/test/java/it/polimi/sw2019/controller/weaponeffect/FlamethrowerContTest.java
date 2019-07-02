@@ -51,7 +51,7 @@ public class FlamethrowerContTest {
         ArrayList<String> expectedTarget1 = new ArrayList<>();
         ArrayList<String> expectedTarget2 = new ArrayList<>();
 
-        model.addObserver(catcher);
+        controller.addObserver(catcher);
         controller.useEffect(players.get(0), players, map);
         expectedDirections.add("south");
         expectedDirections.add("west");
