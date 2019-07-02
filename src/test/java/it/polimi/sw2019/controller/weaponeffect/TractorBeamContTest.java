@@ -46,7 +46,7 @@ public class TractorBeamContTest {
         ArrayList<String> expectedMovesTarget3 = new ArrayList<>();
 
         try {
-            model.addObserver(catcher);
+            controller.addObserver(catcher);
             players.get(0).setPosition(map.getSpace(3,2));
             players.get(1).setPosition(map.getSpace(3,0));
             players.get(2).setPosition(map.getSpace(1,0));
@@ -92,7 +92,7 @@ public class TractorBeamContTest {
         ArrayList<String> expectedMovesTarget3 = new ArrayList<>();
 
         try {
-            model.addObserver(catcher);
+            controller.addObserver(catcher);
             players.get(0).setPosition(map.getSpace(1,0));
             players.get(1).setPosition(map.getSpace(2,0));
             players.get(2).setPosition(map.getSpace(3,2));

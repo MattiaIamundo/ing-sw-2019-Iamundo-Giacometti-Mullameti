@@ -64,7 +64,7 @@ public class ChainReactionContTest {
         ArrayList<String> excpectedNotSelectable = new ArrayList<>();
         ArrayList<String> excpectedNotReachable = new ArrayList<>();
 
-        chainReaction.addObserver(catcher);
+        chainReactionCont.addObserver(catcher);
         chainReactionCont.useEffect(players.get(0), players, map);
         excpectedValid.add("target");
         excpectedNotSelectable.add("attacker");

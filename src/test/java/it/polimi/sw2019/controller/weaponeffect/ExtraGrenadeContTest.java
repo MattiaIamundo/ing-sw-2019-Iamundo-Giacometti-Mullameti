@@ -62,7 +62,7 @@ public class ExtraGrenadeContTest {
             basicEffect.setTarget(players.get(1));
             basicEffect.setMoveto(map.getSpace(2, 0));
             basicEffect.usePower(players.get(0));
-            optEffect.addObserver(catcher);
+            extraGrenadeCont.addObserver(catcher);
             extraGrenadeCont.useEffect(players.get(0), players, map);
             excpected.add("0-0");
             excpected.add("1-0");
@@ -89,7 +89,7 @@ public class ExtraGrenadeContTest {
         basicEffect.setTarget(players.get(1));
         basicEffect.setMoveto(null);
         basicEffect.usePower(players.get(0));
-        optEffect.addObserver(catcher);
+        extraGrenadeCont.addObserver(catcher);
         extraGrenadeCont.useEffect(players.get(0), players, map);
         expected.add("0-0");
         expected.add("1-0");
