@@ -12,6 +12,7 @@ import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.events.server_event.VCevent.PowerupEv;
 import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.BarbecueChooseEv;
 import it.polimi.sw2019.view.PlayerRemoteView;
 
 public class ExecutorEventImp implements ExecutorEvent {
@@ -68,5 +69,9 @@ public class ExecutorEventImp implements ExecutorEvent {
 
     public void updateObject(WeaponReloadChooseEv weaponReloadChooseEv, Game game) {
         game.update(weaponReloadChooseEv);
+    }
+
+    public void updateObject(BarbecueChooseEv barbecueChooseEv, Game game){
+        game.update(barbecueChooseEv);
     }
 }

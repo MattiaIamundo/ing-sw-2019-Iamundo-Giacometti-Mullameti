@@ -13,6 +13,7 @@ import it.polimi.sw2019.events.client_event.MVevent.NotifyReloadEv;
 import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.BarbecueChooseEv;
 import it.polimi.sw2019.model.*;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.powerup.Newton;
@@ -1220,8 +1221,10 @@ public class Game implements Observer <NotifyReturn> {
 
     }
 
-
-
-
-
+    public void update(BarbecueChooseEv barbecueChooseEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(barbecueChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(barbecueChooseEv);
+        }
+    }
 }
