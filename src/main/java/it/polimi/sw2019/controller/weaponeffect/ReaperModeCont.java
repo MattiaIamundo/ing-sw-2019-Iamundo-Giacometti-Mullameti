@@ -7,7 +7,7 @@ import it.polimi.sw2019.model.weapon_power.ReaperMode;
 
 import java.util.ArrayList;
 
-public class ReaperModeCont implements EffectController {
+public class ReaperModeCont extends EffectController {
 
     private ReaperMode model;
     private Player attacker;

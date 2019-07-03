@@ -13,12 +13,11 @@ import it.polimi.sw2019.view.Observer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BarbecueModeCont extends Observable<BarbecueChooseEv> implements Observer<BarbecueSetEv>, EffectController {
+public class BarbecueModeCont extends EffectController implements Observer<BarbecueSetEv> {
 
     private BarbecueMode model;
     private Player attacker;
     private ArrayList<Player> players;
-    private Map map;
     private HashMap<String, ArrayList<Space>> directions = new HashMap<>();
 
     public BarbecueModeCont(Power model) {
@@ -29,7 +28,6 @@ public class BarbecueModeCont extends Observable<BarbecueChooseEv> implements Ob
     public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
         this.attacker = attacker;
         this.players = players;
-        this.map = gamemap;
         acquireDirections();
     }
 

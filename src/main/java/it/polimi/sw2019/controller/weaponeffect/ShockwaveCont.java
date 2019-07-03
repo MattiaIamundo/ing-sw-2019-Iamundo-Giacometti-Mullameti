@@ -13,7 +13,7 @@ import it.polimi.sw2019.view.Observer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ShockwaveCont extends Observable<ShockwaveChooseEv> implements Observer<ShockwaveSetEv>, EffectController {
+public class ShockwaveCont extends EffectController implements Observer<ShockwaveSetEv> {
 
     private Shockwave model;
     private Player attacker;

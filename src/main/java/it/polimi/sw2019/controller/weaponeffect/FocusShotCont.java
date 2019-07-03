@@ -15,12 +15,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class FocusShotCont extends Observable<FocusShotChooseEv> implements Observer<FocusShotSetEv>, EffectController {
+public class FocusShotCont extends EffectController implements Observer<FocusShotSetEv> {
 
     private FocusShot model;
     private Player attacker;
     private ArrayList<Player> players;
-    private Map map;
 
     public FocusShotCont(Power model) {
         this.model = (FocusShot) model;
@@ -30,7 +29,6 @@ public class FocusShotCont extends Observable<FocusShotChooseEv> implements Obse
     public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
         this.attacker = attacker;
         this.players = players;
-        this.map = gamemap;
         acquireTarget();
     }
 

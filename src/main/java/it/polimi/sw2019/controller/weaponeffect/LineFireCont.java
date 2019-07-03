@@ -11,7 +11,7 @@ import it.polimi.sw2019.view.Observable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class LineFireCont extends Observable<WeaponEvent> implements EffectController{
+public abstract class LineFireCont extends EffectController {
 
     protected LineFire model;
     protected Player attacker;
