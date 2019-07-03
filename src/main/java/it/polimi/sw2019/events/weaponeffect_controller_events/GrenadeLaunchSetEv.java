@@ -1,9 +1,14 @@
 package it.polimi.sw2019.events.weaponeffect_controller_events;
 
+import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ActionEv;
+import it.polimi.sw2019.events.ExecutorEventImp;
+
 /**
  * These class represent the set event of Grenade launcher, the basic effect of Grenade Launcher
  */
-public class GrenadeLaunchSetEv implements TargetSetEv{
+public class GrenadeLaunchSetEv implements TargetSetEv, ActionEv {
+    private String playerNickname;
     private String target;
     private String moveto;
 
@@ -22,11 +27,26 @@ public class GrenadeLaunchSetEv implements TargetSetEv{
         moveto = null;
     }
 
+    @Override
+    public String getPlayerNickname() {
+        return playerNickname;
+    }
+
+    @Override
+    public void setPlayerNickname(String playerNickname) {
+        this.playerNickname = playerNickname;
+    }
+
     public String getTarget() {
         return target;
     }
 
     public String getMoveto() {
         return moveto;
+    }
+
+    @Override
+    public void handle(ExecutorEventImp executorEventImp, Game controller) {
+        executorEventImp.handleObject(this, controller);
     }
 }

@@ -1,9 +1,14 @@
 package it.polimi.sw2019.events.weaponeffect_controller_events;
 
+import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ActionEv;
+import it.polimi.sw2019.events.ExecutorEventImp;
+
 /**
  * These class is the set event of Piercing mode, the alternative effect of Railgun
  */
-public class PiercingModeSetEv {
+public class PiercingModeSetEv implements ActionEv {
+    private String playerNickname;
     private String target1;
     private String target2;
 
@@ -27,11 +32,26 @@ public class PiercingModeSetEv {
         this.target2 = null;
     }
 
+    @Override
+    public String getPlayerNickname() {
+        return playerNickname;
+    }
+
+    @Override
+    public void setPlayerNickname(String playerNickname) {
+        this.playerNickname = playerNickname;
+    }
+
     public String getTarget1() {
         return target1;
     }
 
     public String getTarget2() {
         return target2;
+    }
+
+    @Override
+    public void handle(ExecutorEventImp executorEventImp, Game controller) {
+        executorEventImp.handleObject(this, controller);
     }
 }
