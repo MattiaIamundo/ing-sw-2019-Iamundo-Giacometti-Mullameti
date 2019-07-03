@@ -3,8 +3,6 @@ package it.polimi.sw2019.view;
 
 
 import it.polimi.sw2019.view.ControllerClasses.*;
-import it.polimi.sw2019.events.server_event.VCevent.VCColor;
-import it.polimi.sw2019.events.server_event.VCevent.VCLogin;
 import it.polimi.sw2019.nethandler.ViewContEvent;
 import it.polimi.sw2019.network.Socket.ClientSocket;
 import javafx.application.Application;
@@ -17,13 +15,10 @@ import javafx.stage.WindowEvent;
 
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Scanner;
 
 public class GUI extends Application implements UIinterface {
 
-
-    private MenuController menuController;
+    private TableController tableController;
     private Stage stage;
     private ClientSocket clientSocket;
     private String string;
@@ -54,7 +49,7 @@ public class GUI extends Application implements UIinterface {
         });
 
         this.stage=stage;
-        this.clientSocket=new ClientSocket("127.0.0.1");
+        this.clientSocket = new ClientSocket("127.0.0.1");
         clientSocket.setUI(this);
         MenuController menuController = loader.getController();
         menuController.setClientSocket(clientSocket);
@@ -100,7 +95,9 @@ public class GUI extends Application implements UIinterface {
 
                 Stage mainStage = stage;
                 mainStage.getScene().setRoot(playerCharacter);
-            }catch (IOException e){}
+            }catch (IOException e){
+                //
+            }
         }else{
             System.out.println("ko");
         }
@@ -188,19 +185,54 @@ public class GUI extends Application implements UIinterface {
             try {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/Table.fxml"));
-                Parent lobby = loader.load();
+                Parent table = loader.load();
 
-                TableController tableController = loader.getController();
-                tableController.setClientSocket(clientSocket);
+                this.tableController = loader.getController();
+                this.tableController.setClientSocket(clientSocket);
+                this.clientSocket.setTableController(this.tableController);
 
                 Stage mainStage = stage;
-                mainStage.getScene().setRoot(lobby);
+                mainStage.getScene().setRoot(table);
+
+                EventForGui eventForGui = new EventForGui(this.clientSocket);
+                eventForGui.run();
+
+                //EventForServer eventForServer = new EventForServer();
+                //eventForServer.run();
+
             } catch (IOException e) {
+                //
             }
         }else {
             System.out.println("ko");
         }
     }
+
+    @Override
+    public void requestRefresh(String string) {
+        if (string.equals("ok")){
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/Table.fxml"));
+                Parent table = loader.load();
+
+                this.tableController = loader.getController();
+
+                Stage mainStage = stage;
+                mainStage.getScene().setRoot(table);
+
+
+            } catch (IOException e) {
+                //
+            }
+        }else {
+            System.out.println("ko");
+        }
+    }
+
+
+
+
     public static void main(String[]args){
         launch(args);
     }

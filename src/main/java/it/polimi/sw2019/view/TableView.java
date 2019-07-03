@@ -1,15 +1,23 @@
 package it.polimi.sw2019.view;
 
 import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ExecutorEventImp;
+import it.polimi.sw2019.events.NotifyReturn;
+import it.polimi.sw2019.events.client_event.Cevent.StartGameEv;
+import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * this is the class view for the client
  * @author Luca Giacometti
  */
-public class TableView extends ObservableByGame implements Observer <Table> {
+public class TableView {
 
-    private Table table;
+
+    private ExecutorEventImp executorEventImp = new ExecutorEventImp();
     private UIinterface ui;
 
     public TableView() {}
@@ -17,19 +25,5 @@ public class TableView extends ObservableByGame implements Observer <Table> {
         ui = userImp;
     }
 
-    /**
-     * this method send to the NH the query to show the game's table
-     * @param message
-     */
-    protected void showTable(Table message) {
 
-        //it calls a NH methods to show to the client the Table
-    }
-
-    /**
-     * this method show the update that one player did
-     */
-    public void update(Table message) {
-        showTable( message);
-    }
 }

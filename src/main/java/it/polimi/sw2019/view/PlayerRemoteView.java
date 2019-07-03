@@ -1,14 +1,13 @@
 package it.polimi.sw2019.view;
 
 import com.google.gson.Gson;
+import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
 import it.polimi.sw2019.events.client_event.Cevent.StartGameEv;
-import it.polimi.sw2019.network.Socket.ServerSocket;
-import javafx.application.Platform;
 
 import java.io.*;
 import java.net.Socket;
@@ -21,16 +20,20 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
     private Socket socket;
     private String set = "pippo";
     //private PrintWriter output;
+    private Game controller;
     private Scanner input;
+    private ObjectInputStream objectInputStream;
     private Gson gson;
     private ObjectOutputStream objectOutputStream;
     private static final Logger logger = Logger.getLogger( PlayerRemoteView.class.getName() );
 
-    public PlayerRemoteView (Socket socket1) {
+    public PlayerRemoteView (Socket socket1, Game controller) {
         socket = socket1;
         try{
             //output = new PrintWriter(socket.getOutputStream());
+            this.controller = controller;
             input = new Scanner(socket.getInputStream());
+            //objectInputStream = new ObjectInputStream(socket.getInputStream());
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
         } catch (IOException ex) {
@@ -70,6 +73,17 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
     }
 
     public String waitForNickname() {
+/*
+        try {
+            set = objectInputStream.readUTF();
+            return set;
+        } catch (IOException ex) {
+            //
+        }
+
+*/
+
+
 
         set = input.nextLine();
         return set;
@@ -299,11 +313,16 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
     }
 
 
-    public ActionEv waitForAction() {
-        //  i have to wait for a ActionEv
-        set = input.nextLine();
+    public void waitForAction() {
+     /*   //  i have to wait for a ActionEv
+        try {
+            ActionEv actionEv = objectInputStream.readObject();
+            notify(actionEv);
+        } catch (IOException ex) {
+            //
+        }
 
-        return gson.fromJson(set, ActionEv.class);
+      */
     }
 
     public void sendStartGame() {
@@ -322,7 +341,6 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
         try{
             objectOutputStream.writeObject(startGameEv);
             objectOutputStream.flush();
-            objectOutputStream.reset();
         } catch (IOException ex) {
             //do nothing
         }
@@ -338,10 +356,6 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
         //output.flush();
     }
 
-
-    public void notify(ActionEv actionEv) {
-
-    }
 
     public void update(NotifyReturn notifyReturn) {
 

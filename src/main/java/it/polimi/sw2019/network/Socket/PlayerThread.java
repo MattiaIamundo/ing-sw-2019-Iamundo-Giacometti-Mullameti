@@ -53,11 +53,8 @@ public class PlayerThread implements Runnable {
         connection = socket;
         suspended = true;
         string = "bho";
-        //gameLocker = new ReentrantLock();
-        //turnOfOtherPlayers = gameLocker.newCondition();
-        //otherPlayerConnected = gameLocker.newCondition();
         gameController = controller;
-        playerRemoteView = new PlayerRemoteView(socket);
+        playerRemoteView = new PlayerRemoteView(socket,controller);
         tableRemoteView = new TableRemoteView(socket);
         weaponRemoteView = new WeaponRemoteView(socket);
         powerUpRemoteView = new PowerUpRemoteView(socket);
@@ -508,6 +505,7 @@ public class PlayerThread implements Runnable {
         gameController.createAmmo();
         gameController.createWeapon();
         gameController.createPowerUp();
+        //fill the table in space generation and in space ammo with weapon and ammo
 
         try {
             //send the string "start" to activate a new scene in the client
@@ -532,9 +530,9 @@ public class PlayerThread implements Runnable {
                     }
                 }
 
-                ActionEv actionEv = playerRemoteView.waitForAction();
-                actionEv.setPlayerNickname(this.nickname);
-                gameController.handleEvent(actionEv);
+                //ActionEv actionEv = playerRemoteView.waitForAction();
+                //actionEv.setPlayerNickname(this.nickname);
+                //gameController.update(actionEv);
 
                 if ( gameController.getTurnOf().getUsedAction() == 2 ) {
                     //cambio turno al giocatore
@@ -564,10 +562,6 @@ public class PlayerThread implements Runnable {
 
     public String getNickname() {
         return nickname;
-    }
-
-    public void setGameController(Game controller) {
-        this.gameController = controller;
     }
 
     public PlayerRemoteView getPlayerRemoteView() {

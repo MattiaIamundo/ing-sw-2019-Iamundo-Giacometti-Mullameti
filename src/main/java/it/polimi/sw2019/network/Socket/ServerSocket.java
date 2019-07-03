@@ -2,40 +2,27 @@ package it.polimi.sw2019.network.Socket;
 
 import it.polimi.sw2019.controller.Game;
 
-import javax.swing.*;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ServerSocket extends JFrame implements Runnable, Serializable {
+public class ServerSocket implements Runnable {
 
-    //the serial number
-    private final long serialVertionUID = 11111;
     //the port number
-    private final int portNumber = 12345;
+    private static final int portNumber = 12345;
     //the server
     private java.net.ServerSocket server;
     //
-    ExecutorService runGame = Executors.newFixedThreadPool(5);
+    private ExecutorService runGame = Executors.newFixedThreadPool(5);
     //
-    ExecutorService others = Executors.newCachedThreadPool();
+    private ExecutorService others = Executors.newCachedThreadPool();
     //the threads
     private ArrayList <PlayerThread> players = new ArrayList <>(5);
     //the controller
     private Game socketController;
-    //the "main" lock
-    private Lock gameLock;
-    //the condition which set the first time which in the three player are connected
-    //private Condition otherPlayerConnected;
-    //the condition which set the turn
-    //private Condition otherPlayersTurn;
     //the logger for debug
     private static final Logger logger = Logger.getLogger( ServerSocket.class.getName() );
 
@@ -43,13 +30,6 @@ public class ServerSocket extends JFrame implements Runnable, Serializable {
      * this is the server's constructor
      */
     public ServerSocket( Game sockContr){
-
-        //create the game's lock
-        gameLock = new ReentrantLock();
-        //condition variable: all players have to be connected
-        //otherPlayerConnected = gameLock.newCondition();
-        //condition variable: it the turn of another player
-        //otherPlayersTurn = gameLock.newCondition();
 
         this.socketController = sockContr;
 
@@ -183,14 +163,6 @@ public class ServerSocket extends JFrame implements Runnable, Serializable {
 
     public List <PlayerThread> getPlayers() {
         return players;
-    }
-
-    public void setSocketController(Game cont ) {
-        this.socketController = cont;
-    }
-
-    public java.net.ServerSocket getServer() {
-        return this.server;
     }
 
 }

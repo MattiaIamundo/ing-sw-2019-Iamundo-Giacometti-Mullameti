@@ -40,14 +40,6 @@ public class Table extends TableView implements Cloneable, Serializable {
     }
 
     /**
-     * this method has to show to the view the table
-     */
-    @Override
-    protected void showTable (Table message){
-
-    }
-
-    /**
      * @return the Track of skulls
      */
     public List<Skull> getKillshotTrack(){

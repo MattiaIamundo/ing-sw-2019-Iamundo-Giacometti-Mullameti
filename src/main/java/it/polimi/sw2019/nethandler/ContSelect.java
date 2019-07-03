@@ -1,5 +1,6 @@
 package it.polimi.sw2019.nethandler;
 
+import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
@@ -14,7 +15,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ContSelect implements ContSelectInt {
+public class ContSelect implements ContSelectInt{
 
     private Socket socket;
     private PrintWriter out;
@@ -22,17 +23,19 @@ public class ContSelect implements ContSelectInt {
     private ObjectInputStream objectInputStream;
     private boolean boo;
     private String string;
+    private PlayerView playerView;
     private static final Logger logger = Logger.getLogger( ContSelect.class.getName() );
 
     /**
      * this is the constructor
      * @param socket1 the connection with the server
      */
-    public ContSelect (Socket socket1) {
+    public ContSelect (Socket socket1, PlayerView playerView) {
         socket = socket1;
+        this.playerView = playerView;
         try{
-            out = new PrintWriter(socket.getOutputStream());
-            in =  new Scanner(socket.getInputStream());
+            //out = new PrintWriter(socket.getOutputStream());
+            //in =  new Scanner(socket.getInputStream());
             objectInputStream = new ObjectInputStream(socket.getInputStream());
 
         } catch ( IOException e) {
@@ -336,4 +339,18 @@ public class ContSelect implements ContSelectInt {
     }
 
  */
+
+    public NotifyReturn waitForNotifyReturnEvent() {
+        NotifyReturn notifyReturn = null;
+        try{
+            notifyReturn = (NotifyReturn) objectInputStream.readObject();
+            return notifyReturn;
+        } catch (IOException | ClassNotFoundException ex) {
+            //
+        }
+        return notifyReturn;
+    }
+
+
+
 }
