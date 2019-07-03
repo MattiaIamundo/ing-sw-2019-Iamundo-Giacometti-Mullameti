@@ -204,9 +204,9 @@ public class ClientSocket  {
 
     public static void main (String[] args){
 
-        ClientSocket application;
 
-        Application.launch(GUI.class);//(MERITA)
+
+        Application.launch(GUI.class);
 
 
     }

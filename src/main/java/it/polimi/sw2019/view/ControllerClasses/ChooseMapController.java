@@ -79,7 +79,7 @@ public class ChooseMapController {
         clientSocket.getContSelect().waitForPing(clientSocket.getPlayerView());
 
 
-        /*Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/Table.fxml"));
+        /*Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/Table.fxml"));
         Scene tableScene = new Scene(table);
 
         Stage window = (Stage) startButton.getScene().getWindow();

@@ -66,7 +66,7 @@ public class ChooseSkullController {
         public void nextButtonPushed() throws IOException {
             System.out.println("1map");
             clientSocket.getContSelect().waitingForMap(clientSocket.getPlayerView());
-            /*Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/ChooseMap.fxml"));
+            /*Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/ChooseMap.fxml"));
             Scene tableScene = new Scene(table);
 
             Stage window = (Stage) nextButton.getScene().getWindow();

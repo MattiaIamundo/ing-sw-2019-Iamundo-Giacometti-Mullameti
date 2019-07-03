@@ -10,7 +10,7 @@ public class WeaponEffectManagerTest {
 
     @Test
     public void TestInitializtaionOfEffectController(){
-        WeaponEffectManager weaponEffectManager = new WeaponEffectManager(null, null);
+        WeaponEffectManager weaponEffectManager = new WeaponEffectManager(null, null, null);
 
         HashMap<String, EffectController> effectControllerHashMap = weaponEffectManager.getEffectControllers();
         Assert.assertEquals(45, effectControllerHashMap.size());

@@ -118,7 +118,7 @@ public class PlayerCharacterController {
 
 
         /*try{
-            Parent chooseMapSkull= FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/ChooseSkull.fxml"));
+            Parent chooseMapSkull= FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/ChooseSkull.fxml"));
             Scene chooseMapSkullScene = new Scene(chooseMapSkull);
 
             Stage window = (Stage)nextButton.getScene().getWindow();

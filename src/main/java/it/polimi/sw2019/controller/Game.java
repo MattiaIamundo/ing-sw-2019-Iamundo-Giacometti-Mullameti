@@ -28,6 +28,7 @@ import it.polimi.sw2019.network.Socket.PlayerThread;
 import it.polimi.sw2019.view.*;
 import it.polimi.sw2019.view.Observer;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;

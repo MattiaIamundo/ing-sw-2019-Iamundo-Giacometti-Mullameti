@@ -48,7 +48,7 @@ public class MenuController {
         clientSocket.getContSelect().waitForNicknameRequest(clientSocket.getPlayerView());
 
 
-        /*Parent newPlayer=FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/NewPlayer.fxml"));
+        /*Parent newPlayer=FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/NewPlayer.fxml"));
         Scene newPlayerScene = new Scene(newPlayer);
 
         Stage window = (Stage)newButton.getScene().getWindow();
