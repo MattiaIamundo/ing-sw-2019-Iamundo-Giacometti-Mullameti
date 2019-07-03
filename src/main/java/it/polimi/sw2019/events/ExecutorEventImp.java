@@ -39,6 +39,167 @@ public class ExecutorEventImp implements ExecutorEvent {
         //game.handleEvent(powerupEv);
     }
 
+    public void handleObject(BarbecueSetEv barbecueSetEv, Game game){
+        game.handleEvent(barbecueSetEv);
+    }
+
+    public void handleObject(BlackHoleSetEv blackHoleSetEv, Game game){
+        game.handleEvent(blackHoleSetEv);
+    }
+
+    public void handleObject(ChainReactSetEv chainReactSetEv, Game game){
+        game.handleEvent(chainReactSetEv);
+    }
+
+    public void handleObject(CozyFireModeSetEv cozyFireModeSetEv, Game game){
+        game.handleEvent(cozyFireModeSetEv);
+    }
+
+    public void handleObject(CyberbladeSetEv cyberbladeSetEv, Game game){
+        game.handleEvent(cyberbladeSetEv);
+    }
+
+    public void handleObject(ExtraGrenadeSetEv extraGrenadeSetEv, Game game){
+        game.handleEvent(extraGrenadeSetEv);
+    }
+
+    public void handleObject(FlamethrowerSetEv flamethrowerSetEv, Game game){
+        game.handleEvent(flamethrowerSetEv);
+    }
+
+    public void handleObject(FocusShotSetEv focusShotSetEv, Game game){
+        game.handleEvent(focusShotSetEv);
+    }
+
+    public void handleObject(FurnaceSetEv furnaceSetEv, Game game){
+        game.handleEvent(furnaceSetEv);
+    }
+
+    public void handleObject(GrenadeLaunchSetEv grenadeLaunchSetEv, Game game){
+        game.handleEvent(grenadeLaunchSetEv);
+    }
+
+    public void handleObject(HeatseekerSetEv heatseekerSetEv, Game game){
+        game.handleEvent(heatseekerSetEv);
+    }
+
+    public void handleObject(HellionSetEv hellionSetEv, Game game){
+        game.handleEvent(hellionSetEv);
+    }
+
+    public void handleObject(HighVoltageSetEv highVoltageSetEv, Game game){
+        game.handleEvent(highVoltageSetEv);
+    }
+
+    public void handleObject(LockRifleSetEv lockRifleSetEv, Game game){
+        game.handleEvent(lockRifleSetEv);
+    }
+
+    public void handleObject(LongBarrelSetEv longBarrelSetEv, Game game){
+        game.handleEvent(longBarrelSetEv);
+    }
+
+    public void handleObject(MachineGunSetEv machineGunSetEv, Game game){
+        game.handleEvent(machineGunSetEv);
+    }
+
+    public void handleObject(NanoTracerSetEv nanoTracerSetEv, Game game){
+        game.handleEvent(nanoTracerSetEv);
+    }
+
+    public void handleObject(PhaseGlideSetEv phaseGlideSetEv, Game game){
+        game.handleEvent(phaseGlideSetEv);
+    }
+
+    public void handleObject(PiercingModeSetEv piercingModeSetEv, Game game){
+        game.handleEvent(piercingModeSetEv);
+    }
+
+    public void handleObject(PlasmaGunSetEv plasmaGunSetEv, Game game){
+        game.handleEvent(plasmaGunSetEv);
+    }
+
+    public void handleObject(PowerGloveSetEv powerGloveSetEv, Game game){
+        game.handleEvent(powerGloveSetEv);
+    }
+
+    public void handleObject(PulvModeSetEv pulvModeSetEv, Game game){
+        game.handleEvent(pulvModeSetEv);
+    }
+
+    public void handleObject(PunisherModeSetEv punisherModeSetEv, Game game){
+        game.handleEvent(punisherModeSetEv);
+    }
+
+    public void handleObject(RailGunSetEv railGunSetEv, Game game){
+        game.handleEvent(railGunSetEv);
+    }
+
+    public void handleObject(RocketFistSetEv rocketFistSetEv, Game game){
+        game.handleEvent(rocketFistSetEv);
+    }
+
+    public void handleObject(RocketJumpSetEv rocketJumpSetEv, Game game){
+        game.handleEvent(rocketJumpSetEv);
+    }
+
+    public void handleObject(RocketLaunchSetEv rocketLaunchSetEv, Game game){
+        game.handleEvent(rocketLaunchSetEv);
+    }
+
+    public void handleObject(ScannerModeSetEv scannerModeSetEv, Game game){
+        game.handleEvent(scannerModeSetEv);
+    }
+
+    public void handleObject(SecondLockSetEv secondLockSetEv, Game game){
+        game.handleEvent(secondLockSetEv);
+    }
+
+    public void handleObject(ShadowstepSetEv shadowstepSetEv, Game game){
+        game.handleEvent(shadowstepSetEv);
+    }
+
+    public void handleObject(ShockwaveSetEv shockwaveSetEv, Game game){
+        game.handleEvent(shockwaveSetEv);
+    }
+
+    public void handleObject(ShotgunSetEv shotgunSetEv, Game game){
+        game.handleEvent(shotgunSetEv);
+    }
+
+    public void handleObject(SledgehammerSetEv sledgehammerSetEv, Game game){
+        game.handleEvent(sledgehammerSetEv);
+    }
+
+    public void handleObject(SliceAndDiceSetEv sliceAndDiceSetEv, Game game){
+        game.handleEvent(sliceAndDiceSetEv);
+    }
+
+    public void handleObject(ThorSetEv thorSetEv, Game game){
+        game.handleEvent(thorSetEv);
+    }
+
+    public void handleObject(TractorBeamSetEv tractorBeamSetEv, Game game){
+        game.handleEvent(tractorBeamSetEv);
+    }
+
+    public void handleObject(TurretTripodSetEv turretTripodSetEv, Game game){
+        game.handleEvent(turretTripodSetEv);
+    }
+
+    public void handleObject(VortexSetEv vortexSetEv, Game game){
+        game.handleEvent(vortexSetEv);
+    }
+
+    public void handleObject(WhisperSetEv whisperSetEv, Game game){
+        game.handleEvent(whisperSetEv);
+    }
+
+    public void handleObject(ZX2SetEv zx2SetEv, Game game){
+        game.handleEvent(zx2SetEv);
+    }
+
+
 
 
 

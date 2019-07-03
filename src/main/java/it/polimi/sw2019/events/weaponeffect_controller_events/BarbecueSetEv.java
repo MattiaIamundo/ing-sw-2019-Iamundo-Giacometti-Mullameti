@@ -1,9 +1,14 @@
 package it.polimi.sw2019.events.weaponeffect_controller_events;
 
+import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ActionEv;
+import it.polimi.sw2019.events.ExecutorEventImp;
+
 /**
  * This class represent the select event for Barbecue mode, the alternative effect of Flamethrower
  */
-public class BarbecueSetEv {
+public class BarbecueSetEv implements ActionEv {
+    private String playerNickname;
     private String direction;
 
     /**
@@ -13,7 +18,22 @@ public class BarbecueSetEv {
         this.direction = direction;
     }
 
+    @Override
+    public String getPlayerNickname() {
+        return playerNickname;
+    }
+
+    @Override
+    public void setPlayerNickname(String playerNickname) {
+        this.playerNickname = playerNickname;
+    }
+
     public String getDirection() {
         return direction;
+    }
+
+    @Override
+    public void handle(ExecutorEventImp executorEventImp, Game controller) {
+        executorEventImp.handleObject(this, controller);
     }
 }

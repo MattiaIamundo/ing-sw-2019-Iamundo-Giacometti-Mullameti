@@ -1,9 +1,14 @@
 package it.polimi.sw2019.events.weaponeffect_controller_events;
 
+import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ActionEv;
+import it.polimi.sw2019.events.ExecutorEventImp;
+
 /**
  * These class represent the choose event of Shotgun, the basic effect of Shotgun
  */
-public class ShotgunSetEv implements TargetSetEv{
+public class ShotgunSetEv implements TargetSetEv, ActionEv {
+    private String playerNickname;
     private String target;
     private String moveto;
 
@@ -18,11 +23,26 @@ public class ShotgunSetEv implements TargetSetEv{
     }
 
     @Override
+    public String getPlayerNickname() {
+        return playerNickname;
+    }
+
+    @Override
+    public void setPlayerNickname(String playerNickname) {
+        this.playerNickname = playerNickname;
+    }
+
+    @Override
     public String getTarget() {
         return target;
     }
 
     public String getMoveto() {
         return moveto;
+    }
+
+    @Override
+    public void handle(ExecutorEventImp executorEventImp, Game controller) {
+        executorEventImp.handleObject(this, controller);
     }
 }
