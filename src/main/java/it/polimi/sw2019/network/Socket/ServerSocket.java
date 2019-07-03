@@ -1,8 +1,6 @@
 package it.polimi.sw2019.network.Socket;
 
 import it.polimi.sw2019.controller.Game;
-import it.polimi.sw2019.exception.CancellPlayerException;
-import it.polimi.sw2019.utility.TimerThread;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -109,7 +107,6 @@ public class ServerSocket extends JFrame implements Runnable, Serializable {
             } catch (IOException e) {
                 logger.log(Level.SEVERE, e.toString(), e);
                 logger.log(Level.INFO, "{ServerSocket} a IOException: " + e.toString());
-                e.printStackTrace();
 
             }
 

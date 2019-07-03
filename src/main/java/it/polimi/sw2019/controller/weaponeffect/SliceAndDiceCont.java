@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SliceAndDiceCont extends Observable<SliceAndDiceChooseEv> implements Observer<SliceAndDiceSetEv>, EffectController{
+public class SliceAndDiceCont extends EffectController implements Observer<SliceAndDiceSetEv>{
 
     private SliceAndDice model;
     private Player attacker;

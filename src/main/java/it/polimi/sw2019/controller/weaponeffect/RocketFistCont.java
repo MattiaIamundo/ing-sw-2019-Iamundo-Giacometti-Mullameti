@@ -7,7 +7,7 @@ import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.RocketFistMode;
 import it.polimi.sw2019.view.Observer;
 
-public class RocketFistCont extends LineFireCont implements EffectController, Observer<RocketFistSetEv> {
+public class RocketFistCont extends LineFireCont implements Observer<RocketFistSetEv> {
 
     private RocketFistMode realmodel;
 

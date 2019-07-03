@@ -9,7 +9,7 @@ import it.polimi.sw2019.model.weapon_power.TsunamiMode;
 
 import java.util.ArrayList;
 
-public class TsunamiModeCont implements EffectController{
+public class TsunamiModeCont extends EffectController{
 
     private TsunamiMode model;
     private Player attacker;

@@ -3,25 +3,17 @@ package it.polimi.sw2019.network.Socket;
 import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.controller.MultiGame;
 import it.polimi.sw2019.events.ActionEv;
-import it.polimi.sw2019.events.ExecutorEventImp;
-import it.polimi.sw2019.exception.CancellPlayerException;
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.utility.TimerThread;
 import it.polimi.sw2019.view.PlayerRemoteView;
 import it.polimi.sw2019.view.PowerUpRemoteView;
 import it.polimi.sw2019.view.TableRemoteView;
 import it.polimi.sw2019.view.WeaponRemoteView;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -112,7 +104,7 @@ public class PlayerThread implements Runnable {
 
                     } catch (IOException e) {
 
-                        e.printStackTrace();
+                        logger.log(Level.SEVERE, e.toString(), e.getMessage());
                     }
 
                 } else {
@@ -136,7 +128,7 @@ public class PlayerThread implements Runnable {
 
                         } catch (IOException e) {
 
-                            e.printStackTrace();
+                            logger.log(Level.SEVERE, e.toString(), e.getMessage());
                             System.exit(1);
                         }
                     }
@@ -161,7 +153,7 @@ public class PlayerThread implements Runnable {
 
             }catch(IOException e) {
 
-                e.printStackTrace();
+                logger.log(Level.SEVERE, e.toString(), e.getMessage());
                 System.exit(1);
             }
         }
@@ -407,9 +399,9 @@ public class PlayerThread implements Runnable {
                 logger.log(Level.INFO, "{ PlayerThread } loop until there are 5 players or the timer finishes" );
 
 
-                boolean goOutTheLoop = false;
+                //boolean goOutTheLoop = false;
 
-                while ( gameController.getPlayers().size() < 5 && !goOutTheLoop) {
+                while ( gameController.getPlayers().size() < 5 && !gameController.getTimerThread().getTimerDone()) {
 
                     synchronized (gameController.getTimerPingThread()) {
 
@@ -419,8 +411,11 @@ public class PlayerThread implements Runnable {
                             logger.log(Level.INFO, "{ PlayerThread " +  this.nickname + "} sends ping ");
                             string = playerRemoteView.waitForPong();
                             logger.log(Level.INFO, "{ PlayerThread " +  this.nickname + "} receives pong ");
-                            gameController.getTimerPingThread().setOn(false);
                             gameController.getTimerPingThread().deleteTimer();
+                            gameController.getTimerPingThread().setTimerPingDone(false);
+                            gameController.getTimerPingThread().setOn(false);
+
+
 
                         }
 
@@ -443,19 +438,22 @@ public class PlayerThread implements Runnable {
                         }
                         //enough players but the timer is off
                         if ( gameController.getPlayers().size() >= 3 && !gameController.getTimerThread().getOn()
-                                && gameController.getTimerThread().getTurnTime() == 0 && !gameController.getPlayers().get(2).getCharacter().equals("null") ) {
+                                && !gameController.getPlayers().get(2).getCharacter().equals("null") ) {
                             logger.log(Level.INFO, "{PlayerThread "+ this.nickname +"} has started the timer!");
                             gameController.getTimerThread().run();
                             gameController.getTimerThread().setOn(true);
                         }
+                        /*
                         //are there enough players when the timer id done?
                         if(gameController.getPlayers().size() >= 3 && gameController.getTimerThread().getTimerDone() && !goOutTheLoop ){
-                            //gameController.sendPing(playerRemoteView);
+                            gameController.sendPing(playerRemoteView);
                             logger.log(Level.INFO, "{ PlayerThread " +  this.nickname + "} sends the ok ping ");
-                            //string = playerRemoteView.waitForPong();
+                            string = playerRemoteView.waitForPong();
                             logger.log(Level.INFO, "{ PlayerThread " +  this.nickname + "} receives the ok pong ");
                             goOutTheLoop = true;
                         }
+
+                         */
                     }
 
                 }

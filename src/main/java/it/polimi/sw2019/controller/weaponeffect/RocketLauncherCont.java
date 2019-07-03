@@ -13,7 +13,7 @@ import it.polimi.sw2019.view.Observer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RocketLauncherCont extends Observable<RocketLaunchChooseEv> implements Observer<RocketLaunchSetEv>, EffectController{
+public class RocketLauncherCont extends EffectController implements Observer<RocketLaunchSetEv> {
 
     private RocketLauncher model;
     private Player attacker;

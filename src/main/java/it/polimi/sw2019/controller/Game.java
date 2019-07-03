@@ -13,6 +13,8 @@ import it.polimi.sw2019.events.client_event.MVevent.NotifyReloadEv;
 import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
+import it.polimi.sw2019.events.weapon_event.PowerChooseEv;
+import it.polimi.sw2019.events.weapon_event.UnpaidEffectEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.*;
 import it.polimi.sw2019.model.*;
 import it.polimi.sw2019.model.Map;
@@ -97,7 +99,7 @@ public class Game implements Observer <NotifyReturn> {
         grabController = new Grab(this);
         grabController.addObserver(this);
         usePowerUpController = new UsePowerUp();
-        shootController = new Shoot(this.players, this.gameboard.getMap());
+        shootController = new Shoot(this.players, this.gameboard.getMap(), this);
         killshotController = new Killshot();
         finalFrenzyController = new FinalFrenzy();
         //da rimuovere e chiamare da metodo, il metodo c'è già
@@ -1505,6 +1507,13 @@ public class Game implements Observer <NotifyReturn> {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(zx2ChooseEv.getNickname());
         if(playerRemoteView != null) {
             playerRemoteView.sendEvent(zx2ChooseEv);
+        }
+    }
+
+    public void update(UnpaidEffectEv unpaidEffectEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(unpaidEffectEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(unpaidEffectEv);
         }
     }
 }

@@ -7,7 +7,7 @@ import it.polimi.sw2019.model.weapon_power.Power;
 
 import java.util.ArrayList;
 
-public class ElectroscytheCont implements EffectController{
+public class ElectroscytheCont extends EffectController{
 
     private Electroscythe model;
     private Player attacker;

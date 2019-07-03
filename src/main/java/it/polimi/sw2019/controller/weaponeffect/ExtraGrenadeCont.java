@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ExtraGrenadeCont extends Observable<ExtraGrenadeChooseEv> implements Observer<ExtraGrenadeSetEv>, EffectController {
+public class ExtraGrenadeCont extends EffectController implements Observer<ExtraGrenadeSetEv> {
 
     private ExtraGrenade model;
     private Player attacker;

@@ -1,8 +1,9 @@
-package it.polimi.sw2019.events.weaponeffect_controller_events;
+package it.polimi.sw2019.events.weapon_event;
 
 import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.events.NotifyReturn;
+import it.polimi.sw2019.utility.SimplifiedPowerUp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,9 +13,10 @@ public class PowerChooseEv implements NotifyReturn {
     private Boolean itsAlternative;
     private HashMap<String,ArrayList<String>> powers;
     private HashMap<String, Integer> availableAmmo;
-    private HashMap<String, String> availablePowerUps;
+    private ArrayList<SimplifiedPowerUp> availablePowerUps;
 
-    public PowerChooseEv(Boolean itsAlternative, HashMap<String, ArrayList<String>> powers, HashMap<String, Integer> availableAmmo, HashMap<String, String> availablePowerUps) {
+    public PowerChooseEv(String nickname, Boolean itsAlternative, HashMap<String, ArrayList<String>> powers, HashMap<String, Integer> availableAmmo, ArrayList<SimplifiedPowerUp> availablePowerUps) {
+        this.nickname = nickname;
         this.itsAlternative = itsAlternative;
         this.powers = powers;
         this.availableAmmo = availableAmmo;
@@ -43,7 +45,7 @@ public class PowerChooseEv implements NotifyReturn {
         return availableAmmo;
     }
 
-    public HashMap<String, String> getAvailablePowerUps() {
+    public ArrayList<SimplifiedPowerUp> getAvailablePowerUps() {
         return availablePowerUps;
     }
 

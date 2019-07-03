@@ -10,7 +10,7 @@ import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 
-public abstract class VisibleTargetCont extends Observable<WeaponEvent> implements EffectController {
+public abstract class VisibleTargetCont extends EffectController {
     private SingleTarget model;
     protected Player attacker;
     protected ArrayList<Player> players;

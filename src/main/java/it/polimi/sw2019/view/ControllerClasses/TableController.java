@@ -14,11 +14,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TableController {
 
 
     private ClientSocket clientSocket;
+    private static final Logger logger = Logger.getLogger( TableController.class.getName() );
 
     @FXML private Button thisPlayer;
     @FXML private Button firstPlayer;
@@ -180,7 +183,7 @@ public class TableController {
             stage.setScene(new Scene(playerTurn));
             stage.show();
         } catch(Exception e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage(), e.toString());
         }
 
     }

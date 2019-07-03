@@ -11,7 +11,7 @@ import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 
-public abstract class OneMoveAway extends Observable<WeaponEvent> implements EffectController{
+public abstract class OneMoveAway extends EffectController {
 
     private SingleTarget model;
     protected Player attacker;
