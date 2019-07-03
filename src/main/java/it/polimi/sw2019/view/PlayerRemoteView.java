@@ -7,10 +7,14 @@ import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
 import it.polimi.sw2019.events.client_event.Cevent.StartGameEv;
+import it.polimi.sw2019.network.Socket.ServerSocket;
+import javafx.application.Platform;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PlayerRemoteView extends Observable<ActionEv> implements Observer <NotifyReturn> {
 
@@ -20,6 +24,7 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
     private Scanner input;
     private Gson gson;
     private ObjectOutputStream objectOutputStream;
+    private static final Logger logger = Logger.getLogger( PlayerRemoteView.class.getName() );
 
     public PlayerRemoteView (Socket socket1) {
         socket = socket1;
@@ -29,7 +34,7 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
         } catch (IOException ex) {
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, ex.toString(), ex.getMessage());
         }
 
     }

@@ -3,7 +3,6 @@ package it.polimi.sw2019.nethandler;
 import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
-import it.polimi.sw2019.nethandler.ContSelectInt;
 import it.polimi.sw2019.view.PlayerView;
 
 import java.io.*;
@@ -12,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ContSelect implements ContSelectInt {
 
@@ -21,6 +22,7 @@ public class ContSelect implements ContSelectInt {
     private ObjectInputStream objectInputStream;
     private boolean boo;
     private String string;
+    private static final Logger logger = Logger.getLogger( ContSelect.class.getName() );
 
     /**
      * this is the constructor
@@ -34,7 +36,7 @@ public class ContSelect implements ContSelectInt {
             objectInputStream = new ObjectInputStream(socket.getInputStream());
 
         } catch ( IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.toString(), e.getMessage());
         }
     }
 

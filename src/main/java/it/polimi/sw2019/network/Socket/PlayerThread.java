@@ -104,7 +104,7 @@ public class PlayerThread implements Runnable {
 
                     } catch (IOException e) {
 
-                        e.printStackTrace();
+                        logger.log(Level.SEVERE, e.toString(), e.getMessage());
                     }
 
                 } else {
@@ -128,7 +128,7 @@ public class PlayerThread implements Runnable {
 
                         } catch (IOException e) {
 
-                            e.printStackTrace();
+                            logger.log(Level.SEVERE, e.toString(), e.getMessage());
                             System.exit(1);
                         }
                     }
@@ -153,7 +153,7 @@ public class PlayerThread implements Runnable {
 
             }catch(IOException e) {
 
-                e.printStackTrace();
+                logger.log(Level.SEVERE, e.toString(), e.getMessage());
                 System.exit(1);
             }
         }

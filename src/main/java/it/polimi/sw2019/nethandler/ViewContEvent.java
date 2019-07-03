@@ -8,6 +8,8 @@ import it.polimi.sw2019.nethandler.ViewContEventInt;
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class ViewContEvent implements ViewContEventInt {
@@ -15,6 +17,7 @@ public class ViewContEvent implements ViewContEventInt {
     private Socket socket;
     private PrintWriter output;
     private Scanner in;
+    private static final Logger logger = Logger.getLogger( ViewContEvent.class.getName() );
 
     public ViewContEvent (Socket socket) {
 
@@ -24,7 +27,7 @@ public class ViewContEvent implements ViewContEventInt {
             in = new Scanner(socket.getInputStream());
 
         }catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.toString(), e.getMessage());
         }
     }
 
