@@ -551,7 +551,7 @@ public class PlayerThread implements Runnable {
                 logger.log(Level.INFO, "{ PlayerThread " + this.nickname + "} is removed: " + ex.toString());
                 //gameController.removePlayerThread(this);
             }
-            
+
         }
 
     }

@@ -62,11 +62,11 @@ public class PlayerView extends Observable<ActionEv> implements Observer <Notify
     public void sendYouAreFirstPlayer(){clientSocket.getYouAreFirstPlayer();}
 
     public void waitForPing() {
-        if(firstTime) {
+       /* if(firstTime) {
 
             clientSocket.notifyGUI("Ping");
             firstTime = false;
-        }
+        }*/
         //clientSocket.notifyGUI("Ping");
         this.clientSocket.getViewContEvent().sendPong();
         this.clientSocket.getContSelect().waitForPing(this);

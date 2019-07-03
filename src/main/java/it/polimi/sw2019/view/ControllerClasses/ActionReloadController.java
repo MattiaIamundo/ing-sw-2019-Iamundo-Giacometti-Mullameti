@@ -15,7 +15,7 @@ public class ActionReloadController {
 
     @FXML
     public void actionButtonPushed(ActionEvent event) throws IOException {
-        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/action.fxml"));
+        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/action.fxml"));
         Scene tableScene = new Scene(table);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -27,7 +27,7 @@ public class ActionReloadController {
 
     @FXML
     public void reloadButtonPushed(ActionEvent event) throws IOException {
-        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/powerup.fxml"));
+        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/powerup.fxml"));
         Scene tableScene = new Scene(table);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
