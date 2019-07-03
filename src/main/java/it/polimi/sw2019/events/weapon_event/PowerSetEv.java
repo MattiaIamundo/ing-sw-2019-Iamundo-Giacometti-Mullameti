@@ -1,13 +1,15 @@
 package it.polimi.sw2019.events.weapon_event;
 
+import it.polimi.sw2019.utility.SimplifiedPowerUp;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PowerSetEv {
     private ArrayList<String> powers;
-    private HashMap<String, String> usedPowerUps;
+    private ArrayList<SimplifiedPowerUp> usedPowerUps;
 
-    public PowerSetEv(ArrayList<String> powers, HashMap<String, String> usedPowerUps) {
+    public PowerSetEv(ArrayList<String> powers, ArrayList<SimplifiedPowerUp> usedPowerUps) {
         this.powers = powers;
         this.usedPowerUps = usedPowerUps;
     }
@@ -16,7 +18,7 @@ public class PowerSetEv {
         return powers;
     }
 
-    public HashMap<String, String> getUsedPowerUps() {
+    public ArrayList<SimplifiedPowerUp> getUsedPowerUps() {
         return usedPowerUps;
     }
 }

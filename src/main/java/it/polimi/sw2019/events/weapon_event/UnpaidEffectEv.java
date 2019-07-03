@@ -3,6 +3,7 @@ package it.polimi.sw2019.events.weapon_event;
 import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.events.NotifyReturn;
+import it.polimi.sw2019.utility.SimplifiedPowerUp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,12 +11,12 @@ import java.util.HashMap;
 public class UnpaidEffectEv implements NotifyReturn {
     private String nickname;
     private ArrayList<String> selectedEffects;
-    private HashMap<String, String> usedPowerUps;
+    private ArrayList<SimplifiedPowerUp> usedPowerUps;
     private HashMap<String, Integer> remainingCost;
-    private HashMap<String, String> availablePowerUps;
+    private ArrayList<SimplifiedPowerUp> availablePowerUps;
     private HashMap<String, Integer> availableAmmo;
 
-    public UnpaidEffectEv(String nickname, ArrayList<String> selectedEffects, HashMap<String, String> usedPowerUps, HashMap<String, Integer> remainingCost, HashMap<String, String> availablePowerUps, HashMap<String, Integer> availableAmmo) {
+    public UnpaidEffectEv(String nickname, ArrayList<String> selectedEffects, ArrayList<SimplifiedPowerUp> usedPowerUps, HashMap<String, Integer> remainingCost, ArrayList<SimplifiedPowerUp> availablePowerUps, HashMap<String, Integer> availableAmmo) {
         this.nickname = nickname;
         this.selectedEffects = selectedEffects;
         this.usedPowerUps = usedPowerUps;
@@ -38,7 +39,7 @@ public class UnpaidEffectEv implements NotifyReturn {
         return selectedEffects;
     }
 
-    public HashMap<String, String> getUsedPowerUps() {
+    public ArrayList<SimplifiedPowerUp> getUsedPowerUps() {
         return usedPowerUps;
     }
 
@@ -46,7 +47,7 @@ public class UnpaidEffectEv implements NotifyReturn {
         return remainingCost;
     }
 
-    public HashMap<String, String> getAvailablePowerUps() {
+    public ArrayList<SimplifiedPowerUp> getAvailablePowerUps() {
         return availablePowerUps;
     }
 
