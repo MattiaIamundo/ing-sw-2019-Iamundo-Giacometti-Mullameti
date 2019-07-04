@@ -1,11 +1,13 @@
 package it.polimi.sw2019.controller.powerup;
 
+import it.polimi.sw2019.events.powerup_events.TeleporterChooseEv;
 import it.polimi.sw2019.events.powerup_events.TeleporterSetEv;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.powerup.Teleporter;
+import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TeleporterCont implements Observer<TeleporterSetEv>, PowerUpController{
+public class TeleporterCont extends Observable<TeleporterChooseEv> implements Observer<TeleporterSetEv>, PowerUpController{
     private Teleporter model;
     private ArrayList<Player> players;
     private Map map;
@@ -41,7 +43,7 @@ public class TeleporterCont implements Observer<TeleporterSetEv>, PowerUpControl
                     targets.add(player.getNickname());
                 }
             }
-            model.chooseTarget(attacker.getNickname(), targets, new ArrayList<>(positions.keySet()));
+            notify(new TeleporterChooseEv(attacker.getNickname(), targets, new ArrayList<>(positions.keySet())));
         }catch (InvalidSpaceException e){
             logger.log(Level.SEVERE, "out of map boundaries");
         }
