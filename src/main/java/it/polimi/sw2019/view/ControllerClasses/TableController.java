@@ -1,4 +1,5 @@
 package it.polimi.sw2019.view.ControllerClasses;
+import it.polimi.sw2019.events.client_event.Cevent.StartGameEv;
 import it.polimi.sw2019.model.Ammo;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Weapon;
@@ -341,6 +342,11 @@ public class TableController {
 
             }
         }
+    }
+
+    public void handleEvent(StartGameEv startGameEv) {
+        this.Players = startGameEv.getPlayers();
+
     }
 
     public void setClientSocket(ClientSocket clientSocket) {

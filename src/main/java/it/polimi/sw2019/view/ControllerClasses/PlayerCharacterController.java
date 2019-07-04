@@ -44,6 +44,11 @@ public class PlayerCharacterController {
         this.grayButton.setDisable(true);
         this.greenButton.setDisable(true);
         this.purpleButton.setDisable(true);
+        this.yellowButton.setStyle("-fx-background-image: url(/it/polimi/sw2019/Images/yellow.png); ");
+        this.blueButton.setStyle("-fx-background-image: url(/it/polimi/sw2019/Images/blue.png);");
+        this.grayButton.setStyle("-fx-background-image: url(/it/polimi/sw2019/Images/gray.png);");
+        this.greenButton.setStyle("-fx-background-image: url(/it/polimi/sw2019/Images/green.png);");
+        this.purpleButton.setStyle("-fx-background-image: url(/it/polimi/sw2019/Images/purple.png);");
 
 
     }

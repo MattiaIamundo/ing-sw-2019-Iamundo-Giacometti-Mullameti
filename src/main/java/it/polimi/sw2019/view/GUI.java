@@ -26,7 +26,7 @@ public class GUI extends Application implements UIinterface {
 
     public void setServerIP(String ip){
         this.ip = ip;
-        System.out.println(ip);
+
 
     }
 
