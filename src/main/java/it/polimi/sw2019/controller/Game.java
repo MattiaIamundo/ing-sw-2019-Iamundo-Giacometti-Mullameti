@@ -569,18 +569,20 @@ public class Game implements Observer <NotifyReturn> {
 
     public synchronized void initializeKillShotTrack(String numberOfSkulls) {
 
-        int nOfSkull = 5;
-        if (numberOfSkulls.equals("five")) {
-            nOfSkull = 5;
-        }
-        else if (numberOfSkulls.equals("six")) {
-            nOfSkull = 6;
-        }
-        else if (numberOfSkulls.equals("seven")) {
-            nOfSkull = 7;
-        }
-        else {
-            nOfSkull = 8;
+        int nOfSkull;
+        switch (numberOfSkulls) {
+            case "five":
+                nOfSkull = 5;
+                break;
+            case "six":
+                nOfSkull = 6;
+                break;
+            case "seven":
+                nOfSkull = 7;
+                break;
+            default:
+                nOfSkull = 8;
+                break;
         }
 
         for (  int i = 0; i < nOfSkull; i++ ) {
@@ -770,6 +772,7 @@ public class Game implements Observer <NotifyReturn> {
         Space space9 = new SpaceGeneration(null, null, null, null, blue);
         Space space10 = new SpaceGeneration(null, null, null, null, yellow);
         Space space11 = new SpaceAmmo(null, null, null, null, yellow);
+        //space12 is null
 
         Connection c11 = new Connection( space1, space2, false);                space1.setNorth(c11);
         Connection c12 = new Connection( space1, space4, false);                space1.setEast(c12);
@@ -1060,17 +1063,24 @@ public class Game implements Observer <NotifyReturn> {
      * @param nrMap the map's number
      */
     public void setAmmo(String nrMap) {
-        if(nrMap.equals("zero")) {
-            initializeAmmo0();
-        }
-        else if(nrMap.equals("one")) {
-            initializeAmmo1();
-        }
-        else if (nrMap.equals("two")) {
-            initializeAmmo2();
-        }
-        else {
-            initializeAmmo3();
+
+        switch (nrMap) {
+            case "zero":
+                initializeAmmo0();
+                logger.log(Level.INFO, "{Game} initializeAmmo0");
+                break;
+            case "one":
+                initializeAmmo1();
+                logger.log(Level.INFO, "{Game} initializeAmmo1");
+                break;
+            case "two":
+                initializeAmmo2();
+                logger.log(Level.INFO, "{Game} initializeAmmo2");
+                break;
+            default:
+                initializeAmmo3();
+                logger.log(Level.INFO, "{Game} initializeAmmo3");
+                break;
         }
     }
 
@@ -1129,13 +1139,19 @@ public class Game implements Observer <NotifyReturn> {
     private void initializeAmmo3() {
         try{
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            //logger.log(Level.INFO, "{GAME} not good for space ammo 0,2");
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            //logger.log(Level.INFO, "{GAME} not good for space ammo 1,0");
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            //logger.log(Level.INFO, "{GAME} not good for space ammo 1,1");
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            //logger.log(Level.INFO, "{GAME} not good for space ammo 1,2");
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            //logger.log(Level.INFO, "{GAME} not good for space ammo 2,0");
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
-            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            //logger.log(Level.INFO, "{GAME} not good for space ammo 2,1");
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            //logger.log(Level.INFO, "{GAME} not good for space ammo 3,1");
 
         } catch (InvalidSpaceException ex) {
             //

@@ -14,7 +14,7 @@ public class EventForGui extends Observable<NotifyReturn> implements Runnable {
 
     public void run() {
         boolean goOutWhile = false;
-        this.addObserver(this.clientSocket.getTableController());
+        //this.addObserver(this.clientSocket.getTableController());
 
         StartGameEv startGameEv = (StartGameEv) this.clientSocket.getContSelect().waitForNotifyReturnEvent();
         this.clientSocket.getTableController().handleEvent(startGameEv);
