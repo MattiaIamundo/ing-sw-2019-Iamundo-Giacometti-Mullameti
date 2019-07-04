@@ -14,8 +14,7 @@ import it.polimi.sw2019.utility.SimplifiedPowerUp;
 import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,14 +58,16 @@ public class WeaponEffectManager extends Observable<NotifyReturn> implements Obs
         Type FILE_TYPE = new TypeToken<ArrayList<EffectFile>>(){}.getType();
 
         try {
-            FileReader fileReader = new FileReader("File_Json/weaponEffectController.json");
-            effectFiles = gson.fromJson(fileReader, FILE_TYPE);
+            InputStream in = getClass().getClassLoader().getResourceAsStream("it/polimi/sw2019/file_Json/weaponEffectController.json");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            effectFiles = gson.fromJson(reader, FILE_TYPE);
 
             for (EffectFile effct : effectFiles){
                 Power effect = (Power) Class.forName(effct.power).getConstructor().newInstance();
                 EffectController controller = (EffectController) Class.forName(effct.controller).getConstructor(Power.class).newInstance(effect);
                 effectControllers.put(effect.toString(), controller);
             }
+            reader.close();
         }catch (FileNotFoundException e){
             logger.log(Level.SEVERE, "File not found");
         }catch (ClassNotFoundException e){

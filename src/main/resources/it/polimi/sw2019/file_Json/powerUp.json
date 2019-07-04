@@ -1,0 +1,74 @@
+[
+  {
+    "color" : "yellow", "power": "Teleporter", "effect" : "Teleporter"
+  },
+  {
+    "color" : "yellow", "power": "Teleporter", "effect" : "Teleporter"
+  },
+  {
+    "color" : "red", "power": "Teleporter", "effect" : "Teleporter"
+  },
+  {
+    "color" : "red", "power": "Teleporter", "effect" : "Teleporter"
+  },
+  {
+    "color" : "blue", "power": "Teleporter", "effect" : "Teleporter"
+  },
+  {
+    "color" : "blue", "power": "Teleporter", "effect" : "Teleporter"
+  },
+  {
+    "color" : "yellow", "power": "TagbackGrenade", "effect" : "TagbackGrenade"
+  },
+  {
+    "color" : "yellow", "power": "TagbackGrenade", "effect" : "TagbackGrenade"
+  },
+  {
+    "color" : "red", "power": "TagbackGrenade", "effect" : "TagbackGrenade"
+  },
+  {
+    "color" : "red", "power": "TagbackGrenade", "effect" : "TagbackGrenade"
+  },
+  {
+    "color" : "blue", "power": "TagbackGrenade", "effect" : "TagbackGrenade"
+  },
+  {
+    "color" : "blue", "power": "TagbackGrenade", "effect" : "TagbackGrenade"
+  },
+  {
+    "color" : "yellow", "power": "Newton", "effect" : "Newton"
+  },
+  {
+    "color" : "yellow", "power": "Newton", "effect" : "Newton"
+  },
+  {
+    "color" : "red", "power": "Newton", "effect" : "Newton"
+  },
+  {
+    "color" : "red", "power": "Newton", "effect" : "Newton"
+  },
+  {
+    "color" : "blue", "power": "Newton", "effect" : "Newton"
+  },
+  {
+    "color" : "blue", "power": "Newton", "effect" : "Newton"
+  },
+  {
+    "color" : "yellow", "power": "TargetingScope", "effect" : "TargetingScope"
+  },
+  {
+    "color" : "yellow", "power": "TargetingScope", "effect" : "TargetingScope"
+  },
+  {
+    "color" : "red", "power": "TargetingScope", "effect" : "TargetingScope"
+  },
+  {
+    "color" : "red", "power": "TargetingScope", "effect" : "TargetingScope"
+  },
+  {
+    "color" : "blue", "power": "TargetingScope", "effect" : "TargetingScope"
+  },
+  {
+    "color" : "blue", "power": "TargetingScope", "effect" : "TargetingScope"
+  }
+]

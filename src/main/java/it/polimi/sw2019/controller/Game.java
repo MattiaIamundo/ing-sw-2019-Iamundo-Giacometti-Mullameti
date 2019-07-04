@@ -31,9 +31,7 @@ import it.polimi.sw2019.network.Socket.PlayerThread;
 import it.polimi.sw2019.view.*;
 import it.polimi.sw2019.view.Observer;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
 import java.util.List;
@@ -110,7 +108,8 @@ public class Game implements Observer <NotifyReturn> {
         finalFrenzyController = new FinalFrenzy();
         //da rimuovere e chiamare da metodo, il metodo c'è già
         try{
-            FileReader reader = new FileReader("File_Json/milliSecondsToTimerBeginning.json");
+            InputStream in = getClass().getClassLoader().getResourceAsStream("it/polimi/sw2019/file_Json/milliSecondsToTimerBeginning.json");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             timerThread.setTime(gson.fromJson( reader , int.class));
             reader.close();
         } catch (IOException ee) {
@@ -125,7 +124,8 @@ public class Game implements Observer <NotifyReturn> {
     public synchronized  void setTimerThreadToTheLogin() {
 
         try{
-            FileReader reader = new FileReader("File_Json/milliSecondsToTimerBeginning.json");
+            InputStream in = getClass().getClassLoader().getResourceAsStream("it/polimi/sw2019/file_Json/milliSecondsToTimerBeginning.json");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             timerThread.setTime(gson.fromJson( reader , int.class));
             reader.close();
         } catch (IOException ee) {
@@ -136,7 +136,8 @@ public class Game implements Observer <NotifyReturn> {
     public synchronized void setTimerThreadToTheGame() {
 
         try{
-            FileReader reader = new FileReader("File_Json/milliSecondsToTimerTurnOfGame.json");
+            InputStream in = getClass().getClassLoader().getResourceAsStream("it/polimi/sw2019/file_Json/milliSecondsToTimerTurnOfGame.json");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             timerThread.setTurnTime(gson.fromJson( reader , int.class));
             reader.close();
 
@@ -333,7 +334,9 @@ public class Game implements Observer <NotifyReturn> {
 
         if ( gameboard.getPowerUp().isEmpty() ) {
 
-            try ( FileReader reader = new FileReader("File_Json/powerUp.json") ) {
+            try{
+                InputStream in = getClass().getClassLoader().getResourceAsStream("it/polimi/sw2019/file_Json/powerUp.json");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
                 List <PowerUpJson> pow = new ArrayList<>(24);
                 Type REVIEW_TYPE = new TypeToken<List<PowerUpJson>>() {}.getType();
@@ -357,7 +360,7 @@ public class Game implements Observer <NotifyReturn> {
                     PowerUp p = new PowerUp(pow.get(i).getColor(),pow.get(i).getName(), eff);
                     this.gameboard.getPowerUp().add(p);
                 }
-
+                reader.close();
             } catch (IOException ee) {
                 logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
             }
@@ -386,7 +389,9 @@ public class Game implements Observer <NotifyReturn> {
 
     private void createAdditiveWeapons() {
 
-        try ( FileReader reader = new FileReader("File_Json/weaponAdditive.json") ) {
+        try{
+            InputStream in = getClass().getClassLoader().getResourceAsStream("it/polimi/sw2019/file_Json/weaponAdditive.json");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
             List <AdditiveJson> additiveJsons = new ArrayList<> (5);
             Type REVIEW_TYPE = new TypeToken<List<AdditiveJson>>() {}.getType();
@@ -427,7 +432,7 @@ public class Game implements Observer <NotifyReturn> {
 
                 this.gameboard.getWeapon().add(additive);
             }
-
+            reader.close();
         } catch (IOException ee) {
             logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
         }
@@ -435,7 +440,9 @@ public class Game implements Observer <NotifyReturn> {
 
     private void createDoubleAdditiveWeapons() {
 
-        try ( FileReader reader = new FileReader("File_Json/weaponDoubleAdditive.json") ) {
+        try{
+            InputStream in = getClass().getClassLoader().getResourceAsStream("it/polimi/sw2019/file_Json/weaponDoubleAdditive.json");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
             List <DoubleAdditiveJson> doubleAdditiveJsons = new ArrayList<> (5);
             Type REVIEW_TYPE = new TypeToken<List<DoubleAdditiveJson>>() {}.getType();
@@ -483,7 +490,7 @@ public class Game implements Observer <NotifyReturn> {
 
                 this.gameboard.getWeapon().add(doubleAdditive);
             }
-
+            reader.close();
         } catch (IOException ee) {
             logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
         }
@@ -491,7 +498,10 @@ public class Game implements Observer <NotifyReturn> {
 
     private void createAlternativeWeapons() {
 
-        try ( FileReader reader = new FileReader("File_Json/weaponAlternative.json") ) {
+        try{
+            InputStream in = getClass().getClassLoader().getResourceAsStream("it/polimi/sw2019/file_Json/weaponAlternative.json");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
             List <AlternativeJson> alternativeJsons = new ArrayList<> (11);
             Type REVIEW_TYPE = new TypeToken<List<AlternativeJson>>() {}.getType();
             alternativeJsons = gson.fromJson(reader, REVIEW_TYPE);
@@ -561,7 +571,7 @@ public class Game implements Observer <NotifyReturn> {
 
                 this.gameboard.getWeapon().add(alternative);
             }
-
+            reader.close();
         } catch (IOException ee) {
             logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
         }
@@ -609,13 +619,16 @@ public class Game implements Observer <NotifyReturn> {
 
     private void createAmmoDoublePowerUp() {
 
-        try ( FileReader reader = new FileReader("File_Json/ammoDoublePowerUp.json") ) {
+        try{
+            InputStream in = getClass().getClassLoader().getResourceAsStream("it/polimi/sw2019/file_Json/ammoDoublePowerUp.json");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
             List <AmmoDoublePowerUp> ammoDoublePowerUps = new ArrayList<> (18);
             Type REVIEW_TYPE = new TypeToken<List<AmmoDoublePowerUp>>() {}.getType();
             ammoDoublePowerUps = gson.fromJson(reader, REVIEW_TYPE);
 
             this.getGameboard().getAmmo().addAll(ammoDoublePowerUps);
+            reader.close();
         } catch( IOException ee ) {
             logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
         }
@@ -623,13 +636,16 @@ public class Game implements Observer <NotifyReturn> {
 
     private void createAmmoTriple() {
 
-        try ( FileReader reader = new FileReader("File_Json/ammoTriple.json") ) {
+        try{
+            InputStream in = getClass().getClassLoader().getResourceAsStream("it/polimi/sw2019/file_Json/ammoTriple.json");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
             List <AmmoTriple> ammoTriples = new ArrayList<> (18);
             Type REVIEW_TYPE = new TypeToken<List<AmmoTriple>>() {}.getType();
             ammoTriples = gson.fromJson(reader, REVIEW_TYPE);
 
             this.getGameboard().getAmmo().addAll(ammoTriples);
+            reader.close();
         } catch( IOException ee ) {
             logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
         }

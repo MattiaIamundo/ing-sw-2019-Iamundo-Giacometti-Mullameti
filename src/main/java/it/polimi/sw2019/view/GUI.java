@@ -238,9 +238,11 @@ public class GUI extends Application implements UIinterface {
             try {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/Table.fxml"));
+                loader.setControllerFactory( e -> tableController );
                 Parent table = loader.load();
 
                 this.tableController = loader.getController();
+
 
                 Stage mainStage = stage;
                 mainStage.getScene().setRoot(table);

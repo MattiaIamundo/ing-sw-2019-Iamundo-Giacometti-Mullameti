@@ -1,0 +1,183 @@
+[
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.BarbecueMode",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.BarbecueModeCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.BlackHole",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.BlackHoleCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.ChainReaction",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.ChainReactionCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.ChargedShot",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.ChargedShotCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.CozyFireMode",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.CozyFireModeCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.Cyberblade",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.CyberbladeCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.Electroscythe",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.ElectroscytheCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.ExtraGrenade",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.ExtraGrenadeCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.Flamethrower",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.FlamethrowerCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.FocusShot",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.FocusShotCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.FragmentingWarhead",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.FragmentingWarheadCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.Furnace",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.FurnaceCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.GrenadeLauncher",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.GrenadeLaunchCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.Heatseeker",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.HeatseekerCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.Hellion",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.HellionCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.HighVoltage",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.HighVoltageCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.LockRifle",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.LockRifleCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.LongBarrelMode",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.LongBarrelCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.MachineGun",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.MachineGunCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.NanoTracerMode",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.NanoTracerCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.PhaseGlide",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.PhaseGlideCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.PiercingMode",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.PiercingModeCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.PlasmaGun",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.PlasmaGunCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.PowerGlove",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.PowerGloveCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.PulverizeMode",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.PulverizeModeCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.PunisherMode",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.PunisherModeCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.RailGun",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.RailGunCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.ReaperMode",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.ReaperModeCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.RocketFistMode",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.RocketFistCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.RocketJump",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.RocketJumpCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.RocketLauncher",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.RocketLauncherCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.ScannerMode",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.ScannerModeCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.SecondLock",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.SecondLockCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.Shadowstep",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.ShadowstepCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.Shockwave",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.ShockwaveCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.Shotgun",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.ShotgunCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.Sledgehammer",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.SledgehammerCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.SliceAndDice",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.SliceAndDiceCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.Thor",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.ThorCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.TractorBeam",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.TractorBeamCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.TsunamiMode",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.TsunamiModeCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.TurretTripod",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.TurretTripodCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.Vortex",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.VortexCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.Whisper",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.WhisperCont"
+  },
+  {
+    "power": "it.polimi.sw2019.model.weapon_power.ZX2",
+    "controller":   "it.polimi.sw2019.controller.weaponeffect.ZX2Cont"
+
+  }
+]
