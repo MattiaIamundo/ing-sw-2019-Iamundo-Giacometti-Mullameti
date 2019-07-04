@@ -1,4 +1,5 @@
 package it.polimi.sw2019.view.ControllerClasses;
+
 import it.polimi.sw2019.events.NotifyClient;
 import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.client_event.Cevent.DirectionChooseEv;
@@ -34,6 +35,7 @@ public class TableController implements Observer<NotifyClient> {
 
 
     private ClientSocket clientSocket;
+    private String typeMap;
     private List<Player> Players = new ArrayList<Player>(5);
     private List<Weapon> Weapon = new ArrayList<Weapon>(9);
     private List<Ammo> Ammo = new ArrayList<Ammo>(9);
@@ -47,6 +49,7 @@ public class TableController implements Observer<NotifyClient> {
     @FXML private ImageView purpleStatue;
     @FXML private AnchorPane Rooms;
     @FXML private AnchorPane table ;
+    @FXML private ImageView map;
 
     //************************************PLAYERBOARDS*******************************************
 
@@ -56,11 +59,17 @@ public class TableController implements Observer<NotifyClient> {
     @FXML private Button fourthPlayer;
     @FXML private Button fifthPlayer;
 
-    @FXML private AnchorPane thisPlayerBoard;
     @FXML private AnchorPane firstPlayerBoard;
     @FXML private AnchorPane secondPlayerBoard;
     @FXML private AnchorPane thirdPlayerBoard;
     @FXML private AnchorPane fourthPlayerBoard;
+    @FXML private AnchorPane fifthPlayerBoard;
+
+    @FXML private ImageView firstBoard;
+    @FXML private ImageView secondBoard;
+    @FXML private ImageView thirdBoard;
+    @FXML private ImageView fourthBoard;
+    @FXML private ImageView fifthBoard;
 
     //****************************************WEAPON********************************************
 
@@ -98,12 +107,12 @@ public class TableController implements Observer<NotifyClient> {
     //************************************PLAYERBOARDS*******************************************
 
     @FXML
-    public void thisPlayerButtonPushed() {
-        if (thisPlayerBoard.isVisible()) {
-            this.thisPlayerBoard.setVisible(false);
+    public void fifthPlayerButtonPushed() {
+        if (fifthPlayerBoard.isVisible()) {
+            this.fifthPlayerBoard.setVisible(false);
 
         } else {
-            this.thisPlayerBoard.setVisible(true);
+            this.fifthPlayerBoard.setVisible(true);
         }
 
 
@@ -157,23 +166,23 @@ public class TableController implements Observer<NotifyClient> {
         String stringImage;
 
         stringImage = Weapon.get(0).getName();
-        weaponNorth1.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        weaponNorth1.setImage( new Image("it/polimi/sw2019/Images/Cards/"+ stringImage + ".png"));
         stringImage = Weapon.get(1).getName();
-        weaponNorth2.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        weaponNorth2.setImage( new Image("it/polimi/sw2019/Images/Cards/"+ stringImage + ".png"));
         stringImage = Weapon.get(2).getName();
-        weaponNorth3.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        weaponNorth3.setImage( new Image("it/polimi/sw2019/Images/Cards/"+ stringImage + ".png"));
         stringImage = Weapon.get(3).getName();
-        weaponWest1.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        weaponWest1.setImage( new Image("it/polimi/sw2019/Images/Cards/"+ stringImage + ".png"));
         stringImage = Weapon.get(4).getName();
-        weaponWest2.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        weaponWest2.setImage( new Image("it/polimi/sw2019/Images/Cards/"+ stringImage + ".png"));
         stringImage = Weapon.get(5).getName();
-        weaponWest3.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        weaponWest3.setImage( new Image("it/polimi/sw2019/Images/Cards/"+ stringImage + ".png"));
         stringImage = Weapon.get(6).getName();
-        weaponEast1.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        weaponEast1.setImage( new Image("it/polimi/sw2019/Images/Cards/"+ stringImage + ".png"));
         stringImage = Weapon.get(7).getName();
-        weaponEast2.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        weaponEast2.setImage( new Image("it/polimi/sw2019/Images/Cards/"+ stringImage + ".png"));
         stringImage = Weapon.get(8).getName();
-        weaponEast3.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        weaponEast3.setImage( new Image("it/polimi/sw2019/Images/Cards/"+ stringImage + ".png"));
 
 
     }
@@ -233,15 +242,39 @@ public class TableController implements Observer<NotifyClient> {
 
 
 
-    public void setPlayerButtons(List<Player>players ){
+    public void setPlayerButtons(List<Player>Players ){
 
-        for(Player player : players) {
-            for (Button playerButton : PlayerButtons) {
-                playerButton.setText(player.getNickname());
-                playerButton.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", player.getCharacter()));
-            }
+
+
+        firstPlayer.setText(Players.get(0).getNickname());
+        firstPlayer.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", Players.get(0).getCharacter()));
+        firstBoard.setImage( new Image("it/polimi/sw2019/Images/"+ Players.get(0).getCharacter() + "Board.png"));
+
+        secondPlayer.setText(Players.get(1).getNickname());
+        secondPlayer.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", Players.get(1).getCharacter()));
+        secondBoard.setImage( new Image("it/polimi/sw2019/Images/"+ Players.get(1).getCharacter() + "Board.png"));
+
+        thirdPlayer.setText(Players.get(2).getNickname());
+        thirdPlayer.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", Players.get(2).getCharacter()));
+        thirdBoard.setImage( new Image("it/polimi/sw2019/Images/"+ Players.get(2).getCharacter() + "Board.png"));
+
+        if((Players.size())>3) {
+            fourthPlayer.setText(Players.get(3).getNickname());
+            fourthPlayer.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", Players.get(3).getCharacter()));
+            fourthBoard.setImage(new Image("it/polimi/sw2019/Images/" + Players.get(3).getCharacter() + "Board.png"));
+        }else{
+            fourthPlayer.setVisible(false);
         }
 
+        if((Players.size())>4){
+            fifthPlayer.setText(Players.get(4).getNickname());
+            fifthPlayer.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", Players.get(4).getCharacter()));
+            fifthBoard.setImage( new Image("it/polimi/sw2019/Images/"+ Players.get(4).getCharacter() + "Board.png"));
+        }else{
+            fifthPlayer.setVisible(false);
+        }
+
+        map.setImage( new Image("it/polimi/sw2019/Images/"+ typeMap + ".png"));
     }
 
     private void setAmmo(List<Ammo> Ammo){
@@ -253,6 +286,7 @@ public class TableController implements Observer<NotifyClient> {
     }
 
     public void handleEvent(StartGameEv startGameEv) {
+        this.typeMap = startGameEv.getGameboard().getNrMap();
         System.out.println(startGameEv.getPlayers().get(0).getNickname());
         System.out.println(startGameEv.getPlayers().get(1).getNickname());
         System.out.println(startGameEv.getPlayers().get(2).getNickname());
@@ -332,6 +366,8 @@ public class TableController implements Observer<NotifyClient> {
         }
         //addWeaponsToList();
         Platform.runLater( () -> setWeapons(this.Weapon));
+        Platform.runLater( () -> setPlayerButtons(this.Players));
+
         //setPlayerButtons(this.Players);
     }
 
