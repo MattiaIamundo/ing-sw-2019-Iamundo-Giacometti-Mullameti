@@ -1,8 +1,14 @@
 package it.polimi.sw2019.view.ControllerClasses;
+import it.polimi.sw2019.events.NotifyClient;
+import it.polimi.sw2019.events.NotifyReturn;
+import it.polimi.sw2019.events.client_event.Cevent.DirectionChooseEv;
 import it.polimi.sw2019.events.client_event.Cevent.StartGameEv;
+import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.*;
 import it.polimi.sw2019.network.Socket.ClientSocket;
+import it.polimi.sw2019.view.Observer;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +29,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableController {
+public class TableController implements Observer<NotifyClient> {
 
 
 
@@ -32,7 +38,7 @@ public class TableController {
     private List<Weapon> Weapon = new ArrayList<Weapon>(9);
     private List<Ammo> Ammo = new ArrayList<Ammo>(9);
     private List<Button> PlayerButtons = new ArrayList<Button>(5);
-    private List<ImageView> WeaponImages = new ArrayList<ImageView>(9);
+    private List<ImageView> WeaponImages = new ArrayList<>(9);
     private List<ImageView> AmmoImages = new ArrayList<ImageView>(9);
     @FXML private ImageView yellowStatue;
     @FXML private ImageView blueStatue;
@@ -46,7 +52,6 @@ public class TableController {
     @FXML private Button XButtonEast;
     private double XImage;
     private double YImage;
-
     //************************************PLAYERBOARDS*******************************************
 
     @FXML private Button firstPlayer;
@@ -102,6 +107,7 @@ public class TableController {
     @FXML
     public void initialize() {
 
+/*
         this.XImage=this.yellowStatue.getX();
 
         this.YImage=this.yellowStatue.getY();
@@ -111,6 +117,10 @@ public class TableController {
         addWeaponsToList();
         setPlayerButtons(Players);
         setWeapons(Weapon);
+
+
+ */
+
 
 
     }
@@ -194,6 +204,41 @@ public class TableController {
     }
 
     private void setWeapons(List<Weapon> Weapon){
+        String stringImage;
+        String string;
+        /*
+        for (int i = 0 ; i < 9 ; i++){
+            stringImage = Weapon.get(i).getName();
+            string = new StringBuilder().append("-fx-background-image: url(/it/polimi/sw2019/Images/").append(stringImage).append(".png);").toString();
+            //this.WeaponImages.get(i).setImage();
+            this.WeaponImages.get(i).setImage( new Image(string));
+        }
+
+         */
+        stringImage = Weapon.get(0).getName();
+        weaponNorth1.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        stringImage = Weapon.get(1).getName();
+        weaponNorth2.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        stringImage = Weapon.get(2).getName();
+        weaponNorth3.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        stringImage = Weapon.get(3).getName();
+        weaponWest1.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        stringImage = Weapon.get(4).getName();
+        weaponWest2.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        stringImage = Weapon.get(5).getName();
+        weaponWest3.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        stringImage = Weapon.get(6).getName();
+        weaponEast1.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        stringImage = Weapon.get(7).getName();
+        weaponEast2.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+        stringImage = Weapon.get(8).getName();
+        weaponEast3.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
+
+
+
+
+
+        /*
         for (Weapon weapon : Weapon){
 
             for (ImageView weaponImages : WeaponImages) {
@@ -202,6 +247,8 @@ public class TableController {
 
             }
         }
+
+         */
     }
     @FXML
     public void seeWeaponsNorth(){
@@ -427,8 +474,16 @@ public class TableController {
             }
 
         }
+        //addWeaponsToList();
+        Platform.runLater( () -> setWeapons(this.Weapon));
+        //setPlayerButtons(this.Players);
+    }
 
-        setWeapons(this.Weapon);
-        setPlayerButtons(this.Players);
+    public void update(NotifyClient notifyClient) {
+
+    }
+
+    public void handleEvent(DirectionChooseEv directionChooseEv) {
+        //set the possibility to give player the possibility to
     }
 }

@@ -1,11 +1,12 @@
 package it.polimi.sw2019.view;
 
+import it.polimi.sw2019.events.NotifyClient;
 import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.client_event.Cevent.StartGameEv;
 import it.polimi.sw2019.network.Socket.ClientSocket;
 import javafx.application.Platform;
 
-public class EventForGui extends Observable<NotifyReturn> implements Runnable {
+public class EventForGui extends Observable<NotifyClient> implements Runnable {
 
     private ClientSocket clientSocket;
 
@@ -16,24 +17,23 @@ public class EventForGui extends Observable<NotifyReturn> implements Runnable {
     public void run() {
 
 
-        Platform.runLater( () -> {
+
             boolean goOutWhile = false;
-
-            //this.addObserver(this.clientSocket.getTableController());
-
+            this.addObserver(this.clientSocket.getTableController());
             StartGameEv startGameEv = (StartGameEv) this.clientSocket.getContSelect().waitForNotifyReturnEvent();
-            this.clientSocket.getTableController().handleEvent(startGameEv);
 
-            this.clientSocket.notifyGUI("Refresh");
+
+        Platform.runLater( () ->  this.clientSocket.getTableController().handleEvent(startGameEv)    );
+        Platform.runLater( () -> this.clientSocket.notifyGUI("Refresh") );
 
             /*while(!goOutWhile) {
-                NotifyReturn notifyReturn =  this.clientSocket.getContSelect().waitForNotifyReturnEvent();
+                NotifyClient notifyReturn =  this.clientSocket.getContSelect().waitForNotifyReturnEvent();
                 notify(notifyReturn);
 
             }
 
              */
-        }   );
+
 
 
 
