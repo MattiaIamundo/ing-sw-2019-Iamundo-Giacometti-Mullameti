@@ -23,7 +23,7 @@ public class ThorCont extends VisibleTargetCont implements Observer<ThorSetEv> {
 
     @Override
     public void update(ThorSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

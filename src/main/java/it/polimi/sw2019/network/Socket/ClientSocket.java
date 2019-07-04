@@ -206,8 +206,7 @@ public class ClientSocket  {
     }//(MERITA)
 
     public static void main (String[] args){
-
-        Application.launch(GUI.class);//(MERITA)
+        Application.launch(GUI.class);
 
     }
 

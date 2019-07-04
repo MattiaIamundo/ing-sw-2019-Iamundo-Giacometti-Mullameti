@@ -24,7 +24,7 @@ public class FlamethrowerCont extends LineFireCont implements Observer<Flamethro
 
     @Override
     public void update(FlamethrowerSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

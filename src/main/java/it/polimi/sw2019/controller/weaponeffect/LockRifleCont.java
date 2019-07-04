@@ -23,7 +23,7 @@ public class LockRifleCont extends VisibleTargetCont implements Observer<LockRif
 
     @Override
     public void update(LockRifleSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

@@ -59,7 +59,7 @@ public class WhisperCont extends VisibleTargetCont implements Observer<WhisperSe
 
     @Override
     public void update(WhisperSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

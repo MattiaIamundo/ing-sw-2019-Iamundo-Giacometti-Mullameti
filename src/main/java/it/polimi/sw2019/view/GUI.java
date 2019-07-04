@@ -3,7 +3,6 @@ package it.polimi.sw2019.view;
 
 
 import it.polimi.sw2019.view.ControllerClasses.*;
-import it.polimi.sw2019.nethandler.ViewContEvent;
 import it.polimi.sw2019.network.Socket.ClientSocket;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -21,40 +20,65 @@ public class GUI extends Application implements UIinterface {
     private TableController tableController;
     private Stage stage;
     private ClientSocket clientSocket;
-    private String string;
-    private PlayerView pv ;
-    private ViewContEvent vce ;
 
-    public GUI() {
 
+    private String ip;
+
+    public void setServerIP(String ip){
+        this.ip = ip;
+        System.out.println(ip);
 
     }
-
 
     @Override
     public void start(Stage stage) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/Menu.fxml"));
-        Parent menu = loader.load();
-        Scene scene=new Scene(menu);
+        loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/ServerIP.fxml"));
+        Parent serverIP = loader.load();
+        Scene scene=new Scene(serverIP);
         stage.setScene(scene);
         stage.setTitle("Adrenaline");
         stage.setResizable(false);
-        stage.getScene().setRoot(menu);
+        stage.getScene().setRoot(serverIP);
         stage.show();
         stage.setOnCloseRequest((WindowEvent t) -> {
             Platform.exit();
             System.exit(0);
         });
-
+        ServerIPController serverIPController = loader.getController();
+        serverIPController.setGui(this);
         this.stage=stage;
-        this.clientSocket = new ClientSocket("127.0.0.1");
+
+        this.clientSocket=new ClientSocket(ip);
         clientSocket.setUI(this);
-        MenuController menuController = loader.getController();
-        menuController.setClientSocket(clientSocket);
 
 
+
+
+
+    }
+
+
+
+    @Override
+    public void requestMenu(String string) {
+
+        if(string.equals("ok")){
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/Menu.fxml"));
+                Parent menu = loader.load();
+
+                MenuController menuController = loader.getController();
+                menuController.setClientSocket(clientSocket);
+
+                Stage mainStage = stage;
+                mainStage.getScene().setRoot(menu);
+            }catch (IOException e){}
+        }else{
+            System.out.println("ko");
+        }
 
     }
 

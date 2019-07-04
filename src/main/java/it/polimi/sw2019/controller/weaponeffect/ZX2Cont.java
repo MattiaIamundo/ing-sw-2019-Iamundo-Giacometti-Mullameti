@@ -23,7 +23,7 @@ public class ZX2Cont extends VisibleTargetCont implements Observer<ZX2SetEv> {
 
     @Override
     public void update(ZX2SetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

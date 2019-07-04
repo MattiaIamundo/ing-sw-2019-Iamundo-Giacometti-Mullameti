@@ -23,7 +23,7 @@ public class SledgehammerCont extends SameSquare implements Observer<Sledgehamme
 
     @Override
     public void update(SledgehammerSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

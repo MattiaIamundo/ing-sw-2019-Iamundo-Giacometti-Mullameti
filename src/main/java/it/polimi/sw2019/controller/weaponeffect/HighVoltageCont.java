@@ -62,7 +62,7 @@ public class HighVoltageCont extends VisibleTargetCont implements Observer<HighV
 
     @Override
     public void update(HighVoltageSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

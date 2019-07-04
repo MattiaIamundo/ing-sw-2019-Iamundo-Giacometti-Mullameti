@@ -23,7 +23,7 @@ public class PowerGloveCont extends OneMoveAway implements Observer<PowerGloveSe
 
     @Override
     public void update(PowerGloveSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

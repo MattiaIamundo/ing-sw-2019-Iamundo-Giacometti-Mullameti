@@ -23,7 +23,7 @@ public class PlasmaGunCont extends VisibleTargetCont implements Observer<PlasmaG
 
     @Override
     public void update(PlasmaGunSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

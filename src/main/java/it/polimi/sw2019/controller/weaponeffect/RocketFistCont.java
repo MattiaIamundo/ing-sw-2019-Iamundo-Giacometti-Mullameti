@@ -24,7 +24,7 @@ public class RocketFistCont extends LineFireCont implements Observer<RocketFistS
 
     @Override
     public void update(RocketFistSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.setMoveto(moveto(message.getDirection(), message.getMoveAmount()));
         realmodel.usePower(attacker);
     }
