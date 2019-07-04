@@ -12,5 +12,4 @@ public interface NotifyReturn {
 
     void updateObject(ExecutorEventImp executorEventImp, Game controller);
 
-
 }

@@ -21,4 +21,6 @@ public interface UIinterface {
     void requestLobby(String string);
 
     void requestTable(String string);
+
+    void requestRefresh(String string);
 }

@@ -17,6 +17,8 @@ import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
 import it.polimi.sw2019.events.weapon_event.PowerChooseEv;
 import it.polimi.sw2019.events.weapon_event.UnpaidEffectEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.*;
+import it.polimi.sw2019.exception.FullWeaponDeckException;
+import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.*;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.powerup.Newton;
@@ -1052,6 +1054,116 @@ public class Game implements Observer <NotifyReturn> {
         return playerToReturn;
     }
 
+    /**
+     * set the ammo in the correct way,
+     * it depends by the number of map
+     * @param nrMap the map's number
+     */
+    public void setAmmo(String nrMap) {
+        if(nrMap.equals("zero")) {
+            initializeAmmo0();
+        }
+        else if(nrMap.equals("one")) {
+            initializeAmmo1();
+        }
+        else if (nrMap.equals("two")) {
+            initializeAmmo2();
+        }
+        else {
+            initializeAmmo3();
+        }
+    }
+
+    /**
+     * set the ammo if the map is the 4x3
+     */
+    private void initializeAmmo0() {
+        try{
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+
+        } catch (InvalidSpaceException ex) {
+            //
+        }
+    }
+
+    private void initializeAmmo1() {
+        try{
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+
+        } catch (InvalidSpaceException ex) {
+            //
+        }
+    }
+
+    private void initializeAmmo2() {
+        try{
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+
+        } catch (InvalidSpaceException ex) {
+            //
+        }
+    }
+
+    private void initializeAmmo3() {
+        try{
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+
+        } catch (InvalidSpaceException ex) {
+            //
+        }
+
+    }
+
+    /**
+     * set the weapon to the three space generation
+     */
+    public void setWeapon() {
+        //the three space generation are always the same
+        try{
+            ((SpaceGeneration)this.getGameboard().getMap().getSpace(0,1)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration)this.getGameboard().getMap().getSpace(0,1)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration)this.getGameboard().getMap().getSpace(0,1)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration) this.getGameboard().getMap().getSpace(2,2)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration) this.getGameboard().getMap().getSpace(2,2)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration) this.getGameboard().getMap().getSpace(2,2)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration) this.getGameboard().getMap().getSpace(3,0)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration) this.getGameboard().getMap().getSpace(3,0)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration) this.getGameboard().getMap().getSpace(3,0)).setWeapon(this.getGameboard().getWeapon().remove(0));
+        } catch (InvalidSpaceException | FullWeaponDeckException ex) {
+            //do nothing
+        }
+
+    }
+
     public void sendStartGame(PlayerRemoteView playerRemoteView) {
         playerRemoteView.sendStartGame();
     }
@@ -1072,7 +1184,7 @@ public class Game implements Observer <NotifyReturn> {
 
 
 
-    public void handleEvent(ActionEv actionEv) {
+    public void update(ActionEv actionEv) {
 
         actionEv.handle(this.executorEventImp, this);
     }

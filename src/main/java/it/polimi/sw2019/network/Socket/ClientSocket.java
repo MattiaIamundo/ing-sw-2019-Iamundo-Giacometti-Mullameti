@@ -8,6 +8,7 @@ import it.polimi.sw2019.nethandler.ContSelect;
 import it.polimi.sw2019.nethandler.ModViewEvent;
 import it.polimi.sw2019.nethandler.ViewContEvent;
 import it.polimi.sw2019.view.*;
+import it.polimi.sw2019.view.ControllerClasses.TableController;
 import javafx.application.Application;
 
 
@@ -29,7 +30,7 @@ import java.util.logging.Logger;
 public class ClientSocket  {
 
     //the port number
-    private final int portNumber = 12345;
+    private static final int portNumber = 12345;
     //connection to the server
     private Socket connection;
     //input from the server
@@ -45,23 +46,24 @@ public class ClientSocket  {
     //the GUI or CLI
     private UIinterface uIinterface;
     private String nickname;
-    private List<String>colorList=new ArrayList<>(5);
+    private List<String> colorList = new ArrayList<>(5);
+    private TableController tableController;
     //the logger for debugging
     private static final Logger logger = Logger.getLogger( ClientSocket.class.getName() );
 
     //view
     private PlayerView playerView;
-    private transient TableView tableView;
-    private transient WeaponView weaponView;
-    private transient AmmoView ammoView;
-    private transient PowerUpView powerUpView;
+    private TableView tableView;
+    private WeaponView weaponView;
+    private AmmoView ammoView;
+    private PowerUpView powerUpView;
 
     //the NH
-    private transient ContSelect contSelect;
-    private transient ModViewEvent modViewEvent;
-    private transient ViewContEvent viewContEvent;
+    private ContSelect contSelect;
+    private ModViewEvent modViewEvent;
+    private ViewContEvent viewContEvent;
 
-    private transient ExecutorService worker = Executors.newFixedThreadPool( 1 );
+    private ExecutorService worker = Executors.newFixedThreadPool( 1 );
 
     private boolean firstTime = true;
     /**
@@ -92,9 +94,7 @@ public class ClientSocket  {
             output = new PrintWriter( connection.getOutputStream() );
 
             //set the socket to the NH
-            contSelect = new ContSelect( connection );
-            modViewEvent = new ModViewEvent( connection );
-            viewContEvent = new ViewContEvent( connection );
+
 
             //set the view
             playerView = new PlayerView(uIinterface, this);
@@ -103,20 +103,18 @@ public class ClientSocket  {
             ammoView = new AmmoView(uIinterface);
             powerUpView = new PowerUpView(uIinterface);
 
+
+            contSelect = new ContSelect( connection, playerView);
+            modViewEvent = new ModViewEvent( connection );
+            viewContEvent = new ViewContEvent( connection );
+
+
         }catch(IOException e){
             logger.log(Level.SEVERE, e.toString(), e);
         }
-        //it creates and starts the thread for this client
 
-        //client is executed
-        //worker.execute( this );
 
     }//END of START CLIENT
-
-    /**
-     * it is control the thread which are updating a GUI component
-     * and with a loop it can control every server's message send to it
-     */
 
     public ContSelect getContSelect(){
         return contSelect;
@@ -124,6 +122,10 @@ public class ClientSocket  {
 
     public PlayerView getPlayerView() {
         return playerView;
+    }
+
+    public TableView getTableView() {
+        return this.tableView;
     }
 
     public void setUI(UIinterface uIinterface){
@@ -165,6 +167,7 @@ public class ClientSocket  {
                 break;
             case "Start": uIinterface.requestTable("ok");
                 break;
+            case "Refresh": uIinterface.requestRefresh("ok");
             default:
                 break;
         }
@@ -203,11 +206,7 @@ public class ClientSocket  {
     }//(MERITA)
 
     public static void main (String[] args){
-
-
-
         Application.launch(GUI.class);
-
 
     }
 
@@ -227,4 +226,11 @@ public class ClientSocket  {
         return this.colorList;
     }
 
+    public TableController getTableController() {
+        return this.tableController;
+    }
+
+    public void setTableController(TableController tableController) {
+        this.tableController = tableController;
+    }
 }

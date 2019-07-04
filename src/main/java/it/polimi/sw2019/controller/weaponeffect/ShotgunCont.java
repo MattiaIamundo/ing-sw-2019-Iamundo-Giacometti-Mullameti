@@ -44,7 +44,7 @@ public class ShotgunCont extends SameSquare implements Observer<ShotgunSetEv> {
 
     @Override
     public void update(ShotgunSetEv message) {
-       // super.update(message);
+        //super.update(message);
         realmodel.setMoveto(moveto.get(message.getMoveto()));
         realmodel.usePower(attacker);
     }
