@@ -2,13 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="table" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1230.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.sw2019.view.ControllerClasses.TableController">
@@ -28,96 +24,41 @@
             <Button fx:id="fifthPlayer" mnemonicParsing="false" onAction="#thisPlayerButtonPushed" prefHeight="165.0" prefWidth="200.0" text="Player" />
          </children>
       </VBox>
-      <ImageView fx:id="ammoCard" fitHeight="33.0" fitWidth="38.0" layoutX="335.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/Cards/backPowerUp.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="705.0" fitWidth="917.0" layoutX="112.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="112.0" AnchorPane.rightAnchor="201.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../Images/Tabella.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="weaponNorth1" fitHeight="134.0" fitWidth="95.0" layoutX="597.0" onMouseClicked="#seeWeaponsNorth" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="weaponNorth3" fitHeight="134.0" fitWidth="95.0" layoutX="798.0" onMouseClicked="#seeWeaponsNorth" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="weaponNorth1" fitHeight="134.0" fitWidth="95.0" layoutX="597.0"  pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="weaponNorth3" fitHeight="134.0" fitWidth="95.0" layoutX="798.0"  pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="weaponDeck" fitHeight="147.0" fitWidth="94.0" layoutX="910.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="weaponNorth2" fitHeight="134.0" fitWidth="95.0" layoutX="697.0" onMouseClicked="#seeWeaponsNorth" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="weaponEast3" fitHeight="134.0" fitWidth="95.0" layoutX="922.0" layoutY="583.0" onMouseClicked="#seeWeaponsEast" pickOnBounds="true" preserveRatio="true" rotate="90.0" />
-      <ImageView fx:id="weaponEast1" fitHeight="134.0" fitWidth="95.0" layoutX="922.0" layoutY="376.0" onMouseClicked="#seeWeaponsEast" pickOnBounds="true" preserveRatio="true" rotate="90.0" />
-      <ImageView fx:id="weaponEast2" fitHeight="134.0" fitWidth="95.0" layoutX="922.0" layoutY="483.0" onMouseClicked="#seeWeaponsEast" pickOnBounds="true" preserveRatio="true" rotate="90.0" />
-      <ImageView fx:id="weaponWest3" fitHeight="134.0" fitWidth="95.0" layoutX="139.0" layoutY="430.0" onMouseClicked="#seeWeaponsWest" pickOnBounds="true" preserveRatio="true" rotate="-90.0" />
-      <ImageView fx:id="weaponWest1" fitHeight="134.0" fitWidth="95.0" layoutX="139.0" layoutY="223.0" onMouseClicked="#seeWeaponsWest" pickOnBounds="true" preserveRatio="true" rotate="-90.0" />
-      <ImageView fx:id="weaponWest2" fitHeight="134.0" fitWidth="95.0" layoutX="139.0" layoutY="330.0" onMouseClicked="#seeWeaponsWest" pickOnBounds="true" preserveRatio="true" rotate="-90.0" />
-      <AnchorPane fx:id="weaponBoardNorth" layoutX="474.0" layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="555.0" visible="false">
-         <children>
-            <GridPane maxWidth="542.0" minWidth="542.0" prefHeight="378.0" prefWidth="542.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="318.0" minHeight="10.0" prefHeight="318.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Button fx:id="descriptionWeapon_1" mnemonicParsing="false" onAction="#descriptionButtonPushed" prefHeight="50.0" prefWidth="318.0" text="Description" GridPane.rowIndex="1" />
-                  <Button fx:id="descriptionWeapon_2" mnemonicParsing="false" onAction="#descriptionButtonPushed" prefHeight="50.0" prefWidth="318.0" text="Description" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button fx:id="descriptionWeapon_3" mnemonicParsing="false" onAction="#descriptionButtonPushed" prefHeight="50.0" prefWidth="318.0" text="Description" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <ImageView fitHeight="318.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fitHeight="318.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-                  <ImageView fitHeight="318.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-               </children>
-            </GridPane>
-            <TextArea fx:id="descriptionWeapon" layoutY="43.0" prefHeight="318.0" prefWidth="555.0" visible="false" />
-            <Button fx:id="XButtonNorth" layoutX="517.0" layoutY="14.0" mnemonicParsing="false" onAction="#XButtonNorthClicked" text="X" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="weaponBoardEast" layoutX="474.0" layoutY="274.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="555.0" visible="false">
-         <children>
-            <GridPane maxWidth="542.0" minWidth="542.0" prefHeight="378.0" prefWidth="542.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="318.0" minHeight="10.0" prefHeight="318.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Button fx:id="descriptionWeapon_11" mnemonicParsing="false" onAction="#descriptionButtonPushed" prefHeight="50.0" prefWidth="318.0" text="Description" GridPane.rowIndex="1" />
-                  <Button fx:id="descriptionWeapon_21" mnemonicParsing="false" onAction="#descriptionButtonPushed" prefHeight="50.0" prefWidth="318.0" text="Description" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button fx:id="descriptionWeapon_31" mnemonicParsing="false" onAction="#descriptionButtonPushed" prefHeight="50.0" prefWidth="318.0" text="Description" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <ImageView fitHeight="318.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fitHeight="318.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-                  <ImageView fitHeight="318.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-               </children>
-            </GridPane>
-            <TextArea fx:id="descriptionWeapon1" layoutY="44.0" prefHeight="318.0" prefWidth="555.0" visible="false" />
-            <Button fx:id="XButtonEast" layoutX="517.0" layoutY="14.0" mnemonicParsing="false" onAction="#XButtonEastClicked" text="X" />
-         </children>
-      </AnchorPane>
+      <ImageView fx:id="weaponNorth2" fitHeight="134.0" fitWidth="95.0" layoutX="697.0"  pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="weaponEast3" fitHeight="134.0" fitWidth="95.0" layoutX="922.0" layoutY="583.0"  pickOnBounds="true" preserveRatio="true" rotate="90.0" />
+      <ImageView fx:id="weaponEast1" fitHeight="134.0" fitWidth="95.0" layoutX="922.0" layoutY="376.0"  pickOnBounds="true" preserveRatio="true" rotate="90.0" />
+      <ImageView fx:id="weaponEast2" fitHeight="134.0" fitWidth="95.0" layoutX="922.0" layoutY="483.0"  pickOnBounds="true" preserveRatio="true" rotate="90.0" />
+      <ImageView fx:id="weaponWest3" fitHeight="134.0" fitWidth="95.0" layoutX="139.0" layoutY="430.0"  pickOnBounds="true" preserveRatio="true" rotate="-90.0" />
+      <ImageView fx:id="weaponWest1" fitHeight="134.0" fitWidth="95.0" layoutX="139.0" layoutY="223.0"  pickOnBounds="true" preserveRatio="true" rotate="-90.0" />
+      <ImageView fx:id="weaponWest2" fitHeight="134.0" fitWidth="95.0" layoutX="139.0" layoutY="330.0"  pickOnBounds="true" preserveRatio="true" rotate="-90.0" />
       <AnchorPane fx:id="Rooms" layoutX="252.0" layoutY="147.0" prefHeight="498.0" prefWidth="644.0">
          <children>
             <ImageView fx:id="yellowStatue" fitHeight="69.0" fitWidth="62.0" layoutX="14.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/yellow.png" />
+                  <Image url="@../Images/yellowStatue.png" />
                </image>
             </ImageView>
             <ImageView fx:id="greenStatue" fitHeight="69.0" fitWidth="62.0" layoutX="108.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/green.png" />
+                  <Image url="@../Images/greenStatue.png" />
                </image>
             </ImageView>
             <ImageView fx:id="purpleStatue" fitHeight="69.0" fitWidth="62.0" layoutX="237.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/purple.png" />
+                  <Image url="@../Images/purpleStatue.png" />
                </image>
             </ImageView>
             <ImageView fx:id="grayStatue" fitHeight="69.0" fitWidth="62.0" layoutX="264.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/gray.png" />
+                  <Image url="@../Images/grayStatue.png" />
                </image>
             </ImageView>
             <ImageView fx:id="blueStatue" fitHeight="69.0" fitWidth="62.0" layoutX="381.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
@@ -125,31 +66,6 @@
                   <Image url="@../Images/blueStatue.png" />
                </image>
             </ImageView>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="weaponBoardWest" layoutX="112.0" layoutY="249.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="555.0" visible="false">
-         <children>
-            <GridPane maxWidth="542.0" minWidth="542.0" prefHeight="378.0" prefWidth="542.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="318.0" minHeight="10.0" prefHeight="318.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Button fx:id="descriptionWeapon_12" mnemonicParsing="false" onAction="#descriptionButtonPushed" prefHeight="50.0" prefWidth="318.0" text="Description" GridPane.rowIndex="1" />
-                  <Button fx:id="descriptionWeapon_22" mnemonicParsing="false" onAction="#descriptionButtonPushed" prefHeight="50.0" prefWidth="318.0" text="Description" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button fx:id="descriptionWeapon_32" mnemonicParsing="false" onAction="#descriptionButtonPushed" prefHeight="50.0" prefWidth="318.0" text="Description" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <ImageView fitHeight="318.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fitHeight="318.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-                  <ImageView fitHeight="318.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-               </children>
-            </GridPane>
-            <TextArea fx:id="descriptionWeapon2" layoutY="43.0" prefHeight="318.0" prefWidth="555.0" visible="false" />
-            <Button fx:id="XButtonWest" layoutX="529.0" layoutY="14.0" mnemonicParsing="false" onAction="#XButtonWestClicked" text="X" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="fourthPlayerBoard" layoutX="112.0" layoutY="550.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="155.0" prefWidth="988.0" visible="false">
@@ -258,11 +174,5 @@
          </children>
       </AnchorPane>
       <ImageView fx:id="powerUpDeck" fitHeight="99.0" fitWidth="73.0" layoutX="936.0" layoutY="38.0" onMouseClicked="#choosePowerUp" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="adrenalinaBackground" fitHeight="705.0" fitWidth="1230.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/backgroundMenu.jpg" />
-         </image>
-      </ImageView>
-
    </children>
 </AnchorPane>

@@ -47,11 +47,7 @@ public class TableController implements Observer<NotifyClient> {
     @FXML private ImageView purpleStatue;
     @FXML private AnchorPane Rooms;
     @FXML private AnchorPane table ;
-    @FXML private Button XButtonNorth;
-    @FXML private Button XButtonWest;
-    @FXML private Button XButtonEast;
-    private double XImage;
-    private double YImage;
+
     //************************************PLAYERBOARDS*******************************************
 
     @FXML private Button firstPlayer;
@@ -77,9 +73,6 @@ public class TableController implements Observer<NotifyClient> {
     @FXML private ImageView weaponEast1;
     @FXML private ImageView weaponEast2;
     @FXML private ImageView weaponEast3;
-    @FXML private AnchorPane weaponBoardNorth;
-    @FXML private AnchorPane weaponBoardWest;
-    @FXML private AnchorPane weaponBoardEast;
     @FXML private Button descriptionWeapon_1;
     @FXML private Button descriptionWeapon_2;
     @FXML private Button descriptionWeapon_3;
@@ -98,42 +91,12 @@ public class TableController implements Observer<NotifyClient> {
 
 
     @FXML
-    private ImageView ammoCard;
-
-    private double Xcard;
-    private double Ycard;
-
-
-    @FXML
     public void initialize() {
-
-/*
-        this.XImage=this.yellowStatue.getX();
-
-        this.YImage=this.yellowStatue.getY();
-
-        System.out.println(this.yellowStatue.getX());
-        addPlayerButtonsToList();
-        addWeaponsToList();
-        setPlayerButtons(Players);
-        setWeapons(Weapon);
-
-
- */
-
-
 
     }
 
     //************************************PLAYERBOARDS*******************************************
-    private void addPlayerButtonsToList(){
-        PlayerButtons.add(firstPlayer);
-        PlayerButtons.add(secondPlayer);
-        PlayerButtons.add(thirdPlayer);
-        PlayerButtons.add(fourthPlayer);
-        PlayerButtons.add(fifthPlayer);
 
-    }
     @FXML
     public void thisPlayerButtonPushed() {
         if (thisPlayerBoard.isVisible()) {
@@ -141,7 +104,6 @@ public class TableController implements Observer<NotifyClient> {
 
         } else {
             this.thisPlayerBoard.setVisible(true);
-            System.out.println(GridPane.getColumnIndex(yellowStatue));
         }
 
 
@@ -189,32 +151,11 @@ public class TableController implements Observer<NotifyClient> {
     }
 
     //************************************WEAPONS*******************************************
-    private void addWeaponsToList(){
-        WeaponImages.add(weaponNorth1);
-        WeaponImages.add(weaponNorth2);
-        WeaponImages.add(weaponNorth3);
-        WeaponImages.add(weaponEast1);
-        WeaponImages.add(weaponEast2);
-        WeaponImages.add(weaponEast3);
-        WeaponImages.add(weaponWest1);
-        WeaponImages.add(weaponWest2);
-        WeaponImages.add(weaponWest3);
 
-
-    }
 
     private void setWeapons(List<Weapon> Weapon){
         String stringImage;
-        String string;
-        /*
-        for (int i = 0 ; i < 9 ; i++){
-            stringImage = Weapon.get(i).getName();
-            string = new StringBuilder().append("-fx-background-image: url(/it/polimi/sw2019/Images/").append(stringImage).append(".png);").toString();
-            //this.WeaponImages.get(i).setImage();
-            this.WeaponImages.get(i).setImage( new Image(string));
-        }
 
-         */
         stringImage = Weapon.get(0).getName();
         weaponNorth1.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
         stringImage = Weapon.get(1).getName();
@@ -235,69 +176,14 @@ public class TableController implements Observer<NotifyClient> {
         weaponEast3.setImage( new Image("it/polimi/sw2019/Images/"+ stringImage + ".png"));
 
 
-
-
-
-        /*
-        for (Weapon weapon : Weapon){
-
-            for (ImageView weaponImages : WeaponImages) {
-                System.out.println( weapon.getName() );
-                weaponImages.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", weapon.getName()));
-
-            }
-        }
-
-         */
-    }
-    @FXML
-    public void seeWeaponsNorth(){
-        if (!(weaponBoardNorth.isVisible())){
-            this.weaponBoardNorth.setVisible(true);
-
-        }
-
     }
 
-    public void seeWeaponsEast(){
-        if (!(weaponBoardEast.isVisible())){
-            this.weaponBoardEast.setVisible(true);
-
-        }
-
-    }
-
-    public void seeWeaponsWest(){
-        if (!(weaponBoardWest.isVisible())){
-            this.weaponBoardWest.setVisible(true);
-
-        }
-    }
-
-    public void XButtonNorthClicked(){
-        if(weaponBoardNorth.isVisible()){
-            this.weaponBoardNorth.setVisible(false);
-        }
-
-    }
-    public void XButtonWestClicked(){
-        if(weaponBoardWest.isVisible()){
-            this.weaponBoardWest.setVisible(false);
-        }
-
-    }
-    public void XButtonEastClicked(){
-        if(weaponBoardEast.isVisible()){
-            this.weaponBoardEast.setVisible(false);
-        }
-
-    }
 
 
 
     @FXML
     public void descriptionButtonPushed() {
-        this.descriptionWeapon.setText("meri");
+
         if (descriptionWeapon.isVisible()) {
             this.descriptionWeapon.setVisible(false);
 
@@ -345,32 +231,7 @@ public class TableController implements Observer<NotifyClient> {
 
     }
 
-    public void handleAmmo(String direction) {
 
-        if (direction.equals("North")) {
-            double newX = XImage + 0;
-            double newY = YImage + 100;
-            yellowStatue.setX(newX);
-            yellowStatue.setY(newY);
-        } else if (direction.equals("South")) {
-            double newX = XImage + 0;
-            double newY = YImage - 100;
-            yellowStatue.setX(newX);
-            yellowStatue.setY(newY);
-
-        } else if (direction.equals("East") ) {
-            double newX = XImage + 100;
-            double newY = YImage + 0;
-            yellowStatue.setX(newX);
-            yellowStatue.setY(newY);
-
-        } else if (direction.equals("West")) {
-            double newX = XImage - 100;
-            double newY = YImage + 0;
-            yellowStatue.setX(newX);
-            yellowStatue.setY(newY);
-        }
-    }
 
     public void setPlayerButtons(List<Player>players ){
 
@@ -384,12 +245,7 @@ public class TableController implements Observer<NotifyClient> {
     }
 
     private void setAmmo(List<Ammo> Ammo){
-        for (Ammo ammo : Ammo){
-            for (ImageView ammoImages : AmmoImages) {
-                //weaponImages.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", ammo.));
 
-            }
-        }
     }
 
     public void setClientSocket(ClientSocket clientSocket) {
