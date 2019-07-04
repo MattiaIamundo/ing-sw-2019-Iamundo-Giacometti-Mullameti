@@ -1,7 +1,9 @@
 package it.polimi.sw2019.view.ControllerClasses;
 import it.polimi.sw2019.events.client_event.Cevent.StartGameEv;
+import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.Ammo;
 import it.polimi.sw2019.model.Player;
+import it.polimi.sw2019.model.SpaceGeneration;
 import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.network.Socket.ClientSocket;
 import javafx.collections.ObservableList;
@@ -344,12 +346,40 @@ public class TableController {
         }
     }
 
-    public void handleEvent(StartGameEv startGameEv) {
-        this.Players = startGameEv.getPlayers();
-
-    }
-
     public void setClientSocket(ClientSocket clientSocket) {
         this.clientSocket = clientSocket;
+    }
+
+    public void handleEvent(StartGameEv startGameEv) {
+        System.out.println(startGameEv.getPlayers().get(0));
+        System.out.println(startGameEv.getPlayers().get(1));
+        System.out.println(startGameEv.getPlayers().get(2));
+        this.Players = startGameEv.getPlayers();
+        try{
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(0,1)).getWeapon(0));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(0,1)).getWeapon(1));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(0,1)).getWeapon(2));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(2,2)).getWeapon(0));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(2,2)).getWeapon(1));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(2,2)).getWeapon(2));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(3,0)).getWeapon(0));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(3,0)).getWeapon(1));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(3,0)).getWeapon(2));
+        } catch (InvalidSpaceException ex) {
+            System.out.println("handle event exception in table controller");
+        }
+        if ( startGameEv.getGameboard().getNrMap().equals("zero") ) {
+
+        }
+        else if ( startGameEv.getGameboard().getNrMap().equals("one") ) {
+
+        }
+        else if ( startGameEv.getGameboard().getNrMap().equals("two") ) {
+
+        }
+        else {
+
+        }
+
     }
 }

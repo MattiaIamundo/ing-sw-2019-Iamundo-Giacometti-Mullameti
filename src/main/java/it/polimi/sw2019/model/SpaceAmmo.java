@@ -32,7 +32,7 @@ public class SpaceAmmo extends Space {
      */
     public void setAmmo( Ammo ammos){
         //there is not any ammo
-        if( ammo != null){
+        if( ammo == null){
 
             ammo = ammos;
         }

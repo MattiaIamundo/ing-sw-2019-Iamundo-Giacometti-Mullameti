@@ -238,7 +238,7 @@ public class PlayerThread implements Runnable {
                                         canGoOut = true;
                                         this.gameController.askForMap(this.playerRemoteView, firstTime);
                                         String nmap = this.playerRemoteView.waitForMap();
-
+                                        logger.log(Level.INFO, "{playerthread} receives this map" + nmap);
                                         if (!nmap.equals("zero") && !nmap.equals("one") && !nmap.equals("two") && !nmap.equals("three")) {
                                             firstTime = false;
                                             canGoOut = false;
@@ -473,8 +473,9 @@ public class PlayerThread implements Runnable {
         //fill the table in space generation and in space ammo with weapon and ammo
         if( this.nickname.equals(this.gameController.getPlayers().get(0).getNickname() ) ) {
 
-            gameController.setAmmo(this.gameController.getGameboard().getNrMap());
             gameController.setWeapon();
+            gameController.setAmmo(this.gameController.getGameboard().getNrMap());
+
         }
 
 
@@ -502,6 +503,7 @@ public class PlayerThread implements Runnable {
                             //send out to the player
                             changePlayerTurn();
                             this.gameController.getTimerThread().setOn(false);
+                            this.gameController.getTimerThread().setTimerDone(false);
                         }
                     }
                 }
@@ -538,6 +540,7 @@ public class PlayerThread implements Runnable {
      * set the player for the next turn
      */
     private void changePlayerTurn() {
+
         for (int i = 0; i < this.gameController.getPlayers().size(); i++) {
 
             if ( this.gameController.getPlayers().get(i).getNickname().equals(this.nickname) ) {
