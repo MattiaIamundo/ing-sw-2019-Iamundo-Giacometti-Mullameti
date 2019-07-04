@@ -1,10 +1,7 @@
 package it.polimi.sw2019.view.ControllerClasses;
 import it.polimi.sw2019.events.client_event.Cevent.StartGameEv;
 import it.polimi.sw2019.exception.InvalidSpaceException;
-import it.polimi.sw2019.model.Ammo;
-import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.model.SpaceGeneration;
-import it.polimi.sw2019.model.Weapon;
+import it.polimi.sw2019.model.*;
 import it.polimi.sw2019.network.Socket.ClientSocket;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -198,7 +195,9 @@ public class TableController {
 
     private void setWeapons(List<Weapon> Weapon){
         for (Weapon weapon : Weapon){
+
             for (ImageView weaponImages : WeaponImages) {
+                System.out.println( weapon.getName() );
                 weaponImages.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", weapon.getName()));
 
             }
@@ -351,35 +350,85 @@ public class TableController {
     }
 
     public void handleEvent(StartGameEv startGameEv) {
-        System.out.println(startGameEv.getPlayers().get(0));
-        System.out.println(startGameEv.getPlayers().get(1));
-        System.out.println(startGameEv.getPlayers().get(2));
+        System.out.println(startGameEv.getPlayers().get(0).getNickname());
+        System.out.println(startGameEv.getPlayers().get(1).getNickname());
+        System.out.println(startGameEv.getPlayers().get(2).getNickname());
         this.Players = startGameEv.getPlayers();
         try{
-            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(0,1)).getWeapon(0));
-            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(0,1)).getWeapon(1));
-            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(0,1)).getWeapon(2));
-            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(2,2)).getWeapon(0));
-            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(2,2)).getWeapon(1));
-            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(2,2)).getWeapon(2));
-            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(3,0)).getWeapon(0));
-            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(3,0)).getWeapon(1));
-            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(3,0)).getWeapon(2));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(2,2)).takeWeapon(0));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(2,2)).takeWeapon(1));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(2,2)).takeWeapon(2));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(3,0)).takeWeapon(0));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(3,0)).takeWeapon(1));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(3,0)).takeWeapon(2));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(0,1)).takeWeapon(0));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(0,1)).takeWeapon(1));
+            this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(0,1)).takeWeapon(2));
+
+
         } catch (InvalidSpaceException ex) {
             System.out.println("handle event exception in table controller");
         }
-        if ( startGameEv.getGameboard().getNrMap().equals("zero") ) {
 
+        if ( startGameEv.getGameboard().getNrMap().equals("zero") ) {
+            try{
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(0,0)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(0,2)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(1,0)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(1,1)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(1,2)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(2,0)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(2,1)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(3,1)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(3,2)).takeAmmo()   );
+            } catch (InvalidSpaceException ex) {
+                //
+            }
         }
         else if ( startGameEv.getGameboard().getNrMap().equals("one") ) {
-
+            try{
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(0,0)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(0,2)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(1,0)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(1,1)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(1,2)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(2,0)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(2,1)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(3,1)).takeAmmo()   );
+            } catch (InvalidSpaceException ex) {
+                //
+            }
         }
         else if ( startGameEv.getGameboard().getNrMap().equals("two") ) {
-
+            try{
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(0,2)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(1,0)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(1,1)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(1,2)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(2,0)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(2,1)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(3,1)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(3,2)).takeAmmo()   );
+            } catch (InvalidSpaceException ex) {
+                //
+            }
         }
         else {
+            try{
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(0,2)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(1,0)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(1,1)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(1,2)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(2,0)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(2,1)).takeAmmo()   );
+                this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(3,1)).takeAmmo()   );
+            } catch (InvalidSpaceException ex) {
+                //
+            }
 
         }
 
+        setWeapons(this.Weapon);
+        setPlayerButtons(this.Players);
     }
 }

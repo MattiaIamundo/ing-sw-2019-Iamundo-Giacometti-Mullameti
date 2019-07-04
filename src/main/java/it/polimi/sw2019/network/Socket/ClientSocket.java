@@ -168,6 +168,7 @@ public class ClientSocket  {
             case "Start": uIinterface.requestTable("ok");
                 break;
             case "Refresh": uIinterface.requestRefresh("ok");
+                break;
             default:
                 break;
         }

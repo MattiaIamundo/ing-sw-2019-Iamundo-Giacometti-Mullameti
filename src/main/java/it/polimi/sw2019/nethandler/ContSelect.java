@@ -4,6 +4,7 @@ import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
 import it.polimi.sw2019.events.client_event.Cevent.Reconnection;
+import it.polimi.sw2019.events.client_event.Cevent.StartGameEv;
 import it.polimi.sw2019.view.PlayerView;
 
 import java.io.*;
@@ -341,12 +342,12 @@ public class ContSelect implements ContSelectInt{
  */
 
     public NotifyReturn waitForNotifyReturnEvent() {
-        NotifyReturn notifyReturn = null;
+        StartGameEv notifyReturn = null;
         try{
-            notifyReturn = (NotifyReturn) objectInputStream.readObject();
+            notifyReturn = (StartGameEv) objectInputStream.readObject();
             return notifyReturn;
         } catch (IOException | ClassNotFoundException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
         return notifyReturn;
     }
