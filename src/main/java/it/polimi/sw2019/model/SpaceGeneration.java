@@ -45,7 +45,7 @@ public class SpaceGeneration extends Space {
      * @param weaponNum the number which represents a weapon
      * @return the weapon chosen
      */
-    public Weapon takeWeapon(Integer weaponNum){
+    public Weapon takeWeapon(int weaponNum){
         return weapon.get(weaponNum);
     }
     /**

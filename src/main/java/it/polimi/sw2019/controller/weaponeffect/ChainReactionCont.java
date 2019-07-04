@@ -1,7 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.events.weaponeffect_controller_events.ChainReactChooseEv;
-import it.polimi.sw2019.events.weaponeffect_controller_events.TargetSetEv;
 import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.events.weaponeffect_controller_events.ChainReactSetEv;
 import it.polimi.sw2019.model.Player;
@@ -50,7 +49,7 @@ public class ChainReactionCont extends VisibleTargetCont implements Observer<Cha
 
     @Override
     public void update(ChainReactSetEv message) {
-        super.update((TargetSetEv) message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

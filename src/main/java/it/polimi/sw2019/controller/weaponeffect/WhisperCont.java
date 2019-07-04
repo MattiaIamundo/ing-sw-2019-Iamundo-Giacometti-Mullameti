@@ -1,6 +1,5 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.TargetSetEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.WhisperChooseEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
@@ -60,7 +59,7 @@ public class WhisperCont extends VisibleTargetCont implements Observer<WhisperSe
 
     @Override
     public void update(WhisperSetEv message) {
-        super.update((TargetSetEv) message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

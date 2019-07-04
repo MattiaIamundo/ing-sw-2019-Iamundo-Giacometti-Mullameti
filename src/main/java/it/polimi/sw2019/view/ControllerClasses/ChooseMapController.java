@@ -42,6 +42,10 @@ public class ChooseMapController {
     public void initialize(){
        this.startButton.setDefaultButton(true);
        this.startButton.setVisible(false);
+       this.firstMapButton.setStyle("-fx-background-image: url(/it/polimi/sw2019/Images/0map.png); ");
+       this.secondMapButton.setStyle("-fx-background-image: url(/it/polimi/sw2019/Images/1map.png);");
+       this.thirdMapButton.setStyle("-fx-background-image: url(/it/polimi/sw2019/Images/2map.png);");
+       this.fourthMapButton.setStyle("-fx-background-image: url(/it/polimi/sw2019/Images/3map.png);");
     }
 
 

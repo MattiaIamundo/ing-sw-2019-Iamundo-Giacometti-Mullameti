@@ -1,6 +1,5 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.MoveTargetSetEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.ShadowstepChooseEv;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
@@ -37,7 +36,7 @@ public class ShadowstepCont extends MovePlayer implements Observer<ShadowstepSet
 
     @Override
     public void update(ShadowstepSetEv message) {
-        super.update((MoveTargetSetEv) message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

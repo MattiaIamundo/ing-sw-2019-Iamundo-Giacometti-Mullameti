@@ -1,6 +1,5 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.MoveTargetSetEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.PhaseGlideChooseEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.PhaseGlideSetEv;
 import it.polimi.sw2019.model.Space;
@@ -27,7 +26,7 @@ public class PhaseGlideCont extends MovePlayer implements Observer<PhaseGlideSet
 
     @Override
     public void update(PhaseGlideSetEv message) {
-        super.update((MoveTargetSetEv) message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

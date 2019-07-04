@@ -579,18 +579,20 @@ public class Game implements Observer <NotifyReturn> {
 
     public synchronized void initializeKillShotTrack(String numberOfSkulls) {
 
-        int nOfSkull = 5;
-        if (numberOfSkulls.equals("five")) {
-            nOfSkull = 5;
-        }
-        else if (numberOfSkulls.equals("six")) {
-            nOfSkull = 6;
-        }
-        else if (numberOfSkulls.equals("seven")) {
-            nOfSkull = 7;
-        }
-        else {
-            nOfSkull = 8;
+        int nOfSkull;
+        switch (numberOfSkulls) {
+            case "five":
+                nOfSkull = 5;
+                break;
+            case "six":
+                nOfSkull = 6;
+                break;
+            case "seven":
+                nOfSkull = 7;
+                break;
+            default:
+                nOfSkull = 8;
+                break;
         }
 
         for (  int i = 0; i < nOfSkull; i++ ) {
@@ -786,6 +788,7 @@ public class Game implements Observer <NotifyReturn> {
         Space space9 = new SpaceGeneration(null, null, null, null, blue);
         Space space10 = new SpaceGeneration(null, null, null, null, yellow);
         Space space11 = new SpaceAmmo(null, null, null, null, yellow);
+        //space12 is null
 
         Connection c11 = new Connection( space1, space2, false);                space1.setNorth(c11);
         Connection c12 = new Connection( space1, space4, false);                space1.setEast(c12);
@@ -1076,17 +1079,24 @@ public class Game implements Observer <NotifyReturn> {
      * @param nrMap the map's number
      */
     public void setAmmo(String nrMap) {
-        if(nrMap.equals("zero")) {
-            initializeAmmo0();
-        }
-        else if(nrMap.equals("one")) {
-            initializeAmmo1();
-        }
-        else if (nrMap.equals("two")) {
-            initializeAmmo2();
-        }
-        else {
-            initializeAmmo3();
+
+        switch (nrMap) {
+            case "zero":
+                initializeAmmo0();
+                logger.log(Level.INFO, "{Game} initializeAmmo0");
+                break;
+            case "one":
+                initializeAmmo1();
+                logger.log(Level.INFO, "{Game} initializeAmmo1");
+                break;
+            case "two":
+                initializeAmmo2();
+                logger.log(Level.INFO, "{Game} initializeAmmo2");
+                break;
+            default:
+                initializeAmmo3();
+                logger.log(Level.INFO, "{Game} initializeAmmo3");
+                break;
         }
     }
 
@@ -1096,14 +1106,23 @@ public class Game implements Observer <NotifyReturn> {
     private void initializeAmmo0() {
         try{
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,0) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,2) ).takeAmmo().getImageName() );
 
         } catch (InvalidSpaceException ex) {
             //
@@ -1113,13 +1132,21 @@ public class Game implements Observer <NotifyReturn> {
     private void initializeAmmo1() {
         try{
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,0) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).takeAmmo().getImageName() );
 
         } catch (InvalidSpaceException ex) {
             //
@@ -1129,13 +1156,21 @@ public class Game implements Observer <NotifyReturn> {
     private void initializeAmmo2() {
         try{
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,2) ).takeAmmo().getImageName() );
 
         } catch (InvalidSpaceException ex) {
             //
@@ -1145,13 +1180,19 @@ public class Game implements Observer <NotifyReturn> {
     private void initializeAmmo3() {
         try{
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
-            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).takeAmmo().getImageName() );
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            System.out.println( ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).takeAmmo().getImageName() );
 
         } catch (InvalidSpaceException ex) {
             //
@@ -1168,12 +1209,21 @@ public class Game implements Observer <NotifyReturn> {
             ((SpaceGeneration)this.getGameboard().getMap().getSpace(0,1)).setWeapon(this.getGameboard().getWeapon().remove(0));
             ((SpaceGeneration)this.getGameboard().getMap().getSpace(0,1)).setWeapon(this.getGameboard().getWeapon().remove(0));
             ((SpaceGeneration)this.getGameboard().getMap().getSpace(0,1)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            System.out.println( ((SpaceGeneration)this.getGameboard().getMap().getSpace(0,1)).listWeapon().get(0).getName() );
+            System.out.println( ((SpaceGeneration)this.getGameboard().getMap().getSpace(0,1)).listWeapon().get(1).getName() );
+            System.out.println( ((SpaceGeneration)this.getGameboard().getMap().getSpace(0,1)).listWeapon().get(2).getName() );
             ((SpaceGeneration) this.getGameboard().getMap().getSpace(2,2)).setWeapon(this.getGameboard().getWeapon().remove(0));
             ((SpaceGeneration) this.getGameboard().getMap().getSpace(2,2)).setWeapon(this.getGameboard().getWeapon().remove(0));
             ((SpaceGeneration) this.getGameboard().getMap().getSpace(2,2)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            System.out.println( ((SpaceGeneration)this.getGameboard().getMap().getSpace(2,2)).listWeapon().get(0).getName() );
+            System.out.println( ((SpaceGeneration)this.getGameboard().getMap().getSpace(2, 2)).listWeapon().get(1).getName() );
+            System.out.println( ((SpaceGeneration)this.getGameboard().getMap().getSpace(2, 2)).listWeapon().get(2).getName() );
             ((SpaceGeneration) this.getGameboard().getMap().getSpace(3,0)).setWeapon(this.getGameboard().getWeapon().remove(0));
             ((SpaceGeneration) this.getGameboard().getMap().getSpace(3,0)).setWeapon(this.getGameboard().getWeapon().remove(0));
             ((SpaceGeneration) this.getGameboard().getMap().getSpace(3,0)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            System.out.println( ((SpaceGeneration)this.getGameboard().getMap().getSpace(3,0)).listWeapon().get(0).getName() );
+            System.out.println( ((SpaceGeneration)this.getGameboard().getMap().getSpace(3,0)).listWeapon().get(1).getName() );
+            System.out.println( ((SpaceGeneration)this.getGameboard().getMap().getSpace(3,0)).listWeapon().get(2).getName() );
         } catch (InvalidSpaceException | FullWeaponDeckException ex) {
             //do nothing
         }
@@ -1185,16 +1235,18 @@ public class Game implements Observer <NotifyReturn> {
     }
 
     public void sendAllModel(PlayerRemoteView playerRemoteView) {
-        try{
-            List<Player> playerss = new ArrayList<>(5);
+     //   try{
+            List<Player> playerss = new ArrayList<>();
             for( Player p : this.players ) {
-                playerss.add( (Player) p.clonePlayer() );
+                playerss.add(p);
+                //playerss.add( (Player) p.clonePlayer() );
             }
-            StartGameEv startGameEv = new StartGameEv(  playerss, (Table) this.gameboard.cloneTable());
+            //StartGameEv startGameEv = new StartGameEv(  playerss, (Table) this.gameboard.cloneTable());
+            StartGameEv startGameEv = new StartGameEv(  playerss, this.gameboard);
             playerRemoteView.sendAllModel(startGameEv);
-        } catch (CloneNotSupportedException ex) {
+    //    } catch (CloneNotSupportedException ex) {
             //do nothing
-        }
+     //   }
 
     }
 

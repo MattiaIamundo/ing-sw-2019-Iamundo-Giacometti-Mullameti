@@ -10,6 +10,7 @@ import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.view.Observable;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -17,7 +18,7 @@ import java.util.Scanner;
  * @author Merita Mullameti
  */
 
-public class Newton extends Observable<NewtonChooseEv> implements EffectBehaviour {
+public class Newton extends Observable<NewtonChooseEv> implements EffectBehaviour, Serializable {
     private Space moveto;
     /**
      * @param target the player  who is going to be attacked using this power up card

@@ -1,7 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.events.weaponeffect_controller_events.SecondLockChooseEv;
-import it.polimi.sw2019.events.weaponeffect_controller_events.TargetSetEv;
 import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
@@ -56,7 +55,7 @@ public class SecondLockCont extends VisibleTargetCont implements Observer<Second
 
     @Override
     public void update(SecondLockSetEv message) {
-        super.update((TargetSetEv) message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }
