@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.TargetSetEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.TurretTripodChooseEv;
 import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.DoubleAdditive;
@@ -78,7 +79,7 @@ public class TurretTripodCont extends VisibleTargetCont implements Observer<Turr
 
     @Override
     public void update(TurretTripodSetEv message) {
-        //super.update(message);
+        super.update((TargetSetEv) message);
         realmodel.usePower(attacker);
     }
 }

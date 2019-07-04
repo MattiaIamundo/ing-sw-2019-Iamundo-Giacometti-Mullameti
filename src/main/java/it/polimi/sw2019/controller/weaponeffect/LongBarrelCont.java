@@ -2,6 +2,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.events.weaponeffect_controller_events.LongBarrelChooseEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.LongBarrelSetEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.TargetSetEv;
 import it.polimi.sw2019.model.weapon_power.LongBarrelMode;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
@@ -23,7 +24,7 @@ public class LongBarrelCont extends OneMoveAway implements Observer<LongBarrelSe
 
     @Override
     public void update(LongBarrelSetEv message) {
-        //super.update(message);
+        super.update((TargetSetEv) message);
         realmodel.usePower(attacker);
     }
 }

@@ -2,6 +2,7 @@ package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.events.weaponeffect_controller_events.CyberbladeChooseEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.CyberbladeSetEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.TargetSetEv;
 import it.polimi.sw2019.model.weapon_power.Cyberblade;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.view.Observer;
@@ -23,7 +24,7 @@ public class CyberbladeCont extends SameSquare implements Observer<CyberbladeSet
 
     @Override
     public void update(CyberbladeSetEv message) {
-        //super.update(message);
+        super.update((TargetSetEv) message);
         realmodel.usePower(attacker);
     }
 }

@@ -1,6 +1,7 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.events.weaponeffect_controller_events.NanoTracerChooseEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.TargetSetEv;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.events.weaponeffect_controller_events.NanoTracerSetEv;
@@ -49,7 +50,7 @@ public class NanoTracerCont extends VisibleTargetCont implements Observer<NanoTr
     public void update(NanoTracerSetEv message) {
         ArrayList<Player> targets = new ArrayList<>();
 
-        //super.update(message);
+        super.update((TargetSetEv) message);
         for (Player player : players){
             if (player.getPosition() == realmodel.getTarget().getPosition()){
                 targets.add(player);
