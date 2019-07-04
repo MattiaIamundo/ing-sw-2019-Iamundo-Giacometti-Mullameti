@@ -4,6 +4,8 @@ package it.polimi.sw2019.view;
 
 public interface UIinterface {
 
+    void requestMenu(String string);
+
     void requestNickname(String string);
 
     void requestColor(String string);

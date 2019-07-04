@@ -43,4 +43,8 @@ public class Shoot extends Observable<WeaponChooseEv> implements Action, Observe
             }
         }
     }
+
+    public WeaponEffectManager getWeaponEffectManager() {
+        return weaponEffectManager;
+    }
 }

@@ -3,6 +3,7 @@ package it.polimi.sw2019.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import it.polimi.sw2019.controller.weaponeffect.*;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.events.NotifyReturn;
@@ -16,6 +17,8 @@ import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
 import it.polimi.sw2019.events.weapon_event.PowerChooseEv;
 import it.polimi.sw2019.events.weapon_event.UnpaidEffectEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.*;
+import it.polimi.sw2019.exception.FullWeaponDeckException;
+import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.*;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.powerup.Newton;
@@ -28,6 +31,7 @@ import it.polimi.sw2019.network.Socket.PlayerThread;
 import it.polimi.sw2019.view.*;
 import it.polimi.sw2019.view.Observer;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -57,6 +61,7 @@ public class Game implements Observer <NotifyReturn> {
     private Move moveController;
     private Reload reloadController;
     private Shoot shootController;
+    private HashMap<String, EffectController> effectControllers;
     private UsePowerUp usePowerUpController;
     //the main controller's variables
     private List<ActionEv> eventActualPlayer = new ArrayList<>();
@@ -100,6 +105,7 @@ public class Game implements Observer <NotifyReturn> {
         grabController.addObserver(this);
         usePowerUpController = new UsePowerUp();
         shootController = new Shoot(this.players, this.gameboard.getMap(), this);
+        effectControllers = shootController.getWeaponEffectManager().getEffectControllers();
         killshotController = new Killshot();
         finalFrenzyController = new FinalFrenzy();
         //da rimuovere e chiamare da metodo, il metodo c'è già
@@ -1048,6 +1054,116 @@ public class Game implements Observer <NotifyReturn> {
         return playerToReturn;
     }
 
+    /**
+     * set the ammo in the correct way,
+     * it depends by the number of map
+     * @param nrMap the map's number
+     */
+    public void setAmmo(String nrMap) {
+        if(nrMap.equals("zero")) {
+            initializeAmmo0();
+        }
+        else if(nrMap.equals("one")) {
+            initializeAmmo1();
+        }
+        else if (nrMap.equals("two")) {
+            initializeAmmo2();
+        }
+        else {
+            initializeAmmo3();
+        }
+    }
+
+    /**
+     * set the ammo if the map is the 4x3
+     */
+    private void initializeAmmo0() {
+        try{
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+
+        } catch (InvalidSpaceException ex) {
+            //
+        }
+    }
+
+    private void initializeAmmo1() {
+        try{
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+
+        } catch (InvalidSpaceException ex) {
+            //
+        }
+    }
+
+    private void initializeAmmo2() {
+        try{
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+
+        } catch (InvalidSpaceException ex) {
+            //
+        }
+    }
+
+    private void initializeAmmo3() {
+        try{
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(1,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(2,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+            ((SpaceAmmo) this.getGameboard().getMap().getSpace(3,1) ).setAmmo(this.getGameboard().getAmmo().remove(0));
+
+        } catch (InvalidSpaceException ex) {
+            //
+        }
+
+    }
+
+    /**
+     * set the weapon to the three space generation
+     */
+    public void setWeapon() {
+        //the three space generation are always the same
+        try{
+            ((SpaceGeneration)this.getGameboard().getMap().getSpace(0,1)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration)this.getGameboard().getMap().getSpace(0,1)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration)this.getGameboard().getMap().getSpace(0,1)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration) this.getGameboard().getMap().getSpace(2,2)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration) this.getGameboard().getMap().getSpace(2,2)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration) this.getGameboard().getMap().getSpace(2,2)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration) this.getGameboard().getMap().getSpace(3,0)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration) this.getGameboard().getMap().getSpace(3,0)).setWeapon(this.getGameboard().getWeapon().remove(0));
+            ((SpaceGeneration) this.getGameboard().getMap().getSpace(3,0)).setWeapon(this.getGameboard().getWeapon().remove(0));
+        } catch (InvalidSpaceException | FullWeaponDeckException ex) {
+            //do nothing
+        }
+
+    }
+
     public void sendStartGame(PlayerRemoteView playerRemoteView) {
         playerRemoteView.sendStartGame();
     }
@@ -1068,7 +1184,7 @@ public class Game implements Observer <NotifyReturn> {
 
 
 
-    public void handleEvent(ActionEv actionEv) {
+    public void update(ActionEv actionEv) {
 
         actionEv.handle(this.executorEventImp, this);
     }
@@ -1091,20 +1207,206 @@ public class Game implements Observer <NotifyReturn> {
         this.grabController.handleEvent(grabEv, player);
     }
 
-/*
-    public void handleEvent(PowerupEv powerupEv) {
-
-        Player player = searchPlayer( powerupEv.getPlayerNickname() );
-        this.usePowerUpController.handleEvent(powerupEv, player);
+    public void handleEvent(BarbecueSetEv barbecueSetEv){
+        String name = BarbecueMode.class.getName().substring(BarbecueMode.class.getName().lastIndexOf('.') + 1);
+        ((BarbecueModeCont) effectControllers.get(name)).update(barbecueSetEv);
     }
 
-    public void handleEvent() {
-
-
+    public void handleEvent(BlackHoleSetEv blackHoleSetEv){
+        String name = BlackHole.class.getName().substring(BlackHole.class.getName().lastIndexOf('.') + 1);
+        ((BlackHoleCont) effectControllers.get(name)).update(blackHoleSetEv);
     }
 
+    public void handleEvent(ChainReactSetEv chainReactSetEv){
+        String name = ChainReaction.class.getName().substring(ChainReaction.class.getName().lastIndexOf('.') + 1);
+        ((ChainReactionCont) effectControllers.get(name)).update(chainReactSetEv);
+    }
 
- */
+    public void handleEvent(CozyFireModeSetEv cozyFireModeSetEv){
+        String name = CozyFireMode.class.getName().substring(CozyFireMode.class.getName().lastIndexOf('.') + 1);
+        ((CozyFireModeCont) effectControllers.get(name)).update(cozyFireModeSetEv);
+    }
+
+    public void handleEvent(CyberbladeSetEv cyberbladeSetEv){
+        String name = Cyberblade.class.getName().substring(Cyberblade.class.getName().lastIndexOf('.') + 1);
+        ((CyberbladeCont) effectControllers.get(name)).update(cyberbladeSetEv);
+    }
+
+    public void handleEvent(ExtraGrenadeSetEv extraGrenadeSetEv){
+        String name = ExtraGrenade.class.getName().substring(ExtraGrenade.class.getName().lastIndexOf('.') + 1);
+        ((ExtraGrenadeCont) effectControllers.get(name)).update(extraGrenadeSetEv);
+    }
+
+    public void handleEvent(FlamethrowerSetEv flamethrowerSetEv){
+        String name = Flamethrower.class.getName().substring(Flamethrower.class.getName().lastIndexOf('.') + 1);
+        ((FlamethrowerCont) effectControllers.get(name)).update(flamethrowerSetEv);
+    }
+
+    public void handleEvent(FocusShotSetEv focusShotSetEv){
+        String name = FocusShot.class.getName().substring(FocusShot.class.getName().lastIndexOf('.') + 1);
+        ((FocusShotCont) effectControllers.get(name)).update(focusShotSetEv);
+    }
+
+    public void handleEvent(FurnaceSetEv furnaceSetEv){
+        String name = Furnace.class.getName().substring(Furnace.class.getName().lastIndexOf('.') + 1);
+        ((FurnaceCont) effectControllers.get(name)).update(furnaceSetEv);
+    }
+
+    public void handleEvent(GrenadeLaunchSetEv grenadeLaunchSetEv){
+        String name = GrenadeLauncher.class.getName().substring(GrenadeLauncher.class.getName().lastIndexOf('.') + 1);
+        ((GrenadeLaunchCont) effectControllers.get(name)).update(grenadeLaunchSetEv);
+    }
+
+    public void handleEvent(HeatseekerSetEv heatseekerSetEv){
+        String name = Heatseeker.class.getName().substring(Heatseeker.class.getName().lastIndexOf('.') + 1);
+        ((HeatseekerCont) effectControllers.get(name)).update(heatseekerSetEv);
+    }
+
+    public void handleEvent(HellionSetEv hellionSetEv){
+        String name = Hellion.class.getName().substring(Hellion.class.getName().lastIndexOf('.') + 1);
+        ((HellionCont) effectControllers.get(name)).update(hellionSetEv);
+    }
+
+    public void handleEvent(HighVoltageSetEv highVoltageSetEv){
+        String name = HighVoltage.class.getName().substring(HighVoltage.class.getName().lastIndexOf('.') + 1);
+        ((HighVoltageCont) effectControllers.get(name)).update(highVoltageSetEv);
+    }
+
+    public void handleEvent(LockRifleSetEv lockRifleSetEv){
+        String name = LockRifle.class.getName().substring(LockRifle.class.getName().lastIndexOf('.') + 1);
+        ((LockRifleCont) effectControllers.get(name)).update(lockRifleSetEv);
+    }
+
+    public void handleEvent(LongBarrelSetEv longBarrelSetEv){
+        String name = LongBarrelMode.class.getName().substring(LongBarrelMode.class.getName().lastIndexOf('.') + 1);
+        ((LongBarrelCont) effectControllers.get(name)).update(longBarrelSetEv);
+    }
+
+    public void handleEvent(MachineGunSetEv machineGunSetEv){
+        String name = MachineGun.class.getName().substring(MachineGun.class.getName().lastIndexOf('.') + 1);
+        ((MachineGunCont) effectControllers.get(name)).update(machineGunSetEv);
+    }
+
+    public void handleEvent(NanoTracerSetEv nanoTracerSetEv){
+        String name = NanoTracerMode.class.getName().substring(NanoTracerMode.class.getName().lastIndexOf('.') + 1);
+        ((NanoTracerCont) effectControllers.get(name)).update(nanoTracerSetEv);
+    }
+
+    public void handleEvent(PhaseGlideSetEv phaseGlideSetEv){
+        String name = PhaseGlide.class.getName().substring(PhaseGlide.class.getName().lastIndexOf('.') + 1);
+        ((PhaseGlideCont) effectControllers.get(name)).update(phaseGlideSetEv);
+    }
+
+    public void handleEvent(PiercingModeSetEv piercingModeSetEv){
+        String name = PiercingMode.class.getName().substring(PiercingMode.class.getName().lastIndexOf('.') + 1);
+        ((PiercingModeCont) effectControllers.get(name)).update(piercingModeSetEv);
+    }
+
+    public void handleEvent(PlasmaGunSetEv plasmaGunSetEv){
+        String name = PlasmaGun.class.getName().substring(PlasmaGun.class.getName().lastIndexOf('.') + 1);
+        ((PlasmaGunCont) effectControllers.get(name)).update(plasmaGunSetEv);
+    }
+
+    public void handleEvent(PowerGloveSetEv powerGloveSetEv){
+        String name = PowerGlove.class.getName().substring(PowerGlove.class.getName().lastIndexOf('.') + 1);
+        ((PowerGloveCont) effectControllers.get(name)).update(powerGloveSetEv);
+    }
+
+    public void handleEvent(PulvModeSetEv pulvModeSetEv){
+        String name = PulverizeMode.class.getName().substring(PulverizeMode.class.getName().lastIndexOf('.') + 1);
+        ((PulverizeModeCont) effectControllers.get(name)).update(pulvModeSetEv);
+    }
+
+    public void handleEvent(PunisherModeSetEv punisherModeSetEv){
+        String name = PunisherMode.class.getName().substring(PunisherMode.class.getName().lastIndexOf('.') + 1);
+        ((PunisherModeCont) effectControllers.get(name)).update(punisherModeSetEv);
+    }
+
+    public void handleEvent(RailGunSetEv railGunSetEv){
+        String name = RailGun.class.getName().substring(RailGun.class.getName().lastIndexOf('.') + 1);
+        ((RailGunCont) effectControllers.get(name)).update(railGunSetEv);
+    }
+
+    public void handleEvent(RocketFistSetEv rocketFistSetEv){
+        String name = RocketFistMode.class.getName().substring(RocketFistMode.class.getName().lastIndexOf('.') + 1);
+        ((RocketFistCont) effectControllers.get(name)).update(rocketFistSetEv);
+    }
+
+    public void handleEvent(RocketJumpSetEv rocketJumpSetEv){
+        String name = RocketJump.class.getName().substring(RocketJump.class.getName().lastIndexOf('.') + 1);
+        ((RocketJumpCont) effectControllers.get(name)).update(rocketJumpSetEv);
+    }
+
+    public void handleEvent(RocketLaunchSetEv rocketLaunchSetEv){
+        String name = RocketLauncher.class.getName().substring(RocketLauncher.class.getName().lastIndexOf('.') + 1);
+        ((RocketLauncherCont) effectControllers.get(name)).update(rocketLaunchSetEv);
+    }
+
+    public void handleEvent(ScannerModeSetEv scannerModeSetEv){
+        String name = ScannerMode.class.getName().substring(ScannerMode.class.getName().lastIndexOf('.') + 1);
+        ((ScannerModeCont) effectControllers.get(name)).update(scannerModeSetEv);
+    }
+
+    public void handleEvent(SecondLockSetEv secondLockSetEv){
+        String name = SecondLock.class.getName().substring(SecondLock.class.getName().lastIndexOf('.') + 1);
+        ((SecondLockCont) effectControllers.get(name)).update(secondLockSetEv);
+    }
+
+    public void handleEvent(ShadowstepSetEv shadowstepSetEv){
+        String name = Shadowstep.class.getName().substring(Shadowstep.class.getName().lastIndexOf('.') + 1);
+        ((ShadowstepCont) effectControllers.get(name)).update(shadowstepSetEv);
+    }
+
+    public void handleEvent(ShockwaveSetEv shockwaveSetEv){
+        String name = Shockwave.class.getName().substring(Shockwave.class.getName().lastIndexOf('.') + 1);
+        ((ShockwaveCont) effectControllers.get(name)).update(shockwaveSetEv);
+    }
+
+    public void handleEvent(ShotgunSetEv shotgunSetEv){
+        String name = Shotgun.class.getName().substring(Shotgun.class.getName().lastIndexOf('.') + 1);
+        ((ShotgunCont) effectControllers.get(name)).update(shotgunSetEv);
+    }
+
+    public void handleEvent(SledgehammerSetEv sledgehammerSetEv){
+        String name = Sledgehammer.class.getName().substring(Sledgehammer.class.getName().lastIndexOf('.') + 1);
+        ((SledgehammerCont) effectControllers.get(name)).update(sledgehammerSetEv);
+    }
+
+    public void handleEvent(SliceAndDiceSetEv sliceAndDiceSetEv){
+        String name = SliceAndDice.class.getName().substring(SliceAndDice.class.getName().lastIndexOf('.') + 1);
+        ((SliceAndDiceCont) effectControllers.get(name)).update(sliceAndDiceSetEv);
+    }
+
+    public void handleEvent(ThorSetEv thorSetEv){
+        String name = Thor.class.getName().substring(Thor.class.getName().lastIndexOf('.') + 1);
+        ((ThorCont) effectControllers.get(name)).update(thorSetEv);
+    }
+
+    public void handleEvent(TractorBeamSetEv tractorBeamSetEv){
+        String name = TractorBeam.class.getName().substring(TractorBeam.class.getName().lastIndexOf('.') + 1);
+        ((TractorBeamCont) effectControllers.get(name)).update(tractorBeamSetEv);
+    }
+
+    public void handleEvent(TurretTripodSetEv turretTripodSetEv){
+        String name = TurretTripod.class.getName().substring(TurretTripod.class.getName().lastIndexOf('.') + 1);
+        ((TurretTripodCont) effectControllers.get(name)).update(turretTripodSetEv);
+    }
+
+    public void handleEvent(VortexSetEv vortexSetEv){
+        String name = Vortex.class.getName().substring(Vortex.class.getName().lastIndexOf('.') + 1);
+        ((VortexCont) effectControllers.get(name)).update(vortexSetEv);
+    }
+
+    public void handleEvent(WhisperSetEv whisperSetEv){
+        String name = Whisper.class.getName().substring(Whisper.class.getName().lastIndexOf('.') + 1);
+        ((WhisperCont) effectControllers.get(name)).update(whisperSetEv);
+    }
+
+    public void handleEvent(ZX2SetEv zx2SetEv){
+        String name = ZX2.class.getName().substring(ZX2.class.getName().lastIndexOf('.') + 1);
+        ((ZX2Cont) effectControllers.get(name)).update(zx2SetEv);
+    }
+
 
 
     public void update(NotifyReturn notifyReturn) {

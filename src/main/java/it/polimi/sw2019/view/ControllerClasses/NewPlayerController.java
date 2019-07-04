@@ -82,7 +82,7 @@ public class NewPlayerController {
         clientSocket.getContSelect().waitingForColorRequest(clientSocket.getPlayerView());
 
         /*try{
-           Parent chooseMapSkull= FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML/PlayerCharacter.fxml"));
+           Parent chooseMapSkull= FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/PlayerCharacter.fxml"));
             Scene chooseMapSkullScene = new Scene(chooseMapSkull);
 
             Stage window = (Stage)nextButton.getScene().getWindow();

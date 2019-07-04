@@ -25,7 +25,7 @@ public class TimerThread implements Runnable {
     // ........ TimerThread's Methods ...........
 
     public TimerThread() {
-        time = 100;
+        time = 0;
         turnTime = 30000;
         game = false;
         timerDone = false;
@@ -38,7 +38,9 @@ public class TimerThread implements Runnable {
      * @param seconds the time to wait
      */
     public synchronized void setTime(int seconds) {
+
         this.time = seconds;
+        System.out.println(time);
     }
 
     /**
@@ -87,6 +89,7 @@ public class TimerThread implements Runnable {
      * start the timer thread
      */
     public void run() {
+
         timer = new Timer();
         //initializing the task for the timer
         final TimerTask task = new TimerTask() {

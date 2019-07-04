@@ -1,9 +1,14 @@
 package it.polimi.sw2019.events.weaponeffect_controller_events;
 
+import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ActionEv;
+import it.polimi.sw2019.events.ExecutorEventImp;
+
 /**
  * These class represent the set event of Extra grenade, the optional effect of Grenade Launcher
  */
-public class ExtraGrenadeSetEv {
+public class ExtraGrenadeSetEv implements ActionEv {
+    private String playerNickname;
     private String square;
     private String moveto;
 
@@ -26,11 +31,26 @@ public class ExtraGrenadeSetEv {
         this.moveto = moveto;
     }
 
+    @Override
+    public String getPlayerNickname() {
+        return playerNickname;
+    }
+
+    @Override
+    public void setPlayerNickname(String playerNickname) {
+        this.playerNickname = playerNickname;
+    }
+
     public String getSquare() {
         return square;
     }
 
     public String getMoveto() {
         return moveto;
+    }
+
+    @Override
+    public void handle(ExecutorEventImp executorEventImp, Game controller) {
+        executorEventImp.handleObject(this, controller);
     }
 }

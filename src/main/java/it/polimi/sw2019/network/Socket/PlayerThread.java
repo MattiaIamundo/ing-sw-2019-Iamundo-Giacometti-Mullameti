@@ -8,6 +8,7 @@ import it.polimi.sw2019.view.PlayerRemoteView;
 import it.polimi.sw2019.view.PowerUpRemoteView;
 import it.polimi.sw2019.view.TableRemoteView;
 import it.polimi.sw2019.view.WeaponRemoteView;
+import javafx.application.Platform;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,16 +27,11 @@ public class PlayerThread implements Runnable {
     private Scanner input;
     //output to client
     private PrintWriter output;
-    //if the thread is suspended
-    private boolean suspended;
     //the player's nickname
     private String nickname = "pippo";
-    //
-    private String nameOfMatch;
     //to contain what the player write ( his actions )
     private String string;
     //the controller
-    private MultiGame multiGameController;
     private Game gameController;
 
     //the logger
@@ -47,11 +43,15 @@ public class PlayerThread implements Runnable {
     private WeaponRemoteView weaponRemoteView;
     private PowerUpRemoteView powerUpRemoteView;
 
-    //anzichè il Game, devo passargli il multigame dal socket
+    /**
+     * set the remote view, the connection to the socket and
+     * the controller
+     * @param socket the connection with the socket
+     * @param controller the game's controller
+     */
     public PlayerThread(Socket socket, Game controller){
         //set the player's number and the socket
         connection = socket;
-        suspended = true;
         string = "bho";
         gameController = controller;
         playerRemoteView = new PlayerRemoteView(socket,controller);
@@ -156,23 +156,14 @@ public class PlayerThread implements Runnable {
         }
         else {
 
-
             //you are connected with the game
             try {
 
-                //this.playerRemoteView.addObserver(this.gameController);
-                //this.tableRemoteView.addObserver(this.gameController);
-                //this.weaponRemoteView.addObserver(this.gameController);
-                //this.powerUpRemoteView.addObserver(this.gameController);
                 boolean goOut = false;
                 boolean firstTime = true;
 
                 synchronized (gameController.getStop()) {
 
-                    //gameController.addPlayers("mimmo"); gameController.getPlayers().get(0).setColor("gray");
-                    //gameController.addPlayers("eta"); gameController.getPlayers().get(1).setColor("blue");
-                    //gameController.addPlayers("beta"); gameController.getPlayers().get(2).setColor("yellow");
-                    //gameController.setGameStarted(true);
                     do {
 
                         if ( !gameController.getGameStarted() ) {
@@ -222,10 +213,7 @@ public class PlayerThread implements Runnable {
                                 }
                                 logger.log(Level.INFO, "{PlayerThread "+ this.nickname +"} has memorized the character!");
                                 this.gameController.sendYouAreFirstPlayer(this.playerRemoteView);
-                                //if you to choose skull
-                                //if ( this.gameController.getGameboard().getKillshotTrack().isEmpty() ) {
-                                //if ( true ) {
-                                    //this.gameController.sendThereAreNotSkull(this.playerRemoteView);
+
                                     canGoOut = false;
                                     firstTime = true;
                                     //you have to choose the number of the skull
@@ -243,16 +231,7 @@ public class PlayerThread implements Runnable {
                                             gameController.sendOk(this.playerRemoteView);
                                         }
                                     }
-                                //}
-                                //else {
-                                 //   this.gameController.sendThereAreSkull(this.playerRemoteView);
-                                //}
 
-
-                                //you have to choose the number of the map
-                                //if ( this.gameController.getGameboard().getMap().getList().get(0).isEmpty() ) {
-
-                                    //this.gameController.sendThereIsNotMap(this.playerRemoteView);
                                     canGoOut = false;
                                     firstTime = true;
                                     while (!canGoOut) {
@@ -266,14 +245,11 @@ public class PlayerThread implements Runnable {
                                             gameController.sendNotOk(this.playerRemoteView);
                                         } else {
                                             this.gameController.createMap(nmap);
+                                            this.gameController.getGameboard().setNrMap(nmap);
                                             gameController.sendOk(this.playerRemoteView);
                                         }
                                     }
 
-                                //}
-                                //else {
-                                 //   this.gameController.sendThereIsMap(this.playerRemoteView);
-                                //}
 
                             } else {
                                 //OTHERS PLAYERS
@@ -395,9 +371,6 @@ public class PlayerThread implements Runnable {
 
                 logger.log(Level.INFO, "{ PlayerThread } loop until there are 5 players or the timer finishes" );
 
-
-                //boolean goOutTheLoop = false;
-
                 while ( gameController.getPlayers().size() < 5 && !gameController.getTimerThread().getTimerDone()) {
 
                     synchronized (gameController.getTimerPingThread()) {
@@ -440,19 +413,7 @@ public class PlayerThread implements Runnable {
                             gameController.getTimerThread().run();
                             gameController.getTimerThread().setOn(true);
                         }
-                        /*
-                        //are there enough players when the timer id done?
-                        if(gameController.getPlayers().size() >= 3 && gameController.getTimerThread().getTimerDone() && !goOutTheLoop ){
-                            gameController.sendPing(playerRemoteView);
-                            logger.log(Level.INFO, "{ PlayerThread " +  this.nickname + "} sends the ok ping ");
-                            string = playerRemoteView.waitForPong();
-                            logger.log(Level.INFO, "{ PlayerThread " +  this.nickname + "} receives the ok pong ");
-                            goOutTheLoop = true;
-                        }
-
-                         */
                     }
-
                 }
 
                 synchronized ( gameController.getTimerThread() ) {
@@ -489,6 +450,10 @@ public class PlayerThread implements Runnable {
 
     }//END of RUN
 
+    /**
+     * this method set the main things to start the game,
+     * and there is the game loop
+     */
     private void startGame() {
 
         if( gameController.getPlayers().get(0).getNickname().equals(this.nickname) ) {
@@ -506,6 +471,12 @@ public class PlayerThread implements Runnable {
         gameController.createWeapon();
         gameController.createPowerUp();
         //fill the table in space generation and in space ammo with weapon and ammo
+        if( this.nickname.equals(this.gameController.getPlayers().get(0).getNickname() ) ) {
+
+            gameController.setAmmo(this.gameController.getGameboard().getNrMap());
+            gameController.setWeapon();
+        }
+
 
         try {
             //send the string "start" to activate a new scene in the client
@@ -519,23 +490,26 @@ public class PlayerThread implements Runnable {
 
                 while ( !gameController.getTurnOfPlayer().getNickname().equals(this.nickname) ) {
 
-                    if ( !this.gameController.getTimerThread().getOn() ) {
-                        this.gameController.getTimerThread().run();
-                        this.gameController.getTimerThread().setOn(true);
-                    }
+                    synchronized (this.gameController.getTimerThread()) {
 
-                    if ( this.gameController.getTimerThread().getTimerDone() ) {
-                        //how to handle the the timerDone == TRUE??
-                        //bisogna buttare fuori questo player
+                        if ( !this.gameController.getTimerThread().getOn() ) {
+                            this.gameController.getTimerThread().run();
+                            this.gameController.getTimerThread().setOn(true);
+                            this.gameController.getTimerThread().setTimerDone(false);
+                        }
+
+                        if ( this.gameController.getTimerThread().getTimerDone() ) {
+                            //send out to the player
+                            changePlayerTurn();
+                            this.gameController.getTimerThread().setOn(false);
+                        }
                     }
                 }
 
-                //ActionEv actionEv = playerRemoteView.waitForAction();
-                //actionEv.setPlayerNickname(this.nickname);
-                //gameController.update(actionEv);
+                if ( gameController.getTurnOf().getUsedAction() == 2  ) {
+                    //next player
+                    changePlayerTurn();
 
-                if ( gameController.getTurnOf().getUsedAction() == 2 ) {
-                    //cambio turno al giocatore
                 }
 
             }
@@ -547,23 +521,41 @@ public class PlayerThread implements Runnable {
                 logger.log(Level.INFO, "{ PlayerThread " + this.nickname + "} is removed: " + ex.toString());
                 //gameController.removePlayerThread(this);
             }
-            
+
         }
 
     }
 
     /**
-     * this methods set the new player's status
-     * @param status the new player's status
+     * return the nickname of player
+     * @return player's nickname
      */
-    public void setSuspended( boolean status) {
-        this.suspended = status;
-    }//END of SET SUSPENDED
-
     public String getNickname() {
         return nickname;
     }
 
+    /**
+     * set the player for the next turn
+     */
+    private void changePlayerTurn() {
+        for (int i = 0; i < this.gameController.getPlayers().size(); i++) {
+
+            if ( this.gameController.getPlayers().get(i).getNickname().equals(this.nickname) ) {
+
+                if ( i == this.gameController.getPlayers().size() - 1 ) {
+                    gameController.getTurnOf().setPlayer( this.gameController.getPlayers().get(0) );
+                }
+                else {
+                    gameController.getTurnOf().setPlayer(this.gameController.getPlayers().get(i+1));
+                }
+            }
+        }
+    }
+
+    /**
+     * return the remote view associates to player
+     * @return the player's remote view
+     */
     public PlayerRemoteView getPlayerRemoteView() {
         return this.playerRemoteView;
     }
