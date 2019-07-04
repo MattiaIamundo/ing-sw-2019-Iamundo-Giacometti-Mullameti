@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.LineFireSetEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.RocketFistChooseEv;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.events.weaponeffect_controller_events.RocketFistSetEv;
@@ -24,7 +25,7 @@ public class RocketFistCont extends LineFireCont implements Observer<RocketFistS
 
     @Override
     public void update(RocketFistSetEv message) {
-        //super.update(message);
+        super.update((LineFireSetEv) message);
         realmodel.setMoveto(moveto(message.getDirection(), message.getMoveAmount()));
         realmodel.usePower(attacker);
     }

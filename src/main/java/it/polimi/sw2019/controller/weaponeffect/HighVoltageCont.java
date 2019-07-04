@@ -1,6 +1,7 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
 import it.polimi.sw2019.events.weaponeffect_controller_events.HighVoltageChooseEv;
+import it.polimi.sw2019.events.weaponeffect_controller_events.TargetSetEv;
 import it.polimi.sw2019.exception.InexistentWeaponException;
 import it.polimi.sw2019.model.DoubleAdditive;
 import it.polimi.sw2019.model.Map;
@@ -62,7 +63,7 @@ public class HighVoltageCont extends VisibleTargetCont implements Observer<HighV
 
     @Override
     public void update(HighVoltageSetEv message) {
-        //super.update(message);
+        super.update((TargetSetEv) message);
         realmodel.usePower(attacker);
     }
 }

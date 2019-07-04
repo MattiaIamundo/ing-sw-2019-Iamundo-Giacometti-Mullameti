@@ -1,5 +1,6 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
+import it.polimi.sw2019.events.weaponeffect_controller_events.TargetSetEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.ThorChooseEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.ThorSetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
@@ -23,7 +24,7 @@ public class ThorCont extends VisibleTargetCont implements Observer<ThorSetEv> {
 
     @Override
     public void update(ThorSetEv message) {
-        //super.update(message);
+        super.update((TargetSetEv) message);
         realmodel.usePower(attacker);
     }
 }
