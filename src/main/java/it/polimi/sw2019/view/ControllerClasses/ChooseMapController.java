@@ -20,24 +20,28 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ChooseMapController {
-    private ClientSocket clientSocket ;
+/**Class ChooseMapController: the controller behind ChooseMap.fxml file
+ * @author Merita Mullameti
+ */
 
-    private Table table =new Table();
-    private String map =new String();
+public class ChooseMapController {
+
+
+    private ClientSocket clientSocket ;
+    private String map ;
 
    @FXML private RadioButton firstMapButton;
    @FXML private RadioButton secondMapButton;
    @FXML private RadioButton thirdMapButton;
    @FXML private RadioButton fourthMapButton;
+
    @FXML private ToggleGroup mapGroup;
 
    @FXML private Button startButton;
-    public void setClientSocket(ClientSocket clientSocket){
-        this.clientSocket=clientSocket;
-    }
 
-
+    /**
+     * This method initializes the window of the ChooseMap.fxml
+     */
     @FXML
     public void initialize(){
        this.startButton.setDefaultButton(true);
@@ -48,8 +52,9 @@ public class ChooseMapController {
        this.fourthMapButton.setStyle("-fx-background-image: url(/it/polimi/sw2019/Images/3map.png);");
     }
 
-
-
+    /**
+     * This method handles the event on the ToggleGroup of Map-RadioButton
+     */
     @FXML
     public void chooseMap(){
 
@@ -64,7 +69,6 @@ public class ChooseMapController {
         }
         clientSocket.setInfo("map",map);
         if(clientSocket.getOk()){
-            System.out.println("entra");
             this.startButton.setVisible(true);
         }else if(!(clientSocket.getOk())){
             this.startButton.setVisible(false);
@@ -73,24 +77,17 @@ public class ChooseMapController {
 
     }
 
-
-
-
+    /**
+     * This method handles the event on the startButton and sends a " message " in clientSocket
+     */
     @FXML
     public void startButtonPushed()  {
-        System.out.println("6map");
-        System.out.println("1");
         clientSocket.getContSelect().waitForPing(clientSocket.getPlayerView());
-
-
-        /*Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/Table.fxml"));
-        Scene tableScene = new Scene(table);
-
-        Stage window = (Stage) startButton.getScene().getWindow();
-
-        window.setScene(tableScene);
-        window.show();*/
     }
-
+    /**
+     * This method sets the clientSocket on this class
+     * @param clientSocket
+     */
+    public void setClientSocket(ClientSocket clientSocket){ this.clientSocket=clientSocket; }
 
 }

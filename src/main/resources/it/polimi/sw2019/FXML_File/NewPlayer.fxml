@@ -15,16 +15,16 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="validInput" layoutX="28.0" layoutY="84.0" prefHeight="89.0" prefWidth="485.0" styleClass="labelInvalidInfo" stylesheets="@../CssStyle/generale.css" text="Invalid Nickname" />
-            <Button fx:id="submitButton" layoutX="274.0" layoutY="196.0" mnemonicParsing="false" onAction="#submitButtonClicked" prefHeight="31.0" prefWidth="131.0" stylesheets="@../CssStyle/generale.css" text="Submit" />
+            <Label fx:id="validInput" layoutX="28.0" layoutY="84.0" prefHeight="89.0" prefWidth="485.0" styleClass="labelInvalidInfo" stylesheets="@../CssStyle/generale.css" text="Invalid Nickname" visible="false" />
+            <Button fx:id="submitButton" defaultButton="true" layoutX="274.0" layoutY="196.0" mnemonicParsing="false" onAction="#submitButtonClicked" prefHeight="31.0" prefWidth="131.0" stylesheets="@../CssStyle/generale.css" text="Submit" />
             <Label id="label" fx:id="enterNickname" layoutX="27.0" layoutY="73.0" prefHeight="51.0" prefWidth="390.0" stylesheets="@../CssStyle/generale.css" text="Enter your nickname :" AnchorPane.topAnchor="70.0" />
             <TextField fx:id="nicknameField" layoutX="28.0" layoutY="122.0" maxWidth="503.0" prefHeight="51.0" prefWidth="377.0" promptText="Nickname" stylesheets="@../CssStyle/generale.css" AnchorPane.topAnchor="122.0">
                <font>
                   <Font size="24.0" />
                </font>
             </TextField>
-            <Button fx:id="nextButton" layoutX="417.0" layoutY="196.0" mnemonicParsing="false" onAction="#nextButtonClicked" prefHeight="31.0" prefWidth="131.0" stylesheets="@../CssStyle/generale.css" text="Next" />
-            <Button fx:id="okButton" layoutX="28.0" layoutY="196.0" mnemonicParsing="false" onAction="#handleOkButton" prefHeight="31.0" prefWidth="100.0" text="Ok" />
+            <Button fx:id="nextButton" defaultButton="true" layoutX="417.0" layoutY="196.0" mnemonicParsing="false" onAction="#nextButtonClicked" prefHeight="31.0" prefWidth="131.0" stylesheets="@../CssStyle/generale.css" text="Next" visible="false" />
+            <Button fx:id="okButton" defaultButton="true" layoutX="28.0" layoutY="196.0" mnemonicParsing="false" onAction="#handleOkButton" prefHeight="31.0" prefWidth="100.0" text="Ok" visible="false" />
          </children>
       </AnchorPane>
    </children>

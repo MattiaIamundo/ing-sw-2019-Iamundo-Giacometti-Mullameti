@@ -1,13 +1,16 @@
 package it.polimi.sw2019.events.client_event.Cevent;
 
 import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ExecutorEventClient;
 import it.polimi.sw2019.events.ExecutorEventImp;
+import it.polimi.sw2019.events.NotifyClient;
 import it.polimi.sw2019.events.NotifyReturn;
+import it.polimi.sw2019.view.ControllerClasses.TableController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DirectionChooseEv implements NotifyReturn {
+public class DirectionChooseEv implements NotifyReturn, NotifyClient {
 
     private String nickname;
     private List<String> movesPlayerCanDo = new ArrayList<>(3);
@@ -34,4 +37,10 @@ public class DirectionChooseEv implements NotifyReturn {
     public void updateObject(ExecutorEventImp executorEventImp, Game controller) {
         executorEventImp.updateObject(this, controller);
     }
+
+    public void handleMe(ExecutorEventClient executorEventClient, TableController tableController) {
+        tableController.handleEvent(this);
+    }
+
+
 }

@@ -13,16 +13,15 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+/**Class ChooseSkullController: the controller behind ChooseSkull.fxml file
+ * @author Merita Mullameti
+ */
 public class ChooseSkullController {
 
         private ClientSocket clientSocket ;
-        private Table table =new Table();
+        private String skulls ;
 
-        private String skulls =new String();
-
-        @FXML
-        private RadioButton fiveSkullsButton;
+        @FXML private RadioButton fiveSkullsButton;
         @FXML private RadioButton sixSkullsButton;
         @FXML private RadioButton sevenSkullsButton;
         @FXML private RadioButton eightSkullsButton;
@@ -31,13 +30,18 @@ public class ChooseSkullController {
         @FXML private Button nextButton;
 
 
+        /**
+        * This method initializes the window of the ChooseSkull.fxml
+        */
         @FXML
         public void initialize(){
             this.nextButton.setDefaultButton(true);
             this.nextButton.setVisible(false);
         }
 
-
+        /**
+        * This method handles the event on the ToggleGroup of Skulls-RadioButton
+        */
         @FXML
         public void chooseNrSkulls(){
 
@@ -58,23 +62,19 @@ public class ChooseSkullController {
 
         }
 
-        public void setClientSocket(ClientSocket clientSocket){
-            this.clientSocket=clientSocket;
-        }
-
+        /**
+        * This method handles the event on the nextButton and sends a " message " in clientSocket
+        */
         @FXML
-        public void nextButtonPushed() throws IOException {
-            System.out.println("1map");
+        public void nextButtonPushed(){
             clientSocket.getContSelect().waitingForMap(clientSocket.getPlayerView());
-            /*Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/ChooseMap.fxml"));
-            Scene tableScene = new Scene(table);
-
-            Stage window = (Stage) nextButton.getScene().getWindow();
-
-            window.setScene(tableScene);
-            window.show();*/
         }
 
+        /**
+         * This method sets the clientSocket on this class
+         * @param clientSocket
+         */
+        public void setClientSocket(ClientSocket clientSocket){ this.clientSocket=clientSocket; }
 
 }
 
