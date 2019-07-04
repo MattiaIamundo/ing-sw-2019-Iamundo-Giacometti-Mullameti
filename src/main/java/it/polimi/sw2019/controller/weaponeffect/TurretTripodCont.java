@@ -78,7 +78,7 @@ public class TurretTripodCont extends VisibleTargetCont implements Observer<Turr
 
     @Override
     public void update(TurretTripodSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

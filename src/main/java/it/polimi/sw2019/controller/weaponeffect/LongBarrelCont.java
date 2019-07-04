@@ -23,7 +23,7 @@ public class LongBarrelCont extends OneMoveAway implements Observer<LongBarrelSe
 
     @Override
     public void update(LongBarrelSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

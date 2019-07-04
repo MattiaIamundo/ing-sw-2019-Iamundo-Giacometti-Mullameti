@@ -55,7 +55,7 @@ public class SecondLockCont extends VisibleTargetCont implements Observer<Second
 
     @Override
     public void update(SecondLockSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

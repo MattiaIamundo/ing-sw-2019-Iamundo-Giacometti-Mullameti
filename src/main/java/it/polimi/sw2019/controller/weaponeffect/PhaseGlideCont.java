@@ -26,7 +26,7 @@ public class PhaseGlideCont extends MovePlayer implements Observer<PhaseGlideSet
 
     @Override
     public void update(PhaseGlideSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

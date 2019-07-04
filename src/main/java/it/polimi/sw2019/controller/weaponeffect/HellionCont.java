@@ -50,7 +50,7 @@ public class HellionCont extends VisibleTargetCont implements Observer<HellionSe
     public void update(HellionSetEv message) {
         ArrayList<Player> targets = new ArrayList<>();
 
-        super.update(message);
+        //super.update(message);
         for (Player player : players){
             if (player.getPosition() == realmodel.getTarget().getPosition()){
                 targets.add(player);

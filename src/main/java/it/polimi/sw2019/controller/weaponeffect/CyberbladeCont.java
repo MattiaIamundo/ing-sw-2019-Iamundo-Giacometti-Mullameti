@@ -23,7 +23,7 @@ public class CyberbladeCont extends SameSquare implements Observer<CyberbladeSet
 
     @Override
     public void update(CyberbladeSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

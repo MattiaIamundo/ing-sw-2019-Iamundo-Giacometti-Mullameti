@@ -49,7 +49,7 @@ public class NanoTracerCont extends VisibleTargetCont implements Observer<NanoTr
     public void update(NanoTracerSetEv message) {
         ArrayList<Player> targets = new ArrayList<>();
 
-        super.update(message);
+        //super.update(message);
         for (Player player : players){
             if (player.getPosition() == realmodel.getTarget().getPosition()){
                 targets.add(player);

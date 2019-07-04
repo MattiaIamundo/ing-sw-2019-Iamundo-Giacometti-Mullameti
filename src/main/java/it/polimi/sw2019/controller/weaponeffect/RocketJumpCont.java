@@ -26,7 +26,7 @@ public class RocketJumpCont extends MovePlayer implements Observer<RocketJumpSet
 
     @Override
     public void update(RocketJumpSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

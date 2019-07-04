@@ -18,7 +18,7 @@ public class MenuController {
 
 
 
-    private GUI gui;
+    
     private ClientSocket clientSocket;
 
     @FXML private Button newButton;
@@ -31,12 +31,6 @@ public class MenuController {
 
     }
 
-   /* public void attivaButton(){
-        String string=gui.sendOk();
-        if((gui.sendOk().equals("ok")){
-            this.newButton.setDisable(false);
-        }
-    }*/
 
     public void setClientSocket(ClientSocket clientSocket) {
         this.clientSocket=clientSocket;

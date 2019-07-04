@@ -36,7 +36,7 @@ public class ShadowstepCont extends MovePlayer implements Observer<ShadowstepSet
 
     @Override
     public void update(ShadowstepSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

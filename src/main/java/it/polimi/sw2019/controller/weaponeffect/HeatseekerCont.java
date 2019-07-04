@@ -23,7 +23,7 @@ public class HeatseekerCont extends VisibleTargetCont implements Observer<Heatse
 
     @Override
     public void update(HeatseekerSetEv message) {
-        super.update(message);
+      //  super.update(message);
         realmodel.usePower(attacker);
     }
 }

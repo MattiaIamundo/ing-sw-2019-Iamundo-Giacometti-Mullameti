@@ -1,4 +1,7 @@
 package it.polimi.sw2019.view.ControllerClasses;
+import it.polimi.sw2019.model.Ammo;
+import it.polimi.sw2019.model.Player;
+import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.network.Socket.ClientSocket;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -16,13 +20,20 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TableController {
 
 
 
     private ClientSocket clientSocket;
-
+    private List<Player> Players = new ArrayList<Player>(5);
+    private List<Weapon> Weapon = new ArrayList<Weapon>(9);
+    private List<Ammo> Ammo = new ArrayList<Ammo>(9);
+    private List<Button> PlayerButtons = new ArrayList<Button>(5);
+    private List<ImageView> WeaponImages = new ArrayList<ImageView>(9);
+    private List<ImageView> AmmoImages = new ArrayList<ImageView>(9);
     @FXML private ImageView yellowStatue;
     @FXML private ImageView blueStatue;
     @FXML private ImageView grayStatue;
@@ -37,11 +48,12 @@ public class TableController {
     private double YImage;
 
     //************************************PLAYERBOARDS*******************************************
-    @FXML private Button thisPlayer;
+
     @FXML private Button firstPlayer;
     @FXML private Button secondPlayer;
     @FXML private Button thirdPlayer;
     @FXML private Button fourthPlayer;
+    @FXML private Button fifthPlayer;
 
     @FXML private AnchorPane thisPlayerBoard;
     @FXML private AnchorPane firstPlayerBoard;
@@ -51,15 +63,15 @@ public class TableController {
 
     //****************************************WEAPON********************************************
 
-    @FXML private ImageView WeaponNorth1;
-    @FXML private ImageView WeaponNorth2;
-    @FXML private ImageView WeaponNorth3;
-    @FXML private ImageView WeaponWest1;
-    @FXML private ImageView WeaponWest2;
-    @FXML private ImageView WeaponWest3;
-    @FXML private ImageView WeaponEast1;
-    @FXML private ImageView WeaponEast2;
-    @FXML private ImageView WeaponEast3;
+    @FXML private ImageView weaponNorth1;
+    @FXML private ImageView weaponNorth2;
+    @FXML private ImageView weaponNorth3;
+    @FXML private ImageView weaponWest1;
+    @FXML private ImageView weaponWest2;
+    @FXML private ImageView weaponWest3;
+    @FXML private ImageView weaponEast1;
+    @FXML private ImageView weaponEast2;
+    @FXML private ImageView weaponEast3;
     @FXML private AnchorPane weaponBoardNorth;
     @FXML private AnchorPane weaponBoardWest;
     @FXML private AnchorPane weaponBoardEast;
@@ -89,26 +101,30 @@ public class TableController {
 
     @FXML
     public void initialize() {
-        this.thisPlayerBoard.setVisible(false);
-        this.firstPlayerBoard.setVisible(false);
-        this.secondPlayerBoard.setVisible(false);
-        this.thirdPlayerBoard.setVisible(false);
-        this.fourthPlayerBoard.setVisible(false);
-        this.weaponBoardNorth.setVisible(false);
-        this.weaponBoardEast.setVisible(false);
-        this.weaponBoardWest.setVisible(false);
+        
         this.XImage=this.yellowStatue.getX();
 
         this.YImage=this.yellowStatue.getY();
 
         System.out.println(this.yellowStatue.getX());
-
+        addPlayerButtonsToList();
+        addWeaponsToList();
+        setPlayerButtons(Players);
+        setWeapons(Weapon);
 
 
     }
 
     //************************************PLAYERBOARDS*******************************************
 
+    private void addPlayerButtonsToList(){
+        PlayerButtons.add(firstPlayer);
+        PlayerButtons.add(secondPlayer);
+        PlayerButtons.add(thirdPlayer);
+        PlayerButtons.add(fourthPlayer);
+        PlayerButtons.add(fifthPlayer);
+
+    }
     @FXML
     public void thisPlayerButtonPushed() {
         if (thisPlayerBoard.isVisible()) {
@@ -164,6 +180,28 @@ public class TableController {
     }
 
     //************************************WEAPONS*******************************************
+    private void addWeaponsToList(){
+        WeaponImages.add(weaponNorth1);
+        WeaponImages.add(weaponNorth2);
+        WeaponImages.add(weaponNorth3);
+        WeaponImages.add(weaponEast1);
+        WeaponImages.add(weaponEast2);
+        WeaponImages.add(weaponEast3);
+        WeaponImages.add(weaponWest1);
+        WeaponImages.add(weaponWest2);
+        WeaponImages.add(weaponWest3);
+
+
+    }
+
+    private void setWeapons(List<Weapon> Weapon){
+        for (Weapon weapon : Weapon){
+            for (ImageView weaponImages : WeaponImages) {
+                weaponImages.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", weapon.getName()));
+
+            }
+        }
+    }
     @FXML
     public void seeWeaponsNorth(){
         if (!(weaponBoardNorth.isVisible())){
@@ -287,6 +325,26 @@ public class TableController {
             double newY = YImage + 0;
             yellowStatue.setX(newX);
             yellowStatue.setY(newY);
+        }
+    }
+
+    public void setPlayerButtons(List<Player>players ){
+
+        for(Player player : players) {
+            for (Button playerButton : PlayerButtons) {
+                playerButton.setText(player.getNickname());
+                playerButton.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", player.getCharacter()));
+            }
+        }
+
+    }
+
+    private void setAmmo(List<Ammo> Ammo){
+        for (Ammo ammo : Ammo){
+            for (ImageView ammoImages : AmmoImages) {
+                //weaponImages.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", ammo.));
+
+            }
         }
     }
 

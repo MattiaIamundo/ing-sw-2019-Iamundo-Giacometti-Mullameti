@@ -116,7 +116,7 @@ public class PunisherModeCont extends VisibleTargetCont implements Observer<Puni
 
     @Override
     public void update(PunisherModeSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.usePower(attacker);
     }
 }

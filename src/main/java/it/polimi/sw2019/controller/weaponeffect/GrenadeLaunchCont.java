@@ -60,7 +60,7 @@ public class GrenadeLaunchCont extends VisibleTargetCont implements Observer<Gre
 
     @Override
     public void update(GrenadeLaunchSetEv message) {
-        super.update(message);
+        //super.update(message);
         realmodel.setMoveto(squares.get(realmodel.getTarget()).get(message.getMoveto()));
         realmodel.usePower(attacker);
     }
