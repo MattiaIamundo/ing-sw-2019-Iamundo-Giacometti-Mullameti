@@ -27,16 +27,8 @@
                   <ToggleGroup fx:id="mapGroup" />
                </toggleGroup></RadioButton>
             <RadioButton fx:id="thirdMapButton" contentDisplay="GRAPHIC_ONLY" layoutX="27.0" layoutY="291.0" mnemonicParsing="false" onAction="#chooseMap" prefHeight="156.0" prefWidth="219.0" styleClass="buttonMap" stylesheets="@../CssStyle/generale.css" text="RadioButton" toggleGroup="$mapGroup" AnchorPane.topAnchor="291.0" />
-            <RadioButton fx:id="firstMapButton" contentDisplay="GRAPHIC_ONLY" layoutX="27.0" layoutY="122.0" mnemonicParsing="false" onAction="#chooseMap" prefHeight="156.0" prefWidth="219.0" styleClass="buttonMap" stylesheets="@../CssStyle/generale.css" text="RadioButton">
-               <toggleGroup>
-                  <ToggleGroup fx:id="mapGroup1" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton fx:id="fourthMapButton" contentDisplay="GRAPHIC_ONLY" layoutX="266.0" layoutY="291.0" mnemonicParsing="false" onAction="#chooseMap" prefHeight="156.0" prefWidth="219.0" styleClass="buttonMap" stylesheets="@../CssStyle/generale.css" text="RadioButton">
-               <toggleGroup>
-                  <ToggleGroup fx:id="mapGroup2" />
-               </toggleGroup>
-            </RadioButton>
+            <RadioButton fx:id="firstMapButton" contentDisplay="GRAPHIC_ONLY" layoutX="27.0" layoutY="122.0" mnemonicParsing="false" onAction="#chooseMap" prefHeight="156.0" prefWidth="219.0" styleClass="buttonMap" stylesheets="@../CssStyle/generale.css" text="RadioButton" toggleGroup="$mapGroup" />
+            <RadioButton fx:id="fourthMapButton" contentDisplay="GRAPHIC_ONLY" layoutX="266.0" layoutY="291.0" mnemonicParsing="false" onAction="#chooseMap" prefHeight="156.0" prefWidth="219.0" styleClass="buttonMap" stylesheets="@../CssStyle/generale.css" text="RadioButton" toggleGroup="$mapGroup" />
          </children>
       </AnchorPane>
    </children>

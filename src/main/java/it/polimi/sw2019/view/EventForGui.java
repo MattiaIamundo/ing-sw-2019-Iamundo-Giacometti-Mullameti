@@ -15,22 +15,28 @@ public class EventForGui extends Observable<NotifyReturn> implements Runnable {
 
     public void run() {
 
-        Platform.runLater( () -> {
 
+        Platform.runLater( () -> {
             boolean goOutWhile = false;
+
             //this.addObserver(this.clientSocket.getTableController());
 
             StartGameEv startGameEv = (StartGameEv) this.clientSocket.getContSelect().waitForNotifyReturnEvent();
             this.clientSocket.getTableController().handleEvent(startGameEv);
 
             this.clientSocket.notifyGUI("Refresh");
-            while(!goOutWhile) {
 
+            /*while(!goOutWhile) {
                 NotifyReturn notifyReturn =  this.clientSocket.getContSelect().waitForNotifyReturnEvent();
                 notify(notifyReturn);
 
             }
+
+             */
         }   );
+
+
+
 
     }
 }
