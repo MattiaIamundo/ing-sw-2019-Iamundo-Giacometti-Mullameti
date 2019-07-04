@@ -1,26 +1,17 @@
 package it.polimi.sw2019.view.ControllerClasses;
 
-
-
-import it.polimi.sw2019.model.Player;
-
 import it.polimi.sw2019.network.Socket.ClientSocket;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
-
 import java.util.List;
 
+/**Class PlayerCharacterController: the controller behind PlayerCharacter.fxml file
+ * @author Merita Mullameti
+ */
 public class PlayerCharacterController {
+
     private ClientSocket clientSocket ;
-
-
-
-    public void setClientSocket(ClientSocket clientSocket){
-        this.clientSocket=clientSocket;
-    }
-
-
+    private String stringCharacter;
 
     @FXML private RadioButton yellowButton;
     @FXML private RadioButton blueButton;
@@ -30,31 +21,27 @@ public class PlayerCharacterController {
     @FXML private ToggleGroup characterGroup;
     @FXML private Button nextButton;
     @FXML private Button getCharacterButton;
-    private String stringCharacter;
 
 
-
+    /**
+     * This method initializes the window of the PlayerCharacter.fxml
+     */
     @FXML
     public void initialize(){
 
-        this.nextButton.setDefaultButton(true);
-        this.nextButton.setVisible(false);
-        this.yellowButton.setDisable(true);
-        this.blueButton.setDisable(true);
-        this.grayButton.setDisable(true);
-        this.greenButton.setDisable(true);
-        this.purpleButton.setDisable(true);
         this.yellowButton.setStyle("-fx-background-image: url(/it/polimi/sw2019/Images/yellow.png); ");
         this.blueButton.setStyle("-fx-background-image: url(/it/polimi/sw2019/Images/blue.png);");
         this.grayButton.setStyle("-fx-background-image: url(/it/polimi/sw2019/Images/gray.png);");
         this.greenButton.setStyle("-fx-background-image: url(/it/polimi/sw2019/Images/green.png);");
         this.purpleButton.setStyle("-fx-background-image: url(/it/polimi/sw2019/Images/purple.png);");
 
-
     }
 
-
-    public void enableButtons(List<String> colorList){
+    /**
+     * This method enables the still-available characters buttons
+     * @param colorList list of available characters
+     */
+    private void enableButtons(List<String> colorList){
 
         this.getCharacterButton.setVisible(false);
         for (String color : colorList) {
@@ -83,15 +70,19 @@ public class PlayerCharacterController {
 
     }
 
-
+    /**
+     * This method handles the event on the getCharactersButton
+     * calls the enableButtons method to enable the right buttons
+     */
     @FXML
     public void getCharactersButtonClicked(){
         enableButtons(clientSocket.getColorList());
     }
+    /**
+     * This method handles the event on the ToggleGroup of Character-RadioButton
+     */
     @FXML
     public void chooseCharacter(){
-
-
         if(this.characterGroup.getSelectedToggle().equals(this.yellowButton)) {stringCharacter="yellow";}
         if(this.characterGroup.getSelectedToggle().equals(this.blueButton)) {stringCharacter="blue";}
         if(this.characterGroup.getSelectedToggle().equals(this.grayButton)) {stringCharacter="gray";}
@@ -110,6 +101,10 @@ public class PlayerCharacterController {
 
     }
 
+    /**
+     * This method handles the event on the nextButton and sends a " message " in clientSocket
+     * If this is the first player the button asks to choose the nr of skulls ; if not waits to start the game
+     */
     @FXML
     public void nextButtonPushed() {
 
@@ -121,19 +116,10 @@ public class PlayerCharacterController {
             clientSocket.getContSelect().waitForPing(clientSocket.getPlayerView());
         }
 
-
-        /*try{
-            Parent chooseMapSkull= FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/ChooseSkull.fxml"));
-            Scene chooseMapSkullScene = new Scene(chooseMapSkull);
-
-            Stage window = (Stage)nextButton.getScene().getWindow();
-
-            window.setScene(chooseMapSkullScene);
-            window.show();
-        }catch(IOException e){
-
-        }*/
-
-
     }
+    /**
+     * This method sets the clientSocket on this class
+     * @param clientSocket
+     */
+    public void setClientSocket(ClientSocket clientSocket){ this.clientSocket=clientSocket; }
 }

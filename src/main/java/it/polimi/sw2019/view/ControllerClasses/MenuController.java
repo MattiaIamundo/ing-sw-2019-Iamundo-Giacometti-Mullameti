@@ -14,16 +14,19 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**Class MenuController: the controller behind Menu.fxml file
+ * @author Merita Mullameti
+ */
 public class MenuController {
 
-
-
-    
     private ClientSocket clientSocket;
 
     @FXML private Button newButton;
     @FXML private Button exitButton;
 
+    /**
+     * This method initializes the window of the Menu.fxml
+     */
     @FXML
     public void initialize(){
         this.newButton.setDefaultButton(true);
@@ -31,29 +34,25 @@ public class MenuController {
 
     }
 
-
-    public void setClientSocket(ClientSocket clientSocket) {
-        this.clientSocket=clientSocket;
-    }
-
-    public void newPlayerButtonPushed()throws IOException
-    {
-
+    /**
+     * This method handles the event on the newPlayerButton and sends a " message " in clientSocket
+     */
+    @FXML
+    public void newPlayerButtonPushed() {
         clientSocket.getContSelect().waitForNicknameRequest(clientSocket.getPlayerView());
-
-
-        /*Parent newPlayer=FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/NewPlayer.fxml"));
-        Scene newPlayerScene = new Scene(newPlayer);
-
-        Stage window = (Stage)newButton.getScene().getWindow();
-
-        window.setScene(newPlayerScene);
-        window.show();*/
     }
 
+    /**
+     * This method handles the event on the exitButton (closes the window)
+     */
     @FXML
     private void exitButtonPushed(){
         System.exit(0);
     }
 
+    /**
+     * This method sets the clientSocket on this class
+     * @param clientSocket
+     */
+    public void setClientSocket(ClientSocket clientSocket){ this.clientSocket=clientSocket; }
 }

@@ -10,7 +10,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+/**Class ActionController: the controller behind Action.fxml file
+ * @author Merita Mullameti
+ */
 public class ActionController {
 
     @FXML

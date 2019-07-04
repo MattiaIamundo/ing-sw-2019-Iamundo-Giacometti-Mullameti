@@ -1,26 +1,17 @@
 package it.polimi.sw2019.view.ControllerClasses;
 
-
-
-
-
-import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.network.Socket.ClientSocket;
-
-
 import javafx.fxml.FXML;
-
 import javafx.scene.control.*;
 
-
-
+/**Class NewPlayerController: the controller behind NewPlayer.fxml file
+ * @author Merita Mullameti
+ */
 public class NewPlayerController {
 
 
     private ClientSocket clientSocket ;
-    Player tempPlayer = new Player("",0,null,null);
-
-
+    private String nickname;
 
     @FXML private Label enterNickname;
     @FXML private TextField nicknameField;
@@ -29,25 +20,17 @@ public class NewPlayerController {
     @FXML private Button nextButton;
     @FXML private Label validInput;
 
-    private String nickname;
-
-
+    /**
+     * This method initializes the window of the NewPlayer.fxml
+     */
     @FXML
     public void initialize(){
-        this.submitButton.setDefaultButton(true);
-        this.submitButton.setVisible(true);
-        this.nextButton.setVisible(false);
-        this.validInput.setVisible(false);
-        this.okButton.setVisible(false);
 
     }
 
-
-    public void setClientSocket(ClientSocket clientSocket){
-        this.clientSocket=clientSocket;
-    }
-
-
+    /**
+     * This method handles the event on the submitButton and sends the typed nickname  in clientSocket
+     */
     @FXML
     public void submitButtonClicked() {
 
@@ -71,31 +54,27 @@ public class NewPlayerController {
 
     }
 
+    /**
+     * This method handles the event on the OkButton and sends a " message " in clientSocket
+     */
     @FXML
     public void handleOkButton(){
         clientSocket.getContSelect().waitForNicknameRequest(clientSocket.getPlayerView());
     }
 
+    /**
+     * This method handles the event on the nextButton and sends a " message " in clientSocket
+     */
     @FXML
     public void nextButtonClicked(){
-        System.out.println("newPlayer");
         clientSocket.getContSelect().waitingForColorRequest(clientSocket.getPlayerView());
-
-        /*try{
-           Parent chooseMapSkull= FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/PlayerCharacter.fxml"));
-            Scene chooseMapSkullScene = new Scene(chooseMapSkull);
-
-            Stage window = (Stage)nextButton.getScene().getWindow();
-
-            window.setScene(chooseMapSkullScene);
-            window.setResizable(false);
-            window.show();
-
-        }catch(IOException e){
-
-        }*/
-
     }
+
+    /**
+     * This method sets the clientSocket on this class
+     * @param clientSocket
+     */
+    public void setClientSocket(ClientSocket clientSocket){ this.clientSocket=clientSocket; }
 
 
 

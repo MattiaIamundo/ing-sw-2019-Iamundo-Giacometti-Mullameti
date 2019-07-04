@@ -10,12 +10,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+/**Class ActionReloadController: the controller behind Action&Reload.fxml file
+ * @author Merita Mullameti
+ */
 public class ActionReloadController {
 
     @FXML
     public void actionButtonPushed(ActionEvent event) throws IOException {
-        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/action.fxml"));
+        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/Action.fxml"));
         Scene tableScene = new Scene(table);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -4,37 +4,41 @@ import it.polimi.sw2019.network.Socket.ClientSocket;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
-
-
+/**Class LobbyController: the controller behind Lobby.fxml file
+ * @author Merita Mullameti
+ */
 public class LobbyController {
-    @FXML
-    private Button startButton;
 
-    @FXML private ProgressBar pingPong;
+
     private ClientSocket clientSocket;
-    double i = 0.0;
+
+    @FXML private Button startButton;
+    @FXML private ProgressBar pingPong;
+
+
+    /**
+     * This method initializes the window of the Lobby.fxml
+     */
 
     @FXML
     public void initialize(){
         this.startButton.setDefaultButton(true);
         this.startButton.setVisible(true);
-        pingPong.setProgress(0);
+
     }
 
+    /**
+     * This method handles the event on the startButton
+     */
+    @FXML
+    public void startButtonClicked(){ }
+
+    /**
+     * This method sets the clientSocket on this class
+     * @param clientSocket
+     */
     public void setClientSocket(ClientSocket clientSocket){
         this.clientSocket=clientSocket;
     }
 
-
-    @FXML
-    public void startButtonClicked(){
-
-        while(i<1.0) {
-            clientSocket.getContSelect().waitForPing(clientSocket.getPlayerView());
-
-            pingPong.setProgress(i);
-            i = i + 0.1;
-        }
-
-    }
 }
