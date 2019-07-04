@@ -1,13 +1,15 @@
 package it.polimi.sw2019.controller.powerup;
 
+import it.polimi.sw2019.events.powerup_events.TagbackGrenadeChooseEv;
 import it.polimi.sw2019.events.powerup_events.TagbackGrenadeSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.powerup.TagbackGrenade;
+import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 
-public class TagbackGrenadeCont implements Observer<TagbackGrenadeSetEv>, PowerUpController{
+public class TagbackGrenadeCont extends Observable<TagbackGrenadeChooseEv> implements Observer<TagbackGrenadeSetEv>, PowerUpController{
     private TagbackGrenade model;
     private ArrayList<Player> players;
     private Player attacker;
@@ -24,7 +26,7 @@ public class TagbackGrenadeCont implements Observer<TagbackGrenadeSetEv>, PowerU
         for (Player player : players){
             if (attacker.getPlance().getDamageTrack().get(attacker.getPlance().getDamageTrack().size() - 1).equals(player.getNickname())){
                 target = player;
-                model.chooseToMark(attacker.getNickname(), player.getNickname());
+                notify(new TagbackGrenadeChooseEv(attacker.getNickname(), player.getNickname()));
             }
         }
     }

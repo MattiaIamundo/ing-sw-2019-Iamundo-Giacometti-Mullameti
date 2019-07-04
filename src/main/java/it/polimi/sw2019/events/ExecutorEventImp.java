@@ -8,6 +8,7 @@ import it.polimi.sw2019.events.client_event.Cevent.WeaponReloadChooseEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyGrabEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyReloadEv;
+import it.polimi.sw2019.events.powerup_events.*;
 import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.events.server_event.VCevent.PowerupEv;
@@ -197,6 +198,26 @@ public class ExecutorEventImp implements ExecutorEvent {
 
     public void handleObject(ZX2SetEv zx2SetEv, Game game){
         game.handleEvent(zx2SetEv);
+    }
+
+    public void handleObject(PowerUpSetEv powerUpSetEv, Game game){
+        game.handleEvent(powerUpSetEv);
+    }
+
+    public void handleObject(NewtonSetEv newtonSetEv, Game game){
+        game.handleEvent(newtonSetEv);
+    }
+
+    public void handleObject(TagbackGrenadeSetEv tagbackGrenadeSetEv, Game game){
+        game.handleEvent(tagbackGrenadeSetEv);
+    }
+
+    public void handleObject(TargetingScopeSetEv targetingScopeSetEv, Game game){
+        game.handleEvent(targetingScopeSetEv);
+    }
+
+    public void handleObject(TeleporterSetEv teleporterSetEv, Game game){
+        game.handleEvent(teleporterSetEv);
     }
 
 
@@ -399,5 +420,25 @@ public class ExecutorEventImp implements ExecutorEvent {
 
     public void updateObject(UnpaidEffectEv unpaidEffectEv, Game game){
         game.update(unpaidEffectEv);
+    }
+
+    public void updateObject(PowerUpChooseEv powerUpChooseEv, Game game){
+        game.update(powerUpChooseEv);
+    }
+
+    public void updateObject(NewtonChooseEv newtonChooseEv, Game game){
+        game.update(newtonChooseEv);
+    }
+
+    public void updateObject(TagbackGrenadeChooseEv tagbackGrenadeChooseEv, Game game){
+        game.update(tagbackGrenadeChooseEv);
+    }
+
+    public void updateObject(TargetingScopeChooseEv targetingScopeChooseEv, Game game){
+        game.update(targetingScopeChooseEv);
+    }
+
+    public void updateObject(TeleporterChooseEv teleporterChooseEv, Game game){
+        game.update(teleporterChooseEv);
     }
 }

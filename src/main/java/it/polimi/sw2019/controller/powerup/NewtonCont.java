@@ -1,16 +1,18 @@
 package it.polimi.sw2019.controller.powerup;
 
+import it.polimi.sw2019.events.powerup_events.NewtonChooseEv;
 import it.polimi.sw2019.events.powerup_events.NewtonSetEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.model.powerup.Newton;
+import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NewtonCont implements Observer<NewtonSetEv>, PowerUpController {
+public class NewtonCont extends Observable<NewtonChooseEv> implements Observer<NewtonSetEv>, PowerUpController {
     private Newton model;
     private ArrayList<Player> players;
     private HashMap<Player, HashMap<String, Space>> movements = new HashMap<>();
@@ -25,12 +27,14 @@ public class NewtonCont implements Observer<NewtonSetEv>, PowerUpController {
         HashMap<String, ArrayList<String>> valid = new HashMap<>();
 
         for (Player player : players){
-            movements.put(player, checkMovements(player));
+            if (player != attacker) {
+                movements.put(player, checkMovements(player));
+            }
         }
         for (Map.Entry<Player, HashMap<String, Space>> mapEntry : movements.entrySet()){
             valid.put(mapEntry.getKey().getNickname(), new ArrayList<>(mapEntry.getValue().keySet()));
         }
-        model.chooseTarget(attacker.getNickname(), valid);
+        notify(new NewtonChooseEv(attacker.getNickname(), valid));
     }
 
     private HashMap<String, Space> checkMovements(Player player){

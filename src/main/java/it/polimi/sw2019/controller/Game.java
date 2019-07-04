@@ -3,6 +3,7 @@ package it.polimi.sw2019.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import it.polimi.sw2019.controller.powerup.*;
 import it.polimi.sw2019.controller.weaponeffect.*;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.ExecutorEventImp;
@@ -11,6 +12,7 @@ import it.polimi.sw2019.events.client_event.Cevent.*;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyGrabEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyReloadEv;
+import it.polimi.sw2019.events.powerup_events.*;
 import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
@@ -61,6 +63,7 @@ public class Game implements Observer <NotifyReturn> {
     private Shoot shootController;
     private HashMap<String, EffectController> effectControllers;
     private UsePowerUp usePowerUpController;
+    private HashMap<String, PowerUpController> powerUpControllers;
     //the main controller's variables
     private List<ActionEv> eventActualPlayer = new ArrayList<>();
     private Turn turnOf;
@@ -101,7 +104,8 @@ public class Game implements Observer <NotifyReturn> {
         reloadController.addObserver(this);
         grabController = new Grab(this);
         grabController.addObserver(this);
-        usePowerUpController = new UsePowerUp();
+        usePowerUpController = new UsePowerUp(players, gameboard.getMap());
+        powerUpControllers = usePowerUpController.getPowerUpControllers();
         shootController = new Shoot(this.players, this.gameboard.getMap(), this);
         effectControllers = shootController.getWeaponEffectManager().getEffectControllers();
         killshotController = new Killshot();
@@ -405,7 +409,7 @@ public class Game implements Observer <NotifyReturn> {
                     firstEff = new Vortex();
                     secondEff = new BlackHole();
                 }
-                else if (additiveJsons.get(i).getName().equals("Granade Launcher")) {
+                else if (additiveJsons.get(i).getName().equals("Grenade Launcher")) {
 
                     firstEff = new GrenadeLauncher();
                     secondEff = new ExtraGrenade();
@@ -1475,6 +1479,29 @@ public class Game implements Observer <NotifyReturn> {
         ((ZX2Cont) effectControllers.get(name)).update(zx2SetEv);
     }
 
+    public void handleEvent(PowerUpSetEv powerUpSetEv){
+        usePowerUpController.update(powerUpSetEv);
+    }
+
+    public void handleEvent(NewtonSetEv newtonSetEv){
+        String name = Newton.class.getName().substring(Newton.class.getName().lastIndexOf('.') + 1);
+        ((NewtonCont) powerUpControllers.get(name)).update(newtonSetEv);
+    }
+
+    public void handleEvent(TagbackGrenadeSetEv tagbackGrenadeSetEv){
+        String name = TagbackGrenade.class.getName().substring(TagbackGrenade.class.getName().lastIndexOf('.') + 1);
+        ((TagbackGrenadeCont) powerUpControllers.get(name)).update(tagbackGrenadeSetEv);
+    }
+
+    public void handleEvent(TargetingScopeSetEv targetingScopeSetEv){
+        String name = TargetingScope.class.getName().substring(TargetingScope.class.getName().lastIndexOf('.') + 1);
+        ((TargetingScopeCont) powerUpControllers.get(name)).update(targetingScopeSetEv);
+    }
+
+    public void handleEvent(TeleporterSetEv teleporterSetEv){
+        String name = Teleporter.class.getName().substring(Teleporter.class.getName().lastIndexOf('.') + 1);
+        ((TeleporterCont) powerUpControllers.get(name)).update(teleporterSetEv);
+    }
 
 
     public void update(NotifyReturn notifyReturn) {
@@ -1884,6 +1911,41 @@ public class Game implements Observer <NotifyReturn> {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(unpaidEffectEv.getNickname());
         if(playerRemoteView != null) {
             playerRemoteView.sendEvent(unpaidEffectEv);
+        }
+    }
+
+    public void update(PowerUpChooseEv powerUpChooseEv){
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(powerUpChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(powerUpChooseEv);
+        }
+    }
+
+    public void update(NewtonChooseEv newtonChooseEv){
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(newtonChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(newtonChooseEv);
+        }
+    }
+
+    public void update(TagbackGrenadeChooseEv tagbackGrenadeChooseEv){
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(tagbackGrenadeChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(tagbackGrenadeChooseEv);
+        }
+    }
+
+    public void update(TargetingScopeChooseEv targetingScopeChooseEv){
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(targetingScopeChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(targetingScopeChooseEv);
+        }
+    }
+
+    public void update(TeleporterChooseEv teleporterChooseEv){
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(teleporterChooseEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(teleporterChooseEv);
         }
     }
 }
