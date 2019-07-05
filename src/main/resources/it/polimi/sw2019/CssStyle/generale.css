@@ -51,20 +51,20 @@
 }
 .button{
 
-    -fx-background-image: url("../Images/greenButton.png"); /* Green */
+    -fx-background-image: url("../Images/buttons.png");
     -fx-border: none;
     -fx-font-family: Stencil;
-    -fx-font-size: 24pt;
+    -fx-font-size: 18px;
     -fx-text-fill: #ffffff;
     -fx-text-align: center;
     -fx-opacity: 1;
     -fx-cursor: pointer;
-    -fx-webkit-transition-duration: 0.4s; /* Safari */
+    -fx-webkit-transition-duration: 0.4s;
     -fx-transition-duration: 0.4s;
     -fx-display: inline-block;
 }
 .button:hover{
-    -fx-opacity: 0.9 ;
+    -fx-opacity: 0.5 ;
 }
 
 .buttonDirection{
