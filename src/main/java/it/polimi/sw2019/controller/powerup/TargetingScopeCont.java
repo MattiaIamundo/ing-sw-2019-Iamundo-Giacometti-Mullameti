@@ -22,22 +22,48 @@ public class TargetingScopeCont extends Observable<TargetingScopeChooseEv> imple
     @Override
     public void usePowerUp(Player attacker) {
         ArrayList<String> targets = new ArrayList<>();
-
+        ArrayList<String> ammos = new ArrayList<>();
         this.attacker = attacker;
         for (Player player : attacker.getLastHittedPlayers()){
             targets.add(player.getNickname());
         }
-        notify(new TargetingScopeChooseEv(attacker.getNickname(), targets));
+        if (attacker.getAmmo()[0] > 0){
+            ammos.add("red");
+        }
+        if (attacker.getAmmo()[1] > 0){
+            ammos.add("blue");
+        }
+        if (attacker.getAmmo()[2] > 0){
+            ammos.add("yellow");
+        }
+        notify(new TargetingScopeChooseEv(attacker.getNickname(), targets, ammos));
     }
 
     @Override
     public void update(TargetingScopeSetEv message) {
         for (Player player : players){
             if (player.getNickname().equals(message.getTarget())){
+                payAmmo(attacker, message.getAmmo());
                 model.setTarget(player);
                 model.useEffect(attacker);
                 return;
             }
+        }
+    }
+
+    private void payAmmo(Player attacker, String ammo){
+        switch (ammo){
+            case "red":
+                attacker.getAmmo()[0]--;
+                break;
+            case "blue":
+                attacker.getAmmo()[1]--;
+                break;
+            case "yellow":
+                attacker.getAmmo()[2]--;
+                break;
+            default:
+                throw new UnsupportedOperationException();
         }
     }
 }

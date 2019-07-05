@@ -7,8 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Tractor beam, the basic effect of Tractor Beam
  */
-public class TractorBeamSetEv implements ActionEv {
-    private String playerNickname;
+public class TractorBeamSetEv extends WeaponEffectSetEv {
     private String target;
     private String position;
 
@@ -20,16 +19,6 @@ public class TractorBeamSetEv implements ActionEv {
     public TractorBeamSetEv(String target, String position) {
         this.target = target;
         this.position = position;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
     }
 
     public String getTarget() {

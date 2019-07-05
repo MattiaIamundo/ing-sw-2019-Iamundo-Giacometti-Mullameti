@@ -7,8 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Pulverize mode, the alternative effect of Sledgehammer
  */
-public class PulvModeSetEv implements ActionEv {
-    private String playerNickname;
+public class PulvModeSetEv extends WeaponEffectSetEv {
     private String target;
     private String moveto;
 
@@ -29,16 +28,6 @@ public class PulvModeSetEv implements ActionEv {
     public PulvModeSetEv(String target) {
         this.target = target;
         moveto = "zero";
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
     }
 
     public String getTarget() {

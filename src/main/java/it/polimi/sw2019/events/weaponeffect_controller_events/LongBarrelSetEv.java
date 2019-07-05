@@ -7,30 +7,13 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Long barrel mode, the alternative effect of Shotgun
  */
-public class LongBarrelSetEv implements TargetSetEv, ActionEv {
-    private String playerNickname;
-    private String target;
+public class LongBarrelSetEv extends TargetSetEv {
 
     /**
      * @param target is the player selected as target, must be one of those contained in the valid list of choose event
      */
     public LongBarrelSetEv(String target) {
-        this.target = target;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
-    }
-
-    @Override
-    public String getTarget() {
-        return target;
+        super(target);
     }
 
     @Override

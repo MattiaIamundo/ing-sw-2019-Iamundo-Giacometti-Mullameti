@@ -7,8 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of the Focus shot, the first optional effect of Machine Gun
  */
-public class FocusShotSetEv implements ActionEv {
-    private String playerNickname;
+public class FocusShotSetEv extends WeaponEffectSetEv{
     private String target;
 
     /**
@@ -16,16 +15,6 @@ public class FocusShotSetEv implements ActionEv {
      */
     public FocusShotSetEv(String target) {
         this.target = target;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
     }
 
     public String getTarget() {

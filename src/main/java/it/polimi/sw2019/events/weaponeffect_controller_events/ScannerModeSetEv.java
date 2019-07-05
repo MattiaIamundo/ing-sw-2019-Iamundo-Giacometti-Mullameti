@@ -7,8 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Scanner mode, the alternative effect of Zx-2
  */
-public class ScannerModeSetEv implements ActionEv {
-    private String playerNickname;
+public class ScannerModeSetEv extends WeaponEffectSetEv {
     private String target1;
     private String target2;
     private String target3;
@@ -47,16 +46,6 @@ public class ScannerModeSetEv implements ActionEv {
         this.target1 = target1;
         target2 = null;
         target3 = null;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
     }
 
     public String getTarget1() {

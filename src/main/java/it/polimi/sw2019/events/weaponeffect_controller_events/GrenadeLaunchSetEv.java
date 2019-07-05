@@ -7,9 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Grenade launcher, the basic effect of Grenade Launcher
  */
-public class GrenadeLaunchSetEv implements TargetSetEv, ActionEv {
-    private String playerNickname;
-    private String target;
+public class GrenadeLaunchSetEv extends TargetSetEv {
     private String moveto;
 
     /**
@@ -18,27 +16,13 @@ public class GrenadeLaunchSetEv implements TargetSetEv, ActionEv {
      *               target in the hash map moveto in the choose event, must be null if the attacker doesn't want to move the target
      */
     public GrenadeLaunchSetEv(String target, String moveto) {
-        this.target = target;
+        super(target);
         this.moveto = moveto;
     }
 
     public GrenadeLaunchSetEv(String target) {
-        this.target = target;
+        super(target);
         moveto = null;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
-    }
-
-    public String getTarget() {
-        return target;
     }
 
     public String getMoveto() {

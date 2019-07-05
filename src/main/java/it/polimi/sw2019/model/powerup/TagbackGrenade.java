@@ -12,16 +12,12 @@ import java.io.Serializable;
  * @author Merita Mullameti
  */
 
-public class TagbackGrenade extends Observable<TagbackGrenadeChooseEv> implements EffectBehaviour, Serializable {
+public class TagbackGrenade implements EffectBehaviour, Serializable {
     private Player target;
 
     @Override
     public void useEffect(Player attacker) {
         target.getPlance().setMark(attacker);
-    }
-
-    public void chooseToMark(String attacker, String target){
-        notify(new TagbackGrenadeChooseEv(attacker, target));
     }
 
     public Player getTarget() {

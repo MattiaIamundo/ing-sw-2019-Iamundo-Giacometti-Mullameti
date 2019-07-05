@@ -7,9 +7,11 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 public class TargetingScopeSetEv implements ActionEv {
     private String playerNickname;
     private String target;
+    private String ammo;
 
-    public TargetingScopeSetEv(String target) {
+    public TargetingScopeSetEv(String target, String ammo) {
         this.target = target;
+        this.ammo = ammo;
     }
 
     @Override
@@ -24,6 +26,10 @@ public class TargetingScopeSetEv implements ActionEv {
 
     public String getTarget() {
         return target;
+    }
+
+    public String getAmmo() {
+        return ammo;
     }
 
     @Override

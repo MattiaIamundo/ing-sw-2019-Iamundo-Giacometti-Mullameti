@@ -7,8 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Slice and dice, the second optional effect of Cyberblade
  */
-public class SliceAndDiceSetEv implements ActionEv {
-    private String playerNickname;
+public class SliceAndDiceSetEv extends WeaponEffectSetEv{
     private String target;
 
     /**
@@ -16,16 +15,6 @@ public class SliceAndDiceSetEv implements ActionEv {
      */
     public SliceAndDiceSetEv(String target) {
         this.target = target;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
     }
 
     public String getTarget() {

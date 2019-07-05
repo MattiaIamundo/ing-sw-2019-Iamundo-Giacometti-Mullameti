@@ -8,10 +8,12 @@ import java.util.ArrayList;
 public class TargetingScopeChooseEv implements PowerUpEffectChooseEv {
     private String user;
     private ArrayList<String> targets;
+    private ArrayList<String> ammos;
 
-    public TargetingScopeChooseEv(String user, ArrayList<String> targets) {
+    public TargetingScopeChooseEv(String user, ArrayList<String> targets, ArrayList<String> ammos) {
         this.user = user;
         this.targets = targets;
+        this.ammos = ammos;
     }
 
     @Override
@@ -26,6 +28,10 @@ public class TargetingScopeChooseEv implements PowerUpEffectChooseEv {
 
     public ArrayList<String> getTargets() {
         return targets;
+    }
+
+    public ArrayList<String> getAmmos() {
+        return ammos;
     }
 
     @Override

@@ -7,8 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Furnace, the basic effect of Furnace
  */
-public class FurnaceSetEv implements ActionEv {
-    private String playerNickname;
+public class FurnaceSetEv extends WeaponEffectSetEv{
     private String room;
 
     /**
@@ -16,16 +15,6 @@ public class FurnaceSetEv implements ActionEv {
      */
     public FurnaceSetEv(String room) {
         this.room = room;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
     }
 
     public String getRoom() {

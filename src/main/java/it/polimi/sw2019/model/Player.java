@@ -276,6 +276,10 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
     public ArrayList<Player> getLastHittedPlayers() {
         return lastHittedPlayers;
     }
+
+    public void setLastHittedPlayers(ArrayList<Player> lastHittedPlayers) {
+        this.lastHittedPlayers = lastHittedPlayers;
+    }
 }
 
 

@@ -18,7 +18,7 @@ import java.util.Scanner;
  * @author Merita Mullameti
  */
 
-public class Newton extends Observable<NewtonChooseEv> implements EffectBehaviour, Serializable {
+public class Newton implements EffectBehaviour, Serializable {
     private Space moveto;
     /**
      * @param target the player  who is going to be attacked using this power up card
@@ -26,10 +26,6 @@ public class Newton extends Observable<NewtonChooseEv> implements EffectBehaviou
     @Override
     public  void useEffect (Player target){
         target.setPosition(moveto);
-    }
-
-    public void chooseTarget(String attacker, HashMap<String, ArrayList<String>> movements){
-        notify(new NewtonChooseEv(attacker, movements));
     }
 
     public Space getMoveto() {

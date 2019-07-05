@@ -7,8 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Railgun, the basic effect of Railgun
  */
-public class RailGunSetEv implements ActionEv {
-    private String playerNickname;
+public class RailGunSetEv extends WeaponEffectSetEv {
     private String target;
 
     /**
@@ -16,16 +15,6 @@ public class RailGunSetEv implements ActionEv {
      */
     public RailGunSetEv(String target) {
         this.target = target;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
     }
 
     public String getTarget() {

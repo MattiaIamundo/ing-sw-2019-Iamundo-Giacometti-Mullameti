@@ -7,8 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Machine gun, the basic effect of Machine Gun
  */
-public class MachineGunSetEv implements ActionEv {
-    private String playerNickname;
+public class MachineGunSetEv extends WeaponEffectSetEv {
     private String target1;
     private String target2;
 
@@ -29,16 +28,6 @@ public class MachineGunSetEv implements ActionEv {
     public MachineGunSetEv(String target1) {
         this.target1 = target1;
         target2 = null;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
     }
 
     public String getTarget1() {
