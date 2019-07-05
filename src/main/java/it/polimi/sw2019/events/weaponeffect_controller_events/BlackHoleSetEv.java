@@ -7,8 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Black hole, The optional effect of Vortex Cannon
  */
-public class BlackHoleSetEv implements ActionEv {
-    private String playerNickname;
+public class BlackHoleSetEv extends WeaponEffectSetEv{
     private String target1;
     private String target2;
 
@@ -24,16 +23,6 @@ public class BlackHoleSetEv implements ActionEv {
     public BlackHoleSetEv(String target1) {
         this.target1 = target1;
         target2 = null;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
     }
 
     public String getTarget1() {

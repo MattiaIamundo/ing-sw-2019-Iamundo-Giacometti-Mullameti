@@ -7,8 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Phase glide, the first optional effect of Plasma Gun
  */
-public class PhaseGlideSetEv implements MoveTargetSetEv, ActionEv {
-    private String playerNickname;
+public class PhaseGlideSetEv extends WeaponEffectSetEv implements MoveTargetSetEv {
     private String moveto;
 
     /**
@@ -16,16 +15,6 @@ public class PhaseGlideSetEv implements MoveTargetSetEv, ActionEv {
      */
     public PhaseGlideSetEv(String moveto) {
         this.moveto = moveto;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
     }
 
     @Override

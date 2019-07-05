@@ -3,10 +3,12 @@ package it.polimi.sw2019.controller.PowerUp;
 import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.controller.powerup.NewtonCont;
 import it.polimi.sw2019.events.powerup_events.NewtonChooseEv;
+import it.polimi.sw2019.events.powerup_events.NewtonSetEv;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.powerup.Newton;
+import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 import org.junit.Assert;
 import org.junit.Before;
@@ -61,6 +63,36 @@ public class NewtonContTest {
         @Override
         public void update(NewtonChooseEv message) {
             this.message = message;
+        }
+    }
+
+    @Test
+    public void updateTest(){
+        Thrower thrower = new Thrower("target1", "north");
+        NewtonCont controller = new NewtonCont(new Newton(), players);
+
+        thrower.addObserver(controller);
+        controller.usePowerUp(players.get(0));
+        thrower.throwMessage();
+
+        try {
+            Assert.assertEquals(map.getSpace(0, 1), players.get(1).getPosition());
+        }catch (InvalidSpaceException e){
+            logger.log(Level.SEVERE, "out of map");
+        }
+    }
+
+    private class Thrower extends Observable<NewtonSetEv>{
+        private String target;
+        private String moveto;
+
+        public Thrower(String target, String moveto) {
+            this.target = target;
+            this.moveto = moveto;
+        }
+
+        public void throwMessage(){
+            notify(new NewtonSetEv(target, moveto));
         }
     }
 }

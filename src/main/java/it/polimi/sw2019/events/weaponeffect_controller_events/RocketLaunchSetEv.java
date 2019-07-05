@@ -7,8 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Rocket launcher, the basic effect of Rocket Launcher
  */
-public class RocketLaunchSetEv implements ActionEv {
-    private String playerNickname;
+public class RocketLaunchSetEv extends WeaponEffectSetEv{
     private String target;
     private String position;
 
@@ -20,16 +19,6 @@ public class RocketLaunchSetEv implements ActionEv {
     public RocketLaunchSetEv(String target, String position) {
         this.target = target;
         this.position = position;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
     }
 
     public String getTarget() {

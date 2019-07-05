@@ -7,8 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Cozy fire mode, the alternative effect of Furnace
  */
-public class CozyFireModeSetEv implements ActionEv {
-    private String playerNickname;
+public class CozyFireModeSetEv extends WeaponEffectSetEv{
     private String direction;
 
     /**
@@ -16,16 +15,6 @@ public class CozyFireModeSetEv implements ActionEv {
      */
     public CozyFireModeSetEv(String direction) {
         this.direction = direction;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
     }
 
     public String getDirection() {

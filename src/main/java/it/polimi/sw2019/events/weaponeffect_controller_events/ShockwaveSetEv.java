@@ -7,8 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Shockwave, the basic effect of Shockwave
  */
-public class ShockwaveSetEv implements ActionEv {
-    private String  playerNickname;
+public class ShockwaveSetEv extends WeaponEffectSetEv{
     private String target1;
     private String target2;
     private String target3;
@@ -44,16 +43,6 @@ public class ShockwaveSetEv implements ActionEv {
         this.target1 = target1;
         target2 = null;
         target3 = null;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
     }
 
     public String getTarget1() {

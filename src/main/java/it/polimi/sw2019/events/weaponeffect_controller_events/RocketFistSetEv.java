@@ -7,8 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Rocket fist mode, the alternative effect of Power Glove
  */
-public class RocketFistSetEv implements LineFireSetEv, ActionEv {
-    private String playerNickname;
+public class RocketFistSetEv extends WeaponEffectSetEv implements LineFireSetEv {
     private String direction;
     private int moveAmount;
     private String target1;
@@ -25,16 +24,6 @@ public class RocketFistSetEv implements LineFireSetEv, ActionEv {
         this.moveAmount = moveAmount;
         this.target1 = target1;
         this.target2 = target2;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
     }
 
     public String getDirection() {

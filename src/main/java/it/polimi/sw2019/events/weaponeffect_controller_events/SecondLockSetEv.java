@@ -7,30 +7,13 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Second lock, the optional effect of Lock Rifle
  */
-public class SecondLockSetEv implements TargetSetEv, ActionEv {
-    private String playerNickname;
-    private String target;
+public class SecondLockSetEv extends TargetSetEv {
 
     /**
      * @param target is the player selected as target, must be one of those contained in the valid list of the choose event
      */
     public SecondLockSetEv(String target) {
-        this.target = target;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
-    }
-
-    @Override
-    public String getTarget() {
-        return target;
+        super(target);
     }
 
     @Override

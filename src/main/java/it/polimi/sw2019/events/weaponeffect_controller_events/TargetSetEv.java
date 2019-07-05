@@ -1,6 +1,13 @@
 package it.polimi.sw2019.events.weaponeffect_controller_events;
 
-public interface TargetSetEv {
+public abstract class TargetSetEv extends WeaponEffectSetEv{
+    protected String target;
 
-    String getTarget();
+    public TargetSetEv(String target) {
+        this.target = target;
+    }
+
+    public String getTarget() {
+        return target;
+    }
 }

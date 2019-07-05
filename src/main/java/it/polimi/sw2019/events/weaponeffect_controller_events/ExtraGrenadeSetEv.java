@@ -7,8 +7,7 @@ import it.polimi.sw2019.events.ExecutorEventImp;
 /**
  * These class represent the set event of Extra grenade, the optional effect of Grenade Launcher
  */
-public class ExtraGrenadeSetEv implements ActionEv {
-    private String playerNickname;
+public class ExtraGrenadeSetEv extends WeaponEffectSetEv {
     private String square;
     private String moveto;
 
@@ -29,16 +28,6 @@ public class ExtraGrenadeSetEv implements ActionEv {
     public ExtraGrenadeSetEv(String square, String moveto) {
         this.square = square;
         this.moveto = moveto;
-    }
-
-    @Override
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
-
-    @Override
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
     }
 
     public String getSquare() {
