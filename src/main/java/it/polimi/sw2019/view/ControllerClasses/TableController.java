@@ -41,6 +41,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /** Class TableController: the controller behind Table.fxml file
  * @author Merita Mullameti
@@ -57,7 +58,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     private List<Player> Players = new ArrayList<Player>(5);
     private List<Weapon> Weapon = new ArrayList<Weapon>(9);
     private List<Ammo> Ammo = new ArrayList<Ammo>(9);
-
+    private Logger logger = Logger.getLogger(TableController.class.getName());
 
     @FXML private AnchorPane Rooms;
     @FXML private AnchorPane table ;
@@ -115,7 +116,8 @@ public class TableController extends Observable<ActionEv> implements Observer<No
 
     @FXML private ImageView powerUpDeck;
 
-    //******************************************AMMO*********************************************
+    //******************************************AMMO***********************************************
+
     @FXML private ImageView ammo00;
     @FXML private ImageView ammo02;
     @FXML private ImageView ammo10;

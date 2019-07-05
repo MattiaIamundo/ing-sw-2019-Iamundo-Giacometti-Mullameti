@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="table" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1230.0" style="-fx-background-color: #1d1d1d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.sw2019.view.ControllerClasses.TableController">
+<AnchorPane fx:id="table" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1230.0" style="-fx-background-color: #1d1d1d;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.sw2019.view.ControllerClasses.TableController">
    <children>
       <VBox layoutX="1210.0" layoutY="-7.0" maxWidth="199.0" minWidth="155.0" prefHeight="605.0" prefWidth="156.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -166,7 +166,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Label fx:id="info" layoutX="293.0" layoutY="639.0" prefHeight="69.0" prefWidth="485.0" styleClass="labelInvalidInfo" stylesheets="@../CssStyle/generale.css" />
+      <Label fx:id="info" layoutX="293.0" layoutY="639.0" prefHeight="69.0" prefWidth="595.0" styleClass="labelInvalidInfo" stylesheets="@../CssStyle/generale.css" />
       <AnchorPane fx:id="fourthPlayerBoard" layoutX="159.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="917.0" visible="false">
          <children>
             <ImageView fitHeight="147.0" fitWidth="87.0" layoutX="632.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
