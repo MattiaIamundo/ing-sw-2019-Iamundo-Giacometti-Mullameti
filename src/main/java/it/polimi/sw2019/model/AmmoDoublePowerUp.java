@@ -14,12 +14,17 @@ public class AmmoDoublePowerUp extends Ammo{
         this.powerup=powerup;
     }
     /**
+     * This method returns the power up included in the ammo card
      * @return the power up included in the ammo card
      */
     public PowerUp getPowerUp(){
         return powerup;
     }
 
+    /**
+     * This method sets the power up included in the ammo card
+     * @param pw the power up included in the ammo card
+     */
     public void setPowerup(PowerUp pw) {
         this.powerup = pw;
     }

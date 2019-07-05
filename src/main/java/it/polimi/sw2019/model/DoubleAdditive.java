@@ -39,6 +39,7 @@ public class DoubleAdditive extends Weapon{
     }
 
     /**
+     * This method returns the first additive power's cost
      * @return the first additive power's cost
      */
     public String getFirstExtraCost(){
@@ -46,6 +47,7 @@ public class DoubleAdditive extends Weapon{
     }
 
     /**
+     * This method returns the second additive power's cost
      * @return the second additive power's cost
      */
     public String getSecondExtraCost(){
@@ -53,7 +55,7 @@ public class DoubleAdditive extends Weapon{
     }
 
     /**
-     *
+     * This method  implements the use of the first power by the attacker
      * @param attacker the player who calls the attack
      */
     public void attackFirstAdditive(Player attacker){
@@ -62,7 +64,7 @@ public class DoubleAdditive extends Weapon{
     }
 
     /**
-     *
+     * This method  implements the use of the second power by the attacker
      * @param attacker the player who calls the attack
      */
     public void attackSecondAdditive(Player attacker){
@@ -71,6 +73,7 @@ public class DoubleAdditive extends Weapon{
     }
 
     /**
+     * This method returns the first additive power's description
      * @return the first additive power's description
      */
     public String getDescriptionFirstAdditivePower(){
@@ -78,6 +81,7 @@ public class DoubleAdditive extends Weapon{
     }
 
     /**
+     * This method returns the second additive power's description
      * @return the second additive power's description
      */
     public String getDescriptionSecondAdditivePower(){
@@ -85,6 +89,7 @@ public class DoubleAdditive extends Weapon{
     }
 
     /**
+     * This method returns the weapon's first additive power
      * @return the weapon's first additive power
      */
     public Power getFirstAdditivePower() {
@@ -92,6 +97,7 @@ public class DoubleAdditive extends Weapon{
     }
 
     /**
+     * This method returns the weapon's second additive power
      * @return the weapon's second additive power
      */
     public Power getSecondAdditivePower() {

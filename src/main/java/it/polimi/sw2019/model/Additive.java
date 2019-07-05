@@ -29,6 +29,7 @@ public class Additive extends Weapon{
         this.descriptionAdditivePower = descriptionAdditivePower;
     }
     /**
+     * This method returns the extra cost needed to activate this part of the weapon
      * @return the extra cost needed to activate this part of the weapon
      */
     public String getAdditiveCost(){
@@ -36,6 +37,7 @@ public class Additive extends Weapon{
     }
 
     /**
+     * This method  implements the use of the power by the attacker
      * @param attacker the player who wants to attack
      */
     public void attackAdditive (Player attacker){
@@ -44,12 +46,14 @@ public class Additive extends Weapon{
     }
 
     /**
+     * This method returns the weapon's additive power
      * @return the weapon's additive power
      */
     public Power getAdditivePower() {
         return additivePower;
     }
     /**
+     * This method returns a description of the effect the weapon can do in addition to the basic effect
      * @return a description of the effect the weapon can do in addition to the basic effect
      */
     public String getDescriptionAdditivePower(){

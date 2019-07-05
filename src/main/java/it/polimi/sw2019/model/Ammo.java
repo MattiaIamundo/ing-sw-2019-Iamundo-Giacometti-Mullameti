@@ -24,18 +24,24 @@ public abstract class Ammo extends AmmoView implements Cloneable, Serializable {
 
 
     /**
+     * This method returns the color of the first ammo
      * @return the color of the first ammo
      */
     public String getColorFirst(){
         return colorFirst;
     }
     /**
+     * This method returns the color of the second ammo
      * @return the color of the second ammo
      */
     public String getColorSecond(){
         return colorSecond;
     }
 
+    /**
+     * This method returns the name of the image of the ammo card
+     * @return the name of the image of the ammo card
+     */
     public String getImageName () {
         return imageName;
     }

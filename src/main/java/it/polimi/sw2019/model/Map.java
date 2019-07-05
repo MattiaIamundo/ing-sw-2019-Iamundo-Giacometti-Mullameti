@@ -67,14 +67,26 @@ public class Map implements Cloneable, Serializable {
         throw new InvalidSpaceException("space not exist");
     }
 
+    /**
+     * This method returns the horizontal length of the list
+     * @return the horizontal length of the list
+     */
     public int getMaxX(){
         return list.size();
     }
 
+    /**
+     * This method returns the vertical length of the list
+     * @return the vertical length of the list
+     */
     public int getMaxY(){
         return list.get(0).size();
     }
 
+    /**
+     * This method returns the matrix of spaces
+     * @return the list of lists of spaces
+     */
     public List <List<Space>> getList() {
         return this.list;
     }

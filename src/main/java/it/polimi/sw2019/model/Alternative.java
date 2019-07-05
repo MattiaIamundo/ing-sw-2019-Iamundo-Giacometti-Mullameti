@@ -29,6 +29,7 @@ public class Alternative extends Weapon{
         this.descriptionAlternativePower = descriptionAlternativePower;
     }
     /**
+     * This method returns the extra cost to pay for the player to use the alternative
      * @return the extra cost to pay for the player to use the alternative
      */
     public String[] getExtraCost(){
@@ -36,7 +37,7 @@ public class Alternative extends Weapon{
     }
 
     /**
-     *
+     * This method  implements the use of the power by the attacker
      * @param attacker the player who declared the attack
      */
     public void attackAlternative(Player attacker){
@@ -45,6 +46,7 @@ public class Alternative extends Weapon{
     }
 
     /**
+     * This method returns the weapon's power
      * @return the weapon's alternative power
      */
     public Power getAlternativePower (){
@@ -52,6 +54,7 @@ public class Alternative extends Weapon{
         return alternativePower;
     }
     /**
+     * This method returns a description of the effect the weapon can do in alternative to the basic effect
      * @return a description of the effect the weapon can do in alternative to the basic effect
      */
     public String getDescriptionAlternativePower(){

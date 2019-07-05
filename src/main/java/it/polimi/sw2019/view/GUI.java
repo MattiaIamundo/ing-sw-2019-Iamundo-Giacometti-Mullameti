@@ -1,7 +1,5 @@
 package it.polimi.sw2019.view;
 
-
-
 import it.polimi.sw2019.view.ControllerClasses.*;
 import it.polimi.sw2019.network.Socket.ClientSocket;
 import javafx.application.Application;
@@ -15,6 +13,9 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
+/**
+ * Class GUI :
+ */
 public class GUI extends Application implements UIinterface {
 
     private TableController tableController;
@@ -24,12 +25,20 @@ public class GUI extends Application implements UIinterface {
 
     private String ip;
 
+    /**
+     * This method set the server IP
+     * @param ip of the server
+     */
     public void setServerIP(String ip){
         this.ip = ip;
 
-
     }
 
+    /**
+     * This method overrides the method of Application; Sets the ServerIP scene
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -55,14 +64,12 @@ public class GUI extends Application implements UIinterface {
         this.clientSocket=new ClientSocket(ClientSocket.getServerHost());
         clientSocket.setUI(this);
 
-
-
-
-
     }
 
-
-
+    /**
+     * This method set the Menu scene
+     * @param string the ClientSocket response
+     */
     @Override
     public void requestMenu(String string) {
 
@@ -84,7 +91,10 @@ public class GUI extends Application implements UIinterface {
 
     }
 
-
+    /**
+     * This method set the NewPlayer scene
+     * @param string the ClientSocket response
+     */
     @Override
     public void requestNickname(String string) {
 
@@ -107,6 +117,10 @@ public class GUI extends Application implements UIinterface {
         }
     }
 
+    /**
+     * This method set the PlayerCharacter scene
+     * @param string the ClientSocket response
+     */
     @Override
     public void requestColor(String string) {
 
@@ -130,6 +144,10 @@ public class GUI extends Application implements UIinterface {
 
     }
 
+    /**
+     * This method set the ChooseSkull scene
+     * @param string the ClientSocket response
+     */
     @Override
     public void requestSkull(String string) {
 
@@ -163,6 +181,10 @@ public class GUI extends Application implements UIinterface {
 
     }
 
+    /**
+     * This method set the ChooseMap scene
+     * @param string the ClientSocket response
+     */
     @Override
     public void requestMap(String string) {
 
@@ -184,6 +206,10 @@ public class GUI extends Application implements UIinterface {
         }
     }
 
+    /**
+     * This method set the Lobby scene
+     * @param string the ClientSocket response
+     */
     @Override
     public void requestLobby(String string) {
         if (string.equals("ok")){
@@ -204,7 +230,10 @@ public class GUI extends Application implements UIinterface {
         }
     }
 
-
+    /**
+     * This method set the Table scene
+     * @param string the ClientSocket response
+     */
     @Override
     public void requestTable(String string) {
 
@@ -232,6 +261,10 @@ public class GUI extends Application implements UIinterface {
         }
     }
 
+    /**
+     * This method set the Table scene
+     * @param string the ClientSocket response
+     */
     @Override
     public void requestRefresh(String string) {
         if (string.equals("ok")){

@@ -8,14 +8,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="249.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.sw2019.view.ControllerClasses.DirectionController">
    <children>
-      <ImageView fitHeight="249.0" fitWidth="249.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="249.0" fitWidth="249.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../Images/centro.png" />
          </image>
       </ImageView>
-      <Button contentDisplay="GRAPHIC_ONLY" layoutY="83.0" mnemonicParsing="false" onAction="#eastButtonPushed" prefHeight="83.0" prefWidth="83.0" rotate="-90.0" styleClass="buttonDirection" stylesheets="@../CssStyle/generale.css" text="Button" textFill="#1f8031" underline="true" />
-      <Button contentDisplay="GRAPHIC_ONLY" layoutX="83.0" layoutY="165.0" mnemonicParsing="false" onAction="#southButtonPushed" prefHeight="83.0" prefWidth="83.0" rotate="180.0" styleClass="buttonDirection" stylesheets="@../CssStyle/generale.css" text="Button" />
-      <Button contentDisplay="GRAPHIC_ONLY" layoutX="83.0" mnemonicParsing="false" onAction="#northButtonPushed" prefHeight="91.0" prefWidth="83.0" styleClass="buttonDirection" stylesheets="@../CssStyle/generale.css" text="Button" />
+      <Button contentDisplay="GRAPHIC_ONLY" layoutY="83.0" mnemonicParsing="false" onAction="#eastButtonPushed" prefHeight="83.0" prefWidth="83.0" rotate="-90.0" styleClass="buttonDirection" stylesheets="@../CssStyle/generale.css" text="Button" textFill="#1f8031" underline="true" AnchorPane.leftAnchor="0.0" />
+      <Button contentDisplay="GRAPHIC_ONLY" layoutX="83.0" layoutY="165.0" mnemonicParsing="false" onAction="#southButtonPushed" prefHeight="83.0" prefWidth="83.0" rotate="180.0" styleClass="buttonDirection" stylesheets="@../CssStyle/generale.css" text="Button" AnchorPane.bottomAnchor="0.0" />
+      <Button contentDisplay="GRAPHIC_ONLY" layoutX="83.0" mnemonicParsing="false" onAction="#northButtonPushed" prefHeight="91.0" prefWidth="83.0" styleClass="buttonDirection" stylesheets="@../CssStyle/generale.css" text="Button" AnchorPane.topAnchor="0.0" />
       <Button contentDisplay="GRAPHIC_ONLY" layoutX="166.0" layoutY="83.0" mnemonicParsing="false" onAction="#westButtonPushed" prefHeight="83.0" prefWidth="83.0" rotate="90.0" styleClass="buttonDirection" stylesheets="@../CssStyle/generale.css" text="Button" AnchorPane.rightAnchor="0.0" />
       <ImageView fitHeight="83.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="83.0" AnchorPane.rightAnchor="83.0" AnchorPane.topAnchor="83.0">
          <image>

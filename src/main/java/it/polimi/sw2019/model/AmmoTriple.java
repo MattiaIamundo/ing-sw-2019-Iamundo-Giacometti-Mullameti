@@ -15,6 +15,7 @@ public class AmmoTriple extends Ammo{
         this.colorThird = colorThird;
     }
     /**
+     * This method returns the color of the third ammo
      * @return the color of the third ammo
      */
     public String getColorThird() {

@@ -3,7 +3,6 @@ package it.polimi.sw2019.view.ControllerClasses;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.ExecutorEventClient;
 import it.polimi.sw2019.events.NotifyClient;
-import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.client_event.Cevent.DirectionChooseEv;
 import it.polimi.sw2019.events.client_event.Cevent.NotifyEndMoveEv;
 import it.polimi.sw2019.events.client_event.Cevent.StartGameEv;
@@ -19,22 +18,16 @@ import it.polimi.sw2019.network.Socket.ClientSocket;
 import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-
-import javafx.scene.layout.GridPane;
 
 import javafx.stage.Stage;
 
@@ -263,26 +256,6 @@ public class TableController extends Observable<ActionEv> implements Observer<No
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
-    }
-
-
-    /**
-     * This method handles the event on the yourTurnButton and opens the window Action&Reload
-     */
-    @FXML
-    public void yourTurnButtonPushed() {
-
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("Action&Reload.fxml"));
-            AnchorPane playerTurn = (AnchorPane) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(playerTurn));
-            stage.show();
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
-
     }
 
     /**
@@ -562,6 +535,9 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     }
 
     //***********************************Your-TURN-BUTTONS************************************************
+    /**
+     * This method handles the event on the moveButton and opens the window Direction
+     */
     @FXML
     public void moveButtonPushed(){
         try {
@@ -570,8 +546,8 @@ public class TableController extends Observable<ActionEv> implements Observer<No
             AnchorPane playerTurn = (AnchorPane) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(playerTurn));
-            stage.setWidth(249);
-            stage.setHeight(249);
+            stage.setWidth(250);
+            stage.setHeight(250);
             stage.setResizable(false);
             stage.show();
             MoveEv moveEv = new MoveEv(null);
@@ -581,6 +557,9 @@ public class TableController extends Observable<ActionEv> implements Observer<No
         }
     }
 
+    /**
+     * This method handles the event on the grabButton and opens the window Direction
+     */
     @FXML
     public void grabButtonPushed(){
         try {
@@ -597,10 +576,13 @@ public class TableController extends Observable<ActionEv> implements Observer<No
         }
     }
 
+    /**
+     * This method handles the event on the shootButton and opens the window Weapon
+     */
     @FXML
     public void shootButtonPushed() {
         try {
-            Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/weapon.fxml"));
+            Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/Weapon.fxml"));
             Scene tableScene = new Scene(table);
 
             Stage window = (Stage) shootButton.getScene().getWindow();
@@ -613,7 +595,9 @@ public class TableController extends Observable<ActionEv> implements Observer<No
         }
     }
 
-
+    /**
+     * This method handles the event on the reloadButton and opens the window PowerUP
+     */
     @FXML
     public void reloadButtonPushed()  {
         try {
@@ -629,8 +613,12 @@ public class TableController extends Observable<ActionEv> implements Observer<No
 
         }
     }
+
+    /**
+     * This method handles the event on the endButton 
+     */
     @FXML
-    public void endButtonPushed(ActionEvent event) throws IOException {
+    public void endButtonPushed() {
 
         EndEv endEv = new EndEv();
         this.clientSocket.getViewContEvent().sendActionEv(endEv);
