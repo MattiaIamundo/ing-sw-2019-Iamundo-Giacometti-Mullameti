@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,9 +16,12 @@ import java.io.IOException;
  */
 public class ActionController {
 
+
+    @FXML private Button moveButton;
+
     @FXML
     public void moveButtonPushed(ActionEvent event) throws IOException {
-        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/direction.fxml"));
+        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/Direction.fxml"));
         Scene tableScene = new Scene(table);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -28,7 +32,7 @@ public class ActionController {
 
     @FXML
     public void grabButtonPushed(ActionEvent event) throws IOException {
-        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/direction.fxml"));
+        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/Direction.fxml"));
         Scene tableScene = new Scene(table);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

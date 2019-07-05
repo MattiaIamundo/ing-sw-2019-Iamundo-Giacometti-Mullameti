@@ -15,8 +15,8 @@
       </ImageView>
       <VBox layoutX="91.0" prefHeight="218.0" prefWidth="285.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="92.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#actionButtonPushed" prefHeight="109.0" prefWidth="285.0" stylesheets="@../CssStyle/themeGreen.css" text="Action" />
-            <Button mnemonicParsing="false" onAction="#reloadButtonPushed" prefHeight="109.0" prefWidth="285.0" stylesheets="@../CssStyle/themeGreen.css" text="Reload" />
+            <Button fx:id="actionButton" mnemonicParsing="false" onAction="#actionButtonPushed" prefHeight="109.0" prefWidth="285.0" stylesheets="@../CssStyle/themeGreen.css" text="Action" />
+            <Button disable="true" mnemonicParsing="false" onAction="#reloadButtonPushed" prefHeight="109.0" prefWidth="285.0" stylesheets="@../CssStyle/themeGreen.css" text="Reload" />
          </children>
       </VBox>
    </children>

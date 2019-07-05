@@ -21,6 +21,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -44,6 +46,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
 
 
 
+    private boolean turn=false;
     private ClientSocket clientSocket;
     private ExecutorEventClient executorEventClient = new ExecutorEventClient();
     private String typeMap;
@@ -116,6 +119,11 @@ public class TableController extends Observable<ActionEv> implements Observer<No
      */
     @FXML
     public void initialize() {
+        if(turn){
+            yourTurn.setVisible(true);
+        }else{
+            yourTurn.setVisible(false);
+        }
 
     }
 
@@ -240,6 +248,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
      */
     @FXML
     public void yourTurnButtonPushed() {
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("Action&Reload.fxml"));
@@ -507,5 +516,51 @@ public class TableController extends Observable<ActionEv> implements Observer<No
 
     public void handleEvent(NotifyEndMoveEv notifyEndMoveEv) {
         //
+    }
+
+    //***********************************Your-TURN-BUTTONS************************************************
+    @FXML
+    public void moveButtonPushed(ActionEvent event) throws IOException {
+        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/Direction.fxml"));
+        Scene tableScene = new Scene(table);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(tableScene);
+        window.show();
+    }
+
+    @FXML
+    public void grabButtonPushed(ActionEvent event) throws IOException {
+        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/Direction.fxml"));
+        Scene tableScene = new Scene(table);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(tableScene);
+        window.show();
+    }
+
+    @FXML
+    public void shootButtonPushed(ActionEvent event) throws IOException {
+        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/weapon.fxml"));
+        Scene tableScene = new Scene(table);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(tableScene);
+        window.show();
+    }
+
+
+    @FXML
+    public void reloadButtonPushed(ActionEvent event) throws IOException {
+        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/PowerUp.fxml"));
+        Scene tableScene = new Scene(table);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(tableScene);
+        window.show();
     }
 }

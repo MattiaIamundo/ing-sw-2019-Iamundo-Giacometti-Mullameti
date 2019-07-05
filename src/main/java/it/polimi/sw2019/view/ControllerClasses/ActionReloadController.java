@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,6 +15,8 @@ import java.io.IOException;
  * @author Merita Mullameti
  */
 public class ActionReloadController {
+
+    @FXML private Button actionButton;
 
     @FXML
     public void actionButtonPushed(ActionEvent event) throws IOException {
@@ -29,7 +32,7 @@ public class ActionReloadController {
 
     @FXML
     public void reloadButtonPushed(ActionEvent event) throws IOException {
-        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/powerup.fxml"));
+        Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/PowerUp.fxml"));
         Scene tableScene = new Scene(table);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
