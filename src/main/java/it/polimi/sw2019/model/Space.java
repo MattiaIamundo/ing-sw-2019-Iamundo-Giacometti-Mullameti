@@ -15,6 +15,7 @@ public abstract class Space implements Cloneable, Serializable {
     private String room;
 
     /**
+     * this is the constructor
      * @param north the north connection
      * @param east the east connection
      * @param south the south connection
@@ -29,51 +30,74 @@ public abstract class Space implements Cloneable, Serializable {
         this.west = west;
         this.room = room;
     }
+
     /**
+     * north space's getter
      * @return the north adjacent space
      */
     public Connection getNorth() {
         return north;
     }
 
+    /**
+     * north space's setter
+     * @param c the connection to set
+     */
     public void setNorth(Connection c) {
         this.north = c;
     }
+
     /**
+     * east connection's getter
      * @return the east adjacent space
      */
     public Connection getEast() {
         return east;
     }
 
+    /**
+     * east's connection setter
+     * @param c the connection to set
+     */
     public void setEast(Connection c) {
         this.east = c;
     }
 
     /**
-     * @return the oveast adjacent space
+     * west connection's getter
+     * @return the west adjacent connection
      */
     public Connection getWest() {
         return west;
     }
 
+    /**
+     * south connection' setter
+     * @param c the connection to set
+     */
     public void setSouth(Connection c) {
         this.south = c;
     }
 
     /**
+     * south connection's getter
      * @return the sud adjacent space
      */
     public Connection getSouth() {
         return south;
     }
 
+    /**
+     * west connection's setter
+     * @param c the connection to set
+     */
     public void setWest(Connection c) {
         this.west = c;
     }
 
     /**
-     * @return the room where the space is in
+     * room's getter
+     * @return the color of the room where the space is in
      */
     public String getRoom() {
         return room;

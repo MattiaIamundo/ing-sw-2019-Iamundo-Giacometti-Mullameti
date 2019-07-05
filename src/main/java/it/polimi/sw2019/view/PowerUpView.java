@@ -2,7 +2,7 @@ package it.polimi.sw2019.view;
 
 import it.polimi.sw2019.model.PowerUp;
 
-public class PowerUpView extends ObservableByGame implements Observer <PowerUp>{
+public class PowerUpView extends ObservableByGame implements Observer<PowerUp> {
 
     private PowerUp powerup;
     private UIinterface ui;

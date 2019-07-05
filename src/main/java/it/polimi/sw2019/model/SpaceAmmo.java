@@ -19,6 +19,7 @@ public class SpaceAmmo extends Space {
         super(north, east, south, west, room);
     }
     /**
+     * the ammo getter
      * @return tha ammo card
      */
     public Ammo takeAmmo(){

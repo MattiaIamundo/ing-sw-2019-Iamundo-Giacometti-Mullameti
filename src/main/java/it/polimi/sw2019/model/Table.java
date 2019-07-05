@@ -21,7 +21,9 @@ public class Table extends TableView implements Cloneable, Serializable {
     private ArrayList<PowerUp> powerupDeck; //24
     private ArrayList<Ammo> ammoDeck; //36
 
-
+    /**
+     * the constructor: set not null the decks and the map
+     */
     public Table( ){
 
         killshotTrack = new ArrayList<>(8);
@@ -40,21 +42,31 @@ public class Table extends TableView implements Cloneable, Serializable {
     }
 
     /**
+     * skull's track getter
      * @return the Track of skulls
      */
     public List<Skull> getKillshotTrack(){
         return killshotTrack;
     }
 
+    /**
+     * set the map
+     * @param mappa the new map's id
+     */
     public void setMap(Map mappa) {
         map = mappa;
     }
 
+    /**
+     * the map's id getter
+     * @return the map's id
+     */
     public Map getMap() {
         return map;
     }
 
     /**
+     * the power up deck's getter
      * @return the power up Deck
      */
     public List<PowerUp> getPowerUp(){
@@ -62,6 +74,7 @@ public class Table extends TableView implements Cloneable, Serializable {
     }
 
     /**
+     * the weapon deck's getter
      * @return the weapon Deck
      */
     public List<Weapon> getWeapon(){
@@ -69,28 +82,50 @@ public class Table extends TableView implements Cloneable, Serializable {
     }
 
     /**
+     * the ammo desk's getter
      * @return the ammo Deck
      */
     public List<Ammo> getAmmo(){
         return ammoDeck;
     }
 
+    /**
+     * the map's id getter
+     * @return the map's id
+     */
     public String getNrMap() {
         return Map;
     }
 
+    /**
+     * the map's id setter
+     * @param nrMap map id
+     */
     public void setNrMap(String nrMap) {
         this.Map=nrMap;
     }
 
+    /**
+     * the skull's number getter
+     * @return the skulls' number
+     */
     public String getNrSkulls() {
         return nrSkulls;
     }
 
+    /**
+     * the number of skulls setter
+     * @param nrSkulls the number of skull
+     */
     public void setNrSkulls(String nrSkulls) {
         this.nrSkulls=nrSkulls;
     }
 
+    /**
+     * this methods clones the table
+     * @return the table's clone
+     * @throws CloneNotSupportedException if the table is not serializable
+     */
     public Object cloneTable() throws CloneNotSupportedException{
         return super.clone();
     }

@@ -4,7 +4,6 @@ import it.polimi.sw2019.events.weaponeffect_controller_events.LineFireSetEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.RocketFistChooseEv;
 import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.events.weaponeffect_controller_events.RocketFistSetEv;
-import it.polimi.sw2019.model.weapon_power.LineFire;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.RocketFistMode;
 import it.polimi.sw2019.view.Observer;

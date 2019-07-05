@@ -2,9 +2,7 @@ package it.polimi.sw2019.controller;
 
 import it.polimi.sw2019.controller.powerup.*;
 import it.polimi.sw2019.events.powerup_events.PowerUpChooseEv;
-import it.polimi.sw2019.events.powerup_events.PowerUpEffectChooseEv;
 import it.polimi.sw2019.events.powerup_events.PowerUpSetEv;
-import it.polimi.sw2019.events.weapon_event.PowerSetEv;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.PowerUp;

@@ -4,7 +4,7 @@ import it.polimi.sw2019.model.Ammo;
 import it.polimi.sw2019.model.AmmoDoublePowerUp;
 import it.polimi.sw2019.model.AmmoTriple;
 
-public class AmmoView extends ObservableByGame implements Observer <Ammo>{
+public class AmmoView extends ObservableByGame implements Observer<Ammo> {
 
     private Ammo ammo;
     private UIinterface ui;

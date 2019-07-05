@@ -1,10 +1,8 @@
 package it.polimi.sw2019.model.powerup;
 
 
-import it.polimi.sw2019.events.powerup_events.TagbackGrenadeChooseEv;
 import it.polimi.sw2019.model.EffectBehaviour;
 import it.polimi.sw2019.model.Player;
-import it.polimi.sw2019.view.Observable;
 
 import java.io.Serializable;
 

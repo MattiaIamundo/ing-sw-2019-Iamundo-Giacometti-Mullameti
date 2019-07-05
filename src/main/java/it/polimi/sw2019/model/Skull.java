@@ -38,6 +38,7 @@ public class Skull implements Cloneable, Serializable {
     }
 
     /**
+     * true if there is the skull on the track
      * @return the skull's attribute isPresent
      */
     public boolean getIsPresent (){
@@ -45,18 +46,22 @@ public class Skull implements Cloneable, Serializable {
     }
 
     /**
+     * true if the kill includes an overkilled
      * @return the skull's attribute isOverkilled
      */
     public boolean getIsOverkilled (){
         return this.isOverkilled;
     }
+
     /**
      * it sets the double mark
      */
     public void setIsOverkilled(){
         this.isOverkilled = true;
     }
+
     /**
+     * set the killer
      * @param killer the player which killed another player
      */
     public void setKiller(Player killer) {

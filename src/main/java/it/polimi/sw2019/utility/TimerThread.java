@@ -24,6 +24,9 @@ public class TimerThread implements Runnable {
 
     // ........ TimerThread's Methods ...........
 
+    /**
+     * this is the constructor
+     */
     public TimerThread() {
         time = 0;
         turnTime = 30000;
@@ -34,7 +37,6 @@ public class TimerThread implements Runnable {
 
     /**
      * set the time to attend the other players
-     *
      * @param seconds the time to wait
      */
     public synchronized void setTime(int seconds) {
@@ -52,41 +54,60 @@ public class TimerThread implements Runnable {
 
     /**
      * set the player's turn time
-     *
      * @param secondsToTurn the turn time
      */
     public synchronized void setTurnTime(int secondsToTurn) {
         this.turnTime = secondsToTurn;
     }
 
+    /**
+     * @return true if the timer is done
+     */
     public synchronized boolean getTimerDone() {
         return this.timerDone;
     }
 
+    /**
+     * @param status set the status of the timer
+     */
     public synchronized void setTimerDone(boolean status) {
         this.timerDone = status;
     }
 
+    /**
+     * this cancel the timer
+     */
     public synchronized void deleteTimer() {
         timer.cancel();
         timer.purge();
     }
 
+    /**
+     * set is the timer is on
+     * @param status the status of the timer
+     */
     public synchronized void setOn(boolean status) {
         on = status;
     }
 
+    /**
+     * @return the status of the timer
+     */
     public synchronized boolean getOn() {
         return on;
     }
 
+    /**
+     *
+     * @return the milliseconds for play a turn in the game
+     */
     public synchronized int getTurnTime() {
         return turnTime;
     }
 
 
     /**
-     * start the timer thread
+     * start the timer and schedule a task to set true the attribute timerDone
      */
     public void run() {
 
@@ -107,13 +128,13 @@ public class TimerThread implements Runnable {
             setOn(true);
             if (!game) {
                 //the time to accept other two players
-                System.out.println("timer schedule task with time\n");
+                logger.log(Level.INFO, "timer schedule task with time");
                 timer.schedule(task, time);
             }
             //the game is started
             else {
                 //the time which every player has to play his turn
-                System.out.println("timer schedule task with turnTime\n");
+                logger.log(Level.INFO, "timer schedule task with timeTurn");
                 timer.schedule(task, turnTime);
             }
     }

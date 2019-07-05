@@ -7,7 +7,6 @@ import it.polimi.sw2019.model.Space;
 import it.polimi.sw2019.events.weaponeffect_controller_events.ShockwaveSetEv;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.Shockwave;
-import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;

@@ -9,7 +9,6 @@ import it.polimi.sw2019.model.Weapon;
 import it.polimi.sw2019.model.weapon_power.Cyberblade;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.SliceAndDice;
-import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;

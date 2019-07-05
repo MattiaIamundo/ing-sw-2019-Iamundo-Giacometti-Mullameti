@@ -1,15 +1,9 @@
 package it.polimi.sw2019.network.Socket;
 
 import it.polimi.sw2019.controller.Game;
-import it.polimi.sw2019.controller.MultiGame;
-import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.client_event.YourTurnEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.view.PlayerRemoteView;
-import it.polimi.sw2019.view.PowerUpRemoteView;
-import it.polimi.sw2019.view.TableRemoteView;
-import it.polimi.sw2019.view.WeaponRemoteView;
-import javafx.application.Platform;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,9 +34,6 @@ public class PlayerThread implements Runnable {
 
     //the game's Remote View
     private PlayerRemoteView playerRemoteView;
-    private TableRemoteView tableRemoteView;
-    private WeaponRemoteView weaponRemoteView;
-    private PowerUpRemoteView powerUpRemoteView;
 
     /**
      * set the remote view, the connection to the socket and
@@ -56,9 +47,6 @@ public class PlayerThread implements Runnable {
         string = "bho";
         gameController = controller;
         playerRemoteView = new PlayerRemoteView(socket,controller);
-        tableRemoteView = new TableRemoteView(socket);
-        weaponRemoteView = new WeaponRemoteView(socket);
-        powerUpRemoteView = new PowerUpRemoteView(socket);
 
         try{
             //what the client is writing
@@ -494,7 +482,7 @@ public class PlayerThread implements Runnable {
             if( this.gameController.getTurnOf().getPlayer().getNickname().equals(this.nickname)) {
                 YourTurnEv yourTurnEv = new YourTurnEv(this.gameController.getPlayers(), this.gameController.getGameboard());
                 yourTurnEv.setNickname(this.nickname);
-                this.gameController.update(yourTurnEv);
+                //this.gameController.update(yourTurnEv);
             }
             //HERE THE GAME IS ON
             while ( !gameController.getGameover() ) {

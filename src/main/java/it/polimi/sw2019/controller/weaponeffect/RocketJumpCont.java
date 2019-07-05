@@ -1,6 +1,5 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.controller.Move;
 import it.polimi.sw2019.events.weaponeffect_controller_events.MoveTargetSetEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.RocketJumpChooseEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.RocketJumpSetEv;

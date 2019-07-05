@@ -34,22 +34,15 @@ public abstract class Weapon implements Cloneable, Serializable {
     }
 
     /**
-     * this method has to show to the view the weapon
-     */
-    protected void showWeapon() {
-
-    }
-
-    /**
-     *
-     * @return the ammo's name
+     * weapon's name getter
+     * @return the weapon's name
      */
     public String getName(){
         return name;
     }
 
     /**
-     *
+     * recharge'cost getter
      * @return weapon's recharge cost
      */
     public String[] getCost(){
@@ -57,7 +50,7 @@ public abstract class Weapon implements Cloneable, Serializable {
     }
 
     /**
-     *
+     * weapon's description getter
      * @return weapon's description
      */
     public String getDescriptionPower(){
@@ -65,7 +58,7 @@ public abstract class Weapon implements Cloneable, Serializable {
     }
 
     /**
-     *
+     * it show if the weapon is load
      * @return true if the weapon is ready to fire
      */
     public boolean getIsLoad(){
@@ -73,6 +66,8 @@ public abstract class Weapon implements Cloneable, Serializable {
     }
 
     /**
+     * set the new weapon's condition
+     * @param nickname the player's nickname
      * @param set this variable is true if the weapon is load and false if it is discharged
      */
     public void setIsLoad(String nickname, boolean set) {
@@ -80,7 +75,7 @@ public abstract class Weapon implements Cloneable, Serializable {
         //notify(new NotifyReloadEv(player.getNickname(), "reload"));
     }
     /**
-     *
+     * weapon's power getter
      * @return the weapon's power
      */
     public Power getPower() {

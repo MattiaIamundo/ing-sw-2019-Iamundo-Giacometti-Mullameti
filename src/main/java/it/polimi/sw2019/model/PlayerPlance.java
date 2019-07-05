@@ -66,6 +66,7 @@ public class PlayerPlance implements Cloneable, Serializable {
     }
 
     /**
+     * this method set the damages to the player
      * @param shooter it is the opponent who provoked the damage
      * @param quantity it is the amount of damage
      */

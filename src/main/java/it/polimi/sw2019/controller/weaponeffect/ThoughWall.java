@@ -1,13 +1,10 @@
 package it.polimi.sw2019.controller.weaponeffect;
 
-import it.polimi.sw2019.events.weaponeffect_controller_events.WeaponEvent;
 import it.polimi.sw2019.model.Map;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Space;
-import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.model.weapon_power.Power;
 import it.polimi.sw2019.model.weapon_power.ThroughWalls;
-import it.polimi.sw2019.view.Observable;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -10,10 +10,9 @@ import it.polimi.sw2019.events.server_event.VCevent.VCLogin;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.nethandler.ViewContEvent;
 import it.polimi.sw2019.network.Socket.ClientSocket;
-import javafx.application.Platform;
 
 
-public class PlayerView extends Observable<ActionEv> implements Observer <NotifyReturn> {
+public class PlayerView extends Observable<ActionEv> implements Observer<NotifyReturn> {
 
     private Player p;
     private UIinterface ui;

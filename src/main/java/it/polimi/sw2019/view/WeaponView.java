@@ -2,7 +2,7 @@ package it.polimi.sw2019.view;
 
 import it.polimi.sw2019.model.Weapon;
 
-public class WeaponView extends ObservableByGame implements Observer <Weapon> {
+public class WeaponView extends ObservableByGame implements Observer<Weapon> {
 
     private Weapon weapon;
     private UIinterface ui;

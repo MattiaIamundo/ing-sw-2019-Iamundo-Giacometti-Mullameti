@@ -5,7 +5,6 @@ package it.polimi.sw2019.network.Socket;
 import it.polimi.sw2019.events.server_event.VCevent.VCColor;
 import it.polimi.sw2019.events.server_event.VCevent.VCLogin;
 import it.polimi.sw2019.nethandler.ContSelect;
-import it.polimi.sw2019.nethandler.ModViewEvent;
 import it.polimi.sw2019.nethandler.ViewContEvent;
 import it.polimi.sw2019.view.*;
 import it.polimi.sw2019.view.ControllerClasses.TableController;
@@ -53,14 +52,9 @@ public class ClientSocket  {
 
     //view
     private PlayerView playerView;
-    private TableView tableView;
-    private WeaponView weaponView;
-    private AmmoView ammoView;
-    private PowerUpView powerUpView;
 
     //the NH
     private ContSelect contSelect;
-    private ModViewEvent modViewEvent;
     private ViewContEvent viewContEvent;
 
     private ExecutorService worker = Executors.newFixedThreadPool( 1 );
@@ -98,14 +92,9 @@ public class ClientSocket  {
 
             //set the view
             playerView = new PlayerView(uIinterface, this);
-            tableView = new TableView(uIinterface);
-            weaponView = new WeaponView(uIinterface);
-            ammoView = new AmmoView(uIinterface);
-            powerUpView = new PowerUpView(uIinterface);
 
 
             contSelect = new ContSelect( connection, playerView);
-            modViewEvent = new ModViewEvent( connection );
             viewContEvent = new ViewContEvent( connection );
 
 
@@ -126,10 +115,6 @@ public class ClientSocket  {
 
     public PlayerView getPlayerView() {
         return playerView;
-    }
-
-    public TableView getTableView() {
-        return this.tableView;
     }
 
     public void setUI(UIinterface uIinterface){

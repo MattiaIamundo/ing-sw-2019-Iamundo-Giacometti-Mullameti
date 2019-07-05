@@ -60,6 +60,10 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
         return nickname;
     }
 
+    /**
+     * the player's nickname setter
+     * @param name the nickname
+     */
     public void setNickname(String name) {
         this.nickname = name;
     }
@@ -185,10 +189,6 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
         }
     }
 
-    public void removePowerUp(PowerUp powerUp){
-        powerup.remove(powerUp);
-    }
-
     /**
      * change the actual position of the player
      * @param position identifies the new position of the player
@@ -198,14 +198,10 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
         notify( new NotifyMoveEv(this.nickname, "move") );
     }
 
-    public void setPlayerNumber (int number) {
-        this.playerNumber = number;
-    }
-
-    public int getPlayerNumber () {
-        return this.playerNumber;
-    }
-
+    /**
+     * this methods add the ammo to the player
+     * @param ammocard the ammo card
+     */
     public void addAmmo(Ammo ammocard){
 
         //add the first ammo in the ammo array
@@ -231,6 +227,10 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
         notify( new NotifyGrabEv(this.nickname, "ammo") );
     }
 
+    /**
+     * this method add the ammo
+     * @param color the ammo's color
+     */
     private void loadAmmo(String color){
         switch (color){
             case "red":
@@ -253,30 +253,59 @@ public class Player extends ObservableByGame implements Cloneable, Serializable 
         }
     }
 
+    /**
+     *
+     * @return the ammo
+     */
     public int[] getAmmo() {
         return this.ammo;
     }
 
+    /**
+     *
+     * @return a copy of the player's ammo
+     */
     public Object getCopyAmmo() {
         return getAmmo().clone();
     }
 
+    /**
+     *
+     * @return the color of the player
+     */
     public String getCharacter() {
         return character;
     }
 
+    /**
+     * the character setter
+     * @param character  the color of the player
+     */
     public void setCharacter(String character) {
         this.character = character;
     }
 
+    /**
+     * this methods clone the player
+     * @return a clone of the player
+     * @throws CloneNotSupportedException if the player is not serializable
+     */
     public Object clonePlayer() throws CloneNotSupportedException {
         return super.clone();
     }
 
+    /**
+     * this method return the last players which was hit by this player
+     * @return the player hit recently
+     */
     public ArrayList<Player> getLastHittedPlayers() {
         return lastHittedPlayers;
     }
 
+    /**
+     * this method set the last players which was hit by this player
+     * @param lastHittedPlayers
+     */
     public void setLastHittedPlayers(ArrayList<Player> lastHittedPlayers) {
         this.lastHittedPlayers = lastHittedPlayers;
     }

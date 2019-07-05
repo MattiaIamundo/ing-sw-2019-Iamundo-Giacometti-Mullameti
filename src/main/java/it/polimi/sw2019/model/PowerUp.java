@@ -35,22 +35,33 @@ public class PowerUp extends PowerUpView implements Cloneable, Serializable {
     }
 
     /**
+     * power up color's getter
      * @return the power up's color
      */
     public String getColor(){
         return color;
     }
+
     /**
+     * power up's name getter
      * @return the power up's name
      */
     public String getName(){
         return name;
     }
 
+    /**
+     * set the power up effect
+     * @param eff the power up effect
+     */
     public void setEffect(EffectBehaviour eff) {
         this.effect = eff;
     }
 
+    /**
+     * this method shows the effect as a string
+     * @return the effect as a string
+     */
     public String getEffectToString() {
         return this.effect.toString();
     }

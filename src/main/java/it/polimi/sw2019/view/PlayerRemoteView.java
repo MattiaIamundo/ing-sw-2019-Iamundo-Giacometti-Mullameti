@@ -13,7 +13,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PlayerRemoteView extends Observable<ActionEv> implements Observer <NotifyReturn> {
+public class PlayerRemoteView extends Observable<ActionEv> implements Observer<NotifyReturn> {
 
     private Socket socket;
     private String set = "pippo";
