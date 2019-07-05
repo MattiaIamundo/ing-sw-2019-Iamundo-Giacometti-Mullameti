@@ -46,7 +46,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
 
 
 
-    private boolean turn=false;
+    private boolean yourTurn=false;
     private ClientSocket clientSocket;
     private ExecutorEventClient executorEventClient = new ExecutorEventClient();
     private String typeMap;
@@ -54,7 +54,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     private List<Weapon> Weapon = new ArrayList<Weapon>(9);
     private List<Ammo> Ammo = new ArrayList<Ammo>(9);
 
-    @FXML private Button yourTurn;
+
     @FXML private AnchorPane Rooms;
     @FXML private AnchorPane table ;
     @FXML private ImageView map;
@@ -84,6 +84,14 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     @FXML private ImageView thirdBoard;
     @FXML private ImageView fourthBoard;
     @FXML private ImageView fifthBoard;
+    //****************************************YOUR-TURN-BUTTONS*********************************
+
+    @FXML private Button powerUpButton;
+    @FXML private Button moveButton;
+    @FXML private Button grabButton;
+    @FXML private Button shootButton;
+    @FXML private Button reloadButton;
+    @FXML private Button endButton;
 
     //****************************************WEAPON********************************************
 
@@ -119,10 +127,10 @@ public class TableController extends Observable<ActionEv> implements Observer<No
      */
     @FXML
     public void initialize() {
-        if(turn){
-            yourTurn.setVisible(true);
+        if(yourTurn){
+            moveButton.setVisible(true);
         }else{
-            yourTurn.setVisible(false);
+            moveButton.setVisible(false);
         }
 
     }

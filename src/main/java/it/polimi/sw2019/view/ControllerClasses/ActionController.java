@@ -51,4 +51,9 @@ public class ActionController {
         window.setScene(tableScene);
         window.show();
     }
+
+    @FXML
+    public void endButtonPushed(ActionEvent event) throws IOException {
+
+    }
 }
