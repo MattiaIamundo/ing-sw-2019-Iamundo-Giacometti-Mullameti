@@ -11,15 +11,26 @@ import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 
+/**
+ * This class represent the controller of Hellion, the basic effect of Hellion
+ */
 public class HellionCont extends VisibleTargetCont implements Observer<HellionSetEv> {
-
     private Hellion realmodel;
 
+    /**
+     * @param realmodel the model of the effect
+     */
     public HellionCont(Power realmodel) {
         super(realmodel);
         this.realmodel = (Hellion) realmodel;
     }
 
+    /**
+     * This method activate the effect
+     * @param attacker is the player that invoke the effect
+     * @param players is the list of the players in the math
+     * @param gamemap is the map of the match
+     */
     @Override
     public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
         this.attacker = attacker;
@@ -28,6 +39,10 @@ public class HellionCont extends VisibleTargetCont implements Observer<HellionSe
         acquireTarget(notSelectable());
     }
 
+    /**
+     * This method check if a target can be selected as a target or not
+     * @param notselctable the list of the players that can't be selected due to be the attacker or to be the attacker's square
+     */
     @Override
     protected void acquireTarget(ArrayList<String> notselctable) {
         super.acquireTarget(notselctable);
@@ -36,6 +51,10 @@ public class HellionCont extends VisibleTargetCont implements Observer<HellionSe
         notify(new HellionChooseEv(attacker.getNickname(), valid, notreachable));
     }
 
+    /**
+     * This method search the players that are on the same square of the attacker
+     * @return the list of the players on the attacker's square and the attacker in the first position of the array
+     */
     private ArrayList<String> notSelectable(){
         ArrayList<String> notselectable = new ArrayList<>();
 
@@ -47,6 +66,10 @@ public class HellionCont extends VisibleTargetCont implements Observer<HellionSe
         return notselectable;
     }
 
+    /**
+     * This method catch a HellionSetEv event
+     * @param message the object which have to be updated
+     */
     @Override
     public void update(HellionSetEv message) {
         ArrayList<Player> targets = new ArrayList<>();

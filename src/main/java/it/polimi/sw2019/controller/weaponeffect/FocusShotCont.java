@@ -15,16 +15,27 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class represent the controller of Focus shot, the first optional of Machine Gun
+ */
 public class FocusShotCont extends EffectController implements Observer<FocusShotSetEv> {
-
     private FocusShot model;
     private Player attacker;
     private ArrayList<Player> players;
 
+    /**
+     * @param model the model of the effect
+     */
     public FocusShotCont(Power model) {
         this.model = (FocusShot) model;
     }
 
+    /**
+     * This method activate the effect
+     * @param attacker is the player that invoke the effect
+     * @param players is the list of the players in the math
+     * @param gamemap is the map of the match
+     */
     @Override
     public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
         this.attacker = attacker;
@@ -32,6 +43,9 @@ public class FocusShotCont extends EffectController implements Observer<FocusSho
         acquireTarget();
     }
 
+    /**
+     * This method recover the two target of the basic effect that can be set as target
+     */
     public void acquireTarget(){
         Logger logger = Logger.getLogger("controller.FocusShot");
         ArrayList<String> targets = new ArrayList<>();
@@ -49,6 +63,10 @@ public class FocusShotCont extends EffectController implements Observer<FocusSho
         }
     }
 
+    /**
+     * This method catch a FocusShotSetEv event
+     * @param message the object which have to be updated
+     */
     @Override
     public void update(FocusShotSetEv message) {
         for (Player player : players){

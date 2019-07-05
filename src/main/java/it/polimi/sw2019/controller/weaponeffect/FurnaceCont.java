@@ -11,16 +11,27 @@ import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 
+/**
+ * This class represent the controller of Furnace, the basic effect of Furnace
+ */
 public class FurnaceCont extends EffectController implements Observer<FurnaceSetEv> {
-
     private Furnace model;
     private Player attacker;
     private ArrayList<Player> players;
 
+    /**
+     * @param model the model of the effect
+     */
     public FurnaceCont(Power model) {
         this.model = (Furnace) model;
     }
 
+    /**
+     * This method activate the effect
+     * @param attacker is the player that invoke the effect
+     * @param players is the list of the players in the math
+     * @param gamemap is the map of the match
+     */
     @Override
     public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
         this.attacker = attacker;
@@ -28,6 +39,9 @@ public class FurnaceCont extends EffectController implements Observer<FurnaceSet
         acquireRooms();
     }
 
+    /**
+     * This method identify which are the rooms that can be set as a valid target area
+     */
     private void acquireRooms(){
         ArrayList<String> rooms = new ArrayList<>();
         String attackerroom = attacker.getPosition().getRoom();
@@ -46,6 +60,11 @@ public class FurnaceCont extends EffectController implements Observer<FurnaceSet
         notify(new FurnaceChooseEv(attacker.getNickname(), rooms));
     }
 
+    /**
+     * This method check if in the selected room exist some players
+     * @param room the room under analysis
+     * @return true if exist at least one player, false otherwise
+     */
     private Boolean thereIsTargets(String room){
         for (Player player : players){
             if (player.getPosition().getRoom().equals(room)){
@@ -55,6 +74,10 @@ public class FurnaceCont extends EffectController implements Observer<FurnaceSet
         return false;
     }
 
+    /**
+     * This method catch a FurnaceSetEv event
+     * @param message the object which have to be updated
+     */
     @Override
     public void update(FurnaceSetEv message) {
         ArrayList<Player> targets = new ArrayList<>();

@@ -13,16 +13,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class represent the controller of Grenade launcher, the basic effect of Grenade Launcher
+ */
 public class GrenadeLaunchCont extends VisibleTargetCont implements Observer<GrenadeLaunchSetEv>{
-
     private GrenadeLauncher realmodel;
     private HashMap<Player, HashMap<String, Space>> squares = new HashMap<>();
 
+    /**
+     * @param realmodel the model of the effect
+     */
     public GrenadeLaunchCont(Power realmodel){
         super(realmodel);
         this.realmodel = (GrenadeLauncher) realmodel;
     }
 
+    /**
+     * This method check if can be a valid target or not
+     */
     @Override
     public void acquireTarget() {
         HashMap<String, ArrayList<String>> moveto = new HashMap<>();
@@ -39,6 +47,10 @@ public class GrenadeLaunchCont extends VisibleTargetCont implements Observer<Gre
         notify(new GrenadeLaunchChooseEv(attacker.getNickname(), valid, notreachable, moveto));
     }
 
+    /**
+     * This method check the squares in which the target can be moved in
+     * @param target the player under analysis
+     */
     private void acquireSquares(Player target){
         HashMap<String, Space> directions = new HashMap<>();
 
@@ -59,6 +71,10 @@ public class GrenadeLaunchCont extends VisibleTargetCont implements Observer<Gre
         }
     }
 
+    /**
+     * This method catch a GrenadeLauncherSetEv
+     * @param message the object which have to be updated
+     */
     @Override
     public void update(GrenadeLaunchSetEv message) {
         super.update((TargetSetEv) message);

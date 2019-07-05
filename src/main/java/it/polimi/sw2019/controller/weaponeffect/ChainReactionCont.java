@@ -15,16 +15,24 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class represent the controller of Chain reaction, the first optional effect of T.H.O.R.
+ */
 public class ChainReactionCont extends VisibleTargetCont implements Observer<ChainReactSetEv>{
-
     private ChainReaction realmodel;
     private Logger logger = Logger.getLogger("controller.ChainReaction");
 
+    /**
+     * @param realmodel the model of the effect
+     */
     public ChainReactionCont(Power realmodel) {
         super(realmodel);
         this.realmodel = (ChainReaction) realmodel;
     }
 
+    /**
+     * This method identify if a player can be chosen as a target or not
+     */
     @Override
     protected void acquireTarget() {
         ArrayList<String> notselctable = new ArrayList<>();
@@ -48,6 +56,10 @@ public class ChainReactionCont extends VisibleTargetCont implements Observer<Cha
         }
     }
 
+    /**
+     * This method catch a ChainReactionSetEv event
+     * @param message the object which have to be updated
+     */
     @Override
     public void update(ChainReactSetEv message) {
         super.update((TargetSetEv) message);

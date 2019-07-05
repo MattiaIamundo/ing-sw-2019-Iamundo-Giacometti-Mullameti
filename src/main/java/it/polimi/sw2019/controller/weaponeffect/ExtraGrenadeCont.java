@@ -19,8 +19,10 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class represent the controller of Extra grenade, the optional effect of Grenade Launcher
+ */
 public class ExtraGrenadeCont extends EffectController implements Observer<ExtraGrenadeSetEv> {
-
     private ExtraGrenade model;
     private Player attacker;
     private ArrayList<Player> players;
@@ -28,10 +30,19 @@ public class ExtraGrenadeCont extends EffectController implements Observer<Extra
     private HashMap<String, Space> squares = new HashMap<>();
     private HashMap<String, Space> moveto = new HashMap<>();
 
+    /**
+     * @param model the model of the effect
+     */
     public ExtraGrenadeCont(Power model) {
         this.model = (ExtraGrenade) model;
     }
 
+    /**
+     * This method activate the effect
+     * @param attacker is the player that invoke the effect
+     * @param players is the list of the players in the math
+     * @param gamemap is the map of the match
+     */
     @Override
     public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
         this.attacker = attacker;
@@ -40,6 +51,9 @@ public class ExtraGrenadeCont extends EffectController implements Observer<Extra
         acquireSquares();
     }
 
+    /**
+     * This method check if a square can be a valid target area or not
+     */
     private void acquireSquares(){
         ArrayList<String> rooms = loadRooms();
         Logger logger = Logger.getLogger("controller.WeaponEffct.ExtraGrenade");
@@ -61,6 +75,10 @@ public class ExtraGrenadeCont extends EffectController implements Observer<Extra
         }
     }
 
+    /**
+     * This method search which are the rooms that that attacker can see
+     * @return the list of the rooms visible to the attacker
+     */
     private ArrayList<String> loadRooms(){
         ArrayList<String> valid = new ArrayList<>();
 
@@ -80,6 +98,10 @@ public class ExtraGrenadeCont extends EffectController implements Observer<Extra
         return valid;
     }
 
+    /**
+     * This method verify if the target of the basic effect was moved or not after being hit
+     * @return true if the target was moved, false otherwise
+     */
     private boolean chechkIsMoved(){
         for (Weapon weapon : attacker.getWeapons()){
             if (weapon.getName().equals("Grenade Launcher")){
@@ -94,6 +116,10 @@ public class ExtraGrenadeCont extends EffectController implements Observer<Extra
         return false;
     }
 
+    /**
+     * This method verify on which squares the target of the basic effect can be moved if it wasn't moved during the basic effect
+     * @param tarpos the position of the basic effect's target
+     */
     private void loadSquares(Space tarpos){
         if (!tarpos.getWest().isWall()){
             moveto.put("west", tarpos.getWest().getSpaceSecond());
@@ -109,6 +135,10 @@ public class ExtraGrenadeCont extends EffectController implements Observer<Extra
         }
     }
 
+    /**
+     * This method catch a ExtraGrenadeSetEv event
+     * @param message the object which have to be updated
+     */
     @Override
     public void update(ExtraGrenadeSetEv message) {
         Logger logger = Logger.getLogger("controller.ExtraGrenade");

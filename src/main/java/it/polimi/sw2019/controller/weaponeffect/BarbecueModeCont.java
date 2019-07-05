@@ -13,16 +13,28 @@ import it.polimi.sw2019.view.Observer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * This class represent the controller for Barbecue mode, the alternative effect of Flamethrower
+ */
 public class BarbecueModeCont extends EffectController implements Observer<BarbecueSetEv> {
     private BarbecueMode model;
     private Player attacker;
     private ArrayList<Player> players;
     private HashMap<String, ArrayList<Space>> directions = new HashMap<>();
 
+    /**
+     * @param model the model of the effect
+     */
     public BarbecueModeCont(Power model) {
         this.model = (BarbecueMode) model;
     }
 
+    /**
+     * This method activate the effect
+     * @param attacker is the player that invoke the effect
+     * @param players is the list of the players in the math
+     * @param gamemap is the map of the match
+     */
     @Override
     public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
         this.attacker = attacker;
@@ -30,6 +42,9 @@ public class BarbecueModeCont extends EffectController implements Observer<Barbe
         acquireDirections();
     }
 
+    /**
+     * This method verify the directions in which the attacker can shoot
+     */
     private void acquireDirections(){
         loadNorth();
         loadWest();
@@ -38,6 +53,9 @@ public class BarbecueModeCont extends EffectController implements Observer<Barbe
         notify(new BarbecueChooseEv(attacker.getNickname(), new ArrayList<>(directions.keySet())));
     }
 
+    /**
+     * This method verify if the attacker can shoot on north
+     */
     private void loadNorth(){
         ArrayList<Space> valid = new ArrayList<>();
         if (!attacker.getPosition().getNorth().isWall()){
@@ -51,6 +69,9 @@ public class BarbecueModeCont extends EffectController implements Observer<Barbe
         }
     }
 
+    /**
+     * This method verify if the attacker can shoot on west
+     */
     private void loadWest(){
         ArrayList<Space> valid = new ArrayList<>();
         if (!attacker.getPosition().getWest().isWall()){
@@ -64,6 +85,9 @@ public class BarbecueModeCont extends EffectController implements Observer<Barbe
         }
     }
 
+    /**
+     * This method verify if the attacker can shoot on south
+     */
     private void loadSouth(){
         ArrayList<Space> valid = new ArrayList<>();
         if (!attacker.getPosition().getSouth().isWall()){
@@ -77,6 +101,9 @@ public class BarbecueModeCont extends EffectController implements Observer<Barbe
         }
     }
 
+    /**
+     * This method verify if the attacker can shoot on east
+     */
     private void loadEast(){
         ArrayList<Space> valid = new ArrayList<>();
         if (!attacker.getPosition().getEast().isWall()){
@@ -90,6 +117,11 @@ public class BarbecueModeCont extends EffectController implements Observer<Barbe
         }
     }
 
+    /**
+     * This method verify if exists some players on the specified direction
+     * @param valid is the list of the squares in the specified direction
+     * @return true if exist at least one player, false otherwise
+     */
     private Boolean existTargets(ArrayList<Space> valid){
         for (Player player : players){
             if (valid.contains(player.getPosition())){
@@ -99,6 +131,10 @@ public class BarbecueModeCont extends EffectController implements Observer<Barbe
         return false;
     }
 
+    /**
+     * This method catch a BarbecueMOdeSetEv event
+     * @param message the object which have to be updated
+     */
     @Override
     public void update(BarbecueSetEv message) {
         ArrayList<Player> targets = new ArrayList<>();

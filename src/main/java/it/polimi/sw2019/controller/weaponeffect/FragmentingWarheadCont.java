@@ -14,16 +14,27 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class represent the controller of Fragmenting warhead, the second optional effect of Rocket Launcher
+ */
 public class FragmentingWarheadCont extends EffectController{
-
     private FragmentingWarhead model;
     private Player attacker;
     private ArrayList<Player> players;
 
+    /**
+     * @param model the model of the effect
+     */
     public FragmentingWarheadCont(Power model) {
         this.model = (FragmentingWarhead) model;
     }
 
+    /**
+     * This method activate the effect
+     * @param attacker is the player that invoke the effect
+     * @param players is the list of the players in the math
+     * @param gamemap is the map of the match
+     */
     @Override
     public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
         this.attacker = attacker;
@@ -31,6 +42,9 @@ public class FragmentingWarheadCont extends EffectController{
         initialize();
     }
 
+    /**
+     * This method recover the target of the basic effect and it's position and then apply the effect of FragmentingWarhead
+     */
     private void initialize(){
         Logger logger = Logger.getLogger("controller.FragmentingWarHead");
         ArrayList<Player> targets = new ArrayList<>();

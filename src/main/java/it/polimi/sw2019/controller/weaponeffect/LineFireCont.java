@@ -11,8 +11,10 @@ import it.polimi.sw2019.view.Observable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * This class represent the controller for all the effect that shot on a determinate direction
+ */
 public abstract class LineFireCont extends EffectController {
-
     protected LineFire model;
     protected Player attacker;
     protected ArrayList<Player> players;
@@ -20,10 +22,19 @@ public abstract class LineFireCont extends EffectController {
     protected HashMap<String, ArrayList<String>> firststep = new HashMap<>();
     protected HashMap<String, ArrayList<String>> secondstep = new HashMap<>();
 
+    /**
+     * @param model the generic model of this type of effect
+     */
     public LineFireCont(Power model) {
         this.model = (LineFire) model;
     }
 
+    /**
+     * This method activate the effect
+     * @param attacker is the player that invoke the effect
+     * @param players is the list of the players in the math
+     * @param gamemap is the map of the match
+     */
     @Override
     public void useEffect(Player attacker, ArrayList<Player> players, Map gamemap) {
         this.attacker = attacker;
@@ -32,6 +43,9 @@ public abstract class LineFireCont extends EffectController {
         acquireTargets();
     }
 
+    /**
+     * This method check which are the valid directions
+     */
     protected void acquireTargets(){
         loadNorth();
         loadWest();
@@ -39,6 +53,9 @@ public abstract class LineFireCont extends EffectController {
         loadEast();
     }
 
+    /**
+     * This method check if it's possible to shoot on north
+     */
     private void loadNorth(){
         ArrayList<String> first = new ArrayList<>();
 
@@ -53,6 +70,9 @@ public abstract class LineFireCont extends EffectController {
         }
     }
 
+    /**
+     * This method check if it's possible to shoot on north-north
+     */
     private void loadNorthSecond(){
         ArrayList<String> second = new ArrayList<>();
 
@@ -66,6 +86,9 @@ public abstract class LineFireCont extends EffectController {
         }
     }
 
+    /**
+     * This method check if it's possible to shoot on west
+     */
     private void loadWest(){
         ArrayList<String> first = new ArrayList<>();
 
@@ -80,6 +103,9 @@ public abstract class LineFireCont extends EffectController {
         }
     }
 
+    /**
+     * This method check if it's possible to shoot on west-west
+     */
     private void loadWestSecond(){
         ArrayList<String> second = new ArrayList<>();
 
@@ -93,6 +119,9 @@ public abstract class LineFireCont extends EffectController {
         }
     }
 
+    /**
+     * This method check if it's possible to shoot on south
+     */
     private void loadSouth(){
         ArrayList<String> first = new ArrayList<>();
 
@@ -107,6 +136,9 @@ public abstract class LineFireCont extends EffectController {
         }
     }
 
+    /**
+     * This method check if it's possible to shoot on south-south
+     */
     private void loadSouthSecond(){
         ArrayList<String> second = new ArrayList<>();
 
@@ -120,6 +152,9 @@ public abstract class LineFireCont extends EffectController {
         }
     }
 
+    /**
+     * This method check if it's possible to shoot on east
+     */
     private void loadEast(){
         ArrayList<String> first = new ArrayList<>();
 
@@ -134,6 +169,9 @@ public abstract class LineFireCont extends EffectController {
         }
     }
 
+    /**
+     * This method check if it's possible to shoot on east-east
+     */
     private void loadEastSecond(){
         ArrayList<String> second = new ArrayList<>();
 
@@ -147,6 +185,10 @@ public abstract class LineFireCont extends EffectController {
         }
     }
 
+    /**
+     * This method catch a LineFireSetEv event
+     * @param message the object which have to be updated
+     */
     public void update(LineFireSetEv message){
         if (message.getTarget1() != null){
             for (Player player : players){
