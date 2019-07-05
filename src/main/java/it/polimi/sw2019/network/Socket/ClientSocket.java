@@ -196,7 +196,7 @@ public class ClientSocket  {
     }//(MERITA)
 
     public static void main (String[] args){
-        //serverHost = args[0];
+        serverHost = args[0];
         Application.launch(GUI.class);
 
     }
