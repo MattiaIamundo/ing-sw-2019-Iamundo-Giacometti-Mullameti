@@ -16,7 +16,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="startButton" layoutX="25.0" layoutY="458.0" maxHeight="70.0" maxWidth="553.0" minHeight="70.0" minWidth="459.0" mnemonicParsing="false" onAction="#startButtonPushed" prefHeight="70.0" prefWidth="459.0" text="Start Game">
+            <Button fx:id="startButton" layoutX="25.0" layoutY="458.0" maxHeight="70.0" maxWidth="553.0" minHeight="70.0" minWidth="459.0" mnemonicParsing="false" onAction="#startButtonPushed" prefHeight="70.0" prefWidth="459.0" styleClass="buttonGeneral" stylesheets="@../CssStyle/generale.css" text="Start Game">
                <font>
                   <Font size="36.0" />
                </font>

@@ -189,7 +189,6 @@ public class TableController implements Observer<NotifyClient> {
 
 
 
-
     @FXML
     public void descriptionButtonPushed() {
 

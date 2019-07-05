@@ -39,6 +39,8 @@ public class GUI extends Application implements UIinterface {
         Scene scene=new Scene(serverIP);
         stage.setScene(scene);
         stage.setTitle("Adrenaline");
+        stage.setWidth(1230.0);
+        stage.setHeight(705.0);
         stage.setResizable(false);
         stage.getScene().setRoot(serverIP);
         stage.show();

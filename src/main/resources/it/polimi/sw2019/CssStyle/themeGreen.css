@@ -1,13 +1,10 @@
 .button{
 
     -fx-background-image: url("../Images/greenButton.png"); /* Green */
-
-
     -fx-border: none;
-
     -fx-font-family: Stencil;
     -fx-font-size: 24pt;
-    -fx-text-fill: #e4e40f;
+    -fx-text-fill: #ffffff;
     -fx-text-align: center;
     -fx-opacity: 1;
     -fx-cursor: pointer;
@@ -31,6 +28,24 @@
     -fx-display: inline-block;
 }
 
+.buttonGeneral{
+    -fx-background-image: url("../Images/centro.png"); /* Green */
+    -fx-border: none;
+    -fx-font-family: Stencil;
+    -fx-font-size: 24pt;
+    -fx-text-fill: #ffffff;
+    -fx-text-align: center;
+    -fx-opacity: 1;
+    -fx-cursor: pointer;
+    -fx-webkit-transition-duration: 0.4s; /* Safari */
+    -fx-transition-duration: 0.4s;
+    -fx-display: inline-block;
+
+}
+
+.buttonGeneral:hover{
+    -fx-opacity: 0.5 ;
+}
 
 .buttonDirection:hover{
     -fx-opacity: 0.5 ;

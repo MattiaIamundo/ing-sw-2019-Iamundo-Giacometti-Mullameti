@@ -16,7 +16,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="nextButton" layoutX="324.0" layoutY="254.0" maxHeight="70.0" maxWidth="553.0" minHeight="70.0" minWidth="243.0" mnemonicParsing="false" onAction="#nextButtonPushed" prefHeight="70.0" prefWidth="243.0" text="Next">
+            <Button fx:id="nextButton" layoutX="324.0" layoutY="254.0" maxHeight="70.0" maxWidth="553.0" minHeight="70.0" minWidth="243.0" mnemonicParsing="false" onAction="#nextButtonPushed" prefHeight="70.0" prefWidth="243.0" styleClass="buttonGeneral" stylesheets="@../CssStyle/generale.css" text="Next">
                <font>
                   <Font size="36.0" />
                </font>
