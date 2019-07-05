@@ -12,16 +12,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class represent the controller for the powerUp Newton
+ */
 public class NewtonCont extends Observable<NewtonChooseEv> implements Observer<NewtonSetEv>, PowerUpController {
     private Newton model;
     private ArrayList<Player> players;
     private HashMap<Player, HashMap<String, Space>> movements = new HashMap<>();
 
+    /**
+     * @param model is the model of the powerUp
+     * @param players is the list of the players of the match
+     */
     public NewtonCont(Newton model, ArrayList<Player> players) {
         this.model = model;
         this.players = players;
     }
 
+    /**
+     * This method search for the players that can be selected as a valid target for the powerUp
+     * @param attacker is the player that use the powerUp
+     */
     @Override
     public void usePowerUp(Player attacker) {
         HashMap<String, ArrayList<String>> valid = new HashMap<>();
@@ -37,6 +48,12 @@ public class NewtonCont extends Observable<NewtonChooseEv> implements Observer<N
         notify(new NewtonChooseEv(attacker.getNickname(), valid));
     }
 
+    /**
+     * This method check, for every direction, which are the valid movements that the player under analysis can do
+     * @param player is the player under analysis
+     * @return an hash map where the key's are the cardinal direction (e.g. north, north-north) in which the player can be moved
+     *          and the corresponding value is the square associated to that direction
+     */
     private HashMap<String, Space> checkMovements(Player player){
         HashMap<String, Space> validMoves = new HashMap<>();
 
@@ -47,6 +64,12 @@ public class NewtonCont extends Observable<NewtonChooseEv> implements Observer<N
         return validMoves;
     }
 
+    /**
+     * This method check if the player can go north, north-north
+     * @param playerpos is the position of the player under analysis
+     * @return an hash map that use as key the cardinal direction of the valid squares and as value
+     *         the square associated to the movement in that direction
+     */
     private HashMap<String, Space> checkNorth(Space playerpos){
         HashMap<String, Space> valid = new HashMap<>();
 
@@ -59,6 +82,12 @@ public class NewtonCont extends Observable<NewtonChooseEv> implements Observer<N
         return valid;
     }
 
+    /**
+     * This method check if the player can go west, west-west
+     * @param playerpos is the position of the player under analysis
+     * @return an hash map that use as key the cardinal direction of the valid squares and as value
+     *         the square associated to the movement in that direction
+     */
     private HashMap<String, Space> checkWest(Space playerpos){
         HashMap<String, Space> valid = new HashMap<>();
 
@@ -71,6 +100,12 @@ public class NewtonCont extends Observable<NewtonChooseEv> implements Observer<N
         return valid;
     }
 
+    /**
+     * This method check if the player can go south, south, south-south
+     * @param playerpos is the position of the player under analysis
+     * @return an hash map that use as key the cardinal direction of the valid squares and as value
+     *         the square associated to the movement in that direction
+     */
     private HashMap<String, Space> checkSouth(Space playerpos){
         HashMap<String, Space> valid = new HashMap<>();
 
@@ -83,6 +118,12 @@ public class NewtonCont extends Observable<NewtonChooseEv> implements Observer<N
         return valid;
     }
 
+    /**
+     * This method check if the player can go east, east-east
+     * @param playerpos is the position of the player under analysis
+     * @return an hash map that use as key the cardinal direction of the valid squares and as value
+     *         the square associated to the movement in that direction
+     */
     private HashMap<String, Space> checkEast(Space playerpos){
         HashMap<String, Space> valid = new HashMap<>();
 
@@ -95,6 +136,11 @@ public class NewtonCont extends Observable<NewtonChooseEv> implements Observer<N
         return valid;
     }
 
+    /**
+     * This method catch a NewtonSetEv event
+     * @param message the event that contain the nickname of the player selected as target and the direction in
+     *                which have to be moved
+     */
     @Override
     public void update(NewtonSetEv message) {
         for (Player player : players){

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BarbecueModeCont extends EffectController implements Observer<BarbecueSetEv> {
-
     private BarbecueMode model;
     private Player attacker;
     private ArrayList<Player> players;

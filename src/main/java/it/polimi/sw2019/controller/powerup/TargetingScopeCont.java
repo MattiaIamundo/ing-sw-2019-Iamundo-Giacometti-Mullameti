@@ -9,16 +9,27 @@ import it.polimi.sw2019.view.Observer;
 
 import java.util.ArrayList;
 
+/**
+ * This class represent the controller of Targeting Scope powerUp
+ */
 public class TargetingScopeCont extends Observable<TargetingScopeChooseEv> implements Observer<TargetingScopeSetEv>, PowerUpController{
     private TargetingScope model;
     private ArrayList<Player> players;
     private Player attacker;
 
+    /**
+     * @param model the model of the powerUp
+     * @param players the list of the players in the match
+     */
     public TargetingScopeCont(TargetingScope model, ArrayList<Player> players) {
         this.model = model;
         this.players = players;
     }
 
+    /**
+     * This method search for the players that can be selected as a valid target for the powerUp
+     * @param attacker is the player that use the powerUp
+     */
     @Override
     public void usePowerUp(Player attacker) {
         ArrayList<String> targets = new ArrayList<>();
@@ -39,6 +50,10 @@ public class TargetingScopeCont extends Observable<TargetingScopeChooseEv> imple
         notify(new TargetingScopeChooseEv(attacker.getNickname(), targets, ammos));
     }
 
+    /**
+     * This method catch a TargetingScopeEv event
+     * @param message the event that contains the player set as target and the color of the ammunition to be paid
+     */
     @Override
     public void update(TargetingScopeSetEv message) {
         for (Player player : players){
@@ -51,6 +66,11 @@ public class TargetingScopeCont extends Observable<TargetingScopeChooseEv> imple
         }
     }
 
+    /**
+     * This method pay the chosen ammunition
+     * @param attacker the player that use the powerUp
+     * @param ammo the color of the chosen ammunition
+     */
     private void payAmmo(Player attacker, String ammo){
         switch (ammo){
             case "red":
