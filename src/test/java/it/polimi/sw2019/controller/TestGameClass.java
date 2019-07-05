@@ -22,6 +22,16 @@ public class TestGameClass {
     }
 
     @Test
+    public void setTimerThreadToTheLoginTest(){
+        controller.setTimerThreadToTheLogin();
+    }
+
+    @Test
+    public void setTimerThreadToTheGameTest(){
+        controller.setTimerThreadToTheGame();
+    }
+
+    @Test
     public void testCreatePowerUp() {
 
         controller.createPowerUp();

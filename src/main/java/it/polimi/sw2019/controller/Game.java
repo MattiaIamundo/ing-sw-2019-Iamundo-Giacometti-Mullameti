@@ -111,21 +111,17 @@ public class Game implements Observer <NotifyReturn> {
         effectControllers = shootController.getWeaponEffectManager().getEffectControllers();
         killshotController = new Killshot();
         finalFrenzyController = new FinalFrenzy();
-        //da rimuovere e chiamare da metodo, il metodo c'è già
-        try{
-            InputStream in = getClass().getClassLoader().getResourceAsStream("it/polimi/sw2019/file_Json/milliSecondsToTimerBeginning.json");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            timerThread.setTime(gson.fromJson( reader , int.class));
-            reader.close();
-        } catch (IOException ee) {
-            logger.log(Level.INFO, "{Game} IOException!\n" + ee.toString());
-        }
+        setTimerThreadToTheLogin();
     }
 
     public Table getGameboard() {
         return gameboard;
     }
 
+    /**
+     * These method initialize the timer that start after the third player is added to the game waiting for up to two other players to
+     * log into the game
+     */
     public synchronized  void setTimerThreadToTheLogin() {
 
         try{
@@ -138,6 +134,9 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method load the timer that specify the max time that the players have to complete their turn
+     */
     public synchronized void setTimerThreadToTheGame() {
 
         try{
@@ -159,6 +158,9 @@ public class Game implements Observer <NotifyReturn> {
         return this.out;
     }
 
+    /**
+     * @return the list of the players in the game
+     */
     public synchronized List<Player> getPlayers() {
         return players;
     }
@@ -171,10 +173,17 @@ public class Game implements Observer <NotifyReturn> {
         return timerPingThread;
     }
 
+    /**
+     * @return true if the match is concluded, false otherwise
+     */
     public synchronized boolean getGameover() {
         return gameover;
     }
 
+    /**
+     * These method set the status of the match
+     * @param status true if the match is finished, false otherwise
+     */
     public synchronized void setGameover(boolean status) {
         this.gameover = status;
     }
@@ -187,6 +196,10 @@ public class Game implements Observer <NotifyReturn> {
         return this.gameStarted;
     }
 
+    /**
+     * These method add a player to the match
+     * @param nickname is the nickname of the player that want to enter the match
+     */
     public synchronized void addPlayers(String nickname) {
         Player player = new Player(nickname, 0, null, new PlayerPlance());
         players.add(player);
@@ -376,6 +389,9 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method initialize the weapon's deck
+     */
     public synchronized void createWeapon() {
 
         if ( this.getGameboard().getWeapon().isEmpty() ) {
@@ -392,6 +408,9 @@ public class Game implements Observer <NotifyReturn> {
 
     }
 
+    /**
+     * These method initialize the weapons with a single optional effect or only the basic effect
+     */
     private void createAdditiveWeapons() {
 
         try{
@@ -443,6 +462,9 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method initialize the weapons with two optional effects
+     */
     private void createDoubleAdditiveWeapons() {
 
         try{
@@ -501,6 +523,9 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method initialize the weapons with an alternative effect
+     */
     private void createAlternativeWeapons() {
 
         try{
@@ -582,6 +607,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method initialize the killShotTrack
+     * @param numberOfSkulls the number of skulls for the killShotTrack chosen by the first player
+     */
     public synchronized void initializeKillShotTrack(String numberOfSkulls) {
 
         int nOfSkull;
@@ -608,6 +637,9 @@ public class Game implements Observer <NotifyReturn> {
 
     }
 
+    /**
+     * These method initialize the ammo card deck
+     */
     public synchronized void createAmmo() {
 
         if ( this.getGameboard().getAmmo().isEmpty() ) {
@@ -622,6 +654,9 @@ public class Game implements Observer <NotifyReturn> {
 
     }
 
+    /**
+     * These method initialize the ammo cards with two ammunitions and a powerUp
+     */
     private void createAmmoDoublePowerUp() {
 
         try{
@@ -639,6 +674,9 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method initialize the ammo cards with three ammunitions
+     */
     private void createAmmoTriple() {
 
         try{
@@ -656,6 +694,14 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method initialize the map
+     * @param mapNumber the map ID
+     *                  zero: the map good for 4 or 5 player
+     *                  one: good for any number of players
+     *                  two: good for any number of players
+     *                  three: good for 3 or 4 players
+     */
     public synchronized void createMap(String mapNumber) {
 
         if( mapNumber.equals("zero") ) {
@@ -672,6 +718,9 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method initialize the "zero" map, good for 4 or 5 players
+     */
     private void createMap1() {
 
         List<Space> list1 = new ArrayList<>(3);
@@ -769,6 +818,9 @@ public class Game implements Observer <NotifyReturn> {
         this.gameboard.setMap(map);
     }
 
+    /**
+     * These method initialize the "one" map: good for any number of players
+     */
     private void createMap2() {
 
         List<Space> spaceList1 = new ArrayList<>(3);
@@ -863,6 +915,9 @@ public class Game implements Observer <NotifyReturn> {
 
     }
 
+    /**
+     * These method create the map "two": good for any number of players
+     */
     private void createMap3() {
 
         List<Space> lista = new ArrayList<>(3);
@@ -957,6 +1012,9 @@ public class Game implements Observer <NotifyReturn> {
         this.gameboard.setMap(map);
     }
 
+    /**
+     * These method initialize the "three" map: good for 3 or 4 players
+     */
     private void createMap4() {
 
         List<Space> lista = new ArrayList<>(3);
@@ -1052,6 +1110,9 @@ public class Game implements Observer <NotifyReturn> {
 
     public void setTurnOfPlayer (Player player) { this.turnOf.setPlayer(player); }
 
+    /**
+     * @return the player whose turn it is
+     */
     public Player getTurnOfPlayer () {
         return turnOf.getPlayer();
     }
@@ -1064,6 +1125,11 @@ public class Game implements Observer <NotifyReturn> {
         return eventActualPlayer;
     }
 
+    /**
+     * These method search a player by it's nickname
+     * @param nickname the nickname of the searched player
+     * @return the player whose nickname is the given nickname
+     */
     public Player searchPlayer(String nickname) {
 
         Player playerToReturn = null;
@@ -1134,6 +1200,9 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method initialize the ammo cards for the map "one"
+     */
     private void initializeAmmo1() {
         try{
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,0) ).setAmmo(this.getGameboard().getAmmo().remove(0));
@@ -1158,6 +1227,9 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method initialize the ammo cards for the map "two"
+     */
     private void initializeAmmo2() {
         try{
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
@@ -1182,6 +1254,9 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method initialize the ammo cards for the map "three"
+     */
     private void initializeAmmo3() {
         try{
             ((SpaceAmmo) this.getGameboard().getMap().getSpace(0,2) ).setAmmo(this.getGameboard().getAmmo().remove(0));
@@ -1283,248 +1358,444 @@ public class Game implements Observer <NotifyReturn> {
         actionEv.handle(this.executorEventImp, this);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param moveEv the event received from PlayerRemoteView
+     */
     public void handleEvent(MoveEv moveEv) {
 
         Player player = searchPlayer( moveEv.getPlayerNickname() );
         this.moveController.handleEvent(moveEv, player);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param reloadEv the event from PlayerRemoteView
+     */
     public void handleEvent(ReloadEv reloadEv) {
 
         Player player = searchPlayer( reloadEv.getPlayerNickname() );
         this.reloadController.handleEvent(reloadEv, player);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param grabEv the event received from PlayerRemoteView
+     */
     public void handleEvent(GrabEv grabEv) {
 
         Player player = searchPlayer( grabEv.getPlayerNickname() );
         this.grabController.handleEvent(grabEv, player);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param endEv the event received from PlayerRemoteView
+     */
     public void handleEvent(EndEv endEv) {
         Player player = searchPlayer( endEv.getPlayerNickname() );
         //
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param barbecueSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(BarbecueSetEv barbecueSetEv){
         String name = BarbecueMode.class.getName().substring(BarbecueMode.class.getName().lastIndexOf('.') + 1);
         ((BarbecueModeCont) effectControllers.get(name)).update(barbecueSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param blackHoleSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(BlackHoleSetEv blackHoleSetEv){
         String name = BlackHole.class.getName().substring(BlackHole.class.getName().lastIndexOf('.') + 1);
         ((BlackHoleCont) effectControllers.get(name)).update(blackHoleSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param chainReactSetEv the event received from PLayerRemoteView
+     */
     public void handleEvent(ChainReactSetEv chainReactSetEv){
         String name = ChainReaction.class.getName().substring(ChainReaction.class.getName().lastIndexOf('.') + 1);
         ((ChainReactionCont) effectControllers.get(name)).update(chainReactSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param cozyFireModeSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(CozyFireModeSetEv cozyFireModeSetEv){
         String name = CozyFireMode.class.getName().substring(CozyFireMode.class.getName().lastIndexOf('.') + 1);
         ((CozyFireModeCont) effectControllers.get(name)).update(cozyFireModeSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param cyberbladeSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(CyberbladeSetEv cyberbladeSetEv){
         String name = Cyberblade.class.getName().substring(Cyberblade.class.getName().lastIndexOf('.') + 1);
         ((CyberbladeCont) effectControllers.get(name)).update(cyberbladeSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param extraGrenadeSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(ExtraGrenadeSetEv extraGrenadeSetEv){
         String name = ExtraGrenade.class.getName().substring(ExtraGrenade.class.getName().lastIndexOf('.') + 1);
         ((ExtraGrenadeCont) effectControllers.get(name)).update(extraGrenadeSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param flamethrowerSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(FlamethrowerSetEv flamethrowerSetEv){
         String name = Flamethrower.class.getName().substring(Flamethrower.class.getName().lastIndexOf('.') + 1);
         ((FlamethrowerCont) effectControllers.get(name)).update(flamethrowerSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param focusShotSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(FocusShotSetEv focusShotSetEv){
         String name = FocusShot.class.getName().substring(FocusShot.class.getName().lastIndexOf('.') + 1);
         ((FocusShotCont) effectControllers.get(name)).update(focusShotSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param furnaceSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(FurnaceSetEv furnaceSetEv){
         String name = Furnace.class.getName().substring(Furnace.class.getName().lastIndexOf('.') + 1);
         ((FurnaceCont) effectControllers.get(name)).update(furnaceSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param grenadeLaunchSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(GrenadeLaunchSetEv grenadeLaunchSetEv){
         String name = GrenadeLauncher.class.getName().substring(GrenadeLauncher.class.getName().lastIndexOf('.') + 1);
         ((GrenadeLaunchCont) effectControllers.get(name)).update(grenadeLaunchSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param heatseekerSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(HeatseekerSetEv heatseekerSetEv){
         String name = Heatseeker.class.getName().substring(Heatseeker.class.getName().lastIndexOf('.') + 1);
         ((HeatseekerCont) effectControllers.get(name)).update(heatseekerSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param hellionSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(HellionSetEv hellionSetEv){
         String name = Hellion.class.getName().substring(Hellion.class.getName().lastIndexOf('.') + 1);
         ((HellionCont) effectControllers.get(name)).update(hellionSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param highVoltageSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(HighVoltageSetEv highVoltageSetEv){
         String name = HighVoltage.class.getName().substring(HighVoltage.class.getName().lastIndexOf('.') + 1);
         ((HighVoltageCont) effectControllers.get(name)).update(highVoltageSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param lockRifleSetEv the vent received from PlayerRemoteView
+     */
     public void handleEvent(LockRifleSetEv lockRifleSetEv){
         String name = LockRifle.class.getName().substring(LockRifle.class.getName().lastIndexOf('.') + 1);
         ((LockRifleCont) effectControllers.get(name)).update(lockRifleSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param longBarrelSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(LongBarrelSetEv longBarrelSetEv){
         String name = LongBarrelMode.class.getName().substring(LongBarrelMode.class.getName().lastIndexOf('.') + 1);
         ((LongBarrelCont) effectControllers.get(name)).update(longBarrelSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param machineGunSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(MachineGunSetEv machineGunSetEv){
         String name = MachineGun.class.getName().substring(MachineGun.class.getName().lastIndexOf('.') + 1);
         ((MachineGunCont) effectControllers.get(name)).update(machineGunSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param nanoTracerSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(NanoTracerSetEv nanoTracerSetEv){
         String name = NanoTracerMode.class.getName().substring(NanoTracerMode.class.getName().lastIndexOf('.') + 1);
         ((NanoTracerCont) effectControllers.get(name)).update(nanoTracerSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param phaseGlideSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(PhaseGlideSetEv phaseGlideSetEv){
         String name = PhaseGlide.class.getName().substring(PhaseGlide.class.getName().lastIndexOf('.') + 1);
         ((PhaseGlideCont) effectControllers.get(name)).update(phaseGlideSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param piercingModeSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(PiercingModeSetEv piercingModeSetEv){
         String name = PiercingMode.class.getName().substring(PiercingMode.class.getName().lastIndexOf('.') + 1);
         ((PiercingModeCont) effectControllers.get(name)).update(piercingModeSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param plasmaGunSetEv the vent received from PlayerRemoteView
+     */
     public void handleEvent(PlasmaGunSetEv plasmaGunSetEv){
         String name = PlasmaGun.class.getName().substring(PlasmaGun.class.getName().lastIndexOf('.') + 1);
         ((PlasmaGunCont) effectControllers.get(name)).update(plasmaGunSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param powerGloveSetEv the event received from PLayerRemoteView
+     */
     public void handleEvent(PowerGloveSetEv powerGloveSetEv){
         String name = PowerGlove.class.getName().substring(PowerGlove.class.getName().lastIndexOf('.') + 1);
         ((PowerGloveCont) effectControllers.get(name)).update(powerGloveSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param pulvModeSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(PulvModeSetEv pulvModeSetEv){
         String name = PulverizeMode.class.getName().substring(PulverizeMode.class.getName().lastIndexOf('.') + 1);
         ((PulverizeModeCont) effectControllers.get(name)).update(pulvModeSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param punisherModeSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(PunisherModeSetEv punisherModeSetEv){
         String name = PunisherMode.class.getName().substring(PunisherMode.class.getName().lastIndexOf('.') + 1);
         ((PunisherModeCont) effectControllers.get(name)).update(punisherModeSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param railGunSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(RailGunSetEv railGunSetEv){
         String name = RailGun.class.getName().substring(RailGun.class.getName().lastIndexOf('.') + 1);
         ((RailGunCont) effectControllers.get(name)).update(railGunSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param rocketFistSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(RocketFistSetEv rocketFistSetEv){
         String name = RocketFistMode.class.getName().substring(RocketFistMode.class.getName().lastIndexOf('.') + 1);
         ((RocketFistCont) effectControllers.get(name)).update(rocketFistSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param rocketJumpSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(RocketJumpSetEv rocketJumpSetEv){
         String name = RocketJump.class.getName().substring(RocketJump.class.getName().lastIndexOf('.') + 1);
         ((RocketJumpCont) effectControllers.get(name)).update(rocketJumpSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param rocketLaunchSetEv the event received from PLayerRemoteView
+     */
     public void handleEvent(RocketLaunchSetEv rocketLaunchSetEv){
         String name = RocketLauncher.class.getName().substring(RocketLauncher.class.getName().lastIndexOf('.') + 1);
         ((RocketLauncherCont) effectControllers.get(name)).update(rocketLaunchSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param scannerModeSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(ScannerModeSetEv scannerModeSetEv){
         String name = ScannerMode.class.getName().substring(ScannerMode.class.getName().lastIndexOf('.') + 1);
         ((ScannerModeCont) effectControllers.get(name)).update(scannerModeSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param secondLockSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(SecondLockSetEv secondLockSetEv){
         String name = SecondLock.class.getName().substring(SecondLock.class.getName().lastIndexOf('.') + 1);
         ((SecondLockCont) effectControllers.get(name)).update(secondLockSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param shadowstepSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(ShadowstepSetEv shadowstepSetEv){
         String name = Shadowstep.class.getName().substring(Shadowstep.class.getName().lastIndexOf('.') + 1);
         ((ShadowstepCont) effectControllers.get(name)).update(shadowstepSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param shockwaveSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(ShockwaveSetEv shockwaveSetEv){
         String name = Shockwave.class.getName().substring(Shockwave.class.getName().lastIndexOf('.') + 1);
         ((ShockwaveCont) effectControllers.get(name)).update(shockwaveSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param shotgunSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(ShotgunSetEv shotgunSetEv){
         String name = Shotgun.class.getName().substring(Shotgun.class.getName().lastIndexOf('.') + 1);
         ((ShotgunCont) effectControllers.get(name)).update(shotgunSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param sledgehammerSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(SledgehammerSetEv sledgehammerSetEv){
         String name = Sledgehammer.class.getName().substring(Sledgehammer.class.getName().lastIndexOf('.') + 1);
         ((SledgehammerCont) effectControllers.get(name)).update(sledgehammerSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param sliceAndDiceSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(SliceAndDiceSetEv sliceAndDiceSetEv){
         String name = SliceAndDice.class.getName().substring(SliceAndDice.class.getName().lastIndexOf('.') + 1);
         ((SliceAndDiceCont) effectControllers.get(name)).update(sliceAndDiceSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param thorSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(ThorSetEv thorSetEv){
         String name = Thor.class.getName().substring(Thor.class.getName().lastIndexOf('.') + 1);
         ((ThorCont) effectControllers.get(name)).update(thorSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param tractorBeamSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(TractorBeamSetEv tractorBeamSetEv){
         String name = TractorBeam.class.getName().substring(TractorBeam.class.getName().lastIndexOf('.') + 1);
         ((TractorBeamCont) effectControllers.get(name)).update(tractorBeamSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param turretTripodSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(TurretTripodSetEv turretTripodSetEv){
         String name = TurretTripod.class.getName().substring(TurretTripod.class.getName().lastIndexOf('.') + 1);
         ((TurretTripodCont) effectControllers.get(name)).update(turretTripodSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param vortexSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(VortexSetEv vortexSetEv){
         String name = Vortex.class.getName().substring(Vortex.class.getName().lastIndexOf('.') + 1);
         ((VortexCont) effectControllers.get(name)).update(vortexSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param whisperSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(WhisperSetEv whisperSetEv){
         String name = Whisper.class.getName().substring(Whisper.class.getName().lastIndexOf('.') + 1);
         ((WhisperCont) effectControllers.get(name)).update(whisperSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param zx2SetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(ZX2SetEv zx2SetEv){
         String name = ZX2.class.getName().substring(ZX2.class.getName().lastIndexOf('.') + 1);
         ((ZX2Cont) effectControllers.get(name)).update(zx2SetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param powerUpSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(PowerUpSetEv powerUpSetEv){
         usePowerUpController.update(powerUpSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param newtonSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(NewtonSetEv newtonSetEv){
         String name = Newton.class.getName().substring(Newton.class.getName().lastIndexOf('.') + 1);
         ((NewtonCont) powerUpControllers.get(name)).update(newtonSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param tagbackGrenadeSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(TagbackGrenadeSetEv tagbackGrenadeSetEv){
         String name = TagbackGrenade.class.getName().substring(TagbackGrenade.class.getName().lastIndexOf('.') + 1);
         ((TagbackGrenadeCont) powerUpControllers.get(name)).update(tagbackGrenadeSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param targetingScopeSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(TargetingScopeSetEv targetingScopeSetEv){
         String name = TargetingScope.class.getName().substring(TargetingScope.class.getName().lastIndexOf('.') + 1);
         ((TargetingScopeCont) powerUpControllers.get(name)).update(targetingScopeSetEv);
     }
 
+    /**
+     * These method manage the event received from the PlayerRemoteView
+     * @param teleporterSetEv the event received from PlayerRemoteView
+     */
     public void handleEvent(TeleporterSetEv teleporterSetEv){
         String name = Teleporter.class.getName().substring(Teleporter.class.getName().lastIndexOf('.') + 1);
         ((TeleporterCont) powerUpControllers.get(name)).update(teleporterSetEv);
@@ -1606,6 +1877,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param weaponReloadChooseEv the event to send
+     */
     public void update(WeaponReloadChooseEv weaponReloadChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView( weaponReloadChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1613,6 +1888,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param notifyEndReloadEv the event to send
+     */
     public void update(NotifyEndReloadEv notifyEndReloadEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView( notifyEndReloadEv.getNickname());
         if(playerRemoteView != null) {
@@ -1620,6 +1899,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param notifyReloadEv the event to send
+     */
     public void update(NotifyReloadEv notifyReloadEv) {
         List<PlayerRemoteView> playerRemoteViews = searchAllPlayerRemoteViews();
         List<Player> clonePlayers = new ArrayList<>(5);
@@ -1647,6 +1930,10 @@ public class Game implements Observer <NotifyReturn> {
 
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param barbecueChooseEv the event to send
+     */
     public void update(BarbecueChooseEv barbecueChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(barbecueChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1654,6 +1941,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param blackHoleChooseEv the event to send
+     */
     public void update(BlackHoleChooseEv blackHoleChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(blackHoleChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1661,6 +1952,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param chainReactChooseEv the event to send
+     */
     public void update(ChainReactChooseEv chainReactChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(chainReactChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1668,6 +1963,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param cozyFireModeChooseEv the event to send
+     */
     public void update(CozyFireModeChooseEv cozyFireModeChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(cozyFireModeChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1675,6 +1974,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param cyberbladeChooseEv the event to send
+     */
     public void update(CyberbladeChooseEv cyberbladeChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(cyberbladeChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1682,6 +1985,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param extraGrenadeChooseEv the event to send
+     */
     public void update(ExtraGrenadeChooseEv extraGrenadeChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(extraGrenadeChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1689,6 +1996,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param flamethrowerChooseEv the event to send
+     */
     public void update(FlamethrowerChooseEv flamethrowerChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(flamethrowerChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1696,6 +2007,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param focusShotChooseEv the event to send
+     */
     public void update(FocusShotChooseEv focusShotChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(focusShotChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1703,6 +2018,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param furnaceChooseEv the event to send
+     */
     public void update(FurnaceChooseEv furnaceChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(furnaceChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1710,6 +2029,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param grenadeLaunchChooseEv the event to send
+     */
     public void update(GrenadeLaunchChooseEv grenadeLaunchChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(grenadeLaunchChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1717,6 +2040,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param heatseekerChooseEv the event to send
+     */
     public void update(HeatseekerChooseEv heatseekerChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(heatseekerChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1724,6 +2051,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param hellionChooseEv the event to send
+     */
     public void update(HellionChooseEv hellionChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(hellionChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1731,6 +2062,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param highVoltageChooseEv the event to send
+     */
     public void update(HighVoltageChooseEv highVoltageChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(highVoltageChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1738,6 +2073,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param lockRifleChooseEv the event to send
+     */
     public void update(LockRifleChooseEv lockRifleChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(lockRifleChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1745,6 +2084,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param longBarrelChooseEv the event to send
+     */
     public void update(LongBarrelChooseEv longBarrelChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(longBarrelChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1752,6 +2095,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param machineGunChooseEv the event to send
+     */
     public void update(MachineGunChooseEv machineGunChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(machineGunChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1759,6 +2106,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param nanoTracerChooseEv the event to send
+     */
     public void update(NanoTracerChooseEv nanoTracerChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(nanoTracerChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1766,6 +2117,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param phaseGlideChooseEv the event to send
+     */
     public void update(PhaseGlideChooseEv phaseGlideChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(phaseGlideChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1773,6 +2128,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param piercingModeChooseEv the event to send
+     */
     public void update(PiercingModeChooseEv piercingModeChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(piercingModeChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1780,6 +2139,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param plasmaGunChooseEv the event to send
+     */
     public void update(PlasmaGunChooseEv plasmaGunChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(plasmaGunChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1787,6 +2150,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param powerChooseEv the event to send
+     */
     public void update(PowerChooseEv powerChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(powerChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1794,6 +2161,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param powerGloveChooseEv the event to send
+     */
     public void update(PowerGloveChooseEv powerGloveChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(powerGloveChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1801,6 +2172,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param pulvModeChooseEv the event to send
+     */
     public void update(PulvModeChooseEv pulvModeChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(pulvModeChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1808,6 +2183,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param punisherModeChooseEv the event to send
+     */
     public void update(PunisherModeChooseEv punisherModeChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(punisherModeChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1815,6 +2194,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param railGunChooseEv the event to send
+     */
     public void update(RailGunChooseEv railGunChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(railGunChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1822,6 +2205,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param rocketFistChooseEv the event to send
+     */
     public void update(RocketFistChooseEv rocketFistChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(rocketFistChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1829,6 +2216,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param rocketJumpChooseEv the event to send
+     */
     public void update(RocketJumpChooseEv rocketJumpChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(rocketJumpChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1836,6 +2227,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param rocketLaunchChooseEv the event to send
+     */
     public void update(RocketLaunchChooseEv rocketLaunchChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(rocketLaunchChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1843,6 +2238,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param scannerModeChooseEv the event to send
+     */
     public void update(ScannerModeChooseEv scannerModeChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(scannerModeChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1850,6 +2249,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param secondLockChooseEv the event to send
+     */
     public void update(SecondLockChooseEv secondLockChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(secondLockChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1857,6 +2260,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param shadowstepChooseEv the event to send
+     */
     public void update(ShadowstepChooseEv shadowstepChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(shadowstepChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1864,6 +2271,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param shockwaveChooseEv the event to send
+     */
     public void update(ShockwaveChooseEv shockwaveChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(shockwaveChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1871,6 +2282,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param shotgunChooseEv the event to send
+     */
     public void update(ShotgunChooseEv shotgunChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(shotgunChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1878,6 +2293,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param sledgehammerChooseEv the event to send
+     */
     public void update(SledgehammerChooseEv sledgehammerChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(sledgehammerChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1885,6 +2304,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param sliceAndDiceChooseEv the event to send
+     */
     public void update(SliceAndDiceChooseEv sliceAndDiceChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(sliceAndDiceChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1892,6 +2315,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param thorChooseEv the event to send
+     */
     public void update(ThorChooseEv thorChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(thorChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1899,6 +2326,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param tractorBeamChooseEv the event to send
+     */
     public void update(TractorBeamChooseEv tractorBeamChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(tractorBeamChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1906,6 +2337,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param turretTripodChooseEv the event to send
+     */
     public void update(TurretTripodChooseEv turretTripodChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(turretTripodChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1913,6 +2348,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param vortexChooseEv the event to send
+     */
     public void update(VortexChooseEv vortexChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(vortexChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1920,6 +2359,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param whisperChooseEv the event to send
+     */
     public void update(WhisperChooseEv whisperChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(whisperChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1927,6 +2370,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param zx2ChooseEv the event to send
+     */
     public void update(ZX2ChooseEv zx2ChooseEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(zx2ChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1934,6 +2381,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param unpaidEffectEv the event to send
+     */
     public void update(UnpaidEffectEv unpaidEffectEv) {
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(unpaidEffectEv.getNickname());
         if(playerRemoteView != null) {
@@ -1941,6 +2392,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param powerUpChooseEv the event to send
+     */
     public void update(PowerUpChooseEv powerUpChooseEv){
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(powerUpChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1948,6 +2403,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param newtonChooseEv the event to send
+     */
     public void update(NewtonChooseEv newtonChooseEv){
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(newtonChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1955,6 +2414,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param tagbackGrenadeChooseEv the event to send
+     */
     public void update(TagbackGrenadeChooseEv tagbackGrenadeChooseEv){
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(tagbackGrenadeChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1962,6 +2425,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param targetingScopeChooseEv the event to send
+     */
     public void update(TargetingScopeChooseEv targetingScopeChooseEv){
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(targetingScopeChooseEv.getNickname());
         if(playerRemoteView != null) {
@@ -1969,6 +2436,10 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    /**
+     * These method send the event to the PlayerRemoteView of the current player
+     * @param teleporterChooseEv the event to send
+     */
     public void update(TeleporterChooseEv teleporterChooseEv){
         PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(teleporterChooseEv.getNickname());
         if(playerRemoteView != null) {
