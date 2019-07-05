@@ -221,7 +221,7 @@ public class GUI extends Application implements UIinterface {
                 mainStage.getScene().setRoot(table);
 
                 EventForGui eventForGui = new EventForGui(this.clientSocket);
-                eventForGui.run();
+                new Thread(eventForGui).start();
 
 
             } catch (IOException e) {
@@ -247,12 +247,6 @@ public class GUI extends Application implements UIinterface {
                 Stage mainStage = stage;
                 mainStage.getScene().setRoot(table);
 
-/*
-                Platform.runLater( () ->
-                        (new EventForGui(this.clientSocket)).run()
-                );
-
- */
 
             } catch (IOException e) {
                 //

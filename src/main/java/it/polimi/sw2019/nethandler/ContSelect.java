@@ -1,5 +1,6 @@
 package it.polimi.sw2019.nethandler;
 
+import it.polimi.sw2019.events.NotifyClient;
 import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.client_event.Cevent.Color;
 import it.polimi.sw2019.events.client_event.Cevent.Login;
@@ -352,10 +353,10 @@ public class ContSelect implements ContSelectInt{
         return notifyReturn;
     }
 
-    public NotifyReturn waitForNotifyReturnEvent () {
-        NotifyReturn notifyReturn = null;
+    public NotifyClient waitForNotifyReturnEvent () {
+        NotifyClient notifyReturn = null;
         try {
-            notifyReturn = (NotifyReturn) objectInputStream.readObject();
+            notifyReturn = (NotifyClient) objectInputStream.readObject();
             return notifyReturn;
         } catch (IOException | ClassNotFoundException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);

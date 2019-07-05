@@ -36,6 +36,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Class TableController: the controller behind Table.fxml file
+ * @author Merita Mullameti
+ */
+
 public class TableController extends Observable<ActionEv> implements Observer<NotifyClient> {
 
 
@@ -46,10 +50,8 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     private List<Player> Players = new ArrayList<Player>(5);
     private List<Weapon> Weapon = new ArrayList<Weapon>(9);
     private List<Ammo> Ammo = new ArrayList<Ammo>(9);
-    private List<Button> PlayerButtons = new ArrayList<Button>(5);
-    private List<ImageView> WeaponImages = new ArrayList<>(9);
-    private List<ImageView> AmmoImages = new ArrayList<ImageView>(9);
 
+    @FXML private Button yourTurn;
     @FXML private AnchorPane Rooms;
     @FXML private AnchorPane table ;
     @FXML private ImageView map;
@@ -91,22 +93,13 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     @FXML private ImageView weaponEast1;
     @FXML private ImageView weaponEast2;
     @FXML private ImageView weaponEast3;
-    @FXML private Button descriptionWeapon_1;
-    @FXML private Button descriptionWeapon_2;
-    @FXML private Button descriptionWeapon_3;
-    @FXML private TextArea descriptionWeapon;
+
 
     //****************************************POWERUP********************************************
 
     @FXML private ImageView powerUpDeck;
-    @FXML private AnchorPane powerUpBoard;
-    @FXML private Button descriptionPowerUp_1;
-    @FXML private Button descriptionPowerUp_2;
-    @FXML private Button descriptionPowerUp_3;
-    @FXML private Button descriptionPowerUp;
-    @FXML private Button yourTurn;
 
-    //*****************************************************************************************
+    //******************************************AMMO*********************************************
     @FXML private ImageView ammo00;
     @FXML private ImageView ammo02;
     @FXML private ImageView ammo10;
@@ -118,14 +111,18 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     @FXML private ImageView ammo32;
 
 
-
+    /**
+     * This method initializes the window of the PlayerCharacter.fxml
+     */
     @FXML
     public void initialize() {
 
     }
 
     //************************************PLAYERBOARDS*******************************************
-
+    /**
+     * This method handles the event on the fifthPlayerButton and shows his playerBoard
+     */
     @FXML
     public void fifthPlayerButtonPushed() {
         if (fifthPlayerBoard.isVisible()) {
@@ -138,6 +135,9 @@ public class TableController extends Observable<ActionEv> implements Observer<No
 
     }
 
+    /**
+     * This method handles the event on the firstPlayerButton and shows his playerBoard
+     */
     @FXML
     public void firstPlayerButtonPushed() {
 
@@ -149,6 +149,9 @@ public class TableController extends Observable<ActionEv> implements Observer<No
         }
     }
 
+    /**
+     * This method handles the event on the secondPlayerButton and shows his playerBoard
+     */
     @FXML
     public void secondPlayerButtonPushed() {
         if (secondPlayerBoard.isVisible()) {
@@ -159,6 +162,9 @@ public class TableController extends Observable<ActionEv> implements Observer<No
         }
     }
 
+    /**
+     * This method handles the event on the thirdPlayerButton and shows his playerBoard
+     */
     @FXML
     public void thirdPlayerButtonPushed() {
         if (thirdPlayerBoard.isVisible()) {
@@ -169,6 +175,9 @@ public class TableController extends Observable<ActionEv> implements Observer<No
         }
     }
 
+    /**
+     * This method handles the event on the fourthPlayerButton and shows his playerBoard
+     */
     @FXML
     public void fourthPlayerButtonPushed() {
         if (fourthPlayerBoard.isVisible()) {
@@ -182,6 +191,10 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     //************************************WEAPONS*******************************************
 
 
+    /**
+     * This method sets the weapons on the table
+     * @param Weapon arraylist of weapon
+     */
     private void setWeapons(List<Weapon> Weapon){
         String stringImage;
 
@@ -203,34 +216,10 @@ public class TableController extends Observable<ActionEv> implements Observer<No
         weaponEast2.setImage( new Image("it/polimi/sw2019/Images/Cards/"+ stringImage + ".png"));
         stringImage = Weapon.get(8).getName();
         weaponEast3.setImage( new Image("it/polimi/sw2019/Images/Cards/"+ stringImage + ".png"));
-
-
     }
-
-
-
-
-    @FXML
-    public void descriptionButtonPushed() {
-
-        if (descriptionWeapon.isVisible()) {
-            this.descriptionWeapon.setVisible(false);
-
-        } else {
-            this.descriptionWeapon.setVisible(true);
-        }
-    }
-
-    @FXML
-    public void powerUpButtonPushed(ActionEvent event) throws IOException {
-        if (powerUpBoard.isVisible()) {
-            this.powerUpBoard.setVisible(false);
-
-        } else {
-            this.powerUpBoard.setVisible(true);
-        }
-
-    }
+    /**
+     * This method handles the event on the powerUpDeck and opens the window PowerUP
+     */
     @FXML
     public void choosePowerUp(){
         try {
@@ -245,6 +234,10 @@ public class TableController extends Observable<ActionEv> implements Observer<No
         }
     }
 
+
+    /**
+     * This method handles the event on the yourTurnButton and opens the window Action&Reload
+     */
     @FXML
     public void yourTurnButtonPushed() {
         try {
@@ -260,11 +253,11 @@ public class TableController extends Observable<ActionEv> implements Observer<No
 
     }
 
-
-
+    /**
+     * This method sets the Player's characteristics on the table
+     * @param Players arraylist of player
+     */
     public void setPlayerButtons(List<Player>Players ){
-
-
 
         firstPlayer.setText(Players.get(0).getNickname());
         firstPlayer.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", Players.get(0).getCharacter()));
@@ -306,8 +299,11 @@ public class TableController extends Observable<ActionEv> implements Observer<No
         map.setImage( new Image("it/polimi/sw2019/Images/"+ typeMap + ".png"));
     }
 
+    /**
+     * This method sets the ammo cards on the map
+     * @param Ammo arraylist of ammo
+     */
     private void setAmmo(List<Ammo> Ammo){
-
         if(this.typeMap.equals("zero")){
             this.ammo00.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(0).getImageName()+".png"));
             this.ammo02.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(1).getImageName()+".png"));
@@ -352,7 +348,6 @@ public class TableController extends Observable<ActionEv> implements Observer<No
             this.ammo32.setVisible(false);
 
         }else if(this.typeMap.equals("two")){
-
             this.ammo00.setVisible(false);
             this.ammo02.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(0).getImageName()+".png"));
             this.ammo02.setLayoutX(40.0);
@@ -395,10 +390,18 @@ public class TableController extends Observable<ActionEv> implements Observer<No
         }
     }
 
+    /**
+     * This method sets the clientSocket on this class
+     * @param clientSocket
+     */
     public void setClientSocket(ClientSocket clientSocket) {
         this.clientSocket = clientSocket;
     }
 
+    /**
+     *
+     * @param startGameEv
+     */
     public void handleEvent(StartGameEv startGameEv) {
         this.typeMap = startGameEv.getGameboard().getNrMap();
         System.out.println(startGameEv.getPlayers().get(0).getNickname());

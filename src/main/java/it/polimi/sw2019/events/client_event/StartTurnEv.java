@@ -11,14 +11,16 @@ import java.io.Serializable;
 
 public class StartTurnEv implements NotifyClient, NotifyReturn, Serializable {
 
+    private String nickname;
+
     @Override
     public void setNickname(String nickname) {
-
+        this.nickname = nickname;
     }
 
     @Override
     public String getNickname() {
-        return null;
+        return nickname;
     }
 
     @Override
