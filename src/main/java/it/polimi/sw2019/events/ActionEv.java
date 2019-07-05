@@ -2,7 +2,9 @@ package it.polimi.sw2019.events;
 
 import it.polimi.sw2019.controller.Game;
 
-public interface ActionEv {
+import java.io.Serializable;
+
+public interface ActionEv extends Serializable {
 
 
     void setPlayerNickname(String nickname);

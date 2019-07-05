@@ -3,7 +3,9 @@ package it.polimi.sw2019.events;
 
 import it.polimi.sw2019.controller.Game;
 
-public interface NotifyReturn {
+import java.io.Serializable;
+
+public interface NotifyReturn extends Serializable {
 
 
     void setNickname(String nickname);

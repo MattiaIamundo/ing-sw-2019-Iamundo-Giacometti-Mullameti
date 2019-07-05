@@ -8,7 +8,9 @@ import it.polimi.sw2019.events.client_event.Cevent.DirectionChooseEv;
 import it.polimi.sw2019.events.client_event.Cevent.NotifyEndMoveEv;
 import it.polimi.sw2019.events.client_event.Cevent.StartGameEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
+import it.polimi.sw2019.events.client_event.NotYourTurnEv;
 import it.polimi.sw2019.events.client_event.StartTurnEv;
+import it.polimi.sw2019.events.client_event.YourTurnEv;
 import it.polimi.sw2019.events.server_event.VCevent.EndEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.exception.InvalidSpaceException;
@@ -39,6 +41,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /** Class TableController: the controller behind Table.fxml file
  * @author Merita Mullameti
@@ -55,7 +59,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     private List<Player> Players = new ArrayList<Player>(5);
     private List<Weapon> Weapon = new ArrayList<Weapon>(9);
     private List<Ammo> Ammo = new ArrayList<Ammo>(9);
-
+    private Logger logger = Logger.getLogger(TableController.class.getName());
 
     @FXML private AnchorPane Rooms;
     @FXML private AnchorPane table ;
@@ -132,10 +136,13 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     public void initialize() {
         info.setText("");
         if(yourTurn){
-            moveButton.setVisible(true);
+            moveButton.setDisable(false);
+            endButton.setDisable(false);
             info.setText("It`s your turn!");
         }else{
-            moveButton.setVisible(false);
+            moveButton.setDisable(true);
+            endButton.setDisable(true);
+            info.setText("It`s not your turn!");
         }
 
     }
@@ -251,7 +258,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
             stage.setScene(new Scene(PowerUp));
             stage.show();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
 
@@ -270,7 +277,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
             stage.setScene(new Scene(playerTurn));
             stage.show();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage(), e);
         }
 
     }
@@ -426,9 +433,9 @@ public class TableController extends Observable<ActionEv> implements Observer<No
      */
     public void handleEvent(StartGameEv startGameEv) {
         this.typeMap = startGameEv.getGameboard().getNrMap();
-        System.out.println(startGameEv.getPlayers().get(0).getNickname());
-        System.out.println(startGameEv.getPlayers().get(1).getNickname());
-        System.out.println(startGameEv.getPlayers().get(2).getNickname());
+        //System.out.println(startGameEv.getPlayers().get(0).getNickname());
+        //System.out.println(startGameEv.getPlayers().get(1).getNickname());
+        //System.out.println(startGameEv.getPlayers().get(2).getNickname());
         this.Players = startGameEv.getPlayers();
         try{
             this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(2,2)).takeWeapon(0));
@@ -443,7 +450,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
 
 
         } catch (InvalidSpaceException ex) {
-            System.out.println("handle event exception in table controller");
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
         if ( startGameEv.getGameboard().getNrMap().equals("zero") ) {
@@ -458,7 +465,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
                 this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(3,1)).takeAmmo()   );
                 this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(3,2)).takeAmmo()   );
             } catch (InvalidSpaceException ex) {
-                //
+                logger.log(Level.SEVERE, ex.getMessage(), ex);
             }
         }
         else if ( startGameEv.getGameboard().getNrMap().equals("one") ) {
@@ -472,7 +479,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
                 this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(2,1)).takeAmmo()   );
                 this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(3,1)).takeAmmo()   );
             } catch (InvalidSpaceException ex) {
-                //
+                logger.log(Level.SEVERE, ex.getMessage(), ex);
             }
         }
         else if ( startGameEv.getGameboard().getNrMap().equals("two") ) {
@@ -486,7 +493,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
                 this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(3,1)).takeAmmo()   );
                 this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(3,2)).takeAmmo()   );
             } catch (InvalidSpaceException ex) {
-                //
+                logger.log(Level.SEVERE, ex.getMessage(), ex);
             }
         }
         else {
@@ -499,7 +506,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
                 this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(2,1)).takeAmmo()   );
                 this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(3,1)).takeAmmo()   );
             } catch (InvalidSpaceException ex) {
-                //
+                logger.log(Level.SEVERE, ex.getMessage(), ex);
             }
 
         }
@@ -529,6 +536,15 @@ public class TableController extends Observable<ActionEv> implements Observer<No
 
     public void handleEvent(NotifyEndMoveEv notifyEndMoveEv) {
         //
+    }
+
+    public void handleEvent(YourTurnEv yourTurnEv) {
+        this.yourTurn = true;
+
+    }
+
+    public void handleEvent(NotYourTurnEv notYourTurnEv) {
+        this.yourTurn = false;
     }
 
     //***********************************Your-TURN-BUTTONS************************************************
