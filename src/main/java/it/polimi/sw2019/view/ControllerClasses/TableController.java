@@ -49,11 +49,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     private List<Button> PlayerButtons = new ArrayList<Button>(5);
     private List<ImageView> WeaponImages = new ArrayList<>(9);
     private List<ImageView> AmmoImages = new ArrayList<ImageView>(9);
-    @FXML private ImageView yellowStatue;
-    @FXML private ImageView blueStatue;
-    @FXML private ImageView grayStatue;
-    @FXML private ImageView greenStatue;
-    @FXML private ImageView purpleStatue;
+
     @FXML private AnchorPane Rooms;
     @FXML private AnchorPane table ;
     @FXML private ImageView map;
@@ -71,6 +67,12 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     @FXML private AnchorPane thirdPlayerBoard;
     @FXML private AnchorPane fourthPlayerBoard;
     @FXML private AnchorPane fifthPlayerBoard;
+
+    @FXML private ImageView firstStatue;
+    @FXML private ImageView secondStatue;
+    @FXML private ImageView thirdStatue;
+    @FXML private ImageView fourthStatue;
+    @FXML private ImageView fifthStatue;
 
     @FXML private ImageView firstBoard;
     @FXML private ImageView secondBoard;
@@ -103,6 +105,17 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     @FXML private Button descriptionPowerUp_3;
     @FXML private Button descriptionPowerUp;
     @FXML private Button yourTurn;
+
+    //*****************************************************************************************
+    @FXML private ImageView ammo00;
+    @FXML private ImageView ammo02;
+    @FXML private ImageView ammo10;
+    @FXML private ImageView ammo11;
+    @FXML private ImageView ammo12;
+    @FXML private ImageView ammo20;
+    @FXML private ImageView ammo21;
+    @FXML private ImageView ammo31;
+    @FXML private ImageView ammo32;
 
 
 
@@ -256,29 +269,38 @@ public class TableController extends Observable<ActionEv> implements Observer<No
         firstPlayer.setText(Players.get(0).getNickname());
         firstPlayer.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", Players.get(0).getCharacter()));
         firstBoard.setImage( new Image("it/polimi/sw2019/Images/"+ Players.get(0).getCharacter() + "Board.png"));
+        firstStatue.setImage(new Image("it/polimi/sw2019/Images/"+ Players.get(0).getCharacter() + "Statue.png"));
 
         secondPlayer.setText(Players.get(1).getNickname());
         secondPlayer.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", Players.get(1).getCharacter()));
         secondBoard.setImage( new Image("it/polimi/sw2019/Images/"+ Players.get(1).getCharacter() + "Board.png"));
+        secondStatue.setImage( new Image("it/polimi/sw2019/Images/"+ Players.get(1).getCharacter() + "Statue.png"));
 
         thirdPlayer.setText(Players.get(2).getNickname());
         thirdPlayer.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", Players.get(2).getCharacter()));
         thirdBoard.setImage( new Image("it/polimi/sw2019/Images/"+ Players.get(2).getCharacter() + "Board.png"));
+        thirdStatue.setImage( new Image("it/polimi/sw2019/Images/"+ Players.get(2).getCharacter() + "Statue.png"));
 
         if((Players.size())>3) {
             fourthPlayer.setText(Players.get(3).getNickname());
             fourthPlayer.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", Players.get(3).getCharacter()));
             fourthBoard.setImage(new Image("it/polimi/sw2019/Images/" + Players.get(3).getCharacter() + "Board.png"));
+            fourthStatue.setImage( new Image("it/polimi/sw2019/Images/"+ Players.get(3).getCharacter() + "Statue.png"));
+
         }else{
             fourthPlayer.setVisible(false);
+            fourthStatue.setVisible(false);
         }
 
         if((Players.size())>4){
             fifthPlayer.setText(Players.get(4).getNickname());
             fifthPlayer.setStyle(String.format("-fx-background-image: url(/it/polimi/sw2019/Images/%s.png);", Players.get(4).getCharacter()));
             fifthBoard.setImage( new Image("it/polimi/sw2019/Images/"+ Players.get(4).getCharacter() + "Board.png"));
+            fifthStatue.setImage( new Image("it/polimi/sw2019/Images/"+ Players.get(4).getCharacter() + "Statue.png"));
+
         }else{
             fifthPlayer.setVisible(false);
+            fifthStatue.setVisible(false);
         }
 
         map.setImage( new Image("it/polimi/sw2019/Images/"+ typeMap + ".png"));
@@ -286,6 +308,91 @@ public class TableController extends Observable<ActionEv> implements Observer<No
 
     private void setAmmo(List<Ammo> Ammo){
 
+        if(this.typeMap.equals("zero")){
+            this.ammo00.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(0).getImageName()+".png"));
+            this.ammo02.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(1).getImageName()+".png"));
+            this.ammo02.setLayoutX(40.0);
+            this.ammo02.setLayoutY(105.0);
+            this.ammo10.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(2).getImageName()+".png"));
+            this.ammo11.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(3).getImageName()+".png"));
+            this.ammo12.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(4).getImageName()+".png"));
+            this.ammo12.setLayoutX(183.0);
+            this.ammo12.setLayoutY(26.0);
+            this.ammo20.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(5).getImageName()+".png"));
+            this.ammo20.setLayoutX(365.0);
+            this.ammo20.setLayoutY(415.0);
+            this.ammo21.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(6).getImageName()+".png"));
+            this.ammo21.setLayoutX(355.0);
+            this.ammo21.setLayoutY(275.0);
+            this.ammo31.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(7).getImageName()+".png"));
+            this.ammo31.setLayoutX(495.0);
+            this.ammo31.setLayoutY(275.0);
+            this.ammo32.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(8).getImageName()+".png"));
+
+        }else if(this.typeMap.equals("one")){
+
+            this.ammo00.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(0).getImageName()+".png"));
+            this.ammo02.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(1).getImageName()+".png"));
+            this.ammo02.setLayoutX(42.0);
+            this.ammo02.setLayoutY(108.0);
+            this.ammo10.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(2).getImageName()+".png"));
+            this.ammo11.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(3).getImageName()+".png"));
+            this.ammo12.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(4).getImageName()+".png"));
+            this.ammo12.setLayoutX(183.0);
+            this.ammo12.setLayoutY(26.0);
+            this.ammo20.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(5).getImageName()+".png"));
+            this.ammo20.setLayoutX(335.0);
+            this.ammo20.setLayoutY(415.0);
+            this.ammo21.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(5).getImageName()+".png"));
+            this.ammo21.setLayoutX(355.0);
+            this.ammo21.setLayoutY(250.0);
+            this.ammo31.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(6).getImageName()+".png"));
+            this.ammo31.setLayoutX(570.0);
+            this.ammo31.setLayoutY(250.0);
+            this.ammo32.setVisible(false);
+
+        }else if(this.typeMap.equals("two")){
+
+            this.ammo00.setVisible(false);
+            this.ammo02.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(0).getImageName()+".png"));
+            this.ammo02.setLayoutX(40.0);
+            this.ammo02.setLayoutY(27.0);
+            this.ammo10.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(1).getImageName()+".png"));
+            this.ammo11.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(2).getImageName()+".png"));
+            this.ammo12.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(3).getImageName()+".png"));
+            this.ammo12.setLayoutX(185.0);
+            this.ammo12.setLayoutY(103.0);
+            this.ammo20.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(5).getImageName()+".png"));
+            this.ammo20.setLayoutX(365.0);
+            this.ammo20.setLayoutY(415.0);
+            this.ammo21.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(6).getImageName()+".png"));
+            this.ammo21.setLayoutX(355.0);
+            this.ammo21.setLayoutY(275.0);
+            this.ammo31.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(7).getImageName()+".png"));
+            this.ammo31.setLayoutX(495.0);
+            this.ammo31.setLayoutY(275.0);
+            this.ammo32.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(7).getImageName()+".png"));
+        }else if(this.typeMap.equals("three")){
+            this.ammo00.setVisible(false);
+            this.ammo02.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(0).getImageName()+".png"));
+            this.ammo02.setLayoutX(40.0);
+            this.ammo02.setLayoutY(27.0);
+            this.ammo10.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(1).getImageName()+".png"));
+            this.ammo11.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(2).getImageName()+".png"));
+            this.ammo12.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(3).getImageName()+".png"));
+            this.ammo12.setLayoutX(185.0);
+            this.ammo12.setLayoutY(103.0);
+            this.ammo20.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(4).getImageName()+".png"));
+            this.ammo20.setLayoutX(335.0);
+            this.ammo20.setLayoutY(415.0);
+            this.ammo21.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(5).getImageName()+".png"));
+            this.ammo21.setLayoutX(355.0);
+            this.ammo21.setLayoutY(250.0);
+            this.ammo31.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(6).getImageName()+".png"));
+            this.ammo31.setLayoutX(570.0);
+            this.ammo31.setLayoutY(250.0);
+            this.ammo32.setVisible(false);
+        }
     }
 
     public void setClientSocket(ClientSocket clientSocket) {
@@ -374,6 +481,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
         //addWeaponsToList();
         Platform.runLater( () -> setWeapons(this.Weapon));
         Platform.runLater( () -> setPlayerButtons(this.Players));
+        Platform.runLater( () -> setAmmo(this.Ammo));
 
         //setPlayerButtons(this.Players);
     }
