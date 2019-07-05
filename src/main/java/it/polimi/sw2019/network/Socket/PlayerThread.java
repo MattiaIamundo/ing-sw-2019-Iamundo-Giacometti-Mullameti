@@ -494,7 +494,7 @@ public class PlayerThread implements Runnable {
             if( this.gameController.getTurnOf().getPlayer().getNickname().equals(this.nickname)) {
                 YourTurnEv yourTurnEv = new YourTurnEv();
                 yourTurnEv.setNickname(this.nickname);
-                //this.gameController.update(yourTurnEv);
+                this.gameController.update(yourTurnEv);
             }
             //HERE THE GAME IS ON
             while ( !gameController.getGameover() ) {

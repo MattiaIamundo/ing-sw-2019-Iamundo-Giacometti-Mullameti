@@ -52,7 +52,7 @@ public class GUI extends Application implements UIinterface {
         serverIPController.setGui(this);
         this.stage=stage;
 
-        this.clientSocket=new ClientSocket(ClientSocket.serverHost);
+        this.clientSocket=new ClientSocket(ClientSocket.getServerHost());
         clientSocket.setUI(this);
 
 
