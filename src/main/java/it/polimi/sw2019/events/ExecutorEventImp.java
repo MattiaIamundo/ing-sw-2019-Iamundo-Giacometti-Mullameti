@@ -10,10 +10,7 @@ import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyReloadEv;
 import it.polimi.sw2019.events.client_event.StartTurnEv;
 import it.polimi.sw2019.events.powerup_events.*;
-import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
-import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
-import it.polimi.sw2019.events.server_event.VCevent.PowerupEv;
-import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
+import it.polimi.sw2019.events.server_event.VCevent.*;
 import it.polimi.sw2019.events.weapon_event.PowerChooseEv;
 import it.polimi.sw2019.events.weapon_event.UnpaidEffectEv;
 import it.polimi.sw2019.events.weaponeffect_controller_events.*;
@@ -39,6 +36,10 @@ public class ExecutorEventImp implements ExecutorEvent {
 
     public void handleObject(PowerupEv powerupEv, Game game){
         //game.handleEvent(powerupEv);
+    }
+
+    public void handleObject(EndEv endev, Game game) {
+        game.handleEvent(endev);
     }
 
     public void handleObject(BarbecueSetEv barbecueSetEv, Game game){

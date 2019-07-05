@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,8 +10,60 @@
 
 <AnchorPane fx:id="table" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1230.0" style="-fx-background-color: #1d1d1d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.sw2019.view.ControllerClasses.TableController">
    <children>
-      <VBox layoutX="1210.0" layoutY="58.0" maxWidth="199.0" minWidth="155.0" prefHeight="498.0" prefWidth="156.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+      <VBox layoutX="1210.0" layoutY="-7.0" maxWidth="199.0" minWidth="155.0" prefHeight="605.0" prefWidth="156.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <Label prefHeight="94.0" prefWidth="156.0" text="  TURN" textFill="WHITE">
+               <font>
+                  <Font name="Stencil" size="46.0" />
+               </font>
+            </Label>
+            <Button fx:id="powerUpButton" disable="true" mnemonicParsing="false" onAction="#powerUpButtonPushed" prefHeight="100.0" prefWidth="156.0" stylesheets="@../CssStyle/generale.css" text="Power UP">
+               <font>
+                  <Font name="Stencil" size="18.0" />
+               </font>
+            </Button>
+            <Button id="button" fx:id="moveButton" mnemonicParsing="false" onAction="#moveButtonPushed" prefHeight="100.0" prefWidth="285.0" stylesheets="@../CssStyle/generale.css" text="Move">
+               <font>
+                  <Font name="Stencil" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="grabButton" disable="true" mnemonicParsing="false" onAction="#grabButtonPushed" prefHeight="100.0" prefWidth="285.0" stylesheets="@../CssStyle/generale.css" text="Move &amp; Grab">
+               <font>
+                  <Font name="Stencil" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="shootButton" disable="true" mnemonicParsing="false" onAction="#shootButtonPushed" prefHeight="100.0" prefWidth="285.0" stylesheets="@../CssStyle/generale.css" text="Shoot">
+               <font>
+                  <Font name="Stencil" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="reloadButton" disable="true" mnemonicParsing="false" onAction="#reloadButtonPushed" prefHeight="100.0" prefWidth="156.0" stylesheets="@../CssStyle/generale.css" text="Reload">
+               <font>
+                  <Font name="Stencil" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="endButton" mnemonicParsing="false" onAction="#endButtonPushed" prefHeight="110.0" prefWidth="156.0" stylesheets="@../CssStyle/generale.css" text="End Turn">
+               <font>
+                  <Font name="Stencil" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <VBox layoutX="83.0" layoutY="-1.0" prefHeight="705.0" prefWidth="156.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="-1.0">
+         <children>
+            <Button fx:id="firstPlayer" mnemonicParsing="false" onAction="#firstPlayerButtonPushed" prefHeight="165.0" prefWidth="155.0" text="FirstPlayer" textFill="WHITE">
+               <font>
+                  <Font name="Stencil" size="16.0" />
+               </font></Button>
+            <Button fx:id="fourthPlayer" mnemonicParsing="false" onAction="#fourthPlayerButtonPushed" prefHeight="165.0" prefWidth="155.0" text="ForthPlayer" textFill="WHITE">
+               <font>
+                  <Font name="Stencil" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="secondPlayer" mnemonicParsing="false" onAction="#secondPlayerButtonPushed" prefHeight="165.0" prefWidth="155.0" text="SecondPlayer" textFill="WHITE">
+               <font>
+                  <Font name="Stencil" size="16.0" />
+               </font></Button>
             <Button fx:id="fifthPlayer" mnemonicParsing="false" onAction="#fifthPlayerButtonPushed" prefHeight="165.0" prefWidth="200.0" text="FifthPlayer" textFill="WHITE">
                <font>
                   <Font name="Stencil" size="16.0" />
@@ -19,25 +72,8 @@
             <Button fx:id="thirdPlayer" mnemonicParsing="false" onAction="#thirdPlayerButtonPushed" prefHeight="165.0" prefWidth="155.0" text="ThirdPlayer" textFill="WHITE">
                <font>
                   <Font name="Stencil" size="16.0" />
-               </font></Button>
-            <Button fx:id="yourTurn" mnemonicParsing="false" onAction="#yourTurnButtonPushed" prefHeight="165.0" prefWidth="155.0" styleClass="buttonGeneral" stylesheets="@../CssStyle/generale.css" text="Turn" />
-         </children>
-      </VBox>
-      <VBox layoutX="83.0" layoutY="48.0" prefHeight="498.0" prefWidth="156.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="100.0">
-         <children>
-            <Button fx:id="fourthPlayer" mnemonicParsing="false" onAction="#fourthPlayerButtonPushed" prefHeight="165.0" prefWidth="155.0" text="ForthPlayer" textFill="WHITE">
-               <font>
-                  <Font name="Stencil" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="firstPlayer" mnemonicParsing="false" onAction="#firstPlayerButtonPushed" prefHeight="165.0" prefWidth="155.0" text="FirstPlayer" textFill="WHITE">
-               <font>
-                  <Font name="Stencil" size="16.0" />
-               </font></Button>
-            <Button fx:id="secondPlayer" mnemonicParsing="false" onAction="#secondPlayerButtonPushed" prefHeight="165.0" prefWidth="155.0" text="SecondPlayer" textFill="WHITE">
-               <font>
-                  <Font name="Stencil" size="16.0" />
-               </font></Button>
          </children>
       </VBox>
       <ImageView fx:id="map" fitHeight="705.0" fitWidth="917.0" layoutX="157.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="156.0" AnchorPane.topAnchor="0.0">
@@ -230,5 +266,6 @@
             </ImageView>
          </children>
       </AnchorPane>
+      <Label fx:id="info" layoutX="293.0" layoutY="639.0" prefHeight="69.0" prefWidth="485.0" styleClass="labelInvalidInfo" stylesheets="@../CssStyle/generale.css" />
    </children>
 </AnchorPane>
