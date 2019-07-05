@@ -20,6 +20,7 @@ public class EventForGui extends Observable<NotifyClient> implements Runnable {
         this.addObserver(this.clientSocket.getTableController()) ;
 
         while(goOutTheLoop) {
+
             NotifyClient notifyClient = this.clientSocket.getContSelect().waitForNotifyReturnEvent();
             Platform.runLater( () -> notify( (notifyClient)  ) );
             Platform.runLater( () -> this.clientSocket.notifyGUI("Refresh") );

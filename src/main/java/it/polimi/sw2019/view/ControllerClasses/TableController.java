@@ -132,10 +132,10 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     public void initialize() {
         info.setText("");
         if(yourTurn){
-            moveButton.setVisible(true);
+            moveButton.setDisable(false);
             info.setText("It`s your turn!");
         }else{
-            moveButton.setVisible(false);
+            moveButton.setDisable(true);
         }
 
     }
