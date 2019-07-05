@@ -43,53 +43,29 @@ public class GUI extends Application implements UIinterface {
     public void start(Stage stage) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/ServerIP.fxml"));
-        Parent serverIP = loader.load();
-        Scene scene=new Scene(serverIP);
+        loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/Menu.fxml"));
+        Parent menu = loader.load();
+        Scene scene=new Scene(menu);
         stage.setScene(scene);
         stage.setTitle("Adrenaline");
         stage.setWidth(1230.0);
         stage.setHeight(705.0);
         stage.setResizable(false);
-        stage.getScene().setRoot(serverIP);
+        stage.getScene().setRoot(menu);
         stage.show();
         stage.setOnCloseRequest((WindowEvent t) -> {
             Platform.exit();
             System.exit(0);
         });
-        ServerIPController serverIPController = loader.getController();
-        serverIPController.setGui(this);
         this.stage=stage;
-
         this.clientSocket=new ClientSocket(ClientSocket.getServerHost());
+        MenuController menuController = loader.getController();
+        menuController.setClientSocket(clientSocket);
         clientSocket.setUI(this);
 
     }
 
-    /**
-     * This method set the Menu scene
-     * @param string the ClientSocket response
-     */
-    @Override
-    public void requestMenu(String string) {
 
-        if(string.equals("ok")){
-            try {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/Menu.fxml"));
-                Parent menu = loader.load();
-
-                MenuController menuController = loader.getController();
-                menuController.setClientSocket(clientSocket);
-
-                Stage mainStage = stage;
-                mainStage.getScene().setRoot(menu);
-            }catch (IOException e){}
-        }else{
-            System.out.println("ko");
-        }
-
-    }
 
     /**
      * This method set the NewPlayer scene
