@@ -336,7 +336,9 @@ public class TableController extends Observable<ActionEv> implements Observer<No
      * @param Ammo arraylist of ammo
      */
     private void setAmmo(List<Ammo> Ammo){
+
         if(this.typeMap.equals("zero")){
+
             this.ammo00.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(0).getImageName()+".png"));
             this.ammo02.setImage(new Image("it/polimi/sw2019/Images/Ammo/"+Ammo.get(1).getImageName()+".png"));
             this.ammo02.setLayoutX(40.0);
@@ -467,6 +469,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
                 this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(2,1)).takeAmmo()   );
                 this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(3,1)).takeAmmo()   );
                 this.Ammo.add(  ((SpaceAmmo) startGameEv.getGameboard().getMap().getSpace(3,2)).takeAmmo()   );
+
             } catch (InvalidSpaceException ex) {
                 logger.log(Level.SEVERE, ex.getMessage(), ex);
             }
@@ -513,6 +516,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
             }
 
         }
+
         //addWeaponsToList();
         Platform.runLater( () -> setWeapons(this.Weapon));
         Platform.runLater( () -> setPlayerButtons(this.Players));
@@ -522,10 +526,12 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     }
 
     public void update(NotifyClient notifyClient) {
+
         notifyClient.visit(this.executorEventClient, this);
     }
 
     public void handleEvent(DirectionChooseEv directionChooseEv) {
+
         //set the possibility to give player the possibility to
     }
 
@@ -544,11 +550,13 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     public void handleEvent(YourTurnEv yourTurnEv) {
         //Platform.runLater( () -> this.moveButton.setDisable(true));
         //Platform.runLater( () -> this.endButton.setDisable(false) );
+
         handleEvent(new StartGameEv(yourTurnEv.getPlayers(), yourTurnEv.getGameboard()));
 
     }
 
     public void handleEvent(NotYourTurnEv notYourTurnEv) {
+
         info.setText("It's not your turn!");
         this.endButton.setDisable(true);
     }
@@ -557,12 +565,15 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     @FXML
     public void moveButtonPushed(){
         try {
-            Parent table = FXMLLoader.load(getClass().getResource("/it/polimi/sw2019/FXML_File/Direction.fxml"));
-            Scene tableScene = new Scene(table);
-            Stage window = (Stage) moveButton.getScene().getWindow();
-            window.setScene(tableScene);
-            window.setResizable(false);
-            window.show();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/Direction.fxml"));
+            AnchorPane playerTurn = (AnchorPane) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(playerTurn));
+            stage.setWidth(249);
+            stage.setHeight(249);
+            stage.setResizable(false);
+            stage.show();
             MoveEv moveEv = new MoveEv(null);
             this.clientSocket.getViewContEvent().sendActionEv(moveEv);
         }catch (IOException e){
