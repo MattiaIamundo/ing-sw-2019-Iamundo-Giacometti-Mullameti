@@ -1,6 +1,5 @@
 package it.polimi.sw2019.view;
 
-import com.google.gson.Gson;
 import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.NotifyReturn;
@@ -11,7 +10,6 @@ import it.polimi.sw2019.events.client_event.Cevent.StartGameEv;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,22 +17,20 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
 
     private Socket socket;
     private String set = "pippo";
-    //private PrintWriter output;
     private Game controller;
-    private Scanner input;
     private ObjectInputStream objectInputStream;
-    private Gson gson;
     private ObjectOutputStream objectOutputStream;
     private static final Logger logger = Logger.getLogger( PlayerRemoteView.class.getName() );
 
     public PlayerRemoteView (Socket socket1, Game controller) {
         socket = socket1;
         try{
-            //output = new PrintWriter(socket.getOutputStream());
             this.controller = controller;
-            input = new Scanner(socket.getInputStream());
-            //objectInputStream = new ObjectInputStream(socket.getInputStream());
+            logger.log(Level.INFO, "{PlayerRemoteView} set the objectOutputStream");
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            logger.log(Level.INFO, "{PlayerRemoteView} set the objectInputStream");
+            objectInputStream = new ObjectInputStream(socket.getInputStream());
+
 
         } catch (IOException ex) {
             logger.log(Level.SEVERE, ex.toString(), ex.getMessage());
@@ -66,32 +62,32 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
                 objectOutputStream.flush();
             }
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
 
     }
 
     public String waitForNickname() {
-/*
+
         try {
             set = objectInputStream.readUTF();
             return set;
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-*/
-
-
-
-        set = input.nextLine();
         return set;
     }
 
     public String waitForColor() {
 
-        set = input.nextLine();
+        try {
+            set = objectInputStream.readUTF();
+            return set;
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+        }
         return set;
     }
 
@@ -100,14 +96,18 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeUTF("Ping");
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        //output.println("Ping");
-        //output.flush();
     }
 
     public String waitForPong() {
-        set = input.nextLine();
+
+        try {
+            set = objectInputStream.readUTF();
+            return set;
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+        }
         return set;
     }
 
@@ -118,13 +118,8 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeUTF("skull");
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        //output.println(firstTime);
-        //output.flush();
-
-        //output.println("skull");
-        //output.flush();
     }
 
     public void requestMap(boolean firstTime) {
@@ -132,19 +127,29 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeBoolean(firstTime);
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        //output.println(firstTime);
-        //output.flush();
     }
 
     public String waitForSkull() {
-        set = input.nextLine();
+
+        try {
+            set = objectInputStream.readUTF();
+            return set;
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+        }
         return set;
     }
 
     public String waitForMap() {
-        set = input.nextLine();
+
+        try {
+            set = objectInputStream.readUTF();
+            return set;
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+        }
         return set;
     }
 
@@ -155,13 +160,8 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeUTF(reconnection.getRecon());
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        //output.println(reconnection.getFirstTime());
-        //output.flush();
-
-        //output.println(reconnection.getRecon());
-        //output.flush();
     }
 
     public void requestColor(Color color) {
@@ -180,25 +180,8 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeUTF( "" );
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        /*
-        output.println( color.isFirstTime() );
-        output.flush();
-
-        output.println( color.isDuplicated() );
-        output.flush();
-
-        for( String s : color.getColors()) {
-
-            output.println( s );
-            output.flush();
-        }
-
-        output.println( "" );
-        output.flush();
-
-         */
     }
 
     public void sendGoodbye() {
@@ -206,10 +189,8 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeUTF("The nickname was not found, so goodbye!");
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        //output.println("The nickname was not found, so goodbye!");
-        //output.flush();
     }
 
     public void sendOut() {
@@ -217,10 +198,8 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeUTF("out");
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        //output.println("out");
-        //output.flush();
     }
 
     public void sendOk() {
@@ -229,10 +208,8 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeUTF("ok");
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        //output.println("ok");
-        //output.flush();
     }
 
     public void sendNotOk() {
@@ -240,10 +217,8 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeUTF("notok");
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        //output.println("notok");
-        //output.flush();
     }
 
     public void sendYouAreFirstPlayer() {
@@ -251,10 +226,8 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeUTF("first");
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        //output.println("first");
-        //output.flush();
     }
 
     public void sendYouAreNotFirstPlayer() {
@@ -262,10 +235,8 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeUTF("oneother");
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        //output.println("oneother");
-        //output.flush();
     }
 
     public void sendThereAreSkull() {
@@ -273,10 +244,8 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeUTF("true");
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        //output.println("true");
-        //output.flush();
     }
 
     public void sendThereAreNotSkull() {
@@ -284,10 +253,8 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeUTF("false");
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-       //output.println("false");
-        //output.flush();
     }
 
     public void sendThereIsMap() {
@@ -295,10 +262,8 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeUTF("true");
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        //output.println("true");
-        //output.flush();
     }
 
     public void sendThereIsNotMap() {
@@ -306,23 +271,21 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeUTF("false");
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        //output.println("false");
-        //output.flush();
     }
 
 
     public void waitForAction() {
-     /*   //  i have to wait for a ActionEv
+
         try {
-            ActionEv actionEv = objectInputStream.readObject();
+            ActionEv actionEv = (ActionEv) objectInputStream.readObject();
             notify(actionEv);
-        } catch (IOException ex) {
-            //
+        } catch (IOException | ClassNotFoundException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-      */
+
     }
 
     public void sendStartGame() {
@@ -330,10 +293,8 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeUTF("start");
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        //output.println("start");
-        //output.flush();
     }
 
     public void sendAllModel(StartGameEv startGameEv) {
@@ -342,7 +303,7 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             objectOutputStream.writeObject(startGameEv);
             objectOutputStream.flush();
         } catch (IOException ex) {
-            //do nothing
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
 
@@ -351,14 +312,17 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
 
 
     public void sendEvent(NotifyReturn notifyReturn) {
-        set = gson.toJson(notifyReturn);
-        //output.println(set);
-        //output.flush();
+        try {
+            objectOutputStream.writeObject(notifyReturn);
+            objectOutputStream.flush();
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+        }
     }
 
 
     public void update(NotifyReturn notifyReturn) {
-
+        sendEvent(notifyReturn);
     }
 
 

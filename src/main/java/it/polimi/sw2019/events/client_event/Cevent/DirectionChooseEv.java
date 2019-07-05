@@ -38,8 +38,8 @@ public class DirectionChooseEv implements NotifyReturn, NotifyClient {
         executorEventImp.updateObject(this, controller);
     }
 
-    public void handleMe(ExecutorEventClient executorEventClient, TableController tableController) {
-        tableController.handleEvent(this);
+    public void visit(ExecutorEventClient executorEventClient, TableController tableController) {
+        executorEventClient.handleEvent(this, tableController);
     }
 
 

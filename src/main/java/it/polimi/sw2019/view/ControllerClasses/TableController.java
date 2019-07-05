@@ -1,13 +1,19 @@
 package it.polimi.sw2019.view.ControllerClasses;
 
+import it.polimi.sw2019.events.ActionEv;
+import it.polimi.sw2019.events.ExecutorEventClient;
 import it.polimi.sw2019.events.NotifyClient;
 import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.events.client_event.Cevent.DirectionChooseEv;
+import it.polimi.sw2019.events.client_event.Cevent.NotifyEndMoveEv;
 import it.polimi.sw2019.events.client_event.Cevent.StartGameEv;
+import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
+import it.polimi.sw2019.events.client_event.StartTurnEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.exception.InvalidSpaceException;
 import it.polimi.sw2019.model.*;
 import it.polimi.sw2019.network.Socket.ClientSocket;
+import it.polimi.sw2019.view.Observable;
 import it.polimi.sw2019.view.Observer;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -30,11 +36,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableController implements Observer<NotifyClient> {
+public class TableController extends Observable<ActionEv> implements Observer<NotifyClient> {
 
 
 
     private ClientSocket clientSocket;
+    private ExecutorEventClient executorEventClient = new ExecutorEventClient();
     private String typeMap;
     private List<Player> Players = new ArrayList<Player>(5);
     private List<Weapon> Weapon = new ArrayList<Weapon>(9);
@@ -186,6 +193,7 @@ public class TableController implements Observer<NotifyClient> {
 
 
     }
+
 
 
 
@@ -371,10 +379,22 @@ public class TableController implements Observer<NotifyClient> {
     }
 
     public void update(NotifyClient notifyClient) {
-
+        notifyClient.visit(this.executorEventClient, this);
     }
 
     public void handleEvent(DirectionChooseEv directionChooseEv) {
         //set the possibility to give player the possibility to
+    }
+
+    public void handleEvent(NotifyMoveEv notifyMoveEv) {
+        //
+    }
+
+    public void handleEvent(StartTurnEv startTurnEv) {
+        //
+    }
+
+    public void handleEvent(NotifyEndMoveEv notifyEndMoveEv) {
+        //
     }
 }

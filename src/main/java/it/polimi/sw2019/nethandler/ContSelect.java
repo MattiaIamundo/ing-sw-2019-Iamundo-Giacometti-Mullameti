@@ -341,7 +341,7 @@ public class ContSelect implements ContSelectInt{
 
  */
 
-    public NotifyReturn waitForNotifyReturnEvent() {
+    public NotifyReturn waitForStartGameEv() {
         StartGameEv notifyReturn = null;
         try{
             notifyReturn = (StartGameEv) objectInputStream.readObject();
@@ -352,6 +352,16 @@ public class ContSelect implements ContSelectInt{
         return notifyReturn;
     }
 
+    public NotifyReturn waitForNotifyReturnEvent () {
+        NotifyReturn notifyReturn = null;
+        try {
+            notifyReturn = (NotifyReturn) objectInputStream.readObject();
+            return notifyReturn;
+        } catch (IOException | ClassNotFoundException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return notifyReturn;
+    }
 
 
 }

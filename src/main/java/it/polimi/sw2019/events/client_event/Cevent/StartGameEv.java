@@ -2,7 +2,9 @@ package it.polimi.sw2019.events.client_event.Cevent;
 
 
 import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ExecutorEventClient;
 import it.polimi.sw2019.events.ExecutorEventImp;
+import it.polimi.sw2019.events.NotifyClient;
 import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
@@ -12,7 +14,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StartGameEv implements Serializable, NotifyReturn {
+public class StartGameEv implements Serializable, NotifyReturn, NotifyClient {
 
     private String nickname;
     private List<Player> players = new ArrayList<>(5);
@@ -32,10 +34,14 @@ public class StartGameEv implements Serializable, NotifyReturn {
     }
 
     @Override
-    public void updateObject(ExecutorEventImp executorEventImp, Game controller) {
+    public void updateObject(ExecutorEventImp executorEventImp, Game tableController) {
 
     }
 
+    @Override
+    public void visit(ExecutorEventClient executorEventClient, TableController tableController) {
+        tableController.handleEvent(this);
+    }
 
     public Table getGameboard() {
         return this.gameboard;

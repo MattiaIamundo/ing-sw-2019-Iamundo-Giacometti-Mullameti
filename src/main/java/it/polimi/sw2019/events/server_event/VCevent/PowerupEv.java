@@ -4,7 +4,9 @@ import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.ExecutorEventImp;
 
-public class PowerupEv implements ActionEv {
+import java.io.Serializable;
+
+public class PowerupEv implements ActionEv, Serializable {
 
     private String playerNickname = "null";
 

@@ -367,7 +367,7 @@ public class PlayerThread implements Runnable {
                     }
                 }
 
-                this.gameController.searchPlayer(this.nickname).addObserver(this.gameController);
+                this.gameController.searchPlayer(this.nickname).addObserver(this.playerRemoteView);
 
                 logger.log(Level.INFO, "{ PlayerThread } loop until there are 5 players or the timer finishes" );
 
@@ -485,7 +485,8 @@ public class PlayerThread implements Runnable {
             //send the whole model so every client can memorize it in a view to handle the ShowEv
             this.gameController.sendAllModel(this.playerRemoteView);
             this.gameController.getTurnOf().setPlayer(this.gameController.getPlayers().get(0));
-
+            this.playerRemoteView.addObserver(this.gameController);
+            //this.playerRemoteView.setObjectInputStream();
             //HERE THE GAME IS ON
             while ( !gameController.getGameover() ) {
 
@@ -507,6 +508,8 @@ public class PlayerThread implements Runnable {
                         }
                     }
                 }
+
+                //this.playerRemoteView.waitForAction();
 
                 if ( gameController.getTurnOf().getUsedAction() == 2  ) {
                     //next player

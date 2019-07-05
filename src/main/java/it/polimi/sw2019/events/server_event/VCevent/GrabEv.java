@@ -4,7 +4,9 @@ import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.ExecutorEventImp;
 
-public class GrabEv implements ActionEv {
+import java.io.Serializable;
+
+public class GrabEv implements ActionEv, Serializable {
 
     private String playerNickname = "null";
     private String move;

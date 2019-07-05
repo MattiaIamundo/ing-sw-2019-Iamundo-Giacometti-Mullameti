@@ -4,10 +4,11 @@ import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.ExecutorEventImp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReloadEv implements ActionEv {
+public class ReloadEv implements ActionEv, Serializable {
 
     private String playerNickname = "null";
     private String weaponToReload = null;

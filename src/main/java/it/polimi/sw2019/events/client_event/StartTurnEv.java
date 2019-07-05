@@ -1,4 +1,4 @@
-package it.polimi.sw2019.events.client_event.Cevent;
+package it.polimi.sw2019.events.client_event;
 
 import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.events.ExecutorEventClient;
@@ -7,22 +7,18 @@ import it.polimi.sw2019.events.NotifyClient;
 import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.view.ControllerClasses.TableController;
 
-public class NotifyEndMoveEv implements NotifyReturn, NotifyClient {
+import java.io.Serializable;
 
-    private String nickname;
+public class StartTurnEv implements NotifyClient, NotifyReturn, Serializable {
 
-    public NotifyEndMoveEv(String nickname) {
-        this.nickname = nickname;
+    @Override
+    public void setNickname(String nickname) {
+
     }
 
     @Override
     public String getNickname() {
-        return nickname;
-    }
-
-    @Override
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+        return null;
     }
 
     @Override

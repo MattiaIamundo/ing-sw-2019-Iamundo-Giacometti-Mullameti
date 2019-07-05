@@ -1,15 +1,18 @@
 package it.polimi.sw2019.events.client_event.MVevent;
 
 import it.polimi.sw2019.controller.Game;
+import it.polimi.sw2019.events.ExecutorEventClient;
 import it.polimi.sw2019.events.ExecutorEventImp;
+import it.polimi.sw2019.events.NotifyClient;
 import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
+import it.polimi.sw2019.view.ControllerClasses.TableController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotifyMoveEv implements NotifyReturn {
+public class NotifyMoveEv implements NotifyReturn, NotifyClient {
 
     private String nickname;
     private String changeName;
@@ -55,5 +58,9 @@ public class NotifyMoveEv implements NotifyReturn {
 
     public void updateObject(ExecutorEventImp executorEventImp, Game controller) {
         executorEventImp.updateObject(this, controller);
+    }
+
+    public void visit(ExecutorEventClient executorEventClient, TableController tableController) {
+        executorEventClient.handleEvent(this,tableController);
     }
 }

@@ -4,8 +4,10 @@ import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.events.ActionEv;
 import it.polimi.sw2019.events.ExecutorEventImp;
 
+import java.io.Serializable;
 
-public class MoveEv implements ActionEv {
+
+public class MoveEv implements ActionEv, Serializable {
 
     private String playerNickname = "null";
     private String move;

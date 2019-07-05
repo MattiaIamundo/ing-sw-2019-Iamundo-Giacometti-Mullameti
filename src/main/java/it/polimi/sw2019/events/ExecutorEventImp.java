@@ -8,6 +8,7 @@ import it.polimi.sw2019.events.client_event.Cevent.WeaponReloadChooseEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyGrabEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyReloadEv;
+import it.polimi.sw2019.events.client_event.StartTurnEv;
 import it.polimi.sw2019.events.powerup_events.*;
 import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
@@ -223,7 +224,9 @@ public class ExecutorEventImp implements ExecutorEvent {
 
 
 
-
+    public void updateObject(StartTurnEv startTurnEv, Game game) {
+        //
+    }
 
 
     public void updateObject(NotifyMoveEv moveEv, Game game) {
