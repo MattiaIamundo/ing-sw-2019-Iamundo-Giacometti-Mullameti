@@ -17,7 +17,7 @@
                   <Font name="Stencil" size="46.0" />
                </font>
             </Label>
-            <Button fx:id="powerUpButton" disable="true" mnemonicParsing="false" onAction="#powerUpButtonPushed" prefHeight="100.0" prefWidth="156.0" stylesheets="@../CssStyle/generale.css" text="Power UP">
+            <Button fx:id="powerUpButton" disable="true" mnemonicParsing="false" prefHeight="100.0" prefWidth="156.0" stylesheets="@../CssStyle/generale.css" text="Power UP">
                <font>
                   <Font name="Stencil" size="18.0" />
                </font>

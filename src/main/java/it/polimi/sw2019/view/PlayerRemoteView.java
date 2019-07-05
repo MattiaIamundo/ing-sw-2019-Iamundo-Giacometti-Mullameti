@@ -18,6 +18,7 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
     private Socket socket;
     private String set = "pippo";
     private Game controller;
+    private String nickname;
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
     private static final Logger logger = Logger.getLogger( PlayerRemoteView.class.getName() );
@@ -36,6 +37,10 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
             logger.log(Level.SEVERE, ex.toString(), ex.getMessage());
         }
 
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public void requestNickname(Login login) {
@@ -280,6 +285,7 @@ public class PlayerRemoteView extends Observable<ActionEv> implements Observer <
 
         try {
             ActionEv actionEv = (ActionEv) objectInputStream.readObject();
+            this.setNickname(this.nickname);
             notify(actionEv);
         } catch (IOException | ClassNotFoundException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);

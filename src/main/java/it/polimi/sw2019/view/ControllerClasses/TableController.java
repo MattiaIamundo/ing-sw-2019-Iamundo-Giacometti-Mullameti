@@ -8,7 +8,9 @@ import it.polimi.sw2019.events.client_event.Cevent.DirectionChooseEv;
 import it.polimi.sw2019.events.client_event.Cevent.NotifyEndMoveEv;
 import it.polimi.sw2019.events.client_event.Cevent.StartGameEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
+import it.polimi.sw2019.events.client_event.NotYourTurnEv;
 import it.polimi.sw2019.events.client_event.StartTurnEv;
+import it.polimi.sw2019.events.client_event.YourTurnEv;
 import it.polimi.sw2019.events.server_event.VCevent.EndEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.exception.InvalidSpaceException;
@@ -529,6 +531,14 @@ public class TableController extends Observable<ActionEv> implements Observer<No
 
     public void handleEvent(NotifyEndMoveEv notifyEndMoveEv) {
         //
+    }
+
+    public void handleEvent(YourTurnEv yourTurnEv) {
+        //
+    }
+
+    public void handleEvent(NotYourTurnEv notYourTurnEv) {
+
     }
 
     //***********************************Your-TURN-BUTTONS************************************************

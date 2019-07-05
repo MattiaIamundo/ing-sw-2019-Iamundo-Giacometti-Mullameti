@@ -12,6 +12,8 @@ import it.polimi.sw2019.events.client_event.Cevent.*;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyGrabEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyReloadEv;
+import it.polimi.sw2019.events.client_event.NotYourTurnEv;
+import it.polimi.sw2019.events.client_event.YourTurnEv;
 import it.polimi.sw2019.events.powerup_events.*;
 import it.polimi.sw2019.events.server_event.VCevent.EndEv;
 import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
@@ -62,6 +64,7 @@ public class Game implements Observer <NotifyReturn> {
     private Move moveController;
     private Reload reloadController;
     private Shoot shootController;
+    private EndTurn endTurnController;
     private HashMap<String, EffectController> effectControllers;
     private UsePowerUp usePowerUpController;
     private HashMap<String, PowerUpController> powerUpControllers;
@@ -99,6 +102,8 @@ public class Game implements Observer <NotifyReturn> {
         out = false;
         gameover = false;
         //controllers
+        endTurnController = new EndTurn();
+        endTurnController.addObserver(this);
         moveController = new Move(this);
         moveController.addObserver(this);
         reloadController = new Reload(this);
@@ -1303,8 +1308,21 @@ public class Game implements Observer <NotifyReturn> {
 
     public void handleEvent(EndEv endEv) {
         Player player = searchPlayer( endEv.getPlayerNickname() );
-        //
+        this.endTurnController.useAction(player);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void handleEvent(BarbecueSetEv barbecueSetEv){
         String name = BarbecueMode.class.getName().substring(BarbecueMode.class.getName().lastIndexOf('.') + 1);
@@ -1642,6 +1660,19 @@ public class Game implements Observer <NotifyReturn> {
         }
     }
 
+    public void update (YourTurnEv yourTurnEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(yourTurnEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(yourTurnEv);
+        }
+    }
+
+    public void update (NotYourTurnEv notYourTurnEv) {
+        PlayerRemoteView playerRemoteView = searchSpecificPlayerRemoteView(notYourTurnEv.getNickname());
+        if(playerRemoteView != null) {
+            playerRemoteView.sendEvent(notYourTurnEv);
+        }
+    }
 
     public void update (NotifyGrabEv notifyGrabEv) {
 

@@ -3,6 +3,7 @@ package it.polimi.sw2019.network.Socket;
 import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.controller.MultiGame;
 import it.polimi.sw2019.events.ActionEv;
+import it.polimi.sw2019.events.client_event.YourTurnEv;
 import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.view.PlayerRemoteView;
 import it.polimi.sw2019.view.PowerUpRemoteView;
@@ -368,6 +369,8 @@ public class PlayerThread implements Runnable {
                 }
 
                 this.gameController.searchPlayer(this.nickname).addObserver(this.playerRemoteView);
+                this.playerRemoteView.setNickname(this.nickname);
+
 
                 logger.log(Level.INFO, "{ PlayerThread } loop until there are 5 players or the timer finishes" );
 
@@ -477,6 +480,7 @@ public class PlayerThread implements Runnable {
 
                 gameController.setWeapon();
                 gameController.setAmmo(this.gameController.getGameboard().getNrMap());
+                //gameController.setPlayerPositionRandom();
 
             }
 
@@ -487,6 +491,11 @@ public class PlayerThread implements Runnable {
             this.gameController.getTurnOf().setPlayer(this.gameController.getPlayers().get(0));
             this.playerRemoteView.addObserver(this.gameController);
 
+            if( this.gameController.getTurnOf().getPlayer().getNickname().equals(this.nickname)) {
+                YourTurnEv yourTurnEv = new YourTurnEv();
+                yourTurnEv.setNickname(this.nickname);
+                //this.gameController.update(yourTurnEv);
+            }
             //HERE THE GAME IS ON
             while ( !gameController.getGameover() ) {
 
@@ -497,7 +506,7 @@ public class PlayerThread implements Runnable {
                         if( this.gameController.getTimerThread().getTimerDone() && this.gameController.getPlayerThreads().size() < 3) {
                             //game over
                             this.gameController.setGameover(true);
-
+                            //this.gameController.sendGameOver();
                         }
 
                         if ( !this.gameController.getTimerThread().getOn() ) {
@@ -519,13 +528,20 @@ public class PlayerThread implements Runnable {
                     }
                 }
 
-                this.playerRemoteView.waitForAction();
+                //it's my turn so i can wait for an event from client
+                if (gameController.getTurnOfPlayer().getNickname().equals(this.nickname)) {
 
-                if ( gameController.getTurnOf().getUsedAction() == 2  ) {
-                    //next player
-                    this.gameController.getTurnOf().setUsedAction(0);
-                    changePlayerTurn();
+                    this.playerRemoteView.waitForAction();
+                    //if i did two action i have to change the turn
+                    if ( gameController.getTurnOf().getUsedAction() == 2  ) {
+                        //next player
+                        this.gameController.getTurnOf().setUsedAction(0);
+                        changePlayerTurn();
+                    }
                 }
+
+
+
 
             }
 
@@ -554,12 +570,14 @@ public class PlayerThread implements Runnable {
      */
     private void changePlayerTurn() {
 
+        //this.gameController.sendNotYourTurn(this.playerRemoteView);
         for (int i = 0; i < this.gameController.getPlayers().size(); i++) {
 
             if ( this.gameController.getPlayers().get(i).getNickname().equals(this.nickname) ) {
 
                 if ( i == this.gameController.getPlayers().size() - 1 ) {
                     gameController.getTurnOf().setPlayer( this.gameController.getPlayers().get(0) );
+                    //this.gameController.sendYourTurn();
                 }
                 else {
                     gameController.getTurnOf().setPlayer(this.gameController.getPlayers().get(i+1));

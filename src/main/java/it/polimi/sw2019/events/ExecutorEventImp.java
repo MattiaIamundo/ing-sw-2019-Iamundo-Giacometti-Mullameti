@@ -1,5 +1,6 @@
 package it.polimi.sw2019.events;
 
+import it.polimi.sw2019.controller.EndTurn;
 import it.polimi.sw2019.controller.Game;
 import it.polimi.sw2019.events.client_event.Cevent.DirectionChooseEv;
 import it.polimi.sw2019.events.client_event.Cevent.NotifyEndMoveEv;
@@ -8,7 +9,9 @@ import it.polimi.sw2019.events.client_event.Cevent.WeaponReloadChooseEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyGrabEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyReloadEv;
+import it.polimi.sw2019.events.client_event.NotYourTurnEv;
 import it.polimi.sw2019.events.client_event.StartTurnEv;
+import it.polimi.sw2019.events.client_event.YourTurnEv;
 import it.polimi.sw2019.events.powerup_events.*;
 import it.polimi.sw2019.events.server_event.VCevent.*;
 import it.polimi.sw2019.events.weapon_event.PowerChooseEv;
@@ -37,6 +40,7 @@ public class ExecutorEventImp implements ExecutorEvent {
     public void handleObject(PowerupEv powerupEv, Game game){
         //game.handleEvent(powerupEv);
     }
+
 
     public void handleObject(EndEv endev, Game game) {
         game.handleEvent(endev);
@@ -227,6 +231,14 @@ public class ExecutorEventImp implements ExecutorEvent {
 
     public void updateObject(StartTurnEv startTurnEv, Game game) {
         //
+    }
+
+    public void updateObject(YourTurnEv yourTurnEv, Game game) {
+        game.update(yourTurnEv);
+    }
+
+    public void updateObject(NotYourTurnEv notYourTurnEv, Game game) {
+        game.update(notYourTurnEv);
     }
 
 
