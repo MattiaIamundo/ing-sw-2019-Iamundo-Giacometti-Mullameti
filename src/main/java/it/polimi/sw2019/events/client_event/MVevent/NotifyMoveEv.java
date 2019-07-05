@@ -39,7 +39,7 @@ public class NotifyMoveEv implements NotifyReturn, NotifyClient, Serializable {
         this.playerList = playerList;
     }
 
-    public Table getBoardGame() {
+    public Table getGameBoard() {
         return boardGame;
     }
 

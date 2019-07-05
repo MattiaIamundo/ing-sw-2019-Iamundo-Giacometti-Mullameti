@@ -492,7 +492,7 @@ public class PlayerThread implements Runnable {
             this.playerRemoteView.addObserver(this.gameController);
 
             if( this.gameController.getTurnOf().getPlayer().getNickname().equals(this.nickname)) {
-                YourTurnEv yourTurnEv = new YourTurnEv();
+                YourTurnEv yourTurnEv = new YourTurnEv(this.gameController.getPlayers(), this.gameController.getGameboard());
                 yourTurnEv.setNickname(this.nickname);
                 this.gameController.update(yourTurnEv);
             }

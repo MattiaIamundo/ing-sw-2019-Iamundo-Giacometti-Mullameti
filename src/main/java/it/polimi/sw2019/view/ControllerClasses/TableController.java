@@ -134,6 +134,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
      */
     @FXML
     public void initialize() {
+        /*
         info.setText("");
         if(yourTurn){
             moveButton.setDisable(false);
@@ -145,6 +146,8 @@ public class TableController extends Observable<ActionEv> implements Observer<No
             info.setText("It`s not your turn!");
         }
 
+
+         */
     }
 
     //************************************PLAYERBOARDS*******************************************
@@ -436,7 +439,7 @@ public class TableController extends Observable<ActionEv> implements Observer<No
         //System.out.println(startGameEv.getPlayers().get(0).getNickname());
         //System.out.println(startGameEv.getPlayers().get(1).getNickname());
         //System.out.println(startGameEv.getPlayers().get(2).getNickname());
-        this.Players = startGameEv.getPlayers();
+        this.Players = startGameEv.getPlayerList();
         try{
             this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(2,2)).takeWeapon(0));
             this.Weapon.add(((SpaceGeneration)startGameEv.getGameboard().getMap().getSpace(2,2)).takeWeapon(1));
@@ -539,12 +542,15 @@ public class TableController extends Observable<ActionEv> implements Observer<No
     }
 
     public void handleEvent(YourTurnEv yourTurnEv) {
-        this.yourTurn = true;
+        //Platform.runLater( () -> this.moveButton.setDisable(true));
+        //Platform.runLater( () -> this.endButton.setDisable(false) );
+        handleEvent(new StartGameEv(yourTurnEv.getPlayers(), yourTurnEv.getGameboard()));
 
     }
 
     public void handleEvent(NotYourTurnEv notYourTurnEv) {
-        this.yourTurn = false;
+        info.setText("It's not your turn!");
+        this.endButton.setDisable(true);
     }
 
     //***********************************Your-TURN-BUTTONS************************************************

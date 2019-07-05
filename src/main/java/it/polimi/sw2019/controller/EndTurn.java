@@ -11,7 +11,7 @@ public class EndTurn extends Observable<NotifyReturn> implements Action {
 
     public void useAction(Player player) {
         //this player want to change turn
-        NotYourTurnEv notYourTurnEv = new NotYourTurnEv();
+        NotYourTurnEv notYourTurnEv = new NotYourTurnEv(null,null);
         notYourTurnEv.setNickname(player.getNickname());
         notify(notYourTurnEv);
     }
