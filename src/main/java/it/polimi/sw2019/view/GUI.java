@@ -171,7 +171,7 @@ public class GUI extends Application implements UIinterface {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/ChooseMap.fxml"));
                 Parent chooseMap = loader.load();
-
+                System.out.println("siiiii");
                 ChooseMapController chooseMapController = loader.getController();
                 chooseMapController.setClientSocket(clientSocket);
 
@@ -207,12 +207,12 @@ public class GUI extends Application implements UIinterface {
 
     @Override
     public void requestTable(String string) {
+
         if (string.equals("ok")){
             try {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/it/polimi/sw2019/FXML_File/Table.fxml"));
                 Parent table = loader.load();
-
                 this.tableController = loader.getController();
                 this.tableController.setClientSocket(clientSocket);
                 this.clientSocket.setTableController(this.tableController);
