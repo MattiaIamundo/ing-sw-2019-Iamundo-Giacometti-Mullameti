@@ -38,6 +38,8 @@ public class StartGameEv implements Serializable, NotifyReturn, NotifyClient {
 
     }
 
+
+
     @Override
     public void visit(ExecutorEventClient executorEventClient, TableController tableController) {
         tableController.handleEvent(this);
@@ -47,7 +49,12 @@ public class StartGameEv implements Serializable, NotifyReturn, NotifyClient {
         return this.gameboard;
     }
 
-    public List<Player> getPlayers() {
+    public List<Player> getPlayerList() {
         return this.players;
+    }
+
+    @Override
+    public Table getGameBoard() {
+        return this.gameboard;
     }
 }

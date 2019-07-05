@@ -5,13 +5,18 @@ import it.polimi.sw2019.events.ExecutorEventClient;
 import it.polimi.sw2019.events.ExecutorEventImp;
 import it.polimi.sw2019.events.NotifyClient;
 import it.polimi.sw2019.events.NotifyReturn;
+import it.polimi.sw2019.model.Player;
+import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.view.ControllerClasses.TableController;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class NotifyEndMoveEv implements NotifyReturn, NotifyClient, Serializable {
 
     private String nickname;
+    private List<Player> players;
+    private Table gameBoard;
 
     public NotifyEndMoveEv(String nickname) {
         this.nickname = nickname;
@@ -30,6 +35,16 @@ public class NotifyEndMoveEv implements NotifyReturn, NotifyClient, Serializable
     @Override
     public void updateObject(ExecutorEventImp executorEventImp, Game controller) {
         executorEventImp.updateObject(this, controller);
+    }
+
+    @Override
+    public List<Player> getPlayerList() {
+        return this.players;
+    }
+
+    @Override
+    public Table getGameBoard() {
+        return this.gameBoard;
     }
 
     @Override
