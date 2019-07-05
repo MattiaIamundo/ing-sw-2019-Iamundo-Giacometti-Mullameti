@@ -571,4 +571,8 @@ public class TableController extends Observable<ActionEv> implements Observer<No
         window.setScene(tableScene);
         window.show();
     }
+    @FXML
+    public void endButtonPushed(ActionEvent event) throws IOException {
+
+    }
 }

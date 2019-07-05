@@ -13,6 +13,7 @@ import it.polimi.sw2019.events.client_event.MVevent.NotifyGrabEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyMoveEv;
 import it.polimi.sw2019.events.client_event.MVevent.NotifyReloadEv;
 import it.polimi.sw2019.events.powerup_events.*;
+import it.polimi.sw2019.events.server_event.VCevent.EndEv;
 import it.polimi.sw2019.events.server_event.VCevent.GrabEv;
 import it.polimi.sw2019.events.server_event.VCevent.MoveEv;
 import it.polimi.sw2019.events.server_event.VCevent.ReloadEv;
@@ -1298,6 +1299,11 @@ public class Game implements Observer <NotifyReturn> {
 
         Player player = searchPlayer( grabEv.getPlayerNickname() );
         this.grabController.handleEvent(grabEv, player);
+    }
+
+    public void handleEvent(EndEv endEv) {
+        Player player = searchPlayer( endEv.getPlayerNickname() );
+        //
     }
 
     public void handleEvent(BarbecueSetEv barbecueSetEv){

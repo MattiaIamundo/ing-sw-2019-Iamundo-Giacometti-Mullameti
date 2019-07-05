@@ -52,8 +52,5 @@ public class ActionController {
         window.show();
     }
 
-    @FXML
-    public void endButtonPushed(ActionEvent event) throws IOException {
 
-    }
 }
