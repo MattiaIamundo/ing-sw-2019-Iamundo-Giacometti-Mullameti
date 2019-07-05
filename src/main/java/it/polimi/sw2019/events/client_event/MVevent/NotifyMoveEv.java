@@ -9,10 +9,11 @@ import it.polimi.sw2019.model.Player;
 import it.polimi.sw2019.model.Table;
 import it.polimi.sw2019.view.ControllerClasses.TableController;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotifyMoveEv implements NotifyReturn, NotifyClient {
+public class NotifyMoveEv implements NotifyReturn, NotifyClient, Serializable {
 
     private String nickname;
     private String changeName;

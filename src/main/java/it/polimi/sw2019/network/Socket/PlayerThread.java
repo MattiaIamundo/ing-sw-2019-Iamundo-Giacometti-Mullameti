@@ -456,43 +456,49 @@ public class PlayerThread implements Runnable {
      */
     private void startGame() {
 
-        if( gameController.getPlayers().get(0).getNickname().equals(this.nickname) ) {
-            gameController.setFirstPlayer();
+        try {
+            gameController.getPlayerThreads().add(this);
+            if( gameController.getPlayers().get(0).getNickname().equals(this.nickname) ) {
+                gameController.setFirstPlayer();
 
-            for (Player p : gameController.getPlayers()) {
-                if (p.getNickname().equals(this.nickname)) {
-                    gameController.getTurnOf().setPlayer(p);
+                for (Player p : gameController.getPlayers()) {
+                    if (p.getNickname().equals(this.nickname)) {
+                        gameController.getTurnOf().setPlayer(p);
+                    }
                 }
+
             }
 
-        }
+            gameController.createAmmo();
+            gameController.createWeapon();
+            gameController.createPowerUp();
+            //fill the table in space generation and in space ammo with weapon and ammo
+            if( this.nickname.equals(this.gameController.getPlayers().get(0).getNickname() ) ) {
 
-        gameController.createAmmo();
-        gameController.createWeapon();
-        gameController.createPowerUp();
-        //fill the table in space generation and in space ammo with weapon and ammo
-        if( this.nickname.equals(this.gameController.getPlayers().get(0).getNickname() ) ) {
+                gameController.setWeapon();
+                gameController.setAmmo(this.gameController.getGameboard().getNrMap());
 
-            gameController.setWeapon();
-            gameController.setAmmo(this.gameController.getGameboard().getNrMap());
+            }
 
-        }
-
-
-        try {
             //send the string "start" to activate a new scene in the client
             this.gameController.sendStartGame(this.playerRemoteView);
             //send the whole model so every client can memorize it in a view to handle the ShowEv
             this.gameController.sendAllModel(this.playerRemoteView);
             this.gameController.getTurnOf().setPlayer(this.gameController.getPlayers().get(0));
             this.playerRemoteView.addObserver(this.gameController);
-            //this.playerRemoteView.setObjectInputStream();
+
             //HERE THE GAME IS ON
             while ( !gameController.getGameover() ) {
 
                 while ( !gameController.getTurnOfPlayer().getNickname().equals(this.nickname) ) {
 
                     synchronized (this.gameController.getTimerThread()) {
+
+                        if( this.gameController.getTimerThread().getTimerDone() && this.gameController.getPlayerThreads().size() < 3) {
+                            //game over
+                            this.gameController.setGameover(true);
+
+                        }
 
                         if ( !this.gameController.getTimerThread().getOn() ) {
                             this.gameController.getTimerThread().run();
@@ -502,19 +508,23 @@ public class PlayerThread implements Runnable {
 
                         if ( this.gameController.getTimerThread().getTimerDone() ) {
                             //send out to the player
+                            this.gameController.removePlayerThread(this.gameController.searchPlayerThread(this.nickname));
+                            this.gameController.getTurnOf().setUsedAction(0);
                             changePlayerTurn();
                             this.gameController.getTimerThread().setOn(false);
                             this.gameController.getTimerThread().setTimerDone(false);
                         }
+
+
                     }
                 }
 
-                //this.playerRemoteView.waitForAction();
+                this.playerRemoteView.waitForAction();
 
                 if ( gameController.getTurnOf().getUsedAction() == 2  ) {
                     //next player
+                    this.gameController.getTurnOf().setUsedAction(0);
                     changePlayerTurn();
-
                 }
 
             }
@@ -524,7 +534,7 @@ public class PlayerThread implements Runnable {
             synchronized (gameController.getStopArray()){
 
                 logger.log(Level.INFO, "{ PlayerThread " + this.nickname + "} is removed: " + ex.toString());
-                //gameController.removePlayerThread(this);
+                gameController.removePlayerThread(this);
             }
 
         }

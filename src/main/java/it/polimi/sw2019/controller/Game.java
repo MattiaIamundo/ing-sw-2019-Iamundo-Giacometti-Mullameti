@@ -1254,6 +1254,27 @@ public class Game implements Observer <NotifyReturn> {
 
     }
 
+    public void removePlayerThread(PlayerThread playerThread) {
+        if( playerThread != null) {
+
+            for(int i = 0; i < this.playerThreads.size(); i++) {
+
+                if( this.playerThreads.get(i).equals(playerThread)) {
+                    this.playerThreads.remove(i);
+                }
+            }
+        }
+    }
+
+    public PlayerThread searchPlayerThread(String nickname) {
+        PlayerThread ptt = null;
+        for(PlayerThread pt : this.playerThreads) {
+            if ( pt.getNickname().equals(nickname) ) {
+                ptt = pt;
+            }
+        }
+        return ptt;
+    }
 
 
     public void update(ActionEv actionEv) {
@@ -1947,5 +1968,9 @@ public class Game implements Observer <NotifyReturn> {
         if(playerRemoteView != null) {
             playerRemoteView.sendEvent(teleporterChooseEv);
         }
+    }
+
+    public List<PlayerThread> getPlayerThreads() {
+        return this.playerThreads;
     }
 }

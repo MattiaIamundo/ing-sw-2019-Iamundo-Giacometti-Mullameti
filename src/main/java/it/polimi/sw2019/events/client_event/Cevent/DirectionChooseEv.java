@@ -7,10 +7,11 @@ import it.polimi.sw2019.events.NotifyClient;
 import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.view.ControllerClasses.TableController;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DirectionChooseEv implements NotifyReturn, NotifyClient {
+public class DirectionChooseEv implements NotifyReturn, NotifyClient, Serializable {
 
     private String nickname;
     private List<String> movesPlayerCanDo = new ArrayList<>(3);

@@ -7,7 +7,9 @@ import it.polimi.sw2019.events.NotifyClient;
 import it.polimi.sw2019.events.NotifyReturn;
 import it.polimi.sw2019.view.ControllerClasses.TableController;
 
-public class NotifyEndMoveEv implements NotifyReturn, NotifyClient {
+import java.io.Serializable;
+
+public class NotifyEndMoveEv implements NotifyReturn, NotifyClient, Serializable {
 
     private String nickname;
 
