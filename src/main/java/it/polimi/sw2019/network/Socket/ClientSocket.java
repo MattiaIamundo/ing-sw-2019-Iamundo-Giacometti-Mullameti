@@ -38,7 +38,7 @@ public class ClientSocket  {
     //output for the server
     private PrintWriter output;
     //host name for the server
-    private String serverHost;
+    public static String serverHost;
     //boolean to set the condition to go out the loops
     private boolean ok = false;
     //boolean to set that the game is finished
@@ -207,6 +207,7 @@ public class ClientSocket  {
     }//(MERITA)
 
     public static void main (String[] args){
+        serverHost = args[0];
         Application.launch(GUI.class);
 
     }
